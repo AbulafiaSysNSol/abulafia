@@ -1,0 +1,30 @@
+<?php
+
+session_start(); //avvio della sessione: va fatto obbigatoriamente all'inizio e carica tutte le variabili di sessione, valide di pagina in pagina sino al logout.
+
+setlocale(LC_TIME, 'it_IT');//carica la versione italiana della data e dell'orario
+
+$corpus = $_GET['corpus']; //acquisisce da get il valore della pagina ricercata
+
+include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
+
+include 'testa-include.php'; //carica il file con l'header.
+
+@$include=include $corpus.'-centro-include.php';//carica la pagina cercata, la cui variabile è stata passata con il metodo get. L'errore standard è soppresso con @ per consentire il messaggio di errore personalizzato
+
+if (!$include) { echo '<div id="primarycontent"><div class="post"><div class="header"></div>
+
+				<div class="content"><img src="images/pagenotfound.jpg"></div></div></div>';include 'destra-include.php';include 'sotto-include.php';exit();} //messaggio di errore qualora la pagina richiesta non esistesse
+
+
+
+if (($corpus!= 'risultati') and ($corpus!= 'prot-aggiungi-mittente') and ($corpus!= 'prot2-aggiungi-mittente') and ($corpus!= 'todo-list')) {
+
+include 'destra-include.php';//colonna di destra con alcune info relative all'utente, non caricata per motivi di spazio in alcune pagine
+
+}
+
+include 'sotto-include.php'; //carica il file con il footer.
+
+?>
+
