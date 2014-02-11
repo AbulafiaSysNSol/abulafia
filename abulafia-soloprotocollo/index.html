@@ -1,77 +1,57 @@
-<!doctype html public "-//w3c//dtd xhtml 1.0 strict//it"
-	"http://www.w3.org/tr/xhtml1/dtd/xhtml1-strict.dtd">
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//IT" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-<title>Abulafia</title>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-<link rel="stylesheet" type="text/css" href="style.php"/>
+<!-- META -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+ <!-- META -->
+  
+  <!-- CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <!-- CSS -->  
+  
+<title>Abulafia - Login</title>
+
 </head>
+
 <body>
-
-<div id="outer">
-
-	<div id="upbg"></div>
-
-	<div id="inner">
-<div id="header">
-			<h1><span><b>Abulafia</B><br></span><br></h1>
-			<h2><br>Gestione documentale delle segreterie CRI</h2>
-		</div>
-	
-		<div id="staticsplash"></div>
-
-
-
-
-		
-	
-		<div id="menu">
-
-			<ul>
-				<li class="first"><a href="index.html">Home</a></li>
-			
-                                
-				
-			</ul>
-
-		
-		</div>
-
-<p>
-<div id="primarycontent">
-		
-			<!-- primary content start -->
-		
-			<div class="post">
-				<div class="header">
-					<h3>LOGIN<br></h3>
-
-
-</div>
-				<div class="content">
-<p><strong>Per accedere al sistema, inserisci Username e Password</strong></p>
-<form action="login1.php" method="post">
-
-<br>
-<label><b> User ID</b> <br>  <input type="text" name="userid" />
-</label><br>
-
-<label><b> Password</b><br> <input type="PASSWORD" name="password" />
-</label><br><br>
-</select>
-<input type="submit" value="ACCEDI" />
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+	<div class="well well-lg"><h1>Abulafia</h1>Gestione delle segreterie dei Volontari della CRI</div>
+ 
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">LOGIN</h3>
+  </div>
+  <div class="panel-body">
+    Per accedere al sistema, inserisci Username e Password:<br><br>
+    
+    <form action="login1.php" method="post" role="form">
+  <div class="form-group">
+    <label>Username</label>
+	<div class="row">
+	<div class="col-xs-3">
+		<input type="text" class="form-control" name="userid" placeholder="username">
+	</div>
+	</div>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+	<div class="row">
+	<div class="col-xs-3">
+		<input type="password" class="form-control" name="password" placeholder="password">
+	</div>
+	</div>
+  </div>
+  <button type="submit" class="btn btn-default">Accedi</button>
 </form>
-</div>
-</p>
 
-			</div>
-					
-			
-		</div>
+ </div>
 </div>
+
+
+			
 <div id="footer">
 	<center>
 		<table border="0">
@@ -83,19 +63,13 @@
 		<tr>
 			<td align="center" valign="middle">
 				<span xmlns:dc="http://purl.org/dc/elements/1.1/" property="dc:title">
-				Abulafia </span> by 
-				<span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">
-					Alfio Musmarra, Biagio Saitta, Alfio Costanzo  &amp;Giovanni Susinni
-				</span> is licensed under a:  
+				Abulafia </span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Alfio Musmarra, Biagio Saitta  &amp; Alfio Costanzo</span> is licensed under a:  
 			</td>
 		</tr>
 		<tr>
 			<td align="center" valign="middle">
 				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/it/" target="_blank">
-					<img alt="Creative Commons Attribuzione - 
-						Non commerciale - Condividi allo stesso modo 2.5 Italia License" 
-					style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png" />
-				</a>
+				<img alt="Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo 2.5 Italia License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png" /></a>
 			</td>
 		</tr>
 		</table>

@@ -1,0 +1,423 @@
+<?php
+//$annoprotocollo = $_SESSION['annoprotocollo'];
+$risultatiperpagina = $_SESSION['risultatiperpagina']; //acquisisce la variabile di sessione che stabilisce quanti risultati vengono mostrati in ogni pagina
+
+$currentpage = $_GET['currentpage'];
+
+// se non settate da una form di invio, le seguenti variabili prendono valore da GET o da SESSION
+
+if (!isset($_POST['cercato'])) {$_POST['cercato'] = $_GET['cercato'] ;} 
+if (!isset($_POST['ordinerisultati'])) {$_POST['ordinerisultati'] = "anagrafica" ;}
+if (!isset($_POST['tabella'])) {$_POST['tabella'] = $_GET['tabella'] ;}
+if (!isset($_POST['annoricercaprotocollo'])) {$_POST['annoricercaprotocollo'] = $_SESSION['annoricercaprotocollo'] ;}
+if (!isset($_POST['anagraficatipologia'])) {$_POST['anagraficatipologia'] = $_GET['anagraficatipologia'] ;}
+$logindatagruppo2=$_SESSION['gruppo'];//setta l'id del gruppo cui appartiene l'utente che ha fatto login
+
+$filtro = $_POST['anagraficatipologia'];
+
+//if (!isset($_POST['anagraficatipologia'])) {$filtroanagraficatipologia= 'and anagrafica.tipologia='.$_POST['anagraficatipologia']; $anagraficatipologia= $_POST['anagraficatipologia'];}
+//else {$filtroanagraficatipologia= 'and anagrafica.tipologia='.$_POST['anagraficatipologia'];$anagraficatipologia= $_GET['anagraficatipologia'];}
+
+$ordinerisultati = $_POST['ordinerisultati'];
+$cercato = $_POST['cercato']; //parola chiave da ricercare
+$cercato2 = $cercato;
+$nomecercato = NULL;
+list($cognomecercato, $nomecercato) = explode("+", $cercato2);
+$tabella = $_POST['tabella'];
+$annoricercaprotocollo=$_POST['annoricercaprotocollo'];
+$_SESSION['annoricercaprotocollo']= $annoricercaprotocollo;
+$ordinerisultati= $_POST['group1']; //scelta fra i vari tipi di presentazione dei risultati: ordine cronologico, cronologico inverso ed alfabetico
+//scelta fra ricerca in anagrafica e protocollo
+
+//scelta 'anagrafica'
+if ($tabella == 'anagrafica'){
+if ($ordinerisultati == 'alfabetico') { $_SESSION['ordinerisultati'] = 'order by anagrafica.cognome, anagrafica.nome';}
+if ($ordinerisultati == 'cronologico') { $_SESSION['ordinerisultati'] = 'order by anagrafica.idanagrafica';}
+if ($ordinerisultati == 'cron-inverso') { $_SESSION['ordinerisultati'] = 'order by anagrafica.idanagrafica desc';}
+//filtro per ispettori di gruppo: visualizza tra i risultati solo anagrafiche di persone fisiche del suo stesso gruppo
+if ($_SESSION['auth'] < 11) {$filtroispettorigruppo = "and ( joinanagraficagruppo.idgruppo='$logindatagruppo2') and (joinanagraficagruppo.idanagrafica=anagrafica.idanagrafica)"; $joinanagraficagruppo= ', joinanagraficagruppo';}//setta un filtro che impedisce agli ispettori di gruppo, in base al loro livello di autorizzazione, di vedere anagrafiche che non siano appartenenti al loro stesso gruppo
+else {$filtroispettorigruppo =''; $joinanagraficagruppo= '';}
+
+if ($filtro == 'anagrafica.tipologia')
+{
+	if($nomecercato != NULL)
+    { 
+      $count = mysql_query("SELECT COUNT(*) FROM anagrafica where (anagrafica.idanagrafica = '$cercato' or (anagrafica.cognome ='$cognomecercato' and anagrafica.nome='$nomecercato'))"); //conteggio per divisione in pagine dei risultati
+    }
+    else
+    {
+       $count = mysql_query("SELECT COUNT(*) FROM anagrafica where (anagrafica.idanagrafica = '$cercato' or anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%')"); //conteggio per divisione in pagine dei risultati
+    }
+}
+else
+{
+	if($nomecercato != NULL)
+    { 
+      $count = mysql_query("SELECT COUNT(*) FROM anagrafica $joinanagraficagruppo where ((anagrafica.idanagrafica = '$cercato' or (anagrafica.nome='$nomecercato' and anagrafica.cognome='$cognomecercato')) and (anagrafica.tipologia='$filtro') $filtroispettorigruppo )");//conteggio per divisione in pagine dei risultati
+    }
+    else
+    {
+       $count = mysql_query("SELECT COUNT(*) FROM anagrafica $joinanagraficagruppo where ((anagrafica.idanagrafica = '$cercato' or anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%') and (anagrafica.tipologia='$filtro') $filtroispettorigruppo )");//conteggio per divisione in pagine dei risultati
+    }
+}
+
+$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
+
+$tot_records = $res_count[0];//conteggio per divisione in pagine dei risultati
+
+$tot_pages = ceil($tot_records / $risultatiperpagina);//conteggio per divisione in pagine dei risultati - la frazione arrotondata per eccesso
+
+$iniziorisultati = $_GET['iniziorisultati'];
+
+$contatorelinee = 1 ;// per divisione in due colori diversi in tabella
+
+$ordinerisultati=$_SESSION['ordinerisultati']; //acquisisce la scelta fra ordine alfabetico, cronologico o cronologico inverso nella presentazione dei risultati
+
+if($filtro == 'anagrafica.tipologia')  //se la ricerca in anagrafica è su 'nessun filtro'
+{
+	if($nomecercato != NULL)
+    { 
+      $risultati= mysql_query("select distinct * FROM anagrafica where (anagrafica.idanagrafica = '$cercato' or (anagrafica.nome='$nomecercato' and anagrafica.cognome='$cognomecercato')) $ordinerisultati limit $iniziorisultati , $risultatiperpagina " );
+    }
+    else
+    {
+       $risultati= mysql_query("select distinct * FROM anagrafica where (anagrafica.idanagrafica = '$cercato' or anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%') $ordinerisultati limit $iniziorisultati , $risultatiperpagina " );
+    }
+}
+else //se la ricerca in anagrafica è impostata con un qualche filtro per tipologia
+{
+	if($nomecercato != NULL)
+    { 
+      $risultati= mysql_query("select distinct * FROM anagrafica $joinanagraficagruppo where ((anagrafica.idanagrafica = '$cercato' or (anagrafica.nome='$nomecercato' and anagrafica.cognome='$cognomecercato')) and (anagrafica.tipologia='$filtro') $filtroispettorigruppo ) $ordinerisultati limit $iniziorisultati , $risultatiperpagina " );
+    }
+    else
+    {
+       $risultati= mysql_query("select distinct * FROM anagrafica $joinanagraficagruppo where ((anagrafica.idanagrafica = '$cercato' or anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%') and (anagrafica.tipologia='$filtro') $filtroispettorigruppo ) $ordinerisultati limit $iniziorisultati , $risultatiperpagina " );
+    }
+}
+
+$num_righe = mysql_num_rows($risultati);
+
+if  ($num_righe > 0 ) {
+
+if ($cercato !='') { if ($tot_records==1) {echo " $tot_records occorrenza in $tabella per: $cercato"; } else {echo " $tot_records occorrenze in $tabella per: $cercato";} }
+else { echo "$tot_records occorrenze in $tabella";}
+
+?>
+
+
+
+<table border="0" cellpadding="1" cellspacing="1" width="<?php echo $_SESSION['larghezzatabellarisultati'];?>">
+
+<tr><b>
+
+<td align="center" valign="middle"><b>ID</td><td align="center" valign="middle"><b>TIPO</td><td align="center" valign="middle"><b>Cognome</td><td align="center" valign="middle"><b>Nome</td><td align="center" valign="middle"><b>Data di Nascita</td><td align="center" valign="middle"><b>Comune</td><td align="center" valign="middle"><b>Prov.</td><td align="center" valign="middle"><b>Codice Fiscale</td><td align="center" valign="middle"><b>Opzioni</td></tr>
+
+<?php
+
+while ($row = mysql_fetch_array($risultati)) {
+
+if ( $contatorelinee % 2 == 1 ) { $colorelinee = $_SESSION['primocoloretabellarisultati'] ; } //primo colore
+
+else { $colorelinee = $_SESSION['secondocoloretabellarisultati'] ; } //secondo colore
+
+
+
+$contatorelinee = $contatorelinee + 1 ;
+
+
+
+?><tr bgcolor = <?php echo $colorelinee; ?> ><td><?php
+
+echo $row['idanagrafica'] ;
+
+?></td>
+
+
+<td align="center" valign="middle"><?php
+
+echo $row['tipologia'] ; ?>
+
+</td>
+
+
+<td align="center" valign="middle"><?php
+
+echo $row['cognome'] ; ?>
+
+</td>
+
+
+
+<td align="center" valign="middle"><?php
+
+echo $row['nome'] ; ?> 
+
+</td>
+
+
+
+<td align="center" valign="middle"><?php
+
+$data = $row['nascitadata'] ;
+
+list($anno, $mese, $giorno) = explode("-", $data);
+
+$data2 = "$giorno-$mese-$anno";
+
+echo "$data2" ;
+
+?></td>
+
+
+
+<td align="center" valign="middle"><?php
+
+echo $row['nascitacomune'] ;
+
+?></td>
+
+
+
+<td align="center" valign="middle"><?php
+
+echo $row['nascitaprovincia'] ;
+
+?></td>
+
+
+
+<td align="center" valign="middle"><?php
+
+echo $row['codicefiscale'] ;
+
+?></td>
+
+
+
+<td align="center" valign="middle">
+<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>">Dettagli</a>
+
+<br><a href="login0.php?corpus=modifica-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>">Modifica</a>
+
+</td>
+
+
+
+</tr><?php
+
+}
+
+?>
+
+</table>
+
+
+
+<?php
+
+echo "<br>Pagina $currentpage di $tot_pages <br>";
+
+//controllo per pagina avanti-indietro
+
+if(($filtro != 'persona') and ($filtro != 'carica') and ($filtro != 'ente') and ($filtro != 'gruppo'))
+
+{
+
+	$filtro = 'anagrafica.tipologia';
+
+}
+
+if ($iniziorisultati > 0) {
+
+?> <a href="login0.php?corpus=risultati&iniziorisultati=<?php $paginaprecedente = $iniziorisultati - $risultatiperpagina ; echo "$paginaprecedente" ;?>&cercato=<?php echo "$cercato" ;?>&tabella=<?php echo "$tabella" ;?>&currentpage=<?php $previouspage= $currentpage - 1 ; echo "$previouspage" ;?>&anagraficatipologia=<?php echo "$filtro" ;?>">Pagina precedente </a> &nbsp &nbsp <?php } 
+
+if (($iniziorisultati + $risultatiperpagina) < $tot_records ) {
+
+?> <a href="login0.php?corpus=risultati&iniziorisultati=<?php $paginasuccessiva = $iniziorisultati + $risultatiperpagina ; echo "$paginasuccessiva" ;?>&cercato=<?php echo "$cercato" ;?>&tabella=<?php echo "$tabella" ;?>&currentpage=<?php $nextpage= $currentpage + 1 ; echo "$nextpage" ;?>&anagraficatipologia=<?php echo "$filtro" ;?>">Pagina successiva</a><?php }
+
+//fine controllo pagine avanti-indietro
+
+echo '<br><br>';
+
+}
+
+
+
+else {
+
+echo "Non ci sono risultati "; ?> <a href="login0.php?corpus=ricerca"><br><br>Effettua un'altra ricerca</a><?php
+
+}
+
+}
+//fine scelta tabella = anagrafica
+
+
+
+
+
+//scelta tabella = lettere
+$my_file = new File(); //crea un nuovo oggetto 'file'
+$cercato3 = $cercato;
+list($giornocercato, $mesecercato, $annocercato) = explode("-", $cercato3);
+$dataletteracercata = "$annocercato-$mesecercato-$giornocercato";
+
+
+if (ereg("lettere", $tabella)){
+if ($tabella=='lettere') { $tabella= $tabella.$annoricercaprotocollo;}
+$joinletteremittenti= 'joinletteremittenti'.$annoricercaprotocollo;
+
+if ($ordinerisultati == 'alfabetico') { $_SESSION['ordinerisultati'] = 'order by anagrafica.cognome, anagrafica.nome';}
+if ($ordinerisultati == 'cronologico') { $_SESSION['ordinerisultati'] = 'order by '.$tabella.'.idlettera';}
+if ($ordinerisultati == 'cron-inverso') { $_SESSION['ordinerisultati'] = 'order by '.$tabella.'.idlettera desc';}
+
+$count = mysql_query("SELECT COUNT(*) FROM $tabella , anagrafica , $joinletteremittenti where ( $tabella.idlettera like '%$cercato%' or $tabella.oggetto like '%$cercato%' or $tabella.speditaricevuta like '%$cercato%' or $tabella.note like '%$cercato%' or $tabella.posizione like '%$cercato%' or anagrafica.cognome like '%$cercato%' or $tabella.datalettera like '$dataletteracercata') and ($joinletteremittenti.idlettera = $tabella.idlettera and $joinletteremittenti.idanagrafica = anagrafica.idanagrafica) ");//conteggio per divisione in pagine dei risultati
+//echo mysql_error();
+
+$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
+
+$tot_records = $res_count[0];//conteggio per divisione in pagine dei risultati
+
+$tot_pages = ceil($tot_records / $risultatiperpagina);//conteggio per divisione in pagine dei risultati - la frazione arrotondata per eccesso
+
+$iniziorisultati = $_GET['iniziorisultati'];
+
+$contatorelinee = 1 ;// per divisione in due colori diversi in tabella
+$ordinerisultati=$_SESSION['ordinerisultati'];
+$risultati = mysql_query("SELECT  distinct * FROM $tabella , anagrafica , $joinletteremittenti where ( $tabella.idlettera like '%$cercato%' or $tabella.oggetto like '%$cercato%' or $tabella.speditaricevuta like '%$cercato%' or $tabella.note like '%$cercato%' or $tabella.posizione like '%$cercato%' or anagrafica.cognome like '%$cercato%' or $tabella.datalettera like '$dataletteracercata') and ($joinletteremittenti.idlettera = $tabella.idlettera and $joinletteremittenti.idanagrafica = anagrafica.idanagrafica) $ordinerisultati limit $iniziorisultati , $risultatiperpagina");
+echo mysql_error();
+$num_righe = mysql_num_rows($risultati);
+
+if  ($num_righe > 0 ) {
+
+if ($cercato !='') { if ($tot_records==1) {echo " $tot_records occorrenza in $tabella per: $cercato"; } else {echo " $tot_records occorrenze in $tabella per: $cercato";} }
+else { echo "$tot_records occorrenze in $tabella";}
+
+?>
+<table border="0" cellpadding="1" cellspacing="1" width="<?php echo $_SESSION['larghezzatabellarisultati'];?>">
+
+<tr><b>
+
+<td align="center" valign="middle"><b>Protocollo</td><td align="center" valign="middle"><b>Data registrazione</td><td align="center" valign="middle"><b>Spedita/Ricevuta</td><td align="center" valign="middle"><b>Oggetto</td><td align="center" valign="middle"><b>File</td><td align="center" valign="middle"><b>Mittenti/Destinatari</td><td align="center" valign="middle"><b>Opzioni</td></tr>
+
+<?php
+
+while ($row = mysql_fetch_array($risultati)) {
+
+if ( $contatorelinee % 2 == 1 ) { $colorelinee = $_SESSION['primocoloretabellarisultati'] ; } //primo colore
+
+else { $colorelinee = $_SESSION['secondocoloretabellarisultati'] ; } //secondo colore
+
+
+
+$contatorelinee = $contatorelinee + 1 ;
+
+
+
+?><tr bgcolor = <?php echo "$colorelinee"; ?> ><td><?php
+
+echo $row['idlettera'] ;
+
+?></td><?php
+
+
+
+?><td align="center" valign="middle"><?php
+
+$dataregistrazione = $row['dataregistrazione'] ;
+
+list($anno, $mese, $giorno) = explode("-", $dataregistrazione);
+
+$data2 = "$giorno-$mese-$anno";
+
+echo "$data2" ;
+
+?></td>
+
+
+
+
+
+<td align="center" valign="middle"><?php
+
+echo $row['speditaricevuta'] ; ?> 
+
+</td>
+
+
+
+
+<td align="center" valign="middle"><?php
+
+echo $row['oggetto'] ;
+
+?></td>
+
+
+
+<td align="center" valign="middle">
+
+	<?php 
+     		$my_file -> publdownloadlink ($row['urlpdf'], $row['idlettera'], $annoricercaprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
+	?>
+</td>
+
+<td align="center" valign="middle"><a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>"><?echo $row['cognome'].' '.$row['nome'] ;?></a></td>
+
+
+
+<td align="center" valign="middle">
+<a href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $row['idlettera'];?>">Dettagli</a>
+
+<br><a href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=anagrafica&id=<?php echo $row['idlettera'];?>">Modifica</a>
+
+</td>
+
+
+
+</tr><?php
+
+}
+
+?>
+
+</table>
+
+
+
+<?php
+
+echo "<br>Pagina $currentpage di $tot_pages <br>";
+
+//controllo per pagina avanti-indietro
+
+if ($iniziorisultati > 0) {
+
+?> <a href="login0.php?corpus=risultati&iniziorisultati=<?php $paginaprecedente = $iniziorisultati - $risultatiperpagina ; echo "$paginaprecedente" ;?>&cercato=<?php echo "$cercato" ;?>&tabella=<?php echo "$tabella" ;?>&currentpage=<?php $previouspage= $currentpage - 1 ; echo "$previouspage" ;?>">Pagina precedente </a> &nbsp &nbsp <?php } 
+
+if (($iniziorisultati + $risultatiperpagina) < $tot_records ) {
+
+?> <a href="login0.php?corpus=risultati&iniziorisultati=<?php $paginasuccessiva = $iniziorisultati + $risultatiperpagina ; echo "$paginasuccessiva" ;?>&cercato=<?php echo "$cercato" ;?>&tabella=<?php echo "$tabella" ;?>&currentpage=<?php $nextpage= $currentpage + 1 ; echo "$nextpage" ;?>">Pagina successiva </a><?php }
+
+//fine controllo pagine avanti-indietro
+
+echo '<br><br>';
+
+}
+
+
+
+else {
+
+echo "Non ci sono risultati $tabella $joinletteremittenti"; ?> <br><br><a href="login0.php?corpus=ricerca">Effettua un'altra ricerca</a><?php
+
+}
+
+
+
+}
+
+?>
+
+

@@ -169,27 +169,6 @@ top: 46px;
 letter-spacing: 0px;
 }
 
-#header alert
-{
-position: absolute;
-font-size: 12px;
-font-weight: normal;
-color: #FFCC33;
-top: 46px;
-letter-spacing: 0px;
-}
-
-#header alarm
-{
-position: absolute;
-font-size: 12px;
-font-weight: normal;
-color: #FCE2CA;
-top: 46px;
-letter-spacing: 0px;
-}
-
-
 #header sup
 {
 color: #FCE2CA;
@@ -325,33 +304,6 @@ background: url('images/a22.gif') bottom repeat-x;
 padding: 0px 0px 10px 15px;
 margin-bottom: 20px;
 }
-
-#primarycontent alert
-{
-position: relative;
-top: 0px;
-font-size: 12px;
-line-height: 5px;
-color: #000000;
-letter-spacing: 0px;
-background: #FFCC33;
-padding: 2px 2px 2px 2px;
-margin-bottom: 0px;
-}
-
-#primarycontent alarm
-{
-position: relative;
-top: 0px;
-font-size: 12px;
-line-height: 5px;
-color: #ffffff;
-letter-spacing: 0px;
-background: #cc0000;
-padding: 2px 2px 2px 2px;
-margin-bottom: 0px;
-}
-
 
 #primarycontent .content
 {
