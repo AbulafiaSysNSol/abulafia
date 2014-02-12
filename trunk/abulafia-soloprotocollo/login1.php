@@ -125,11 +125,6 @@ echo 'Login effettuato<br><br>'; //nel caso che il login sia andato a buon fine
 
 //log degli accessi con esito positivo
 $my_log -> publscrivilog($userid, 'login', 'ok', $client, $logfile );
-
-
-?> <a href="login0.php?corpus=home"><?php echo 'Accedi al programma'; ?></a>
-<?php 
-//exit();
 ?>
 <SCRIPT LANGUAGE="Javascript">
 browser= navigator.appName;
