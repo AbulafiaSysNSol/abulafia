@@ -43,7 +43,7 @@
 	?>
 	<div class="row">
 	<div class="col-xs-3">
-	<div class="alert alert-danger">Username o Password errati</div></div></div>
+	<div class="alert alert-danger"> <span class="glyphicon glyphicon-remove"></span> Username o Password errati</div></div></div>
 	<?php
    }
    ?>
