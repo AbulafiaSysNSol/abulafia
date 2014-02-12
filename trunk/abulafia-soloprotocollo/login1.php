@@ -49,15 +49,15 @@ $login=mysql_query(
 			where loginname='$userid' and password='$password'");               //controllo della correttezza di username e password
 $login2 = mysql_fetch_array($login);
 if ($login2[0] < 1 ) {
-echo 'Username o Password errati.';
-?> <a href="index.html"><?php echo 'Ritenta'; $_SESSION['auth']= 0 ;  ?></a>
-<?php 
-$_SESSION['auth']= 0 ;
-
-//log degli accessi con esito negativo
 $my_log -> publscrivilog($userid, 'login', 'denied', $client , $logfile);
-
-exit();
+$_SESSION['auth']= 0 ;
+?>
+	<SCRIPT LANGUAGE="Javascript">
+	browser= navigator.appName;
+	if (browser == "Netscape")
+	window.location="index.php?err=1"; else window.location="index.php?err=1";
+	</SCRIPT>
+<?php 
 }
 //inizio settaggio delle variabili di sessione
 
