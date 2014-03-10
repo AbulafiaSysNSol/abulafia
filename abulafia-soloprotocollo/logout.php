@@ -19,12 +19,12 @@ $_SESSION['auth']= 0 ;
   session_destroy(); //DISTRUGGE la sessione. 
 ?>
 LogOut Effettuato con successo<br><br>
-<a href="index.html">Torna alla pagina iniziale</a>
+<a href="index.php">Torna alla pagina iniziale</a>
 </body>
 
 <SCRIPT LANGUAGE="Javascript">
 browser= navigator.appName;
 if (browser == "Netscape")
-window.location="index.html"; else window.location="index.html"
+window.location="index.php"; else window.location="index.php"
 </SCRIPT>
 </html>
