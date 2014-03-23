@@ -34,46 +34,65 @@ exit() ; }
 <meta name="description" content="<?php echo $_SESSION['description'];?>" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="style.php"/>
+<!-- META -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+ <!-- META -->
+  
+  <!-- CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <!-- CSS -->  
+  
+  <!-- JS -->
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- JS -->
 </head>
+
+
 <body>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+  
+	<div class="page-header">
+	<div class="row">
+	  <div class="col-md-8"><h1><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <small>'. $_SESSION['headerdescription'];?></small></h1></div>
+	  <div class="col-md-4"><img class="text-right" src="<?php echo $_SESSION['splash']; ?>"></div>
+	</div>
+	  
+	<nav class="navbar navbar-default" role="navigation">
 
-<div id="outer">
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+		<li><a href="login0.php?corpus=home">Home</a></li>
+		<li><a href="login0.php?corpus=protocollo">Protocollo</a></li>
+		<li><a href="login0.php?corpus=anagrafica">Anagrafica</a></li>
+		<li><a href="login0.php?corpus=ricerca">Ricerca</a></li>
+		<li><a href="login0.php?corpus=aiuto">F.A.Q.</a></li>
+		<li><a href="login0.php?corpus=informazioni">Informazioni</a></li>
+	      </ul>
 
-	<div id="upbg"></div>
-
-	<div id="inner">
-<div id="header">
-			<h1><span><?php echo $_SESSION['nomeapplicativo'];?><br></span>Versione <?php echo $_SESSION['version'];?><br></h1>
-			<h2><br><?php echo $_SESSION['headerdescription'];?></h2>
-		</div>
-	
-		<div id="splash"></div>
-
-
-
-
-		
-	
-		<div id="menu">
-
-			<ul>
-				<li class="first"><a href="login0.php?corpus=home">Home</a></li>
-				<li><a href="login0.php?corpus=protocollo">Protocollo</a></li>
-                                <li><a href="login0.php?corpus=anagrafica">Anagrafica</a></li>
-                                <li><a href="login0.php?corpus=ricerca">Ricerca</a></li>
-				<li><a href="login0.php?corpus=aiuto">Aiuto</a></li>
-                                <li><a href="login0.php?corpus=informazioni">Informazioni</a></li>
-                                
-				
-			</ul>
-
-		<div id="date"><?php //stampo la data odierna in alto a destra
-				$my_calendario-> publadesso();
-				echo $my_calendario->giorno.' '.$my_calendario->meseesteso.' '.$my_calendario->anno;
-				?> 
-		</div>
-
-		</div>
+	      <ul class="nav navbar-nav navbar-right">
+		<li class="dropdown">
+		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b></a>
+		  <ul class="dropdown-menu">
+		    <li><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>">Cambia Password</a></li>
+		    <li><a href="login0.php?corpus=segnala-bug">Segnala un Errore</a></li>
+		    <li><a href="login0.php?corpus=settings">Impostazioni</a></li>
+		    <?php if ($_SESSION['auth'] > 50) {?>
+		    <li class="divider"></li>
+		    <li><a href="login0.php?corpus=gestione-utenti">Gestione degli Utenti</a></li>
+		    <li><a href="login0.php?corpus=advancedsettings">Advanced Settings</a></li>
+		    <li><a href="download.php?lud=access.log&est=log">Scarica il log degli accessi</a></li>
+		    <li><a href="login0.php?corpus=log-mail">Visualizza il log delle mail</a></li>
+		    <?php } ?>
+		    <li class="divider"></li>
+		    <li><a href="logout.php">Logout</a></li>
+		  </ul>
+		</li>
+	    </div><!-- /.navbar-collapse -->
+	</nav>
 
 
 <?php

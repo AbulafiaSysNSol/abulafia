@@ -17,13 +17,6 @@ if (!$include) { echo '<div id="primarycontent"><div class="post"><div class="he
 				<div class="content"><img src="images/pagenotfound.jpg"></div></div></div>';include 'destra-include.php';include 'sotto-include.php';exit();} //messaggio di errore qualora la pagina richiesta non esistesse
 
 
-
-if (($corpus!= 'risultati') and ($corpus!= 'prot-aggiungi-mittente') and ($corpus!= 'prot2-aggiungi-mittente') and ($corpus!= 'todo-list')) {
-
-include 'destra-include.php';//colonna di destra con alcune info relative all'utente, non caricata per motivi di spazio in alcune pagine
-
-}
-
 include 'sotto-include.php'; //carica il file con il footer.
 
 ?>

@@ -29,6 +29,7 @@ $insertid=$ultimoid;
 //$inseriscimittentestandard=mysql_query("insert into joinletteremittenti values('$ultimoid',1)"); eliminata perché inutile dopo modifica del 22-10-2009: l'inserimento del mittente anonimo avviene di default in pagina protocollo3- se non è stato selezionato nessun mittente
 $loginid=$_SESSION['loginid'];
 $tracciautenteinserimento=mysql_query("insert into joinlettereinserimento$annoprotocollo values('$ultimoid', '$loginid','','')");
+if ($insertid > 0) { $idlettera = $insertid;}
 }
 
 
@@ -54,144 +55,197 @@ $idlettera=$_GET['idlettera'];
 
 ?>
 
-	<div id="primarycontent">
-		
-			<!-- primary content start -->
-		
-			<div class="post">
-				<div class="header">
-					<h3><u>Protocollo numero: <?php echo $insertid; echo $idlettera;?> </u></h3>
-				
-				</div>
-				<div class="content">
-					<p>
-<?php
-
-
-if ($insertid > 0) { $idlettera = $insertid;}?>
-<form enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file&idlettera=<?php echo $idlettera;?>" method="POST">
-<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />
-Carica il file contenente il documento da registrare:<br> <input size="22" name="uploadedfile" type="file" />
-<input type="submit" value="Upload" />
-</form>
-
-<?php
-$cercadocumento= mysql_query("select distinct * from lettere$annoprotocollo where idlettera='$idlettera'");
-$urlpdf1= mysql_fetch_array($cercadocumento);
-$urlpdf=$urlpdf1['urlpdf'];
-$my_file -> publdownloadlink ($urlpdf, $idlettera, $annoprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
-?><br><br><?php
-echo "Ricerca mittente o destinatario:\n";
-$my_lettera -> publcercamittente ($idlettera,''); //richiamo del metodo
-?>
-
-<b>Mittenti/destinatari:<br></b>
-<?php
-$risultati=mysql_query("select anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, joinletteremittenti$annoprotocollo.idlettera, joinletteremittenti$annoprotocollo.idanagrafica from anagrafica, joinletteremittenti$annoprotocollo where anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica and joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
-while ($row2 = mysql_fetch_array($risultati)) {
-echo $row2['cognome'] . '  -  ' . $row2['nome'] ;?> <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idlettera=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $urlpdf;?>">elimina</a><br><?php
-}
-?>
-
-<form name="modulo" method="post" >
-<br>
-<label><b> Spedita/Ricevuta</b><br>
-<select size="1" cols=4 type="text" name="spedita-ricevuta" />
-<OPTION value="ricevuta"> Ricevuta&nbsp;&nbsp;
-<OPTION value="spedita"> Spedita&nbsp;&nbsp;
-</select>
-</label>
-
-<label> <br>Oggetto della lettera:<br><input size="40" type="text" name="oggetto" />
-
-</label>
-
-<label> <br>Data della lettera<br>
-<select size="1" cols=4 type="text" name="lettera-data-giorno" />
-<?php
-$iterazionegiornodelmese = 0;
-while ($iterazionegiornodelmese < 31) { $iterazionegiornodelmese = $iterazionegiornodelmese +1;
-if ($iterazionegiornodelmese != strftime("%d")) { ?>
-<OPTION value="<?php echo $iterazionegiornodelmese;?>"> <?php echo $iterazionegiornodelmese;?>&nbsp;&nbsp; 
-<?php } 
-else { ?><OPTION selected value="<?php echo $iterazionegiornodelmese;?>"> <?php echo $iterazionegiornodelmese;?>&nbsp;&nbsp; 
-<?php }
-}?>
-</select>
-</label>
-
-<label>
-<select size="1" cols=4 type="text" name="lettera-data-mese" />
-<?php
-$iterazionemese = 0;
-$iterazionemese2= '';
-$meseattuale = strftime("%m");
-while ($iterazionemese < 12) { $iterazionemese = $iterazionemese +1;
-if ($iterazionemese<10) {$iterazionemese2= '0'.$iterazionemese;} 
-else {$iterazionemese2= $iterazionemese;}
-if (strcmp($iterazionemese2,$meseattuale) != 0) { ?>
-<OPTION value="<?php echo $iterazionemese2 ;?>"> <?php echo $iterazionemese2?>&nbsp;&nbsp; 
-<?php } 
-else { ?><OPTION selected value="<?php echo $iterazionemese2 ;?>"> <?php echo $iterazionemese2 ;?>&nbsp;&nbsp; 
-<?php }
-}?>
-</select>
-</label>
-
-<label>
-<select size="1" cols=4 type="text" name="lettera-data-anno" />
-
-<?php
-$iterazioneanno = strftime("%Y") - 3 ;
-while ($iterazioneanno < (strftime("%Y")-1) ) { $iterazioneanno = $iterazioneanno +1;?>
-<OPTION value="<?php echo $iterazioneanno;?>"> <?php echo $iterazioneanno;?>&nbsp;&nbsp; 
-<?php }?> 
-<OPTION selected value="<?php echo strftime("%Y");?>"> <?php echo strftime("%Y");?>&nbsp;&nbsp; 
-</select>
-
-</label>
-
-
-
-<label> <br>Mezzo di trasmissione<br>
-
-<SELECT size=1 cols=4 NAME="posizione">
-<OPTION selected value="">
-<OPTION value="posta ordinaria"> posta ordinaria&nbsp;&nbsp;
-<OPTION value="raccomandata"> raccomandata
-<OPTION Value="telegramma"> telegramma
-<OPTION value="fax"> fax
-<OPTION value="email"> email
-<OPTION value="consegna a mano"> consegna a mano
-</select>
-</label>
-
-
-<label> <br>Note:<br><input size="40" type="text" name="note" />
-
-</label>
-
-
-<br>
-<br>
-<input type="button" value="REGISTRA" onClick="Controllo()" /><br><br>
-</form>
-
-
-
-
-</p></div>
-					
-			
-<div class="footer">
-
-					
-				</div>
+<div class="panel panel-default">
+	
+		<div class="panel-heading">
+		<h3 class="panel-title"><strong>Protocollo numero: <?php echo $idlettera;?></strong></h3>
 		</div>
+		<div class="panel-body">
+		
+			<?php
+			 if($_GET['upfile'] == "error") {
+			?>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="alert alert-danger">C'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+				</div>
+			</div>
+			<?php
+			}
+			?>
 			
-			<!-- post end -->
+			<?php
+			 if($_GET['upfile'] == "success") {
+			?>
+			<div class="row">
+				<div class="col-xs-5">
+					<div class="alert alert-success">File allegato correttamente!</div>
+				</div>
+			</div>
+			<?php
+			}
+			?>
+			
+			<div class="form-group">
+			<form role="form" enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file&idlettera=<?php echo $idlettera;?>" method="POST">
+			<table>
+			<tr>
+			<td>
+			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
+			<label for="exampleInputFile">Carica allegato</label>
+			<input name="uploadedfile" type="file" id="exampleInputFile">
+			</td>
+			<td>
+			<button type="submit" class="btn btn-default">Allega</button>
+			</td>
+			</tr>
+			</table>
+			</form>
+		
+			<?php
+			$cercadocumento= mysql_query("select distinct * from lettere$annoprotocollo where idlettera='$idlettera'");
+			$urlpdf1= mysql_fetch_array($cercadocumento);
+			$urlpdf=$urlpdf1['urlpdf'];
+			$my_file -> publdownloadlink ($urlpdf, $idlettera, $annoprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
+			?>
+			
+			
+			<br><br>
+			
+			<?php
+				$my_lettera -> publcercamittente ($idlettera,''); //richiamo del metodo
+			?>
+			
+			<?php
+			$risultati=mysql_query("select anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, joinletteremittenti$annoprotocollo.idlettera, joinletteremittenti$annoprotocollo.idanagrafica from anagrafica, joinletteremittenti$annoprotocollo where anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica and joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
+			if ($row = mysql_fetch_array($risultati)) {
+			echo '<b>Mittenti/Destinatari:<br></b>';
+			$risultati2=mysql_query("select anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, joinletteremittenti$annoprotocollo.idlettera, joinletteremittenti$annoprotocollo.idanagrafica from anagrafica, joinletteremittenti$annoprotocollo where anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica and joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
+			while ($row2 = mysql_fetch_array($risultati2)) {
+			echo $row2['cognome'] . '  -  ' . $row2['nome'] ;?> <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idlettera=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $urlpdf;?>">elimina</a><br><?php
+			}
+			echo '<br>';
+			}
+			?>
+
+			<form name="modulo" method="post" >
+			
+			<div class="form-group">
+				<label>Spedita/Ricevuta</label>
+				<div class="row">
+					<div class="col-xs-2">
+						<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
+						<OPTION value="ricevuta"> Ricevuta
+						<OPTION value="spedita"> Spedita
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label>Oggetto della lettera:</label>
+				<div class="row">
+					<div class="col-xs-5">
+						<input type="text" class="form-control" name="oggetto">
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label>Data della lettera</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<table><tr>
+						<td>
+						<select class="form-control" name="lettera-data-giorno" />
+						<?php
+						$iterazionegiornodelmese = 0;
+						while ($iterazionegiornodelmese < 31) { $iterazionegiornodelmese = $iterazionegiornodelmese +1;
+						if ($iterazionegiornodelmese != strftime("%d")) { ?>
+						<OPTION value="<?php echo $iterazionegiornodelmese;?>"> <?php echo $iterazionegiornodelmese;?>&nbsp;&nbsp; 
+						<?php } 
+						else { ?><OPTION selected value="<?php echo $iterazionegiornodelmese;?>"> <?php echo $iterazionegiornodelmese;?>&nbsp;&nbsp; 
+						<?php }
+						}?>
+						</select>
+						</td>
+						
+						<td>
+						<select class="form-control" name="lettera-data-mese" />
+						<?php
+						$iterazionemese = 0;
+						$iterazionemese2= '';
+						$meseattuale = strftime("%m");
+						while ($iterazionemese < 12) { $iterazionemese = $iterazionemese +1;
+						if ($iterazionemese<10) {$iterazionemese2= '0'.$iterazionemese;} 
+						else {$iterazionemese2= $iterazionemese;}
+						if (strcmp($iterazionemese2,$meseattuale) != 0) { ?>
+						<OPTION value="<?php echo $iterazionemese2 ;?>"> <?php echo $iterazionemese2?>&nbsp;&nbsp; 
+						<?php } 
+						else { ?><OPTION selected value="<?php echo $iterazionemese2 ;?>"> <?php echo $iterazionemese2 ;?>&nbsp;&nbsp; 
+						<?php }
+						}?>
+						</select>
+						</td>
+						
+						<td>
+						<select class="form-control" name="lettera-data-anno" />
+						<?php
+						$iterazioneanno = strftime("%Y") - 3 ;
+						while ($iterazioneanno < (strftime("%Y")-1) ) { $iterazioneanno = $iterazioneanno +1;?>
+						<OPTION value="<?php echo $iterazioneanno;?>"> <?php echo $iterazioneanno;?>&nbsp;&nbsp; 
+						<?php }?> 
+						<OPTION selected value="<?php echo strftime("%Y");?>"> <?php echo strftime("%Y");?>&nbsp;&nbsp; 
+						</select>
+						</td>
+						</tr></table>
+						
+					</div>						
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label>Mezzo di trasmissione:</label>
+				<div class="row">
+					<div class="col-xs-2">
+						<select class="form-control" size=1 cols=4 NAME="posizione">
+						<OPTION selected value="">
+						<OPTION value="posta ordinaria"> posta ordinaria
+						<OPTION value="raccomandata"> raccomandata
+						<OPTION Value="telegramma"> telegramma
+						<OPTION value="fax"> fax
+						<OPTION value="email"> email
+						<OPTION value="consegna a mano"> consegna a mano
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Fascicolazione:</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<input type="text" class="form-control" name="fascicolazione">
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Note:</label>
+				<div class="row">
+					<div class="col-xs-5">
+						<input type="text" class="form-control" name="note">
+					</div>
+				</div>
+			</div>
+			
+			<button type="button" class="btn btn-default" onClick="Controllo()">Registra</button>
+
+			</form>
 
 		</div>
+	</div>	
+</div>
 
 <script language="javascript">
  <!--

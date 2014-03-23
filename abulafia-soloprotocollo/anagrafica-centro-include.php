@@ -1,198 +1,299 @@
 <?php
 $urlfoto= $_GET['urlfoto'];
+if (!$urlfoto) { $urlfoto = 'sagoma.jpg'; }
 $my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
 ?>
 
-
-<div id="primarycontent">
-		
-
-
-
-
-		
-			<!-- primary content start -->
-		
-			<div class="post">
-				<div class="header">
-					<h3><u>Inserimento di un nuovo soggetto:</u></h3>
-				
-				</div>
-				<div class="content">
-					<p><b> 
-
-<img src="foto/<?php echo $urlfoto ;?>" height="100">
-<form enctype="multipart/form-data" action="login0.php?corpus=upload-foto" method="POST">
-<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
-Carica una foto:<br> <input size="22" name="uploadedfile" type="file" />
-<input type="submit" value="Upload" />
-</form>
-<form name="modulo" method="post" >
-<label> <br>Tipologia:<br>
-<?php if ($_SESSION['auth'] > 10) {?>
-<SELECT size=1 cols=4 NAME="anagraficatipologia" onChange="Change()">
-<OPTION selected value="">Scegli...
-<OPTION value="persona"> Persona Fisica
-<OPTION value="carica"> Carica Elettiva o Incarico&nbsp;
-<OPTION value="gruppo"> Gruppo Pionieri
-<OPTION Value="ente"> Ente
-</select>
-<?php } else { ?>	
-<SELECT size=1 cols=4 NAME="anagraficatipologia" onChange="Change()">
-<OPTION selected value="">Scegli...
-<OPTION value="persona"> Persona Fisica &nbsp 
-</select>
-<?php } ?>	
-</label>
-<br>
-<label>Cognome o Denominazione <br><input size="40" type="text" name="cognome" disabled />
-</label>
-
-<label> <br>Nome<br><input size="40" type="text" name="nome" disabled />
-
-</label>
-
-<label> <br>Nato il (gg-mm-aaaa)<br>
-<select size="1" cols=4 type="text" name="nascitadatagiorno" disabled />
-<OPTION selected value="01"> &nbsp;&nbsp;
-<?php
-$iterazionemese = 0;
-while ($iterazionemese < 31) { $iterazionemese = $iterazionemese +1;?>
-<OPTION value="<?php echo $iterazionemese ;?>"> <?php echo $iterazionemese?>&nbsp;&nbsp; 
-<?php } ?>
-</select>
-</select>
-</label>
-<label>
-<select size="1" cols=4 type="text" name="nascitadatamese" disabled />
-<OPTION selected value="01"> &nbsp;&nbsp;
-<?php
-$iterazionemese = 0;
-while ($iterazionemese < 12) { $iterazionemese = $iterazionemese +1;?>
-<OPTION value="<?php echo $iterazionemese ;?>"> <?php echo $iterazionemese?>&nbsp;&nbsp; 
-<?php } ?>
-</select>
-</label>
-
-<label>
-<select size="1" cols=4 type="text" name="nascitadataanno" disabled />
-<OPTION selected value="1901"> &nbsp;&nbsp;
-<?php 
-$iterazioneannonascita = 1920;
-while ($iterazioneannonascita < strftime("%Y") ) { $iterazioneannonascita = $iterazioneannonascita +1;?> 
-<OPTION value="<?php echo $iterazioneannonascita;?>"> <?php echo $iterazioneannonascita;}?>
-</select>
-</label>
-<br>
-<?php
-$my_anagrafica -> publscegliregione ('nascita'); //richiamo del metodo "scegli regione" dell'oggetto Anagrafica
-?>
-
-<label> <br>Comune <br><input size="30" type="text" name="nascitacomune" disabled />
-</label>
-
-<label>  Prov.  <input size="3" type="text" name="nascitaprovincia" disabled />
-</label>
-
-<label> <br>Stato<br><input size="40" type="text" name="nascitastato"  value="italia" disabled />
-</label>
-
-<label> <br>Residente in (via)<br><input size="30" type="text" name="residenzavia" disabled />
-</label>
-
-<label> Num. <input size="3" type="text" name="residenzacivico" disabled />
-</label>
-
-<label> <br>Residente in (comune)<br><input size="30" type="text" name="residenzacomune" disabled />
-</label>
-
-<label> Prov. <input size="3" type="text" name="residenzaprovincia" disabled />
-</label>
-
-<label> <br>Codice di avviamento postale<br><input size="40" type="text" name="residenzacap" disabled />
-</label>
-
-<label> <br>Residente in (stato)<br><input size="40" type="text" name="residenzastato" value="italia"  disabled />
-</label>
-
-
-
-
-
-
-
-<label> <br>Gruppo Sanguigno<br>
-
-<SELECT size=1 cols=4 NAME="grupposanguigno"  disabled>
-<OPTION selected value="">
-<OPTION value="0rh+"> 0rh+
-<OPTION value="0rh-"> 0rh-
-<OPTION Value="Arh+"> Arh+
-<OPTION value="Arh-"> Arh-
-<OPTION value="Brh+"> Brh+
-<OPTION value="Brh-"> Brh-
-<OPTION Value="ABrh+"> ABrh+&nbsp;
-<OPTION value="ABrh-"> ABrh-
-</select>
-</label>
-
-<label> <br>Codice Fiscale<br><input size="40" type="text" name="codicefiscale"  disabled />
-</label>
-
-<label> <br>Telefono/Fax/E-Mail/Contatto MSN<br><input size="27" type="text" name="numero"  disabled />
-</label>
-
-<label>  Tipo  <SELECT size=1 cols=4 NAME="tipo"  disabled><br>
-<OPTION Value="email"> E-Mail
-<OPTION value="fisso"> Fisso
-<OPTION value="cell"> Cell.
-<OPTION Value="fax"> Fax
-<OPTION Value="msn"> MSN
-<OPTION Value="facebook"> Url Profilo Facebook&nbsp;
-<OPTION Value="twitter"> Twitter&nbsp;
-</label>
-</select>
-<label> <br>Altro Telefono/Fax/E-Mail/Contatto MSN<br><input size="27" type="text" name="numero2"  disabled />
-</label>
-
-<label>  Tipo  <SELECT size=1 cols=4 NAME="tipo2" disabled><br>
-<OPTION value="cell"> Cell.
-<OPTION Value="email"> E-Mail
-<OPTION value="fisso"> Fisso
-<OPTION Value="fax"> Fax
-<OPTION Value="msn"> MSN
-<OPTION Value="facebook"> Url Profilo Facebook&nbsp;
-<OPTION Value="twitter"> Twitter&nbsp;
-</label>
-
-</select>
-
-<br>
-(Ulteriori recapiti telefonici o informatici potranno essere aggiunti<br> dopo aver creato l'anagrafica, cliccando su "<i>modifica questa anagrafica</i>")
-
-<br><br>
-
-<input type="button" value="INSERISCI" onClick="Controllo()" /><br><br></b>
-</form>
-
-
-
-
-</p></div>
-					
-		
-<div class="footer">
-
-					
-				</div>
+<div class="panel panel-default">
+	
+		<div class="panel-heading">
+		<h3 class="panel-title"><strong>Inserimento di un nuovo soggetto in anagrafica</strong></h3>
 		</div>
+		<div class="panel-body">
+		
+			<?php
+			 if($_GET['upfoto'] == "error") {
+			?>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="alert alert-danger">C'e' stato un errore nel caricamento della foto, controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+				</div>
+			</div>
+			<?php
+			}
+			?>
 			
-			<!-- post end -->
+			<?php
+			 if($_GET['upfoto'] == "success") {
+			?>
+			<div class="row">
+				<div class="col-xs-5">
+					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Foto inserita correttamente</div>
+				</div>
+			</div>
+			<?php
+			}
+			?>
+			
+			<div class="form-group">
+			<label>Associa una foto:</label>
+			<form role="form" enctype="multipart/form-data" action="login0.php?corpus=upload-foto" method="POST">
+			<table>
+			<tr>
 
+			<td>
+			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />			
+			<input name="uploadedfile" type="file" id="exampleInputFile">
+			<br>
+			<button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span> Salva</button>
+			</td>
 
+			<td><img src="foto/<?php echo $urlfoto ;?>" height="100"></td>
 
+			</tr>
+			</table>
+			</form>
 
+			<form name="modulo" method="post" >
 
+			<div class="form-group">
+				<label>Tipologia:</label>
+				<div class="row">
+					<div class="col-xs-2">
+						<select class="form-control input-sm"  size=1 cols=4 NAME="anagraficatipologia" onChange="Change()">
+						<OPTION selected value="">Scegli...
+						<OPTION value="persona"> Persona Fisica
+						<OPTION value="carica"> Carica Elettiva o Incarico
+						<OPTION Value="ente"> Ente
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Cognome o Denominazione:</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<input type="text" class="form-control input-sm" size="40" name="cognome" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Nome:</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<input type="text" class="form-control input-sm" size="40" name="nome" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Nato il (gg-mm-aaaa)</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<table><tr>
+						
+						<td>
+						<select class="form-control input-sm" size="1" cols=4 type="text" name="nascitadatagiorno" disabled />
+						<OPTION selected value="01">
+						<?php
+						$iterazionemese = 0;
+						while ($iterazionemese < 31) { $iterazionemese = $iterazionemese +1;?>
+						<OPTION value="<?php echo $iterazionemese ;?>"> <?php echo $iterazionemese?>
+						<?php } ?>
+						</select>
+						</select>
+						</td>
+						
+						<td>
+						<select class="form-control input-sm" size="1" cols=4 type="text" name="nascitadatamese" disabled />
+						<OPTION selected value="01"> &nbsp;&nbsp;
+						<?php
+						$iterazionemese = 0;
+						while ($iterazionemese < 12) { $iterazionemese = $iterazionemese +1;?>
+						<OPTION value="<?php echo $iterazionemese ;?>"> <?php echo $iterazionemese?>
+						<?php } ?>
+						</select>
+						</td>
+						
+						<td>
+						<select class="form-control input-sm" size="1" cols=4 type="text" name="nascitadataanno" disabled />
+						<OPTION selected value="1901"> &nbsp;&nbsp;
+						<?php 
+						$iterazioneannonascita = 1920;
+						while ($iterazioneannonascita < strftime("%Y") ) { $iterazioneannonascita = $iterazioneannonascita +1;?> 
+						<OPTION value="<?php echo $iterazioneannonascita;?>"> <?php echo $iterazioneannonascita;}?>
+						</select>
+						</td>
+						
+						</tr></table>
+						
+					</div>						
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Comune di nascita:</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<input type="text" class="form-control input-sm" size="30" name="nascitacomune" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Provincia di nascita:</label>
+				<div class="row">
+					<div class="col-xs-1">
+						<input type="text" class="form-control input-sm" size="40" name="nascitaprovincia" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Stato:</label>
+				<div class="row">
+					<div class="col-xs-3">
+						<input type="text" class="form-control input-sm" size="40" name="nascitastato" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Residente in via:</label>
+				<div class="row">
+					<div class="col-xs-5">
+						<input type="text" class="form-control input-sm" size="40" name="residenzavia" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>N:</label>
+				<div class="row">
+					<div class="col-xs-1">
+						<input type="text" class="form-control input-sm" size="40" name="residenzacivico" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Comune di:</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<input type="text" class="form-control input-sm" size="40" name="residenzacomune" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Provincia:</label>
+				<div class="row">
+					<div class="col-xs-1">
+						<input type="text" class="form-control input-sm" size="40" name="residenzaprovincia" disabled>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label>CAP:</label>
+				<div class="row">
+					<div class="col-xs-2">
+						<input type="text" class="form-control input-sm" size="40" name="residenzacap" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Stato di residenza:</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<input type="text" class="form-control input-sm" size="40" name="residenzastato" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Gruppo sanguigno:</label>
+				<div class="row">
+					<div class="col-xs-2">
+						<select class="form-control input-sm"  size=1 cols=4 NAME="grupposanguigno" onChange="Change()" disabled>
+						<OPTION selected value="">
+						<OPTION value="0rh+"> 0rh+
+						<OPTION value="0rh-"> 0rh-
+						<OPTION Value="Arh+"> Arh+
+						<OPTION value="Arh-"> Arh-
+						<OPTION value="Brh+"> Brh+
+						<OPTION value="Brh-"> Brh-
+						<OPTION Value="ABrh+"> ABrh+&nbsp;
+						<OPTION value="ABrh-"> ABrh-
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Codice Fiscale:</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<input type="text" class="form-control input-sm" size="40" name="codicefiscale" disabled>
+					</div>
+				</div>
+			</div>
+			
+			<label>Recapito:</label>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-2">
+						<SELECT class="form-control input-sm" size=1 cols=4 NAME="tipo"  disabled><br>
+						<OPTION Value=""> seleziona tipo
+						<OPTION Value="email"> E-Mail
+						<OPTION value="fisso"> Fisso
+						<OPTION value="cell"> Cell.
+						<OPTION Value="fax"> Fax
+						<OPTION Value="msn"> MSN
+						<OPTION Value="facebook">Facebook
+						<OPTION Value="twitter"> Twitter
+						</select>
+					</div>
+
+					<div class="col-xs-3">
+						<input type="text" class="form-control input-sm" size="40" name="numero" disabled>
+					</div>
+				</div>
+			</div>
+
+			
+			<label>Altro recapito:</label>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-2">
+						<SELECT class="form-control input-sm" size=1 cols=4 NAME="tipo2"  disabled><br>
+						<OPTION Value=""> seleziona tipo
+						<OPTION Value="email"> E-Mail
+						<OPTION value="fisso"> Fisso
+						<OPTION value="cell"> Cell.
+						<OPTION Value="fax"> Fax
+						<OPTION Value="msn"> MSN
+						<OPTION Value="facebook">Facebook
+						<OPTION Value="twitter"> Twitter
+						</select>
+					</div>
+
+					<div class="col-xs-3">
+						<input type="text" class="form-control input-sm" size="40" name="numero2" disabled>
+					</div>
+				</div>
+			</div>
+			
+			
+			<button type="button" class="btn btn-default" onClick="Controllo()">Inserisci</button>
+
+			</form>
+
+		</div>
+	</div>	
 </div>
 
 <script language="javascript">

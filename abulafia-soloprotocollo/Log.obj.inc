@@ -43,7 +43,7 @@ class Log
 			$riga= $accessloglines[$accessloglinesnumber-($ciclo+$partenza)];
 			if (strpos($riga, $filtro,0) > 0)
 				{ 
-				echo $ciclo.') '.$riga.'<br><br><br>';
+				echo '<br>'. $ciclo.') '.$riga.'<br>';
 				
 				}
 			else { $numerorighe = $numerorighe +1; }

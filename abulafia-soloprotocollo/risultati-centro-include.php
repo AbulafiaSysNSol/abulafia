@@ -100,18 +100,18 @@ $num_righe = mysql_num_rows($risultati);
 
 if  ($num_righe > 0 ) {
 
-if ($cercato !='') { if ($tot_records==1) {echo " $tot_records occorrenza in $tabella per: $cercato"; } else {echo " $tot_records occorrenze in $tabella per: $cercato";} }
-else { echo "$tot_records occorrenze in $tabella";}
+if ($cercato !='') { if ($tot_records==1) {echo "Numero di risultati trovati: <b>$tot_records</b>"; } else {echo "Numero di risultati trovati: <b>$tot_records</b>";} }
+else { echo "Numero di risultati trovati: <b>$tot_records</b>";}
 
 ?>
+<br><br>
 
 
+<table class="table table-bordered" border="0" cellpadding="1" cellspacing="1" width="<?php echo $_SESSION['larghezzatabellarisultati'];?>">
 
-<table border="0" cellpadding="1" cellspacing="1" width="<?php echo $_SESSION['larghezzatabellarisultati'];?>">
+<tr valign="middle"><b>
 
-<tr><b>
-
-<td align="center" valign="middle"><b>ID</td><td align="center" valign="middle"><b>TIPO</td><td align="center" valign="middle"><b>Cognome</td><td align="center" valign="middle"><b>Nome</td><td align="center" valign="middle"><b>Data di Nascita</td><td align="center" valign="middle"><b>Comune</td><td align="center" valign="middle"><b>Prov.</td><td align="center" valign="middle"><b>Codice Fiscale</td><td align="center" valign="middle"><b>Opzioni</td></tr>
+<td align="center"><b>Id</td><td align="center"><b>Tipo</td><td align="center"><b>Cognome</td><td align="center"><b>Nome</td><td align="center"><b>Data di Nascita</td><td align="center"><b>Comune</td><td align="center"><b>Prov.</td><td align="center"><b>Codice Fiscale</td><td align="center"><b>Opzioni</td></tr>
 
 <?php
 
@@ -198,7 +198,7 @@ echo $row['codicefiscale'] ;
 <td align="center" valign="middle">
 <a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>">Dettagli</a>
 
-<br><a href="login0.php?corpus=modifica-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>">Modifica</a>
+<a href="login0.php?corpus=modifica-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>">Modifica</a>
 
 </td>
 
@@ -291,10 +291,11 @@ $num_righe = mysql_num_rows($risultati);
 
 if  ($num_righe > 0 ) {
 
-if ($cercato !='') { if ($tot_records==1) {echo " $tot_records occorrenza in $tabella per: $cercato"; } else {echo " $tot_records occorrenze in $tabella per: $cercato";} }
-else { echo "$tot_records occorrenze in $tabella";}
+if ($cercato !='') { if ($tot_records==1) {echo "Numero di risultati trovati: <b>$tot_records</b>"; } else {echo "Numero di risultati trovati: <b>$tot_records</b>";} }
+else { echo "Numero di risultati trovati: <b>$tot_records</b>";}
 
 ?>
+<br><br>
 <table border="0" cellpadding="1" cellspacing="1" width="<?php echo $_SESSION['larghezzatabellarisultati'];?>">
 
 <tr><b>
