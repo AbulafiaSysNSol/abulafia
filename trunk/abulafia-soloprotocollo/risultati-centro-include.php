@@ -220,12 +220,8 @@ echo "<br>Pagina $currentpage di $tot_pages <br>";
 
 //controllo per pagina avanti-indietro
 
-if(($filtro != 'persona') and ($filtro != 'carica') and ($filtro != 'ente') and ($filtro != 'gruppo'))
-
-{
-
+if(($filtro != 'persona') and ($filtro != 'carica') and ($filtro != 'ente')) {
 	$filtro = 'anagrafica.tipologia';
-
 }
 
 if ($iniziorisultati > 0) {
@@ -296,11 +292,11 @@ else { echo "Numero di risultati trovati: <b>$tot_records</b>";}
 
 ?>
 <br><br>
-<table border="0" cellpadding="1" cellspacing="1" width="<?php echo $_SESSION['larghezzatabellarisultati'];?>">
+<table class="table table-bordered" border="0" cellpadding="1" cellspacing="1" width="<?php echo $_SESSION['larghezzatabellarisultati'];?>">
 
 <tr><b>
 
-<td align="center" valign="middle"><b>Protocollo</td><td align="center" valign="middle"><b>Data registrazione</td><td align="center" valign="middle"><b>Spedita/Ricevuta</td><td align="center" valign="middle"><b>Oggetto</td><td align="center" valign="middle"><b>File</td><td align="center" valign="middle"><b>Mittenti/Destinatari</td><td align="center" valign="middle"><b>Opzioni</td></tr>
+<td align="center" valign="middle"><b>N. Prot.</td><td align="center" valign="middle"><b>Data registrazione</td><td align="center" valign="middle"><b>Spedita/Ricevuta</td><td align="center" valign="middle"><b>Oggetto</td><td align="center" valign="middle"><b>File</td><td align="center" valign="middle"><b>Mittenti/Destinatari</td><td align="center" valign="middle"><b>Opzioni</td></tr>
 
 <?php
 
@@ -360,7 +356,7 @@ echo $row['oggetto'] ;
 <td align="center" valign="middle">
 
 	<?php 
-     		$my_file -> publdownloadlink ($row['urlpdf'], $row['idlettera'], $annoricercaprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
+     		$my_file -> publdownloadlink2($row['urlpdf'], $row['idlettera'], $annoricercaprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
 	?>
 </td>
 
@@ -370,9 +366,7 @@ echo $row['oggetto'] ;
 
 <td align="center" valign="middle">
 <a href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $row['idlettera'];?>">Dettagli</a>
-
-<br><a href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=anagrafica&id=<?php echo $row['idlettera'];?>">Modifica</a>
-
+<a href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=anagrafica&id=<?php echo $row['idlettera'];?>">Modifica</a>
 </td>
 
 

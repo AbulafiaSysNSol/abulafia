@@ -1,6 +1,7 @@
 <?php
 
 include '../db-connessione-include.php'; //connessione al db-server
+include 'maledetti-apici-centro-include.php';
 
 function __autoload ($class_name) //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
 { require_once $class_name.".obj.inc";
@@ -29,7 +30,7 @@ exit() ; }
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-<title><?php echo $_SESSION['titolopagina'];?></title>
+<title><?php echo $_SESSION['nomeapplicativo'] . ' ' . $_SESSION['version'];?></title>
 <meta name="keywords" content="<?php echo $_SESSION['keywords'];?>" />
 <meta name="description" content="<?php echo $_SESSION['description'];?>" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
@@ -96,7 +97,7 @@ exit() ; }
 
 
 <?php
-include '../db-connessione-include.php'; //connessione al db-server
+
 
 if ($_GET['corpus'] != 'cambioanno') 
 	{ 
