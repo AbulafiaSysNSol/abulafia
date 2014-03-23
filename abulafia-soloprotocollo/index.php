@@ -7,7 +7,7 @@
 ?>
 <html>
 <head>
-
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <!-- META -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
