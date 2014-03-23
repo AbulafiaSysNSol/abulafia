@@ -9,9 +9,9 @@
 			 				inserirlo prima in anagrafica?
 			 			</strong> 
 			 			<br> Spesso alcuni nomi o alcune cariche vengono inserite o abbreviate
-			 			 in forme differenti. Ad esempio, l'ispettore provinciale di trapani 
-			 			 puo' essere inserito come isp. prov. trapani, ispettore prov. tp,
-			 			  isp. provinciale trapani. Per evitare inutili doppioni che darebbero
+			 			 in forme differenti. Ad esempio, il presidente provinciale di trapani 
+			 			 puo' essere inserito come pres. prov. trapani, presidente prov. tp,
+			 			  pres. provinciale trapani. Per evitare inutili doppioni che darebbero
 			 			   inoltre risultati falsati nele ricerche, la fase di inserimento
 			 			    dell'anagrafica e' propedeutica e centralizzata rispetto all'inserimento
 			 			     del protocollo, della gestione del curriculum e delle altre funzioni
