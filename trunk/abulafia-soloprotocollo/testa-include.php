@@ -57,7 +57,7 @@ exit() ; }
   
 	<div class="page-header">
 	<div class="row">
-	  <div class="col-md-8"><h1><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <small>'. $_SESSION['headerdescription'];?></small></h1></div>
+	  <div class="col-md-8"><h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2></div>
 	  <div class="col-md-4"><img class="text-right" src="<?php echo $_SESSION['splash']; ?>"></div>
 	</div>
 	  
