@@ -37,13 +37,13 @@
     <h3 class="panel-title" bgcolor="red"><b>LOGIN</b></h3>
   </div>
   <div class="panel-body">
-    Per accedere al sistema, inserisci Username e Password:<br><br>
+    Per accedere al sistema, inserisci username e password:<br><br>
      <?php
     if($_GET['err'] == 1) {
 	?>
 	<div class="row">
 	<div class="col-xs-3">
-	<div class="alert alert-danger"> <span class="glyphicon glyphicon-remove"></span> Username o Password errati</div></div></div>
+	<div class="alert alert-danger"> <span class="glyphicon glyphicon-remove"></span> Username o password errati</div></div></div>
 	<?php
    }
    ?>
@@ -73,9 +73,13 @@
 
 	<center><h5><small>
 	<span xmlns:dc="http://purl.org/dc/elements/1.1/" property="dc:title">
-	Abulafia </span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Alfio Musmarra e Biagio Saitta</span> is licensed under a:<br><br>
-	<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/it/" target="_blank">
-	<img alt="Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo 2.5 Italia License" style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png" /></a>
+		Abulafia </span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">
+		Alfio Musmarra, Biagio Saitta e Federico D'Urso</span> is licensed under a:
+		<br><br>
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/it/" target="_blank">
+		<img alt="Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo 2.5 Italia License" 
+			style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png" />
+		</a>
 	</small></h5></center>
 
 </body>
