@@ -7,7 +7,10 @@ $loginurlfoto =$_SESSION['loginurlfoto']; //acquisisce l'url della foto dell'ute
 		
 			<h3>User Info</h3>
 			<div class="content">
+				<?php if (!$loginurlfoto)
+				{ ?>
 				<img src="foto/<?php echo $loginurlfoto;?>" height="100" alt="" /><!-- foto dell'utente che ha fatto login -->
+				<?php } ?>
 				<p><strong>Username =</strong> <?php echo $_SESSION['loginname'];?><br><strong>Auth level =</strong> <?php echo $_SESSION['auth'];?><br><strong>User ID =</strong> <?php echo $_SESSION['loginid'];?></p>
 			</div>
 			

@@ -44,14 +44,16 @@ echo mysql_error();
 			{
 
 			$this -> leggilettera ($idlettera, $annoricercaprotocollo); 
-
-			$my_file = new File (); 		
-			$my_file -> publdownloadlink ($this->arraylettera1['urlpdf'], $this->arraylettera1['idlettera'], $annoricercaprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
+        ?>
 			
-
-			?><br>Protocollo numero: <strong><?php 
-								echo $this->arraylettera1['idlettera'];
-							?></strong>
+        Protocollo numero: <strong><?php 
+        echo $this->arraylettera1['idlettera'];
+        ?></strong>
+      
+        <?php
+        $my_file = new File (); 		
+			$my_file -> publdownloadlink2($this->arraylettera1['urlpdf'], $this->arraylettera1['idlettera'], $annoricercaprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
+			?>
 	
 			<br>Spedita/Ricevuta: <strong><?php 
 							echo $this->arraylettera1['speditaricevuta'];
@@ -76,13 +78,20 @@ echo mysql_error();
 					echo $this->arraylettera1['note'];
 			?></strong> <br>
 
-			<br>Mittenti/destinatari:<br><b><?php
+			<br>Mittenti/Destinatari: <b><?php
 			while ($row2 = mysql_fetch_array($this->arrayletteramittenti)) 
-		{
+			{
 			?><a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row2['idanagrafica'];?>"><?
-echo $row2['cognome'] . '  ' . $row2['nome'] ;?></a><br> <?php
-		}
-				?>
+			if($row2['nome']) {
+			  $nome = $row2['cognome'] . ' ' . $row2['nome'] .';';
+			}
+		      else {
+			  $nome = $row2['cognome'] . ';';
+			}
+			echo $nome . ' ';?></a><?php
+			}
+			?>
+			<br>
 
 			
 			</B><br>Utente che ha effettuato l'inserimento: <b>
@@ -132,21 +141,17 @@ echo $row2['cognome'] . '  ' . $row2['nome'] ;?></a><br> <?php
 		?>
 			<script type="text/javascript" src="livesearch-cerca-mittente.js"></script>
 			<script language="javascript"> var id=0; </script>
-			<style type="text/css">
-			#livesearch
- 				 {
- 				 margin:0px;
-  				width:194px;
-  				 }
-				#txt1
- 				 {
- 				 margin:0px;
-  				}
-			</style>
 
 			<form>
-			<input type="text" id="txt1" size="30" onkeyup="showResult(this.value,'<?php echo $tipologia;?>',<?php echo $idlettera;?>)" />
-			<div id="livesearch"></div>
+      <div class="form-group">
+				<label>Ricerca mittente o destinatario:</label>
+				<div class="row">
+					<div class="col-xs-4">
+              <input placeholder="digita il cognome o la ragione sociale" type="text" class="form-control" id="txt1" onkeyup="showResult(this.value,'<?php echo $tipologia;?>',<?php echo $idlettera;?>)" >
+              <div id="livesearch"></div>
+					</div>
+				</div>
+			</div>
 			</form>
 
 		<?php 

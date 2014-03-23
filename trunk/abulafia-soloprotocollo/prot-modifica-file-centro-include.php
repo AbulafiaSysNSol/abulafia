@@ -1,33 +1,34 @@
 <?php
 $annoprotocollo = $_SESSION['annoprotocollo'];
 $from =$_GET['from'];
-?>
-	<div id="primarycontent">
-		
-			<!-- primary content start -->
-		
-			<div class="post">
-				<div class="header">
-					<h3><u>Upload file Protocollo</u></h3>
-				
-				</div>
-				<div class="content">
-			<?php		
-if ($from != 'modifica-protocollo') {?>				
-<b>Upload in corso...</b> <br><?php
-$target_path = "lettere$annoprotocollo/";
-$idlettera=$_GET['idlettera'];
-$target_path = $target_path . $idlettera.basename( $_FILES['uploadedfile']['name']); 
-$urlpdf=  $idlettera.basename( $_FILES['uploadedfile']['name']); 
 
-if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
-    echo "File ".  basename( $_FILES['uploadedfile']['name']). 
-    " caricato sul server regolarmente";
-$inserisci=mysql_query("update lettere$annoprotocollo set urlpdf='$urlpdf' where idlettera ='$idlettera'");
+	
+if ($from != 'modifica-protocollo') {				
 
-} else{
-    echo "C'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.";
-}
+	$target_path = "lettere$annoprotocollo/";
+	$idlettera=$_GET['idlettera'];
+	$target_path = $target_path . $idlettera.basename( $_FILES['uploadedfile']['name']); 
+	$urlpdf=  $idlettera.basename( $_FILES['uploadedfile']['name']); 
+
+	if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
+	$inserisci=mysql_query("update lettere$annoprotocollo set urlpdf='$urlpdf' where idlettera ='$idlettera'");
+	?>
+	<SCRIPT LANGUAGE="Javascript">
+	browser= navigator.appName;
+	if (browser == "Netscape")
+	window.location="login0.php?corpus=protocollo2&urlpdf=<?php echo $urlpdf ; ?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=success"; else window.location="login0.php?corpus=protocollo2&urlpdf=<?php echo $urlpdf ; ?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=success";
+	</SCRIPT>
+	<?php
+	} 
+	else {
+		?>
+		<SCRIPT LANGUAGE="Javascript">
+		browser= navigator.appName;
+		if (browser == "Netscape")
+		window.location="login0.php?corpus=protocollo2&urlpdf=<?php echo $urlpdf ; ?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=error"; else window.location="login0.php?corpus=protocollo2&urlpdf=<?php echo $urlpdf ; ?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=error";
+		</SCRIPT>
+		<?php
+	}
 
 ?>
 <div class="content">

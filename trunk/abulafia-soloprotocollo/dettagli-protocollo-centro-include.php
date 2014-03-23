@@ -59,7 +59,7 @@ $my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
 				<ul class="linklist">
 
 <li class="first"><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $_GET['id'];?>"><br>Modifica questo Protocollo</a></li>
-<li><a href="login0.php?corpus=invia-newsletter&id=<?php echo $_GET['id'];?>">Invia tramite mailing list</a></li>					
+<li><a href="login0.php?corpus=invia-newsletter&id=<?php echo $_GET['id'];?>">Invia tramite Email</a></li>					
 <li><a href="login0.php?corpus=protocollo">Nuovo inserimento PROTOCOLLO</a></li>
 </ul>
 			</div>

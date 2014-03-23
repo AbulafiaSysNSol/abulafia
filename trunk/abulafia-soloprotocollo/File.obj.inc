@@ -39,19 +39,35 @@ Class File
 		{
 			if (!$nomefile) 
 				{ 
-			echo "Nessun file associato";
+			echo "<br>Nessun file associato";
 				} //nel caso di nessun file associato al protocollo
 			else 	{
-		?><br><a target ="_new" href="download.php?annoricercaprotocollo=<?php echo $annoricercaprotocollo; ?>
+		?><br><b>File associato:</b><a target ="_new" href="download.php?annoricercaprotocollo=<?php echo $annoricercaprotocollo; ?>
 	&lud=<?php echo $nomefile; ?>
 	&idlettera=<?php echo $idlettera; ?>
 	&est=<?php echo $this->estensionefile ($nomefile);?> "> <!-- richiamo del metodo "ricava estensione dal file" di questo stesso oggetto-->
-	 <?php echo "File associato: ".substr($nomefile,0,5).'...';?> <!-- pubblica il nome abbreviato del file -->
-		</a><br>
+	 <?php echo substr($nomefile,0,36).'...';?> <!-- pubblica il nome abbreviato del file -->
+		</a>
 		<?
 				}
 		}
-
+      
+    private function downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo)
+		{
+			if (!$nomefile) 
+				{ 
+			echo "<br>Nessun file associato";
+				} //nel caso di nessun file associato al protocollo
+			else 	{
+		?><br>File associato:<a target ="_new" href="download.php?annoricercaprotocollo=<?php echo $annoricercaprotocollo; ?>
+	&lud=<?php echo $nomefile; ?>
+	&idlettera=<?php echo $idlettera; ?>
+	&est=<?php echo $this->estensionefile ($nomefile);?> "> <!-- richiamo del metodo "ricava estensione dal file" di questo stesso oggetto-->
+	 <?php echo '<b>'.$nomefile.'</b>';?> <!-- pubblica il nomecompleto del file -->
+		</a>
+		<?
+				}
+		}  
 
 	function publdownloadlink  ($nomefile, $idlettera, $annoricercaprotocollo)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
 		{
@@ -59,6 +75,11 @@ Class File
 			
 		}
 
-
+function publdownloadlink2  ($nomefile, $idlettera, $annoricercaprotocollo)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
+		{
+		$this->downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo);
+			
+		}
+      
 	}//fine classe
 ?>

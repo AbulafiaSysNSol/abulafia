@@ -1,15 +1,3 @@
-
-	<div id="primarycontent">
-		
-			<!-- primary content start -->
-		
-			<div class="post">
-				<div class="header">
-					<h3><u>Dati inviati</u></h3>
-				
-				</div>
-				<div class="content">
-					<p>
 <?php
 $annoprotocollo = $_SESSION['annoprotocollo'];
 //inizio passaggio dati da pagina inserimento
@@ -37,10 +25,6 @@ $auth = $_SESSION['auth'] ;
 //fine passaggio dati
 
 //controllo esistenza
-
-
-
-
 $inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.urlpdf='$urlpdf', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.note='$note', lettere$annoprotocollo.dataregistrazione='$dataregistrazione' WHERE lettere$annoprotocollo.idlettera='$idlettera'     " );
 echo  mysql_error();
 if (!$inserimento) { echo "Inserimento non riuscito" ; }
@@ -53,59 +37,28 @@ if ($conteggiomittenti2[0] < 1) { $inserimentomittenti=mysql_query("insert into 
 ?>
 
 
-<div class="content">
-
-<?php 	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
+<div class="panel panel-default">
+  <div class="panel-body">
+   
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo registrato correttamente.</div>
+		</div>
+	</div>
+	<b>Riepilogo:</b>
+	<br><br>
+	<?php 	
+	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
 	$my_lettera -> publdisplaylettera ($_GET['idlettera'], $annoprotocollo); //richiamo del metodo "mostra" dell'oggetto Lettera
-?>
+	?>
+	
+  </div>
+  
+  	<div class="panel-heading">
+	<h3 class="panel-title"><strong>Opzioni:</strong></h3>
+	</div>
+	<div class="panel-body">
+		<p><a href="login0.php?corpus=protocollo">Registrazione nuovo PROTOCOLLO</a></p>
+	</div>
+  
 </div>
-
-
-</p></div>
-					
-			
-
-		</div>
-			
-			<!-- post end -->
-<div id="primarycontent">
-		
-			<!-- secondary content start -->
-		
-			<div class="post">
-				<div class="header">
-					<h3><u>Opzioni:</u></h3>
-				
-				</div>
-				<div class="content">
-					<p>
-
-
-
-</p>
-
-
-</div>
-<div class="content">
-				<ul class="linklist">
-
-<li class="first"><a href="login0.php?corpus=dettagli-protocollo&from=risultati&id=<?php echo $idlettera;?>"><br>Visualizza Dettagli</a></li>
-					<li><a href="login0.php?corpus=protocollo">Registrazione nuovo PROTOCOLLO</a></li>
-</ul>
-			</div>
-<br><br>
-
-
-</p></div>
-					
-			
-<div class="footer">
-
-					
-				</div>
-		</div>
-
-
-
-
-		</div>

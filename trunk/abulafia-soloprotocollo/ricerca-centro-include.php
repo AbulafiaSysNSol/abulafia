@@ -4,114 +4,92 @@ $_SESSION['annoricercaprotocollo']= '';
 
 $level = $_SESSION['auth'];
 ?>
-	<div id="primarycontent">
 
-		<!-- primary content start -->
-
-			<div class="post">
-
-				<div class="header">
-
-					<h3><u>Ricerca nel Database</u></h3>
-
-				</div>
-
-					<div class="content">
-
-					<p>
-                    
-                    	<form name="search" method="post">
-
-<p><b>Ricerca avanzata</b> <br>
-  
-  <!--</label> -->
-  
-  <label> Inserisci il valore da cercare<br>
-     <input type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
-  </label>
-  
-  <input type="button" value="CERCA" onClick="autorized(<?php echo $level ?>)" />
-<br />
-<div id="content" style="display: none; border: solid; border-width:1px; padding:5px">
-RICERCA COGNOME+NOME:<br /> &Eacute; possibile effettuare una ricerca esatta per cognome e nome (esempio Saitta+Biagio)
-</div>
-
-<label>
-	<br>Ricerca in:<br> 
-
-		<SELECT style="width:120px" size=1 cols=4 NAME="tabella" onChange="Change()">
-			<OPTION selected value="lettere" onclick="document.search.cercato.focus()"> PROTOCOLLO&nbsp;
-			<OPTION value="anagrafica" onclick="document.search.cercato.focus()"> ANAGRAFICA&nbsp;
-		</SELECT>
-</label>
-
-<br><br>
-
-Elenca in ordine:<br>
-<input type="radio" onfocus="document.search.cercato.focus()" name="group1" value="alfabetico"> Alfabetico<br>
-<input type="radio" onfocus="document.search.cercato.focus()" name="group1" value="cronologico"> Cronologico<br>
-<input type="radio" onfocus="document.search.cercato.focus()" name="group1" value="cron-inverso" checked> Cronologico inverso<br>
-
-<br>
-
-Anno di riferimento: 
-
-<br>
-
-
-<SELECT style="width:100px" size=1 cols=4 NAME="annoricercaprotocollo" >
-<?php
-	$esistenzatabella1=mysql_query("show tables like 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
-	$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
-	$my_calendario-> publadesso(); //acquisizione dell'anno attuale per indicare l'anno selezionato di default
-	while ($esistenzatabella11 = mysql_fetch_array($esistenzatabella1, MYSQL_NUM))
-	{
-	if ('lettere'.$my_calendario->anno== $esistenzatabella11[0]) { $selected='selected'; }
-	else { $selected ='';}
-	$annoprotocollo= explode("lettere", $esistenzatabella11[0]);
-	?><OPTION value="<?php echo $annoprotocollo[1] ;?>" onclick="document.search.cercato.focus()" <?php echo $selected ;?>> <?php echo $annoprotocollo[1].' ' ;?>
-	<?
-	}
-	?>
-
-</select>
-
-<br><br>
-
-Filtro per tipologia: <br>
-
-<?php 
-	if ($_SESSION['auth'] > 10) {?>
-		<SELECT style="width:150px" size=1 cols=4 NAME="anagraficatipologia"  disabled>
-			<OPTION value="anagrafica.tipologia" onclick="document.search.cercato.focus()" selected> Nessun filtro
-			<OPTION value="persona" onclick="document.search.cercato.focus()"> Persone fisiche
-			<OPTION value="carica" onclick="document.search.cercato.focus()"> Carica o Incarico
-			<OPTION value="gruppo" onclick="document.search.cercato.focus()"> Gruppo Pionieri
-			<OPTION value="ente" onclick="document.search.cercato.focus()"> Ente
-		</select>
-<?php } 
-
-else { ?>	
-	<SELECT style="width:150px" size=1 cols=4 NAME="anagraficatipologia"  disabled>
-		<OPTION value="persona" selected> Persone fisiche
-	</select>
-<?php } ?>	
-
-<br>
-<br>
-						</form>
-					</p>
-
-					</div>	
-
-					<div class="footer">
-					</div>
-
-				</div>
-
-				<!-- post end -->
+<div class="panel panel-default">
+	
+		<div class="panel-heading">
+		<h3 class="panel-title"><strong>Ricerca nel database</strong></h3>
 		</div>
-        
+		<div class="panel-body">
+			
+			<div class="form-group">
+			<form name="search" method="post">
+			
+				<label>Inserisci il valore da cercare:</label>
+				<div class="row">
+					<div class="col-xs-4">
+						<input class="form-control input-sm" type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
+					</div>
+					
+					<div class="col-xs-2">
+						<input class="btn btn-default" type="button" value="CERCA" onClick="autorized(<?php echo $level ?>)" />
+					</div>
+				</div>
+				<br>
+				<div id="content" style="display: none;" class="alert alert-info"><span class="glyphicon glyphicon-search"></span> <b> RICERCA COGNOME+NOME</b>: è possibile effettuare una ricerca esatta per cognome e nome (esempio <b>Saitta+Biagio</b>)</div>
+				
+				<label>Ricerca in:</label>
+				<div class="row">
+					<div class="col-xs-2">
+						<SELECT class="form-control input-sm" name="tabella" onChange="Change()">
+							<OPTION selected value="lettere" onclick="document.search.cercato.focus()"> PROTOCOLLO&nbsp;
+							<OPTION value="anagrafica" onclick="document.search.cercato.focus()"> ANAGRAFICA&nbsp;
+						</SELECT>
+					</div>
+				</div>
+				
+				<br>
+				<label>Elenca in ordine:</label>
+				<div class="row">
+					<div class="col-xs-3">
+						<input type="radio" onfocus="document.search.cercato.focus()" name="group1" value="alfabetico"> Alfabetico;<br>
+						<input type="radio" onfocus="document.search.cercato.focus()" name="group1" value="cronologico"> Cronologico;<br>
+						<input type="radio" onfocus="document.search.cercato.focus()" name="group1" value="cron-inverso" checked> Cronologico inverso;<br>
+					</div>
+				</div>	
+				
+				<br>
+				<label>Anno di riferimento:</label>
+				<div class="row">
+					<div class="col-xs-2">
+						<SELECT class="form-control input-sm" name="annoricercaprotocollo" >
+						<?php
+							$esistenzatabella1=mysql_query("show tables like 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
+							$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
+							$my_calendario-> publadesso(); //acquisizione dell'anno attuale per indicare l'anno selezionato di default
+							while ($esistenzatabella11 = mysql_fetch_array($esistenzatabella1, MYSQL_NUM))
+							{
+							if ('lettere'.$my_calendario->anno== $esistenzatabella11[0]) { $selected='selected'; }
+							else { $selected ='';}
+							$annoprotocollo= explode("lettere", $esistenzatabella11[0]);
+							?><OPTION value="<?php echo $annoprotocollo[1] ;?>" onclick="document.search.cercato.focus()" <?php echo $selected ;?>> <?php echo $annoprotocollo[1].' ' ;?>
+							<?
+							}
+						?>
+						</select>
+					</div>
+				</div>
+				
+				<br>
+				<label>Filtra per tipologia:</label>
+				<div class="row">
+					<div class="col-xs-2">
+						<SELECT class="form-control input-sm" NAME="anagraficatipologia"  disabled>
+						<OPTION value="anagrafica.tipologia" onclick="document.search.cercato.focus()" selected> Nessun filtro
+						<OPTION value="persona" onclick="document.search.cercato.focus()"> Persone fisiche
+						<OPTION value="carica" onclick="document.search.cercato.focus()"> Carica o Incarico
+						<OPTION value="ente" onclick="document.search.cercato.focus()"> Ente
+						</select>
+					</div>
+				</div>
+				
+			</form>	
+			
+			</div>			
+			
+		</div>
+		
+</div>        
 
 <script language="javascript">
 
