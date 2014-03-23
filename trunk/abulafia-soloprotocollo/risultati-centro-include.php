@@ -107,9 +107,9 @@ else { echo "Numero di risultati trovati: <b>$tot_records</b>";}
 <br><br>
 
 
-<table class="table table-bordered" border="0" cellpadding="1" cellspacing="1" width="<?php echo $_SESSION['larghezzatabellarisultati'];?>">
+<table class="table table-bordered">
 
-<tr valign="middle"><b>
+<tr><b>
 
 <td align="center"><b>Id</td><td align="center"><b>Tipo</td><td align="center"><b>Cognome</td><td align="center"><b>Nome</td><td align="center"><b>Data di Nascita</td><td align="center"><b>Comune</td><td align="center"><b>Prov.</td><td align="center"><b>Codice Fiscale</td><td align="center"><b>Opzioni</td></tr>
 
@@ -195,11 +195,11 @@ echo $row['codicefiscale'] ;
 
 
 
-<td align="center" valign="middle">
-<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>">Dettagli</a>
-
-<a href="login0.php?corpus=modifica-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>">Modifica</a>
-
+<td align="center" width="150">
+	<div class="btn-group btn-group-sm">
+		<a class="btn btn-info" href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>">Dettagli</a>
+		<a class="btn btn-warning" href="login0.php?corpus=modifica-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>">Modifica</a>
+	</div>
 </td>
 
 
@@ -291,12 +291,13 @@ if ($cercato !='') { if ($tot_records==1) {echo "Numero di risultati trovati: <b
 else { echo "Numero di risultati trovati: <b>$tot_records</b>";}
 
 ?>
+
 <br><br>
-<table class="table table-bordered" border="0" cellpadding="1" cellspacing="1" width="<?php echo $_SESSION['larghezzatabellarisultati'];?>">
+<table class="table table-bordered">
 
-<tr><b>
-
-<td align="center" valign="middle"><b>N. Prot.</td><td align="center" valign="middle"><b>Data registrazione</td><td align="center" valign="middle"><b>Spedita/Ricevuta</td><td align="center" valign="middle"><b>Oggetto</td><td align="center" valign="middle"><b>File</td><td align="center" valign="middle"><b>Mittenti/Destinatari</td><td align="center" valign="middle"><b>Opzioni</td></tr>
+<tr align="center"><strong>
+<td>N. Prot.</td><td>Data registrazione</td><td>Spedita/Ricevuta</td><td>Oggetto</td><td>File</td><td>Mittenti/Destinatari</td><td>Opzioni</td>
+</strong></tr>
 
 <?php
 
@@ -320,7 +321,7 @@ echo $row['idlettera'] ;
 
 
 
-?><td align="center" valign="middle"><?php
+?><td align="center"><?php
 
 $dataregistrazione = $row['dataregistrazione'] ;
 
@@ -336,7 +337,7 @@ echo "$data2" ;
 
 
 
-<td align="center" valign="middle"><?php
+<td align="center"><?php
 
 echo $row['speditaricevuta'] ; ?> 
 
@@ -345,7 +346,7 @@ echo $row['speditaricevuta'] ; ?>
 
 
 
-<td align="center" valign="middle"><?php
+<td align="center"><?php
 
 echo $row['oggetto'] ;
 
@@ -353,20 +354,22 @@ echo $row['oggetto'] ;
 
 
 
-<td align="center" valign="middle">
+<td align="center">
 
 	<?php 
      		$my_file -> publdownloadlink2($row['urlpdf'], $row['idlettera'], $annoricercaprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
 	?>
 </td>
 
-<td align="center" valign="middle"><a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>"><?echo $row['cognome'].' '.$row['nome'] ;?></a></td>
+<td align="center"><a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>"><?echo $row['cognome'].' '.$row['nome'] ;?></a></td>
 
 
 
-<td align="center" valign="middle">
-<a href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $row['idlettera'];?>">Dettagli</a>
-<a href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=anagrafica&id=<?php echo $row['idlettera'];?>">Modifica</a>
+<td align="center" width="150">
+<div class="btn-group btn-group-sm">
+<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $row['idlettera'];?>">Dettagli</a>
+<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=anagrafica&id=<?php echo $row['idlettera'];?>">Modifica</a>
+</div>
 </td>
 
 
