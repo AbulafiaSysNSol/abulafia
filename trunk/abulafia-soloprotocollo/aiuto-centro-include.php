@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-		<h3 class="panel-title"><strong>F.A.Q. - Frequently Ask Questions</strong></h3>
+		<h3 class="panel-title"><strong>F.A.Q. - Frequently Asked Questions</strong></h3>
 		</div>
 		<div class="panel-body">
 			<p class="text-justify"><strong>Perche' non posso scrivere liberamente il nome di un mittente
