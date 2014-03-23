@@ -1,4 +1,6 @@
 <?php
+include 'maledetti-apici-centro-include.php';
+
 Class File
 	{
 
@@ -34,7 +36,7 @@ Class File
 		
 		
 
-
+  
 	private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo)
 		{
 			if (!$nomefile) 
@@ -56,14 +58,14 @@ Class File
 		{
 			if (!$nomefile) 
 				{ 
-			echo "<br>Nessun file associato";
+			echo "Nessun file associato";
 				} //nel caso di nessun file associato al protocollo
 			else 	{
-		?><br>File associato:<a target ="_new" href="download.php?annoricercaprotocollo=<?php echo $annoricercaprotocollo; ?>
+		?><a target ="_new" href="download.php?annoricercaprotocollo=<?php echo $annoricercaprotocollo; ?>
 	&lud=<?php echo $nomefile; ?>
 	&idlettera=<?php echo $idlettera; ?>
 	&est=<?php echo $this->estensionefile ($nomefile);?> "> <!-- richiamo del metodo "ricava estensione dal file" di questo stesso oggetto-->
-	 <?php echo '<b>'.$nomefile.'</b>';?> <!-- pubblica il nomecompleto del file -->
+	 <?php echo stripslashes($nomefile);?> <!-- pubblica il nomecompleto del file -->
 		</a>
 		<?
 				}

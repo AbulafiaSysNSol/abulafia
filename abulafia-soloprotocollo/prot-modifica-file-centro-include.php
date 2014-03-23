@@ -1,4 +1,6 @@
 <?php
+include 'maledetti-apici-centro-include.php';
+
 $annoprotocollo = $_SESSION['annoprotocollo'];
 $from =$_GET['from'];
 
@@ -8,8 +10,7 @@ if ($from != 'modifica-protocollo') {
 	$target_path = "lettere$annoprotocollo/";
 	$idlettera=$_GET['idlettera'];
 	$target_path = $target_path . $idlettera.basename( $_FILES['uploadedfile']['name']); 
-	$urlpdf=  $idlettera.basename( $_FILES['uploadedfile']['name']); 
-
+	$urlpdf=  addslashes($idlettera.basename( $_FILES['uploadedfile']['name'])); 
 	if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
 	$inserisci=mysql_query("update lettere$annoprotocollo set urlpdf='$urlpdf' where idlettera ='$idlettera'");
 	?>

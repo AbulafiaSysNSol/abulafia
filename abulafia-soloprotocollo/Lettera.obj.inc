@@ -50,10 +50,11 @@ echo mysql_error();
         echo $this->arraylettera1['idlettera'];
         ?></strong>
       
+        <br>File associato:<b>
         <?php
         $my_file = new File (); 		
 			$my_file -> publdownloadlink2($this->arraylettera1['urlpdf'], $this->arraylettera1['idlettera'], $annoricercaprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
-			?>
+			?></b>
 	
 			<br>Spedita/Ricevuta: <strong><?php 
 							echo $this->arraylettera1['speditaricevuta'];

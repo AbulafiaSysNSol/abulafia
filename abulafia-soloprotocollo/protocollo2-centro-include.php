@@ -78,7 +78,7 @@ $idlettera=$_GET['idlettera'];
 			 if($_GET['upfile'] == "success") {
 			?>
 			<div class="row">
-				<div class="col-xs-5">
+				<div class="col-xs-12">
 					<div class="alert alert-success">File allegato correttamente!</div>
 				</div>
 			</div>
