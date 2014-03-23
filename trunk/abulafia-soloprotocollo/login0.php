@@ -1,6 +1,6 @@
 <?php
 
-session_start(); //avvio della sessione: va fatto obbigatoriamente all'inizio e carica tutte le variabili di sessione, valide di pagina in pagina sino al logout.
+session_start(); //avvio della sessione: va fatto obbigatoriamente all'inizio e carica tutte le variabili di sessione, valide di pagina in pagina sino al logout
 
 setlocale(LC_TIME, 'it_IT');//carica la versione italiana della data e dell'orario
 
