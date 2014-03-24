@@ -35,7 +35,16 @@ if (!$inserimento) {echo 'Impossibile compiere l\'azione richiesta'; echo mysql_
 
 
 $update=mysql_query("update defaultsettings set risultatiperpagina='$risultati_per_pagina' , splash='$splash' , primocoloretabellarisultati='$color1' , secondocoloretabellarisultati='$color2' where idanagrafica='$id'");
-if (!$update) {echo 'Impossibile compiere l\'azione richiesta'; echo mysql_error(); exit();}
+if (!$update) {
+?>
+<SCRIPT LANGUAGE="Javascript">
+browser= navigator.appName;
+if (browser == "Netscape")
+window.location="login0.php?corpus=settings&update=error"; else window.location="login0.php?corpus=settings&update=error"
+</SCRIPT>
+<?php
+}
+
 else 
 {
 	$_SESSION['risultatiperpagina'] = $risultati_per_pagina;
@@ -49,5 +58,5 @@ else
 <SCRIPT LANGUAGE="Javascript">
 browser= navigator.appName;
 if (browser == "Netscape")
-window.location="login0.php?corpus=settings"; else window.location="login0.php?corpus=settings"
+window.location="login0.php?corpus=settings&update=success"; else window.location="login0.php?corpus=settings&update=success"
 </SCRIPT>

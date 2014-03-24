@@ -1,39 +1,27 @@
-	<div id="primarycontent">
-		
-			<!-- primary content start -->
-		
-			<div class="post">
-				<div class="header">
-					<h3><u>Segnalazione errori:</u></h3>
-				
-				</div>
-				<div class="content">
-					<p>
-<form action="login0.php?corpus=segnala-bug2&idanagrafica=<?php echo $_SESSION['loginid'];?>" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="mittente" value="webmaster@pionierisicilia.com">
-<table border="0">
-
-<tr>
-  <td>Pagina in cui si e' riscontrato l'errore</td>
-  <td><input type="text" name="pagina-errore" value="" /></td>
-</tr>
-<tr>
-  <td>Descrizione dell'errore:</td>
-  <td><textarea cols="23" rows="4" name="messaggio"></textarea></td>
-  </tr>
-<tr>
-  <td colspan="2" align="right"><input type="submit" value="Invia" /></td>
-</tr>
-</table>
-</form>
-
-<b>Tutte le segnalazioni verranno vagliate. <br>Si verra' avvisati via e-mail quando l'errore sara' stato corretto.</b>
-
-
-</p></div>
-					
+<div class="panel panel-default">
+	
+		<div class="panel-heading">
+		<h3 class="panel-title"><b>Segnalazione errori</b></h3>
 		</div>
+		<div class="panel-body">
 			
-			<!-- post end -->
+			<div class="row">
+			<div class="col-xs-5">
+			<div class="form-group">
+			<form action="login0.php?corpus=segnala-bug2&idanagrafica=<?php echo $_SESSION['loginid'];?>" method="POST" enctype="multipart/form-data">
+			<input type="hidden" name="mittente" value="informatica@cricatania.it">
+			Pagina in cui si e' riscontrato l'errore:<br>
+			<input class="form-control" type="text" name="pagina-errore" value="" />
+			<br>Descrizione dell'errore:<br>
+			<textarea class="form-control" cols="23" rows="4" name="messaggio"></textarea>
+			<br><input class="btn btn-primary" type="submit" value="Invia" />
+			</form>
+			</div>
+			</div>
+			</div>
+			
+			<h5>Tutte le segnalazioni verranno vagliate. Si verra' avvisati via e-mail quando l'errore sara' stato corretto.</h5>
+		</div>
 
 </div>
+

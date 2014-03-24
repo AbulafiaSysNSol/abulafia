@@ -25,15 +25,15 @@ else
 }
 
 $annoricercaprotocollo=$_GET['annoricercaprotocollo'];
-$lud2= $tabella.$annoricercaprotocollo.$path.$lud.'.'.$est;
-$lud3=$fileprename.$idlettera.'.'.$est; // nome assegnato al file per il download
+$lud2= stripslashes($tabella.$annoricercaprotocollo.$path.$lud);
+$lud3=stripslashes($fileprename.$idlettera); // nome assegnato al file per il download
 $fp = fopen($lud2, 'rb');
 header("Pragma: public");
 header("Expires: 0");
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
 header("Cache-Control: private",false); 
 header("Content-Type: application/octetstream");
-header("Content-Disposition: attachment\; filename=\"$lud3\"");
+header("Content-Disposition: attachment; filename=\"$lud3.$est\"");
 header("Content-Transfer-Encoding:­ binary");
 header("Content-Length: " . filesize($lud2));
 header("Connection: close");
