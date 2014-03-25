@@ -12,6 +12,7 @@ $lettera_data_giorno = $_POST['lettera-data-giorno'];
 $lettera_data_mese = $_POST['lettera-data-mese'];
 $lettera_data_anno = $_POST['lettera-data-anno'];
 $posizione = $_POST['posizione'];
+$riferimento = $_POST['riferimento'];
 $note  = $_POST['note'];
 $urlpdf = $_GET['urlpdf'];
 $dataregistrazione = strftime("%Y-%m-%d");

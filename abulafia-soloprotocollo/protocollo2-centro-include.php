@@ -222,11 +222,31 @@ $idlettera=$_GET['idlettera'];
 			</div>
 			
 			<div class="form-group">
-				<label>Fascicolazione:</label>
 				<div class="row">
-					<div class="col-xs-4">
-						<input type="text" class="form-control" name="fascicolazione">
-					</div>
+				<div class="col-xs-3">
+				<label>Fascicolazione:</label>
+				<?php
+				$fascicolo=mysql_query("select count(*) from fascicoli");
+				$num=mysql_fetch_row($fascicolo);
+				if($num[0]<=0) {
+					?>
+					<select class="form-control" size=1 cols=4 NAME="posizione" disabled>
+					<OPTION value="">Nessun fascicolo aggiunto
+					</select>
+					<?php
+				}
+				else {
+
+				$risultati=mysql_query("select distinct * from fascicoli");
+				?><select class="form-control" size=1 cols=4 NAME="riferimento"><?php
+				while ($risultati2=mysql_fetch_array($risultati))
+				{
+					echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['descrizione'];
+				}
+				echo '</select>';
+				}
+				?>
+				</div>
 				</div>
 			</div>
 			
