@@ -55,10 +55,14 @@ exit() ; }
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
   
-	<div class="page-header">
-	<div class="row">
-	  <div class="col-md-8"><h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2></div>
-	  <div class="col-md-4"><img class="text-right" src="<?php echo $_SESSION['splash']; ?>"></div>
+	 <div class="row">
+		 <div class="col-md-12">
+			<div class="page-header">
+			<table border="0" width="100%"><tr><td>
+			<h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2></td> 
+			<td align="right"><img src="<?php echo $_SESSION['splash']; ?>"></td></tr></table>
+			</div>
+		 </div>
 	</div>
 	  
 	<nav class="navbar navbar-default" role="navigation">
@@ -83,6 +87,7 @@ exit() ; }
 		    <li><a href="login0.php?corpus=settings">Impostazioni</a></li>
 		    <?php if ($_SESSION['auth'] > 50) {?>
 		    <li class="divider"></li>
+		    <li><a href="login0.php?corpus=fascicoli">Fascicoli</a></li>
 		    <li><a href="login0.php?corpus=gestione-utenti">Gestione degli Utenti</a></li>
 		    <li><a href="login0.php?corpus=advancedsettings">Advanced Settings</a></li>
 		    <li><a href="download.php?lud=access.log&est=log">Scarica il log degli accessi</a></li>

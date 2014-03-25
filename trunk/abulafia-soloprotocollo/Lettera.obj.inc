@@ -74,6 +74,10 @@ echo mysql_error();
 			<br>Mezzo di trasmissione: <strong><?php 
 					echo $this->arraylettera1['posizione'];
 					?></strong> 
+          
+        	<br>Fascicolazione: <strong><?php 
+					echo $this->arraylettera1['riferimento'];
+			?></strong>
 
 			<br>Note: <strong><?php 
 					echo $this->arraylettera1['note'];
