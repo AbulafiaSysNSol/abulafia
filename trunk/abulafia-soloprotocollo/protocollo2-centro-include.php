@@ -224,24 +224,24 @@ $idlettera=$_GET['idlettera'];
 			<div class="form-group">
 				<div class="row">
 				<div class="col-xs-3">
-				<label>Fascicolazione:</label>
+				<label>Titolazione:</label>
 				<?php
-				$fascicolo=mysql_query("select count(*) from fascicoli");
+				$fascicolo=mysql_query("select count(*) from titolario");
 				$num=mysql_fetch_row($fascicolo);
 				if($num[0]<=0) {
 					?>
 					<select class="form-control" size=1 cols=4 NAME="posizione" disabled>
-					<OPTION value="">Nessun fascicolo aggiunto
+					<OPTION value="">Nessuna posizione aggiunta
 					</select>
 					<?php
 				}
 				else {
 
-				$risultati=mysql_query("select distinct * from fascicoli");
+				$risultati=mysql_query("select distinct * from titolario");
 				?><select class="form-control" size=1 cols=4 NAME="riferimento"><?php
 				while ($risultati2=mysql_fetch_array($risultati))
 				{
-					echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['descrizione'];
+					echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
 				}
 				echo '</select>';
 				}

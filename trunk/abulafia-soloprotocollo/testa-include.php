@@ -87,7 +87,7 @@ exit() ; }
 		    <li><a href="login0.php?corpus=settings">Impostazioni</a></li>
 		    <?php if ($_SESSION['auth'] > 50) {?>
 		    <li class="divider"></li>
-		    <li><a href="login0.php?corpus=fascicoli">Fascicoli</a></li>
+		    <li><a href="login0.php?corpus=titolario">Titolario</a></li>
 		    <li><a href="login0.php?corpus=gestione-utenti">Gestione degli Utenti</a></li>
 		    <li><a href="login0.php?corpus=advancedsettings">Advanced Settings</a></li>
 		    <li><a href="download.php?lud=access.log&est=log">Scarica il log degli accessi</a></li>
