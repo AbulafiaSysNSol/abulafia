@@ -48,57 +48,63 @@
 	<?php
    }
    ?>
- 
-    <form action="login0.php?corpus=titolario2" method="post" role="form">
-	  <div class="form-group">
-		
-		<div class="row">
-			<div class="col-xs-2">
-				<label>Codice posizione:</label> <input class="form-control" size="10" type="text" name="codice" />
-			</div>
-			<div class="col-xs-4">
-				<label>Descrizione posizione:</label><input class="form-control" size="40" type="text" name="descrizione" />			
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-6">
-				<br><button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> Aggiungi Posizione</button>
-			</div>
-		</div>
-		
-	  </div>
-</form>
+   
+   <div class="row">
 
-<?php
-$fascicolo=mysql_query("select count(*) from titolario");
-$num=mysql_fetch_row($fascicolo);
-if($num[0]<=0) {
-	echo '<br><label><span class="glyphicon glyphicon-warning-sign"></span> Nessun fascicolo registrato.</label>';
-}
-else {
+	<div class="col-xs-6">   
+		<?php
+		$fascicolo=mysql_query("select count(*) from titolario");
+		$num=mysql_fetch_row($fascicolo);
+		if($num[0]<=0) {
+			echo '<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Nessuna posizione registrata.</div>';
+		}
+		else {
 
-?>
-<br><label><span class="glyphicon glyphicon-list"></span> Posizioni gia presenti:</label><br><br>
-<?php
+		?>
+		<label><span class="glyphicon glyphicon-list"></span> Elenco posizioni:</label><br><br>
+		<?php
 
-$risultati=mysql_query("select distinct * from titolario");
-?>
-<div class="row">
-<div class="col-xs-6">
-<table class="table table-striped table-hover">
-<tr>
-<td><b>Codice</b></td><td><b>Descrizione</b></td><td><b>Opzioni</b></td>
-</tr>
-<?php
-while ($risultati2=mysql_fetch_array($risultati))
-{
-	echo '<tr>';
-	echo '<td>' . $risultati2['codice'] . '</td><td>' . $risultati2['descrizione'] . '</td><td><a href="login0.php?corpus=modifca-fascicolo&id=' . $risultati2['id'] . '">Modifica</a> - <a href="login0.php?corpus=elimina-fascicolo&id='. $risultati2['id'] . '">Elimina</a></td></tr>';
-}
-}
-?>
-</table>
-</div></div>
+		$risultati=mysql_query("select distinct * from titolario");
+		?>
+		<table class="table table-striped table-hover">
+		<tr>
+		<td><b>Codice</b></td><td><b>Descrizione</b></td><td><b>Opzioni</b></td>
+		</tr>
+		<?php
+		while ($risultati2=mysql_fetch_array($risultati))
+		{
+			echo '<tr>';
+			echo '<td>' . $risultati2['codice'] . '</td><td>' . $risultati2['descrizione'] . '</td><td><a href="login0.php?corpus=titolario-modifica&id=' . $risultati2['id'] . '"><button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></button></a> <a onClick="return confirm(\'Vuoi veramente cancellare questa posizione?\');" href="login0.php?corpus=titolario-elimina&id='. $risultati2['id'] . '"><button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button></a></td></tr>';
+		}
+		}
+		?>
+		</table>
+	</div>
+	
+	<div class="col-xs-6">   
+	 <label><span class="glyphicon glyphicon-plus"></span> Aggiungi posizione:</label><br><br>
+	    <form action="login0.php?corpus=titolario2" method="post" role="form">
+		  <div class="form-group">
+			
+			<div class="row">
+				<div class="col-xs-4">
+					<label>Codice posizione:</label> <input class="form-control" size="10" type="text" name="codice" />
+				</div>
+				<div class="col-xs-8">
+					<label>Descrizione posizione:</label><input class="form-control" size="40" type="text" name="descrizione" />			
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<br><button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> Aggiungi Posizione</button>
+				</div>
+			</div>
+			
+		  </div>
+	</form>
+	</div>
+	
+</div>
 
 </div>
 </div>
