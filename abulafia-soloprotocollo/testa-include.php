@@ -3,7 +3,7 @@
 include '../db-connessione-include.php'; //connessione al db-server
 include 'maledetti-apici-centro-include.php';
 
-function __autoload ($class_name) //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
+function __autoload ('class/'.$class_name) //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
 { require_once $class_name.".obj.inc";
 }
 $my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
