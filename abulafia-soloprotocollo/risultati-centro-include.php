@@ -268,7 +268,18 @@ if ($ordinerisultati == 'alfabetico') { $_SESSION['ordinerisultati'] = 'order by
 if ($ordinerisultati == 'cronologico') { $_SESSION['ordinerisultati'] = 'order by '.$tabella.'.idlettera';}
 if ($ordinerisultati == 'cron-inverso') { $_SESSION['ordinerisultati'] = 'order by '.$tabella.'.idlettera desc';}
 
-$count = mysql_query("SELECT COUNT(*) FROM $tabella , anagrafica , $joinletteremittenti where ( $tabella.idlettera like '%$cercato%' or $tabella.oggetto like '%$cercato%' or $tabella.speditaricevuta like '%$cercato%' or $tabella.note like '%$cercato%' or $tabella.posizione like '%$cercato%' or anagrafica.cognome like '%$cercato%' or $tabella.datalettera like '$dataletteracercata') and ($joinletteremittenti.idlettera = $tabella.idlettera and $joinletteremittenti.idanagrafica = anagrafica.idanagrafica) ");//conteggio per divisione in pagine dei risultati
+$count = mysql_query("SELECT COUNT(*) 
+			FROM $tabella , anagrafica , $joinletteremittenti 
+			where ( $tabella.idlettera like '%$cercato%' 
+				or $tabella.oggetto like '%$cercato%' 
+				or $tabella.speditaricevuta like '%$cercato%' 
+				or $tabella.note like '%$cercato%' 
+				or $tabella.posizione like '%$cercato%' 
+				or anagrafica.cognome like '%$cercato%' 
+				or $tabella.datalettera like '$dataletteracercata') 
+			and ($joinletteremittenti.idlettera = $tabella.idlettera 
+				and $joinletteremittenti.idanagrafica = anagrafica.idanagrafica
+			) ");//conteggio per divisione in pagine dei risultati
 //echo mysql_error();
 
 $res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
