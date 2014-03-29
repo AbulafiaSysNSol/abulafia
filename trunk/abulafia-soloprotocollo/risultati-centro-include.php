@@ -292,7 +292,20 @@ $iniziorisultati = $_GET['iniziorisultati'];
 
 $contatorelinee = 1 ;// per divisione in due colori diversi in tabella
 $ordinerisultati=$_SESSION['ordinerisultati'];
-$risultati = mysql_query("SELECT  distinct * FROM $tabella , anagrafica , $joinletteremittenti where ( $tabella.idlettera like '%$cercato%' or $tabella.oggetto like '%$cercato%' or $tabella.speditaricevuta like '%$cercato%' or $tabella.note like '%$cercato%' or $tabella.posizione like '%$cercato%' or anagrafica.cognome like '%$cercato%' or $tabella.datalettera like '$dataletteracercata') and ($joinletteremittenti.idlettera = $tabella.idlettera and $joinletteremittenti.idanagrafica = anagrafica.idanagrafica) $ordinerisultati limit $iniziorisultati , $risultatiperpagina");
+$risultati = mysql_query("SELECT  distinct * 
+			FROM $tabella , anagrafica , $joinletteremittenti 
+			where ( $tabella.idlettera like '%$cercato%' 
+				or $tabella.oggetto like '%$cercato%' 
+				or $tabella.speditaricevuta like '%$cercato%' 
+				or $tabella.note like '%$cercato%' 
+				or $tabella.posizione like '%$cercato%' 
+				or anagrafica.cognome like '%$cercato%' 
+				or $tabella.datalettera like '$dataletteracercata') 
+			and ($joinletteremittenti.idlettera = $tabella.idlettera 
+				and $joinletteremittenti.idanagrafica = anagrafica.idanagrafica) 
+			$ordinerisultati 
+			limit $iniziorisultati , $risultatiperpagina
+			");
 echo mysql_error();
 $num_righe = mysql_num_rows($risultati);
 
@@ -306,43 +319,36 @@ else { echo "Numero di risultati trovati: <b>$tot_records</b>";}
 <br><br>
 <table class="table table-bordered">
 
-<tr align="center"><strong>
-<td>N. Prot.</td><td>Data registrazione</td><td>Spedita/Ricevuta</td><td>Oggetto</td><td>File</td><td>Mittenti/Destinatari</td><td>Opzioni</td>
-</strong></tr>
+	<tr align="center">
+		<strong>
+		<td>N. Prot.</td>
+		<td>Data registrazione</td>
+		<td>Spedita/Ricevuta</td>
+		<td>Oggetto</td>
+		<td>File</td>
+		<td>Mittenti/Destinatari</td>
+		<td>Opzioni</td>
+		</strong>
+	</tr>
 
 <?php
 
 while ($row = mysql_fetch_array($risultati)) {
 
-if ( $contatorelinee % 2 == 1 ) { $colorelinee = $_SESSION['primocoloretabellarisultati'] ; } //primo colore
+	if ( $contatorelinee % 2 == 1 ) { $colorelinee = $_SESSION['primocoloretabellarisultati'] ; } //primo colore
 
-else { $colorelinee = $_SESSION['secondocoloretabellarisultati'] ; } //secondo colore
+	else { $colorelinee = $_SESSION['secondocoloretabellarisultati'] ; } //secondo colore
 
+	$contatorelinee = $contatorelinee + 1 ;
 
-
-$contatorelinee = $contatorelinee + 1 ;
-
-
-
-?><tr bgcolor = <?php echo "$colorelinee"; ?> ><td><?php
-
-echo $row['idlettera'] ;
-
-?></td><?php
-
-
-
-?><td align="center"><?php
-
-$dataregistrazione = $row['dataregistrazione'] ;
-
-list($anno, $mese, $giorno) = explode("-", $dataregistrazione);
-
-$data2 = "$giorno-$mese-$anno";
-
-echo "$data2" ;
-
-?></td>
+?>
+	<tr bgcolor = <?php echo "$colorelinee"; ?> >
+		<td><?php echo $row['idlettera'] ;?></td>
+		<td align="center"><?php $dataregistrazione = $row['dataregistrazione'] ;
+					list($anno, $mese, $giorno) = explode("-", $dataregistrazione);
+					$data2 = "$giorno-$mese-$anno";
+					echo "$data2" ;?>
+		</td>
 
 
 
