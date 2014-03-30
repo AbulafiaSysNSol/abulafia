@@ -36,6 +36,7 @@ exit() ; }
 <meta name="description" content="<?php echo $_SESSION['description'];?>" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="style.php"/>
+
 <!-- META -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
@@ -49,6 +50,18 @@ exit() ; }
   <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- JS -->
+  
+<link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.10.4.custom.css"></link>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
+
+<script type="text/javascript">
+$(function(){
+     $.datepicker.setDefaults( $.datepicker.regional[ "it" ] );
+     $('.datepicker').datepicker( { changeMonth: true, changeYear: true });
+});
+</script>
+  
 </head>
 
 
@@ -88,7 +101,6 @@ exit() ; }
 		    <li><a href="login0.php?corpus=settings">Impostazioni</a></li>
 		    <?php if ($_SESSION['auth'] > 50) {?>
 		    <li class="divider"></li>
-		    <li><a href="login0.php?corpus=titolario">Titolario</a></li>
 		    <li><a href="login0.php?corpus=gestione-utenti">Gestione degli Utenti</a></li>
 		    <li><a href="login0.php?corpus=advancedsettings">Advanced Settings</a></li>
 		    <li><a href="download.php?lud=access.log&est=log">Scarica il log degli accessi</a></li>
