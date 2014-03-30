@@ -150,57 +150,13 @@ $idlettera=$_GET['idlettera'];
 					</div>
 				</div>
 			</div>
-
+			
 			<div class="form-group">
-				<label>Data della lettera</label>
+				<label>Data della lettera:</label>
 				<div class="row">
-					<div class="col-xs-4">
-						<table><tr>
-						<td>
-						<select class="form-control" name="lettera-data-giorno" />
-						<?php
-						$iterazionegiornodelmese = 0;
-						while ($iterazionegiornodelmese < 31) { $iterazionegiornodelmese = $iterazionegiornodelmese +1;
-						if ($iterazionegiornodelmese != strftime("%d")) { ?>
-						<OPTION value="<?php echo $iterazionegiornodelmese;?>"> <?php echo $iterazionegiornodelmese;?>&nbsp;&nbsp; 
-						<?php } 
-						else { ?><OPTION selected value="<?php echo $iterazionegiornodelmese;?>"> <?php echo $iterazionegiornodelmese;?>&nbsp;&nbsp; 
-						<?php }
-						}?>
-						</select>
-						</td>
-						
-						<td>
-						<select class="form-control" name="lettera-data-mese" />
-						<?php
-						$iterazionemese = 0;
-						$iterazionemese2= '';
-						$meseattuale = strftime("%m");
-						while ($iterazionemese < 12) { $iterazionemese = $iterazionemese +1;
-						if ($iterazionemese<10) {$iterazionemese2= '0'.$iterazionemese;} 
-						else {$iterazionemese2= $iterazionemese;}
-						if (strcmp($iterazionemese2,$meseattuale) != 0) { ?>
-						<OPTION value="<?php echo $iterazionemese2 ;?>"> <?php echo $iterazionemese2?>&nbsp;&nbsp; 
-						<?php } 
-						else { ?><OPTION selected value="<?php echo $iterazionemese2 ;?>"> <?php echo $iterazionemese2 ;?>&nbsp;&nbsp; 
-						<?php }
-						}?>
-						</select>
-						</td>
-						
-						<td>
-						<select class="form-control" name="lettera-data-anno" />
-						<?php
-						$iterazioneanno = strftime("%Y") - 3 ;
-						while ($iterazioneanno < (strftime("%Y")-1) ) { $iterazioneanno = $iterazioneanno +1;?>
-						<OPTION value="<?php echo $iterazioneanno;?>"> <?php echo $iterazioneanno;?>&nbsp;&nbsp; 
-						<?php }?> 
-						<OPTION selected value="<?php echo strftime("%Y");?>"> <?php echo strftime("%Y");?>&nbsp;&nbsp; 
-						</select>
-						</td>
-						</tr></table>
-						
-					</div>						
+					<div class="col-xs-2">
+						<input type="text" class="form-control datepicker" name="data">
+					</div>
 				</div>
 			</div>
 

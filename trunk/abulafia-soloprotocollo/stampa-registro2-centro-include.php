@@ -1,0 +1,127 @@
+<?php
+
+require('lib/fpdf/fpdf.php');
+
+	class PDF extends FPDF
+	{
+		// Page header
+		function Header()
+		{
+		    // Logo
+		    $this->Image('images/intestazione.jpg',5,-6,209.97);
+		    // Line break
+		    $this->Ln(30);
+		}
+
+		// Page footer
+		function Footer()
+		{
+		    // Logo
+		    $this->Image('images/footer.jpg',0,274,209.97);
+		    // Position at 1.5 cm from bottom
+		    $this->SetY(-15);
+		    // Page number
+		    $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'C');
+		}
+	}
+
+	$from = $_GET['search'];
+	if($from == "num") {
+	
+		$inizio = $_POST['numeroinizio'];
+		$fine = $_POST['numerofine'];
+		$intestazione = 'Registro di protocollo dal numero '. $inizio .' al numero '. $fine.':';
+		$query = mysql_query("SELECT COUNT(*) FROM lettere2014, anagrafica, joinletteremittenti2014 WHERE anagrafica.idanagrafica = joinletteremittenti2014.idanagrafica AND lettere2014.idlettera = joinletteremittenti2014.idlettera AND lettere2014.idlettera >= '$inizio' AND lettere2014.idlettera <= '$fine'"); 
+		$numerorisultati = mysql_fetch_row($query); 
+		if($numerorisultati[0] < 1) {
+			
+			?>
+			<SCRIPT LANGUAGE="Javascript">
+			browser= navigator.appName;
+			if (browser == "Netscape")
+			window.location="login0.php?corpus=stampa-registro&noresult=1"; else window.location="login0.php?corpus=stampa-registro&noresult=1";
+			</SCRIPT>
+			<?php 
+			exit();
+		}
+		else {
+		
+			$query = mysql_query("SELECT * FROM lettere2014, anagrafica, joinletteremittenti2014 WHERE anagrafica.idanagrafica = joinletteremittenti2014.idanagrafica AND lettere2014.idlettera = joinletteremittenti2014.idlettera AND lettere2014.idlettera >= '$inizio' AND lettere2014.idlettera <= '$fine' ORDER BY lettere2014.idlettera"); 
+		}
+	}
+	
+	if($from == "date") {
+	
+		$inizio = $_POST['datainizio'];
+		$fine = $_POST['datafine'];
+		$intestazione = 'Registro di protocollo dal '. $inizio .' al '. $fine.':';
+		list($giornoi, $mesei, $annoi) = explode("/", $inizio);
+		list($giornof, $mesef, $annof) = explode("/", $fine);
+		$inizio = $annoi.'-'.$mesei.'-'.$giornoi;
+		$fine = $annof.'-'.$mesef.'-'.$giornof;
+		$query = mysql_query("SELECT COUNT(*) FROM lettere2014, anagrafica, joinletteremittenti2014 WHERE anagrafica.idanagrafica = joinletteremittenti2014.idanagrafica AND lettere2014.idlettera = joinletteremittenti2014.idlettera AND lettere2014.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
+		$numerorisultati = mysql_fetch_row($query);
+		if($numerorisultati[0] < 1) {
+			
+			?>
+			<SCRIPT LANGUAGE="Javascript">
+			browser= navigator.appName;
+			if (browser == "Netscape")
+			window.location="login0.php?corpus=stampa-registro&noresult=1"; else window.location="login0.php?corpus=stampa-registro&noresult=1";
+			</SCRIPT>
+			<?php 
+			exit();
+		}
+		else {
+		
+			$query = mysql_query("SELECT * FROM lettere2014, anagrafica, joinletteremittenti2014 WHERE anagrafica.idanagrafica = joinletteremittenti2014.idanagrafica AND lettere2014.idlettera = joinletteremittenti2014.idlettera AND lettere2014.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere2014.idlettera"); 
+		}	
+	}
+	
+$finale = 'Documento generato digitalmente da Abulafia ' . $_SESSION['version'].', il ' . date("d".'/'."m".'/'."Y");
+		
+ob_end_clean ();
+$pdf = new PDF();
+$pdf->AliasNbPages();
+$pdf->AddPage();
+$pdf->SetFont('Times','',12);
+$pdf->SetTitle('registroprotocollo');
+$pdf->Text(10,50,$intestazione);
+$pdf->Ln(20);
+$pdf->Cell(13,7,'N.',1,0,'C');
+$pdf->Cell(23,7,'Data Reg.',1,0,'C');
+$pdf->Cell(22,7,'Sped./Ric.',1,0,'C');
+$pdf->Cell(0,7,'Oggetto',1,1,'C');
+$pdf->Ln(5);
+while($query2 = mysql_fetch_array($query)) {
+	$pdf->SetFillColor(255,0,0);
+	$pdf->Cell(13,7,$query2['idlettera'],1,0,'L',true);
+	$pdf->Cell(23,7,$query2['dataregistrazione'],1,0,'L',true);
+	$pdf->Cell(22,7,$query2['speditaricevuta'],1,0,'L',true);
+	$pdf->Cell(0,7,$query2['oggetto'],1,1,'L',true);
+	$pdf->MultiCell(0,7,'Mittenti/Destinatari: ' . $query2['cognome'] . ' ' . $query2['nome'],1,'L',true);
+	$pdf->Ln(4);
+    }
+$pdf->Ln(15);
+$pdf->Write('',$finale);
+$pdf->Output();
+?>
+
+<div class="panel panel-default">
+	
+		<div class="panel-heading">
+		<h3 class="panel-title"><strong>PROVA STAMPA REGISTRO</strong></h3>
+		</div>
+		
+		<div class="panel-body">
+			<?php
+			
+				while($result = mysql_fetch_array($query))
+				{
+					echo $result['idlettera'] . ' - ' . $result['speditaricevuta'] . '<br>'; 
+				}
+			
+			?>
+		</div>
+		
+</div>

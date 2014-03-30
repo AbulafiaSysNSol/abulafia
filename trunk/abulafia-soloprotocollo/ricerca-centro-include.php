@@ -17,12 +17,13 @@ $level = $_SESSION['auth'];
 			
 				<label>Inserisci il valore da cercare:</label>
 				<div class="row">
+				
 					<div class="col-xs-4">
-						<input class="form-control input-sm" type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
+						<input class="form-control input-sm" placeholder="lasciare vuoto per una ricerca senza filtri" type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
 					</div>
 					
 					<div class="col-xs-2">
-						<input class="btn btn-default" type="button" value="CERCA" onClick="autorized(<?php echo $level ?>)" />
+						<button class="btn btn-default" type="button" onClick="autorized(<?php echo $level ?>)"><span class="glyphicon glyphicon-search"></span> Cerca</button>
 					</div>
 				</div>
 				<br>
