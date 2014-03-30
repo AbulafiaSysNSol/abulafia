@@ -1,7 +1,5 @@
 <?php
-
 require('lib/fpdf/fpdf.php');
-
 	class PDF extends FPDF
 	{
 		// Page header
@@ -24,10 +22,8 @@ require('lib/fpdf/fpdf.php');
 		    $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'C');
 		}
 	}
-
 	$from = $_GET['search'];
 	if($from == "num") {
-	
 		$inizio = $_POST['numeroinizio'];
 		$fine = $_POST['numerofine'];
 		$anno = $_POST['annoprotocollo'];
@@ -35,7 +31,6 @@ require('lib/fpdf/fpdf.php');
 		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine'"); 
 		$numerorisultati = mysql_fetch_row($query); 
 		if($numerorisultati[0] < 1) {
-			
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -46,20 +41,16 @@ require('lib/fpdf/fpdf.php');
 			exit();
 		}
 		else {
-		
 			$query = mysql_query("SELECT * FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine' ORDER BY lettere$anno.idlettera"); 
 		}
 	}
-	
 	if($from == "date") {
-	
 		$inizio = $_POST['datainizio'];
 		$fine = $_POST['datafine'];
 		$intestazione = 'Registro di protocollo dal '. $inizio .' al '. $fine.':';
 		list($giornoi, $mesei, $annoi) = explode("/", $inizio);
 		list($giornof, $mesef, $annof) = explode("/", $fine);
 		if ($annoi != $annof) {
-	
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -75,7 +66,6 @@ require('lib/fpdf/fpdf.php');
 		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
 		$numerorisultati = mysql_fetch_row($query);
 		if($numerorisultati[0] < 1) {
-			
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -86,15 +76,12 @@ require('lib/fpdf/fpdf.php');
 			exit();
 		}
 		else {
-		
 			$query = mysql_query("SELECT * FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
 		}	
 	}
-	
 $finale = 'Documento generato digitalmente da Abulafia ' . $_SESSION['version'].', il ' . date("d".'/'."m".'/'."Y");
-
 $contatorelinee = 1;
-ob_end_clean ();
+ob_clean();
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
@@ -125,22 +112,3 @@ $pdf->Ln(15);
 $pdf->Write('',$finale);
 $pdf->Output();
 ?>
-
-<div class="panel panel-default">
-	
-		<div class="panel-heading">
-		<h3 class="panel-title"><strong>PROVA STAMPA REGISTRO</strong></h3>
-		</div>
-		
-		<div class="panel-body">
-			<?php
-			
-				while($result = mysql_fetch_array($query))
-				{
-					echo $result['idlettera'] . ' - ' . $result['speditaricevuta'] . '<br>'; 
-				}
-			
-			?>
-		</div>
-		
-</div>

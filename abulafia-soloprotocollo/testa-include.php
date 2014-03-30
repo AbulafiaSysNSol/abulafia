@@ -85,22 +85,12 @@ $(function(){
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 		<li><a href="login0.php?corpus=home">Home</a></li>
-		
-		<li class="dropdown">
-		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Protocollo <b class="caret"></b></a>
-		  <ul class="dropdown-menu">
-		    <li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
-		    <li><a href="login0.php?corpus=stampa-registro"><span class="glyphicon glyphicon-print"></span> Stampa il registro</a></li>
-		    <li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list-alt"></span> Gestione posizioni</a></li>
-		  </ul>
-		</li>
-		
+		<li><a href="login0.php?corpus=protocollo">Protocollo</a></li>
 		<li><a href="login0.php?corpus=anagrafica">Anagrafica</a></li>
 		<li><a href="login0.php?corpus=ricerca">Ricerca</a></li>
 		<li><a href="login0.php?corpus=aiuto">F.A.Q.</a></li>
 		<li><a href="login0.php?corpus=informazioni">Informazioni</a></li>
 	      </ul>
-
 	      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b></a>
@@ -121,14 +111,9 @@ $(function(){
 		</li>
 	    </div><!-- /.navbar-collapse -->
 	</nav>
-
-
 <?php
-
-
 if ($_GET['corpus'] != 'cambioanno') 
 	{ 
 	$my_registroprotocollo -> publcontrolloanno (); //controllo della corrispondenza fra l'anno corrente e l'anno in uso dal db
 	}
 ?>
-
