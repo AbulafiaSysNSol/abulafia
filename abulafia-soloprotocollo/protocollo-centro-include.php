@@ -9,14 +9,23 @@ if ($_SESSION['auth'] < 20) { echo 'Non hai l\'autorizzazione necessaria per uti
 		<h3 class="panel-title"><strong>Registrazione nuovo protocollo</strong></h3>
 		</div>
 		<div class="panel-body">
-			<p><a href="login0.php?corpus=protocollo2&from=crea">Crea nuovo numero progressivo</a></p>
+			<p><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></p>
 		</div>
 		
 		<div class="panel-heading">
 		<h3 class="panel-title"><strong>Registro di protocollo</strong></h3>
 		</div>
 		<div class="panel-body">
-			<p><a href="#">Stampa il registro</a></p>
+			<p><a href="login0.php?corpus=stampa-registro"><span class="glyphicon glyphicon-print"></span> Stampa il registro</a></p>
 		</div>
+		
+		<?php if ($_SESSION['auth'] > 98) {?>
+		<div class="panel-heading">
+		<h3 class="panel-title"><strong>Titolario</strong></h3>
+		</div>
+		<div class="panel-body">
+			<p><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list-alt"></span> Gestione posizioni</a></p>
+		</div>
+		<?php } ?>
 		
 </div>
