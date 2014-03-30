@@ -391,15 +391,13 @@ if (ereg("lettere", $tabella))
 	$ordinerisultati=$_SESSION['ordinerisultati'];
 
 	$risultati = mysql_query("SELECT  distinct * 
-				FROM $tabella , anagrafica
+				FROM $tabella
 				where ( $tabella.idlettera like '%$cercato%' 
 					or $tabella.oggetto like '%$cercato%' 
 					or $tabella.speditaricevuta like '%$cercato%' 
 					or $tabella.note like '%$cercato%' 
 					or $tabella.posizione like '%$cercato%' 
-					or anagrafica.cognome like '%$cercato%' 
 					or $tabella.datalettera like '$dataletteracercata') 
-				and ($tabella.idlettera = anagrafica.idanagrafica) 
 				$ordinerisultati 
 				limit $iniziorisultati , $risultatiperpagina
 				");
