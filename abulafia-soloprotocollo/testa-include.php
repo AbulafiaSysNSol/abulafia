@@ -85,7 +85,16 @@ $(function(){
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 		<li><a href="login0.php?corpus=home">Home</a></li>
-		<li><a href="login0.php?corpus=protocollo">Protocollo</a></li>
+		
+		<li class="dropdown">
+		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Protocollo <b class="caret"></b></a>
+		  <ul class="dropdown-menu">
+		    <li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
+		    <li><a href="login0.php?corpus=stampa-registro"><span class="glyphicon glyphicon-print"></span> Stampa il registro</a></li>
+		    <li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list-alt"></span> Gestione posizioni</a></li>
+		  </ul>
+		</li>
+		
 		<li><a href="login0.php?corpus=anagrafica">Anagrafica</a></li>
 		<li><a href="login0.php?corpus=ricerca">Ricerca</a></li>
 		<li><a href="login0.php?corpus=aiuto">F.A.Q.</a></li>

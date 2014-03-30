@@ -61,7 +61,7 @@ if ($conteggiomittenti2[0] < 1) { $inserimentomittenti=mysql_query("insert into 
 	<h3 class="panel-title"><strong>Opzioni:</strong></h3>
 	</div>
 	<div class="panel-body">
-		<p><a href="login0.php?corpus=protocollo">Registrazione nuovo PROTOCOLLO</a></p>
+		<p><a href="login0.php?corpus=protocollo2&from=crea">Registrazione nuovo PROTOCOLLO</a></p>
 	</div>
   
 </div>
