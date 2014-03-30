@@ -13,6 +13,7 @@ $my_registroprotocollo= unserialize($_SESSION['my_registroprotocollo']);//deseri
 $my_ricerca= unserialize($_SESSION['my_ricerca']);//deserializzazione 
 $my_manuale= unserialize($_SESSION['my_manuale']);//deserializzazione 
 $my_tabellahtml= unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
+$my_database= unserialize($_SESSION['my_database']);//deserializzazione 
 $setting=mysql_query("select * from defaultsettings");
 $setting2=mysql_fetch_array($setting);
 

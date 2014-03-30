@@ -26,6 +26,9 @@ $_SESSION['my_tabellahtml'] = serialize($my_tabellahtml); //serializzazione per 
 $my_manuale = new Manuale ;//crea un nuovo oggetto
 $_SESSION['my_manuale'] = serialize($my_manuale); //serializzazione per passaggio alle variabili di sessione
 
+$my_database = new Database ;//crea un nuovo oggetto
+$_SESSION['my_database'] = serialize($my_database); //serializzazione per passaggio alle variabili di sessione
+
 $logfile='access.log';
 $maillog='mail.log';
 $data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
