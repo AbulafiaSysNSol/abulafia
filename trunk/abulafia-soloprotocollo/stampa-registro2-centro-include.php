@@ -30,8 +30,9 @@ require('lib/fpdf/fpdf.php');
 	
 		$inizio = $_POST['numeroinizio'];
 		$fine = $_POST['numerofine'];
+		$anno = $_POST['annoprotocollo'];
 		$intestazione = 'Registro di protocollo dal numero '. $inizio .' al numero '. $fine.':';
-		$query = mysql_query("SELECT COUNT(*) FROM lettere2014, anagrafica, joinletteremittenti2014 WHERE anagrafica.idanagrafica = joinletteremittenti2014.idanagrafica AND lettere2014.idlettera = joinletteremittenti2014.idlettera AND lettere2014.idlettera >= '$inizio' AND lettere2014.idlettera <= '$fine'"); 
+		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine'"); 
 		$numerorisultati = mysql_fetch_row($query); 
 		if($numerorisultati[0] < 1) {
 			
@@ -46,7 +47,7 @@ require('lib/fpdf/fpdf.php');
 		}
 		else {
 		
-			$query = mysql_query("SELECT * FROM lettere2014, anagrafica, joinletteremittenti2014 WHERE anagrafica.idanagrafica = joinletteremittenti2014.idanagrafica AND lettere2014.idlettera = joinletteremittenti2014.idlettera AND lettere2014.idlettera >= '$inizio' AND lettere2014.idlettera <= '$fine' ORDER BY lettere2014.idlettera"); 
+			$query = mysql_query("SELECT * FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine' ORDER BY lettere$anno.idlettera"); 
 		}
 	}
 	
@@ -57,9 +58,21 @@ require('lib/fpdf/fpdf.php');
 		$intestazione = 'Registro di protocollo dal '. $inizio .' al '. $fine.':';
 		list($giornoi, $mesei, $annoi) = explode("/", $inizio);
 		list($giornof, $mesef, $annof) = explode("/", $fine);
+		if ($annoi != $annof) {
+	
+			?>
+			<SCRIPT LANGUAGE="Javascript">
+			browser= navigator.appName;
+			if (browser == "Netscape")
+			window.location="login0.php?corpus=stampa-registro&noresult=2"; else window.location="login0.php?corpus=stampa-registro&noresult=2";
+			</SCRIPT>
+			<?php 
+			exit();
+		}
+		$anno = $annoi;
 		$inizio = $annoi.'-'.$mesei.'-'.$giornoi;
 		$fine = $annof.'-'.$mesef.'-'.$giornof;
-		$query = mysql_query("SELECT COUNT(*) FROM lettere2014, anagrafica, joinletteremittenti2014 WHERE anagrafica.idanagrafica = joinletteremittenti2014.idanagrafica AND lettere2014.idlettera = joinletteremittenti2014.idlettera AND lettere2014.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
+		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
 		$numerorisultati = mysql_fetch_row($query);
 		if($numerorisultati[0] < 1) {
 			
@@ -74,7 +87,7 @@ require('lib/fpdf/fpdf.php');
 		}
 		else {
 		
-			$query = mysql_query("SELECT * FROM lettere2014, anagrafica, joinletteremittenti2014 WHERE anagrafica.idanagrafica = joinletteremittenti2014.idanagrafica AND lettere2014.idlettera = joinletteremittenti2014.idlettera AND lettere2014.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere2014.idlettera"); 
+			$query = mysql_query("SELECT * FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
 		}	
 	}
 	
@@ -99,7 +112,9 @@ while($query2 = mysql_fetch_array($query)) {
 	else { $r = 255; $g = 255; $b = 255; }
 	$pdf->SetFillColor($r,$g,$b);
 	$pdf->Cell(13,7,$query2['idlettera'],1,0,'L',true);
-	$pdf->Cell(23,7,$query2['dataregistrazione'],1,0,'L',true);
+	list($anno, $mese, $giorno) = explode("-", $query2['dataregistrazione']);
+	$data = $giorno.'/'.$mese.'/'.$anno;
+	$pdf->Cell(23,7,$data,1,0,'L',true);
 	$pdf->Cell(22,7,$query2['speditaricevuta'],1,0,'L',true);
 	$pdf->Cell(0,7,$query2['oggetto'],1,1,'L',true);
 	$pdf->MultiCell(0,7,'Mittenti/Destinatari: ' . $query2['cognome'] . ' ' . $query2['nome'],1,'L',true);
