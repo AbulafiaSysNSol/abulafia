@@ -317,9 +317,9 @@ else { echo "Numero di risultati trovati: <b>$tot_records</b>";}
 ?>
 
 <br><br>
-<table class="table table-bordered">
+<table class="table table-bordered" align="center">
 
-	<tr align="center">
+	<tr>
 		<strong>
 		<td>N. Prot.</td>
 		<td>Data registrazione</td>
@@ -333,68 +333,54 @@ else { echo "Numero di risultati trovati: <b>$tot_records</b>";}
 
 <?php
 
-while ($row = mysql_fetch_array($risultati)) {
+$my_database->arrayfromquery($risultati); //uso oggetto database per impostare i risultati della query
 
+foreach ($my_database->resultarray as $key=>$value) //elenco i risultati dell'array
+
+	{
 	if ( $contatorelinee % 2 == 1 ) { $colorelinee = $_SESSION['primocoloretabellarisultati'] ; } //primo colore
 
 	else { $colorelinee = $_SESSION['secondocoloretabellarisultati'] ; } //secondo colore
 
 	$contatorelinee = $contatorelinee + 1 ;
-
-?>
-	<tr bgcolor = <?php echo "$colorelinee"; ?> >
-		<td><?php echo $row['idlettera'] ;?></td>
-		<td align="center"><?php $dataregistrazione = $row['dataregistrazione'] ;
-					list($anno, $mese, $giorno) = explode("-", $dataregistrazione);
-					$data2 = "$giorno-$mese-$anno";
-					echo "$data2" ;?>
+	
+	?><tr bgcolor = <?php echo "$colorelinee"; ?> >
+		<td><?php echo $value[0] ;?></td>
+		<td> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana?></td>
+		<td><?php echo $value[5] ;?></td>
+		<td><?php echo $value[1] ;?></td>
+		<td><?php $my_file -> publdownloadlink2($value[4], $value[0], $annoricercaprotocollo);
+					 //richiamo del metodo "downloadlink" dell'oggetto file ;?>
+					 </td>
+		<td><a href="login0.php?corpus=dettagli-anagrafica
+			&from=risultati
+			&tabella=anagrafica
+			&id=<?php echo $value[9];?>
+			">
+			<?echo $value[10].' '.$value[11];?></a></td>
+			</td>
+			
+		<td align="center" width="150">
+			<div class="btn-group btn-group-sm">
+				<a class="btn btn-info" 
+					href="login0.php?corpus=dettagli-protocollo
+						&from=risultati&tabella=protocollo
+						&id=<?php echo $value[0];?>
+					">Dettagli
+				</a>
+				<a class="btn btn-warning" 
+					href="login0.php?corpus=modifica-protocollo
+						&from=risultati
+						&tabella=anagrafica
+						&id=<?php echo $value[0];?>
+					">Modifica
+				</a>
+			</div>
 		</td>
-
-
-
-
-
-<td align="center"><?php
-
-echo $row['speditaricevuta'] ; ?> 
-
-</td>
-
-
-
-
-<td align="center"><?php
-
-echo $row['oggetto'] ;
-
-?></td>
-
-
-
-<td align="center">
-
-	<?php 
-     		$my_file -> publdownloadlink2($row['urlpdf'], $row['idlettera'], $annoricercaprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
-	?>
-</td>
-
-<td align="center"><a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row['idanagrafica'];?>"><?echo $row['cognome'].' '.$row['nome'] ;?></a></td>
-
-
-
-<td align="center" width="150">
-<div class="btn-group btn-group-sm">
-<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $row['idlettera'];?>">Dettagli</a>
-<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=anagrafica&id=<?php echo $row['idlettera'];?>">Modifica</a>
-</div>
-</td>
-
-
-
-</tr><?php
-
-}
-
+		
+	   </tr><?
+	
+	}
 ?>
 
 </table>
@@ -425,7 +411,7 @@ echo '<br><br>';
 
 else {
 
-echo "Non ci sono risultati $tabella $joinletteremittenti"; ?> <br><br><a href="login0.php?corpus=ricerca">Effettua un'altra ricerca</a><?php
+echo "Non ci sono risultati nelle tabelle $tabella e $joinletteremittenti"; ?> <br><br><a href="login0.php?corpus=ricerca">Effettua un'altra ricerca</a><?php
 
 }
 
