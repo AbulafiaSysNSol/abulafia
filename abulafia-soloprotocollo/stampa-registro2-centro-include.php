@@ -79,7 +79,8 @@ require('lib/fpdf/fpdf.php');
 	}
 	
 $finale = 'Documento generato digitalmente da Abulafia ' . $_SESSION['version'].', il ' . date("d".'/'."m".'/'."Y");
-		
+
+$contatorelinee = 1;
 ob_end_clean ();
 $pdf = new PDF();
 $pdf->AliasNbPages();
@@ -94,13 +95,16 @@ $pdf->Cell(22,7,'Sped./Ric.',1,0,'C');
 $pdf->Cell(0,7,'Oggetto',1,1,'C');
 $pdf->Ln(5);
 while($query2 = mysql_fetch_array($query)) {
-	$pdf->SetFillColor(255,0,0);
+	if ( $contatorelinee % 2 == 1 ) { $r = 255; $g = 253; $b = 208; }
+	else { $r = 255; $g = 255; $b = 255; }
+	$pdf->SetFillColor($r,$g,$b);
 	$pdf->Cell(13,7,$query2['idlettera'],1,0,'L',true);
 	$pdf->Cell(23,7,$query2['dataregistrazione'],1,0,'L',true);
 	$pdf->Cell(22,7,$query2['speditaricevuta'],1,0,'L',true);
 	$pdf->Cell(0,7,$query2['oggetto'],1,1,'L',true);
 	$pdf->MultiCell(0,7,'Mittenti/Destinatari: ' . $query2['cognome'] . ' ' . $query2['nome'],1,'L',true);
 	$pdf->Ln(4);
+	$contatorelinee = $contatorelinee + 1;
     }
 $pdf->Ln(15);
 $pdf->Write('',$finale);
