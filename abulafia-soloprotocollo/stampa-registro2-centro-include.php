@@ -117,7 +117,8 @@ while($query2 = mysql_fetch_array($query)) {
 	$pdf->Cell(10,7,'X',1,0,'C',true);
 	$pdf->Cell(0,7,$query2['note'],1,1,'L',true);
 	$pdf->MultiCell(0,7,'Oggetto: ' . $query2['oggetto'],1,'L',true);
-	$pdf->MultiCell(0,7,'Mittenti/Destinatari: ' . $query2['cognome'] . ' ' . $query2['nome'],1,'L',true);
+	if($query2['speditaricevuta'] == 'ricevuta') { $sd = 'Mittenti'; } else { $sd = 'Destinatari'; }
+	$pdf->MultiCell(0,7,$sd . ': ' . $query2['cognome'] . ' ' . $query2['nome'],1,'L',true);
 	$pdf->Ln(7);
 	$contatorelinee = $contatorelinee + 1;
     }
