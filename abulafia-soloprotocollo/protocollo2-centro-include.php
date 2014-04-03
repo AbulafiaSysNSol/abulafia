@@ -188,25 +188,16 @@ $idlettera=$_GET['idlettera'];
 				<div class="col-xs-3">
 				<label>Titolazione:</label>
 				<?php
-				$fascicolo=mysql_query("select count(*) from titolario");
-				$num=mysql_fetch_row($fascicolo);
-				if($num[0]<=0) {
-					?>
-					<select class="form-control" size=1 cols=4 NAME="posizione" disabled>
-					<OPTION value="">Nessuna posizione aggiunta
-					</select>
-					<?php
-				}
-				else {
-
 				$risultati=mysql_query("select distinct * from titolario");
-				?><select class="form-control" size=1 cols=4 NAME="riferimento"><?php
+				?>
+				<select class="form-control" size=1 cols=4 NAME="riferimento">
+				<option value="">nessuna titolazione
+				<?php
 				while ($risultati2=mysql_fetch_array($risultati))
 				{
 					echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
 				}
 				echo '</select>';
-				}
 				?>
 				</div>
 				</div>
