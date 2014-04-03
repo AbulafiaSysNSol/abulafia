@@ -96,7 +96,7 @@ $idlettera=$_GET['idlettera'];
 			<input name="uploadedfile" type="file" id="exampleInputFile">
 			</td>
 			<td>
-			<button type="button" class="btn btn-default" onClick="Change()">Allega</button>
+			<button type="submit" class="btn btn-default" onClick="Change()">Allega</button>
 			</td>
 			</tr>
 			</table>
