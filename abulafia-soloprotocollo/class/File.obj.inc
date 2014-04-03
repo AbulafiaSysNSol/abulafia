@@ -54,7 +54,7 @@ Class File
 				}
 		}
       
-    private function downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo)
+ /*   private function downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo)
 		{
 			if (!$nomefile) 
 				{ 
@@ -69,7 +69,7 @@ Class File
 		</a>
 		<?
 				}
-		}  
+		}  */
 
 	function publdownloadlink  ($nomefile, $idlettera, $annoricercaprotocollo)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
 		{
@@ -77,11 +77,11 @@ Class File
 			
 		}
 
-function publdownloadlink2  ($nomefile, $idlettera, $annoricercaprotocollo)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
+/*function publdownloadlink2  ($nomefile, $idlettera, $annoricercaprotocollo)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
 		{
 		$this->downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo);
 			
-		}
+		}*/
       
 	}//fine classe
 ?>
