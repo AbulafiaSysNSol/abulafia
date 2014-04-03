@@ -29,7 +29,7 @@
 			
 				<div class="col-xs-4">
 					Stampa intervallo numerico:<br><br>
-					<form class="form-inline" role="form" method="post" action="login0.php?corpus=stampa-registro2&search=num">
+					<form class="form-inline" role="form" method="post" target="_BLANK" action="login0.php?corpus=stampa-registro2&search=num">
 				
 						Dal n. 
 						<div class="form-group">
@@ -63,7 +63,7 @@
 				
 				<div class="col-xs-4">
 					Stampa intervallo temporale:<br><br>
-					<form class="form-inline" role="form" method="post" action="login0.php?corpus=stampa-registro2&search=date">
+					<form class="form-inline" role="form" method="post" target="_BLANK" action="login0.php?corpus=stampa-registro2&search=date">
 				
 						Dal 
 						<div class="form-group">
