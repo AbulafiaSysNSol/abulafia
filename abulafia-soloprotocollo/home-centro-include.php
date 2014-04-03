@@ -27,7 +27,7 @@
 			
 				$statslettere=mysql_query("select count(*) from lettere$annoprotocollo");
 				$res_lettere = mysql_fetch_row($statslettere);
-				echo 'Nell\'anno corrente sono state registrate '.($res_lettere[0] - 1) .' lettere.';?></p>
+				echo 'Nell\'anno corrente sono state registrate '.($res_lettere[0]) .' lettere.';?></p>
 
 				<p><?php 
 				if ($res_lettere[0] > 0) {
@@ -38,7 +38,7 @@
 				$statsusers3 = mysql_query("select count(*) from joinlettereinserimento$annoprotocollo where joinlettereinserimento$annoprotocollo.idinser = '$statsusers2a'");
 				$res_statsusers3 = mysql_fetch_row($statsusers3);
 				if ($res_statsusers3[0] > 0) {
-				echo ($res_statsusers3[0]-1).' inserite da '.$statsusers2['loginname'].'<br>';
+				echo ($res_statsusers3[0]).' inserite da '.$statsusers2['loginname'].'<br>';
 				}
 				}
 				}?></p>
