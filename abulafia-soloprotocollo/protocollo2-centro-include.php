@@ -96,21 +96,26 @@ $idlettera=$_GET['idlettera'];
 			<input name="uploadedfile" type="file" id="exampleInputFile">
 			</td>
 			<td>
-			<button type="submit" class="btn btn-default">Allega</button>
+			<button type="submit" class="btn btn-default" onClick="Change()">Allega</button>
 			</td>
 			</tr>
 			</table>
 			</form>
-		
+			
 			<?php
 			$cercadocumento= mysql_query("select distinct * from lettere$annoprotocollo where idlettera='$idlettera'");
 			$urlpdf1= mysql_fetch_array($cercadocumento);
 			$urlpdf=$urlpdf1['urlpdf'];
 			$my_file -> publdownloadlink ($urlpdf, $idlettera, $annoprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
 			?>
+			<div class="row">
+			<div class ="col-xs-5" id="content" style="display: none;">
+			<br>
+			<div id="progressbar"><div class="progress-label">Invio file in corso, attendere qualche istante...</div></div>
+			</div>
+			</div>
 			
-			
-			<br><br>
+			<br>
 			
 			<?php
 				$my_lettera -> publcercamittente ($idlettera,''); //richiamo del metodo
@@ -222,6 +227,19 @@ $idlettera=$_GET['idlettera'];
 		</div>
 	</div>	
 </div>
+
+<script language="javascript">
+
+ <!--
+  function Change() 
+
+  {
+	  document.getElementById("content").style.display="table";	
+  }
+
+ //-->
+
+</script> 
 
 <script language="javascript">
  <!--
