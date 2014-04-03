@@ -457,7 +457,7 @@ if (ereg("lettere", $tabella))
 				<td> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana?></td>
 				<td><?php echo $value[5] ;?></td>
 				<td><?php echo $value[1] ;?></td>
-				<td><?php $my_file -> publdownloadlink2($value[4], $value[0], $annoricercaprotocollo);
+				<td><?php $my_file -> publdownloadlink($value[4], $value[0], $annoricercaprotocollo);
 							 //richiamo del metodo "downloadlink" dell'oggetto file ;?></td>
 
 				<td><?php
