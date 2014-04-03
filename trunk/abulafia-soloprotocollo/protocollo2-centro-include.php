@@ -96,7 +96,7 @@ $idlettera=$_GET['idlettera'];
 			<input name="uploadedfile" type="file" id="exampleInputFile">
 			</td>
 			<td>
-			<button type="submit" class="btn btn-default" onClick="Change()">Allega</button>
+			<button type="button" class="btn btn-default" onClick="Change()">Allega</button>
 			</td>
 			</tr>
 			</table>
@@ -111,7 +111,8 @@ $idlettera=$_GET['idlettera'];
 			<div class="row">
 			<div class ="col-xs-5" id="content" style="display: none;">
 			<br>
-			<div id="progressbar"><div class="progress-label">Invio file in corso, attendere qualche istante...</div></div>
+			<b>Caricamento in corso...</b>
+			<img src="images/progress.gif">
 			</div>
 			</div>
 			
