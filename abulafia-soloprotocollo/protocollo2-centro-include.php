@@ -106,7 +106,7 @@ $idlettera=$_GET['idlettera'];
 			$cercadocumento= mysql_query("select distinct * from lettere$annoprotocollo where idlettera='$idlettera'");
 			$urlpdf1= mysql_fetch_array($cercadocumento);
 			$urlpdf=$urlpdf1['urlpdf'];
-			$my_file -> publdownloadlink ($urlpdf, $idlettera, $annoprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
+			$my_file -> publdownloadlink ($urlpdf, $idlettera, $annoprotocollo, '6', '_new'); //richiamo del metodo "downloadlink" dell'oggetto file
 			?>
 			<div class="row">
 			<div class ="col-xs-5" id="content" style="display: none;">

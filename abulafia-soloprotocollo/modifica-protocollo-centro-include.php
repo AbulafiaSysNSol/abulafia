@@ -80,7 +80,7 @@ Carica il file contenente il documento da registrare:<br> <input size="22" name=
 </form>
 
 <?php
-$my_file -> publdownloadlink ($row['urlpdf'], $row['idlettera'], $annoprotocollo); //richiamo del metodo "downloadlink" dell'oggetto file
+$my_file -> publdownloadlink ($row['urlpdf'], $row['idlettera'], $annoprotocollo, '6', '_new'); //richiamo del metodo "downloadlink" dell'oggetto file
 ?>
 
 <form action="login0.php?corpus=prot2-aggiungi-mittente&idlettera=<?php echo $row['idlettera'];?>&urlpdf=<?php echo $row['urlpdf'];?>" method="post" >
