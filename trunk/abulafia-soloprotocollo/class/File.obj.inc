@@ -4,7 +4,7 @@ include 'maledetti-apici-centro-include.php';
 Class File
 	{
 
-private $href="download.php";
+private $href="download.php?";
 
 
 	private function uploadfile ($nomefile, $tipofile) 
