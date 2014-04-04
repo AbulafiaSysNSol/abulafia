@@ -45,7 +45,7 @@ private $href="download.php?";
                                        	 ."&lud=".$nomefile
                                        	 ."&idlettera=".$idlettera
                                        	 ."&est=".$this->estensionefile ($nomefile);//richiamo del metodo "ricava estensione dal file"
-                                                                                         di questa stessa classe
+                                                                                         //di questa stessa classe
                                                    
               			$this->testodownloadlink=stripslashes(substr($nomefile,0,$numerocaratteri).'...'); //passa come link visibile solo 
               												//un certo numero di caratteri 
