@@ -34,7 +34,7 @@ private $href="download.php?";
 			
 		}
 
-		private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri, $target)
+	 private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri, $target)
 		{
 			if (!$nomefile)
               {
