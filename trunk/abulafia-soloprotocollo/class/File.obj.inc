@@ -48,57 +48,20 @@ private $href="download.php";
                                         ."&est=".$this->estensionefile ($nomefile);//richiamo del metodo "ricava estensione dal file"
                                                                                          di questa stessa classe
                                                    
-              $this->testodownloadlink=
+              $this->testodownloadlink=stripslashes(substr($nomefile,0,$numerocaratteri).'...'); //passa come link visibile solo un certo
+                                                                                                  //numero di caratteri pasato come parametro
              }
 		}
 		
 
- /* 
-	private function olddownloadlink ($nomefile, $idlettera, $annoricercaprotocollo)
-		{
-			if (!$nomefile) 
-				{ 
-			echo "<br>Nessun file associato";
-				} //nel caso di nessun file associato al protocollo
-			else 	{
-		?><br><b>File associato:</b><a target ="_new" href="download.php?annoricercaprotocollo=<?php echo $annoricercaprotocollo; ?>
-	&lud=<?php echo $nomefile; ?>
-	&idlettera=<?php echo $idlettera; ?>
-	&est=<?php echo $this->estensionefile ($nomefile);?> "> <!-- richiamo del metodo "ricava estensione dal file" di questo stesso oggetto-->
-	 <?php echo substr($nomefile,0,36).'...';?> <!-- pubblica il nome abbreviato del file -->
-		</a>
-		<?
-				}
-		}
-      
-    private function downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo)
-		{
-			if (!$nomefile) 
-				{ 
-			echo "Nessun file associato";
-				} //nel caso di nessun file associato al protocollo
-			else 	{
-		?><a target ="_new" href="download.php?annoricercaprotocollo=<?php echo $annoricercaprotocollo; ?>
-	&lud=<?php echo $nomefile; ?>
-	&idlettera=<?php echo $idlettera; ?>
-	&est=<?php echo $this->estensionefile ($nomefile);?> "> <!-- richiamo del metodo "ricava estensione dal file" di questo stesso oggetto-->
-	 <?php echo stripslashes($nomefile);?> <!-- pubblica il nomecompleto del file -->
-		</a>
-		<?
-				}
-		}  */
 
-	function publdownloadlink  ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
+
+	function publdownloadlink  ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri, $target)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
 		{
-		$this->downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri);
+		$this->downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri, $target);
 			
 		}
 
-/*function publdownloadlink2  ($nomefile, $idlettera, $annoricercaprotocollo, $target)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
-		{
-		$this->downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo, $target);
-			
-		}*/
       
 	}//fine classe
 ?>
