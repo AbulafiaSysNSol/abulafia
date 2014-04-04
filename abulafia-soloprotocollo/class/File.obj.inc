@@ -4,6 +4,7 @@ include 'maledetti-apici-centro-include.php';
 Class File
 	{
 
+private $href="download.php";
 
 
 	private function uploadfile ($nomefile, $tipofile) 
@@ -33,21 +34,22 @@ Class File
 			
 		}
 
-		private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)
+		private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri, $target)
 		{
 			if (!$nomefile)
               {
              $this->testodownloadlink="Nessun file associato";
               } //nel caso di nessun file associato al protocollo
-			else 	{
-		?><br><b>File associato:</b><a target ="_new" href="download.php?annoricercaprotocollo=<?php echo $annoricercaprotocollo; ?>
-	&lud=<?php echo $nomefile; ?>
-	&idlettera=<?php echo $idlettera; ?>
-	&est=<?php echo $this->estensionefile ($nomefile);?> "> <!-- richiamo del metodo "ricava estensione dal file" di questo stesso oggetto-->
-	 <?php echo substr($nomefile,0,36).'...';?> <!-- pubblica il nome abbreviato del file -->
-		</a>
-		<?
-				}
+			else 	
+             {
+              $this->opzionidownloadlink="annoricercaprotocollo=".$annoricercaprotocollo
+                                        ."&lud=".$nomefile
+                                        ."&idlettera=".$idlettera
+                                        ."&est=".$this->estensionefile ($nomefile);//richiamo del metodo "ricava estensione dal file"
+                                                                                         di questa stessa classe
+                                                   
+              $this->testodownloadlink=
+             }
 		}
 		
 
@@ -92,9 +94,9 @@ Class File
 			
 		}
 
-/*function publdownloadlink2  ($nomefile, $idlettera, $annoricercaprotocollo)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
+/*function publdownloadlink2  ($nomefile, $idlettera, $annoricercaprotocollo, $target)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
 		{
-		$this->downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo);
+		$this->downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo, $target);
 			
 		}*/
       
