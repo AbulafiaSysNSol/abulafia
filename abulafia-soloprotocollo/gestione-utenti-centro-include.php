@@ -37,16 +37,17 @@ var id=0;
 				<?php
 				$risultati=mysql_query("select distinct * from users, anagrafica where users.idanagrafica=anagrafica.idanagrafica order by users.auth desc, anagrafica.cognome, anagrafica.nome ");
 				?>
-				<tr><td><b>Utente</b></td><td><b>Livello Autorizzazione</b></td><td><b>Opzioni</b></td></tr>
+				<tr align="center"><td><b>Utente</b></td><td><b>Livello Autorizzazione</b></td><td><b>Opzioni</b></td></tr>
 				<?php
 				while ($risultati2=mysql_fetch_array($risultati))
 				{
 				?>
-				<tr><td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo $risultati2['cognome'].' '.$risultati2['nome'];?></a></td><td> Auth = <?php echo $risultati2['auth'];?></td><td><a href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"> Modifica</a> - <a href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>">Elimina</a></td></tr>
+				<tr align="center"><td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo $risultati2['cognome'].' '.$risultati2['nome'];?></a></td><td> Auth = <?php echo $risultati2['auth'];?></td><td><a href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"> Modifica</a> - <a href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>">Elimina</a></td></tr>
 				<?php 
 				} 
 				?>
 			</table>
+			</center>
 			</div>
 
 		</div>
