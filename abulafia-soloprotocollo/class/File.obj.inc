@@ -33,11 +33,26 @@ Class File
 			
 		}
 
-		
+		private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)
+		{
+			if (!$nomefile)
+              {
+             $this->testodownloadlink="Nessun file associato";
+              } //nel caso di nessun file associato al protocollo
+			else 	{
+		?><br><b>File associato:</b><a target ="_new" href="download.php?annoricercaprotocollo=<?php echo $annoricercaprotocollo; ?>
+	&lud=<?php echo $nomefile; ?>
+	&idlettera=<?php echo $idlettera; ?>
+	&est=<?php echo $this->estensionefile ($nomefile);?> "> <!-- richiamo del metodo "ricava estensione dal file" di questo stesso oggetto-->
+	 <?php echo substr($nomefile,0,36).'...';?> <!-- pubblica il nome abbreviato del file -->
+		</a>
+		<?
+				}
+		}
 		
 
-  
-	private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo)
+ /* 
+	private function olddownloadlink ($nomefile, $idlettera, $annoricercaprotocollo)
 		{
 			if (!$nomefile) 
 				{ 
@@ -54,7 +69,7 @@ Class File
 				}
 		}
       
- /*   private function downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo)
+    private function downloadlink2 ($nomefile, $idlettera, $annoricercaprotocollo)
 		{
 			if (!$nomefile) 
 				{ 
@@ -71,9 +86,9 @@ Class File
 				}
 		}  */
 
-	function publdownloadlink  ($nomefile, $idlettera, $annoricercaprotocollo)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
+	function publdownloadlink  ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)  //<man>Stampa il link ad un certo file nel protocollo, passando come argomenti il nome del file, il suo id e l'anno di registrazione</man>
 		{
-		$this->downloadlink ($nomefile, $idlettera, $annoricercaprotocollo);
+		$this->downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri);
 			
 		}
 
