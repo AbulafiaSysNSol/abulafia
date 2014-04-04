@@ -53,8 +53,17 @@ echo mysql_error();
         <br>File associato:<b>
         <?php
         $my_file = new File (); 		
-			$my_file -> publdownloadlink($this->arraylettera1['urlpdf'], $this->arraylettera1['idlettera'], $annoricercaprotocollo, '6', '_new'); //richiamo del metodo "downloadlink" dell'oggetto file
-			?></b>
+			$my_file -> publdownloadlink($this->arraylettera1['urlpdf'], 
+						$this->arraylettera1['idlettera'], 
+						$annoricercaprotocollo, 
+						'6'); //richiamo del metodo "downloadlink" dell'oggetto file
+	echo "<a target='_new' 
+		href='"
+		.$my_file->href
+		.$my_file->opzionidownloadlink
+		."'>"
+		.$my_file->testodownloadlink
+		."</a>";?></b>
 	
 			<br>Spedita/Ricevuta: <strong><?php 
 							echo $this->arraylettera1['speditaricevuta'];

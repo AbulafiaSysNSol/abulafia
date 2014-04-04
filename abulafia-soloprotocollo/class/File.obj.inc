@@ -3,7 +3,7 @@
 Class File
 	{
 
-private $href="download.php?";
+public $href="download.php?";
 
 
 	private function uploadfile ($nomefile, $tipofile) 
@@ -13,17 +13,16 @@ private $href="download.php?";
 		
 	private function estensionefile ($nomefile)
 		{
-			$elementiurlpdf= explode( ".", $nomefile); 
-			$numelementiurlpdf=count($elementiurlpdf);
-			if ($numelementiurlpdf > 1)  
+			$this->elementiurlpdf= explode( ".", $nomefile); 
+			$this->numelementiurlpdf=count($this->elementiurlpdf);
+			if ($this->numelementiurlpdf > 1)  
 				{
-				$estensione= $elementiurlpdf[$numelementiurlpdf-1];
+				$this->estensione= $this->elementiurlpdf[$this->numelementiurlpdf-1];
 				}
 			else 
 				{
-				$estensione='abu';
+				$this->estensione='abu';
 				}
-			echo $estensione;
 			
 		}
 
@@ -33,18 +32,21 @@ private $href="download.php?";
 			
 		}
 
-	 private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri, $target)
+	 private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)
 		{
 			if (!$nomefile)
               			{
              			$this->testodownloadlink="Nessun file associato";
+             			$this->href="#";
+             			$this->opzionidownloadlink="";
               			} //nel caso di nessun file associato al protocollo
 			else 	
              			{
-             			 $this->opzionidownloadlink="annoricercaprotocollo=".$annoricercaprotocollo
+             			$this->publestensionefile($nomefile);
+             			$this->opzionidownloadlink="annoricercaprotocollo=".$annoricercaprotocollo
                                        	 ."&lud=".$nomefile
                                        	 ."&idlettera=".$idlettera
-                                       	 ."&est=".$this->estensionefile ($nomefile);//richiamo del metodo "ricava estensione dal file"
+                                       	 ."&est=".$this->estensione;//richiamo del metodo "ricava estensione dal file"
                                                                                          //di questa stessa classe
                                                    
               			$this->testodownloadlink=stripslashes(substr($nomefile,0,$numerocaratteri).'...'); //passa come link visibile solo 
@@ -56,12 +58,12 @@ private $href="download.php?";
 
 
 
-	function publdownloadlink  ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri, $target)  //<man>Stampa il link ad un certo 
+	function publdownloadlink  ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)  //<man>Stampa il link ad un certo 
 												//file nel protocollo, passando come 
 												//argomenti il nome del file, 
 												//il suo id e l'anno di registrazione</man>
 		{
-		$this->downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri, $target);
+		$this->downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri);
 			
 		}
 
