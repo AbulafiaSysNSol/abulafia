@@ -24,17 +24,32 @@ if (!isset($_POST['annoricercaprotocollo']))
 	}
 if (!isset($_POST['anagraficatipologia'])) 
 	{
-	$_POST['anagraficatipologia'] = $_GET['anagraficatipologia'] ;
+	if (isset($_GET['anagraficatipologia']))
+		{
+		 $_POST['anagraficatipologia']= $_GET['anagraficatipologia'] ;
+		 }
 	}
 $logindatagruppo2=$_SESSION['gruppo'];//setta l'id del gruppo cui appartiene l'utente che ha fatto login
 
-$filtro = $_POST['anagraficatipologia'];
+if (isset($_POST['anagraficatipologia']))
+	{
+	$filtro = $_POST['anagraficatipologia'];
+	}
+
 
 $ordinerisultati = $_POST['ordinerisultati'];
 $cercato = $_POST['cercato']; //parola chiave da ricercare
-$cercato2 = $cercato;
+
 $nomecercato = NULL;
-list($cognomecercato, $nomecercato) = explode("+", $cercato2);
+
+if ($cercato!='') 
+	{
+	if (substr_count(" ", $cercato) > 0)
+		{
+		list($cognomecercato, $nomecercato) = explode("+", $cercato);
+		}
+	}
+
 $tabella = $_POST['tabella'];
 $annoricercaprotocollo=$_POST['annoricercaprotocollo'];
 $_SESSION['annoricercaprotocollo']= $annoricercaprotocollo;
@@ -244,6 +259,7 @@ if ($tabella == 'anagrafica')
 
 
 
+
 			?><tr bgcolor = <?php echo $colorelinee; ?> >
 				<td><?php echo $row['idanagrafica'];?></td>
 				<td align="center" valign="middle"><?php echo $row['tipologia'];?></td>
@@ -342,12 +358,14 @@ if ($tabella == 'anagrafica')
 
 //scelta tabella = lettere
 $my_file = new File(); //crea un nuovo oggetto 'file'
-$cercato3 = $cercato;
-list($giornocercato, $mesecercato, $annocercato) = explode("-", $cercato3);
+
+
+
+list($giornocercato, $mesecercato, $annocercato) = explode("-", $cercato);
 $dataletteracercata = "$annocercato-$mesecercato-$giornocercato";
 
 
-if (ereg("lettere", $tabella))
+if (preg_match("/lettere/i", $tabella))
 	{
 	if ($tabella=='lettere') 
 		{ 
