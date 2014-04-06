@@ -7,7 +7,7 @@
 		<div class="panel-body">
 		
 		<?php
-		 if($_GET['noresult'] == 1) {
+		 if( isset($_GET['noresult']) && $_GET['noresult'] == 1) {
 		?>
 		<div class="row">
 		<div class="col-xs-12">
@@ -17,7 +17,7 @@
 		?>	
 		
 		<?php
-		 if($_GET['noresult'] == 2) {
+		 if( isset($_GET['noresult']) && $_GET['noresult'] == 2) {
 		?>
 		<div class="row">
 		<div class="col-xs-12">

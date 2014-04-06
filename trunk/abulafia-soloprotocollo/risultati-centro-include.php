@@ -427,13 +427,13 @@ if (ereg("lettere", $tabella))
 			?>
 			<br><br>
 		<table class="table table-bordered" align="center">
-			<tr><strong>
+			<tr align = "center"><strong>
 				<td>N. Prot.</td>
-				<td>Data registrazione</td>
-				<td>Spedita/Ricevuta</td>
+				<td>Data Reg.</td>
+				<td>Sped./Ric.</td>
 				<td>Oggetto</td>
 				<td>File</td>
-				<td>Mittenti/Destinatari</td>
+				<td>Mitt./Dest.</td>
 				<td>Opzioni</td>
 			</strong>
 			</tr>
@@ -459,18 +459,17 @@ if (ereg("lettere", $tabella))
 				<td> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana?></td>
 				<td><?php echo $value[5] ;?></td>
 				<td><?php echo $value[1] ;?></td>
-				<td><b><?php $my_file -> publdownloadlink($value[4], 
-						$value[0], 
-						$annoricercaprotocollo, 
-						'6');?>
-						<a target="_new" 
-							href="
-							<?php echo $my_file->href.$my_file->opzionidownloadlink;?>
-							">
-							<?php echo $my_file->testodownloadlink;?>
-							</a>
-							</b>
-							</td>
+				<td>
+				<?php
+				$download = $my_file -> downloadlink($value[4], $value[0], $annoricercaprotocollo, '30');
+					if ($download != "Nessun file associato") {
+						echo $download;
+					}
+					else {
+						echo "Nessun file associato";
+					}
+				?>
+				</td>
 
 				<td><?php
 					$mittenti= mysql_query("SELECT  distinct *
