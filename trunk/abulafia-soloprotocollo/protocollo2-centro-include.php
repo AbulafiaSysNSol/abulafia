@@ -3,8 +3,8 @@ $annoprotocollo = $_SESSION['annoprotocollo'];
 $my_file = new File(); //crea un nuovo oggetto 'file'
 $my_lettera = new Lettera(); //crea un nuovo oggetto
 $from= $_GET['from'];
-$dbname=$_session['dbname'];
-$idanagrafica=$_GET['idanagrafica'];
+if (isset($_session['dbname'])) { $dbname=$_session['dbname']; }
+if (isset($_GET['idanagrafica'])) { $idanagrafica=$_GET['idanagrafica']; }
 //se la pagina da cui si proviene è "crea nuovo protocollo" 
 if ($from == 'crea') {  
 $lastrec= mysql_query("SELECT * FROM lettere$annoprotocollo ORDER BY idlettera desc LIMIT 1");
@@ -63,7 +63,7 @@ $idlettera=$_GET['idlettera'];
 		<div class="panel-body">
 		
 			<?php
-			 if($_GET['upfile'] == "error") {
+			 if( isset($_GET['upfile']) && $_GET['upfile'] == "error") {
 			?>
 			<div class="row">
 				<div class="col-xs-12">
@@ -75,7 +75,7 @@ $idlettera=$_GET['idlettera'];
 			?>
 			
 			<?php
-			 if($_GET['upfile'] == "success") {
+			 if( isset($_GET['upfile']) && $_GET['upfile'] == "success") {
 			?>
 			<div class="row">
 				<div class="col-xs-12">
@@ -106,14 +106,25 @@ $idlettera=$_GET['idlettera'];
 			$cercadocumento= mysql_query("select distinct * from lettere$annoprotocollo where idlettera='$idlettera'");
 			$urlpdf1= mysql_fetch_array($cercadocumento);
 			$urlpdf=$urlpdf1['urlpdf'];
-			$my_file -> publdownloadlink ($urlpdf, $idlettera, $annoprotocollo, '6', '_new'); //richiamo del metodo "downloadlink" dell'oggetto file
+			$download = $my_file->downloadlink ($urlpdf, $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
+			if ($download != "Nessun file associato") {
+				echo "<br><b>File associato: </b>" . $download;
+			}
+			else {
+				echo "<br>Nessun file associato.";
+			}
+				
 			?>
+<<<<<<< .mine
+			
+=======
 			<a target="_new" 
 				href="
 				<?php echo $my_file->href.$my_file->opzionidownloadlink;?>
 				">
 				<?php echo $my_file->testodownloadlink;?>
 			</a>
+>>>>>>> .r203
 			<div class="row">
 			<div class ="col-xs-5" id="content" style="display: none;">
 			<br>

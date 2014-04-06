@@ -3,35 +3,42 @@
 Class File
 	{
 
-public $href="download.php?";
-
-
-	private function uploadfile ($nomefile, $tipofile) 
-		{
-		}
-
+		private $href = "download.php?" ;
 		
-	private function estensionefile ($nomefile)
+		public function estensioneFile($nomefile)
 		{
 			$this->elementiurlpdf= explode( ".", $nomefile); 
 			$this->numelementiurlpdf=count($this->elementiurlpdf);
-			if ($this->numelementiurlpdf > 1)  
-				{
+			if ($this->numelementiurlpdf > 1)  {
 				$this->estensione= $this->elementiurlpdf[$this->numelementiurlpdf-1];
-				}
-			else 
-				{
+			}
+			else {
 				$this->estensione='abu';
-				}
+			}
 			
+		return $this->estensione;	
 		}
 
-	function publestensionefile  ($nomefile) //<man> stampa l'estensione di un file passato come argomento</man>
+		public function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)
 		{
-		$this->estensionefile  ($nomefile);
+			if (!$nomefile) {
+             			$this->link = "Nessun file associato";
+			} //nel caso di nessun file associato al protocollo
+			else {
 			
-		}
+             			$this->opzionidownloadlink= "annoricercaprotocollo=".$annoricercaprotocollo 
+								      ."&lud=".$nomefile
+								      ."&idlettera=".$idlettera
+								      ."&est=".$this->estensioneFile($nomefile);//richiamo del metodo ricava estensione dal file di questa stessa classe
+								      
+              			$this->testodownloadlink=stripslashes(substr($nomefile,0,$numerocaratteri)); //passa come link visibile solo un certo numero di caratteri pasato come parametro
 
+<<<<<<< .mine
+				 $this->link = "<a target=_new href=" . str_replace(' ', '%20', $this->href . $this->opzionidownloadlink) . ">" . $this->testodownloadlink . "</a>";
+				 }
+				 
+			return $this->link;
+=======
 	 private function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)
 		{
 			if (!$nomefile)
@@ -53,21 +60,9 @@ public $href="download.php?";
               												//un certo numero di caratteri 
               												//pasato come parametro
             			 }
-		}
-		
-
-
-
-	function publdownloadlink  ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)  //<man>Stampa il link ad un certo 
-												//file nel protocollo, passando come 
-												//argomenti il nome del file, 
-												//il suo id e l'anno di registrazione</man>
-		{
-		$this->downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri);
-			
+>>>>>>> .r203
 		}
 
-      
 	}//fine classe
 ?>
 
