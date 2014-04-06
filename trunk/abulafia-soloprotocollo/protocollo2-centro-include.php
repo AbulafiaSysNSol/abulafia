@@ -115,16 +115,7 @@ $idlettera=$_GET['idlettera'];
 			}
 				
 			?>
-<<<<<<< .mine
-			
-=======
-			<a target="_new" 
-				href="
-				<?php echo $my_file->href.$my_file->opzionidownloadlink;?>
-				">
-				<?php echo $my_file->testodownloadlink;?>
-			</a>
->>>>>>> .r203
+
 			<div class="row">
 			<div class ="col-xs-5" id="content" style="display: none;">
 			<br>
