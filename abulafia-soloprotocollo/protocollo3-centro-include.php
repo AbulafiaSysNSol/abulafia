@@ -2,14 +2,14 @@
 $annoprotocollo = $_SESSION['annoprotocollo'];
 //inizio passaggio dati da pagina inserimento
 $loginid=$_SESSION['loginid'];
-$dataoriginalegiorno= $_GET['dataoriginalegiorno'];
-$dataoriginalemese = $_GET['dataoriginalemese'];
-$dataoriginaleanno= $_GET['dataoriginaleanno'];
-$from = $_GET['from'];
+if(isset($_GET['dataoriginalegiorno'])) { $dataoriginalegiorno= $_GET['dataoriginalegiorno']; }
+if(isset($_GET['dataoriginalemese'])) { $dataoriginalemese = $_GET['dataoriginalemese']; }
+if(isset($_GET['dataoriginaleanno'])) { $dataoriginaleanno= $_GET['dataoriginaleanno']; }
+if(isset($_GET['from'])) { $from = $_GET['from']; }
 $speditaricevuta = $_POST['spedita-ricevuta'];
 $oggetto= $_POST['oggetto'];
 $data = $_POST['data'];
-$arraydata = split("/", $data);
+$arraydata = explode("/", $data);
 $lettera_data_giorno = $arraydata[0];
 $lettera_data_mese = $arraydata[1];
 $lettera_data_anno = $arraydata[2];
@@ -20,7 +20,7 @@ $urlpdf = $_GET['urlpdf'];
 $dataregistrazione = strftime("%Y-%m-%d");
 list($anno, $mese, $giorno) = explode("-", $dataregistrazione);
 $dataregistrazione2= $anno.'-'.$mese.'-'.$giorno;
-if ($from =='modifica') { $dataregistrazione = $dataoriginaleanno.'-'.$dataoriginalemese.'-'.$dataoriginalegiorno; }
+if (isset($from) && $from =='modifica') { $dataregistrazione = $dataoriginaleanno.'-'.$dataoriginalemese.'-'.$dataoriginalegiorno; }
 $idlettera=$_GET['idlettera'];
 $lettera_data = $lettera_data_anno . '-' . $lettera_data_mese . '-' . $lettera_data_giorno   ;
 $loginid = $_SESSION['loginid'];
