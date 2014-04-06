@@ -81,7 +81,7 @@ Carica il file contenente il documento da registrare:<br> <input size="22" name=
 
 <p>
 <?php
-	$download = $my_file -> downloadlink($value[4], $value[0], $annoricercaprotocollo, '30');
+	$download = $my_file -> downloadlink($row['urlpdf'], $row['idlettera'], $annoprotocollo, '6');
 	if ($download != "Nessun file associato") 
 		{
 		echo $download;
