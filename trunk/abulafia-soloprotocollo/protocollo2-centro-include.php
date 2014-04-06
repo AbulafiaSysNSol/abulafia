@@ -108,6 +108,12 @@ $idlettera=$_GET['idlettera'];
 			$urlpdf=$urlpdf1['urlpdf'];
 			$my_file -> publdownloadlink ($urlpdf, $idlettera, $annoprotocollo, '6', '_new'); //richiamo del metodo "downloadlink" dell'oggetto file
 			?>
+			<a target="_new" 
+				href="
+				<?php echo $my_file->href.$my_file->opzionidownloadlink;?>
+				">
+				<?php echo $my_file->testodownloadlink;?>
+				</a>
 			<div class="row">
 			<div class ="col-xs-5" id="content" style="display: none;">
 			<br>
