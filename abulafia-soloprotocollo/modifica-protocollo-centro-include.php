@@ -79,15 +79,20 @@ Carica il file contenente il documento da registrare:<br> <input size="22" name=
 <input type="submit" value="Upload" />
 </form>
 
+<p>
 <?php
-$my_file -> publdownloadlink ($row['urlpdf'], $row['idlettera'], $annoprotocollo, '6', '_new'); //richiamo del metodo "downloadlink" dell'oggetto file
+	$download = $my_file -> downloadlink($value[4], $value[0], $annoricercaprotocollo, '30');
+	if ($download != "Nessun file associato") 
+		{
+		echo $download;
+		}
+					
+	else 
+		{
+		echo "Nessun file associato";
+		}
 ?>
-<a target="_new" 
-	href="
-	<?php echo $my_file->href.$my_file->opzionidownloadlink;?>
-	">
-	<?php echo $my_file->testodownloadlink;?>
-</a>
+</p>
 
 <form action="login0.php?corpus=prot2-aggiungi-mittente&idlettera=<?php echo $row['idlettera'];?>&urlpdf=<?php echo $row['urlpdf'];?>" method="post" >
 <label> <b>Aggiungi mittente/destinatario</b><br> <input type="text" name="cercato"/>
