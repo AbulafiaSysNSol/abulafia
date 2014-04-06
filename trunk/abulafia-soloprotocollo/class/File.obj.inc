@@ -16,7 +16,7 @@ Class File
 				$this->estensione='abu';
 			}
 			
-		return $this->estensione;	
+		return $this->estensione;
 		}
 
 		public function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)
