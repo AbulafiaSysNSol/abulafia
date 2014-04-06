@@ -38,6 +38,7 @@ public $href="download.php?";
               			{
              			$this->testodownloadlink="Nessun file associato";
              			$this->opzionidownloadlink="";
+             			$this->href="#";
               			} //nel caso di nessun file associato al protocollo
 			else 	
              			{
