@@ -360,7 +360,6 @@ if ($tabella == 'anagrafica')
 $my_file = new File(); //crea un nuovo oggetto 'file'
 
 
-
 list($giornocercato, $mesecercato, $annocercato) = explode("-", $cercato);
 $dataletteracercata = "$annocercato-$mesecercato-$giornocercato";
 
