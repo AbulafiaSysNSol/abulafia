@@ -9,7 +9,7 @@ session_start();
 <title><?php echo $_SESSION['titolopagina'];?></title>
 <meta name="keywords" content="<?php echo $_SESSION['keywords'];?>" />
 <meta name="description" content="<?php echo $_SESSION['description'];?>" />
-<link rel="stylesheet" type="text/css" href="default.css" rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="style.php" rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 </head>
 <body>
 
