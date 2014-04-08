@@ -76,7 +76,7 @@ echo mysql_error();
 					echo $this->arraylettera1['posizione'];
 					?></strong> 
           
-        	<br>Fascicolazione: <strong><?php 
+        	<br>Posizione: <strong><?php 
 					echo $this->arraylettera1['riferimento'];
 			?></strong>
 

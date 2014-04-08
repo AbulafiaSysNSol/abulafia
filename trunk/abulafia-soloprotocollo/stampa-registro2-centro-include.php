@@ -15,7 +15,7 @@ require('lib/fpdf/fpdf.php');
 		function Footer()
 		{
 		    // Logo
-		    $this->Image('images/footer.jpg',0,274,209.97);
+		    $this->Image('images/footer.jpg',0,281,209.97);
 		    // Position at 1.5 cm from bottom
 		    $this->SetY(-15);
 		    // Page number
@@ -87,8 +87,8 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 $pdf->SetTitle('registroprotocollo');
-$pdf->Text(10,50,$intestazione);
-$pdf->Ln(20);
+$pdf->Text(10,45,$intestazione);
+$pdf->Ln(10);
 
 while($query2 = mysql_fetch_array($query)) {
 
@@ -119,7 +119,7 @@ while($query2 = mysql_fetch_array($query)) {
 	$pdf->MultiCell(0,7,'Oggetto: ' . $query2['oggetto'],1,'L',true);
 	if($query2['speditaricevuta'] == 'ricevuta') { $sd = 'Mittenti'; } else { $sd = 'Destinatari'; }
 	$pdf->MultiCell(0,7,$sd . ': ' . $query2['cognome'] . ' ' . $query2['nome'],1,'L',true);
-	$pdf->Ln(7);
+	$pdf->Ln(5);
 	$contatorelinee = $contatorelinee + 1;
     }
 $pdf->Ln(15);
