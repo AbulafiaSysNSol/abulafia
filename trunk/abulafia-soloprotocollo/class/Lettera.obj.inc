@@ -54,7 +54,7 @@ echo mysql_error();
         <?php
         $my_file = new File (); 		
 			$download = $my_file->downloadlink($this->arraylettera1['urlpdf'], $this->arraylettera1['idlettera'], $annoricercaprotocollo,'30'); //richiamo del metodo "downloadlink" dell'oggetto file
-	echo $download
+	echo stripslashes($download);
 	?></b>
 	
 			<br>Spedita/Ricevuta: <strong><?php 
