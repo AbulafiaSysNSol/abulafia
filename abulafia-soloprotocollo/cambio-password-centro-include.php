@@ -6,35 +6,35 @@
   </div>
   <div class="panel-body">
      <?php
-    if($_GET['pass'] == "ok") {
+    if( isset($_GET['pass']) && $_GET['pass'] == "ok") {
 	?>
 	<div class="row">
 	<div class="col-xs-4">
 	<div class="alert alert-success">Password modifcata!</div></div></div>
 	<?php
    }
-    if($_GET['pass'] == "leng") {
+    if( isset($_GET['pass']) && $_GET['pass'] == "leng") {
 	?>
 	<div class="row">
 	<div class="col-xs-4">
 	<div class="alert alert-danger">La password deve contenere almeno 6 caratteri</div></div></div>
 	<?php
    }
-    if($_GET['pass'] == "empty") {
+    if( isset($_GET['pass']) && $_GET['pass'] == "empty") {
 	?>
 	<div class="row">
 	<div class="col-xs-4">
 	<div class="alert alert-danger">Assicurati di aver compilato tutti i campi</div></div></div>
 	<?php
    }
-    if($_GET['pass'] == "old") {
+    if( isset($_GET['pass']) && $_GET['pass'] == "old") {
 	?>
 	<div class="row">
 	<div class="col-xs-4">
 	<div class="alert alert-danger">La password attuale non è corretta!</div></div></div>
 	<?php
    }
-    if($_GET['pass'] == "nomatch") {
+    if( isset($_GET['pass']) && $_GET['pass'] == "nomatch") {
 	?>
 	<div class="row">
 	<div class="col-xs-4">

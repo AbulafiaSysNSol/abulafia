@@ -1,27 +1,16 @@
-<div id="primarycontent">
-<div class="post">
+<div class="panel panel-default">
+	
+		<div class="panel-heading">
+		<h3 class="panel-title"><strong>Log delle ultime 15 email</strong></h3>
+		</div>
+		<div class="panel-body">
+			<p>
+			<?php 
+				$my_log->publleggilog('0', '15', ' ', $_SESSION['maillog']);//legge dal log delle email inviate
+			?>
+			</p>
+			<br><a href="download.php?lud=mail.log&est=log">Scarica il log delle mail</a>
 
-				<div class="header">
-
-					<h3>Log delle ultime 15 email:</h3>	
-
-				</div>
-
-				<div class="content">
-
-					
-
-					<p><?php 
-
-
-						
-						$my_log -> publleggilog('0', '15', ' ', $_SESSION['maillog']);//legge dal log delle email inviate
-						
-						
-						?></p>
-						
-							<h2><a href="download.php?lud=mail.log&est=log">Scarica il log delle mail</a></h2>
-
-
-
-			</div>	</div>  </div>
+		</div>
+				
+</div>

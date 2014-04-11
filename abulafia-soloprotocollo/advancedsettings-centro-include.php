@@ -3,16 +3,36 @@ $annoprotocollo = $_SESSION['annoprotocollo'];
 //controllo dell'autorizzazione necessaria alla gestione degli utenti di abulafia
 if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; exit ();}
 ?>
-<div id="primarycontent">
+<div class="panel panel-default">
+	
+		<div class="panel-heading">
+		<h3 class="panel-title"><strong>Advanced Settings</strong></h3>
+		</div>
+		<div class="panel-body">
 		
-			<!-- primary content start -->
-		
-			<div class="post">
-				<div class="header">
-					<h3><?php echo 'Advanced Settings';?></h3>
-				
+		<?php
+			 if( isset($_GET['update']) && $_GET['update'] == "error") {
+			?>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="alert alert-danger">C'e' stato un errore nella modifica delle impostazioni, riprova in seguito o contatta l'amministratore del server.</div>
 				</div>
-				<div class="content">
+			</div>
+			<?php
+			}
+			?>
+			
+			<?php
+			 if( isset($_GET['update']) && $_GET['update'] == "success") {
+			?>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Impostazioni modificate con successo!</div>
+				</div>
+			</div>
+			<?php
+			}
+		?>
 
 <?php //funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
 $contalettere=mysql_query("select count(*) from lettere$annoprotocollo where lettere$annoprotocollo.datalettera!='0000-00-00'");
@@ -20,47 +40,45 @@ $res_count=mysql_fetch_row($contalettere);
 $contalettere= $res_count[0] +1 ;
 //fine funzione per determinare se la tabella "lettere" è vuota. 
 ?>
-
-<label> <br>Per rendere effettive le modifiche e' consigliato effettuare il logout.
-</label><br><br>
-<form name="modifica" method="post" >
-<label> <br>Nome dell'applicativo <br><input size="50" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>"/>
+Per rendere effettive le modifiche e' consigliato effettuare il logout.
+<br>
+<form name="modifica" method="post" class="form-group">
+<label> <br>Nome dell'applicativo:<br><input class="form-control" size="50" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>"/>
 </label><br>
-<label> <br>Descrizione breve (in alto a destra)<br><input size="50" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>"/>
+<label> <br>Descrizione breve (in alto a destra)<br><input class="form-control" size="50" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>"/>
 </label><br>
-<label> <br>Numero Versione <br><input size="50" type="text" name="version"  value="<?php echo $_SESSION['version'];?>"/>
+<label> <br>Numero Versione <br><input class="form-control" size="50" type="text" name="version"  value="<?php echo $_SESSION['version'];?>"/>
 </label><br>
-<label> <br>Email <br><input size="50" type="text" name="email"  value="<?php echo $_SESSION['email'];?>"/>
+<label> <br>Email <br><input class="form-control" size="50" type="text" name="email"  value="<?php echo $_SESSION['email'];?>"/>
 </label><br>
-<label> <br>Max File Size (allegati del Protocollo, <b>espressi in byte</B>) <br><input size="50" type="text" name="protocollomaxfilesize"  value="<?php echo $_SESSION['protocollomaxfilesize'];?>"/>
+<label> <br>Max File Size (allegati del Protocollo, <b>espressi in byte</B>) <br><input class="form-control" size="50" type="text" name="protocollomaxfilesize"  value="<?php echo $_SESSION['protocollomaxfilesize'];?>"/>
 </label><br>
-<label> <br>Anno Corrente per il Protocollo <br><input size="50" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled/>
+<label> <br>Anno Corrente per il Protocollo <br><input class="form-control" size="50" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled/>
 </label><br>
-<label> <br>Numero iniziale per il Protocollo (settabile solo nella prima installazione) <br><input size="50" type="text" name="primoprotocollo"  value="<?php echo $contalettere;?>"/>
+<label> <br>Numero iniziale per il Protocollo (settabile solo nella prima installazione) <br><input class="form-control" size="50" type="text" name="primoprotocollo"  value="<?php echo $contalettere;?>"/>
 	<script language="javascript">
 	var primoprotocollo = document.modifica.primoprotocollo.value;
 		if (primoprotocollo > 1) 
-
 		{
-
 	 		 document.modifica.primoprotocollo.disabled = true;
-		 
-
 		}
-</script>
+	</script>
 </label><br>
-<label> <br>Max File Size (foto dell'anagrafica, <b>espresse in byte</B>) <br><input size="50" type="text" name="fotomaxfilesize"  value="<?php echo $_SESSION['fotomaxfilesize'];?>"/>
+<label> <br>Max File Size (foto dell'anagrafica, <b>espresse in byte</B>) <br><input class="form-control" size="50" type="text" name="fotomaxfilesize"  value="<?php echo $_SESSION['fotomaxfilesize'];?>"/>
 </label><br>
-<label> <br>Pagina principale<br><input size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>"/>
+<label> <br>Pagina principale<br><input class="form-control" size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>"/>
 </label><br>
-<label> <br>Mittente Mail-Protocollo <br><input size="50" type="text" name="mittente"  value="<?php echo $_SESSION['mittente'];?>"/>
+<label> <br>Mittente Mail-Protocollo <br><input class="form-control" size="50" type="text" name="mittente"  value="<?php echo $_SESSION['mittente'];?>"/>
 </label><br>
-<label> <br>Header Mail-Protocollo <br><input size="50" type="text" name="headermail"  value="<?php echo $_SESSION['headermail'];?>"/>
+<label> <br>Header Mail-Protocollo <br><input class="form-control" size="50" type="text" name="headermail"  value="<?php echo $_SESSION['headermail'];?>"/>
 </label><br>
-<label> <br>Footer Mail-Protocollo <br><input size="50" type="text" name="footermail"  value="<?php echo $_SESSION['footermail'];?>"/>
+<label> <br>Footer Mail-Protocollo <br><input class="form-control" size="50" type="text" name="footermail"  value="<?php echo $_SESSION['footermail'];?>"/>
 </label><br><br>
-<input type="button" value="MODIFICA" onClick="Controllo()" /><br><br>
+<button class="btn btn-primary" onClick="Controllo()" />Modifica</button>
 </form>
+
+</div>
+</div>
 
 
 <script language="javascript">
@@ -157,6 +175,3 @@ $contalettere= $res_count[0] +1 ;
   }
  //-->
 </script> 
-</div>
-</div>
-</div>
