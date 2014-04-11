@@ -6,8 +6,8 @@
 		
 		<div class="panel-body">
 			
-		<?php
-			 if($_GET['update'] == "error") {
+			<?php
+			 if( isset($_GET['update']) && $_GET['update'] == "error") {
 			?>
 			<div class="row">
 				<div class="col-xs-12">
@@ -19,7 +19,7 @@
 			?>
 			
 			<?php
-			 if($_GET['update'] == "success") {
+			 if( isset($_GET['update']) && $_GET['update'] == "success") {
 			?>
 			<div class="row">
 				<div class="col-xs-12">

@@ -1,6 +1,7 @@
 <?php
-$urlfoto= $_GET['urlfoto'];
-if (!$urlfoto) { $urlfoto = 'sagoma.jpg'; }
+
+if ( isset($_GET['urlfoto']) ) { $urlfoto = $_GET['urlfoto']; }
+else { $urlfoto = 'sagoma.jpg'; }
 $my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
 ?>
 
@@ -12,7 +13,7 @@ $my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
 		<div class="panel-body">
 		
 			<?php
-			 if($_GET['upfoto'] == "error") {
+			if( isset($_GET['upfoto']) && $_GET['upfoto'] == "error") {
 			?>
 			<div class="row">
 				<div class="col-xs-12">
@@ -24,7 +25,7 @@ $my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
 			?>
 			
 			<?php
-			 if($_GET['upfoto'] == "success") {
+			 if( isset($_GET['upfoto']) && $_GET['upfoto'] == "success") {
 			?>
 			<div class="row">
 				<div class="col-xs-5">

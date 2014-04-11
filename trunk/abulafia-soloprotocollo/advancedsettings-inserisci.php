@@ -37,12 +37,33 @@ $inserimento=mysql_query("update defaultsettings set defaultsettings.version = $
 
 $inserimento2=mysql_query("update mailsettings set mailsettings.mittente = '$mittente', mailsettings.headermail = '$headermail', mailsettings.footermail = '$footermail'");
 
-if (!$inserimento && !$inserimento2) {echo 'Impossibile compiere l\'azione richiesta<br>'; echo mysql_error(); exit();}
-else { $_SESSION['version'] = $version ; $_SESSION['email'] = $email ; $_SESSION['nomeapplicativo'] = $nomeapplicativo; $_SESSION['paginaprincipale']= $paginaprincipale; $_SESSION['protocollomaxfilesize']= $protocollomaxfilesize; $_SESSION['fotomaxfilesize']= $fotomaxfilesize; $_SESSION['annoprotocollo']= $annoprotocollo; $_SESSION['headerdescription']= $headerdescription; $_SESSION['mittente'] = $mittente; $_SESSION['headermail'] = $headermail; $_SESSION['footermail'] = $footermail;}
+if (!$inserimento && !$inserimento2) {
+	?>
+	<SCRIPT LANGUAGE="Javascript">
+	browser= navigator.appName;
+	if (browser == "Netscape")
+	window.location="login0.php?corpus=advancedsettings&update=error"; else window.location="login0.php?corpus=advancedsettings&update=error"
+	</SCRIPT> 
+	<?php
+	exit();
+}
+else { 
+	$_SESSION['version'] = $version; 
+	$_SESSION['email'] = $email; 
+	$_SESSION['nomeapplicativo'] = $nomeapplicativo; 
+	$_SESSION['paginaprincipale']= $paginaprincipale; 
+	$_SESSION['protocollomaxfilesize']= $protocollomaxfilesize; 
+	$_SESSION['fotomaxfilesize']= $fotomaxfilesize; 
+	$_SESSION['annoprotocollo']= $annoprotocollo; 
+	$_SESSION['headerdescription']= $headerdescription; 
+	$_SESSION['mittente'] = $mittente; 
+	$_SESSION['headermail'] = $headermail; 
+	$_SESSION['footermail'] = $footermail;
+}
 ?>
 
 <SCRIPT LANGUAGE="Javascript">
 browser= navigator.appName;
 if (browser == "Netscape")
-window.location="login0.php?corpus=advancedsettings"; else window.location="login0.php?corpus=advancedsettings"
+window.location="login0.php?corpus=advancedsettings&update=success"; else window.location="login0.php?corpus=advancedsettings&update=success"
 </SCRIPT>

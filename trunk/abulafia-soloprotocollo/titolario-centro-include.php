@@ -5,42 +5,42 @@
   <div class="panel-body">
   
      <?php
-    if($_GET['add'] == "ok") {
+    if( isset($_GET['add']) && $_GET['add'] == "ok") {
 	?>
 	<div class="row">
 	<div class="col-xs-12">
 	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Nuova posizione aggiunta!</div></div></div>
 	<?php
    }
-    if($_GET['add'] == "no") {
+    if( isset($_GET['add']) && $_GET['add'] == "no") {
 	?>
 	<div class="row">
 	<div class="col-xs-12">
 	<div class="alert alert-danger">Si è verificato un errore, controlla di aver inserito tutti i campi oppure riprova più tardi.</div></div></div>
 	<?php
    }
-   if($_GET['mod'] == "ok") {
+   if( isset($_GET['mod']) && $_GET['mod'] == "ok") {
 	?>
 	<div class="row">
 	<div class="col-xs-12">
 	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Posizione modificata con successo!</div></div></div>
 	<?php
    }
-   if($_GET['mod'] == "no") {
+   if( isset($_GET['mod']) && $_GET['mod'] == "no") {
 	?>
 	<div class="row">
 	<div class="col-xs-12">
 	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Si è verificato un errore nella modifica della posizione.</div></div></div>
 	<?php
    }
-   if($_GET['canc'] == "ok") {
+   if( isset($_GET['canc']) && $_GET['canc'] == "ok") {
 	?>
 	<div class="row">
 	<div class="col-xs-12">
 	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Posizione eliminata con successo!</div></div></div>
 	<?php
    }
-   if($_GET['canc'] == "no") {
+   if( isset($_GET['canc']) && $_GET['canc'] == "no") {
 	?>
 	<div class="row">
 	<div class="col-xs-12">
