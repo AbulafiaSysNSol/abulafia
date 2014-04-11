@@ -360,9 +360,10 @@ if ($tabella == 'anagrafica')
 $my_file = new File(); //crea un nuovo oggetto 'file'
 
 
-list($giornocercato, $mesecercato, $annocercato) = explode("-", $cercato);
-$dataletteracercata = "$annocercato-$mesecercato-$giornocercato";
-
+$data = explode("/", $cercato);
+if( isset($data[0]) && isset($data[1]) && isset($data[2])) { 
+	$data = "$data[2]-$data[1]-$data[0]";
+}
 
 if (preg_match("/lettere/i", $tabella))
 	{
@@ -393,7 +394,7 @@ if (preg_match("/lettere/i", $tabella))
 					or $tabella.note like '%$cercato%' 
 					or $tabella.posizione like '%$cercato%' 
 					or anagrafica.cognome like '%$cercato%' 
-					or $tabella.datalettera like '$dataletteracercata') 
+					or $tabella.datalettera like '$data') 
 				and ($joinletteremittenti.idlettera = $tabella.idlettera 
 					and $joinletteremittenti.idanagrafica = anagrafica.idanagrafica
 				) ");//conteggio per divisione in pagine dei risultati
@@ -416,7 +417,7 @@ if (preg_match("/lettere/i", $tabella))
 					or $tabella.speditaricevuta like '%$cercato%' 
 					or $tabella.note like '%$cercato%' 
 					or $tabella.posizione like '%$cercato%' 
-					or $tabella.datalettera like '$dataletteracercata') 
+					or $tabella.datalettera like '$data') 
 				$ordinerisultati 
 				limit $iniziorisultati , $risultatiperpagina
 				");
