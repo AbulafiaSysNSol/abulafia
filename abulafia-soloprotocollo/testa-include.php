@@ -44,6 +44,7 @@ exit() ; }
   
   <!-- CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/grid.css" rel="stylesheet">
   <!-- CSS -->  
   
   <!-- JS -->
@@ -67,9 +68,8 @@ $(function(){
 
 
 <body>
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
   
+  <div class="container">
 	 <div class="row">
 		 <div class="col-md-12">
 			<div class="page-header">
