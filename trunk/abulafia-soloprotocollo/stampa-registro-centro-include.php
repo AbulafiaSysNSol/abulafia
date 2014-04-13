@@ -51,7 +51,7 @@
 							else { $selected ='';}
 							$annoprotocollo= explode("lettere", $esistenzatabella11[0]);
 							?><OPTION value="<?php echo $annoprotocollo[1] ;?>" <?php echo $selected ;?>> <?php echo $annoprotocollo[1].' ' ;?>
-							<?
+							<?php
 							}
 						?>
 						</select>

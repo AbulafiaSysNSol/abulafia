@@ -14,7 +14,7 @@ session_start();
 <body>
 
 <?php
-  $_SESSION=array(); // Resetta tutte le variabili di sessione. 
+$_SESSION=array(); // Resetta tutte le variabili di sessione. 
 $_SESSION['auth']= 0 ;
   session_destroy(); //DISTRUGGE la sessione. 
 ?>
