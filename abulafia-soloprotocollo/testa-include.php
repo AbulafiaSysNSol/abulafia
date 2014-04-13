@@ -85,12 +85,12 @@ $(function(){
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-		<li><a href="login0.php?corpus=home">Home</a></li>
-		<li><a href="login0.php?corpus=protocollo">Protocollo</a></li>
-		<li><a href="login0.php?corpus=anagrafica">Anagrafica</a></li>
-		<li><a href="login0.php?corpus=ricerca">Ricerca</a></li>
-		<li><a href="login0.php?corpus=aiuto">F.A.Q.</a></li>
-		<li><a href="login0.php?corpus=informazioni">Informazioni</a></li>
+		<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home">Home</a></li>
+		<li <?php if($_GET['corpus'] == 'protocollo') { echo 'class="active"'; }?>><a href="login0.php?corpus=protocollo">Protocollo</a></li>
+		<li <?php if($_GET['corpus'] == 'anagrafica') { echo 'class="active"'; }?>><a href="login0.php?corpus=anagrafica">Anagrafica</a></li>
+		<li <?php if($_GET['corpus'] == 'ricerca') { echo 'class="active"'; }?>><a href="login0.php?corpus=ricerca">Ricerca</a></li>
+		<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto">F.A.Q.</a></li>
+		<li <?php if($_GET['corpus'] == 'informazioni') { echo 'class="active"'; }?>><a href="login0.php?corpus=informazioni">Informazioni</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
