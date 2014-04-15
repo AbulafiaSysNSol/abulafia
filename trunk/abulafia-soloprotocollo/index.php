@@ -15,6 +15,7 @@
   
   <!-- CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/grid.css" rel="stylesheet">
   <!-- CSS -->  
   
   <!-- JS -->
@@ -28,8 +29,8 @@
 
 <body>
 
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
+<div class="container">
+
 	<div class="well well-lg"><h1>Abulafia</h1>Gestione delle segreterie dei Volontari della CRI</div>
 
 <div class="panel panel-default">
@@ -68,7 +69,7 @@
   <button type="submit" class="btn btn-default">Accedi</button>
 </form>
 
- </div>
+</div>
 </div>
 
 	<center><h5><small>
