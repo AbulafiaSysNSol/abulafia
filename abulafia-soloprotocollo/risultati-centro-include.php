@@ -322,6 +322,7 @@
 				<tr align = "center">
 					<td>N. Prot.</td>
 					<td>Data Reg.</td>
+					<td>Pos.</td>
 					<td>Sped./Ric.</td>
 					<td>Oggetto</td>
 					<td>File</td>
@@ -342,6 +343,7 @@
 				<tr bgcolor=<?php echo $colorelinee; ?> >
 					<td><?php echo $value[0] ;?></td>
 					<td> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
+					<td><?php echo $value[7] ;?></td>
 					<td><?php echo $value[5] ;?></td>
 					<td><?php echo $value[1] ;?></td>
 					<td>
