@@ -13,7 +13,19 @@ if (($codice == "") OR ($descrizione =="")) {
 <?php 
 exit();
 }
- 
+$my_database=unserialize($_SESSION['my_database']);
+if ($my_database->controllaEsistenza($codice, 'titolario', 'codice') == True)
+	{
+	?>
+	<SCRIPT LANGUAGE="Javascript">
+	browser= navigator.appName;
+	if (browser == "Netscape")
+	window.location="login0.php?corpus=titolario&add=duplicato"; else window.location="login0.php?corpus=titolario&add=duplicato"
+	</SCRIPT>
+	<?php 
+	exit();
+	}
+
 $inserimento=mysql_query("insert into titolario values('', '$codice', '$descrizione', '$owner')");
 if($inserimento) {
 ?>

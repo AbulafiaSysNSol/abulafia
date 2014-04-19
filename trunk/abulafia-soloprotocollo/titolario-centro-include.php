@@ -19,6 +19,13 @@
 	<div class="alert alert-danger">Si è verificato un errore, controlla di aver inserito tutti i campi oppure riprova più tardi.</div></div></div>
 	<?php
    }
+    if( isset($_GET['add']) && $_GET['add'] == "duplicato") {
+	?>
+	<div class="row">
+	<div class="col-xs-12">
+	<div class="alert alert-danger">Impossibile aggiungere: esiste già una posizione con lo stesso nome!</div></div></div>
+	<?php
+   }
    if( isset($_GET['mod']) && $_GET['mod'] == "ok") {
 	?>
 	<div class="row">
@@ -109,4 +116,5 @@
 
 </div>
 </div>
+<?php $_SESSION['my_database']=serialize($my_database);?>
 
