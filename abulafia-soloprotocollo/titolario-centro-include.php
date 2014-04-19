@@ -53,8 +53,9 @@
 
 	<div class="col-xs-6">   
 		<?php
-		$fascicolo=mysql_query("select count(*) from titolario");
-		$num=mysql_fetch_row($fascicolo);
+		$fascicolo=mysql_query("select count(*) from titolario"); //ricerca tutti i valori del titolario
+		if ($fascicolo) { $num=mysql_fetch_row($fascicolo);} //se ce ne sono, li conta
+		else { $num[0]=0; } //altrimenti azzera il contatore
 		if($num[0]<=0) {
 			echo '<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Nessuna posizione registrata.</div>';
 		}
