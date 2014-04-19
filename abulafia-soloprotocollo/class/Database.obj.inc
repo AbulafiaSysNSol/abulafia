@@ -59,6 +59,20 @@ class Database
                         array_push($this->resultarray, $this->righe);
                         }
                 }
+                
+        public function controllaEsistenza($valore, $tabella, $colonna)//<man> controlla se un valore è già presente in una colonna di una tabella del db</man>
+
+                {
+		$this->ricerca=mysql_query("select distinct *
+					from $tabella
+					where $colonna = '$valore'");
+
+		$this->arrayfromquery($this->ricerca);
+		if (count($this->resultarray) > 0) { $this->occorrenza= True ; }
+		else { $this->occorrenza = False ;}
+		
+		return $this->occorrenza ;
+                }
 
 	
 	
