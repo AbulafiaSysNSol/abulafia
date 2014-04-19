@@ -340,13 +340,13 @@
 				} //secondo colore
 				$contatorelinee = $contatorelinee + 1 ;
 				?>
-				<tr bgcolor=<?php echo $colorelinee; ?> >
+				<tr align = "center" VALIGN="middle" bgcolor=<?php echo $colorelinee; ?> >
 					<td><?php echo $value[0] ;?></td>
 					<td> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
 					<td><?php echo $value[7] ;?></td>
 					<td><?php echo $value[5] ;?></td>
 					<td><?php echo $value[1] ;?></td>
-					<td>
+					<td> 
 					<?php
 					$download = $my_file -> downloadlink($value[4], $value[0], $annoricercaprotocollo, '30');
 						if ($download != "Nessun file associato") {
