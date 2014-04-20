@@ -33,8 +33,8 @@
 	$cercato = $_POST['cercato']; //parola chiave da ricercare
 	$nomecercato = NULL;
 
-	if ($cercato!='') {
-		if (substr_count(" ", $cercato) > 0) {
+	if ($cercato != '') {
+		if ( substr_count($cercato, "+") > 0) {
 			list($cognomecercato, $nomecercato) = explode("+", $cercato);
 		}
 	}
