@@ -42,7 +42,12 @@
 	$tabella = $_POST['tabella'];
 	$annoricercaprotocollo=$_POST['annoricercaprotocollo'];
 	$_SESSION['annoricercaprotocollo']= $annoricercaprotocollo;
-	$ordinerisultati= $_POST['group1']; //scelta fra i vari tipi di presentazione dei risultati: ordine cronologico, cronologico inverso ed alfabetico
+	if(isset($_POST['group1'])) { 
+		$ordinerisultati= $_POST['group1'];
+	}
+	else {
+		$ordinerisultati ='';
+	}
 
 	//scelta fra ricerca in anagrafica e protocollo
 
@@ -218,7 +223,7 @@
 			</table>
 			
 			<?php
-			echo "<br>Pagina $currentpage di $tot_pages <br>";
+			echo "Pagina $currentpage di $tot_pages <br>";
 			//controllo per pagina avanti-indietro
 			if( ($filtro != 'persona') and ($filtro != 'carica') and ($filtro != 'ente')) {
 				$filtro = 'anagrafica.tipologia';
@@ -270,14 +275,17 @@
 
 	$data = explode("/", $cercato);
 	if( isset($data[0]) && isset($data[1]) && isset($data[2])) { 
-		$data = "$data[2]-$data[1]-$data[0]";
+		$data = $data[2].'-'.$data[1].'-'.$data[0];
+	}
+	else {
+		$data='';
 	}
 
 	if ($tabella == 'lettere') {
 		$tabella= $tabella.$annoricercaprotocollo;
 		$joinletteremittenti= 'joinletteremittenti'.$annoricercaprotocollo;
 		if ($ordinerisultati == 'alfabetico') { 
-			$_SESSION['ordinerisultati'] = 'order by anagrafica.cognome, anagrafica.nome';
+			$_SESSION['ordinerisultati'] = 'order by '.$tabella.'.oggetto';
 		}
 		if ($ordinerisultati == 'cronologico') { 
 			$_SESSION['ordinerisultati'] = 'order by '.$tabella.'.idlettera';
@@ -285,33 +293,52 @@
 		if ($ordinerisultati == 'cron-inverso') { 
 			$_SESSION['ordinerisultati'] = 'order by '.$tabella.'.idlettera desc';
 		}
-		$count = mysql_query(	"SELECT COUNT(*) 
-						FROM $tabella , anagrafica , $joinletteremittenti 
-						where ($tabella.idlettera like '%$cercato%' 
-						or $tabella.oggetto like '%$cercato%' 
-						or $tabella.speditaricevuta like '%$cercato%' 
-						or $tabella.note like '%$cercato%' 
-						or $tabella.posizione like '%$cercato%' 
-						or anagrafica.cognome like '%$cercato%' 
-						or $tabella.datalettera like '$data') 
-						and ($joinletteremittenti.idlettera = $tabella.idlettera 
-						and $joinletteremittenti.idanagrafica = anagrafica.idanagrafica)"
-						);//conteggio per divisione in pagine dei risultati
+		$count = mysql_query(	
+						"SELECT 
+							COUNT(*) 
+						FROM 
+							$tabella
+						WHERE 
+							($tabella.idlettera like '%$cercato%' 
+							OR 
+							$tabella.oggetto like '%$cercato%' 
+							OR 
+							$tabella.speditaricevuta like '%$cercato%' 
+							OR 
+							$tabella.note like '%$cercato%' 
+							OR
+							$tabella.posizione like '%$cercato%' 
+							OR
+							$tabella.datalettera like '$data')"
+						);
+		//conteggio per divisione in pagine dei risultati
 		$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
 		$tot_records = $res_count[0];//conteggio per divisione in pagine dei risultati
 		$tot_pages = ceil($tot_records / $risultatiperpagina);//conteggio per divisione in pagine dei risultati - la frazione arrotondata per eccesso
 		$iniziorisultati = $_GET['iniziorisultati'];
 		$contatorelinee = 1 ;// per divisione in due colori diversi in tabella
 		$ordinerisultati=$_SESSION['ordinerisultati'];
-		$risultati = mysql_query(	"SELECT  distinct * 
-							FROM $tabella
-							where ( $tabella.idlettera like '%$cercato%' 
-							or $tabella.oggetto like '%$cercato%' 
-							or $tabella.speditaricevuta like '%$cercato%' 
-							or $tabella.note like '%$cercato%' 
-							or $tabella.posizione like '%$cercato%' 
-							or $tabella.datalettera like '$data') 
-							$ordinerisultati limit $iniziorisultati , $risultatiperpagina");
+		$risultati = mysql_query("	
+							SELECT  DISTINCT 
+								* 
+							FROM 
+								$tabella
+							WHERE
+								($tabella.idlettera like '%$cercato%' 
+								OR
+								$tabella.oggetto like '%$cercato%' 
+								OR
+								$tabella.speditaricevuta like '%$cercato%' 
+								OR
+								$tabella.note like '%$cercato%' 
+								OR
+								$tabella.posizione like '%$cercato%' 
+								OR
+								$tabella.datalettera like '$data')
+							$ordinerisultati 
+							LIMIT
+								$iniziorisultati , $risultatiperpagina
+						");
 		$num_righe = mysql_num_rows($risultati);
 		if  ($num_righe > 0 ) {
 			echo "Numero di risultati trovati: <b>$tot_records</b>"; 
@@ -382,21 +409,21 @@
 			</table>
 
 			<?php
-			echo "<br>Pagina $currentpage di $tot_pages <br>";
+			echo "Pagina $currentpage di $tot_pages<br>";
 
 			//controllo per pagina avanti-indietro
 			if ($iniziorisultati > 0) {
 				$paginaprecedente = $iniziorisultati - $risultatiperpagina;
 				$previouspage= $currentpage - 1;
 				?> 
-				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginaprecedente; ?>&cercato=<?php echo $cercato ;?>&tabella=<?php echo $tabella ;?>&currentpage=<?php echo $previouspage; ?>">Pagina precedente</a>
+				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginaprecedente; ?>&cercato=<?php echo $cercato ;?>&tabella=lettere&currentpage=<?php echo $previouspage; ?>">Pagina precedente</a>
 				<?php 
 			} 
 			if (($iniziorisultati + $risultatiperpagina) < $tot_records ) {
 				$paginasuccessiva = $iniziorisultati + $risultatiperpagina;
 				$nextpage = $currentpage + 1;
 				?> 
-				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginasuccessiva; ?>&cercato=<?php echo $cercato; ?>&tabella=<?php echo $tabella; ?>&currentpage=<?php echo $nextpage ;?>">Pagina successiva</a>
+				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginasuccessiva; ?>&cercato=<?php echo $cercato; ?>&tabella=lettere&currentpage=<?php echo $nextpage ;?>">Pagina successiva</a>
 				<?php 
 			}
 			//fine controllo pagine avanti-indietro
