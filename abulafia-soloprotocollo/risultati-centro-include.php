@@ -162,9 +162,59 @@
 	
 		$num_righe = mysql_num_rows($risultati);
 		if  ($num_righe > 0) {
-			echo "Numero di risultati trovati: <b>$tot_records</b>"; 
+			echo "Numero di risultati trovati: <b>$tot_records</b><br>"; 
+			
 			?>
-			<br><br>
+			<ul class="pagination">
+			<?php
+			
+			if ($iniziorisultati > 0) {
+				$paginaprecedente = $iniziorisultati - $risultatiperpagina;
+				$previouspage= $currentpage - 1;
+				?> 
+				<li>
+					<a href="login0.php?corpus=risultati
+					&iniziorisultati=<?php echo $paginaprecedente ;?>
+					&cercato=<?php echo $cercato; ?>
+					&tabella=<?php echo $tabella; ?>
+					&currentpage=<?php  echo $previouspage; ?>
+					&anagraficatipologia=<?php echo $filtro; ?>">
+					&laquo;
+					</a>
+				</li>
+				<?php 
+			} 
+			
+			$i = 0;
+			do {
+				$pagina = $i * $risultatiperpagina;
+				$currentpage = $_GET['currentpage'];
+				?>
+				<li <?php if( ($i+1) == $currentpage) { echo "class=\"active\""; } ?>><a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $pagina; ?>&cercato=<?php echo $cercato; ?>&tabella=<?php echo $tabella; ?>&currentpage=<?php  echo $i+1; ?>&anagraficatipologia=<?php echo $filtro; ?>"><?php echo $i+1 ?></a></li>
+				<?php
+				$i++;
+			} while ($i < $tot_pages);
+
+			if (($iniziorisultati + $risultatiperpagina) < $tot_records ) {
+				$paginasuccessiva = $iniziorisultati + $risultatiperpagina;
+				$nextpage= $currentpage + 1;
+				?> 
+				<li>
+					<a href="login0.php?corpus=risultati
+					&iniziorisultati=<?php  echo $paginasuccessiva; ?>
+					&cercato=<?php echo $cercato; ?>
+					&tabella=<?php echo $tabella; ?>
+					&currentpage=<?php  echo $nextpage; ?>
+					&anagraficatipologia=<?php echo $filtro; ?>">
+					&raquo;
+					</a>
+				</li>
+				<?php 
+			}
+			?>
+			</ul>
+
+			<br>
 			<table class="table table-bordered">
 				<tr>
 					<td align="center"><b>Id</b></td>
@@ -223,45 +273,65 @@
 			</table>
 			
 			<?php
-			echo "Pagina $currentpage di $tot_pages <br>";
 			//controllo per pagina avanti-indietro
 			if( ($filtro != 'persona') and ($filtro != 'carica') and ($filtro != 'ente')) {
 				$filtro = 'anagrafica.tipologia';
 			}
+			
+			?>
+			<ul class="pagination">
+			<?php
+			
 			if ($iniziorisultati > 0) {
 				$paginaprecedente = $iniziorisultati - $risultatiperpagina;
 				$previouspage= $currentpage - 1;
 				?> 
-				<a 	href="login0.php?corpus=risultati
+				<li>
+					<a href="login0.php?corpus=risultati
 					&iniziorisultati=<?php echo $paginaprecedente ;?>
 					&cercato=<?php echo $cercato; ?>
 					&tabella=<?php echo $tabella; ?>
 					&currentpage=<?php  echo $previouspage; ?>
 					&anagraficatipologia=<?php echo $filtro; ?>">
-					Pagina precedente 
-				</a>
+					&laquo;
+					</a>
+				</li>
 				<?php 
 			} 
+			
+			$i = 0;
+			do {
+				$pagina = $i * $risultatiperpagina;
+				$currentpage = $_GET['currentpage'];
+				?>
+				<li <?php if( ($i+1) == $currentpage) { echo "class=\"active\""; } ?>><a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $pagina; ?>&cercato=<?php echo $cercato; ?>&tabella=<?php echo $tabella; ?>&currentpage=<?php  echo $i+1; ?>&anagraficatipologia=<?php echo $filtro; ?>"><?php echo $i+1 ?></a></li>
+				<?php
+				$i++;
+			} while ($i < $tot_pages);
 
 			if (($iniziorisultati + $risultatiperpagina) < $tot_records ) {
 				$paginasuccessiva = $iniziorisultati + $risultatiperpagina;
 				$nextpage= $currentpage + 1;
 				?> 
-				<a href="login0.php?corpus=risultati
+				<li>
+					<a href="login0.php?corpus=risultati
 					&iniziorisultati=<?php  echo $paginasuccessiva; ?>
 					&cercato=<?php echo $cercato; ?>
 					&tabella=<?php echo $tabella; ?>
 					&currentpage=<?php  echo $nextpage; ?>
 					&anagraficatipologia=<?php echo $filtro; ?>">
-					Pagina successiva
-				</a>
+					&raquo;
+					</a>
+				</li>
 				<?php 
 			}
+			?>
+			</ul>
+			<?php
 			//fine controllo pagine avanti-indietro
-			echo '<br>';
 		}
 		else {
-			echo "Non ci sono risultati "; 
+			echo "Non ci sono risultati con i filtri applicati."; 
 			?> 
 			<a href="login0.php?corpus=ricerca"><br><br>Effettua un'altra ricerca</a>
 			<?php
@@ -341,9 +411,46 @@
 						");
 		$num_righe = mysql_num_rows($risultati);
 		if  ($num_righe > 0 ) {
-			echo "Numero di risultati trovati: <b>$tot_records</b>"; 
+			echo "Numero di risultati trovati: <b>$tot_records</b><br>"; 
+			
 			?>
-			<br><br>
+			<ul class="pagination">
+			<?php
+
+			//controllo per pagina avanti-indietro
+			if ($iniziorisultati > 0) {
+				$paginaprecedente = $iniziorisultati - $risultatiperpagina;
+				$previouspage= $currentpage - 1;
+				?> 
+				<li>
+				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginaprecedente; ?>&cercato=<?php echo $cercato ;?>&tabella=lettere&currentpage=<?php echo $previouspage; ?>">&laquo;</a>
+				</li>
+				<?php 
+			} 
+			
+			$i = 0;
+			do {
+				$pagina = $i * $risultatiperpagina;
+				$currentpage = $_GET['currentpage'];
+				?>
+				<li <?php if( ($i+1) == $currentpage) { echo "class=\"active\""; } ?>><a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $pagina; ?>&cercato=<?php echo $cercato; ?>&tabella=lettere&currentpage=<?php  echo $i+1; ?>"><?php echo $i+1 ?></a></li>
+				<?php
+				$i++;
+			} while ($i < $tot_pages);
+			
+			if (($iniziorisultati + $risultatiperpagina) < $tot_records ) {
+				$paginasuccessiva = $iniziorisultati + $risultatiperpagina;
+				$nextpage = $currentpage + 1;
+				?> 				
+				<li>
+				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginasuccessiva; ?>&cercato=<?php echo $cercato; ?>&tabella=lettere&currentpage=<?php echo $nextpage ;?>">&raquo;</a>
+				</li>
+				<?php 
+			}
+			
+			?>
+			</ul>
+			<br>
 			
 			<table class="table table-bordered">
 				<tr align = "center">
@@ -408,24 +515,43 @@
 			?>
 			</table>
 
+			<ul class="pagination">
 			<?php
-			echo "Pagina $currentpage di $tot_pages<br>";
 
 			//controllo per pagina avanti-indietro
 			if ($iniziorisultati > 0) {
 				$paginaprecedente = $iniziorisultati - $risultatiperpagina;
 				$previouspage= $currentpage - 1;
 				?> 
-				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginaprecedente; ?>&cercato=<?php echo $cercato ;?>&tabella=lettere&currentpage=<?php echo $previouspage; ?>">Pagina precedente</a>
+				<li>
+				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginaprecedente; ?>&cercato=<?php echo $cercato ;?>&tabella=lettere&currentpage=<?php echo $previouspage; ?>">&laquo;</a>
+				</li>
 				<?php 
 			} 
+			
+			$i = 0;
+			do {
+				$pagina = $i * $risultatiperpagina;
+				$currentpage = $_GET['currentpage'];
+				?>
+				<li <?php if( ($i+1) == $currentpage) { echo "class=\"active\""; } ?>><a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $pagina; ?>&cercato=<?php echo $cercato; ?>&tabella=lettere&currentpage=<?php  echo $i+1; ?>"><?php echo $i+1 ?></a></li>
+				<?php
+				$i++;
+			} while ($i < $tot_pages);
+			
 			if (($iniziorisultati + $risultatiperpagina) < $tot_records ) {
 				$paginasuccessiva = $iniziorisultati + $risultatiperpagina;
 				$nextpage = $currentpage + 1;
-				?> 
-				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginasuccessiva; ?>&cercato=<?php echo $cercato; ?>&tabella=lettere&currentpage=<?php echo $nextpage ;?>">Pagina successiva</a>
+				?> 				
+				<li>
+				<a href="login0.php?corpus=risultati&iniziorisultati=<?php echo $paginasuccessiva; ?>&cercato=<?php echo $cercato; ?>&tabella=lettere&currentpage=<?php echo $nextpage ;?>">&raquo;</a>
+				</li>
 				<?php 
 			}
+			
+			?>
+			</ul>
+			<?php
 			//fine controllo pagine avanti-indietro
 		}
 		else {
