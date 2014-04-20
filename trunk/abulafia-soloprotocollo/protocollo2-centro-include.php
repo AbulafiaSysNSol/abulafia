@@ -1,76 +1,145 @@
 <?php
-$annoprotocollo = $_SESSION['annoprotocollo'];
-$my_file = new File(); //crea un nuovo oggetto 'file'
-$my_lettera = new Lettera(); //crea un nuovo oggetto
-$from= $_GET['from'];
-if (isset($_session['dbname'])) { $dbname=$_session['dbname']; }
-if (isset($_GET['idanagrafica'])) { $idanagrafica=$_GET['idanagrafica']; }
-//se la pagina da cui si proviene Ã¨ "crea nuovo protocollo" 
-if ($from == 'crea') {  
-$lastrec= mysql_query("SELECT * FROM lettere$annoprotocollo ORDER BY idlettera desc LIMIT 1");
-while ($lastrec2 = mysql_fetch_array($lastrec)) {
-$lastrec3=$lastrec2['idlettera'];
-$lasttopic=$lastrec2['oggetto'];
-}
-$lastjoinletteremittenti=mysql_query("SELECT count(*) FROM joinletteremittenti$annoprotocollo where idlettera='$lastrec3'");
-$lastjoinletteremittenti = mysql_fetch_array($lastjoinletteremittenti);
-
-        
-if (($lastjoinletteremittenti[0] < 1) or (!$lasttopic)) { //controlla che sia stato attribuito un oggetto e un mittente all'ultimo protocollo. In caso non sia stato fatto, lo cancella e lo riutilizza, in quanto ritenuto un protocollo non correttamente registrato e probabile frutto di errore.
-$cancella=mysql_query("DELETE FROM lettere$annoprotocollo WHERE idlettera='$lastrec3' limit 1 ");
-$resetta=mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $lastrec3 ");
-$cancella2=mysql_query("DELETE from joinletteremittenti$annoprotocollo where idlettera='$lastrec3' limit 1");
-$cancella3=mysql_query("DELETE from joinlettereinserimento$annoprotocollo where idlettera='$lastrec3' limit 1");
-}
-$dataregistrazione = strftime("%Y-%m-%d");
-$crea=mysql_query("insert into lettere$annoprotocollo values('','','','$dataregistrazione','','','','','')");
-$ultimoid=mysql_insert_id();
-$insertid=$ultimoid;
-//$inseriscimittentestandard=mysql_query("insert into joinletteremittenti values('$ultimoid',1)"); eliminata perchÃ© inutile dopo modifica del 22-10-2009: l'inserimento del mittente anonimo avviene di default in pagina protocollo3- se non Ã¨ stato selezionato nessun mittente
-$loginid=$_SESSION['loginid'];
-$tracciautenteinserimento=mysql_query("insert into joinlettereinserimento$annoprotocollo values('$ultimoid', '$loginid','','')");
-if ($insertid > 0) { $idlettera = $insertid;}
-}
-
-
-
-if ($from =='aggiungi') 
-	{
-	$idlettera=$_GET['idlettera'];
-	$my_lettera -> publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo); //richiamo del metodo
+	$annoprotocollo = $_SESSION['annoprotocollo'];
+	$from= $_GET['from'];
+	$my_file = new File(); //crea un nuovo oggetto 'file'
+	$my_lettera = new Lettera(); //crea un nuovo oggetto
+	
+	if (isset($_session['dbname'])) { 
+		$dbname=$_session['dbname']; 
+	}
+	
+	if (isset($_GET['idanagrafica'])) { 
+		$idanagrafica=$_GET['idanagrafica']; 
+	}
+	
+	//se la pagina da cui si proviene è crea nuovo protocollo
+	if ($from == 'crea') {  
+		$lastrec= mysql_query("SELECT * FROM lettere$annoprotocollo ORDER BY idlettera desc LIMIT 1");
+		
+		while ($lastrec2 = mysql_fetch_array($lastrec)) {
+			$lastrec3=$lastrec2['idlettera'];
+			$lasttopic=$lastrec2['oggetto'];
+		}
+		
+		$lastjoinletteremittenti=mysql_query("SELECT count(*) FROM joinletteremittenti$annoprotocollo where idlettera='$lastrec3'");
+		$lastjoinletteremittenti = mysql_fetch_array($lastjoinletteremittenti);
+			
+		if (($lastjoinletteremittenti[0] < 1) or (!$lasttopic)) { //controlla che sia stato attribuito un oggetto e un mittente all'ultimo protocollo. In caso non sia stato fatto, lo cancella e lo riutilizza, in quanto ritenuto un protocollo non correttamente registrato e probabile frutto di errore.
+			$cancella=mysql_query("DELETE FROM lettere$annoprotocollo WHERE idlettera='$lastrec3' limit 1 ");
+			$resetta=mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $lastrec3 ");
+			$cancella2=mysql_query("DELETE from joinletteremittenti$annoprotocollo where idlettera='$lastrec3' limit 1");
+			$cancella3=mysql_query("DELETE from joinlettereinserimento$annoprotocollo where idlettera='$lastrec3' limit 1");
+		}
+		
+		$dataregistrazione = strftime("%Y-%m-%d");
+		$crea=mysql_query("insert into lettere$annoprotocollo values('','','','$dataregistrazione','','','','','')");
+		$ultimoid=mysql_insert_id();
+		$insertid=$ultimoid;
+		$loginid=$_SESSION['loginid'];
+		$tracciautenteinserimento=mysql_query("insert into joinlettereinserimento$annoprotocollo values('$ultimoid', '$loginid','','')");
+		
+		if ($insertid > 0) { 
+			$idlettera = $insertid;
+		}
 	}
 
+	if ($from == 'aggiungi') {
+			$idlettera=$_GET['idlettera'];
+			$my_lettera -> publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo); //richiamo del metodo
+		}
 
-if ($from == 'elimina-mittente') { 
-$idlettera=$_GET['idlettera'];
-$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
-
-$urlpdf = $_GET['urlpdf'];
-}
-if ($from == 'urlpdf') {  
-$urlpdf = $_GET['urlpdf'];
-$idlettera=$_GET['idlettera'];
-}
-
-
+	if ($from == 'elimina-mittente') { 
+		$idlettera=$_GET['idlettera'];
+		$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
+		$urlpdf = $_GET['urlpdf'];
+	}
+	
+	if ($from == 'urlpdf') {  
+		$urlpdf = $_GET['urlpdf'];
+		$idlettera=$_GET['idlettera'];
+	}
+	
 ?>
+
+<!-- Modal -->
+	<form action="?corpus=inserimento.rapido.anagrafica&idlettera=<?php echo $idlettera; ?>" method="POST" name="modale">
+		<div class="modal fade" id="myModal" tabindex="-1" role="form" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Inserimento rapido in anagrafica</h4>
+					</div>
+	      
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Tipologia:</label>
+							<div class="row">
+								<div class="col-xs-5">
+									<select class="form-control input-sm" name="anagraficatipologia" onChange="changeSelect()">
+									<OPTION value="persona"> Persona Fisica</OPTION>
+									<OPTION value="carica"> Carica Elettiva o Incarico</OPTION>
+									<OPTION Value="ente"> Ente</OPTION>
+									</select>
+								</div>
+							</div>
+							<br>
+							<label id="lblcognome">Cognome:</label>
+							<label id="lblden" style="display: none;">Denominazione:</label>
+							<div class="row">
+								<div class="col-xs-8">
+									<input type="text" class="form-control input-sm" name="cognome" required>
+								</div>
+							</div>
+							<br>
+							<label id="lblnome">Nome:</label>
+							<div class="row">
+								<div class="col-xs-8">
+									<input id="txtnome" type="text" class="form-control input-sm" name="nome" required>
+								</div>
+							</div>
+						</div>
+					</div>
+			
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+						<button type="submit" class="btn btn-primary">Salva ed associa al protocollo</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+<!--End Modal-->
 
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-		<h3 class="panel-title"><strong>Protocollo numero: <?php echo $idlettera;?></strong></h3>
+			<h3 class="panel-title"><strong>Protocollo numero: <?php echo $idlettera;?></strong></h3>
 		</div>
+		
 		<div class="panel-body">
+			
+			<?php
+			if( isset($_GET['insert']) && $_GET['insert'] == "error") {
+				?>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="alert alert-danger">C'è stato un errore nell'associare la nuova anagrafica.</div>
+					</div>
+				</div>
+				<?php
+			}
+			?>
 		
 			<?php
-			 if( isset($_GET['upfile']) && $_GET['upfile'] == "error") {
-			?>
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="alert alert-danger">C'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+			if( isset($_GET['upfile']) && $_GET['upfile'] == "error") {
+				?>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="alert alert-danger">C'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+					</div>
 				</div>
-			</div>
-			<?php
+				<?php
 			}
 			?>
 			
@@ -95,8 +164,8 @@ $idlettera=$_GET['idlettera'];
 			<label for="exampleInputFile">Carica allegato</label>
 			<input name="uploadedfile" type="file" id="exampleInputFile">
 			</td>
-			<td>
-			<button type="submit" class="btn btn-default" onClick="Change()">Allega</button>
+			<td valign="bottom">
+			<button type="submit" class="btn btn-default" onClick="loading()">Allega</button>
 			</td>
 			</tr>
 			</table>
@@ -231,18 +300,36 @@ $idlettera=$_GET['idlettera'];
 <script language="javascript">
 
  <!--
-  function Change() 
+ function changeSelect() {
+	var type = document.modale.anagraficatipologia.options[document.modale.anagraficatipologia.selectedIndex].value;
+	if (type == "persona") {
+		document.getElementById("lblcognome").style.display="table";
+		document.getElementById("lblden").style.display="none";
+		document.getElementById("txtnome").style.display="table";
+		document.getElementById("txtnome").required = true;
+		document.getElementById("lblnome").style.display="table";
+	}
+	if (type == "carica") {
+		document.getElementById("lblcognome").style.display="none";
+		document.getElementById("lblnome").style.display="none";
+		document.getElementById("lblden").style.display="table";	
+		document.getElementById("txtnome").style.display="none";
+		document.getElementById("txtnome").required = false;
+	}
+	if (type == "ente") {
+		document.getElementById("lblcognome").style.display="none";
+		document.getElementById("lblnome").style.display="none";
+		document.getElementById("lblden").style.display="table";
+		document.getElementById("txtnome").style.display="none";
+		document.getElementById("txtnome").required = false;
+	}
+ }
+  function loading() 
 
   {
 	  document.getElementById("content").style.display="table";	
   }
 
- //-->
-
-</script> 
-
-<script language="javascript">
- <!--
   function Controllo() 
   {
 	//acquisisco il valore delle variabili
