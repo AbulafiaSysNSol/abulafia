@@ -96,10 +96,10 @@
 			
 			<div class="row">
 				<div class="col-xs-4">
-					<label>Codice posizione:</label> <input class="form-control" size="10" type="text" name="codice" />
+					<label>Codice posizione:</label> <input class="form-control" size="10" type="text" name="codice" required />
 				</div>
 				<div class="col-xs-8">
-					<label>Descrizione posizione:</label><input class="form-control" size="40" type="text" name="descrizione" />			
+					<label>Descrizione posizione:</label><input class="form-control" size="40" type="text" name="descrizione" required />			
 				</div>
 			</div>
 			<div class="row">
