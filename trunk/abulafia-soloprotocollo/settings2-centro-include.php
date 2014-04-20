@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 $id = $_GET['id'];
 $risultati_per_pagina = $_POST['risultatiperpagina'];
