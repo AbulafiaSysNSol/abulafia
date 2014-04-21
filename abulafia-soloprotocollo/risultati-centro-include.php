@@ -482,7 +482,7 @@
 					<td><?php echo $value[1] ;?></td>
 					<td> 
 					<?php
-					$download = $my_file -> downloadlink($value[4], $value[0], $annoricercaprotocollo, '30');
+					$download = $my_file -> downloadlink($value[4], $value[0], $annoricercaprotocollo, '6');
 						if ($download != "Nessun file associato") {
 							echo $download;
 						}

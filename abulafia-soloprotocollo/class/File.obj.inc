@@ -31,7 +31,7 @@ Class File
 								      ."&idlettera=".$idlettera
 								      ."&est=".$this->estensioneFile($nomefile);//richiamo del metodo ricava estensione dal file di questa stessa classe
 								      
-              			$this->testodownloadlink=stripslashes(substr($nomefile,0,$numerocaratteri)); //passa come link visibile solo un certo numero di caratteri pasato come parametro
+              			$this->testodownloadlink=stripslashes(substr($nomefile,0,$numerocaratteri).'[...].'.$this->estensioneFile($nomefile)); //passa come link visibile solo un certo numero di caratteri pasato come parametro
 
 				 $this->link = "<a target=_new href=" . str_replace(' ', '%20', $this->href . $this->opzionidownloadlink) . ">" . $this->testodownloadlink . "</a>";
 				 }
