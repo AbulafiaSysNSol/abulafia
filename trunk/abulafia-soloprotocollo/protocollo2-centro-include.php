@@ -78,7 +78,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Inserimento rapido in anagrafica</h4>
+						<h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-user"></span> Inserimento rapido in anagrafica</h4>
 					</div>
 	      
 					<div class="modal-body">

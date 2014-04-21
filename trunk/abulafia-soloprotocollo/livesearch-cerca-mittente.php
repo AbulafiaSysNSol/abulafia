@@ -23,16 +23,15 @@
 	$my_ricerca->publricercaespolosa($q, 'cognome');
 	$where= $my_ricerca->where;
 	
-	echo '<b><i><br>"' . $q . '"</i></b> non è presente nel database:<br>vai a => 
-				<a href="#" data-toggle="modal" data-target="#myModal">Inserimento Rapido</a>
-				<br>o seleziona un elemento dall\'elenco seguente<br>';
+	echo '<b><i><br>"' . $q . '"</i></b> non è presente nel database. <a href="#" data-toggle="modal" data-target="#myModal">Vai all\'inserimento rapido <span class="glyphicon glyphicon-share-alt"></span></a>
+				<br>oppure seleziona un elemento dall\'elenco seguente:<br>';
 	
 	$sql=mysql_query("SELECT * FROM anagrafica $where $filtro limit 5");
 	while($row = mysql_fetch_array($sql)) {
 		?>
 		<br>
 		<a href="login0.php?corpus=protocollo2&idanagrafica=<?php echo $row['idanagrafica'];?>&idlettera=<?php echo $idlettera;?>&from=aggiungi">
-			<?php echo $row['cognome'].' '.$row['nome'];?>
+			<span class="glyphicon glyphicon-plus-sign"></span> <?php echo $row['cognome'].' '.$row['nome'];?>
 		</a>
 		<br>
 		<?php
