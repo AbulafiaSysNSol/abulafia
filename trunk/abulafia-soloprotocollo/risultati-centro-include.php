@@ -379,7 +379,11 @@
 							OR
 							$tabella.posizione like '%$cercato%' 
 							OR
-							$tabella.datalettera like '$data')"
+							$tabella.datalettera like '$data')
+							and
+							($tabella.speditaricevuta!=''
+							and
+							$tabella.oggetto!='')"
 						);
 		//conteggio per divisione in pagine dei risultati
 		$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
