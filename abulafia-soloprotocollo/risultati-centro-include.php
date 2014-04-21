@@ -22,8 +22,6 @@
 			$_POST['anagraficatipologia']= $_GET['anagraficatipologia'];
 		}
 	}
-	
-	$logindatagruppo2=$_SESSION['gruppo']; //setta l'id del gruppo cui appartiene l'utente che ha fatto login
 
 	if (isset($_POST['anagraficatipologia'])) {
 		$filtro = $_POST['anagraficatipologia'];
@@ -517,7 +515,7 @@
 					<td width="150">
 						<div class="btn-group btn-group-sm">
 							<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>">Dettagli</a>
-							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=anagrafica&id=<?php echo $value[0];?>">Modifica</a>
+							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>">Modifica</a>
 						</div>
 					</td>		
 				</tr>
