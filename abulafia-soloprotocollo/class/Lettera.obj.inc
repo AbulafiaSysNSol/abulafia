@@ -184,6 +184,23 @@ class Lettera {
 		</form>
 		<?php 
 	}//fine metodo
+	
+	public function modificaMittente ($idlettera, $tipologia) { //<man>Elenca in ajax i risultati della ricerca in anagrafica per cercare il mittente/destinatario di una lettera, passando l'id della lettera e filtrando per tipologia</man>
+		?>
+		<script type="text/javascript" src="livesearch-modifica-mittente.js"></script>
+		<form name="cercato">
+			<div class="form-group">
+				<label>Ricerca mittente o destinatario:</label>
+				<div class="row">
+					<div class="col-xs-5">
+						<input placeholder="digita il COGNOME o la RAGIONE SOCIALE" type="text" name="valore" class="form-control" onkeyup="showResult(this.value,'<?php echo $tipologia;?>',<?php echo $idlettera;?>)">
+						<div id="livesearch"></div> <!-- spazio riservato ai risultati live della ricerca -->
+					</div>
+				</div>
+			</div>
+		</form>
+		<?php 
+	}//fine metodo
 
 	public function publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo) { //<man>Inserisce in ajax i risultati della ricerca in anagrafica per  il mittente/destinatario di una lettera, passando l'id della lettera, l'id dell'anagrafica e l'anno di registrazione</man>
 		$inserisci=mysql_query("insert into joinletteremittenti$annoprotocollo values('$idlettera', '$idanagrafica')");

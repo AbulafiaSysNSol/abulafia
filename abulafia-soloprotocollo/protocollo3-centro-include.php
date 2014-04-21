@@ -15,6 +15,9 @@
 	if(isset($_GET['from'])) { 
 		$from = $_GET['from']; 
 	}
+	else {
+		$from='';
+	}
 	$conteggiomittenti=mysql_query("select count(*) from joinletteremittenti$annoprotocollo where idlettera='$idlettera'"); 
 	$conteggiomittenti2 = mysql_fetch_row($conteggiomittenti);
 	if ($conteggiomittenti2[0] < 1) { 
@@ -25,6 +28,8 @@
 		$_SESSION['riferimento'] = $_POST['riferimento'];
 		$_SESSION['note'] = $_POST['note'];
 		$_SESSION['urlpdf'] = addslashes($_GET['urlpdf']);
+		
+		if($from != "modifica") {
 		?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -33,6 +38,17 @@
 			</SCRIPT>
 			<?php
 			exit();
+		}
+		else {
+			?>
+			<SCRIPT LANGUAGE="Javascript">
+			browser= navigator.appName;
+			if (browser == "Netscape")
+			window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>"; else window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>";
+			</SCRIPT>
+			<?php
+			exit();
+		}
 	}
 	$speditaricevuta = $_POST['spedita-ricevuta'];
 	$oggetto= $_POST['oggetto'];
@@ -87,7 +103,18 @@
    
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo registrato correttamente.</div>
+			<?php
+			if($from != "modifica") {
+				?>
+				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo registrato correttamente.</div>
+				<?php
+			}
+			else {
+				?>
+				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo modificato correttamente.</div>
+				<?php
+			}
+			?>
 		</div>
 	</div>
 	<b>Riepilogo:</b>
