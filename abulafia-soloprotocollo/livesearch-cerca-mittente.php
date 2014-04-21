@@ -23,7 +23,9 @@
 	$my_ricerca->publricercaespolosa($q, 'cognome');
 	$where= $my_ricerca->where;
 	
-	echo '<br>' . $q . ' non presente nell\'anagrafica. <a href="#" data-toggle="modal" data-target="#myModal">Inserimento Rapido</a><br>';
+	echo '<b><i><br>"' . $q . '"</i></b> non è presente nel database:<br>vai a => 
+				<a href="#" data-toggle="modal" data-target="#myModal">Inserimento Rapido</a>
+				<br>o seleziona un elemento dall\'elenco seguente<br>';
 	
 	$sql=mysql_query("SELECT * FROM anagrafica $where $filtro limit 5");
 	while($row = mysql_fetch_array($sql)) {
