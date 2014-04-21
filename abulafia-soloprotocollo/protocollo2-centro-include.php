@@ -3,6 +3,7 @@
 	$from= $_GET['from'];
 	$my_file = new File(); //crea un nuovo oggetto 'file'
 	$my_lettera = new Lettera(); //crea un nuovo oggetto
+	$add = false;
 	
 	if (isset($_session['dbname'])) { 
 		$dbname=$_session['dbname']; 
@@ -10,6 +11,14 @@
 	
 	if (isset($_GET['idanagrafica'])) { 
 		$idanagrafica=$_GET['idanagrafica']; 
+	}
+	
+	if($from == "errore") {
+		$errore = true;
+		$idlettera = $_GET['idlettera'];
+	}
+	else {
+		$errore = false;
 	}
 	
 	//se la pagina da cui si proviene è crea nuovo protocollo
@@ -46,6 +55,7 @@
 	if ($from == 'aggiungi') {
 			$idlettera=$_GET['idlettera'];
 			$my_lettera -> publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo); //richiamo del metodo
+			$add = true;
 		}
 
 	if ($from == 'elimina-mittente') { 
@@ -111,10 +121,10 @@
 	</form>
 <!--End Modal-->
 
-<div class="panel panel-default">
+<div class="<?php if($errore) { echo "panel panel-danger";} else { echo "panel panel-default";} ?>">
 	
 		<div class="panel-heading">
-			<h3 class="panel-title"><strong>Protocollo numero: <?php echo $idlettera;?></strong></h3>
+			<h3 class="panel-title"><strong>Protocollo numero: <?php echo $idlettera;?></strong><?php if($errore) { echo " - <b>ERRORE:</b> Bisogna inserire almeno un mittente o un destinatario.";} ?></h3>
 		</div>
 		
 		<div class="panel-body">
@@ -165,7 +175,7 @@
 			<input name="uploadedfile" type="file" id="exampleInputFile">
 			</td>
 			<td valign="bottom">
-			<button type="submit" class="btn btn-default" onClick="loading()">Allega</button>
+			<button type="submit" class="btn btn-default" onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
 			</td>
 			</tr>
 			</table>
@@ -177,7 +187,7 @@
 			$urlpdf=$urlpdf1['urlpdf'];
 			$download = $my_file->downloadlink ($urlpdf, $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
 			if ($download != "Nessun file associato") {
-				echo "<br><b>File associato: </b>" . $download;
+				echo "<br><span class=\"glyphicon glyphicon-file\"></span> <b>File associato: </b>" . $download;
 			}
 			else {
 				echo "<br>Nessun file associato.";
@@ -196,7 +206,9 @@
 			<br>
 			
 			<?php
+				if($errore) { echo "<div class=\"alert alert-danger\">"; }
 				$my_lettera -> publcercamittente ($idlettera,''); //richiamo del metodo
+				if($errore) { echo "</div>"; }
 			?>
 			
 			<?php
@@ -218,8 +230,8 @@
 				<div class="row">
 					<div class="col-xs-2">
 						<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
-						<OPTION value="ricevuta"> Ricevuta
-						<OPTION value="spedita"> Spedita
+						<OPTION value="ricevuta" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "ricevuta") {echo "selected";} ?>> Ricevuta
+						<OPTION value="spedita" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "spedita") {echo "selected";} ?>> Spedita
 						</select>
 					</div>
 				</div>
@@ -229,7 +241,7 @@
 				<label>Oggetto della lettera:</label>
 				<div class="row">
 					<div class="col-xs-5">
-						<input type="text" class="form-control" name="oggetto">
+						<input type="text" class="form-control" name="oggetto" <?php if( ($errore || $add) && isset($_SESSION['oggetto']) ) { echo "value=\"".$_SESSION['oggetto']."\"";} ?> >
 					</div>
 				</div>
 			</div>
@@ -238,7 +250,7 @@
 				<label>Data della lettera:</label>
 				<div class="row">
 					<div class="col-xs-2">
-						<input type="text" class="form-control datepicker" name="data">
+						<input type="text" class="form-control datepicker" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} ?> >
 					</div>
 				</div>
 			</div>
@@ -249,12 +261,12 @@
 					<div class="col-xs-2">
 						<select class="form-control" size=1 cols=4 NAME="posizione">
 						<OPTION selected value="">
-						<OPTION value="posta ordinaria"> posta ordinaria
-						<OPTION value="raccomandata"> raccomandata
-						<OPTION Value="telegramma"> telegramma
-						<OPTION value="fax"> fax
-						<OPTION value="email"> email
-						<OPTION value="consegna a mano"> consegna a mano
+						<OPTION value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected";} ?>> posta ordinaria
+						<OPTION value="raccomandata"<?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "raccomandata") {echo "selected";} ?>> raccomandata
+						<OPTION Value="telegramma" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "telegramma") {echo "selected";} ?>> telegramma
+						<OPTION value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected";} ?>> fax
+						<OPTION value="email" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "email") {echo "selected";} ?>> email
+						<OPTION value="consegna a mano" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "consegna a mano") {echo "selected";} ?>> consegna a mano
 						</select>
 					</div>
 				</div>
@@ -272,7 +284,12 @@
 				<?php
 				while ($risultati2=mysql_fetch_array($risultati))
 				{
-					echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
+					 if( ($errore || $add) && isset($_SESSION['riferimento']) && $_SESSION['riferimento'] == $risultati2['codice'] ) {
+						echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
+					}
+					else {
+						echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
+					}
 				}
 				echo '</select>';
 				?>
@@ -284,7 +301,7 @@
 				<label>Note:</label>
 				<div class="row">
 					<div class="col-xs-5">
-						<input type="text" class="form-control" name="note">
+						<input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
 					</div>
 				</div>
 			</div>

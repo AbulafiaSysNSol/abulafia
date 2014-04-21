@@ -77,11 +77,6 @@ $_SESSION['loginurlfoto']= $logindata4['urlfoto']; //seleziona l'url della foto 
 $_SESSION['auth']= $logindata2['auth']; //livello di autorizzazione dell'utente, prelevato dal db
 $_SESSION['loginname'] = $logindata2['loginname']; //nome utente prelevato dalla tabella users
 $_SESSION['loginid']=$logindata2['idanagrafica']; //id prelevato dalla tabella users, identica a quella dell'anagrafica
-$logindatagruppo=mysql_query("select * from joinanagraficagruppo where idanagrafica='$idperricerca' and datafine='0000-00-00'");
-$logindatagruppo2=mysql_fetch_array($logindatagruppo);
-$_SESSION['gruppo']=$logindatagruppo2['idgruppo'];
-if ($_SESSION['gruppo'] == '') {$_SESSION['gruppo']== 0;}
-
 
 //caricamento dei settaggi personalizzati
 $settings=mysql_query("

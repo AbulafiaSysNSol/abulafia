@@ -8,7 +8,7 @@
 			Si evolvono gli uffici, pubblici e privati, per stare al passo con i tempi e con le rinnovate esigenze di gestione amministrativa
 			e del personale.<br><?php echo $_SESSION['nomeapplicativo'];?> vuole essere un piccolo contributo, aperto a chiunque abbia voglia di suggerire 
 			miglioramenti, per la gestione degli affari correnti delle segreterie dei volontari della CRI.
-			<br>Chiunque fosse interessato al progetto, puo' contattare l'amministratore del sito all'indirizzo email <strong><?php echo $_SESSION['email']; ?></strong></p>
+			<br>Chiunque fosse interessato al progetto, puo' contattare l'amministratore del sito all'indirizzo email <strong><?php echo $_SESSION['email']; ?></strong> <span class="glyphicon glyphicon-envelope"></span></p>
 			<div class="text-right"><small>03 dicembre 2008</small></div>
 		</div>
 		
