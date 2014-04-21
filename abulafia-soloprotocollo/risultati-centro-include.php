@@ -405,6 +405,10 @@
 								$tabella.posizione like '%$cercato%' 
 								OR
 								$tabella.datalettera like '$data')
+								and
+								($tabella.speditaricevuta!=''
+								and
+								$tabella.oggetto!='')
 							$ordinerisultati 
 							LIMIT
 								$iniziorisultati , $risultatiperpagina
@@ -494,7 +498,10 @@
 
 					<td>
 					<?php
-					$mittenti= mysql_query("SELECT distinct * from anagrafica, $joinletteremittenti where $joinletteremittenti.idlettera = '$value[0]' and anagrafica.idanagrafica=$joinletteremittenti.idanagrafica");
+					$mittenti= mysql_query("SELECT distinct * 
+								from anagrafica, $joinletteremittenti 
+								where $joinletteremittenti.idlettera = '$value[0]' 
+								and anagrafica.idanagrafica=$joinletteremittenti.idanagrafica");
 					while ($mittenti2=mysql_fetch_array($mittenti)) {
 						$mittenti3=$mittenti2['nome'].' '.$mittenti2['cognome'];	
 						?>	
