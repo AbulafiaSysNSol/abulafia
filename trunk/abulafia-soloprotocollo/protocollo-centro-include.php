@@ -24,7 +24,7 @@ if ($_SESSION['auth'] < 20) { echo 'Non hai l\'autorizzazione necessaria per uti
 		<h3 class="panel-title"><strong>Titolario</strong></h3>
 		</div>
 		<div class="panel-body">
-			<p><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list-alt"></span> Gestione posizioni</a></p>
+			<p><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione posizioni</a></p>
 		</div>
 		<?php } ?>
 		

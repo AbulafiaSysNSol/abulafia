@@ -85,29 +85,29 @@ $(function(){
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-		<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home">Home</a></li>
-		<li <?php if($_GET['corpus'] == 'protocollo') { echo 'class="active"'; }?>><a href="login0.php?corpus=protocollo">Protocollo</a></li>
-		<li <?php if($_GET['corpus'] == 'anagrafica') { echo 'class="active"'; }?>><a href="login0.php?corpus=anagrafica">Anagrafica</a></li>
-		<li <?php if($_GET['corpus'] == 'ricerca') { echo 'class="active"'; }?>><a href="login0.php?corpus=ricerca">Ricerca</a></li>
-		<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto">F.A.Q.</a></li>
-		<li <?php if($_GET['corpus'] == 'informazioni') { echo 'class="active"'; }?>><a href="login0.php?corpus=informazioni">Informazioni</a></li>
+		<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+		<li <?php if($_GET['corpus'] == 'protocollo') { echo 'class="active"'; }?>><a href="login0.php?corpus=protocollo"><span class="glyphicon glyphicon-list-alt"></span> Protocollo</a></li>
+		<li <?php if($_GET['corpus'] == 'anagrafica') { echo 'class="active"'; }?>><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-user"></span> Anagrafica</a></li>
+		<li <?php if($_GET['corpus'] == 'ricerca') { echo 'class="active"'; }?>><a href="login0.php?corpus=ricerca"><span class="glyphicon glyphicon-search"></span> Ricerca</a></li>
+		<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto"><span class="glyphicon glyphicon-question-sign"></span> F.A.Q.</a></li>
+		<li <?php if($_GET['corpus'] == 'informazioni') { echo 'class="active"'; }?>><a href="login0.php?corpus=informazioni"><span class="glyphicon glyphicon-info-sign"></span> Informazioni</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
 		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b></a>
 		  <ul class="dropdown-menu">
-		    <li><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>">Cambia Password</a></li>
-		    <li><a href="login0.php?corpus=segnala-bug">Segnala un Errore</a></li>
-		    <li><a href="login0.php?corpus=settings">Impostazioni</a></li>
+		    <li><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><span class="glyphicon glyphicon-edit"></span> Cambia Password</a></li>
+		    <li><a href="login0.php?corpus=segnala-bug"><span class="glyphicon glyphicon-warning-sign"></span> Segnala un Errore</a></li>
+		    <li><a href="login0.php?corpus=settings"><span class="glyphicon glyphicon-cog"></span> Impostazioni</a></li>
 		    <?php if ($_SESSION['auth'] > 50) {?>
 		    <li class="divider"></li>
-		    <li><a href="login0.php?corpus=gestione-utenti">Gestione degli Utenti</a></li>
-		    <li><a href="login0.php?corpus=advancedsettings">Advanced Settings</a></li>
-		    <li><a href="download.php?lud=access.log&est=log">Scarica il log degli accessi</a></li>
-		    <li><a href="login0.php?corpus=log-mail">Visualizza il log delle mail</a></li>
+		    <li><a href="login0.php?corpus=gestione-utenti"><span class="glyphicon glyphicon-user"></span> Gestione degli Utenti</a></li>
+		    <li><a href="login0.php?corpus=advancedsettings"><span class="glyphicon glyphicon-wrench"></span> Advanced Settings</a></li>
+		    <li><a href="download.php?lud=access.log&est=log"><span class="glyphicon glyphicon-download"></span> Scarica il log degli accessi</a></li>
+		    <li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
 		    <?php } ?>
 		    <li class="divider"></li>
-		    <li><a href="logout.php">Logout</a></li>
+		    <li><a href="logout.php"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
 		  </ul>
 		</li>
 	    </div><!-- /.navbar-collapse -->
