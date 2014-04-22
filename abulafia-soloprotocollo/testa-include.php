@@ -1,29 +1,31 @@
 <?php
 
-include '../db-connessione-include.php'; //connessione al db-server
-include 'maledetti-apici-centro-include.php';
+	include '../db-connessione-include.php'; //connessione al db-server
+	include 'maledetti-apici-centro-include.php';
 
-function __autoload ($class_name) //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
-{ require_once "class/" . $class_name.".obj.inc";
-}
-$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
-$my_anagrafica= unserialize($_SESSION['my_anagrafica']);//deserializzazione 
-$my_log= unserialize($_SESSION['my_log']);//deserializzazione 
-$my_registroprotocollo= unserialize($_SESSION['my_registroprotocollo']);//deserializzazione 
-$my_ricerca= unserialize($_SESSION['my_ricerca']);//deserializzazione 
-$my_manuale= unserialize($_SESSION['my_manuale']);//deserializzazione 
-$my_tabellahtml= unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
-$my_database= unserialize($_SESSION['my_database']);//deserializzazione 
-$setting=mysql_query("select * from defaultsettings");
-$setting2=mysql_fetch_array($setting);
+	function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
+		require_once "class/" . $class_name.".obj.inc";
+	}
+	
+	$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
+	$my_anagrafica= unserialize($_SESSION['my_anagrafica']);//deserializzazione 
+	$my_log= unserialize($_SESSION['my_log']);//deserializzazione 
+	$my_registroprotocollo= unserialize($_SESSION['my_registroprotocollo']);//deserializzazione 
+	$my_ricerca= unserialize($_SESSION['my_ricerca']);//deserializzazione 
+	$my_manuale= unserialize($_SESSION['my_manuale']);//deserializzazione 
+	$my_tabellahtml= unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
+	$my_database= unserialize($_SESSION['my_database']);//deserializzazione 
+	$setting=mysql_query("select * from defaultsettings");
+	$setting2=mysql_fetch_array($setting);
 
-$_SESSIONs['paginaprincipale'] = $setting2['paginaprincipale'];
+	$_SESSIONs['paginaprincipale'] = $setting2['paginaprincipale'];
 
-if ($_SESSION['auth']< 1 ) {
-echo 'Devi prima effettuare il login dalla<br>';
-?> <a href="<?php echo $_SESSIONs['paginaprincipale'];?>"><?php echo 'pagina principale'; $_SESSION['auth']= 0 ;  ?></a>
-<?php 
-exit() ; }
+	if ($_SESSION['auth']< 1 ) {
+		echo 'Devi prima effettuare il login dalla<br>';
+		?> <a href="<?php echo $_SESSIONs['paginaprincipale'];?>"><?php echo 'pagina principale'; $_SESSION['auth']= 0 ;  ?></a>
+		<?php 
+		exit(); 
+	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//IT" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -58,10 +60,10 @@ exit() ; }
 <script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
 
 <script type="text/javascript">
-$(function(){
-     $.datepicker.setDefaults( $.datepicker.regional[ "it" ] );
-     $('.datepicker').datepicker( { changeMonth: true, changeYear: true });
-});
+	$(function(){
+	     $.datepicker.setDefaults( $.datepicker.regional[ "it" ] );
+	     $('.datepicker').datepicker( { changeMonth: true, changeYear: true });
+	});
 </script>
   
 </head>
@@ -86,35 +88,38 @@ $(function(){
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 		<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-		<li <?php if($_GET['corpus'] == 'protocollo') { echo 'class="active"'; }?>><a href="login0.php?corpus=protocollo"><span class="glyphicon glyphicon-list-alt"></span> Protocollo</a></li>
+		<li <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo 'class="active"'; }?>><a href="login0.php?corpus=protocollo"><span class="glyphicon glyphicon-list-alt"></span> Protocollo</a></li>
 		<li <?php if($_GET['corpus'] == 'anagrafica') { echo 'class="active"'; }?>><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-user"></span> Anagrafica</a></li>
-		<li <?php if($_GET['corpus'] == 'ricerca') { echo 'class="active"'; }?>><a href="login0.php?corpus=ricerca"><span class="glyphicon glyphicon-search"></span> Ricerca</a></li>
+		<li <?php if($_GET['corpus'] == 'ricerca' OR $_GET['corpus']=='risultati') { echo 'class="active"'; }?>><a href="login0.php?corpus=ricerca"><span class="glyphicon glyphicon-search"></span> Ricerca</a></li>
 		<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto"><span class="glyphicon glyphicon-question-sign"></span> F.A.Q.</a></li>
 		<li <?php if($_GET['corpus'] == 'informazioni') { echo 'class="active"'; }?>><a href="login0.php?corpus=informazioni"><span class="glyphicon glyphicon-info-sign"></span> Informazioni</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
-		  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b></a>
-		  <ul class="dropdown-menu">
-		    <li><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><span class="glyphicon glyphicon-edit"></span> Cambia Password</a></li>
-		    <li><a href="login0.php?corpus=segnala-bug"><span class="glyphicon glyphicon-warning-sign"></span> Segnala un Errore</a></li>
-		    <li><a href="login0.php?corpus=settings"><span class="glyphicon glyphicon-cog"></span> Impostazioni</a></li>
-		    <?php if ($_SESSION['auth'] > 50) {?>
-		    <li class="divider"></li>
-		    <li><a href="login0.php?corpus=gestione-utenti"><span class="glyphicon glyphicon-user"></span> Gestione degli Utenti</a></li>
-		    <li><a href="login0.php?corpus=advancedsettings"><span class="glyphicon glyphicon-wrench"></span> Advanced Settings</a></li>
-		    <li><a href="download.php?lud=access.log&est=log"><span class="glyphicon glyphicon-download"></span> Scarica il log degli accessi</a></li>
-		    <li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
-		    <?php } ?>
-		    <li class="divider"></li>
-		    <li><a href="logout.php"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
-		  </ul>
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b></a>
+		<ul class="dropdown-menu">
+		<li><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><span class="glyphicon glyphicon-edit"></span> Cambia Password</a></li>
+		<li><a href="login0.php?corpus=segnala-bug"><span class="glyphicon glyphicon-warning-sign"></span> Segnala un Errore</a></li>
+		<li><a href="login0.php?corpus=settings"><span class="glyphicon glyphicon-cog"></span> Impostazioni</a></li>
+		<?php 
+			if ($_SESSION['auth'] > 50) {
+				?>
+				<li class="divider"></li>
+				<li><a href="login0.php?corpus=gestione-utenti"><span class="glyphicon glyphicon-user"></span> Gestione degli Utenti</a></li>
+				<li><a href="login0.php?corpus=advancedsettings"><span class="glyphicon glyphicon-wrench"></span> Advanced Settings</a></li>
+				<li><a href="download.php?lud=access.log&est=log"><span class="glyphicon glyphicon-download"></span> Scarica il log degli accessi</a></li>
+				<li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
+				<?php
+			}
+		?>
+		<li class="divider"></li>
+		<li><a href="logout.php"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+		</ul>
 		</li>
 	    </div><!-- /.navbar-collapse -->
 	</nav>
 <?php
-if ($_GET['corpus'] != 'cambioanno') 
-	{ 
-	$my_registroprotocollo -> publcontrolloanno (); //controllo della corrispondenza fra l'anno corrente e l'anno in uso dal db
+	if ($_GET['corpus'] != 'cambioanno') { 
+		$my_registroprotocollo->publcontrolloanno (); //controllo della corrispondenza fra l'anno corrente e l'anno in uso dal db
 	}
 ?>
