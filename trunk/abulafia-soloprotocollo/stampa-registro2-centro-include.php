@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require('lib/fpdf/fpdf.php');
 	class PDF extends FPDF
 	{
@@ -45,11 +46,39 @@ require('lib/fpdf/fpdf.php');
 		}
 	}
 	if($from == "date") {
-		$inizio = $_POST['datainizio'];
-		$fine = $_POST['datafine'];
-		list($giornoi, $mesei, $annoi) = explode("/", $inizio);
-		list($giornof, $mesef, $annof) = explode("/", $fine);
-		if ($annoi != $annof) {
+		if(isset($_POST['datainizio'])) {
+			$inizio = $_POST['datainizio'];
+			$datai = explode("/", $inizio);
+			if(isset($datai[0])) {
+				$giornoi = $datai[0];
+			}
+			if(isset($datai[1])) {
+				$mesei = $datai[1];
+			}
+			if(isset($datai[2])) {
+				$annoi = $datai[2];
+			}
+			else {
+				$annoi = 0;
+			}
+		}
+		if(isset($_POST['datafine'])) {
+			$fine = $_POST['datafine'];
+			$dataf = explode("/", $fine);
+			if(isset($dataf[0])) {
+				$giornof = $dataf[0];
+			}
+			if(isset($dataf[1])) {
+				$mesef = $dataf[1];
+			}
+			if(isset($dataf[2])) {
+				$annof = $dataf[2];
+			}
+			else {
+				$annof = 1;
+			}
+		}
+		if ( $annoi != $annof ) {
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -81,7 +110,6 @@ require('lib/fpdf/fpdf.php');
 	}
 $finale = 'Documento generato digitalmente da Abulafia ' . $_SESSION['version'].', il ' . date("d".'/'."m".'/'."Y");
 $contatorelinee = 1;
-ob_clean();
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
@@ -89,14 +117,10 @@ $pdf->SetFont('Times','',12);
 $pdf->SetTitle('registroprotocollo');
 $pdf->Text(10,45,$intestazione);
 $pdf->Ln(10);
-
 while($query2 = mysql_fetch_array($query)) {
-
 	if ( $contatorelinee % 2 == 1 ) { $r = 255; $g = 253; $b = 170; }
 	else { $r = 255; $g = 255; $b = 255; }
-	
 	$pdf->SetFillColor($r,$g,$b);
-	
 	$pdf->Cell(13,7,'N.',1,0,'C',true);
 	$pdf->Cell(23,7,'Data Reg.',1,0,'C',true);
 	$pdf->Cell(22,7,'Sped./Ric.',1,0,'C',true);
@@ -104,7 +128,6 @@ while($query2 = mysql_fetch_array($query)) {
 	$pdf->Cell(10,7,'Pos.',1,0,'C',true);
 	$pdf->Cell(10,7,'All.',1,0,'C',true);
 	$pdf->Cell(0,7,'Note',1,1,'C',true);
-
 	$pdf->Cell(13,7,$query2['idlettera'],1,0,'C',true);
 	list($anno, $mese, $giorno) = explode("-", $query2['dataregistrazione']);
 	$data = $giorno.'/'.$mese.'/'.$anno;
@@ -121,8 +144,9 @@ while($query2 = mysql_fetch_array($query)) {
 	$pdf->MultiCell(0,7,$sd . ': ' . $query2['cognome'] . ' ' . $query2['nome'],1,'L',true);
 	$pdf->Ln(5);
 	$contatorelinee = $contatorelinee + 1;
-    }
+}
 $pdf->Ln(15);
 $pdf->Write('',$finale);
 $pdf->Output();
+exit();
 ?>
