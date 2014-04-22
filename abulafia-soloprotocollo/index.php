@@ -29,13 +29,14 @@
 
 <body>
 
-<div class="container">
+<div class="container-login">
 
-	<div class="well well-lg"><h1>Abulafia</h1>Gestione delle segreterie dei Volontari della CRI</div>
+	<center><div class="well"><label><h1 class="paneltitle">Abulafia</h1></label><br>Gestione delle segreterie dei Volontari della CRI</div><center>
 
+<center>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title" bgcolor="red"><b>LOGIN</b></h3>
+    <h3 class="panel-title" bgcolor="red"><b><span class="glyphicon glyphicon-log-in"></span> LOGIN</b></h3>
   </div>
   <div class="panel-body">
     Per accedere al sistema, inserisci username e password:<br><br>
@@ -53,24 +54,25 @@
   <div class="form-group">
     <label>Username</label>
 	<div class="row">
-	<div class="col-xs-3">
+	<div class="col-md-8 col-md-offset-2">
 		<input type="text" class="form-control" name="userid" placeholder="username">
 	</div>
 	</div>
   </div>
   <div class="form-group">
     <label>Password</label>
-	<div class="row">
-	<div class="col-xs-3">
+	<div class="row center">
+	<div class="col-md-8 col-md-offset-2">
 		<input type="password" class="form-control" name="password" placeholder="password">
 	</div>
 	</div>
   </div>
-  <button type="submit" class="btn btn-default">Accedi</button>
+  <button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-ok"></span> Accedi</button>
 </form>
 
 </div>
 </div>
+</center>
 
 	<center><h5><small>
 	<span xmlns:dc="http://purl.org/dc/elements/1.1/" property="dc:title">
