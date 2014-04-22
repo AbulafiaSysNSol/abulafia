@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-		<h3 class="panel-title"><strong><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'];?>: saper conservare, saper ritrovare.</strong></h3>
+		<h3 class="panel-title"><span class="glyphicon glyphicon-inbox"></span> <strong><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'];?>: saper conservare, saper ritrovare.</strong></h3>
 		</div>
 		<div class="panel-body">
 			<p>
@@ -13,7 +13,7 @@
 		</div>
 		
 		<div class="panel-heading">
-		<h3 class="panel-title"><strong>Stats:</strong></h3>
+		<h3 class="panel-title"><strong><span class="glyphicon glyphicon-stats"></span> Stats:</strong></h3>
 		</div>
 		<div class="panel-body">
 		
@@ -56,7 +56,7 @@
 		</div>
 		
 		<div class="panel-heading">
-		<h3 class="panel-title"><strong>Log degli ultimi 5 accessi:</strong></h3>
+		<h3 class="panel-title"><strong><span class="glyphicon glyphicon-calendar"></span> Log degli ultimi 5 accessi:</strong></h3>
 		</div>
 		<div class="panel-body">
 			<p><?php $my_log -> publleggilog('1', '5', 'login', $_SESSION['logfile']); //legge dal log degli accessi ?></p>
