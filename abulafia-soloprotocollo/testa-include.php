@@ -88,7 +88,16 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 		<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-		<li <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo 'class="active"'; }?>><a href="login0.php?corpus=protocollo"><span class="glyphicon glyphicon-list-alt"></span> Protocollo</a></li>
+				
+		<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-list-alt"></span> Protocollo <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
+				<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione posizioni</a></li>
+				<li><a href="login0.php?corpus=stampa-registro"><span class="glyphicon glyphicon-print"></span> Stampa il registro</a></li>
+			</ul>
+		</li>
+		
 		<li <?php if($_GET['corpus'] == 'anagrafica') { echo 'class="active"'; }?>><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-user"></span> Anagrafica</a></li>
 		<li <?php if($_GET['corpus'] == 'ricerca' OR $_GET['corpus']=='risultati') { echo 'class="active"'; }?>><a href="login0.php?corpus=ricerca"><span class="glyphicon glyphicon-search"></span> Ricerca</a></li>
 		<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto"><span class="glyphicon glyphicon-question-sign"></span> F.A.Q.</a></li>
