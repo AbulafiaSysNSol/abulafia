@@ -1,5 +1,7 @@
 <?php
-ob_start();
+session_start();
+include '../db-connessione-include.php';
+include 'maledetti-apici-centro-include.php';
 require('lib/fpdf/fpdf.php');
 	class PDF extends FPDF
 	{
@@ -30,7 +32,7 @@ require('lib/fpdf/fpdf.php');
 		$anno = $_POST['annoprotocollo'];
 		$intestazione = 'Registro di protocollo '. $anno . ' dal numero '. $inizio .' al numero '. $fine.':';
 		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine'"); 
-		$numerorisultati = mysql_fetch_row($query); 
+		$numerorisultati = mysql_fetch_row($query);
 		if($numerorisultati[0] < 1) {
 			?>
 			<SCRIPT LANGUAGE="Javascript">
@@ -108,6 +110,7 @@ require('lib/fpdf/fpdf.php');
 			$query = mysql_query("SELECT * FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
 		}	
 	}
+$now = date("d".'.'."m".'.'."Y");
 $finale = 'Documento generato digitalmente da Abulafia ' . $_SESSION['version'].', il ' . date("d".'/'."m".'/'."Y");
 $contatorelinee = 1;
 $pdf = new PDF();
@@ -147,6 +150,6 @@ while($query2 = mysql_fetch_array($query)) {
 }
 $pdf->Ln(15);
 $pdf->Write('',$finale);
-$pdf->Output();
+$pdf->Output('registroprotocollo'.$now.'.pdf','I');
 exit();
 ?>
