@@ -248,19 +248,19 @@
 						<td align="center" valign="middle"><?php echo $row['nascitacomune'];?></td>
 						<td align="center" valign="middle"><?php echo $row['nascitaprovincia'];?></td>
 						<td align="center" valign="middle"><?php echo $row['codicefiscale'];?></td>
-						<td align="center" width="150">
+						<td align="center">
 							<div class="btn-group btn-group-sm">
 								<a class="btn btn-info" href="login0.php?corpus=dettagli-anagrafica
 													&from=risultati
 													&tabella=anagrafica
 													&id=<?php echo $row['idanagrafica'];?>">
-													Dettagli
+													<span class="glyphicon glyphicon-info-sign"></span> Info
 								</a>
 								<a class="btn btn-warning" 	href="login0.php?corpus=modifica-anagrafica
 													&from=risultati
 													&tabella=anagrafica
 													&id=<?php echo $row['idanagrafica'];?>">
-													Modifica
+													<span class="glyphicon glyphicon-pencil"></span> Modifica
 								</a>
 							</div>
 						</td>
@@ -512,10 +512,11 @@
 					}
 					?>
 					</td>
-					<td width="150">
+					<td>
 						<div class="btn-group btn-group-sm">
-							<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>">Dettagli</a>
-							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>">Modifica</a>
+							<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span> Info</a>
+							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
+							<a class="btn btn-success" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span> Invia</a>
 						</div>
 					</td>		
 				</tr>

@@ -171,7 +171,7 @@
 			<tr>
 			<td>
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
-			<label for="exampleInputFile">Carica allegato</label>
+			<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
 			<input name="uploadedfile" type="file" id="exampleInputFile">
 			</td>
 			<td valign="bottom">
@@ -217,7 +217,7 @@
 				echo '<b>Mittenti/Destinatari:<br><br></b>';
 				$risultati2=mysql_query("select anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, joinletteremittenti$annoprotocollo.idlettera, joinletteremittenti$annoprotocollo.idanagrafica from anagrafica, joinletteremittenti$annoprotocollo where anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica and joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
 				while ($row2 = mysql_fetch_array($risultati2)) {
-					echo ucwords($row2['cognome'] . ' ' . $row2['nome']) ;?> - <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idlettera=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $urlpdf;?>">Elimina</a><br>
+					echo ucwords($row2['cognome'] . ' ' . $row2['nome']) ;?> - <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idlettera=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $urlpdf;?>"></span> Elimina <span class="glyphicon glyphicon-remove"></a><br>
 					<?php
 				}
 			}
@@ -230,7 +230,7 @@
 			<form name="modulo" method="post" >
 			
 			<div class="form-group">
-				<label>Spedita/Ricevuta</label>
+				<label> <span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta</label>
 				<div class="row">
 					<div class="col-xs-2">
 						<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
@@ -242,16 +242,16 @@
 			</div>
 
 			<div class="form-group">
-				<label>Oggetto della lettera:</label>
+				<label> <span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
 				<div class="row">
 					<div class="col-xs-5">
-						<input type="text" class="form-control" name="oggetto" <?php if( ($errore || $add) && isset($_SESSION['oggetto']) ) { echo "value=\"".$_SESSION['oggetto']."\"";} ?> >
+						<input required type="text" class="form-control" name="oggetto" <?php if( ($errore || $add) && isset($_SESSION['oggetto']) ) { echo "value=\"".$_SESSION['oggetto']."\"";} ?> >
 					</div>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label>Data della lettera:</label>
+				<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
 				<div class="row">
 					<div class="col-xs-2">
 						<input type="text" class="form-control datepicker" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} ?> >
@@ -260,7 +260,7 @@
 			</div>
 
 			<div class="form-group">
-				<label>Mezzo di trasmissione:</label>
+				<label> <span class="glyphicon glyphicon-briefcase"></span> Mezzo di trasmissione:</label>
 				<div class="row">
 					<div class="col-xs-2">
 						<select class="form-control" size=1 cols=4 NAME="posizione">
@@ -279,7 +279,7 @@
 			<div class="form-group">
 				<div class="row">
 				<div class="col-xs-3">
-				<label>Titolazione:</label>
+				<label> <span class="glyphicon glyphicon-book"></span> Titolazione:</label>
 				<?php
 				$risultati=mysql_query("select distinct * from titolario");
 				?>
@@ -302,7 +302,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Note:</label>
+				<label> <span class="glyphicon glyphicon-comment"></span> Note:</label>
 				<div class="row">
 					<div class="col-xs-5">
 						<input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
@@ -310,7 +310,7 @@
 				</div>
 			</div>
 			
-			<button type="button" class="btn btn-default" onClick="Controllo()">Registra</button>
+			<button type="button" class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra</button>
 
 			</form>
 

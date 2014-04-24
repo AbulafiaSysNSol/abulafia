@@ -18,7 +18,7 @@ $reply=$_SESSION['email']; /*Inserire l'indirizzo email a cui verranno inviate l
 
 /*Non modificare nulla al di sotto di questa linea*/
 
-$intestazioni = "From: $mittente\nReply-To: $reply\nX-Mailer: Sismail Web Email Interface\nMIME-version: 1.0\nContent-type: multipart/mixed;\n boundary=\"Message-Boundary\"\nContent-transfer-encoding: 7BIT\nX-attachments: $titolo";
+$intestazioni = "From: $mittente\nReply-To: $reply\nX-Mailer: Sismail Web Email Interface\nMIME-version: 1.0\nContent-type: multipart/mixed;\n boundary=\"Message-Boundary\"\nContent-transfer-encoding: 7BIT\nX-attachments:";
 
 $body_top = "--Message-Boundary\n";
 $body_top .= "Content-type: text/html; charset=iso-8859-1\n";
@@ -27,33 +27,16 @@ $body_top .= "Content-description: Mail message body\n\n";
 
 $msg_body = $body_top . $mess;
 
-if(!(mail($e,$ogg,$msg_body, $intestazioni))){
-print "<H5>Invio della email fallito.</H5>";
+if(!(mail($e,$ogg,$msg_body, $intestazioni))) {
+	print '<div class="alert alert-danger">C\'e\' stato un errore nell\'invio dell\'email, riprova in seguito o contatta l\'amministratore del server.</div>';
 	$esito= 'FAILED';
-	} 
-else { print"<H5>Invio eseguito con successo.</H5>";
+} 
+else { 
+	print '<div class="alert alert-success">Segnalazione inviata correttamente.</div>';
 	$esito= 'SUCCESSFUL';
-	} 
+} 
 
 
 $my_log -> publscrivilog($_SESSION['loginname'],'bug report' , $esito ,'Pagina: '.$_POST['pagina-errore'], $_SESSION['maillog']);
 
-
-echo 'Pagina: '.$_POST['pagina-errore'].' <br>Errore: '.$_POST['messaggio'];?>
-
-</strong> 
-</b>
-</p>
-
-
-</div>
-
-</p></div>
-					
-		
-	
-			
-			<!-- post end -->
-
-
-		</div>
+?>

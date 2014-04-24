@@ -104,7 +104,7 @@
 		<tr>
 		<td>
 		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />
-		<label for="exampleInputFile">Carica allegato</label> 
+		<label for="exampleInputFile"><span class="glyphicon glyphicon-upload"></span> Carica allegato</label> 
 		<input name="uploadedfile" type="file" id="exampleInputFile" />
 		</td>
 		<td valign="bottom">
@@ -157,7 +157,7 @@
 		
 		<form class="form-group" action="login0.php?corpus=protocollo3&from=modifica&dataoriginalegiorno=<?php echo $giornor; ?>&dataoriginalemese=<?php echo $meser; ?>&dataoriginaleanno=<?php echo $annor; ?>&urlpdf=<?php echo $urlpdf;?>&idlettera=<?php echo $idlettera;?>" method="post" >
 			<br>
-			<label>Spedita/Ricevuta:</label>
+			<label><span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta:</label>
 			<div class="row">
 			<div class="col-xs-2">
 			<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
@@ -169,10 +169,10 @@
 			</div>
 				
 			<br>
-			<label>Oggetto della lettera:</label>
+			<label><span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
 			<div class="row">
 			<div class="col-xs-5">
-			<input class="form-control" size="40" type="text" name="oggetto" value="<?php echo $row['oggetto'];?>"/>
+			<input required class="form-control" size="40" type="text" name="oggetto" value="<?php echo $row['oggetto'];?>"/>
 			</div>
 			</div>
 			
@@ -180,7 +180,7 @@
 			<?php
 				$data = $giorno.'/'.$mese.'/'.$anno;
 			?>
-			<label>Data della lettera</label>
+			<label><span class="glyphicon glyphicon-calendar"></span> Data della lettera</label>
 			<div class="row">
 				<div class="col-xs-2">
 					<input type="text" class="form-control datepicker" name="data" value="<?php echo $data; ?>">
@@ -188,7 +188,7 @@
 			</div>
 				
 			<br>
-			<label>Mezzo di trasmissione:</label>
+			<label><span class="glyphicon glyphicon-briefcase"></span> Mezzo di trasmissione:</label>
 			<div class="row">
 			<div class="col-xs-2">
 			<SELECT class="form-control" size=1 cols=4 NAME="posizione">
@@ -204,7 +204,7 @@
 			</div>
 			
 			<br>
-			<label>Titolazione:</label>
+			<label><span class="glyphicon glyphicon-book"></span> Titolazione:</label>
 			<div class="row">
 			<div class="col-xs-3">
 			<?php
@@ -228,7 +228,7 @@
 			</div>
 			
 			<br>
-			<label>Note:</label>
+			<label><span class="glyphicon glyphicon-comment"></span> Note:</label>
 			<div class="row">
 			<div class="col-xs-5">
 			<input class="form-control" size="40" type="text" name="note" value="<?php echo $row['note']; ?>"/></label>
@@ -236,7 +236,7 @@
 			</div>
 			
 			<br>
-			<button type="submit" class="btn btn-primary">MODIFICA</button>
+			<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> MODIFICA</button>
 		</form>
 	</div>
 </div>
