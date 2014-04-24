@@ -11,9 +11,9 @@
 			<form action="login0.php?corpus=segnala-bug2&idanagrafica=<?php echo $_SESSION['loginid'];?>" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="mittente" value="informatica@cricatania.it">
 			Pagina in cui si e' riscontrato l'errore:<br>
-			<input class="form-control" type="text" name="pagina-errore" value="" />
+			<input required class="form-control" type="text" name="pagina-errore" value="" />
 			<br>Descrizione dell'errore:<br>
-			<textarea class="form-control" cols="23" rows="4" name="messaggio"></textarea>
+			<textarea required class="form-control" cols="23" rows="4" name="messaggio"></textarea>
 			<br><input class="btn btn-primary" type="submit" value="Invia" />
 			</form>
 			</div>
