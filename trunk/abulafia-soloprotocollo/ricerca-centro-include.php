@@ -86,7 +86,7 @@
 <script type="text/javascript" language="javascript">
 function autorized(livello) {
 	var scelta = document.search.tabella.value;
-	if ((livello <= 40) && (scelta == 'lettere')) {
+	if ((livello < 40) && (scelta == 'lettere')) {
 		alert("Non hai i privilegi per ricercare nel 'PROTOCOLLO'");
 		document.search.tabella.focus();
 		return false;
