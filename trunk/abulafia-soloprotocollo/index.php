@@ -29,6 +29,9 @@
 
 <body>
 
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+
 <div class="container-login">
 
 	<center><div class="well"><label><h1 class="paneltitle">Abulafia</h1></label><br>Gestione delle segreterie dei Volontari della CRI</div><center>
@@ -84,6 +87,9 @@
 			style="border-width:0" src="http://creativecommons.org/images/public/somerights20.png" />
 		</a>
 	</small></h5></center>
+
+</div>
+</div>
 
 </body>
 </html>
