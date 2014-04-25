@@ -18,7 +18,7 @@ else {
 	<SCRIPT LANGUAGE="Javascript">
 	browser= navigator.appName;
 	if (browser == "Netscape")
-	window.location="login0.php?corpus=anagrafica&urlfoto=<?php echo $urlfoto ; ?>&id=<?php echo $id;?>&from=foto-modifica&upfoto=error"; else window.location="login0.php?corpus=anagrafica&urlfoto=<?php echo $urlfoto ; ?>&id=<?php echo $id;?>&from=foto-modifica&upfoto=error";
+	window.location="login0.php?corpus=anagrafica&id=<?php echo $id;?>&from=foto-modifica&upfoto=error"; else window.location="login0.php?corpus=anagrafica&id=<?php echo $id;?>&from=foto-modifica&upfoto=error";
 	</SCRIPT>
 	<?php
 }

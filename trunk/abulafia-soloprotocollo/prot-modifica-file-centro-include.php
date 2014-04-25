@@ -39,7 +39,7 @@
 		$target_path = "lettere$annoprotocollo/";
 		$idlettera=$_GET['idlettera'];
 		$target_path = $target_path . $idlettera.basename( $_FILES['uploadedfile']['name']); 
-		$urlpdf=  $idlettera.basename( $_FILES['uploadedfile']['name']); 
+		$urlpdf=  addslashes($idlettera.basename( $_FILES['uploadedfile']['name'])); 
 
 		if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
 			?>

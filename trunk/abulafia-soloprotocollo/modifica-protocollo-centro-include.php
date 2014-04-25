@@ -48,7 +48,16 @@
 	if ($from == 'elimina-mittente') {  
 		$idanagrafica=$_GET['idanagrafica'];
 		$idlettera=$_GET['id'];
-		$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
+		
+		//controllo almeno un mittente/destinatario
+		$count=mysql_query("select count(*) from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
+		$count = mysql_fetch_row($count);
+		if($count[0] == 1) {
+			echo '<div class="alert alert-danger"><b>Errore:</b> impossibile eliminare l\'unico mittente o destinario delle lettera. Aggiungerne prima un altro.</div>';
+		}
+		else {
+			$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
+		}
 		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$urlpdf = $_GET['urlpdf'];
@@ -105,7 +114,7 @@
 		<td>
 		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />
 		<label for="exampleInputFile"><span class="glyphicon glyphicon-upload"></span> Carica allegato</label> 
-		<input name="uploadedfile" type="file" id="exampleInputFile" />
+		<input required name="uploadedfile" type="file" id="exampleInputFile" />
 		</td>
 		<td valign="bottom">
 		<button type="submit" class="btn btn-default" onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
@@ -128,7 +137,7 @@
 		<div class="row">
 		<div class ="col-xs-5" id="content" style="display: none;">
 		<br>
-		<b>Caricamento in corso...</b>
+		<b>Caricamento File in corso...</b>
 		<img src="images/progress.gif">
 		</div>
 		</div>
@@ -146,7 +155,7 @@
 		if($count[0] > 0) {
 			echo '<b>Mittenti/Destinatari attuali:</b><br><br>';
 			while ($row2 = mysql_fetch_array($risultati2)) {
-				echo $row2['cognome'] . '  -  ' . $row2['nome'] ;?> <a href="login0.php?corpus=modifica-protocollo&from=elimina-mittente&id=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $row['urlpdf'];?>">elimina</a><br><?php
+				echo $row2['cognome'] . ' ' . $row2['nome'] ;?> - <a href="login0.php?corpus=modifica-protocollo&from=elimina-mittente&id=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $row['urlpdf'];?>">Elimina <span class="glyphicon glyphicon-remove"></span></a><br><?php
 			}
 		}
 		else {
@@ -244,7 +253,9 @@
 <script language="javascript">
  <!--
 function loading() {
-	document.getElementById("content").style.display="table";	
+	if(document.getElementById("exampleInputFile").value != '') {
+		document.getElementById("content").style.display="table";
+	}	
 }
  //-->
 </script> 

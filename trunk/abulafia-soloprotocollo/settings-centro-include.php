@@ -216,7 +216,7 @@
 			</table>			
 			
 			<br>
-			<input class="btn btn-primary" type="button" value="MODIFICA" onClick="Controllo()" />
+			<button class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-edit"></span> MODIFICA</button>
 			</form>
 			
 			</div>

@@ -1,239 +1,282 @@
 <?php
-$level = $_SESSION['auth'];
-$id = $_GET['id'];
 
-//filtro per consentire agli ispettori (che hanno un livello auth basso) di lmodificare l'anagrafica dei soli componenti del proprio gruppo
-$gruppo=mysql_query("select distinct * from joinanagraficagruppo where idanagrafica='$id'");
-$gruppo2= mysql_fetch_array($gruppo); //definizione del gruppo di cui mostrare i componenti
+	$level = $_SESSION['auth'];
+	$id = $_GET['id'];
 
-$gruppoutente=$_SESSION['gruppo']; //definizione del gruppo cui appartiene l'utente di abulafia loggato al momento
+	//inizio del passaggio dei dati dalla pagina precedente
+	$from = $_GET['from'];
+	if(isset($_GET['tabella'])) {
+		$tabella = $_GET['tabella'];
+	}
+	if(isset($_GET['url-foto'])) {
+		$urlfoto =$_GET['url-foto'];
+	}
+	if(isset($_GET['url-foto2'])) {
+		$urlfoto2 =$_POST['url-foto2'];
+	}
+	if(isset($_POST['numero'])) {
+		$numero = $_POST['numero'];
+	}
+	if(isset($_POST['tipo'])) {
+		$tipo = $_POST['tipo'];
+	}
+	if(isset($_GET['numero'])) {
+		$numero2 = $_GET['numero'];
+	}
+	if(isset($_GET['tipo'])) {
+		$tipo2 = $_GET['tipo'];
+	}
+	//fine del passaggio dei dati dalla pagina precedente
 
-//limitazione per gli utenti di basso livello che possono vedere solo gli appartenenti al proprio gruppo
-if (($level < 11) and ($gruppoutente != $gruppo2['idgruppo'])) { 
-echo "Non hai l'autorizzazione necessaria per accedere a questa pagina. Se ritieni di averne diritto, contatta l'amministratore.";
-exit();
-}
-
-
-//inizio del passaggio dei dati dalla pagina precedente
-$from = $_GET['from'];
-$tabella = $_GET['tabella'];
-$urlfoto =$_GET['url-foto'];
-$urlfoto2 =$_POST['url-foto2'];
-$numero = $_POST['numero'];
-$tipo = $_POST['tipo'];
-$numero2 = $_GET['numero'];
-$tipo2 = $_GET['tipo'];
-//fine del passaggio dei dati dalla pagina precedente
-
-if ($from == 'foto-modifica') {$inserisci= mysql_query("UPDATE anagrafica SET urlfoto = '$urlfoto' where idanagrafica = '$id' " );
-}
-if ($from == 'numero-modifica') {$inserisci= mysql_query("insert into jointelefonipersone values('$id', '$numero', '$tipo' )");
-}
-if ($from == 'elimina-numero-modifica') {$elimina= mysql_query("DELETE FROM jointelefonipersone WHERE numero = '$numero2' and tipo = '$tipo2' and idanagrafica='$id'");
-}
-$risultati= mysql_query ("select distinct * from anagrafica where anagrafica.idanagrafica ='$id'");
-$risultati2= mysql_query ("select * from jointelefonipersone where jointelefonipersone.idanagrafica='$id' ");
-$row = mysql_fetch_array($risultati);
-$data = $row['nascitadata'] ;
-list($anno, $mese, $giorno) = explode("-", $data);
-$data2 = "$giorno-$mese-$anno";
-
+	if ($from == 'foto-modifica') {
+		$inserisci= mysql_query("UPDATE anagrafica SET urlfoto = '$urlfoto' where idanagrafica = '$id' " );
+	}
+	if ($from == 'numero-modifica') {
+		$inserisci= mysql_query("insert into jointelefonipersone values('$id', '$numero', '$tipo' )");
+	}
+	if ($from == 'elimina-numero-modifica') {
+		$elimina= mysql_query("DELETE FROM jointelefonipersone WHERE numero = '$numero2' and tipo = '$tipo2' and idanagrafica='$id'");
+	}
+	
+	$risultati= mysql_query ("select distinct * from anagrafica where anagrafica.idanagrafica ='$id'");
+	$risultati2= mysql_query ("select * from jointelefonipersone where jointelefonipersone.idanagrafica='$id' order by jointelefonipersone.tipo");
+	$row = mysql_fetch_array($risultati);
+	$data = $row['nascitadata'] ;
+	list($anno, $mese, $giorno) = explode("-", $data);
+	$data2 = "$giorno-$mese-$anno";
 ?>
-	<div id="primarycontent">
+
+<div class="panel panel-default">
+	
+	<div class="panel-heading">
+		<h3 class="panel-title"><strong>Modifica soggetto:</strong></h3>
+	</div>
+
+	<div class="panel-body">
+	
+		<div class="row">
+		<div class="col-xs-2">
+			<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br>
+			<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'images/nessuna.jpg';}?>" height="110">
+		</div>
 		
-			<!-- primary content start -->
+		<div class="col-xs-3">
+		<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
+			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
+			<label><span class="glyphicon glyphicon-camera"></span> Modifica foto:</label>
+			<br>
+			<input required size="22" name="uploadedfile" type="file" />
+			<br>
+			<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-upload"></span> Upload</button>
+		</form>
+		</div>
+		</div>
+
+		<body onLoad="Change()">
+
+		<br>
+		<div class="row">
+		<div class="col-xs-4">
+		<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br>
+		<table class="table">
+		<?php
+		while ($row2 = mysql_fetch_array($risultati2)) {
+			echo '<tr>';
+			echo '<td>'.ucwords($row2['tipo']).'</td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-xs" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
+			<?php
+			echo '</tr>';
+		}
+		?>
+		</table>
+		</div>
 		
-			<div class="post">
-				<div class="header">
-					<h3><u>Modifica soggetto:</u></h3>
+		<div class="col-xs-8">
+			<form class="form-inline" role="form" action="login0.php?corpus=modifica-anagrafica&from=numero-modifica&id=<?php echo $id;?>" method="post" >
+				<label><span class="glyphicon glyphicon-plus-sign"></span> Aggiungi Recapito:</label><br>
+						
+					<label>Tipo:</label>
+					<div class="form-group">
+					<SELECT class="form-control" NAME="tipo">
+						<OPTION value="fisso">Fisso
+						<OPTION value="cell">Cellullare
+						<OPTION Value="fax">Fax
+						<OPTION Value="email">E-Mail
+						<OPTION Value="facebook">Facebook
+						<OPTION Value="twitter">Twitter
+					</select>
+					</div>
+					
+					<label>Numero/Descrizione:</label>
+					<div class="form-group">
+					<input required size="40" class="form-control" type="text" name="numero">
+					</div>
+					
+					<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Aggiungi</button>
+			</form>
+		</div>
+		</div>
+
+		<form class="form-horizontal" role="form" name="modulo" method="post">
+		
+			<label>Tipologia:</label>
+			<div class="row">
+			<div class="col-xs-3">
+			<SELECT class="form-control input-sm" NAME="anagraficatipologia" onChange="Change()">
+				<?php 
+				if( $row['tipologia'] == 'persona') { 
+					?>
+					<OPTION value="persona" selected >Persona Fisica </OPTION>
+					<?php 
+				} 
+				else { 
+					?>
+					<OPTION value="persona">Persona Fisica</OPTION>
+					<?php 
+				} 
+				 
+				if( $row['tipologia'] == 'carica') { 
+					?>
+					<OPTION value="carica" selected >Carica Elettiva o Incarico</OPTION>
+					<?php 
+				} 
+				else { 
+					?>
+					<OPTION value="carica">Carica Elettiva o Incarico</OPTION>
+					<?php 
+				} 
 				
-				</div>
-				<div class="content">
-					<p>
-
-<img src="foto/<?php echo $row['urlfoto'] ;?>" height="100">
-
-<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
-<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
-Carica una foto:<br> <input size="22" name="uploadedfile" type="file" />
-<input type="submit" value="Upload" />
-</form>
-
-<body onLoad="Change()">
-
-<br><b>Recapiti:</b><br><?php
-while ($row2 = mysql_fetch_array($risultati2)) {
-echo $row2['numero'] . '  -  ' . $row2['tipo'] ;?> <a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>">elimina</a><br><?php
-}
-?>
-<form action="login0.php?corpus=modifica-anagrafica&from=numero-modifica&id=<?php echo $id;?>" method="post" >
-<label>Numero/Descrizione<br><input size="18" type="text" name="numero" />
-</label>
-
-<label>  Tipo  <SELECT size=1 cols=4 NAME="tipo"><br>
-<OPTION value="fisso"> Fisso
-<OPTION value="cell"> Cell.
-<OPTION Value="fax"> Fax
-<OPTION Value="email"> E-Mail
-<OPTION Value="msn"> MSN
-<OPTION Value="facebook"> Url Facebook
-</label>
-</select>
-<input type="submit" value="AGGIUNGI" /><br>
-</form>
-
-<form name="modulo" method="post">
-
-<label> <br>Tipologia:<br>
-
-<?php if ($_SESSION['auth'] > 10) {?>
-
-<SELECT size=1 cols=4 NAME="anagraficatipologia" onChange="Change()">
-
-<?php if( $row['tipologia'] == 'persona') { ?>
-<OPTION value="persona" selected >Persona Fisica </OPTION>
-<?php } else { ?>
-<OPTION value="persona">Persona Fisica</OPTION>
-<?php } ?>
-
-<?php if( $row['tipologia'] == 'carica') { ?>
-<OPTION value="carica" selected >Carica Elettiva o Incarico&nbsp;</OPTION>
-<?php } else { ?>
-<OPTION value="carica">Carica Elettiva o Incarico&nbsp;</OPTION>
-<?php } ?>
-
-<?php if( $row['tipologia'] == 'gruppo') { ?>
-<OPTION value="gruppo" selected >Gruppo Pionieri</OPTION>
-<?php } else { ?>
-<OPTION value="gruppo">Gruppo Pionieri</OPTION>
-<?php } ?>
-
-<?php if( $row['tipologia'] == 'ente') { ?>
-<OPTION Value="ente" selected >Ente</OPTION>
-<?php } else { ?>
-<OPTION value="ente">Ente</OPTION>
-<?php } ?>
-
-</select>
-<?php } else { ?>
-
-<SELECT size=1 cols=4 NAME="anagraficatipologia" onChange="Change()">
-<OPTION value="persona" selected >Persona Fisica </OPTION>
-<?php } ?>
-
-</label>
-<br>
-
-<label><b> Cognome o denominazione <br><input size="40" type="text" name="cognome" value="<?php echo $row['cognome'];?>" />
-</label>
-
-<label> <br>Nome (lasciare vuoto in caso di ente o carica)<br><input size="40" type="text" name="nome" value="<?php echo $row['nome'];?>"/>
-
-</label>
-
-<label> <br>Nato il (gg-mm-aaaa)<br>
-<select size="1" cols=4 type="text" name="nascitadatagiorno" />
-<OPTION selected value="<?php echo $giorno;?>"> <?php echo $giorno;?>
-<?php
-$iterazionegiornodelmese = 0;
-while ($iterazionegiornodelmese < 31) { $iterazionegiornodelmese = $iterazionegiornodelmese +1;?>
-<OPTION value="<?php echo $iterazionegiornodelmese;?>"> <?php echo $iterazionegiornodelmese;?>&nbsp;&nbsp; 
-<?php } ?>
-</select>
-</label>
-
-<label>
-<select size="1" cols=4 type="text" name="nascitadatamese" />
-<OPTION selected value="<?php echo $mese;?>"> <?php echo $mese;?>
-<?php
-$iterazionemese = 0;
-while ($iterazionemese < 12) { $iterazionemese = $iterazionemese +1;?>
-<OPTION value="<?php echo $iterazionemese;?>"> <?php echo $iterazionemese;?>&nbsp;&nbsp; 
-<?php } ?>
-</select>
-</label>
-
-<label>
-<select size="1" cols=4 type="text" name="nascitadataanno" />
-<OPTION selected value="<?php echo $anno;?>"> <?php echo $anno;?>&nbsp;&nbsp; 
-<?php 
-$iterazioneannonascita =1920;
-while ($iterazioneannonascita < strftime("%Y") ) { $iterazioneannonascita = $iterazioneannonascita +1;?> 
-<OPTION value="<?php echo $iterazioneannonascita;?>"> <?php echo $iterazioneannonascita;}?>
-</select>
-
-</label>
-
-<label> <br>Comune <br><input size="30" type="text" name="nascitacomune"  value="<?php echo $row['nascitacomune'];?>"/>
-</label>
-
-<label>  Prov.  <input size="3" type="text" name="nascitaprovincia"  value="<?php echo $row['nascitaprovincia'];?>"/>
-</label>
-
-<label> <br>Stato<br><input size="40" type="text" name="nascitastato"  value="<?php echo $row['nascitastato'];?>"/>
-</label>
-
-<label> <br>Residente in (via)<br><input size="30" type="text" name="residenzavia"  value="<?php echo $row['residenzavia'];?>"/>
-</label>
-
-<label> Num. <input size="3" type="text" name="residenzacivico"  value="<?php echo $row['residenzacivico'];?>"/>
-</label>
-
-<label> <br>Residente in (comune)<br><input size="30" type="text" name="residenzacomune"  value="<?php echo $row['residenzacitta'];?>"/>
-</label>
-
-<label> Prov. <input size="3" type="text" name="residenzaprovincia"  value="<?php echo $row['residenzaprovincia'];?>"/>
-</label>
-
-<label><br>Codice di avviamento postale<br> <input size="30" type="text" name="residenzacap"  value="<?php echo $row['residenzacap'];?>"/>
-</label>
-
-<label> <br>Residente in (stato)<br><input size="40" type="text" name="residenzastato"  value="<?php echo $row['residenzastato'];?>"/>
-</label>
-
-
-<label> <br>Gruppo Sanguigno<br>
-
-<SELECT size=1 cols=4 NAME="grupposanguigno" >
-<OPTION selected="value="<?php echo $row['grupposanguigno'];?>""> <?php echo $row['grupposanguigno'];?>
-<OPTION value="0rh+"> 0rh+
-<OPTION value="0rh-"> 0rh-
-<OPTION Value="Arh+"> Arh+
-<OPTION value="Arh-"> Arh-
-<OPTION value="Brh+"> Brh+
-<OPTION value="Brh-"> Brh-
-<OPTION Value="ABrh+"> ABrh+&nbsp;
-<OPTION value="ABrh-"> ABrh-
-</select>
-</label>
-
-<label> <br>Codice Fiscale<br><input size="40" type="text" name="codicefiscale" value="<?php echo $row['codicefiscale'];?>" />
-</label>
-</b>
-
-</body>
-
-<br>
-
-
-<br>
-
-<input type="button" value="MODIFICA" onClick="Controllo()" /><br><br>
-</form>
-
-</p></div>
-					
+				if( $row['tipologia'] == 'ente') { 
+					?>
+					<OPTION Value="ente" selected >Ente</OPTION>
+					<?php 
+				} 
+				else { 
+					?>
+					<OPTION value="ente">Ente</OPTION>
+					<?php 
+				} 
+				?>
+			</select>
+			</div></div>
 			
-<div class="footer">
-
-					
-				</div>
-		</div>
+			<br>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Cognome:</label> 
+			<div class="row">
+			<div class="col-sm-4">
+			<input class="form-control input-sm" type="text" name="cognome" value="<?php echo $row['cognome'];?>" />
+			</div></div></div>
 			
-			<!-- post end -->
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Nome:</label>
+			<div class="row">
+			<div class="col-xs-4">
+			<input class="form-control input-sm" type="text" name="nome" value="<?php echo $row['nome'];?>"/>
+			</div></div></div>
+			
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Nato il:</label>
+			<div class="row">
+			<div class="col-xs-2">
+			<input type="text" class="form-control input-sm datepicker" name="datanascita">
+			</div></div></div>
+			
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Comune:</label>
+			<div class="row">
+			<div class="col-xs-4">
+			<input class="form-control input-sm" type="text" name="nascitacomune"  value="<?php echo $row['nascitacomune'];?>"/>
+			</div></div></div>
+			
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Provincia:</label>
+			<div class="row">
+			<div class="col-xs-1">
+			<input class="form-control input-sm" type="text" name="nascitaprovincia"  value="<?php echo $row['nascitaprovincia'];?>"/>
+			</div></div></div>
+				
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Stato:</label>
+			<div class="row">
+			<div class="col-xs-3">
+			<input class="form-control input-sm" type="text" name="nascitastato"  value="<?php echo $row['nascitastato'];?>"/>
+			</div></div></div>
+			
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Residente in via:</label>
+			<div class="row">
+			<div class="col-xs-5">
+			<input class="form-control input-sm" type="text" name="residenzavia"  value="<?php echo $row['residenzavia'];?>"/>
+			</div></div></div>
+			
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Numero:</label>
+			<div class="row">
+			<div class="col-xs-1">
+			<input class="form-control input-sm" type="text" name="residenzacivico"  value="<?php echo $row['residenzacivico'];?>"/>
+			</div></div></div>
+			
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Comune di:</label>
+			<div class="row">
+			<div class="col-xs-4">
+			<input class="form-control input-sm" type="text" name="residenzacomune"  value="<?php echo $row['residenzacitta'];?>"/>
+			</div></div></div>
 
-		</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Provincia:</label>
+			<div class="row">
+			<div class="col-xs-1">
+			<input class="form-control input-sm" type="text" name="residenzaprovincia"  value="<?php echo $row['residenzaprovincia'];?>"/>
+			</div></div></div>
+
+			<div class="form-group">
+			<label class="col-sm-2 control-label">CAP:</label>
+			<div class="row">
+			<div class="col-xs-2">
+			<input class="form-control input-sm" type="text" name="residenzacap"  value="<?php echo $row['residenzacap'];?>"/>
+			</div></div></div>
+		
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Stato di residenza:</label>
+			<div class="row">
+			<div class="col-xs-4">
+			<input class="form-control input-sm" type="text" name="residenzastato"  value="<?php echo $row['residenzastato'];?>"/>
+			</div></div></div>
+
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Gruppo Sanguigno:</label>
+			<div class="row">
+			<div class="col-xs-2">
+			<SELECT class="form-control input-sm" NAME="grupposanguigno" >
+				<OPTION selected="value="<?php echo $row['grupposanguigno'];?>""> <?php echo $row['grupposanguigno'];?>
+				<OPTION value="0rh+"> 0rh+
+				<OPTION value="0rh-"> 0rh-
+				<OPTION Value="Arh+"> Arh+
+				<OPTION value="Arh-"> Arh-
+				<OPTION value="Brh+"> Brh+
+				<OPTION value="Brh-"> Brh-
+				<OPTION Value="ABrh+"> ABrh+
+				<OPTION value="ABrh-"> ABrh-
+			</select>
+			</div></div></div>
+			
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Codice Fiscale:</label>
+			<div class="row">
+			<div class="col-xs-4">
+			<input class="form-control input-sm" type="text" name="codicefiscale" value="<?php echo $row['codicefiscale'];?>" />
+			</div></div></div>
+
+			</body>
+
+			<div class="col-sm-offset-2">
+			<button class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-edit"></span> MODIFICA</button>
+			</div>
+		</form>
+	</div>
+  
+</div>
 
 <script language="javascript">
  <!--
@@ -266,9 +309,7 @@ while ($iterazioneannonascita < strftime("%Y") ) { $iterazioneannonascita = $ite
 	{
 	  document.modulo.cognome.disabled = false;
           document.modulo.nome.disabled = false;
-	  document.modulo.nascitadatagiorno.disabled = false;
-	  document.modulo.nascitadatamese.disabled = false;
-	  document.modulo.nascitadataanno.disabled = false;
+	  document.modulo.datanascita.disabled = false;
 	  document.modulo.nascitacomune.disabled = false;
 	  document.modulo.nascitaprovincia.disabled = false;
 	  document.modulo.nascitastato.disabled = false;
@@ -283,38 +324,12 @@ while ($iterazioneannonascita < strftime("%Y") ) { $iterazioneannonascita = $ite
 	  document.modulo.numero.disabled = false;
 	  document.modulo.tipo.disabled = false;
 	}
-	  	  
-	if (type == "gruppo") 
-	{
-  	  document.modulo.cognome.disabled = false;
-          document.modulo.nome.disabled = true;
-	  document.modulo.nascitadatagiorno.disabled = false;
-	  document.modulo.nascitadatamese.disabled = false;
-	  document.modulo.nascitadataanno.disabled = false;
-	  document.modulo.nascitacomune.disabled = true;
-	  document.modulo.nascitaprovincia.disabled = true;
-	  document.modulo.nascitastato.disabled = true;
-	  document.modulo.residenzavia.disabled = false;
-	  document.modulo.residenzacivico.disabled = false;
-	  document.modulo.residenzacomune.disabled = false;
-	  document.modulo.residenzaprovincia.disabled = false;
-	  document.modulo.residenzacap.disabled = false;
-	  document.modulo.residenzastato.disabled = false;
-	  document.modulo.grupposanguigno.disabled = true;
-	  document.modulo.codicefiscale.disabled = true;
-	  document.modulo.numero.disabled = false;
-	  document.modulo.tipo.disabled = false;
-
-
-	}
 	
 	if (type == "carica") 
 	{
 	  document.modulo.cognome.disabled = false;
 	  document.modulo.nome.disabled = true;
-	  document.modulo.nascitadatagiorno.disabled = true;
-	  document.modulo.nascitadatamese.disabled = true;
-	  document.modulo.nascitadataanno.disabled = true;
+	  document.modulo.datanascita.disabled = true;
 	  document.modulo.nascitacomune.disabled = true;
 	  document.modulo.nascitaprovincia.disabled = true;
 	  document.modulo.nascitastato.disabled = true;
@@ -334,9 +349,7 @@ while ($iterazioneannonascita < strftime("%Y") ) { $iterazioneannonascita = $ite
 	{
 	  document.modulo.cognome.disabled = false;	
 	  document.modulo.nome.disabled = true;
-	  document.modulo.nascitadatagiorno.disabled = true;
-	  document.modulo.nascitadatamese.disabled = true;
-	  document.modulo.nascitadataanno.disabled = true;
+	  document.modulo.datanascita.disabled = true;
 	  document.modulo.nascitacomune.disabled = true;
 	  document.modulo.nascitaprovincia.disabled = true;
 	  document.modulo.nascitastato.disabled = true;

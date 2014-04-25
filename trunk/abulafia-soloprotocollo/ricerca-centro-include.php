@@ -19,7 +19,7 @@
 							<input class="form-control input-sm" placeholder="lasciare vuoto per una ricerca senza filtri" type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
 						</div>
 						<div class="col-xs-2">
-							<button class="btn btn-default" type="button" onClick="autorized(<?php echo $level ?>)"><span class="glyphicon glyphicon-search"></span> Cerca</button>
+							<button class="btn btn-primary" type="button" onClick="autorized(<?php echo $level ?>)"><span class="glyphicon glyphicon-search"></span> Cerca</button>
 						</div>
 					</div>
 					<br>
