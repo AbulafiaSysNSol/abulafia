@@ -161,7 +161,8 @@
 			
 			<br>
 			<div class="form-group">
-			<label class="col-sm-2 control-label">Cognome:</label> 
+			<label id="lblcog" class="col-sm-2 control-label">Cognome:</label> 
+			<label id="lblden" style="display: none;" class="col-sm-2 control-label">Denominazione:</label>
 			<div class="row">
 			<div class="col-sm-4">
 			<input class="form-control input-sm" type="text" name="cognome" value="<?php echo $row['cognome'];?>" />
@@ -307,6 +308,8 @@
 	
 	if (type == "persona") 
 	{
+		document.getElementById("lblcog").style.display="table";
+		document.getElementById("lblden").style.display="none";
 	  document.modulo.cognome.disabled = false;
           document.modulo.nome.disabled = false;
 	  document.modulo.datanascita.disabled = false;
@@ -327,6 +330,8 @@
 	
 	if (type == "carica") 
 	{
+		document.getElementById("lblcog").style.display="none";
+		document.getElementById("lblden").style.display="table";
 	  document.modulo.cognome.disabled = false;
 	  document.modulo.nome.disabled = true;
 	  document.modulo.datanascita.disabled = true;
@@ -347,6 +352,8 @@
 	
 	if (type == "ente") 
 	{
+		document.getElementById("lblcog").style.display="none";
+		document.getElementById("lblden").style.display="table";
 	  document.modulo.cognome.disabled = false;	
 	  document.modulo.nome.disabled = true;
 	  document.modulo.datanascita.disabled = true;
@@ -363,28 +370,6 @@
 	  document.modulo.codicefiscale.disabled = false;
 	  document.modulo.numero.disabled = false;
 	  document.modulo.tipo.disabled = false;
-	}
-	
-	if (type == "") 
-	{
-	  document.modulo.cognome.disabled = true;	
-	  document.modulo.nome.disabled = true;
-	  document.modulo.nascitadatagiorno.disabled = true;
-	  document.modulo.nascitadatamese.disabled = true;
-	  document.modulo.nascitadataanno.disabled = true;
-	  document.modulo.nascitacomune.disabled = true;
-	  document.modulo.nascitaprovincia.disabled = true;
-	  document.modulo.nascitastato.disabled = true;
-	  document.modulo.residenzavia.disabled = true;
-	  document.modulo.residenzacivico.disabled = true;
-	  document.modulo.residenzacomune.disabled = true;
-	  document.modulo.residenzaprovincia.disabled = true;
-	  document.modulo.residenzacap.disabled = true;
-	  document.modulo.residenzastato.disabled = true;
-	  document.modulo.grupposanguigno.disabled = true;
-	  document.modulo.codicefiscale.disabled = true;
-	  document.modulo.numero.disabled = true;
-	  document.modulo.tipo.disabled = true;
 	}
 }
  //-->
