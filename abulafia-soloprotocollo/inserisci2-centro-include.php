@@ -21,6 +21,9 @@
 	if( isset($_GET['url-foto']) ) {
 		$url_foto = $_GET['url-foto'];
 	}
+	else {
+		$url_foto = '';
+	}
 	$gruppo_sanguigno = $_POST['grupposanguigno'];
 	$codice_fiscale = $_POST['codicefiscale'];
 	$telefono = $_POST['numero'];
@@ -43,8 +46,13 @@
 		$lastid=mysql_insert_id();
 		$old_compl_url='foto/'.$url_foto;
 		$new_compl_url='foto/'.$lastid.$url_foto;
-		$newname=$lastid.$url_foto;
 		@rename ("$old_compl_url", "$new_compl_url");
+		if($url_foto != '') {
+			$newname=$lastid.$url_foto;
+		}
+		else {
+			$newname = '';
+		}
 		$inserimento3=mysql_query("update anagrafica set anagrafica.urlfoto='$newname' where anagrafica.idanagrafica='$lastid'");
 		if (!$inserimento3) { 
 			echo "<br>Inserimento foto non riuscito"; 
@@ -72,7 +80,6 @@
 	else {
 		$exist = true;
 	}
-
 ?>
 
 <div class="panel panel-default">

@@ -1,8 +1,12 @@
 <?php
 
-if ( isset($_GET['urlfoto']) ) { $urlfoto = $_GET['urlfoto']; }
-else { $urlfoto = 'sagoma.jpg'; }
-$my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
+	if (isset($_GET['urlfoto'])) { 
+		$urlfoto = $_GET['urlfoto']; 
+	}
+	else { 
+		$urlfoto = ''; 
+	}
+	$my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
 ?>
 
 <div class="panel panel-default">
@@ -44,12 +48,12 @@ $my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
 
 			<td>
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />			
-			<input name="uploadedfile" type="file" id="exampleInputFile">
+			<input required name="uploadedfile" type="file" id="exampleInputFile">
 			<br>
 			<button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span> Salva</button>
 			</td>
 
-			<td><img src="foto/<?php echo $urlfoto ;?>" height="100"></td>
+			<td><img src="foto/<?php if($urlfoto) {echo $urlfoto;} else {echo 'sagoma.jpg';}?>" height="100"></td>
 
 			</tr>
 			</table>
@@ -289,7 +293,7 @@ $my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
 			</div>
 			
 			
-			<button type="button" class="btn btn-default" onClick="Controllo()">Inserisci</button>
+			<button type="button" class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-check"></span> Inserisci</button>
 
 			</form>
 

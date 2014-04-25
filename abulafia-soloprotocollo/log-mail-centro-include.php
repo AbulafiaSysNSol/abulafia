@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-		<h3 class="panel-title"><strong>Log delle ultime 15 email</strong></h3>
+		<h3 class="panel-title"><strong><span class="glyphicon glyphicon-envelope"></span> Log delle ultime 15 email</strong></h3>
 		</div>
 		<div class="panel-body">
 			<p>
