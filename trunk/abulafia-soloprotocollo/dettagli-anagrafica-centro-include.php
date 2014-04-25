@@ -3,9 +3,11 @@
 	$id= $_GET['id'];
 	$risultati=mysql_query("select * from anagrafica where idanagrafica='$id'");
 	$risultati2=mysql_query("select * from jointelefonipersone where idanagrafica='$id'");
+	$countrecapiti = mysql_query("select count(*) from jointelefonipersone where idanagrafica='$id'");
 	$row = mysql_fetch_array($risultati);
 	$data = $row['nascitadata'] ;
 	list($anno, $mese, $giorno) = explode("-", $data);
+	$datanascita = $giorno .'/'. $mese .'/'. $anno;
 ?>
 
 <div class="panel panel-default">
@@ -26,38 +28,38 @@
 					if ($row['tipologia']=='persona') {
 						?>
 						<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">Cognome: </font>
-						<strong><font style="font-family:'Comic Sans MS', cursive" size="+1"><?php echo ucwords(strtolower($row['cognome'])) ; ?></font></strong>
+						<strong><font style="font-family:'Arial', cursive" size="+1"><?php echo ucwords(strtolower($row['cognome'])) ; ?></font></strong>
 						<?php 
 					}
 					
 					if ($row['tipologia']!='persona') {
 						?>
 						<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">Denominazione: </font>
-						<strong><font style="font-family:'Comic Sans MS', cursive" size="+1"><?php echo ucwords(strtolower($row['cognome'])) ; ?></font></strong>
+						<strong><font style="font-family:'Arial', cursive" size="+1"><?php echo ucwords(strtolower($row['cognome'])) ; ?></font></strong>
 						<?php 
 					}
 					
-					if ($row['tipologia']=='persona') {
+					if ($row['tipologia']=='persona' AND $row['nome'] != '') {
 						?>
 						<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1"><br>Nome: </font><strong>
-						<font style="font-family:'Comic Sans MS', cursive" size="+1"><?php echo ucwords(strtolower($row['nome'])) ; ?></font></strong>
+						<font style="font-family:'Arial', cursive" size="+1"><?php echo ucwords(strtolower($row['nome'])) ; ?></font></strong>
 						<?php 
 					}
 				
-					if ($row['tipologia']=='persona') {
+					if ($row['tipologia']=='persona' AND ( $datanascita != '' AND $datanascita != '00/00/0000' AND $datanascita != '01/01/1901') ) {
 						?>
 						<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1"><br>Data di Nascita: </font>
-						<strong><font style="font-family:'Comic Sans MS', cursive" size="+1"><?php echo $giorno .'/'. $mese .'/'. $anno ; ?></font></strong>
+						<strong><font style="font-family:'Arial', cursive" size="+1"><?php echo $datanascita ; ?></font></strong>
 						<?php 
 					}
 					?>
 
 					<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">
 						<?php 
-						if ($row['tipologia']=='persona') {
+						if ($row['tipologia']=='persona' AND $row['nascitacomune'] != '') {
 							?>
 							<br>Luogo di Nascita: </font>
-							<strong><font style="font-family:'Comic Sans MS', cursive" size="+1"><?php echo ucwords(strtolower($row['nascitacomune'])); 
+							<strong><font style="font-family:'Arial', cursive" size="+1"><?php echo ucwords(strtolower($row['nascitacomune'])); 
 							if ($row['nascitaprovincia'] !='') { 
 								echo ' (' . strtoupper($row['nascitaprovincia']) . ')'; 
 							} 
@@ -68,87 +70,121 @@
 						}
 						?>
 							</strong>
-							
-					<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1"><br>Codice Fiscale: </font>
-					<font style="font-family:'Comic Sans MS', cursive" size="+1"><strong><?php echo strtoupper($row['codicefiscale']); ?></strong></font>
+					
+					<?php
+					if($row['codicefiscale'] != '') {
+						?>
+						<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1"><br>Codice Fiscale: </font>
+						<font style="font-family:'Arial', cursive" size="+1"><strong><?php echo strtoupper($row['codicefiscale']); ?></strong></font>
+						<?php
+					}
+					?>
+					
 				</td>
 			
 				<?php 
 				if ($row['tipologia']=='persona') {
-					list($tipo, $rh)=explode('rh', $row['grupposanguigno']); 
+					$gr = explode('rh', $row['grupposanguigno']);
+					if(isset($gr[0])) {
+						$tipo = $gr[0];
+					}
+					if(isset($gr[1])) {
+						$rh = $gr[1];
+					}
 					?>
 					<td width="60px" height="60px" background="images/tesserino/<?php echo $rh; ?>.png" style="background-repeat:no-repeat; background-position:top; padding-top:18px; padding-right:2px" align="center" valign="top">
-						<strong><font style="font-family:'Comic Sans MS', cursive" size="+3"><?php echo $tipo; ?></font></strong>
+						<strong><font style="font-family:'Arial', cursive" size="+3"><?php echo $tipo; ?></font></strong>
 					</td>
 					<?php 
 				}
 				?>
 			</tr>
 
-			<tr>
-				<td colspan="3" valign="middle" style="border-top:solid 3px; border-left:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">
-					<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">
-					<?php 
-					if ($row['tipologia']=='persona') {
-						?>
-						Residente in: </font><strong>
-						<font style="font-family:'Comic Sans MS', cursive" size="+1"><?php echo ucwords(strtolower($row['residenzavia'])); 
-						if ($row['residenzacivico']!='') {
-							echo ' n. ' . $row['residenzacivico'] ;
-						} 
-					}
-					?>
-					</font></strong>
-
-					<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">
-					<?php 
-						if ($row['tipologia']!='persona') { 
+			<?php
+			if($row['residenzavia'] != '' OR $row['residenzacitta'] != '' OR $row['residenzacap'] != '') {
+				?>
+				<tr>
+					<td colspan="3" valign="middle" style="border-top:solid 3px; border-left:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">
+						
+						<?php 
+						if ($row['tipologia']=='persona' AND $row['residenzavia'] != '') {
 							?>
-							Indirizzo: </font><strong>
-							<font style="font-family:'Comic Sans MS', cursive" size="+1"><?php echo $row['residenzavia']; 
+							<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">
+								Residente in: 
+							</font>
+							<strong><font style="font-family:'Arial', cursive" size="+1"><?php echo ucwords(strtolower($row['residenzavia'])); 
+							if ($row['residenzacivico']!='') {
+								echo ' n. ' . $row['residenzacivico'] ;
+							} 
+							echo '</font></strong><br>';
+						}
+						
+						if ($row['tipologia']!='persona' AND $row['residenzavia'] != '') { 
+							?>
+							<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">
+								Indirizzo: 
+							</font>
+							<strong><font style="font-family:'Arial', cursive" size="+1"><?php echo ucwords(strtolower($row['residenzavia'])); 
 							if ($row['residenzacivico']!='') { 
 								echo ' n. ' . $row['residenzacivico'];
 							} 
 							?>
-							</font></strong>  
+							</font></strong><br>
 							<?php 
 						}
-						?>
+						
+						if($row['residenzacitta'] != '') {
+							?>
+							<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">Comune: </font>
+							<font style="font-family:'Arial', cursive" size="+1"><strong><?php echo ucwords(strtolower($row['residenzacitta'])); 
+							if ($row['residenzaprovincia']!='') {
+								echo ' ('. strtoupper($row['residenzaprovincia']) . ')';
+							} 
+							?>
+							</strong></font><br>
+							<?php
+						}
+						
 
-					<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1"><br>Comune: </font>
-					<font style="font-family:'Comic Sans MS', cursive" size="+1"><strong><?php echo $row['residenzacitta']; 
-					if ($row['residenzaprovincia']!='') {
-						echo ' ('. $row['residenzaprovincia'] . ')';
-					} 
-					?>
-					</strong></font>
-
-					<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1"><br>CAP: </font>
-					<font style="font-family:'Comic Sans MS', cursive" size="+1"><strong><?php echo $row['residenzacap']; ?></strong></font>
-
-				</td>
-			</tr>
-		    
-			<tr>
-				<td width="" style="border-top:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">  
-					<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">Recapiti: </font>
-				</td>
-				
-				<td colspan="2" width="" style="border-top:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">
-					<strong><font style="font-family:'Comic Sans MS', cursive" size="+1">
-					<?php
-					while ($row2 = mysql_fetch_array($risultati2)) {
-						if ($row2['numero'] != '') {
-							echo '<img src="images/'.$row2['tipo'].'.png" width="20" height="20"> '; echo strtolower($row2['numero']). '  -  ' .strtoupper($row2['tipo']);
+						if($row['residenzacap'] != '') {
+							?>
+							<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">CAP: </font>
+							<font style="font-family:'Arial', cursive" size="+1"><strong><?php echo $row['residenzacap']; ?></strong></font>
+							<?php
 						}
 						?>
-						<br> 
+
+					</td>
+				</tr>
+				<?php
+			}
+			
+			$cr = mysql_fetch_row($countrecapiti);
+			if ($cr[0] > 0) {
+				?>
+				<tr>
+					<td width="" style="border-top:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">  
+						<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">Recapiti: </font>
+					</td>
+					
+					<td colspan="2" width="" style="border-top:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">
+						<strong><font style="font-family:'Arial', cursive" size="+1">
 						<?php
-					}
-					?>
-					</font></strong>
-				</td>
-			</tr>
+						while ($row2 = mysql_fetch_array($risultati2)) {
+							if ($row2['numero'] != '') {
+								echo '<img src="images/'.$row2['tipo'].'.png" width="20" height="20"> '; echo strtolower($row2['numero']). '  -  ' .strtoupper($row2['tipo']);
+							}
+							?>
+							<br> 
+							<?php
+						}
+						?>
+						</font></strong>
+					</td>
+				</tr>
+				<?php
+			}
+			?>
 		</table>
 	</div>
   
