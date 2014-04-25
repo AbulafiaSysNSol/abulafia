@@ -179,7 +179,7 @@
 			<td>
 			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
 			<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
-			<input name="uploadedfile" type="file" id="exampleInputFile">
+			<input required name="uploadedfile" type="file" id="exampleInputFile">
 			</td>
 			<td valign="bottom">
 			<button type="submit" class="btn btn-default" onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
@@ -205,7 +205,7 @@
 			<div class="row">
 			<div class ="col-xs-5" id="content" style="display: none;">
 			<br>
-			<b>Caricamento in corso...</b>
+			<b>Caricamento File in corso...</b>
 			<img src="images/progress.gif">
 			</div>
 			</div>
@@ -379,11 +379,12 @@
 		document.getElementById("txtnome").required = false;
 	}
  }
-  function loading() 
-
-  {
-	  document.getElementById("content").style.display="table";	
-  }
+ 
+function loading() {
+	if(document.getElementById("exampleInputFile").value != '') {
+		document.getElementById("content").style.display="table";
+	}
+}
 
   function Controllo() 
   {
