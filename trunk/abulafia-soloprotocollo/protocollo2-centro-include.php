@@ -23,7 +23,10 @@
 	
 	//se la pagina da cui si proviene è crea nuovo protocollo
 	if ($from == 'crea') {  
-		$lastrec= mysql_query("SELECT * FROM lettere$annoprotocollo ORDER BY idlettera desc LIMIT 1");
+		$lastrec= mysql_query("SELECT * 
+					FROM lettere$annoprotocollo 
+					ORDER BY idlettera 
+					desc LIMIT 1");
 		
 		while ($lastrec2 = mysql_fetch_array($lastrec)) {
 			$lastrec3=$lastrec2['idlettera'];
@@ -33,7 +36,11 @@
 		$lastjoinletteremittenti=mysql_query("SELECT count(*) FROM joinletteremittenti$annoprotocollo where idlettera='$lastrec3'");
 		$lastjoinletteremittenti = mysql_fetch_array($lastjoinletteremittenti);
 			
-		if (($lastjoinletteremittenti[0] < 1) or (!$lasttopic)) { //controlla che sia stato attribuito un oggetto e un mittente all'ultimo protocollo. In caso non sia stato fatto, lo cancella e lo riutilizza, in quanto ritenuto un protocollo non correttamente registrato e probabile frutto di errore.
+		if (($lastjoinletteremittenti[0] < 1) or (!$lasttopic)) { /*controlla che sia stato attribuito un oggetto 
+									e un mittente all'ultimo protocollo. In caso non sia stato fatto,
+									 lo cancella e lo riutilizza, in quanto ritenuto un protocollo 
+									 non correttamente registrato e probabile frutto di errore.
+									 */
 			$cancella=mysql_query("DELETE FROM lettere$annoprotocollo WHERE idlettera='$lastrec3' limit 1 ");
 			$resetta=mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $lastrec3 ");
 			$cancella2=mysql_query("DELETE from joinletteremittenti$annoprotocollo where idlettera='$lastrec3' limit 1");
@@ -212,12 +219,39 @@
 			?>
 			
 			<?php
-			$risultati=mysql_query("select anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, joinletteremittenti$annoprotocollo.idlettera, joinletteremittenti$annoprotocollo.idanagrafica from anagrafica, joinletteremittenti$annoprotocollo where anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica and joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
+			$risultati=mysql_query("select 
+						anagrafica.idanagrafica, 
+						anagrafica.cognome, 
+						anagrafica.nome, 
+						joinletteremittenti$annoprotocollo.idlettera, 
+						joinletteremittenti$annoprotocollo.idanagrafica 
+						from 
+						anagrafica, joinletteremittenti$annoprotocollo 
+						where 
+						anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica 
+						and 
+						joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
 			if ($row = mysql_fetch_array($risultati)) {
 				echo '<b>Mittenti/Destinatari:<br><br></b>';
-				$risultati2=mysql_query("select anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, joinletteremittenti$annoprotocollo.idlettera, joinletteremittenti$annoprotocollo.idanagrafica from anagrafica, joinletteremittenti$annoprotocollo where anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica and joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
+				$risultati2=mysql_query("select 
+							anagrafica.idanagrafica, 
+							anagrafica.cognome, 
+							anagrafica.nome, 
+							joinletteremittenti$annoprotocollo.idlettera, 
+							joinletteremittenti$annoprotocollo.idanagrafica 
+							from 
+							anagrafica, joinletteremittenti$annoprotocollo 
+							where 
+							anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica 
+							and 
+							joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
 				while ($row2 = mysql_fetch_array($risultati2)) {
-					echo ucwords($row2['cognome'] . ' ' . $row2['nome']) ;?> - <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idlettera=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $urlpdf;?>"></span> Elimina <span class="glyphicon glyphicon-remove"></a><br>
+					echo ucwords($row2['cognome'] . ' ' . $row2['nome']) ;?> - <a href="login0.php?corpus=protocollo2
+												&from=elimina-mittente
+												&idlettera=<?php echo $idlettera;?>
+												&idanagrafica=<?php echo $row2['idanagrafica'];?>
+												&urlpdf=<?php echo $urlpdf;?>"></span> 
+												Elimina <span class="glyphicon glyphicon-remove"></a><br>
 					<?php
 				}
 			}
