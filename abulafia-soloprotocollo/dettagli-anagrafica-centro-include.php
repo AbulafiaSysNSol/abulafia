@@ -16,7 +16,7 @@
 	</div>
 	
 	<div class="panel-body">
-		<table width="100%" border="0" style="border:solid 3px; border-color:#C0C0C0; background-repeat:repeat-x; background-position:top" cellspacing="0" background="images/tesserino/sfondo.png">
+		<table width="100%" border="0" style="border:solid 3px; border-color:#C0C0C0; background-repeat:repeat-x; background-position:top" cellspacing="0" background="images/dettagli/sfondo.png">
 			<tr>
 				<td width="170px" height="180px" style="background-repeat:no-repeat; background-position:center; padding:10px 5px 10px 5px"" align="center">
 					<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'images/nessuna.jpg';} ?>" width="145">
@@ -92,7 +92,7 @@
 						$rh = $gr[1];
 					}
 					?>
-					<td width="60px" height="60px" background="images/tesserino/<?php echo $rh; ?>.png" style="background-repeat:no-repeat; background-position:top; padding-top:18px; padding-right:2px" align="center" valign="top">
+					<td width="60px" height="60px" background="images/dettagli/<?php echo $rh; ?>.png" style="background-repeat:no-repeat; background-position:top; padding-top:18px; padding-right:2px" align="center" valign="top">
 						<strong><font style="font-family:'Arial', cursive" size="+3"><?php echo $tipo; ?></font></strong>
 					</td>
 					<?php 
