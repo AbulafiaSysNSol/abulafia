@@ -54,10 +54,22 @@
 
 	<div class="panel-body">
 	
+		<?php
+			if( isset($_GET['upfoto']) && $_GET['upfoto'] == "error") {
+			?>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="alert alert-danger">C'e' stato un errore nel caricamento della foto, controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+				</div>
+			</div>
+			<?php
+			}
+		?>
+	
 		<div class="row">
 		<div class="col-xs-2">
 			<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br>
-			<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'images/nessuna.jpg';}?>" height="110">
+			<center><img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'images/nessuna.jpg';}?>" height="110"></center>
 		</div>
 		
 		<div class="col-xs-3">

@@ -6,9 +6,7 @@
 	}
 	$cognome = $_POST['cognome'];
 	$nome = $_POST['nome'];
-	$nascita_data_giorno = $_POST['nascitadatagiorno'];
-	$nascita_data_mese = $_POST['nascitadatamese'];
-	$nascita_data_anno = $_POST['nascitadataanno'];
+	$datanascita = $_POST['datanascita'];
 	$nascita_comune = $_POST['nascitacomune'];
 	$nascita_provincia  = $_POST['nascitaprovincia'];
 	$nascita_stato = $_POST['nascitastato'];
@@ -30,7 +28,8 @@
 	$tipo = $_POST['tipo'];
 	$telefono2 = $_POST['numero2'];
 	$tipo2 = $_POST['tipo2'];
-	$nascita_data = $nascita_data_anno . '-' . $nascita_data_mese . '-' . $nascita_data_giorno   ;
+	$nascitadata = explode('/',$datanascita);
+	$nascita_data = $nascitadata[2].'-'.$nascitadata[1].'-'.$nascitadata[0];
 	$anagraficatipologia= $_POST['anagraficatipologia'];
 
 	//fine passaggio dati
@@ -90,7 +89,7 @@
 					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica registrata correttamente!</div>
 				</div>
 			</div>
-			<p><img width="130" src="foto/<?php echo $lastid.$url_foto; ?>"><br><br>Cognome: <strong><?php echo $cognome ; ?></strong> <br>Nome: <strong><?php echo $nome ; ?></strong><br>Data di Nascita: <strong><?php echo $nascita_data_giorno .'-'. $nascita_data_mese .'-'. $nascita_data_anno ; ?></strong></p>
+			<p><img width="130" src="foto/<?php echo $lastid.$url_foto; ?>"><br><br>Cognome: <strong><?php echo $cognome ; ?></strong> <br>Nome: <strong><?php echo $nome ; ?></strong><br>Data di Nascita: <strong><?php echo $datanascita; ?></strong></p>
 		</div>
 		  
 		<div class="panel-heading">

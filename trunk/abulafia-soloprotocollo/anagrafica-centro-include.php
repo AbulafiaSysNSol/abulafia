@@ -59,13 +59,12 @@
 			</table>
 			</form>
 
-			<form name="modulo" method="post" >
+			<form class="form-horizontal" role="form" name="modulo" method="post" >
 
-			<div class="form-group">
 				<label>Tipologia:</label>
 				<div class="row">
-					<div class="col-xs-2">
-						<select class="form-control input-sm"  size=1 cols=4 NAME="anagraficatipologia" onChange="Change()">
+					<div class="col-xs-3">
+						<select class="form-control input-sm" NAME="anagraficatipologia" onChange="Change()">
 						<OPTION selected value="">Scegli...
 						<OPTION value="persona"> Persona Fisica
 						<OPTION value="carica"> Carica Elettiva o Incarico
@@ -73,10 +72,11 @@
 						</select>
 					</div>
 				</div>
-			</div>
 			
+			<br>
 			<div class="form-group">
-				<label>Cognome o Denominazione:</label>
+				<label id="lblcog" class="col-sm-2 control-label">Cognome:</label>
+				<label id="lblden" style="display: none;" class="col-sm-2 control-label">Denominazione:</label>
 				<div class="row">
 					<div class="col-xs-4">
 						<input type="text" class="form-control input-sm" size="40" name="cognome" disabled>
@@ -85,7 +85,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Nome:</label>
+				<label class="col-sm-2 control-label">Nome:</label>
 				<div class="row">
 					<div class="col-xs-4">
 						<input type="text" class="form-control input-sm" size="40" name="nome" disabled>
@@ -94,52 +94,14 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Nato il (gg-mm-aaaa)</label>
-				<div class="row">
-					<div class="col-xs-4">
-						<table><tr>
-						
-						<td>
-						<select class="form-control input-sm" size="1" cols=4 type="text" name="nascitadatagiorno" disabled />
-						<OPTION selected value="01">
-						<?php
-						$iterazionemese = 0;
-						while ($iterazionemese < 31) { $iterazionemese = $iterazionemese +1;?>
-						<OPTION value="<?php echo $iterazionemese ;?>"> <?php echo $iterazionemese?>
-						<?php } ?>
-						</select>
-						</select>
-						</td>
-						
-						<td>
-						<select class="form-control input-sm" size="1" cols=4 type="text" name="nascitadatamese" disabled />
-						<OPTION selected value="01"> &nbsp;&nbsp;
-						<?php
-						$iterazionemese = 0;
-						while ($iterazionemese < 12) { $iterazionemese = $iterazionemese +1;?>
-						<OPTION value="<?php echo $iterazionemese ;?>"> <?php echo $iterazionemese?>
-						<?php } ?>
-						</select>
-						</td>
-						
-						<td>
-						<select class="form-control input-sm" size="1" cols=4 type="text" name="nascitadataanno" disabled />
-						<OPTION selected value="1901"> &nbsp;&nbsp;
-						<?php 
-						$iterazioneannonascita = 1920;
-						while ($iterazioneannonascita < strftime("%Y") ) { $iterazioneannonascita = $iterazioneannonascita +1;?> 
-						<OPTION value="<?php echo $iterazioneannonascita;?>"> <?php echo $iterazioneannonascita;}?>
-						</select>
-						</td>
-						
-						</tr></table>
-						
-					</div>						
-				</div>
-			</div>
+			<label class="col-sm-2 control-label">Nato il:</label>
+			<div class="row">
+			<div class="col-xs-2">
+			<input type="text" class="form-control input-sm datepicker" name="datanascita" disabled>
+			</div></div></div>
 			
 			<div class="form-group">
-				<label>Comune di nascita:</label>
+				<label class="col-sm-2 control-label">Comune di nascita:</label>
 				<div class="row">
 					<div class="col-xs-4">
 						<input type="text" class="form-control input-sm" size="30" name="nascitacomune" disabled>
@@ -148,7 +110,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Provincia di nascita:</label>
+				<label class="col-sm-2 control-label">Provincia di nascita:</label>
 				<div class="row">
 					<div class="col-xs-1">
 						<input type="text" class="form-control input-sm" size="40" name="nascitaprovincia" disabled>
@@ -157,7 +119,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Stato:</label>
+				<label class="col-sm-2 control-label">Stato:</label>
 				<div class="row">
 					<div class="col-xs-3">
 						<input type="text" class="form-control input-sm" size="40" name="nascitastato" disabled>
@@ -166,7 +128,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Residente in via:</label>
+				<label class="col-sm-2 control-label">Residente in via:</label>
 				<div class="row">
 					<div class="col-xs-5">
 						<input type="text" class="form-control input-sm" size="40" name="residenzavia" disabled>
@@ -175,7 +137,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>N:</label>
+				<label class="col-sm-2 control-label">N:</label>
 				<div class="row">
 					<div class="col-xs-1">
 						<input type="text" class="form-control input-sm" size="40" name="residenzacivico" disabled>
@@ -184,7 +146,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Comune di:</label>
+				<label class="col-sm-2 control-label">Comune di:</label>
 				<div class="row">
 					<div class="col-xs-4">
 						<input type="text" class="form-control input-sm" size="40" name="residenzacomune" disabled>
@@ -193,7 +155,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Provincia:</label>
+				<label class="col-sm-2 control-label">Provincia:</label>
 				<div class="row">
 					<div class="col-xs-1">
 						<input type="text" class="form-control input-sm" size="40" name="residenzaprovincia" disabled>
@@ -202,7 +164,7 @@
 			</div>
 
 			<div class="form-group">
-				<label>CAP:</label>
+				<label class="col-sm-2 control-label">CAP:</label>
 				<div class="row">
 					<div class="col-xs-2">
 						<input type="text" class="form-control input-sm" size="40" name="residenzacap" disabled>
@@ -211,7 +173,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Stato di residenza:</label>
+				<label class="col-sm-2 control-label">Stato di residenza:</label>
 				<div class="row">
 					<div class="col-xs-4">
 						<input type="text" class="form-control input-sm" size="40" name="residenzastato" disabled>
@@ -220,7 +182,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Gruppo sanguigno:</label>
+				<label class="col-sm-2 control-label">Gruppo sanguigno:</label>
 				<div class="row">
 					<div class="col-xs-2">
 						<select class="form-control input-sm"  size=1 cols=4 NAME="grupposanguigno" onChange="Change()" disabled>
@@ -239,7 +201,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Codice Fiscale:</label>
+				<label class="col-sm-2 control-label">Codice Fiscale:</label>
 				<div class="row">
 					<div class="col-xs-4">
 						<input type="text" class="form-control input-sm" size="40" name="codicefiscale" disabled>
@@ -247,8 +209,8 @@
 				</div>
 			</div>
 			
-			<label>Recapito:</label>
 			<div class="form-group">
+			<label class="col-sm-2 control-label">Recapito:</label>
 				<div class="row">
 					<div class="col-xs-2">
 						<SELECT class="form-control input-sm" size=1 cols=4 NAME="tipo"  disabled><br>
@@ -269,9 +231,8 @@
 				</div>
 			</div>
 
-			
-			<label>Altro recapito:</label>
 			<div class="form-group">
+			<label class="col-sm-2 control-label">Altro recapito:</label>
 				<div class="row">
 					<div class="col-xs-2">
 						<SELECT class="form-control input-sm" size=1 cols=4 NAME="tipo2"  disabled><br>
@@ -292,9 +253,10 @@
 				</div>
 			</div>
 			
-			
+			<div class="col-sm-offset-2">
 			<button type="button" class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-check"></span> Inserisci</button>
-
+			</div>
+			
 			</form>
 
 		</div>
@@ -338,11 +300,11 @@
 	
 	if (type == "persona") 
 	{
+		document.getElementById("lblcog").style.display="table";
+		document.getElementById("lblden").style.display="none";
 	  document.modulo.cognome.disabled = false;
           document.modulo.nome.disabled = false;
-	  document.modulo.nascitadatagiorno.disabled = false;
-	  document.modulo.nascitadatamese.disabled = false;
-	  document.modulo.nascitadataanno.disabled = false;
+	  document.modulo.datanascita.disabled = false;
 	  document.modulo.nascitacomune.disabled = false;
 	  document.modulo.nascitaprovincia.disabled = false;
 	  document.modulo.nascitastato.disabled = false;
@@ -359,39 +321,14 @@
 	  document.modulo.numero2.disabled = false;
 	  document.modulo.tipo2.disabled = false;
 	}
-	  	  
-	if (type == "gruppo") 
-	{
-	  document.modulo.cognome.disabled = false;
-          document.modulo.nome.disabled = true;
-	  document.modulo.nascitadatagiorno.disabled = false;
-	  document.modulo.nascitadatamese.disabled = false;
-	  document.modulo.nascitadataanno.disabled = false;
-	  document.modulo.nascitacomune.disabled = true;
-	  document.modulo.nascitaprovincia.disabled = true;
-	  document.modulo.nascitastato.disabled = true;
-	  document.modulo.residenzavia.disabled = false;
-	  document.modulo.residenzacivico.disabled = false;
-	  document.modulo.residenzacomune.disabled = false;
-	  document.modulo.residenzaprovincia.disabled = false;
-	  document.modulo.residenzacap.disabled = false;
-	  document.modulo.residenzastato.disabled = false;
-	  document.modulo.grupposanguigno.disabled = true;
-	  document.modulo.codicefiscale.disabled = true;
-	  document.modulo.numero.disabled = false;
-	  document.modulo.tipo.disabled = false;
-	  document.modulo.numero2.disabled = false;
-	  document.modulo.tipo2.disabled = false;
-
-	}
 	
 	if (type == "carica") 
 	{
+		document.getElementById("lblcog").style.display="none";
+		document.getElementById("lblden").style.display="table";
 	  document.modulo.cognome.disabled = false;
 	  document.modulo.nome.disabled = true;
-	  document.modulo.nascitadatagiorno.disabled = true;
-	  document.modulo.nascitadatamese.disabled = true;
-	  document.modulo.nascitadataanno.disabled = true;
+	  document.modulo.datanascita.disabled = true;
 	  document.modulo.nascitacomune.disabled = true;
 	  document.modulo.nascitaprovincia.disabled = true;
 	  document.modulo.nascitastato.disabled = true;
@@ -411,11 +348,11 @@
 	
 	if (type == "ente") 
 	{
+		document.getElementById("lblcog").style.display="none";
+		document.getElementById("lblden").style.display="table";
 	  document.modulo.cognome.disabled = false;	
 	  document.modulo.nome.disabled = true;
-	  document.modulo.nascitadatagiorno.disabled = true;
-	  document.modulo.nascitadatamese.disabled = true;
-	  document.modulo.nascitadataanno.disabled = true;
+	  document.modulo.datanascita.disabled = true;
 	  document.modulo.nascitacomune.disabled = true;
 	  document.modulo.nascitaprovincia.disabled = true;
 	  document.modulo.nascitastato.disabled = true;
@@ -437,9 +374,7 @@
 	{
 	  document.modulo.cognome.disabled = true;	
 	  document.modulo.nome.disabled = true;
-	  document.modulo.nascitadatagiorno.disabled = true;
-	  document.modulo.nascitadatamese.disabled = true;
-	  document.modulo.nascitadataanno.disabled = true;
+	  document.modulo.datanascita.disabled = true;
 	  document.modulo.nascitacomune.disabled = true;
 	  document.modulo.nascitaprovincia.disabled = true;
 	  document.modulo.nascitastato.disabled = true;
@@ -453,8 +388,8 @@
 	  document.modulo.codicefiscale.disabled = true;
 	  document.modulo.numero.disabled = true;
 	  document.modulo.tipo.disabled = true;
-	  document.modulo.numero2.disabled = false;
-	  document.modulo.tipo2.disabled = false;
+	  document.modulo.numero2.disabled = true;
+	  document.modulo.tipo2.disabled = true;
 	}
   }
  //-->
