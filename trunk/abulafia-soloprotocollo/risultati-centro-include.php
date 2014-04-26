@@ -82,22 +82,20 @@
 		else {
 			if($nomecercato != NULL) { 
 				$count = mysql_query(	"SELECT COUNT(*) 
-								FROM anagrafica $joinanagraficagruppo 
+								FROM anagrafica
 								where ((anagrafica.idanagrafica = '$cercato' 
 								or (anagrafica.nome='$nomecercato' 
 								and anagrafica.cognome='$cognomecercato')) 
-								and (anagrafica.tipologia='$filtro') 
-								$filtroispettorigruppo )
+								and (anagrafica.tipologia='$filtro'))
 								");//conteggio per divisione in pagine dei risultati
     			}
 			else {
 				$count = mysql_query(	"SELECT COUNT(*) 
-								FROM anagrafica $joinanagraficagruppo 
+								FROM anagrafica
 								where ((anagrafica.idanagrafica = '$cercato' 
 								or anagrafica.nome like '%$cercato%' 
 								or anagrafica.cognome like '%$cercato%') 
-								and (anagrafica.tipologia='$filtro') 
-								$filtroispettorigruppo )
+								and (anagrafica.tipologia='$filtro'))
 								");//conteggio per divisione in pagine dei risultati
     			}
 		}
@@ -137,20 +135,18 @@
 								where ((anagrafica.idanagrafica = '$cercato' 
 								or (anagrafica.nome='$nomecercato' 
 								and anagrafica.cognome='$cognomecercato')) 
-								and (anagrafica.tipologia='$filtro') 
-								$filtroispettorigruppo ) 
+								and (anagrafica.tipologia='$filtro')) 
 								$ordinerisultati 
 								limit $iniziorisultati , $risultatiperpagina 
 								");
     			}
 			else {
 				$risultati= mysql_query("select distinct * 
-								FROM anagrafica $joinanagraficagruppo 
+								FROM anagrafica
 								where ((anagrafica.idanagrafica = '$cercato' 
 								or anagrafica.nome like '%$cercato%' 
 								or anagrafica.cognome like '%$cercato%') 
-								and (anagrafica.tipologia='$filtro') 
-								$filtroispettorigruppo ) 
+								and (anagrafica.tipologia='$filtro')) 
 								$ordinerisultati 
 								limit $iniziorisultati , $risultatiperpagina 
 								");
