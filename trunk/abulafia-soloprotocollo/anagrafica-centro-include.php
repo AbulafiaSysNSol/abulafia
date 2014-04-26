@@ -215,11 +215,10 @@
 					<div class="col-xs-2">
 						<SELECT class="form-control input-sm" size=1 cols=4 NAME="tipo"  disabled><br>
 						<OPTION Value=""> seleziona tipo
-						<OPTION Value="email"> E-Mail
-						<OPTION value="fisso"> Fisso
-						<OPTION value="cell"> Cell.
+						<OPTION Value="fisso">Telefono
+						<OPTION value="cell"> Cellulare
+						<OPTION value="email"> Email
 						<OPTION Value="fax"> Fax
-						<OPTION Value="msn"> MSN
 						<OPTION Value="facebook">Facebook
 						<OPTION Value="twitter"> Twitter
 						</select>
@@ -237,11 +236,10 @@
 					<div class="col-xs-2">
 						<SELECT class="form-control input-sm" size=1 cols=4 NAME="tipo2"  disabled><br>
 						<OPTION Value=""> seleziona tipo
-						<OPTION Value="email"> E-Mail
-						<OPTION value="fisso"> Fisso
-						<OPTION value="cell"> Cell.
+						<OPTION Value="fisso">Telefono
+						<OPTION value="cell"> Cellulare
+						<OPTION value="email"> Email
 						<OPTION Value="fax"> Fax
-						<OPTION Value="msn"> MSN
 						<OPTION Value="facebook">Facebook
 						<OPTION Value="twitter"> Twitter
 						</select>
