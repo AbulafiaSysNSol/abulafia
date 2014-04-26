@@ -45,6 +45,7 @@
  <!-- META -->
   
   <!-- CSS -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="css/grid.css" rel="stylesheet">
   <!-- CSS -->  
@@ -114,7 +115,7 @@
 			if ($_SESSION['auth'] > 50) {
 				?>
 				<li class="divider"></li>
-				<li><a href="login0.php?corpus=gestione-utenti"><span class="glyphicon glyphicon-user"></span> Gestione degli Utenti</a></li>
+				<li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users"></i> Gestione degli Utenti</a></li>
 				<li><a href="login0.php?corpus=advancedsettings"><span class="glyphicon glyphicon-wrench"></span> Advanced Settings</a></li>
 				<li><a href="download.php?lud=access.log&est=log"><span class="glyphicon glyphicon-download"></span> Scarica il log degli accessi</a></li>
 				<li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>

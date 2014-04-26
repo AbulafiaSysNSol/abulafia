@@ -1,49 +1,48 @@
 <?php
-$idlettera= $_GET['id']; //acquisizione dell'id della lettera da inviare tramite newsletter
+	$idlettera= $_GET['id']; //acquisizione dell'id della lettera da inviare tramite newsletter
 ?>
 
-<div id="primarycontent">
-	<div class="post">
-		<div class="header"><h3><u>Invio mailing list:</u></h3></div>
-			<div class="content">
-				<p>
-
-<form action="login0.php?corpus=invia-newsletter2&id=<?php echo $idlettera;?>" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="mittente" value="<?php $_SESSION['mittente'] ?>">
-<table border="0">
-<tr>
-  <td><br><i>N.B. - Indirizzi multipli vanno separati da virgole.<br> Ad esempio:<b> tizio@pionierisicilia.com,caio@pionierisicilia.com</b></i></td><td></td></tr>
-  <tr>
-<td><b>Destinatari:</b></td></tr>
-  <tr><td><input type="text" size ="52" name="destinatario" value="" /></td>
-</tr>
-<tr>
-  <td><b>Oggetto:</b></td></tr><tr>
-  <td><input type="text" name="oggetto" value="" size ="52"/></td>
-</tr>
-<tr>
-  <td><b>Messaggio:</b></td></tr><tr>
-  <td><textarea cols="50" rows="15" name="messaggio"></textarea></td>
-  </tr>
-  
-<tr>
-  <td style="padding:3px">
-    <input type="checkbox" name="intestazione" value="intestazione" checked="checked"> Intestazione Standard<br />
-	<input type="checkbox" name="firma" value="firma" checked="checked"> Firma Standard<br />
-<font size="-2">(Per utilizzare una intestazione ed una firma personalizzata deselezionare le caselle)</font>
-  </td>
-</tr>
-  
-<tr>
-  <td colspan="2" align="right"><input type="submit" value="Invia" /></td>
-</tr>
-</table>
-</form>
-
-	</strong> 
-</b>
-
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><strong>Invio Protocollo come allegato</strong></h3>
+	</div>
+	
+	<div class="panel-body">
+		<form action="login0.php?corpus=invia-newsletter2&id=<?php echo $idlettera;?>" method="POST" enctype="multipart/form-data">
+			<input type="hidden" name="mittente" value="<?php $_SESSION['mittente'] ?>">
+			<i> N.B. - Indirizzi multipli vanno separati da virgole.
+			<br> 
+			Ad esempio:<b> tizio@example.it,caio@example.it</b></i>
+			
+			<br><br>
+			<div class="row">
+				<div class="col-xs-5">
+					<div class="form-group">
+						<label>Destinatari:</label>
+						<input required class="form-control" type="text" name="destinatario" placeholder="inserisci i destinatari separandoli con una virgola...">
+					</div>
+					
+					<div class="form-group">
+						<label>Oggetto:</label>
+						<input class="form-control" type="text" name="oggetto" placeholder="inserisci un oggetto...">
+					</div>
+					
+					<div class="form-group">
+						<label>Messaggio:</label>
+						<textarea class="form-control" rows="5" name="messaggio" placeholder="aggiungi un messaggio..."></textarea>
+					</div>
+					
+					<div class="form-group">
+						<input type="checkbox" name="intestazione" value="intestazione" checked="checked"> Intestazione Standard<br />
+					</div>
+					
+					<div class="form-group">
+						<input type="checkbox" name="firma" value="firma" checked="checked"> Firma Standard
+					</div>
+				</div>
 			</div>
-		</p>
+			<small>(Per utilizzare una intestazione ed una firma personalizzata deselezionare le caselle)</small>
+			<br><br><button type="submit" class="btn btn-success"><i class="fa fa-share"></i> Invia</button>
+		</form>
 	</div>
 </div>

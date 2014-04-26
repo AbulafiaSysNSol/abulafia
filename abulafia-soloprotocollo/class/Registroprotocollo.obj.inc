@@ -1,24 +1,17 @@
 <?php 
-class Registroprotocollo
-	{ //apertura classe
+class Registroprotocollo { //apertura classe
 
-var $annodb; 
-
+	var $annodb; 
 
 	private function selezionaanno ($var) // modulo per la selezione dell'anno di uso del registro protocollo
 		{
 		$this->annodb = mysql_fetch_array (mysql_query("select annoprotocollo FROM defaultsettings where idanagrafica='1'" ));
 		}
 
-
-
-
-
 	function publselezionaanno ($var) //<man>Legge dal DB l'anno corrente di uso del protocollo</man>
 		{
 		$this->selezionaanno($var);
 		}
-
 
 	private function controlloanno() //controllo fra l'anno corrente e l'anno del sistema
 		{
@@ -39,7 +32,7 @@ var $annodb;
 				else
  					{
  					 alert("Contatta gli amministratori di sistema per assistenza nel passaggio d'anno.");
-						window.location = "index.html"
+						window.location = "index.php"
 
   					}
 				}
@@ -53,15 +46,10 @@ var $annodb;
 		
 		 }
 
-
 	function publcontrolloanno () //<man>Controlla la corrispondenza tra l'anno del protocollo e l'anno solare corrente</man>
 		{
 		$this->controlloanno ();
 		}
-
-
-
-
 
 	}//chiusura classe
 ?>
