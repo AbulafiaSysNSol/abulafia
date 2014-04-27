@@ -2,7 +2,7 @@
 class Lettera {
 	private $mittentidestinatari='';
 	private $speditaricevuta='';
-	private $urlpdf='';
+	private $urlfile=array();
 	private $oggetto='';
 	private $datalettera='';
 	private $posizione='';
@@ -13,6 +13,7 @@ class Lettera {
 	private $arraylettera;
 
 	private function leggilettera ($idlettera, $annoricercaprotocollo) { //<man>legge i dati dettagliati di una lettera in protocollo, indicandone id e anno di registrazione</man>
+		
 		$tabella= 'lettere'.$annoricercaprotocollo;
 		$joinletteremittenti= 'joinletteremittenti'.$annoricercaprotocollo;
 		$joinlettereinserimento='joinlettereinserimento'.$annoricercaprotocollo;
@@ -44,7 +45,7 @@ class Lettera {
 		</strong>
       
 		<br>
-		File associato: <b>
+		File associati: <b>
 		<?php
 			$my_file = new File (); 		
 			$download = $my_file->downloadlink($this->arraylettera1['urlpdf'], $this->arraylettera1['idlettera'], $annoricercaprotocollo,'30'); //richiamo del metodo "downloadlink" dell'oggetto file
@@ -205,6 +206,28 @@ class Lettera {
 	public function publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo) { //<man>Inserisce in ajax i risultati della ricerca in anagrafica per  il mittente/destinatario di una lettera, passando l'id della lettera, l'id dell'anagrafica e l'anno di registrazione</man>
 		$inserisci=mysql_query("insert into joinletteremittenti$annoprotocollo values('$idlettera', '$idanagrafica')");
 	}//fine metodo
+	
+
+	public function cercaAllegati ($idlettera, $annoprotocollo) //<man>ricerca i path dei file allegati alla lettera passata come parametro</man>
+		{
+	 
+		$this->patharray=mysql_query("select 
+					distinct * 
+					from 
+					joinlettereallegati 
+					where
+					idlettera=$idlettera
+					and
+					annoprotocollo=$annoprotocollo
+					");
+					
+		while ($this->patharray2=mysql_fetch_row($this->patharray))
+			{
+			array_push($this->urlfile, $this->patharray2);
+			}
+		return $this->urlfile;
+		
+		}//fine metodo
 
 }//chiusura della classe
 
