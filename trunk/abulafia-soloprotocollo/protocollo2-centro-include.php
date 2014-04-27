@@ -172,53 +172,66 @@
 			}
 			?>
 			
-			<div class="form-group">
-			<form role="form" enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file&idlettera=<?php echo $idlettera;?>" method="POST">
+			<!--form caricamento allegati-->
+			
+			<div class="form-group"> 
+			<form role="form" 
+				enctype="multipart/form-data" 
+				action="login0.php?corpus=prot-modifica-file
+					&idlettera=<?php echo $idlettera;?>" 
+				method="POST">
 			<table>
 			<tr>
-			<td>
-			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
+			<td> <!--impostazione dimensione massima file-->
+			<input type="hidden" 
+				name="MAX_FILE_SIZE" 
+				value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
 			<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
-			<input required name="uploadedfile" type="file" id="exampleInputFile">
+			<input name="uploadedfile" type="file" id="exampleInputFile">
 			</td>
 			<td valign="bottom">
-			<button type="submit" class="btn btn-default" onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
+			<button type="submit" 
+				class="btn btn-default" 
+				onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
 			</td>
 			</tr>
 			</table>
 			</form>
 			
 			<?php
-			$cercadocumento= mysql_query("select distinct * from lettere$annoprotocollo where idlettera='$idlettera'");
-			$urlpdf1= mysql_fetch_array($cercadocumento);
-			$urlpdf=$urlpdf1['urlpdf'];
-			$download = $my_file->downloadlink ($urlpdf, $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-			if ($download != "Nessun file associato") {
-				echo "<br><span class=\"glyphicon glyphicon-file\"></span> <b>File associato: </b>" . $download;
-			}
-			else {
-				echo "<br>Nessun file associato.";
-			}
-				
-			?>
+			$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
+			foreach ( $urlfile as $chiave=>$valore)
+				{
+				$download = $my_file->downloadlink ($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
+				if ($download != "Nessun file associato") 
+					{
+					echo "<br><span class=\"glyphicon glyphicon-file\"></span> <b>File associato: </b>" . $download;
+					}
+				else 
+					{
+					echo "<br>Nessun file associato.";
+					}	
+				?>
 
-			<div class="row">
-			<div class ="col-xs-5" id="content" style="display: none;">
-			<br>
-			<b>Caricamento File in corso...</b>
-			<img src="images/progress.gif">
-			</div>
-			</div>
+				<div class="row">
+				<div class ="col-xs-5" id="content" style="display: none;">
+				<br>
+				<b>Caricamento in corso...</b>
+				<img src="images/progress.gif">
+				</div>
+				</div>
 			
-			<br>
+				<br>
+				<?php
+				}
+	
 			
-			<?php
+			
+			
 				if($errore) { echo "<div class=\"alert alert-danger\">"; }
 				$my_lettera -> publcercamittente ($idlettera,''); //richiamo del metodo
 				if($errore) { echo "</div>"; }
-			?>
-			
-			<?php
+
 			$risultati=mysql_query("select 
 						anagrafica.idanagrafica, 
 						anagrafica.cognome, 
@@ -379,12 +392,11 @@
 		document.getElementById("txtnome").required = false;
 	}
  }
- 
-function loading() {
-	if(document.getElementById("exampleInputFile").value != '') {
-		document.getElementById("content").style.display="table";
-	}
-}
+  function loading() 
+
+  {
+	  document.getElementById("content").style.display="table";	
+  }
 
   function Controllo() 
   {
