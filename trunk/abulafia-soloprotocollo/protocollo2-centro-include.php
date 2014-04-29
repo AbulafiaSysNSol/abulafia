@@ -45,6 +45,15 @@
 			$resetta=mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $lastrec3 ");
 			$cancella2=mysql_query("DELETE from joinletteremittenti$annoprotocollo where idlettera='$lastrec3' limit 1");
 			$cancella3=mysql_query("DELETE from joinlettereinserimento$annoprotocollo where idlettera='$lastrec3' limit 1");
+			
+			$urlfile= $my_lettera->cercaAllegati($lastrec3, $annoprotocollo);
+			foreach ($urlfile as $valore) {
+				$delete = $my_file->cancellaAllegato($lastrec3, $annoprotocollo, $valore[2]);
+				if (!$delete) {
+					echo "Si è verificato un problema con la cancellazione di un allegato.";
+				}
+			}
+			$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera='$lastrec3' AND annoprotocollo=$annoprotocollo");
 		}
 		
 		$dataregistrazione = strftime("%Y-%m-%d");
@@ -185,7 +194,7 @@
 				name="MAX_FILE_SIZE" 
 				value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
 			<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
-			<input name="uploadedfile" type="file" id="exampleInputFile">
+			<input required name="uploadedfile" type="file" id="exampleInputFile">
 			</td>
 			<td valign="bottom">
 			<button type="submit" 
@@ -199,7 +208,7 @@
 			<?php
 			$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
 			foreach ($urlfile as $valore) {
-				$download = $my_file->downloadlink ($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
+				$download = $my_file->downloadlink($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
 				if ($download != "Nessun file associato") {
 					echo "<br><span class=\"glyphicon glyphicon-file\"></span> <b>File associato: </b>" . $download;
 				}
@@ -390,7 +399,9 @@
   function loading() 
 
   {
-	  document.getElementById("content").style.display="table";	
+	 if(document.getElementById("exampleInputFile").value != '') {
+		document.getElementById("content").style.display="table";
+	}		
   }
 
   function Controllo() 
