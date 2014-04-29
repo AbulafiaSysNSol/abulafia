@@ -25,7 +25,7 @@ else
 }
 
 $annoricercaprotocollo=$_GET['annoricercaprotocollo'];
-$lud2= stripslashes($tabella.$annoricercaprotocollo.$path.$lud);
+$lud2= stripslashes($lud);
 $lud3=stripslashes($fileprename.$idlettera); // nome assegnato al file per il download
 $fp = fopen($lud2, 'rb');
 header("Pragma: public");

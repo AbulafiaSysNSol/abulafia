@@ -19,7 +19,7 @@ Class File
 		return $this->estensione;
 		}
 
-		public function downloadlink ($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)
+		public function downloadlink($nomefile, $idlettera, $annoricercaprotocollo, $numerocaratteri)
 		{
 			if (!$nomefile) {
              			$this->link = "Nessun file associato";
@@ -51,6 +51,12 @@ Class File
 				 }
 				 
 			return $this->link;
+		}
+		
+		public function cancellaAllegato($idlettera, $anno, $nome) {
+			$deletepath = "lettere".$anno."/".$idlettera."/".$nome;
+			$delete = unlink($deletepath);
+			return $delete;
 		}
 
 	}//fine classe
