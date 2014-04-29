@@ -14,7 +14,9 @@
 	
 		$target_path = "lettere$annoprotocollo/"; //setta la directory di destinazione del file da caricare
 		$idlettera=$_GET['idlettera']; //setta l'id della lettera cui attribuire gli allegati
-		$target_path = $target_path . $idlettera."/".time().".".$my_file->estensioneFile (basename( $_FILES['uploadedfile']['name'])); 
+		$time = time();
+		$name = $time.".".$my_file->estensioneFile (basename( $_FILES['uploadedfile']['name']));
+		$target_path = $target_path . $idlettera."/".$time.".".$name; 
 												/*
 												aggiunge alla directory, 
 												una sotto-directory con l'id della lettera
@@ -38,7 +40,7 @@
 			echo $target_path2;
 			$inserisci=mysql_query("insert 
 						into joinlettereallegati
-						values($idlettera, $annoprotocollo, '$target_path2')
+						values($idlettera, $annoprotocollo, '$name')
 						");			
 			?>
 			<SCRIPT LANGUAGE="Javascript">

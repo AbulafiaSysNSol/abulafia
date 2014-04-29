@@ -27,7 +27,7 @@ Class File
 			else {
 			
              			$this->opzionidownloadlink= "annoricercaprotocollo=".$annoricercaprotocollo 
-								      ."&lud=".$nomefile
+								      ."&lud=lettere".$annoricercaprotocollo."/".$idlettera."/".$nomefile
 								      ."&idlettera=".$idlettera
 								      ."&est=".$this->estensioneFile($nomefile);//richiamo del metodo ricava estensione dal file di questa stessa classe
 								      
