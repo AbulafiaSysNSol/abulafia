@@ -510,9 +510,10 @@
 					</td>
 					<td>
 						<div class="btn-group btn-group-sm">
-							<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span> Info</a>
-							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span> Modifica</a>
-							<a class="btn btn-success" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span> Invia</a>
+							<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
+							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
+							<a class="btn btn-success" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span></a>
+							<a class="btn btn-primary" href="login0.php?corpus=barcode&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-barcode"></span></a>
 						</div>
 					</td>		
 				</tr>

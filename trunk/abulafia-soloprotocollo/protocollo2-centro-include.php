@@ -68,11 +68,9 @@
 	if ($from == 'elimina-mittente') { 
 		$idlettera=$_GET['idlettera'];
 		$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
-		$urlpdf = $_GET['urlpdf'];
 	}
 	
 	if ($from == 'urlpdf') {  
-		$urlpdf = $_GET['urlpdf'];
 		$idlettera=$_GET['idlettera'];
 	}
 	
@@ -200,19 +198,17 @@
 			
 			<?php
 			$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
-			foreach ( $urlfile as $chiave=>$valore)
-				{
+			foreach ($urlfile as $valore) {
 				$download = $my_file->downloadlink ($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-				if ($download != "Nessun file associato") 
-					{
+				if ($download != "Nessun file associato") {
 					echo "<br><span class=\"glyphicon glyphicon-file\"></span> <b>File associato: </b>" . $download;
-					}
-				else 
-					{
+				}
+				else {
 					echo "<br>Nessun file associato.";
-					}	
+				}
+			}
 				?>
-
+			
 				<div class="row">
 				<div class ="col-xs-5" id="content" style="display: none;">
 				<br>
@@ -223,7 +219,7 @@
 			
 				<br>
 				<?php
-				}
+			
 	
 			
 			
@@ -262,8 +258,7 @@
 					echo ucwords($row2['cognome'] . ' ' . $row2['nome']) ;?> - <a href="login0.php?corpus=protocollo2
 												&from=elimina-mittente
 												&idlettera=<?php echo $idlettera;?>
-												&idanagrafica=<?php echo $row2['idanagrafica'];?>
-												&urlpdf=<?php echo $urlpdf;?>"></span> 
+												&idanagrafica=<?php echo $row2['idanagrafica'];?>"></span> 
 												Elimina <span class="glyphicon glyphicon-remove"></a><br>
 					<?php
 				}
@@ -416,7 +411,7 @@
 	//mando i dati alla pagina
 	else 
 	{
-           document.modulo.action = "login0.php?corpus=protocollo3&urlpdf=<?php echo $urlpdf;?>&idlettera=<?php echo $idlettera;?>";
+           document.modulo.action = "login0.php?corpus=protocollo3&idlettera=<?php echo $idlettera;?>";
            document.modulo.submit();
       }
   }
