@@ -208,10 +208,8 @@ class Lettera {
 	}//fine metodo
 	
 
-	public function cercaAllegati ($idlettera, $annoprotocollo) //<man>ricerca i path dei file allegati alla lettera passata come parametro</man>
-		{
-	 
-		$this->patharray=mysql_query("select 
+	public function cercaAllegati ($idlettera, $annoprotocollo) {//<man>ricerca i path dei file allegati alla lettera passata come parametro</man>	 
+		$this->patharray = mysql_query("select 
 					distinct * 
 					from 
 					joinlettereallegati 
@@ -220,14 +218,11 @@ class Lettera {
 					and
 					annoprotocollo=$annoprotocollo
 					");
-					
-		while ($this->patharray2=mysql_fetch_row($this->patharray))
-			{
+		while ($this->patharray2=mysql_fetch_row($this->patharray)) {
 			array_push($this->urlfile, $this->patharray2);
-			}
+		}
 		return $this->urlfile;
-		
-		}//fine metodo
+	}//fine metodo
 
 }//chiusura della classe
 
