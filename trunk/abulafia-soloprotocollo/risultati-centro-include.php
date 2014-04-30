@@ -336,6 +336,7 @@
 	
 	//scelta tabella = lettere
 	$my_file = new File(); //crea un nuovo oggetto 'file'
+	$my_lettera = new Lettera();
 
 	$data = explode("/", $cercato);
 	if( isset($data[0]) && isset($data[1]) && isset($data[2])) { 
@@ -483,14 +484,19 @@
 					<td><?php echo $value[5] ;?></td>
 					<td><?php echo $value[1] ;?></td>
 					<td> 
+					
 					<?php
-					$download = $my_file -> downloadlink($value[4], $value[0], $annoricercaprotocollo, '6');
-						if ($download != "Nessun file associato") {
-							echo $download;
+					$urlfile= $my_lettera->cercaAllegati($value[0], $annoricercaprotocollo);
+					if ($urlfile) {
+						foreach ($urlfile as $valore) {
+							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '10'); //richiamo del metodo "downloadlink" dell'oggetto file
+							echo $download."   ";
 						}
-						else {
-							echo "Nessun file associato";
-						}
+					}
+					else {
+						echo "Nessun file associato";
+					}
+					
 					?>
 					</td>
 

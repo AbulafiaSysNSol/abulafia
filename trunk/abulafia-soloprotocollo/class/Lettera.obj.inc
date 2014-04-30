@@ -50,16 +50,17 @@ class Lettera {
 			$my_file = new File(); 		
 			
 			$urlfile= $this->cercaAllegati($this->arraylettera1['idlettera'], $annoricercaprotocollo);
-			foreach ($urlfile as $valore) {
-				$download = $my_file->downloadlink($valore[2], $this->arraylettera1['idlettera'], $annoricercaprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-				if ($download != "Nessun file associato") {
+			if ($urlfile) {
+				foreach ($urlfile as $valore) {
+					$download = $my_file->downloadlink($valore[2], $$this->arraylettera1['idlettera'], $annoricercaprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
 					echo $download."   ";
 				}
-				else {
-					echo "<br>Nessun file associato.";
-				}
 			}
-		?></b>
+			else {
+				echo "Nessun file associato.";
+			}
+		?>
+		</b>
 	
 		<br>
 		Spedita/Ricevuta: 
@@ -218,6 +219,7 @@ class Lettera {
 	
 
 	public function cercaAllegati ($idlettera, $annoprotocollo) {//<man>ricerca i path dei file allegati alla lettera passata come parametro</man>	 
+		$this->urlfile=array();
 		$this->patharray = mysql_query("select 
 					distinct * 
 					from 

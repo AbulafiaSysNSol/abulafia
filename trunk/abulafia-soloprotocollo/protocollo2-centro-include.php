@@ -45,7 +45,6 @@
 			$resetta=mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $lastrec3 ");
 			$cancella2=mysql_query("DELETE from joinletteremittenti$annoprotocollo where idlettera='$lastrec3' limit 1");
 			$cancella3=mysql_query("DELETE from joinlettereinserimento$annoprotocollo where idlettera='$lastrec3' limit 1");
-			
 			$urlfile= $my_lettera->cercaAllegati($lastrec3, $annoprotocollo);
 			foreach ($urlfile as $valore) {
 				$delete = $my_file->cancellaAllegato($lastrec3, $annoprotocollo, $valore[2]);
@@ -53,7 +52,7 @@
 					echo "Si è verificato un problema con la cancellazione di un allegato.";
 				}
 			}
-			$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera='$lastrec3' AND annoprotocollo=$annoprotocollo");
+			$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=$lastrec3 AND annoprotocollo=$annoprotocollo");
 		}
 		
 		$dataregistrazione = strftime("%Y-%m-%d");
@@ -207,35 +206,32 @@
 			
 			<?php
 			$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
-			foreach ($urlfile as $valore) {
-				$download = $my_file->downloadlink($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-				if ($download != "Nessun file associato") {
+			if ($urlfile) {
+				foreach ($urlfile as $valore) {
+					$download = $my_file->downloadlink($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
 					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download;
 				}
-				else {
-					echo "<br>Nessun file associato.";
-				}
 			}
-				?>
-			
-				<div class="row">
-				<div class ="col-xs-5" id="content" style="display: none;">
-				<br>
-				<b>Caricamento in corso...</b>
-				<img src="images/progress.gif">
-				</div>
-				</div>
-			
-				<br>
-				<?php
-			
+			else {
+				echo "<br>Nessun file associato.";
+			}
 	
+			?>
 			
+			<div class="row">
+			<div class ="col-xs-5" id="content" style="display: none;">
+			<br>
+			<b>Caricamento in corso...</b>
+			<img src="images/progress.gif">
+			</div>
+			</div>
 			
+			<br>
+			<?php
 			
-				if($errore) { echo "<div class=\"alert alert-danger\">"; }
-				$my_lettera -> publcercamittente ($idlettera,''); //richiamo del metodo
-				if($errore) { echo "</div>"; }
+			if($errore) { echo "<div class=\"alert alert-danger\">"; }
+			$my_lettera->publcercamittente($idlettera,''); //richiamo del metodo
+			if($errore) { echo "</div>"; }
 
 			$risultati=mysql_query("select 
 						anagrafica.idanagrafica, 
