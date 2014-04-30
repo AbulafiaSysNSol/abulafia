@@ -47,9 +47,18 @@ class Lettera {
 		<br>
 		File associati: <b>
 		<?php
-			$my_file = new File (); 		
-			$download = $my_file->downloadlink($this->arraylettera1['urlpdf'], $this->arraylettera1['idlettera'], $annoricercaprotocollo,'30'); //richiamo del metodo "downloadlink" dell'oggetto file
-			echo stripslashes($download);
+			$my_file = new File(); 		
+			
+			$urlfile= $this->cercaAllegati($this->arraylettera1['idlettera'], $annoricercaprotocollo);
+			foreach ($urlfile as $valore) {
+				$download = $my_file->downloadlink($valore[2], $this->arraylettera1['idlettera'], $annoricercaprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
+				if ($download != "Nessun file associato") {
+					echo $download."   ";
+				}
+				else {
+					echo "<br>Nessun file associato.";
+				}
+			}
 		?></b>
 	
 		<br>

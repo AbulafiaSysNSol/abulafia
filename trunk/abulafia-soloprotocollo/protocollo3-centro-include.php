@@ -27,7 +27,6 @@
 		$_SESSION['posizione'] = $_POST['posizione'];
 		$_SESSION['riferimento'] = $_POST['riferimento'];
 		$_SESSION['note'] = $_POST['note'];
-		$_SESSION['urlpdf'] = addslashes($_GET['urlpdf']);
 		
 		if($from != "modifica") {
 		?>
@@ -69,7 +68,6 @@
 	$posizione = $_POST['posizione'];
 	$riferimento = $_POST['riferimento'];
 	$note  = $_POST['note'];
-	$urlpdf = addslashes($_GET['urlpdf']);
 	$dataregistrazione = strftime("%Y-%m-%d");
 	list($anno, $mese, $giorno) = explode("-", $dataregistrazione);
 	$dataregistrazione2= $anno.'-'.$mese.'-'.$giorno;
@@ -82,7 +80,7 @@
 	//fine passaggio dati
 
 	//controllo esistenza
-	$inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.urlpdf='$urlpdf', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.note='$note', lettere$annoprotocollo.dataregistrazione='$dataregistrazione' WHERE lettere$annoprotocollo.idlettera='$idlettera'");
+	$inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.note='$note', lettere$annoprotocollo.dataregistrazione='$dataregistrazione' WHERE lettere$annoprotocollo.idlettera='$idlettera'");
 	echo  mysql_error();
 	if (!$inserimento) { echo "Inserimento non riuscito" ; }
 	$ultimoid = mysql_insert_id();
@@ -94,7 +92,6 @@
 	unset($_SESSION['posizione']);
 	unset($_SESSION['riferimento']);
 	unset($_SESSION['note']);
-	unset($_SESSION['urlpdf']);
 ?>
 
 
