@@ -60,13 +60,23 @@
 		}
 		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-		$urlpdf = $_GET['urlpdf'];
+	}
+	
+	if ($from == 'eliminaallegato') {  
+		$idlettera=$_GET['idlettera'];
+		$anno = $_GET['anno'];
+		$nome = $_GET['nome'];
+		$delete = $my_file->cancellaAllegato($idlettera, $anno, $nome);
+				if (!$delete) {
+					echo "Si è verificato un problema con la cancellazione di un allegato.";
+				}
+		$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=idlettera AND annoprotocollo=$annoprotocollo AND pathfile='$nome'");
+		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
+		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 	}
 	
 	if ($from == 'urlpdf') {  
-		$urlpdf = $_GET['urlpdf'];
 		$idlettera=$_GET['idlettera'];
-		$inserisci= mysql_query("UPDATE lettere$annoprotocollo SET urlpdf = '$urlpdf' where idlettera = '$idlettera' " );
 		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$row = mysql_fetch_array($risultati);
@@ -117,7 +127,7 @@
 		<input required name="uploadedfile" type="file" id="exampleInputFile" />
 		</td>
 		<td valign="bottom">
-		<button type="submit" class="btn btn-default" onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
+		<button type="submit" class="btn btn-primary" onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
 		</td>
 		</tr>
 		</table>
@@ -128,7 +138,13 @@
 			if ($urlfile) {
 				foreach ($urlfile as $valore) {
 					$download = $my_file->downloadlink($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download;
+					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download;?> - <a href="login0.php?corpus=modifica-protocollo
+																			&from=eliminaallegato
+																			&idlettera=<?php echo $idlettera;?>
+																			&anno=<?php echo $annoprotocollo;?>
+																			&nome=<?php echo $valore[2];?>"></span> 
+																			Elimina <span class="glyphicon glyphicon-remove"></a>
+				<?php
 				}
 			}
 			else {

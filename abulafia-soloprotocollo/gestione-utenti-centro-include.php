@@ -30,7 +30,7 @@ var id=0;
 		</div>
 		<div class="panel-body">
 
-			<p><b>Elenco utenti attuali:<br></b>
+			<p><b>Elenco utenti attuali:<br><br></b>
 			
 			<div class="table-responsive">
 			<table class="table">
