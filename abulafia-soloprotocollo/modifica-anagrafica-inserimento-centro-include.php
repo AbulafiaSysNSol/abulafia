@@ -1,25 +1,61 @@
 <?php
 
 	//inizio passaggio dati da pagina inserimento
-	$cognome = $_POST['cognome'];
-	$nome = $_POST['nome'];
-	$datanascita = $_POST['datanascita'];
-	$nascita_comune = $_POST['nascitacomune'];
-	$nascita_provincia  = $_POST['nascitaprovincia'];
-	$nascita_stato = $_POST['nascitastato'];
-	$residenza_via = $_POST['residenzavia'];
-	$residenza_civico = $_POST['residenzacivico'];
-	$residenza_comune = $_POST['residenzacomune'];
-	$residenza_cap = $_POST['residenzacap'];
-	$residenza_provincia = $_POST['residenzaprovincia'];
-	$residenza_stato = $_POST['residenzastato'];
-	$url_foto = $_POST['url-foto'];
-	$gruppo_sanguigno = $_POST['grupposanguigno'];
-	$codice_fiscale = $_POST['codicefiscale'];
-	$telefono = $_POST['numero'];
-	$tipo = $_POST['tipo'];
-	$nascitadata = explode('/',$datanascita);
-	$nascita_data = $nascitadata[2].'-'.$nascitadata[1].'-'.$nascitadata[0];
+	if(isset($_POST['cognome'])) {
+		$cognome = $_POST['cognome'];
+	}
+	if(isset($_POST['nome'])) {
+		$nome = $_POST['nome'];
+	}
+	if(isset($_POST['datanascita'])) {
+		$datanascita = $_POST['datanascita'];
+	}
+	else {
+		$datanascita = "00/00/0000";
+	}
+	if(isset($_POST['nascitacomune'])) {
+		$nascita_comune = $_POST['nascitacomune'];
+	}
+	if(isset($_POST['nascitaprovincia'])) {
+		$nascita_provincia  = $_POST['nascitaprovincia'];
+	}
+	if(isset($_POST['nascitastato'])) {
+		$nascita_stato = $_POST['nascitastato'];
+	}
+	if(isset($_POST['residenzavia'])) {
+		$residenza_via = $_POST['residenzavia'];
+	}
+	if(isset($_POST['residenzacivico'])) {
+		$residenza_civico = $_POST['residenzacivico'];
+	}
+	if(isset($_POST['residenzacomune'])) {
+		$residenza_comune = $_POST['residenzacomune'];
+	}
+	if(isset($_POST['residenzacap'])) {
+		$residenza_cap = $_POST['residenzacap'];
+	}
+	if(isset($_POST['residenzaprovincia'])) {
+		$residenza_provincia = $_POST['residenzaprovincia'];
+	}
+	if(isset($_POST['residenzastato'])) {
+		$residenza_stato = $_POST['residenzastato'];
+	}
+	if(isset($_POST['url-foto'])) {
+		$url_foto = $_POST['url-foto'];
+	}
+	if(isset($_POST['grupposanguigno'])) {
+		$gruppo_sanguigno = $_POST['grupposanguigno'];
+	}
+	if(isset($_POST['codicefiscale'])) {
+		$codice_fiscale = $_POST['codicefiscale'];
+	}
+	if($datanascita != '') {
+		$nascitadata = explode('/',$datanascita);
+		$nascita_data = $nascitadata[2].'-'.$nascitadata[1].'-'.$nascitadata[0];
+	}
+	else {
+		$nascita_data='0000-00-00';
+	}
 	$id =$_GET['id'];
 	$anagraficatipologia= $_POST['anagraficatipologia'];
 	//fine passaggio dati
@@ -61,8 +97,8 @@
 <SCRIPT LANGUAGE="Javascript">
 browser= navigator.appName;
 	if (browser == "Netscape")
-		window.location="login0.php?corpus=modifica2-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>"; 
-	else window.location="login0.php?corpus=modifica2-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>"
+		window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>"; 
+	else window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>"
 </SCRIPT>
 
 
