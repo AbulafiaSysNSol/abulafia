@@ -464,7 +464,7 @@
 					<td>Oggetto</td>
 					<td>File</td>
 					<td>Mitt./Dest.</td>
-					<td>Opzioni</td>
+					<td width="150">Opzioni</td>
 				</tr>
 			<?php
 			
@@ -519,7 +519,7 @@
 							<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
 							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
 							<a class="btn btn-success" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span></a>
-							<a class="btn btn-primary" href="login0.php?corpus=barcode&id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><span class="glyphicon glyphicon-barcode"></span></a>
+							<a class="btn btn-primary" href="barcode-centro-include.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-barcode"></span></a>
 						</div>
 					</td>		
 				</tr>

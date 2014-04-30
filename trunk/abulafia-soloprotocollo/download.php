@@ -40,9 +40,7 @@ header("Connection: close");
 fpassthru($fp);
 readfile($fp); 
 exit;
-?>
 
-<?php
 /*
 	VERIFICARE
     //Identificativo del file

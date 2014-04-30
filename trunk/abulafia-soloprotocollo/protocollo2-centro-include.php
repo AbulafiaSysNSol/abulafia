@@ -208,7 +208,7 @@
 			</td>
 			<td valign="bottom">
 			<button type="submit" 
-				class="btn btn-default" 
+				class="btn btn-primary" 
 				onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
 			</td>
 			</tr>
