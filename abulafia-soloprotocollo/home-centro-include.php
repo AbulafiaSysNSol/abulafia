@@ -50,6 +50,8 @@
 				echo $my_anagrafica->contacomponenti.' persone fisiche<br>';
 				$my_anagrafica->publcontaanagrafica('carica');
 				echo $my_anagrafica->contacomponenti.' cariche o incarichi<br>';
+				$my_anagrafica->publcontaanagrafica('ente');
+				echo $my_anagrafica->contacomponenti.' enti';
 			    ?>
 			
 			</p>

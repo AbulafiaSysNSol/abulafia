@@ -82,6 +82,17 @@
 		$idlettera=$_GET['idlettera'];
 	}
 	
+	if ($from == 'eliminaallegato') {  
+		$idlettera=$_GET['idlettera'];
+		$anno = $_GET['anno'];
+		$nome = $_GET['nome'];
+		$delete = $my_file->cancellaAllegato($idlettera, $anno, $nome);
+				if (!$delete) {
+					echo "Si è verificato un problema con la cancellazione di un allegato.";
+				}
+		$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=idlettera AND annoprotocollo=$annoprotocollo AND pathfile='$nome'");
+	}
+	
 ?>
 
 <!-- Modal -->
@@ -209,7 +220,13 @@
 			if ($urlfile) {
 				foreach ($urlfile as $valore) {
 					$download = $my_file->downloadlink($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download;
+					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download; ?> - <a href="login0.php?corpus=protocollo2
+																			&from=eliminaallegato
+																			&idlettera=<?php echo $idlettera;?>
+																			&anno=<?php echo $annoprotocollo;?>
+																			&nome=<?php echo $valore[2];?>"></span> 
+																			Elimina <span class="glyphicon glyphicon-remove"></a>
+				<?php
 				}
 			}
 			else {
