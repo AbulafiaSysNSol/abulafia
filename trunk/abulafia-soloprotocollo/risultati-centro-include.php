@@ -489,7 +489,7 @@
 					$urlfile= $my_lettera->cercaAllegati($value[0], $annoricercaprotocollo);
 					if ($urlfile) {
 						foreach ($urlfile as $valore) {
-							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '10'); //richiamo del metodo "downloadlink" dell'oggetto file
+							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '14'); //richiamo del metodo "downloadlink" dell'oggetto file
 							echo $download."   ";
 						}
 					}

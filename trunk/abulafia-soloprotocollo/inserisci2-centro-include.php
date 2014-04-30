@@ -4,34 +4,128 @@
 	if( isset($_POST['insertok']) ) {
 		$insertok = $_POST['insertok'];
 	}
-	$cognome = $_POST['cognome'];
-	$nome = $_POST['nome'];
-	$datanascita = $_POST['datanascita'];
-	$nascita_comune = $_POST['nascitacomune'];
-	$nascita_provincia  = $_POST['nascitaprovincia'];
-	$nascita_stato = $_POST['nascitastato'];
-	$residenza_via = $_POST['residenzavia'];
-	$residenza_civico = $_POST['residenzacivico'];
-	$residenza_comune = $_POST['residenzacomune'];
-	$residenza_cap = $_POST['residenzacap'];
-	$residenza_provincia = $_POST['residenzaprovincia'];
-	$residenza_stato = $_POST['residenzastato'];
+	else {
+		$insertok = '';
+	}
+	if( isset($_POST['cognome']) ) {
+		$cognome = $_POST['cognome'];
+	}
+	else {
+		$cognome = '';
+	}
+	if( isset($_POST['nome']) ) {
+		$nome = $_POST['nome'];
+	}
+	else {
+		$nome = '';
+	}
+	if( isset($_POST['datanascita']) ) {
+		$datanascita = $_POST['datanascita'];
+		$nascitadata = explode('/',$datanascita);
+		$nascita_data = $nascitadata[2].'-'.$nascitadata[1].'-'.$nascitadata[0];
+	}
+	else {
+		$datanascita = '';
+		$nascitadata='';
+		$nascita_data='';
+	}
+	if( isset($_POST['nascitacomune']) ) {
+		$nascita_comune = $_POST['nascitacomune'];
+	}
+	else {
+		$nascita_comune = '';
+	}
+	if( isset($_POST['nascitaprovincia']) ) {
+		$nascita_provincia  = $_POST['nascitaprovincia'];
+	}
+	else {
+		$nascita_provincia = '';
+	}
+	if( isset($_POST['nascitastato']) ) {
+		$nascita_stato = $_POST['nascitastato'];
+	}
+	else {
+		$nascita_stato = '';
+	}
+	if( isset($_POST['residenzavia']) ) {
+		$residenza_via = $_POST['residenzavia'];
+	}
+	else {
+		$residenza_via = '';
+	}
+	if( isset($_POST['residenzacivico']) ) {
+		$residenza_civico = $_POST['residenzacivico'];
+	}
+	else {
+		$residenza_civico = '';
+	}
+	if( isset($_POST['residenzacomune']) ) {
+		$residenza_comune = $_POST['residenzacomune'];
+	}
+	else {
+		$residenza_comune = '';
+	}
+	if( isset($_POST['residenzacap']) ) {
+		$residenza_cap = $_POST['residenzacap'];
+	}
+	else {
+		$residenza_cap = '';
+	}
+	if( isset($_POST['residenzaprovincia']) ) {
+		$residenza_provincia = $_POST['residenzaprovincia'];
+	}
+	else {
+		$residenza_provincia = '';
+	}
+	if( isset($_POST['residenzastato']) ) {
+		$residenza_stato = $_POST['residenzastato'];
+	}
+	else {
+		$residenza_stato = '';
+	}
 	if( isset($_GET['url-foto']) ) {
 		$url_foto = $_GET['url-foto'];
 	}
 	else {
 		$url_foto = '';
 	}
-	$gruppo_sanguigno = $_POST['grupposanguigno'];
-	$codice_fiscale = $_POST['codicefiscale'];
-	$telefono = $_POST['numero'];
-	$tipo = $_POST['tipo'];
-	$telefono2 = $_POST['numero2'];
-	$tipo2 = $_POST['tipo2'];
-	$nascitadata = explode('/',$datanascita);
-	$nascita_data = $nascitadata[2].'-'.$nascitadata[1].'-'.$nascitadata[0];
+	if( isset($_POST['grupposanguigno']) ) {
+		$gruppo_sanguigno = $_POST['grupposanguigno'];
+	}
+	else {
+		$gruppo_sanguigno = '';
+	}
+	if( isset($_POST['codicefiscale']) ) {
+		$codice_fiscale = $_POST['codicefiscale'];
+	}
+	else {
+		$codice_fiscale = '';
+	}
+	if( isset($_POST['numero']) ) {
+		$telefono = $_POST['numero'];
+	}
+	else {
+		$telefono = '';
+	}
+	if( isset($_POST['tipo']) ) {
+		$tipo = $_POST['tipo'];
+	}
+	else {
+		$tipo = '';
+	}
+	if( isset($_POST['numero2']) ) {
+		$telefono2 = $_POST['numero2'];
+	}
+	else {
+		$telefono2 = '';
+	}
+	if( isset($_POST['tipo2']) ) {
+		$tipo2 = $_POST['tipo2'];
+	}
+	else {
+		$tipo2 = '';
+	}
 	$anagraficatipologia= $_POST['anagraficatipologia'];
-
 	//fine passaggio dati
 
 	//controllo esistenza
@@ -89,15 +183,23 @@
 					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica registrata correttamente!</div>
 				</div>
 			</div>
-			<p><img width="130" src="foto/<?php echo $lastid.$url_foto; ?>"><br><br>Cognome: <strong><?php echo $cognome ; ?></strong> <br>Nome: <strong><?php echo $nome ; ?></strong><br>Data di Nascita: <strong><?php echo $datanascita; ?></strong></p>
+			<p>
+				<img width="130" src="<?php if($url_foto != '') { echo 'foto/'.$lastid.$url_foto; } else { echo 'images/nessuna.jpg'; } ?>">
+				<br><br>
+				Cognome: <strong><?php echo $cognome ; ?></strong> 
+				<br>
+				Nome: <strong><?php echo $nome ; ?></strong>
+				<br>
+				Data di Nascita: <strong><?php echo $datanascita; ?></strong>
+			</p>
 		</div>
 		  
 		<div class="panel-heading">
 			<h3 class="panel-title"><strong>Opzioni:</strong></h3>
 		</div>
 		<div class="panel-body">
-			<p><a href="login0.php?corpus=dettagli-anagrafica&from=risultati&id=<?php echo $lastid;?>">Visualizza Dettagli di questa anagrafica</a></p>
-			<p><a href="login0.php?corpus=anagrafica">Inserisci nuova anagrafica</a></p>
+			<p><a href="login0.php?corpus=dettagli-anagrafica&from=risultati&id=<?php echo $lastid;?>"><i class="fa fa-bars"></i> Visualizza Dettagli di questa anagrafica</a></p>
+			<p><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus-sign"></span> Inserisci nuova anagrafica</a></p>
 		</div>
 	<?php }
 	else {
@@ -113,7 +215,7 @@
 			<h3 class="panel-title"><strong>Opzioni:</strong></h3>
 		</div>
 		<div class="panel-body">
-			<p><a href="login0.php?corpus=anagrafica">Inserisci nuova anagrafica</a></p>
+			<p><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus-sign"></span> Inserisci nuova anagrafica</a></p>
 		</div>
 	<?php } ?>
 </div>

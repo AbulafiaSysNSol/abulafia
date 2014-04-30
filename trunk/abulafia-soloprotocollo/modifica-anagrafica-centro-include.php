@@ -191,7 +191,11 @@
 			<label class="col-sm-2 control-label">Nato il:</label>
 			<div class="row">
 			<div class="col-xs-2">
-			<input type="text" class="form-control input-sm datepicker" name="datanascita">
+			<?php
+				$nascita = explode('-',$row['nascitadata']);
+				$data = $nascita[2]."/".$nascita[1]."/".$nascita[0];
+			?>
+			<input type="text" class="form-control input-sm datepicker" name="datanascita" value="<?php echo $data; ?>">
 			</div></div></div>
 			
 			<div class="form-group">
