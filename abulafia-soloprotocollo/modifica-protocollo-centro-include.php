@@ -123,14 +123,16 @@
 		</table>
 		</form>
 		
-		<br>
 		<?php
-			$download = $my_file -> downloadlink($row['urlpdf'], $row['idlettera'], $annoprotocollo, '6');
-			if ($download != "Nessun file associato") {
-				echo "<span class=\"glyphicon glyphicon-file\"></span> <b>File associato: </b>" . $download;
+			$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
+			if ($urlfile) {
+				foreach ($urlfile as $valore) {
+					$download = $my_file->downloadlink($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
+					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download;
+				}
 			}
 			else {
-				echo "Nessun file associato.";
+				echo "<br>Nessun file associato.";
 			}
 		?>
 		
