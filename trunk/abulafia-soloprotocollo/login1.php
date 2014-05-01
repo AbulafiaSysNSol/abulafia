@@ -29,6 +29,8 @@ $_SESSION['my_manuale'] = serialize($my_manuale); //serializzazione per passaggi
 $my_database = new Database ;//crea un nuovo oggetto
 $_SESSION['my_database'] = serialize($my_database); //serializzazione per passaggio alle variabili di sessione
 
+$logdirectory="log/";
+$errorlog='error.log';
 $logfile='access.log';
 $maillog='mail.log';
 $data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
@@ -117,6 +119,8 @@ $_SESSION['headermail'] = $settings6['headermail'];
 $_SESSION['footermail'] = $settings6['footermail'];
 $_SESSION['logfile'] = $logfile;
 $_SESSION['maillog'] = $maillog;
+$_SESSION['errorlog'] = $errorlog;
+$_SESSION['logdirectory'] = $logdirectory;
 
 //fine del settaggio delle variabili di sessione e avvio del refresh automatico
 echo 'Login effettuato<br><br>'; //nel caso che il login sia andato a buon fine

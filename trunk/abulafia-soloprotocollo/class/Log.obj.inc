@@ -15,8 +15,20 @@ class Log
 	private $filtro='';
 
 	private function scrivilog ($username, $operazione, $esito, $client, $logfile) 
+		{
+		
+		if (!is_dir($_SESSION['logdirectory']))//se la directory non esiste, la crea
 			{
-		$accesslog=fopen($logfile,"a"); //apertura del file di log
+			$creadir=mkdir($_SESSION['logdirectory'], 0777, true);
+			if (!$creadir) die ("Impossibile creare la directory: log/");
+			}
+		
+		if (file_exists($_SESSION['logdirectory'].$logfile)==false)//se il file non esiste, lo crea
+			{
+			$filehandle=fopen($_SESSION['logdirectory'].$logfile, 'w');
+			fclose($filehandle);
+			}	
+		$accesslog=fopen($_SESSION['logdirectory'].$logfile,"a"); //apertura del file di log
 		if (!$accesslog) die ("Impossibile scrivere nel file di log: $logfile ");
 		$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
 		$my_calendario->publggmmaaaa('-'); //acquisisco la data dall'oggetto Calendario
@@ -34,7 +46,7 @@ class Log
 
 	private function leggilog ($partenza, $numerorighe, $filtro, $logfile)
 		{
-		$accessloglines= (file($logfile));
+		$accessloglines= (file($_SESSION['logdirectory'].$logfile));
 		$accessloglinesnumber= count($accessloglines);
 		$ciclo=0;
 		while (($ciclo < $numerorighe) and ( $accessloglinesnumber-($ciclo+$partenza) > 0)) 
