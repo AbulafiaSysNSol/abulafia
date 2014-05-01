@@ -33,7 +33,7 @@
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
 			if (browser == "Netscape")
-			window.location="login0.php?corpus=protocollo2&urlpdf=<?php echo $_SESSION['urlpdf'] ; ?>&idlettera=<?php echo $idlettera;?>&from=errore"; else window.location="login0.php?corpus=protocollo2&urlpdf=<?php echo $_SESSION['urlpdf'] ; ?>&idlettera=<?php echo $idlettera;?>&from=errore";
+			window.location="login0.php?corpus=protocollo2&idlettera=<?php echo $idlettera;?>&from=errore"; else window.location="login0.php?corpus=protocollo2&idlettera=<?php echo $idlettera;?>&from=errore";
 			</SCRIPT>
 			<?php
 			exit();
