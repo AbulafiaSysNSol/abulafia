@@ -30,19 +30,18 @@
 				$path = "lettere".$anno."/".$id."/".$valore[2];
 
 				//aggiungo alla prima pagina il barcode
+				
+				//aggiungo una pagina al pdf
 				$pdf->AddPage(); 
+				
+				//conto le pagine e setto il pdf sorgente
 				$pageCount = $pdf->setSourceFile($path);
-				// import page 1 
-				$tplIdx = $pdf->importPage(1); 
-				//use the imported page and place it at point 0,0; calculate width and height
-				//automaticallay and ajust the page size to the size of the imported page 
+				
+				// importazione della prima pagina
+				$tplIdx = $pdf->importPage(1);  
 				$pdf->useTemplate($tplIdx, 5, 23, 200, 0, true); 
-				// now write some text above the imported page 
 				$pdf->SetFont('Arial', '', '9'); 
 				$pdf->SetTextColor(0,0,0);
-				//set position in pdf document
-				//$pdf->SetXY(17, 7);
-				//first parameter defines the line height
 				$pdf->Write(0, 'Croce Rossa Italiana - Comitato Provinciale Catania');
 				$pdf->Ln(4);
 				$pdf->Write(0, 'Protocollo n° '.$id.' del '.$datareg);
@@ -56,11 +55,29 @@
 					$pdf->useTemplate($tplIdx, 0, 0, 200, 0, true);
 					$i++;
 				}
+			}
+			//in caso di un allegato nel formato immagine
+			if($my_file->estensioneFile($valore[2]) == 'jpg' OR $my_file->estensioneFile($valore[2]) == 'JPG' 
+			OR $my_file->estensioneFile($valore[2]) == 'jpeg' OR $my_file->estensioneFile($valore[2]) == 'JPEG'
+			OR $my_file->estensioneFile($valore[2]) == 'gif' OR $my_file->estensioneFile($valore[2]) == 'GIF'
+			OR $my_file->estensioneFile($valore[2]) == 'png' OR $my_file->estensioneFile($valore[2]) == 'PNG') {
+				$path = "lettere".$anno."/".$id."/".$valore[2];
 
-				//force the browser to download the output
-				$nome = 'protocollon'.$id;
+				//aggiungo alla prima pagina il barcode
+				
+				//aggiungo una pagina al pdf
+				$pdf->AddPage(); 
+				$pdf->Image($path, 12, 27, 185, 0);
+				$pdf->SetFont('Arial', '', '9'); 
+				$pdf->SetTextColor(0,0,0);
+				$pdf->Write(0, 'Croce Rossa Italiana - Comitato Provinciale Catania');
+				$pdf->Ln(4);
+				$pdf->Write(0, 'Protocollo n° '.$id.' del '.$datareg);
+				$pdf->Code39(11, 16, $id.' - '.$datareg);
 			}
 		}
+		$nome = 'protocollon'.$id;
+		//force the browser to download the output
 		$pdf->Output($nome, 'I');
 	}
 ?>
