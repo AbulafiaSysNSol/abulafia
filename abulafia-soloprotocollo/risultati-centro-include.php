@@ -490,7 +490,7 @@
 					if ($urlfile) {
 						foreach ($urlfile as $valore) {
 							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '14'); //richiamo del metodo "downloadlink" dell'oggetto file
-							echo $download."   ";
+							echo $download."<br>";
 						}
 					}
 					else {
