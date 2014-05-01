@@ -211,15 +211,15 @@
 			<br>
 			<table class="table table-bordered">
 				<tr>
-					<td align="center"><b>Id</b></td>
-					<td align="center"><b>Tipo</b></td>
-					<td align="center"><b>Cognome</b></td>
-					<td align="center"><b>Nome</b></td>
-					<td align="center"><b>Data di Nascita</b></td>
-					<td align="center"><b>Comune</b></td>
-					<td align="center"><b>Prov.</b></td>
-					<td align="center"><b>Codice Fiscale</b></td>
-					<td align="center"><b>Opzioni</b></td>
+					<td  style="vertical-align: middle" align="center"><b>Id</b></td>
+					<td style="vertical-align: middle" align="center"><b>Tipo</b></td>
+					<td style="vertical-align: middle" align="center"><b>Cognome</b></td>
+					<td style="vertical-align: middle" align="center"><b>Nome</b></td>
+					<td style="vertical-align: middle" align="center"><b>Data di Nascita</b></td>
+					<td style="vertical-align: middle" align="center"><b>Comune</b></td>
+					<td style="vertical-align: middle" align="center"><b>Prov.</b></td>
+					<td style="vertical-align: middle" align="center"><b>Codice Fiscale</b></td>
+					<td style="vertical-align: middle" align="center"><b>Opzioni</b></td>
 				</tr>
 				<?php
 				while ($row = mysql_fetch_array($risultati)) {
@@ -232,19 +232,19 @@
 					$contatorelinee = $contatorelinee + 1 ;
 					?>
 					<tr bgcolor=<?php echo $colorelinee; ?>>
-						<td><?php echo $row['idanagrafica'];?></td>
-						<td align="center" valign="middle"><?php echo $row['tipologia'];?></td>
-						<td align="center" valign="middle"><?php echo $row['cognome'];?></td>
-						<td align="center" valign="middle"><?php echo $row['nome'] ; ?> </td>
-						<td align="center" valign="middle"><?php $data = $row['nascitadata'] ;
+						<td style="vertical-align: middle" align="center"><?php echo $row['idanagrafica'];?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $row['tipologia'];?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $row['cognome'];?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $row['nome'] ; ?> </td>
+						<td style="vertical-align: middle" align="center"><?php $data = $row['nascitadata'] ;
 										list($anno, $mese, $giorno) = explode("-", $data);
 										$data2 = "$giorno-$mese-$anno";
 										echo "$data2" ;?>
 						</td>
-						<td align="center" valign="middle"><?php echo $row['nascitacomune'];?></td>
-						<td align="center" valign="middle"><?php echo $row['nascitaprovincia'];?></td>
-						<td align="center" valign="middle"><?php echo $row['codicefiscale'];?></td>
-						<td align="center">
+						<td style="vertical-align: middle" align="center"><?php echo $row['nascitacomune'];?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $row['nascitaprovincia'];?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $row['codicefiscale'];?></td>
+						<td style="vertical-align: middle" align="center">
 							<div class="btn-group btn-group-sm">
 								<a class="btn btn-info" href="login0.php?corpus=dettagli-anagrafica
 													&from=risultati
@@ -457,14 +457,14 @@
 			
 			<table class="table table-bordered">
 				<tr align = "center">
-					<td>N. Prot.</td>
-					<td>Data Reg.</td>
-					<td>Pos.</td>
-					<td>Sped./Ric.</td>
-					<td>Oggetto</td>
-					<td>File</td>
-					<td>Mitt./Dest.</td>
-					<td width="150">Opzioni</td>
+					<td style="vertical-align: middle">N. Prot.</td>
+					<td style="vertical-align: middle">Data Reg.</td>
+					<td style="vertical-align: middle">Pos.</td>
+					<td style="vertical-align: middle">Sped./Ric.</td>
+					<td style="vertical-align: middle">Oggetto</td>
+					<td style="vertical-align: middle">File</td>
+					<td style="vertical-align: middle">Mitt./Dest.</td>
+					<td style="vertical-align: middle" width="150">Opzioni</td>
 				</tr>
 			<?php
 			
@@ -477,13 +477,13 @@
 				} //secondo colore
 				$contatorelinee = $contatorelinee + 1 ;
 				?>
-				<tr align = "center" VALIGN="middle" bgcolor=<?php echo $colorelinee; ?> >
-					<td><?php echo $value[0] ;?></td>
-					<td> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
-					<td><?php echo $value[7] ;?></td>
-					<td><?php echo $value[5] ;?></td>
-					<td><?php echo $value[1] ;?></td>
-					<td> 
+				<tr align = "center" bgcolor=<?php echo $colorelinee; ?> >
+					<td style="vertical-align: middle"><?php echo $value[0] ;?></td>
+					<td style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
+					<td style="vertical-align: middle"><?php echo $value[7] ;?></td>
+					<td style="vertical-align: middle"><?php echo $value[5] ;?></td>
+					<td style="vertical-align: middle"><?php echo $value[1] ;?></td>
+					<td style="vertical-align: middle"> 
 					
 					<?php
 					$urlfile= $my_lettera->cercaAllegati($value[0], $annoricercaprotocollo);
@@ -500,7 +500,7 @@
 					?>
 					</td>
 
-					<td>
+					<td style="vertical-align: middle">
 					<?php
 					$mittenti= mysql_query("SELECT distinct * 
 								from anagrafica, $joinletteremittenti 
@@ -514,7 +514,7 @@
 					}
 					?>
 					</td>
-					<td>
+					<td style="vertical-align: middle">
 						<div class="btn-group btn-group-sm">
 							<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
 							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
