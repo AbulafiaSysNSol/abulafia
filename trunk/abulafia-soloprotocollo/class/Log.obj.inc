@@ -46,6 +46,17 @@ class Log
 
 	private function leggilog ($partenza, $numerorighe, $filtro, $logfile)
 		{
+		if (!is_dir($_SESSION['logdirectory']))//se la directory non esiste, la crea
+			{
+			$creadir=mkdir($_SESSION['logdirectory'], 0777, true);
+			if (!$creadir) die ("Impossibile creare la directory: log/");
+			}
+		
+		if (file_exists($_SESSION['logdirectory'].$logfile)==false)//se il file non esiste, lo crea
+			{
+			$filehandle=fopen($_SESSION['logdirectory'].$logfile, 'w');
+			fclose($filehandle);
+			}
 		$accessloglines= (file($_SESSION['logdirectory'].$logfile));
 		$accessloglinesnumber= count($accessloglines);
 		$ciclo=0;
