@@ -15,7 +15,12 @@
 
 	$id = $_GET['id'];
 	$anno = $_GET['anno'];
-	
+	$tabella = 'lettere'.$anno;
+	$data2 = mysql_query("SELECT dataregistrazione FROM $tabella WHERE idlettera = '$id'");
+	$data = mysql_fetch_row($data2);
+	$date = explode('-', $data[0]);
+	$datareg = $date[2]."/".$date[1]."/".$date[0];
+
 	$pdf = new FPDI();
 	
 	$urlfile = $my_lettera->cercaAllegati($id, $anno);
@@ -40,8 +45,8 @@
 				//first parameter defines the line height
 				$pdf->Write(0, 'Croce Rossa Italiana - Comitato Provinciale Catania');
 				$pdf->Ln(4);
-				$pdf->Write(0, 'Protocollo n° '.$id.' del 01/01/2014');
-				$pdf->Code39(11, 16, $id.' - 01.01.2014');
+				$pdf->Write(0, 'Protocollo n° '.$id.' del '.$datareg);
+				$pdf->Code39(11, 16, $id.' - '.$datareg);
 
 				//aggiunta delle altre pagine del pdf
 				$i = 2;
