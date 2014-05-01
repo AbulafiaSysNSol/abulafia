@@ -30,6 +30,7 @@ require('lib/fpdf/fpdf.php');
 		$inizio = $_POST['numeroinizio'];
 		$fine = $_POST['numerofine'];
 		$anno = $_POST['annoprotocollo'];
+		$annoricerca = $anno;
 		$intestazione = 'Registro di protocollo '. $anno . ' dal numero '. $inizio .' al numero '. $fine.':';
 		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine'"); 
 		$numerorisultati = mysql_fetch_row($query);
@@ -44,7 +45,7 @@ require('lib/fpdf/fpdf.php');
 			exit();
 		}
 		else {
-			$query = mysql_query("SELECT * FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine' ORDER BY lettere$anno.idlettera"); 
+			$query = mysql_query("SELECT * FROM lettere$anno WHERE lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine' ORDER BY lettere$anno.idlettera"); 
 		}
 	}
 	if($from == "date") {
@@ -91,6 +92,7 @@ require('lib/fpdf/fpdf.php');
 			exit();
 		}
 		$anno = $annoi;
+		$annoricerca = $anno;
 		$intestazione = 'Registro di protocollo ' . $anno . ' dal '. $inizio .' al '. $fine.':';
 		$inizio = $annoi.'-'.$mesei.'-'.$giornoi;
 		$fine = $annof.'-'.$mesef.'-'.$giornof;
@@ -107,7 +109,7 @@ require('lib/fpdf/fpdf.php');
 			exit();
 		}
 		else {
-			$query = mysql_query("SELECT * FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
+			$query = mysql_query("SELECT * FROM lettere$anno WHERE lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
 		}	
 	}
 $now = date("d".'.'."m".'.'."Y");
@@ -144,7 +146,17 @@ while($query2 = mysql_fetch_array($query)) {
 	$pdf->Cell(0,7,$query2['note'],1,1,'L',true);
 	$pdf->MultiCell(0,7,'Oggetto: ' . $query2['oggetto'],1,'L',true);
 	if($query2['speditaricevuta'] == 'ricevuta') { $sd = 'Mittenti'; } else { $sd = 'Destinatari'; }
-	$pdf->MultiCell(0,7,$sd . ': ' . $query2['cognome'] . ' ' . $query2['nome'],1,'L',true);
+	$destinatari = mysql_query("Select * From anagrafica, joinletteremittenti$annoricerca Where anagrafica.idanagrafica=joinletteremittenti$annoricerca.idanagrafica AND joinletteremittenti$annoricerca.idlettera=$query2[0]");
+	echo mysql_error();
+	$d='';
+	while ( $dest = mysql_fetch_array($destinatari)) {
+		$d = $d.' '.$dest['cognome'];
+		if($dest['nome'] != '') { 
+			$d =$d . ' ' . $dest['nome']; 
+		}
+		$d = $d.';';
+	}
+	$pdf->MultiCell(0,7,$sd . ': ' . $d,1,'L',true);
 	$pdf->Ln(5);
 	$contatorelinee = $contatorelinee + 1;
 }
