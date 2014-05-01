@@ -53,7 +53,7 @@ class Lettera {
 			if ($urlfile) {
 				foreach ($urlfile as $valore) {
 					$download = $my_file->downloadlink($valore[2], $this->arraylettera1['idlettera'], $annoricercaprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-					echo $download."   ";
+					echo $download.";    ";
 				}
 			}
 			else {
