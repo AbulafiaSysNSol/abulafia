@@ -186,11 +186,11 @@
 			<p>
 				<img width="130" src="<?php if($url_foto != '') { echo 'foto/'.$lastid.$url_foto; } else { echo 'images/nessuna.jpg'; } ?>">
 				<br><br>
-				Cognome: <strong><?php echo $cognome ; ?></strong> 
+				Cognome: <strong><?php echo stripslashes($cognome) ; ?></strong> 
 				<br>
-				Nome: <strong><?php echo $nome ; ?></strong>
+				Nome: <strong><?php echo stripslashes($nome) ; ?></strong>
 				<br>
-				Data di Nascita: <strong><?php echo $datanascita; ?></strong>
+				Data di Nascita: <strong><?php echo stripslashes($datanascita); ?></strong>
 			</p>
 		</div>
 		  
