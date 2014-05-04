@@ -4,8 +4,14 @@
 	if(isset($_POST['cognome'])) {
 		$cognome = $_POST['cognome'];
 	}
+	else {
+		$cognome = '';
+	}
 	if(isset($_POST['nome'])) {
 		$nome = $_POST['nome'];
+	}
+	else {
+		$nome = '';
 	}
 	if(isset($_POST['datanascita'])) {
 		$datanascita = $_POST['datanascita'];
@@ -16,39 +22,76 @@
 	if(isset($_POST['nascitacomune'])) {
 		$nascita_comune = $_POST['nascitacomune'];
 	}
+	else {
+		$nascita_comune = '';
+	}
 	if(isset($_POST['nascitaprovincia'])) {
 		$nascita_provincia  = $_POST['nascitaprovincia'];
+	}
+	else {
+		$nascita_provincia = '';
 	}
 	if(isset($_POST['nascitastato'])) {
 		$nascita_stato = $_POST['nascitastato'];
 	}
+	else {
+		$nascita_stato = '';
+	}
 	if(isset($_POST['residenzavia'])) {
 		$residenza_via = $_POST['residenzavia'];
+	}
+	else {
+		$residenza_via = '';
 	}
 	if(isset($_POST['residenzacivico'])) {
 		$residenza_civico = $_POST['residenzacivico'];
 	}
+	else {
+		$residenza_civico = '';
+	}
 	if(isset($_POST['residenzacomune'])) {
 		$residenza_comune = $_POST['residenzacomune'];
+	}
+	else {
+		$residenza_comune = '';
 	}
 	if(isset($_POST['residenzacap'])) {
 		$residenza_cap = $_POST['residenzacap'];
 	}
+	else {
+		$residenza_cap = '';
+	}
 	if(isset($_POST['residenzaprovincia'])) {
 		$residenza_provincia = $_POST['residenzaprovincia'];
+	}
+	else {
+		$residenza_provincia = '';
 	}
 	if(isset($_POST['residenzastato'])) {
 		$residenza_stato = $_POST['residenzastato'];
 	}
+	else {
+		$residenza_stato = '';
+	}
 	if(isset($_POST['url-foto'])) {
 		$url_foto = $_POST['url-foto'];
+	}
+	else {
+		$url_foto = '';
 	}
 	if(isset($_POST['grupposanguigno'])) {
 		$gruppo_sanguigno = $_POST['grupposanguigno'];
 	}
+	else {
+		$gruppo_sanguigno = '';
+	}
 	if(isset($_POST['codicefiscale'])) {
 		$codice_fiscale = $_POST['codicefiscale'];
 	}
+	else {
+		$codice_fiscale = '';
+	}
+	
 	if($datanascita != '') {
 		$nascitadata = explode('/',$datanascita);
 		$nascita_data = $nascitadata[2].'-'.$nascitadata[1].'-'.$nascitadata[0];
@@ -56,6 +99,7 @@
 	else {
 		$nascita_data='0000-00-00';
 	}
+	
 	$id =$_GET['id'];
 	$anagraficatipologia= $_POST['anagraficatipologia'];
 	//fine passaggio dati
@@ -97,8 +141,8 @@
 <SCRIPT LANGUAGE="Javascript">
 browser= navigator.appName;
 	if (browser == "Netscape")
-		window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>"; 
-	else window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>"
+		window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>&from=modifica"; 
+	else window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>&from=modifica"
 </SCRIPT>
 
 

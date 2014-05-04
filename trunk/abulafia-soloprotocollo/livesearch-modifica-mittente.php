@@ -28,6 +28,7 @@
 	*/
 	$sql=mysql_query("SELECT * FROM anagrafica $where $filtro limit 5");
 	while($row = mysql_fetch_array($sql)) {
+	$row = array_map('stripslashes', $row);
 		?>
 		<br>
 		<a href="login0.php?corpus=modifica-protocollo&from=aggiungi&idanagrafica=<?php echo $row['idanagrafica'];?>&id=<?php echo $idlettera;?>">

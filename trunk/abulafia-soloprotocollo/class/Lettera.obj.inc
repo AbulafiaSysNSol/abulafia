@@ -20,6 +20,7 @@ class Lettera {
 		$risultati=mysql_query("select distinct * from $tabella where ($tabella.idlettera='$idlettera') ");
 		echo mysql_error();
 		$arraylettera = mysql_fetch_array($risultati);
+		$arraylettera = array_map('stripslashes', $arraylettera);
 		$letteramittenti=mysql_query("select * from $joinletteremittenti, anagrafica where $joinletteremittenti.idlettera='$idlettera' and $joinletteremittenti.idanagrafica=anagrafica.idanagrafica ");
 		$risultati3=mysql_query("select * from $joinlettereinserimento, anagrafica where idlettera='$idlettera' and $joinlettereinserimento.idinser=anagrafica.idanagrafica");
 		echo mysql_error();
@@ -117,6 +118,7 @@ class Lettera {
 		<b>
 			<?php
 				while ($row2 = mysql_fetch_array($this->arrayletteramittenti)) {
+					$row2 = array_map('stripslashes', $row2);
 					?>
 					<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row2['idanagrafica'];?>">
 						<?php
