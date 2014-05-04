@@ -41,6 +41,7 @@
 	$risultati= mysql_query ("select distinct * from anagrafica where anagrafica.idanagrafica ='$id'");
 	$risultati2= mysql_query ("select * from jointelefonipersone where jointelefonipersone.idanagrafica='$id' order by jointelefonipersone.tipo");
 	$row = mysql_fetch_array($risultati);
+	$row = array_map ("stripslashes",$row);
 	$data = $row['nascitadata'] ;
 	list($anno, $mese, $giorno) = explode("-", $data);
 	$data2 = "$giorno-$mese-$anno";

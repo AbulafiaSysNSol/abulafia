@@ -223,6 +223,7 @@
 				</tr>
 				<?php
 				while ($row = mysql_fetch_array($risultati)) {
+					$row = array_map('stripslashes', $row);
 					if ( $contatorelinee % 2 == 1 ) { 
 						$colorelinee = $_SESSION['primocoloretabellarisultati'] ; 
 					} //primo colore
@@ -469,6 +470,7 @@
 			<?php
 			
 			while ($value = mysql_fetch_array($risultati)) { //elenco i risultati dell'array
+				$value = array_map('stripslashes', $value);
 				if ( $contatorelinee % 2 == 1 ) { 
 					$colorelinee = $_SESSION['primocoloretabellarisultati'];
 				} //primo colore
@@ -507,6 +509,7 @@
 								where $joinletteremittenti.idlettera = '$value[0]' 
 								and anagrafica.idanagrafica=$joinletteremittenti.idanagrafica");
 					while ($mittenti2=mysql_fetch_array($mittenti)) {
+						$mittenti2 = array_map('stripslashes', $mittenti2);
 						$mittenti3=$mittenti2['nome'].' '.$mittenti2['cognome'];	
 						?>	
 						<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $mittenti2['idanagrafica'];?>"><?php echo $mittenti3; ?><br></a>

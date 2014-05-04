@@ -1,10 +1,44 @@
 <?php
+	if( isset($_GET['from']) && $_GET['from'] == 'insert') {
+		if($_GET['exist'] == "true") {
+			?>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> <b>Errore:</b> il soggetto è già presente in anagrafica, controlla.</div>
+					</div>
+				</div>
+			</div>
+			<?php
+			include 'sotto-include.php';
+			exit();
+		}
+		else {
+			?>
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica registrata correttamente!</div>
+				</div>
+			</div>
+			<?php
+		}
+	}
+	if( isset($_GET['from']) && $_GET['from'] == 'modifica') {
+		?>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica modificata correttamente!</div>
+			</div>
+		</div>
+		<?php
+	}
 	$level = $_SESSION['auth'];
 	$id= $_GET['id'];
 	$risultati=mysql_query("select * from anagrafica where idanagrafica='$id'");
 	$risultati2=mysql_query("select * from jointelefonipersone where idanagrafica='$id'");
 	$countrecapiti = mysql_query("select count(*) from jointelefonipersone where idanagrafica='$id'");
 	$row = mysql_fetch_array($risultati);
+	$row = array_map ("stripslashes",$row);
 	$data = $row['nascitadata'] ;
 	list($anno, $mese, $giorno) = explode("-", $data);
 	$datanascita = $giorno .'/'. $mese .'/'. $anno;

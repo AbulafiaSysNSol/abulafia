@@ -1,5 +1,4 @@
 <?php
-
 	//inizio passaggio dati da pagina inserimento
 	if( isset($_POST['insertok']) ) {
 		$insertok = $_POST['insertok'];
@@ -19,15 +18,13 @@
 	else {
 		$nome = '';
 	}
-	if( isset($_POST['datanascita']) ) {
+	if(  isset($_POST['datanascita']) && $_POST['datanascita'] != '' ) {
 		$datanascita = $_POST['datanascita'];
 		$nascitadata = explode('/',$datanascita);
 		$nascita_data = $nascitadata[2].'-'.$nascitadata[1].'-'.$nascitadata[0];
 	}
 	else {
-		$datanascita = '';
-		$nascitadata='';
-		$nascita_data='';
+		$nascita_data = '';
 	}
 	if( isset($_POST['nascitacomune']) ) {
 		$nascita_comune = $_POST['nascitacomune'];
@@ -168,54 +165,21 @@
 				echo "<br>Inserimento secondo recapito non riuscito"; 
 			}
 		}
-		$exist = false;
+		?>
+		<SCRIPT LANGUAGE="Javascript">
+		browser= navigator.appName;
+		if (browser == "Netscape")
+		window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=false&id=<?php echo $lastid;?>"; else window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=false&id=<?php echo $lastid;?>";
+		</SCRIPT>
+		<?php
 	}
-	else {
-		$exist = true;
-	}
-?>
-
-<div class="panel panel-default">
-	<?php if(!$exist) { ?>
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica registrata correttamente!</div>
-				</div>
-			</div>
-			<p>
-				<img width="130" src="<?php if($url_foto != '') { echo 'foto/'.$lastid.$url_foto; } else { echo 'images/nessuna.jpg'; } ?>">
-				<br><br>
-				Cognome: <strong><?php echo stripslashes($cognome) ; ?></strong> 
-				<br>
-				Nome: <strong><?php echo stripslashes($nome) ; ?></strong>
-				<br>
-				Data di Nascita: <strong><?php echo stripslashes($datanascita); ?></strong>
-			</p>
-		</div>
-		  
-		<div class="panel-heading">
-			<h3 class="panel-title"><strong>Opzioni:</strong></h3>
-		</div>
-		<div class="panel-body">
-			<p><a href="login0.php?corpus=dettagli-anagrafica&from=risultati&id=<?php echo $lastid;?>"><i class="fa fa-bars"></i> Visualizza Dettagli di questa anagrafica</a></p>
-			<p><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus-sign"></span> Inserisci nuova anagrafica</a></p>
-		</div>
-	<?php }
 	else {
 		?>
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> <b>Errore:</b> il soggetto è già presente in anagrafica, controlla.</div>
-				</div>
-			</div>
-		</div>
-		<div class="panel-heading">
-			<h3 class="panel-title"><strong>Opzioni:</strong></h3>
-		</div>
-		<div class="panel-body">
-			<p><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus-sign"></span> Inserisci nuova anagrafica</a></p>
-		</div>
-	<?php } ?>
-</div>
+		<SCRIPT LANGUAGE="Javascript">
+		browser= navigator.appName;
+		if (browser == "Netscape")
+		window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=true"; else window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=true";
+		</SCRIPT>
+		<?php
+	}
+?>

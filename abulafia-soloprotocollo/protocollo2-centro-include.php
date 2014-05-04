@@ -277,6 +277,7 @@
 							and 
 							joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
 				while ($row2 = mysql_fetch_array($risultati2)) {
+				$row2 = array_map('stripslashes', $row2);
 					echo ucwords($row2['cognome'] . ' ' . $row2['nome']) ;?> - <a href="login0.php?corpus=protocollo2
 												&from=elimina-mittente
 												&idlettera=<?php echo $idlettera;?>
