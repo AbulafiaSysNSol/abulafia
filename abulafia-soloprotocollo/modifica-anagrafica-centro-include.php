@@ -195,6 +195,9 @@
 			<?php
 				$nascita = explode('-',$row['nascitadata']);
 				$data = $nascita[2]."/".$nascita[1]."/".$nascita[0];
+				if($data == '00/00/0000') {
+					$data = '';
+				}
 			?>
 			<input type="text" class="form-control input-sm datepicker" name="datanascita" value="<?php echo $data; ?>">
 			</div></div></div>
