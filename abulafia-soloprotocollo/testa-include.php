@@ -76,9 +76,13 @@
 	 <div class="row">
 		 <div class="col-md-12">
 			<div class="page-header">
-			<table border="0" width="100%"><tr><td>
-			<h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2></td> 
-			<td align="right"><img src="<?php echo $_SESSION['splash']; ?>"></td></tr></table>
+			<table border="0" width="100%">
+			<tr>
+			<td><img width="60" src="images/abulafia logo-scont.png"></td>
+			<td><h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2></td> 
+			<td align="right"><img src="<?php echo $_SESSION['splash']; ?>"></td>
+			</tr>
+			</table>
 			</div>
 		 </div>
 	</div>
