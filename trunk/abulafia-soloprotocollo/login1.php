@@ -30,6 +30,7 @@ $my_database = new Database ;//crea un nuovo oggetto
 $_SESSION['my_database'] = serialize($my_database); //serializzazione per passaggio alle variabili di sessione
 
 $logdirectory="log/";
+$_SESSION['logdirectory'] = "log/";
 $errorlog='error.log';
 $logfile='access.log';
 $maillog='mail.log';
