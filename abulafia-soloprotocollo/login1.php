@@ -64,6 +64,7 @@ $_SESSION['auth']= 0 ;
 	window.location="index.php?err=1"; else window.location="index.php?err=1";
 	</SCRIPT>
 <?php 
+exit();
 }
 //inizio settaggio delle variabili di sessione
 
