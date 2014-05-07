@@ -375,6 +375,8 @@
 							OR
 							$tabella.posizione like '%$cercato%' 
 							OR
+							$tabella.riferimento like '%$cercato%' 
+							OR
 							$tabella.datalettera like '$data')
 							and
 							($tabella.speditaricevuta!=''
@@ -403,6 +405,8 @@
 								$tabella.note like '%$cercato%' 
 								OR
 								$tabella.posizione like '%$cercato%' 
+								OR
+								$tabella.riferimento like '%$cercato%' 
 								OR
 								$tabella.datalettera like '$data')
 								and
@@ -488,10 +492,12 @@
 					<td style="vertical-align: middle"> 
 					
 					<?php
+					$file = false;
 					$urlfile= $my_lettera->cercaAllegati($value[0], $annoricercaprotocollo);
 					if ($urlfile) {
 						foreach ($urlfile as $valore) {
 							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '14'); //richiamo del metodo "downloadlink" dell'oggetto file
+							$file = true;
 							echo $download."<br>";
 						}
 					}
@@ -521,8 +527,14 @@
 						<div class="btn-group btn-group-sm">
 							<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
 							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
-							<a class="btn btn-success" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span></a>
-							<a class="btn btn-primary" href="barcode-centro-include.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-barcode"></span></a>
+							<?php
+							if($file) {
+								?>
+								<a class="btn btn-success" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span></a>
+								<a class="btn btn-primary" href="barcode-centro-include.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-barcode"></span></a>
+								<?php
+							}
+							?>
 						</div>
 					</td>		
 				</tr>
