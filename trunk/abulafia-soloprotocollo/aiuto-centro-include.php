@@ -20,10 +20,9 @@
 			<br>
 			<p class="text-justify"><strong>Posso associare due o piu' documenti ad un protocollo?
 						</strong> 
-						<br> Ogni protocollo puo' essere associato al momento ad un solo file. 
-						Qualora fosse necessario associare piu' file, e' necessario inserire i
-						 documenti in un unico archivio (ad esempio rar, zip o tar.gz) che verra'
-						  poi associato al protocollo in questione.
+						<br> Si, è possibile associare ad ogni protocollo due o più documenti;
+							basterà semplicemente allegare i documenti uno per volta durante la fase di registrazione
+							del protocollo.
 			</p>
 			<br>
 			<p class="text-justify"><strong>Cosa significa il nome Abulafia?</strong> <br> E' il nome di un celebre uomo di cultura di alcuni secoli fa.</p>
