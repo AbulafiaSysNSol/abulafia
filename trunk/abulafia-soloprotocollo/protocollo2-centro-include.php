@@ -319,7 +319,7 @@
 				<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
 				<div class="row">
 					<div class="col-xs-2">
-						<input type="text" class="form-control datepicker" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} ?> >
+						<input type="text" class="form-control datepicker" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} else { echo 'value='.date("d/m/Y"); } ?> >
 					</div>
 				</div>
 			</div>
