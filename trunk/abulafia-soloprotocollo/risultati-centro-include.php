@@ -462,10 +462,10 @@
 			
 			<table class="table table-bordered">
 				<tr align = "center">
+					<td style="vertical-align: middle"></td>
 					<td style="vertical-align: middle">N. Prot.</td>
 					<td style="vertical-align: middle">Data Reg.</td>
 					<td style="vertical-align: middle">Pos.</td>
-					<td style="vertical-align: middle">Sped./Ric.</td>
 					<td style="vertical-align: middle">Oggetto</td>
 					<td style="vertical-align: middle">File</td>
 					<td style="vertical-align: middle">Mitt./Dest.</td>
@@ -484,10 +484,10 @@
 				$contatorelinee = $contatorelinee + 1 ;
 				?>
 				<tr align = "center" bgcolor=<?php echo $colorelinee; ?> >
+					<td style="vertical-align: middle"><?php if($value[5] == 'spedita') { echo'<h3><i class="fa fa-level-up"></i></h3>'; } else { echo '<h3><i class="fa fa-level-down"></i></h3>'; } ;?></td>
 					<td style="vertical-align: middle"><?php echo $value[0] ;?></td>
 					<td style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
 					<td style="vertical-align: middle"><?php echo $value[7] ;?></td>
-					<td style="vertical-align: middle"><?php echo $value[5] ;?></td>
 					<td style="vertical-align: middle"><?php echo $value[1] ;?></td>
 					<td style="vertical-align: middle"> 
 					
