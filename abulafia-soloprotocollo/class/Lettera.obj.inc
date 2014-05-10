@@ -236,6 +236,15 @@ class Lettera {
 		}
 		return $this->urlfile;
 	}//fine metodo
+	
+	public function ultimeLettere($numerolettere, $anno) {
+		$res = array();
+		$query = mysql_query("SELECT idlettera, dataregistrazione, oggetto, speditaricevuta FROM lettere$anno WHERE datalettera != '0000-00-00' ORDER BY idlettera desc LIMIT $numerolettere ");
+		while ($risultati  = mysql_fetch_array($query)) {
+			array_push ($res, $risultati);
+		}
+		return $res;
+	}
 
 }//chiusura della classe
 

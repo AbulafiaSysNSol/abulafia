@@ -227,8 +227,9 @@
 	</div>
 	
 	<div class="panel-body">
-		<p><a href="login0.php?corpus=modifica-anagrafica&amp;from=risultati&amp;id=<?php echo $id;?>"><span class="glyphicon glyphicon-edit"></span> Modifica questa Anagrafica</a></p>
-		<a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus-sign"></span> Nuovo inserimento in Anagrafica</a>
+		<p><a href="login0.php?corpus=corrispondenza.anagrafica&id=<?php echo $id;?>"><i class="fa fa-exchange"></i> Visualizza corrispondenza inviata/ricevuta dall'anagrafica</a></p>
+		<p><a href="login0.php?corpus=modifica-anagrafica&amp;from=risultati&amp;id=<?php echo $id;?>"><span class="glyphicon glyphicon-edit"></span> Modifica questa anagrafica</a></p>
+		<a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus-sign"></span> Nuovo inserimento in anagrafica</a>
 	</div>
   
 </div>

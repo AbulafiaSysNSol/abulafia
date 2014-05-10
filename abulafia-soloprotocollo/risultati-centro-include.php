@@ -251,13 +251,17 @@
 													&from=risultati
 													&tabella=anagrafica
 													&id=<?php echo $row['idanagrafica'];?>">
-													<span class="glyphicon glyphicon-info-sign"></span> Info
+													<span class="glyphicon glyphicon-info-sign"></span>
 								</a>
 								<a class="btn btn-warning" 	href="login0.php?corpus=modifica-anagrafica
 													&from=risultati
 													&tabella=anagrafica
 													&id=<?php echo $row['idanagrafica'];?>">
-													<span class="glyphicon glyphicon-pencil"></span> Modifica
+													<span class="glyphicon glyphicon-pencil"></span>
+								</a>
+								<a class="btn btn-primary" 	href="login0.php?corpus=corrispondenza.anagrafica
+													&id=<?php echo $row['idanagrafica'];?>">
+													<i class="fa fa-exchange"></i>
 								</a>
 							</div>
 						</td>
