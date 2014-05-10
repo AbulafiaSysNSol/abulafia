@@ -59,6 +59,12 @@ public $ggmmaaaa;
 		$this->hhmmss=$this->ora.$separatore.$this->minuti.$separatore.$this->secondi;
 		
 		}//fine metodo
+		
+	public function dataSlash($data) {
+		$date = explode("-",$data);
+		$dataslash = $date[2]."/".$date[1]."/".$date[0];
+		return $dataslash;
+	}
 
 
 	}//chiusura classe

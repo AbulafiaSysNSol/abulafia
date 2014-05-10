@@ -79,8 +79,8 @@
 		<td><b>Codice</b></td><td><b>Descrizione</b></td><td><b>Opzioni</b></td>
 		</tr>
 		<?php
-		while ($risultati2=mysql_fetch_array($risultati))
-		{
+		while ($risultati2=mysql_fetch_array($risultati))	{
+			$risultati2 = array_map ("stripslashes",$risultati2);
 			echo '<tr>';
 			echo '<td>' . $risultati2['codice'] . '</td><td>' . $risultati2['descrizione'] . '</td><td><a href="login0.php?corpus=titolario-modifica&id=' . $risultati2['id'] . '"><button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></button></a> <a onClick="return confirm(\'Vuoi veramente cancellare questa posizione?\');" href="login0.php?corpus=titolario-elimina&id='. $risultati2['id'] . '"><button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button></a></td></tr>';
 		}

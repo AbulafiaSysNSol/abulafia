@@ -243,9 +243,8 @@
 			<select class="form-control" name="riferimento">
 			<option value="">nessuna titolazione
 			<?php
-			while ($risultati2=mysql_fetch_array($risultati))
-			$risultati2 = array_map('stripslashes', $risultati2);
-			{
+			while ($risultati2=mysql_fetch_array($risultati)) {
+				$risultati2 = array_map ("stripslashes",$risultati2);
 				 if( $row['riferimento'] == $risultati2['codice'] ) {
 					echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
 				}
