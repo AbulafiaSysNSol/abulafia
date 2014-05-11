@@ -1,15 +1,16 @@
 <?php
 	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
+	$id = $_GET['id'];
 ?>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title"><strong>Dettagli Protocollo: <?php echo $_GET['id']; ?></strong></h3>
+		<h3 class="panel-title"><strong>Dettagli Protocollo: <?php echo $id; ?></strong></h3>
 	</div>
 	
 	<div class="panel-body">
 		<?php 
-		$my_lettera -> publdisplaylettera ($_GET['id'], $_SESSION['annoricercaprotocollo']); //richiamo del metodo "mostra" dell'oggetto Lettera
+		$my_lettera -> publdisplaylettera ($id, $_SESSION['annoricercaprotocollo']); //richiamo del metodo "mostra" dell'oggetto Lettera
 		?> 
 	</div>
   

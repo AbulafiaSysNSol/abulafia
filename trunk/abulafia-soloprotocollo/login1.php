@@ -99,6 +99,7 @@ $settings6=mysql_fetch_array($settings5);
 $_SESSION['keywords'] = $settings4['keywords'];
 $_SESSION['description'] = $settings4['description'];
 $_SESSION['annoprotocollo'] = $settings4['annoprotocollo'];
+$_SESSION['annoricercaprotocollo'] = $_SESSION['annoprotocollo'];
 $_SESSION['paginaprincipale'] = $settings4['paginaprincipale'];
 $_SESSION['headerdescription'] = $settings4['headerdescription'];
 $_SESSION['titolopagina'] = $settings4['titolopagina'];

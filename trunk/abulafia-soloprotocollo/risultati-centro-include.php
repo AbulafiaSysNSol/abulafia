@@ -259,7 +259,8 @@
 													&id=<?php echo $row['idanagrafica'];?>">
 													<span class="glyphicon glyphicon-pencil"></span>
 								</a>
-								<a class="btn btn-primary" 	href="login0.php?corpus=corrispondenza.anagrafica
+								<a class="btn btn-primary" 	href="login0.php?corpus=corrispondenza-anagrafica
+													&currentpage=1&iniziorisultati=0
 													&id=<?php echo $row['idanagrafica'];?>">
 													<i class="fa fa-exchange"></i>
 								</a>
