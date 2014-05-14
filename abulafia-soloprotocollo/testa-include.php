@@ -64,6 +64,8 @@
 	$(function(){
 	     $.datepicker.setDefaults( $.datepicker.regional[ "it" ] );
 	     $('.datepicker').datepicker( { changeMonth: true, changeYear: true });
+	     $('.datepickerAnag').datepicker( { changeMonth: true, changeYear: true, yearRange: "-100:+0" }); 
+	     $('.datepickerProt').datepicker( { changeMonth: true, changeYear: true, maxDate: "today" });
 	});
 </script>
   

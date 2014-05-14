@@ -199,7 +199,7 @@
 					$data = '';
 				}
 			?>
-			<input type="text" class="form-control input-sm datepicker" name="datanascita" value="<?php echo $data; ?>">
+			<input type="text" class="form-control input-sm datepickerAnag" name="datanascita" value="<?php echo $data; ?>">
 			</div></div></div>
 			
 			<div class="form-group">
