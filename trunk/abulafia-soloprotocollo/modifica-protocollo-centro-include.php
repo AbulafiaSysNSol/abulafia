@@ -213,7 +213,7 @@
 			<label><span class="glyphicon glyphicon-calendar"></span> Data della lettera</label>
 			<div class="row">
 				<div class="col-xs-2">
-					<input type="text" class="form-control datepicker" name="data" value="<?php echo $data; ?>">
+					<input type="text" class="form-control datepickerProt" name="data" value="<?php echo $data; ?>">
 				</div>
 			</div>
 				

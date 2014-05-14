@@ -97,7 +97,7 @@
 			<label class="col-sm-2 control-label">Nato il:</label>
 			<div class="row">
 			<div class="col-xs-2">
-			<input type="text" class="form-control input-sm datepicker" name="datanascita" disabled>
+			<input type="text" class="form-control input-sm datepickerAnag" name="datanascita" disabled>
 			</div></div></div>
 			
 			<div class="form-group">
