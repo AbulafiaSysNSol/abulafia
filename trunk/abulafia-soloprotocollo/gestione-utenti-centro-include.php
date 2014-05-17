@@ -39,11 +39,11 @@ var id=0;
 				?>
 				<tr align="center"><td><b>Utente</b></td><td><b>Livello Autorizzazione</b></td><td><b>Opzioni</b></td></tr>
 				<?php
-				while ($risultati2=mysql_fetch_array($risultati))
-				{
-				?>
-				<tr align="center"><td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo $risultati2['cognome'].' '.$risultati2['nome'];?></a></td><td> Auth = <?php echo $risultati2['auth'];?></td><td><a href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"> Modifica</a> - <a href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>">Elimina</a></td></tr>
-				<?php 
+				while ($risultati2=mysql_fetch_array($risultati))	{
+					$risultati2 = array_map('stripslashes', $risultati2);
+					?>
+					<tr align="center"><td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo ucwords($risultati2['cognome'].' '.$risultati2['nome']);?></a></td><td> Auth = <?php echo $risultati2['auth'];?></td><td><a href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"> Modifica</a> - <a href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>">Elimina</a></td></tr>
+					<?php 
 				} 
 				?>
 			</table>
@@ -57,7 +57,7 @@ var id=0;
 		</div>
 		<div class="panel-body">
 			<form>
-			<input class="form-control" placeholder="digita il cognome o parte di esso..." type="text" id="txt1" onkeyup="showResult(this.value)" />
+			<input class="form-control" placeholder="digita il nome o parte di esso..." type="text" id="txt1" onkeyup="showResult(this.value)" />
 			<div id="livesearch"></div>
 			</form>
 		</div>
