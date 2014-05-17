@@ -57,7 +57,7 @@ var id=0;
 		</div>
 		<div class="panel-body">
 			<form>
-			<input class="form-control" placeholder="digita il nome o parte di esso..." type="text" id="txt1" onkeyup="showResult(this.value)" />
+			<input class="form-control" placeholder="digita il cognome o parte di esso..." type="text" id="txt1" onkeyup="showResult(this.value)" />
 			<div id="livesearch"></div>
 			</form>
 		</div>
