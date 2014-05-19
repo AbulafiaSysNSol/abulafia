@@ -126,7 +126,7 @@ $_SESSION['errorlog'] = $errorlog;
 $_SESSION['logdirectory'] = $logdirectory;
 
 //fine del settaggio delle variabili di sessione e avvio del refresh automatico
-echo 'Login effettuato<br><br>'; //nel caso che il login sia andato a buon fine
+echo 'Loading, please wait...<br><br>'; //nel caso che il login sia andato a buon fine
 
 //log degli accessi con esito positivo
 $my_log -> publscrivilog($userid, 'login', 'ok', $client, $logfile );
