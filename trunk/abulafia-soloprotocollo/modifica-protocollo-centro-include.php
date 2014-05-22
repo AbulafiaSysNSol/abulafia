@@ -19,7 +19,7 @@
 	$row3 = mysql_fetch_array($risultati3);
 	if (($_SESSION['auth'] <= $row3['auth']) and ($row3['idinser'] !=  $_SESSION['loginid'])) {
 		echo 'Non hai un livello di autorizzazione sufficiente a modificare questo protocollo.';?> 
-		<a href="login0.php?corpus=dettagli-protocollo&from=risultati&id=<?php echo $idlettera;?>"><br><br>Vai alla pagina dei Dettagli del Protocollo n°<?php echo $idlettera;?></a><?php
+		<a href="login0.php?corpus=dettagli-protocollo&from=risultati&id=<?php echo $idlettera;?>"><br><br>Vai alla pagina dei Dettagli del Protocollo N.<?php echo $idlettera;?><br><br></a><?php
 		include 'sotto-include.php'; //carica il file con il footer.
 		exit();
 	}
