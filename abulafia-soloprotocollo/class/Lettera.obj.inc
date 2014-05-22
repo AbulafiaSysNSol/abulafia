@@ -106,6 +106,17 @@ class Lettera {
 		</strong>
 
 		<br>
+		Pratica: 
+		<strong>
+			<?php
+				$idpratica = $this->arraylettera1['pratica'];
+				$risultati=mysql_query("select distinct * from pratiche WHERE id='$idpratica'");
+				$risultati2=mysql_fetch_row($risultati);
+				echo stripslashes($risultati2[1]);
+			?>
+		</strong>
+
+		<br>
 		Note: 
 		<strong>
 			<?php 

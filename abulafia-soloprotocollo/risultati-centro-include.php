@@ -333,7 +333,7 @@
 		else {
 			echo "Non ci sono risultati con i filtri applicati."; 
 			?> 
-			<a href="login0.php?corpus=ricerca"><br><br>Effettua un'altra ricerca</a>
+			<a href="login0.php?corpus=ricerca"><br><br><i class="fa fa-reply"></i> Torna alla pagina di ricerca</a><br><br></a>
 			<?php
 		}
 
@@ -590,7 +590,7 @@
 		else {
 			echo "Nessun risultato trovato con i filtri di ricerca applicati."; 
 			?> 
-			<br><br><a href="login0.php?corpus=ricerca">Effettua un'altra ricerca</a><?php
+			<br><br><a href="login0.php?corpus=ricerca"><i class="fa fa-reply"></i> Torna alla pagina di ricerca</a><br><br><?php
 		} 
 	}
 ?>

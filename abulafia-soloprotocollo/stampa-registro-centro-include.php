@@ -67,11 +67,11 @@
 				
 						Dal 
 						<div class="form-group">
-						<input name="datainizio" size="10" type="text" class="form-control datepicker">
+						<input name="datainizio" size="10" type="text" class="form-control datepickerProt">
 						</div>
 						al
 						<div class="form-group">
-						<input name="datafine" size="10" type="text" class="form-control datepicker">
+						<input name="datafine" size="10" type="text" class="form-control datepickerProt">
 						</div>
 						<br><br>
 						<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-file"></span> Genera PDF</button>

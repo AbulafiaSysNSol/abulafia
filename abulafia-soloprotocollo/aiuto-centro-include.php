@@ -25,6 +25,12 @@
 							del protocollo.
 			</p>
 			<br>
+			<p class="text-justify"><strong>Cosa sono le posizioni?
+						</strong> 
+						<br> Le posizioni sono le "classificazioni" che insieme formano il titolario. E' il sistema con cui vengono catalogate le lettere nella scaffalatura dove
+							sono riposte. E' possibile aggiungere, modficare ed eliminare una posizione dal menu "Protocollo" alla voce "Gestione posizioni".
+			</p>
+			<br>
 			<p class="text-justify"><strong>Cosa significa il nome Abulafia?</strong> <br> E' il nome di un celebre uomo di cultura di alcuni secoli fa.</p>
 
 		</div>

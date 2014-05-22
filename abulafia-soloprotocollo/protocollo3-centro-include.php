@@ -26,6 +26,7 @@
 		$_SESSION['data'] = $_POST['data'];
 		$_SESSION['posizione'] = $_POST['posizione'];
 		$_SESSION['riferimento'] = $_POST['riferimento'];
+		$_SESSION['pratica'] = $_POST['pratica'];
 		$_SESSION['note'] = $_POST['note'];
 		
 		if($from != "modifica") {
@@ -67,6 +68,7 @@
 	}
 	$posizione = $_POST['posizione'];
 	$riferimento = $_POST['riferimento'];
+	$pratica = $_POST['pratica'];
 	$note  = $_POST['note'];
 	$dataregistrazione = strftime("%Y-%m-%d");
 	list($anno, $mese, $giorno) = explode("-", $dataregistrazione);
@@ -80,7 +82,7 @@
 	//fine passaggio dati
 
 	//controllo esistenza
-	$inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.note='$note', lettere$annoprotocollo.dataregistrazione='$dataregistrazione' WHERE lettere$annoprotocollo.idlettera='$idlettera'");
+	$inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.pratica='$pratica', lettere$annoprotocollo.note='$note', lettere$annoprotocollo.dataregistrazione='$dataregistrazione' WHERE lettere$annoprotocollo.idlettera='$idlettera'");
 	echo  mysql_error();
 	if (!$inserimento) { echo "Inserimento non riuscito" ; }
 	$ultimoid = mysql_insert_id();
@@ -91,6 +93,7 @@
 	unset($_SESSION['data']);
 	unset($_SESSION['posizione']);
 	unset($_SESSION['riferimento']);
+	unset($_SESSION['pratica']);
 	unset($_SESSION['note']);
 ?>
 
@@ -127,7 +130,9 @@
 	<h3 class="panel-title"><strong>Opzioni:</strong></h3>
 	</div>
 	<div class="panel-body">
-		<p><a href="login0.php?corpus=protocollo2&from=crea">Registrazione nuovo PROTOCOLLO</a></p>
+		<p><a href="login0.php?corpus=protocollo2&from=crea"><i class="fa fa-plus-square"></i> Registrazione nuovo protocollo</a></p>
+		<p><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $idlettera;?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo Protocollo</a></p>
+		<p><a href="login0.php?corpus=invia-newsletter&id=<?php echo $idlettera;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite Email</a></p>					
 	</div>
   
 </div>

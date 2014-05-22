@@ -20,6 +20,7 @@ $lettera_data_giorno = $_POST['lettera-data-giorno'];
 $lettera_data_mese = $_POST['lettera-data-mese'];
 $lettera_data_anno = $_POST['lettera-data-anno'];
 $posizione = $_POST['posizione'];
+$pratica = $_POST['pratica'];
 $note  = $_POST['note'];
 $urlpdf = $_GET['urlpdf'];
 
@@ -36,7 +37,7 @@ $lettera_data = $lettera_data_anno . '-' . $lettera_data_mese . '-' . $lettera_d
 
 
 
-$inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.note='$note' WHERE lettere$annoprotocollo.idlettera='$idlettera'     " );
+$inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.pratica='$pratica', lettere$annoprotocollo.note='$note' WHERE lettere$annoprotocollo.idlettera='$idlettera'     " );
 echo  mysql_error();
 if (!$inserimento) { echo "Inserimento non riuscito" ; }
 $ultimoid = mysql_insert_id();
