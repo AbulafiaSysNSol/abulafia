@@ -40,6 +40,7 @@
 				`speditaricevuta` text collate utf8_roman_ci NOT NULL,
 				`posizione` text collate utf8_roman_ci NOT NULL,
 				`riferimento` text collate utf8_roman_ci NOT NULL,
+				`pratica` int(11) NULL,
 				`note` text collate utf8_roman_ci NOT NULL,
 				 PRIMARY KEY  (`idlettera`)
 				) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_roman_ci AUTO_INCREMENT=833 ;
