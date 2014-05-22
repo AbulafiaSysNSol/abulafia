@@ -12,7 +12,7 @@
 			<a href="?corpus=home">Home Page</a> &middot;
 			<a href="?corpus=informazioni">Info</a> &middot;
 			<a href="#"><strong>Guida</strong></a>
-			<br><strong>if you want somethings done right, do it yourself.</strong>
+			<br><strong>If you want somethings done right, do it yourself.</strong>
 		</td>
 		</tr>
 		</table>

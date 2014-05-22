@@ -234,7 +234,7 @@
 			</div>
 			
 			<br>
-			<label><span class="glyphicon glyphicon-book"></span> Titolazione:</label>
+			<label><i class="fa fa-archive"></i> Titolazione:</label>
 			<div class="row">
 			<div class="col-xs-3">
 			<?php
@@ -250,6 +250,30 @@
 				}
 				else {
 					echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
+				}
+			}
+			echo '</select>';
+			?>
+			</div>
+			</div>
+			
+			<br>
+			<label><i class="fa fa-files-o"></i> Pratica:</label>
+			<div class="row">
+			<div class="col-xs-4">
+			<?php
+			$risultati=mysql_query("select distinct * from pratiche");
+			?>
+			<select class="form-control" name="pratica">
+			<option value="">nessuna pratica
+			<?php
+			while ($risultati2=mysql_fetch_array($risultati)) {
+				$risultati2 = array_map ("stripslashes",$risultati2);
+				 if( $row['pratica'] == $risultati2['id'] ) {
+					echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
+				}
+				else {
+					echo '<option value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
 				}
 			}
 			echo '</select>';

@@ -56,7 +56,7 @@
 		}
 		
 		$dataregistrazione = strftime("%Y-%m-%d");
-		$crea=mysql_query("insert into lettere$annoprotocollo values('','','','$dataregistrazione','','','','','')");
+		$crea=mysql_query("insert into lettere$annoprotocollo values('','','','$dataregistrazione','','','','','','')");
 		$ultimoid=mysql_insert_id();
 		$insertid=$ultimoid;
 		$loginid=$_SESSION['loginid'];
@@ -344,7 +344,7 @@
 			<div class="form-group">
 				<div class="row">
 				<div class="col-xs-3">
-				<label> <span class="glyphicon glyphicon-book"></span> Titolazione:</label>
+				<label> <i class="fa fa-archive"></i> Titolazione:</label>
 				<?php
 				$risultati=mysql_query("select distinct * from titolario");
 				?>
@@ -353,11 +353,38 @@
 				<?php
 				while ($risultati2=mysql_fetch_array($risultati))
 				{
+					$risultati2 = array_map("stripslashes",$risultati2);
 					 if( ($errore || $add) && isset($_SESSION['riferimento']) && $_SESSION['riferimento'] == $risultati2['codice'] ) {
 						echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
 					}
 					else {
 						echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
+					}
+				}
+				echo '</select>';
+				?>
+				</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="row">
+				<div class="col-xs-4">
+				<label> <i class="fa fa-files-o"></i> Pratica:</label>
+				<?php
+				$risultati=mysql_query("select distinct * from pratiche");
+				?>
+				<select class="form-control" size=1 cols=4 NAME="pratica">
+				<option value="">nessuna pratica
+				<?php
+				while ($risultati2=mysql_fetch_array($risultati))
+				{
+					$risultati2 = array_map("stripslashes",$risultati2);
+					 if( ($errore || $add) && isset($_SESSION['pratica']) && $_SESSION['pratica'] == $risultati2['id'] ) {
+						echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
+					}
+					else {
+						echo '<option value="' . $risultati2['id'] . '">' .  $risultati2['descrizione'];
 					}
 				}
 				echo '</select>';
