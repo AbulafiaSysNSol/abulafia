@@ -1,6 +1,6 @@
 <?php
 
-	$idanagrafica = $_GET['id'];
+	$idposizione = $_GET['id'];
 	$risultatiperpagina = $_SESSION['risultatiperpagina']; //acquisisce la variabile di sessione che stabilisce quanti risultati vengono mostrati in ogni pagina
 	$currentpage = $_GET['currentpage'];
 	
@@ -21,11 +21,9 @@
 						"SELECT 
 							COUNT(*) 
 						FROM 
-							$tabella, $joinletteremittenti
+							$tabella
 						WHERE 
-							$tabella.idlettera = $joinletteremittenti.idlettera
-						AND
-							$joinletteremittenti.idanagrafica = $idanagrafica"
+							$tabella.riferimento = '$idposizione'"
 						);
 	//conteggio per divisione in pagine dei risultati
 	$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
@@ -37,18 +35,15 @@
 						SELECT 
 							* 
 						FROM 
-							$tabella, $joinletteremittenti
+							$tabella
 						WHERE 
-							$tabella.idlettera = $joinletteremittenti.idlettera
-						AND
-							$joinletteremittenti.idanagrafica = $idanagrafica
+							$tabella.riferimento = '$idposizione'
 						ORDER BY
 							$tabella.idlettera DESC
 						LIMIT
 							$iniziorisultati , $risultatiperpagina
 					");
 	$num_righe = mysql_num_rows($risultati);
-	
 	?>
 	<center>
 	<div class="row">
@@ -127,6 +122,7 @@
 				<td style="vertical-align: middle">Pos.</td>
 				<td style="vertical-align: middle">Oggetto</td>
 				<td style="vertical-align: middle">File</td>
+				<td style="vertical-align: middle">Mitt./Dest.</td>
 				<td style="vertical-align: middle" width="150">Opzioni</td>
 			</tr>
 		<?php
@@ -164,6 +160,22 @@
 				}
 				
 				?>
+				</td>
+					
+				<td style="vertical-align: middle">
+					<?php
+					$mittenti= mysql_query("SELECT distinct * 
+								from anagrafica, $joinletteremittenti 
+								where $joinletteremittenti.idlettera = '$value[0]' 
+								and anagrafica.idanagrafica=$joinletteremittenti.idanagrafica");
+					while ($mittenti2=mysql_fetch_array($mittenti)) {
+						$mittenti2 = array_map('stripslashes', $mittenti2);
+						$mittenti3=$mittenti2['nome'].' '.$mittenti2['cognome'];	
+						?>	
+						<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $mittenti2['idanagrafica'];?>"><?php echo $mittenti3; ?><br></a>
+						<?php 
+					}
+					?>
 				</td>
 
 				<td style="vertical-align: middle">
@@ -226,7 +238,7 @@
 			//fine controllo pagine avanti-indietro
 		}
 		else {
-			echo "<br><center><div class=\"alert alert-danger\"><b><i class=\"fa fa-warning\"></i> Nessuna</b> corrispondenza trovata con l'anagrafica per l'anno selezionato. Provare a variare l'anno di ricerca.</div></center>"; 
+			echo "<br><center><div class=\"alert alert-danger\"><b><i class=\"fa fa-warning\"></i> Nessuna</b> corrispondenza trovata con la posizione per l'anno selezionato. Provare a variare l'anno di ricerca.</div></center>"; 
 			?> 
 			<a href="login0.php?corpus=ricerca"><i class="fa fa-reply"></i> Vai alla pagina di ricerca</a><br><?php
 		} 
@@ -238,9 +250,9 @@ function change() {
 	var anno = document.getElementById("annoricerca").value;
 	browser= navigator.appName;
 	if (browser == "Netscape")
-	window.location="login0.php?corpus=corrispondenza-anagrafica&iniziorisultati=0&id=<?php echo $idanagrafica; ?>&anno="+anno+"&currentpage=1"; 
+	window.location="login0.php?corpus=corrispondenza-titolario&iniziorisultati=0&id=<?php echo $idposizione; ?>&anno="+anno+"&currentpage=1"; 
 	else 
-	window.location="login0.php?corpus=corrispondenza-anagrafica&iniziorisultati=0&id=<?php echo $idanagrafica; ?>&anno="+anno+"&currentpage=1";
+	window.location="login0.php?corpus=corrispondenza-titolario&iniziorisultati=0&id=<?php echo $idposizione; ?>&anno="+anno+"&currentpage=1";
 }
  //-->
 </script> 
