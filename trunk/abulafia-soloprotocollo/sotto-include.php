@@ -1,4 +1,4 @@
-
+<hr>
 	<div>
 	<small>
 		<table border="0" width="100%">
