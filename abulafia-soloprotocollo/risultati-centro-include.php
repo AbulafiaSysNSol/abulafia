@@ -247,19 +247,19 @@
 						<td style="vertical-align: middle" align="center"><?php echo $row['codicefiscale'];?></td>
 						<td style="vertical-align: middle" align="center">
 							<div class="btn-group btn-group-sm">
-								<a class="btn btn-info" href="login0.php?corpus=dettagli-anagrafica
+								<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli anagrafica" href="login0.php?corpus=dettagli-anagrafica
 													&from=risultati
 													&tabella=anagrafica
 													&id=<?php echo $row['idanagrafica'];?>">
 													<span class="glyphicon glyphicon-info-sign"></span>
 								</a>
-								<a class="btn btn-warning" 	href="login0.php?corpus=modifica-anagrafica
+								<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica anagrafica" 	href="login0.php?corpus=modifica-anagrafica
 													&from=risultati
 													&tabella=anagrafica
 													&id=<?php echo $row['idanagrafica'];?>">
 													<span class="glyphicon glyphicon-pencil"></span>
 								</a>
-								<a class="btn btn-primary" 	href="login0.php?corpus=corrispondenza-anagrafica
+								<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Visualizza corrispondenza anagrafica" 	href="login0.php?corpus=corrispondenza-anagrafica
 													&currentpage=1&iniziorisultati=0
 													&id=<?php echo $row['idanagrafica'];?>">
 													<i class="fa fa-exchange"></i>
@@ -530,13 +530,13 @@
 					</td>
 					<td style="vertical-align: middle">
 						<div class="btn-group btn-group-sm">
-							<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
-							<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
+							<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
+							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
 							<?php
 							if($file) {
 								?>
-								<a class="btn btn-success" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span></a>
-								<a class="btn btn-primary" href="barcode-centro-include.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-barcode"></span></a>
+								<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Invia tramite email" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span></a>
+								<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Imprimi barcode sugli allegati" href="barcode-centro-include.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-barcode"></span></a>
 								<?php
 							}
 							?>
