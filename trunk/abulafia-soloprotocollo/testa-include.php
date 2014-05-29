@@ -90,7 +90,7 @@
 		 </div>
 	</div>
 	  
-	<nav class="navbar navbar-default hidden-phone" role="navigation">
+	<nav class="navbar navbar-default navbar-collapse" role="navigation">
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
