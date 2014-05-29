@@ -32,6 +32,7 @@
 
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <title><?php echo $_SESSION['nomeapplicativo'] . ' ' . $_SESSION['version'];?></title>
 <meta name="keywords" content="<?php echo $_SESSION['keywords'];?>" />
@@ -39,26 +40,26 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="style.php"/>
 
-<!-- META -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- META -->
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
- <!-- META -->
+  <!-- META -->
   
   <!-- CSS -->
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.10.4.custom.css"></link>
   <link href="css/grid.css" rel="stylesheet">
   <!-- CSS -->  
   
   <!-- JS -->
   <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery-1.10.4.custom.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
   <!-- JS -->
   
-<link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.10.4.custom.css"></link>
-<script type="text/javascript" src="js/jquery-1.10.4.custom.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
+
 
 <script type="text/javascript">
 	$(function(){
@@ -89,7 +90,7 @@
 		 </div>
 	</div>
 	  
-	<nav class="navbar navbar-default navbar-wrapper" role="navigation">
+	<nav class="navbar navbar-default hidden-phone" role="navigation">
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

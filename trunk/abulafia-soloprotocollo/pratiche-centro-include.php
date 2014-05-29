@@ -82,7 +82,15 @@
 		while ($risultati2=mysql_fetch_array($risultati))	{
 			$risultati2 = array_map ("stripslashes",$risultati2);
 			echo '<tr>';
-			echo '<td>' . $risultati2['id'] . '</td><td>' . $risultati2['descrizione'] . '</td><td><a href="login0.php?corpus=pratica-modifica&id=' . $risultati2['id'] . '"><button type="button" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></span></button></a> <a onClick="return confirm(\'Vuoi veramente cancellare questa pratica?\');" href="login0.php?corpus=pratica-elimina&id='. $risultati2['id'] . '"><button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button></a></td></tr>';
+			echo '<td>' . $risultati2['id'] . '</td><td>' . $risultati2['descrizione'] . '</td>
+				<td>
+				<div class="btn-group btn-group-xs">
+					<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Visualizza protocolli per questa pratica" href="login0.php?corpus=corrispondenza-pratica&currentpage=1&iniziorisultati=0&id=' . $risultati2['id'] . '"><i class="fa fa-bars"></i></a>
+					<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica pratica" href="login0.php?corpus=pratica-modifica&id=' . $risultati2['id'] . '"><span class="glyphicon glyphicon-pencil"></span></a> 
+					<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina pratica" onClick="return confirm(\'Vuoi veramente cancellare questa pratica?\');" href="login0.php?corpus=pratica-elimina&id='. $risultati2['id'] . '"><span class="glyphicon glyphicon-trash"></a>
+				</div>
+				</td>
+				</tr>';
 		}
 		}
 		?>

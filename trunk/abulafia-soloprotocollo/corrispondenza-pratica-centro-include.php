@@ -1,6 +1,6 @@
 <?php
 
-	$idposizione = $_GET['id'];
+	$idpratica = $_GET['id'];
 	$risultatiperpagina = $_SESSION['risultatiperpagina']; //acquisisce la variabile di sessione che stabilisce quanti risultati vengono mostrati in ogni pagina
 	$currentpage = $_GET['currentpage'];
 	
@@ -23,7 +23,7 @@
 						FROM 
 							$tabella
 						WHERE 
-							$tabella.riferimento = '$idposizione'"
+							$tabella.pratica = $idpratica"
 						);
 	//conteggio per divisione in pagine dei risultati
 	$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
@@ -37,7 +37,7 @@
 						FROM 
 							$tabella
 						WHERE 
-							$tabella.riferimento = '$idposizione'
+							$tabella.pratica = $idpratica
 						ORDER BY
 							$tabella.idlettera DESC
 						LIMIT
@@ -240,7 +240,7 @@
 		else {
 			echo "<br><center><div class=\"alert alert-danger\"><b><i class=\"fa fa-warning\"></i> Nessuna</b> corrispondenza trovata con la posizione per l'anno selezionato. Provare a variare l'anno di ricerca.</div></center>"; 
 			?> 
-			<a href="login0.php?corpus=titolario"><i class="fa fa-reply"></i> Torna al titolario </a> o <a href="login0.php?corpus=ricerca">vai alla pagina di ricerca <i class="fa fa-search"></i></a><br><?php
+			<a href="login0.php?corpus=pratiche"><i class="fa fa-reply"></i> Torna alle pratiche </a> o <a href="login0.php?corpus=ricerca">vai alla pagina di ricerca <i class="fa fa-search"></i></a><br><?php
 		} 
 ?>
 
@@ -250,9 +250,9 @@ function change() {
 	var anno = document.getElementById("annoricerca").value;
 	browser= navigator.appName;
 	if (browser == "Netscape")
-	window.location="login0.php?corpus=corrispondenza-titolario&iniziorisultati=0&id=<?php echo $idposizione; ?>&anno="+anno+"&currentpage=1"; 
+	window.location="login0.php?corpus=corrispondenza-pratica&iniziorisultati=0&id=<?php echo $idpratica; ?>&anno="+anno+"&currentpage=1"; 
 	else 
-	window.location="login0.php?corpus=corrispondenza-titolario&iniziorisultati=0&id=<?php echo $idposizione; ?>&anno="+anno+"&currentpage=1";
+	window.location="login0.php?corpus=corrispondenza-pratica&iniziorisultati=0&id=<?php echo $idpratica; ?>&anno="+anno+"&currentpage=1";
 }
  //-->
 </script> 
