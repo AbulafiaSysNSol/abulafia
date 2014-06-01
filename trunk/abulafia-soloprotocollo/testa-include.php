@@ -101,8 +101,8 @@
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
-				<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione posizioni</a></li>
-				<li><a href="login0.php?corpus=pratiche"><i class="fa fa-files-o"></i> Gestione pratiche</a></li>
+				<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione titolario</a></li>
+				<li><a href="login0.php?corpus=pratiche"><i class="fa fa-tags"></i> Gestione pratiche</a></li>
 				<li><a href="login0.php?corpus=stampa-registro"><span class="glyphicon glyphicon-print"></span> Stampa il registro</a></li>
 			</ul>
 		</li>

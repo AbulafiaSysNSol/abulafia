@@ -238,7 +238,7 @@
 			//fine controllo pagine avanti-indietro
 		}
 		else {
-			echo "<br><center><div class=\"alert alert-danger\"><b><i class=\"fa fa-warning\"></i> Nessuna</b> corrispondenza trovata con la posizione per l'anno selezionato. Provare a variare l'anno di ricerca.</div></center>"; 
+			echo "<br><center><div class=\"alert alert-danger\"><b><i class=\"fa fa-warning\"></i> Nessuna</b> corrispondenza trovata con la pratica per l'anno selezionato. Provare a variare l'anno di ricerca.</div></center>"; 
 			?> 
 			<a href="login0.php?corpus=pratiche"><i class="fa fa-reply"></i> Torna alle pratiche </a> o <a href="login0.php?corpus=ricerca">vai alla pagina di ricerca <i class="fa fa-search"></i></a><br><?php
 		} 

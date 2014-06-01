@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title" bgcolor="red"><b>Gestione posizioni</b></h3>
+    <h3 class="panel-title" bgcolor="red"><b>Gestione Titolario</b></h3>
   </div>
   <div class="panel-body">
   
