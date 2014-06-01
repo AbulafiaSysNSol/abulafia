@@ -173,7 +173,7 @@
 		$count=mysql_query("select count(*) from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$count = mysql_fetch_row($count);
 		if($count[0] > 0) {
-			echo '<b>Mittenti/Destinatari attuali:</b><br><br>';
+			echo '<b><i class="fa fa-users"></i> Mittenti/Destinatari attuali:</b><br><br>';
 			while ($row2 = mysql_fetch_array($risultati2)) {
 				$row2 = array_map('stripslashes', $row2);
 				echo $row2['cognome'] . ' ' . $row2['nome'] ;?> - <a href="login0.php?corpus=modifica-protocollo&from=elimina-mittente&id=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $row['urlpdf'];?>">Elimina <span class="glyphicon glyphicon-remove"></span></a><br><?php
@@ -258,7 +258,7 @@
 			</div>
 			
 			<br>
-			<label><i class="fa fa-files-o"></i> Pratica:</label>
+			<label><i class="fa fa-tag"></i> Pratica:</label>
 			<div class="row">
 			<div class="col-xs-4">
 			<?php

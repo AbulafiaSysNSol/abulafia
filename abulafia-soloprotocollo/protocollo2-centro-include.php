@@ -263,7 +263,7 @@
 						and 
 						joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
 			if ($row = mysql_fetch_array($risultati)) {
-				echo '<b>Mittenti/Destinatari:<br><br></b>';
+				echo '<b><i class="fa fa-users"></i> Mittenti/Destinatari:<br><br></b>';
 				$risultati2=mysql_query("select 
 							anagrafica.idanagrafica, 
 							anagrafica.cognome, 
@@ -370,7 +370,7 @@
 			<div class="form-group">
 				<div class="row">
 				<div class="col-xs-4">
-				<label> <i class="fa fa-files-o"></i> Pratica:</label>
+				<label> <i class="fa fa-tag"></i> Pratica:</label>
 				<?php
 				$risultati=mysql_query("select distinct * from pratiche");
 				?>
