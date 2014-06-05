@@ -39,14 +39,14 @@
 	$mail->addAddress($destinatario);     // Add a recipient
 	$mail->addReplyTo($mittente);
 	
-	/*$urlfile = $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
+	$urlfile = $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
 	if ($urlfile) {
 		foreach ($urlfile as $valore) {
 				$f = 'lettere' . $annoricercaprotocollo . '/' . $idlettera . '/'. $valore[2];
 				$mail->addAttachment($f);         // Add attachments
 		}
 	}
-	*/
+	
 	$mail->Subject = $oggetto;
 	$mail->Body    = $messaggio;
 
