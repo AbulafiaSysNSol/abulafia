@@ -46,9 +46,11 @@
 	
 	$urlfile = $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
 	if ($urlfile) {
+		$i = 1;
 		foreach ($urlfile as $valore) {
 				$f = 'lettere' . $annoricercaprotocollo . '/' . $idlettera . '/'. $valore[2];
-				$mail->addAttachment($f, 'AllegatoProt'.$idlettera.'-'.$valore[0]);         // Add attachments
+				$mail->addAttachment($f, 'AllegatoProt'.$idlettera.'-'.$i);
+				$i++;
 		}
 	}
 	$mail->isHTML(true);   
