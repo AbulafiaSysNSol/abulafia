@@ -32,7 +32,7 @@
 				<p><?php 
 					$annoprotocollo = $_SESSION['annoprotocollo'];
 				
-					$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where dataregistrazione!='0000/00/00'");
+					$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00'");
 					$res_lettere = mysql_fetch_row($statslettere);
 					echo 'Nell\'anno corrente sono state registrate '.($res_lettere[0]) .' lettere.';?></p>
 
@@ -42,7 +42,7 @@
 					echo 'In dettaglio: <br>';
 					while ($statsusers2= mysql_fetch_array($statsusers1)) {
 					$statsusers2a=$statsusers2['idanagrafica'];
-					$statsusers3 = mysql_query("select count(*) from joinlettereinserimento$annoprotocollo where joinlettereinserimento$annoprotocollo.idinser = '$statsusers2a'");
+					$statsusers3 = mysql_query("select count(*) from joinlettereinserimento$annoprotocollo where joinlettereinserimento$annoprotocollo.idinser = '$statsusers2a' AND datamod != '0000/00/00' ");
 					$res_statsusers3 = mysql_fetch_row($statsusers3);
 					if ($res_statsusers3[0] > 0) {
 					echo ($res_statsusers3[0]).' inserite da '.$statsusers2['loginname'].'<br>';
