@@ -5,7 +5,7 @@
 	$my_file = new File();
 	
 	require('lib/phpmailer/PHPMailerAutoload.php');
-	$mail = new PHPMailer;
+	$mail = new PHPMailer();
 	
 	$idlettera= $_GET['id'];
 	$annoricercaprotocollo=$_SESSION['annoricercaprotocollo'];
@@ -31,24 +31,29 @@
 
 	$mittente = $setting2['mittente'];
 	$destinatario = $_POST['destinatario'];
+	$destinatari = explode(',' , $destinatario);
 	$oggetto = stripslashes($_POST['oggetto']);
 	$messaggio = stripslashes($_POST['messaggio']);
 	
 	$mail->From = $mittente;
 	$mail->FromName = 'C.P. CRI Catania';
-	$mail->addAddress($destinatario);     // Add a recipient
+	
+	foreach ($destinatari as $valore) {
+		$mail->addAddress($valore[0]);     // Add a recipient
+	}
+	
 	$mail->addReplyTo($mittente);
 	
 	$urlfile = $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
 	if ($urlfile) {
 		foreach ($urlfile as $valore) {
 				$f = 'lettere' . $annoricercaprotocollo . '/' . $idlettera . '/'. $valore[2];
-				$mail->addAttachment($f);         // Add attachments
+				$mail->addAttachment($f, 'AllegatoProt'.$idlettera.'-'.$valore[1]);         // Add attachments
 		}
 	}
 	
 	$mail->Subject = $oggetto;
-	$mail->Body    = $messaggio;
+	$mail->Body    = $headermail.$messaggio.$footermail;
 
 	if(!$mail->send()) {
 		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:</b> si è verificato un errore nell\'invio dell\'email.<br>'.$mail->ErrorInfo.'</div>';
