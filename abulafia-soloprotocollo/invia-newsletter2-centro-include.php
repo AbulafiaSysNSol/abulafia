@@ -51,7 +51,7 @@
 				$mail->addAttachment($f, 'AllegatoProt'.$idlettera.'-'.$valore[0]);         // Add attachments
 		}
 	}
-	
+	$mail->isHTML(true);   
 	$mail->Subject = $oggetto;
 	$mail->Body    = $headermail.$messaggio.$footermail;
 
