@@ -82,6 +82,7 @@
 	if ($urlfile) {
 		foreach ($urlfile as $valore) {
 				$f = 'lettere' . $annoricercaprotocollo . '/' . $idlettera . '/'. $valore[2];
+				echo $f;
 				$filez = fopen($f, "r");
 				$contents = fread($filez, filesize($f));
 				$encoded_attach = chunk_split(base64_encode($contents));
