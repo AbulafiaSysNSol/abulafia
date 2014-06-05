@@ -32,7 +32,7 @@
 				<p><?php 
 					$annoprotocollo = $_SESSION['annoprotocollo'];
 				
-					$statslettere=mysql_query("select count(*) from lettere$annoprotocollo");
+					$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where dataregistrazione!='0000/00/00'");
 					$res_lettere = mysql_fetch_row($statslettere);
 					echo 'Nell\'anno corrente sono state registrate '.($res_lettere[0]) .' lettere.';?></p>
 
