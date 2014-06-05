@@ -24,12 +24,12 @@
 					
 					<div class="form-group">
 						<label>Oggetto:</label>
-						<input class="form-control" type="text" name="oggetto" placeholder="inserisci un oggetto...">
+						<input required class="form-control" type="text" name="oggetto" placeholder="inserisci un oggetto...">
 					</div>
 					
 					<div class="form-group">
 						<label>Messaggio:</label>
-						<textarea class="form-control" rows="5" name="messaggio" placeholder="aggiungi un messaggio..."></textarea>
+						<textarea required class="form-control" rows="5" name="messaggio" placeholder="aggiungi un messaggio..."></textarea>
 					</div>
 					
 					<div class="form-group">
