@@ -39,7 +39,6 @@
 	$mail->FromName = 'Comitato Provinciale CRI Catania';
 	
 	foreach ($destinatari as $valore) {
-	echo $valore;
 		$mail->addAddress($valore);     // Add a recipient
 	}
 	
@@ -49,7 +48,7 @@
 	if ($urlfile) {
 		foreach ($urlfile as $valore) {
 				$f = 'lettere' . $annoricercaprotocollo . '/' . $idlettera . '/'. $valore[2];
-				$mail->addAttachment($f, 'AllegatoProt'.$idlettera.'-'.$valore[1]);         // Add attachments
+				$mail->addAttachment($f, 'AllegatoProt'.$idlettera.'-'.$valore[0]);         // Add attachments
 		}
 	}
 	
