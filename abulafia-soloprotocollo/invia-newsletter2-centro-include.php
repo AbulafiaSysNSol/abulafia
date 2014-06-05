@@ -51,7 +51,7 @@
 	$reply = $mittente; /*Inserire l'indirizzo email a cui verranno inviate le risposte all'email inviata*/
 
 	
-
+	/*
 	$allegato = mysql_query("select distinct * from $tabella where idlettera='$idlettera';");
 	$allegato = mysql_fetch_array($allegato);
 	$urlpdf= $allegato['urlpdf'];
@@ -61,21 +61,22 @@
 	$estenzione2 = $elementiurlpdf-1;
 	$est3 = $estenzione[$estenzione2];}
 	else { $estenzione2 = 0; $estenzione ='';}
-	$titolo='allegato-prot-'.$idlettera.'.'.$est3; /*Inserire il nome che si vuole dare all'allegato*/
-	$f='lettere'.$annoricercaprotocollo.'/'.$allegato['urlpdf']; /*Inserire l'indirizzo del file che si vuole inviare come allegato*/
-
+	*/
+	//$titolo='allegato-prot-'.$idlettera.'.'.$est3; /*Inserire il nome che si vuole dare all'allegato*/
+	//$f='lettere'.$annoricercaprotocollo.'/'.$allegato['urlpdf']; /*Inserire l'indirizzo del file che si vuole inviare come allegato*/
+	
+	
 	$filetype="application/octet-stream"; /*Inserire il formato MIME del file da allegare*/
 
 	/*Non modificare nulla al di sotto di questa linea*/
 	
-	/*	OLD
+	
 	$intestazioni = "From: $mittente\nReply-To: $reply\nX-Mailer: Sismail Web Email Interface\nMIME-version: 1.0\nContent-type: multipart/mixed;\n boundary=\"Message-Boundary\"\nContent-transfer-encoding: 7BIT\nX-attachments: $titolo";
 	$body_top = "--Message-Boundary\n";
 	$body_top .= "Content-type: text/html; charset=iso-8859-1\n";
 	$body_top .= "Content-transfer-encoding: 7BIT\n";
 	$body_top .= "Content-description: Mail message body\n\n";
 	$msg_body = $body_top . $mess;
-	*/
 	
 	$urlfile= $my_lettera->cercaAllegati($idlettera, $annoricercaprotocolloprotocollo);
 	if ($urlfile) {
