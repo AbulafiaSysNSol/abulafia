@@ -31,15 +31,16 @@
 
 	$mittente = $setting2['mittente'];
 	$destinatario = $_POST['destinatario'];
-	$destinatari = explode(',' , $destinatario);
+	$destinatari = explode( ',' , $destinatario);
 	$oggetto = stripslashes($_POST['oggetto']);
 	$messaggio = stripslashes($_POST['messaggio']);
 	
 	$mail->From = $mittente;
-	$mail->FromName = 'C.P. CRI Catania';
+	$mail->FromName = 'Comitato Provinciale CRI Catania';
 	
 	foreach ($destinatari as $valore) {
-		$mail->addAddress($valore[0]);     // Add a recipient
+	echo $valore;
+		$mail->addAddress($valore);     // Add a recipient
 	}
 	
 	$mail->addReplyTo($mittente);
