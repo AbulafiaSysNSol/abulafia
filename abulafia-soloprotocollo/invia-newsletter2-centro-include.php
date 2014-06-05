@@ -1,4 +1,8 @@
 <?php
+
+	$my_lettera = new Lettera();
+	$my_file = new File();
+	
 	$idlettera= $_GET['id'];
 	$annoricercaprotocollo=$_SESSION['annoricercaprotocollo'];
 	$tabella= 'lettere'.$annoricercaprotocollo;
@@ -46,6 +50,8 @@
 	$ogg=$oggetto; /*Inserire l'oggetto dell'email da spedire*/
 	$reply = $mittente; /*Inserire l'indirizzo email a cui verranno inviate le risposte all'email inviata*/
 
+	
+
 	$allegato = mysql_query("select distinct * from $tabella where idlettera='$idlettera';");
 	$allegato = mysql_fetch_array($allegato);
 	$urlpdf= $allegato['urlpdf'];
@@ -61,23 +67,45 @@
 	$filetype="application/octet-stream"; /*Inserire il formato MIME del file da allegare*/
 
 	/*Non modificare nulla al di sotto di questa linea*/
+	
+	/*	OLD
 	$intestazioni = "From: $mittente\nReply-To: $reply\nX-Mailer: Sismail Web Email Interface\nMIME-version: 1.0\nContent-type: multipart/mixed;\n boundary=\"Message-Boundary\"\nContent-transfer-encoding: 7BIT\nX-attachments: $titolo";
 	$body_top = "--Message-Boundary\n";
 	$body_top .= "Content-type: text/html; charset=iso-8859-1\n";
 	$body_top .= "Content-transfer-encoding: 7BIT\n";
 	$body_top .= "Content-description: Mail message body\n\n";
 	$msg_body = $body_top . $mess;
-	$filez = fopen($f, "r");
-	$contents = fread($filez, filesize($f));
-	$encoded_attach = chunk_split(base64_encode($contents));
-	fclose($filez);
+	*/
+	
+	$urlfile= $my_lettera->cercaAllegati($idlettera, $annoricercaprotocolloprotocollo);
+	if ($urlfile) {
+		foreach ($urlfile as $valore) {
+				$f = 'lettere' . $annoricercaprotocollo . '/' . $idlettera . '/'. $valore[2];
+				$filez = fopen($f, "r");
+				$contents = fread($filez, filesize($f));
+				$encoded_attach = chunk_split(base64_encode($contents));
+				fclose($filez);
+				$estensione = $my_file->estensioneFile($valore[2]);
+				$titolo='allegato-prot-'.$idlettera.'.'.$estensione;
+				
+				$msg_body .= "\n\n--Message-Boundary\n";
+				$msg_body .= "Content-type: $filetype; name=\"$titolo\"\n";
+				$msg_body .= "Content-Transfer-Encoding: BASE64\n";
+				$msg_body .= "Content-disposition: attachment; filename=\"$titolo\"\n\n";
+				$msg_body .= "$encoded_attach\n";
+				$msg_body .= "--Message-Boundary--\n";
+		}
+	}
+	
+	/*	OLD
 	$msg_body .= "\n\n--Message-Boundary\n";
 	$msg_body .= "Content-type: $filetype; name=\"$titolo\"\n";
 	$msg_body .= "Content-Transfer-Encoding: BASE64\n";
 	$msg_body .= "Content-disposition: attachment; filename=\"$titolo\"\n\n";
 	$msg_body .= "$encoded_attach\n";
 	$msg_body .= "--Message-Boundary--\n";
-
+	*/
+	
 	//SALVATAGGIO LOG MAIL
 	if(!(@mail($e,$ogg,$msg_body, $intestazioni))) {
 		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:<b> si è verificato un errore nell\'invio dell\'email.</div>';
