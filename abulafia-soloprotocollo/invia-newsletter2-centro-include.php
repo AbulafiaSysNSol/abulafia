@@ -71,18 +71,17 @@
 	/*Non modificare nulla al di sotto di questa linea*/
 	
 	
-	$intestazioni = "From: $mittente\nReply-To: $reply\nX-Mailer: Sismail Web Email Interface\nMIME-version: 1.0\nContent-type: multipart/mixed;\n boundary=\"Message-Boundary\"\nContent-transfer-encoding: 7BIT\nX-attachments: $titolo";
+	$intestazioni = "From: $mittente\nReply-To: $reply\nX-Mailer: Sismail Web Email Interface\nMIME-version: 1.0\nContent-type: multipart/mixed;\n boundary=\"Message-Boundary\"\nContent-transfer-encoding: 7BIT\n";
 	$body_top = "--Message-Boundary\n";
 	$body_top .= "Content-type: text/html; charset=iso-8859-1\n";
 	$body_top .= "Content-transfer-encoding: 7BIT\n";
 	$body_top .= "Content-description: Mail message body\n\n";
 	$msg_body = $body_top . $mess;
 	
-	$urlfile= $my_lettera->cercaAllegati($idlettera, $annoricercaprotocolloprotocollo);
+	$urlfile= $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
 	if ($urlfile) {
 		foreach ($urlfile as $valore) {
 				$f = 'lettere' . $annoricercaprotocollo . '/' . $idlettera . '/'. $valore[2];
-				echo $f;
 				$filez = fopen($f, "r");
 				$contents = fread($filez, filesize($f));
 				$encoded_attach = chunk_split(base64_encode($contents));
