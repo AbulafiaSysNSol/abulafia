@@ -29,7 +29,7 @@
 		$footermail = '<br><br><br>'.$setting2['footermail'];	
 	}
 
-	$mittente = $setting2['mittente'];
+	$mittente = "cp.catania@cri.it";
 	$destinatario = $_POST['destinatario'];
 	$destinatari = explode( ',' , $destinatario);
 	$oggetto = stripslashes($_POST['oggetto']);
