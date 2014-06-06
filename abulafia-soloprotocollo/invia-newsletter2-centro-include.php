@@ -35,7 +35,7 @@
 	$oggetto = stripslashes($_POST['oggetto']);
 	$messaggio = stripslashes($_POST['messaggio']);
 	
-	$mail->From = $mittente;
+	$mail->From = "cp.catania@cri.it";
 	$mail->FromName = 'Comitato Provinciale CRI Catania';
 	
 	foreach ($destinatari as $valore) {
