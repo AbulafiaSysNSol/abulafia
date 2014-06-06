@@ -123,6 +123,7 @@ $pdf->SetTitle('registroprotocollo');
 $pdf->Text(10,45,$intestazione);
 $pdf->Ln(10);
 while($query2 = mysql_fetch_array($query)) {
+	$query2 = array_map('stripslashes', $query2);
 	if ( $contatorelinee % 2 == 1 ) { $r = 255; $g = 253; $b = 170; }
 	else { $r = 255; $g = 255; $b = 255; }
 	$pdf->SetFillColor($r,$g,$b);
