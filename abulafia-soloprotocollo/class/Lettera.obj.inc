@@ -252,6 +252,7 @@ class Lettera {
 		$res = array();
 		$query = mysql_query("SELECT idlettera, dataregistrazione, oggetto, speditaricevuta FROM lettere$anno WHERE datalettera != '0000-00-00' ORDER BY idlettera desc LIMIT $numerolettere ");
 		while ($risultati  = mysql_fetch_array($query)) {
+			$risultati = array_map('stripslashes', $risultati);
 			array_push ($res, $risultati);
 		}
 		return $res;
