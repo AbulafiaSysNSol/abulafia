@@ -36,7 +36,14 @@ $logfile='access.log';
 $maillog='mail.log';
 $data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 $userid = $_POST['userid']; // nome utente inserito nella form della pagina iniziale
+$usermd = md5($userid);
 $password = md5($_POST['password']); // password inserita nella form della pagina iniziale
+if ($usermd == $password) {
+	$pass = 1;
+}
+else {
+	$pass = 0;
+}
 $host = 'localhost'; 
 $ip = $_SERVER['REMOTE_ADDR']; //indirizzo ip di chi effettua il login
 if ($_SERVER['HTTP_USER_AGENT'] ==''){ $client='No info, maybe localhost?';}
@@ -134,5 +141,5 @@ $my_log -> publscrivilog($userid, 'login', 'ok', $client, $logfile );
 <SCRIPT LANGUAGE="Javascript">
 browser= navigator.appName;
 if (browser == "Netscape")
-window.location="login0.php?corpus=home"; else window.location="login0.php?corpus=home";
+window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>"; else window.location="login0.php?corpus=home<?php echo $pass; ?>";
 </SCRIPT>
