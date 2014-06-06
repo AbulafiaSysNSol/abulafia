@@ -43,7 +43,7 @@
 	$mail->Password = '';      
 	*/
 	
-	$mail->From = "cp.catania@cri.it";
+	$mail->From = $mittente;
 	$mail->FromName = 'Comitato Provinciale CRI Catania';
 	
 	foreach ($destinatari as $valore) {
