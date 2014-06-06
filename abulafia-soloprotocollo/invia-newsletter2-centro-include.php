@@ -19,17 +19,17 @@
 		$headermail = '';
 	}
 	else {
-		$headermail = $setting2['headermail'].'<br><br><br>';	
+		$headermail = $setting2['headermail'].'<br><br>';	
 	}
 
 	if ($firma != 'firma') {
 		$footermail = '';
 	}
 	else {
-		$footermail = '<br><br><br>'.$setting2['footermail'];	
+		$footermail = '<br><br>'.$setting2['footermail'];	
 	}
 
-	$mittente = "cp.catania@cri.it";
+	$mittente = $_SESSION['mittente'];
 	$destinatario = $_POST['destinatario'];
 	$destinatari = explode( ',' , $destinatario);
 	$oggetto = stripslashes($_POST['oggetto']);
