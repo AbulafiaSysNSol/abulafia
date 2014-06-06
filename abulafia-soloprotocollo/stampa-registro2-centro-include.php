@@ -151,6 +151,7 @@ while($query2 = mysql_fetch_array($query)) {
 	echo mysql_error();
 	$d='';
 	while ( $dest = mysql_fetch_array($destinatari)) {
+		$dest = array_map('stripslashes', $dest);
 		$d = $d.' '.$dest['cognome'];
 		if($dest['nome'] != '') { 
 			$d =$d . ' ' . $dest['nome']; 
