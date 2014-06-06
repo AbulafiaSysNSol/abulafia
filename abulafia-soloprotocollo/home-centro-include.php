@@ -1,3 +1,10 @@
+<?php
+	if(isset($_GET['pass']) && ($_GET['pass'] == 1)) {
+		echo '<center><div class="alert alert-warning"><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> non hai ancora modificato la tua password di default!<br>
+			Per questioni di sicurezza ti invitiamo a cambiarla al più presto. <a href="?corpus=cambio-password&loginid='. $_SESSION['loginid'] . '">Cambia la tua password ora</a></div></center>';
+	}
+?>
+
 <div class="panel panel-default">
 		
 	<div class="panel-heading">
