@@ -503,7 +503,7 @@
 						foreach ($urlfile as $valore) {
 							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '4'); //richiamo del metodo "downloadlink" dell'oggetto file
 							$file = true;
-							echo $download.' - <a class="fancybox fancybox.iframe" data-fancybox-type="iframe" href="lettere'.$annoricercaprotocollo.'/'.$value[0].'/'.$valore[2].'"><i class="fa fa-eye"></i></a><br>';
+							echo $download.' - <a class="fancybox" data-fancybox-type="iframe" href="lettere'.$annoricercaprotocollo.'/'.$value[0].'/'.$valore[2].'"><i class="fa fa-eye"></i></a><br>';
 						}
 					}
 					else {
