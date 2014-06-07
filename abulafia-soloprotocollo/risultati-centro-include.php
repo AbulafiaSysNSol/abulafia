@@ -472,7 +472,7 @@
 					<td style="vertical-align: middle">Data Reg.</td>
 					<td style="vertical-align: middle">Pos.</td>
 					<td style="vertical-align: middle">Oggetto</td>
-					<td style="vertical-align: middle" width="138">File</td>
+					<td style="vertical-align: middle" width="150">File</td>
 					<td style="vertical-align: middle">Mitt./Dest.</td>
 					<td style="vertical-align: middle" width="150">Opzioni</td>
 				</tr>
@@ -501,9 +501,9 @@
 					$urlfile= $my_lettera->cercaAllegati($value[0], $annoricercaprotocollo);
 					if ($urlfile) {
 						foreach ($urlfile as $valore) {
-							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '14'); //richiamo del metodo "downloadlink" dell'oggetto file
+							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '4'); //richiamo del metodo "downloadlink" dell'oggetto file
 							$file = true;
-							echo $download."<br>";
+							echo $download.' - <a class="fancybox" data-fancybox-type="iframe" href="lettere'.$annoricercaprotocollo.'/'.$value[0].'/'.$valore[2].'"><i class="fa fa-eye"></i></a><br>';
 						}
 					}
 					else {
