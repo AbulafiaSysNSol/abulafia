@@ -69,6 +69,7 @@
 						<OPTION value="persona"> Persona Fisica
 						<OPTION value="carica"> Carica Elettiva o Incarico
 						<OPTION Value="ente"> Ente
+						<OPTION Value="ente"> Fornitore
 						</select>
 					</div>
 				</div>
@@ -345,6 +346,30 @@
 	}
 	
 	if (type == "ente") 
+	{
+		document.getElementById("lblcog").style.display="none";
+		document.getElementById("lblden").style.display="table";
+	  document.modulo.cognome.disabled = false;	
+	  document.modulo.nome.disabled = true;
+	  document.modulo.datanascita.disabled = true;
+	  document.modulo.nascitacomune.disabled = true;
+	  document.modulo.nascitaprovincia.disabled = true;
+	  document.modulo.nascitastato.disabled = true;
+	  document.modulo.residenzavia.disabled = false;
+	  document.modulo.residenzacivico.disabled = false;
+	  document.modulo.residenzacomune.disabled = false;
+	  document.modulo.residenzaprovincia.disabled = false;
+	  document.modulo.residenzacap.disabled = false;
+	  document.modulo.residenzastato.disabled = false;
+	  document.modulo.grupposanguigno.disabled = true;
+	  document.modulo.codicefiscale.disabled = false;
+	  document.modulo.numero.disabled = false;
+	  document.modulo.tipo.disabled = false;
+	  document.modulo.numero2.disabled = false;
+	  document.modulo.tipo2.disabled = false;
+	}
+	
+	if (type == "fornitore") 
 	{
 		document.getElementById("lblcog").style.display="none";
 		document.getElementById("lblden").style.display="table";
