@@ -57,7 +57,7 @@
 					}
 					}?></p>
 
-					<p><?php $statsanagrafica=mysql_query("select count(*) from anagrafica");
+					<?php $statsanagrafica=mysql_query("select count(*) from anagrafica");
 					$res_anagrafica = mysql_fetch_row($statsanagrafica);
 					echo 'Nella tabella ANAGRAFICA sono presenti '.($res_anagrafica[0] - 1) .' occorrenze, di cui<br>';
 					$my_anagrafica->publcontaanagrafica('persona');
@@ -65,10 +65,11 @@
 					$my_anagrafica->publcontaanagrafica('carica');
 					echo $my_anagrafica->contacomponenti.' cariche o incarichi<br>';
 					$my_anagrafica->publcontaanagrafica('ente');
-					echo $my_anagrafica->contacomponenti.' enti';
+					echo $my_anagrafica->contacomponenti.' enti<br>';
+					$my_anagrafica->publcontaanagrafica('fornitore');
+					echo $my_anagrafica->contacomponenti.' fornitori';
 				    ?>
 					
-				</p>
 			</div>
 		</div>
 		

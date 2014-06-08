@@ -46,8 +46,12 @@ else {
 }
 $host = 'localhost'; 
 $ip = $_SERVER['REMOTE_ADDR']; //indirizzo ip di chi effettua il login
-if ($_SERVER['HTTP_USER_AGENT'] ==''){ $client='No info, maybe localhost?';}
-else { $client = $_SERVER['HTTP_USER_AGENT'];}
+if ($_SERVER['HTTP_USER_AGENT'] == '') { 
+	$client='No info, maybe localhost?';
+}
+else { 
+	$client = $_SERVER['HTTP_USER_AGENT'];
+}
 $client=$ip.' - '.$client;
 include '../db-connessione-include.php'; //connessione al db-server
 

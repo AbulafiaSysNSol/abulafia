@@ -31,9 +31,9 @@ class Log
 		$accesslog=fopen($_SESSION['logdirectory'].$logfile,"a"); //apertura del file di log
 		if (!$accesslog) die ("Impossibile scrivere nel file di log: $logfile ");
 		$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
-		$my_calendario->publggmmaaaa('-'); //acquisisco la data dall'oggetto Calendario
+		$my_calendario->publggmmaaaa('/'); //acquisisco la data dall'oggetto Calendario
 		$my_calendario->publhhmmss(':'); //acquisisco l'orario dall'oggetto Calendario
-		$logline='Date/Hour: '.$my_calendario->ggmmaaaa.'/'.$my_calendario->hhmmss.' - Username: '.$username.' - Request: '.$operazione.' - Answer: '.$esito.' - Details: '.$client."\n"; //compongo la riga di log
+		$logline='Date: '.$my_calendario->ggmmaaaa.' - Hour: '.$my_calendario->hhmmss.' - Username: '.$username.' - Request: '.$operazione.' - Answer: '.$esito.' - Details: '.$client."\n"; //compongo la riga di log
 		fwrite($accesslog, "$logline"); //scrivo il log
 		fclose($accesslog); //chiudo il file
 		}

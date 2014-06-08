@@ -114,6 +114,7 @@
 									<OPTION value="persona"> Persona Fisica</OPTION>
 									<OPTION value="carica"> Carica Elettiva o Incarico</OPTION>
 									<OPTION Value="ente"> Ente</OPTION>
+									<OPTION Value="fornitore"> Fornitore</OPTION>
 									</select>
 								</div>
 							</div>
@@ -430,6 +431,13 @@
 		document.getElementById("txtnome").required = false;
 	}
 	if (type == "ente") {
+		document.getElementById("lblcognome").style.display="none";
+		document.getElementById("lblnome").style.display="none";
+		document.getElementById("lblden").style.display="table";
+		document.getElementById("txtnome").style.display="none";
+		document.getElementById("txtnome").required = false;
+	}
+	if (type == "fornitore") {
 		document.getElementById("lblcognome").style.display="none";
 		document.getElementById("lblnome").style.display="none";
 		document.getElementById("lblden").style.display="table";
