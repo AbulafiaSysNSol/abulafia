@@ -59,8 +59,16 @@
   <script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
   <!-- JS -->
   
+  <script type="text/javascript">
+	$(function(){
+	     $.datepicker.setDefaults( $.datepicker.regional[ "it" ] );
+	     $('.datepicker').datepicker( { changeMonth: true, changeYear: true });
+	     $('.datepickerAnag').datepicker( { changeMonth: true, changeYear: true, yearRange: "-100:+0" }); 
+	     $('.datepickerProt').datepicker( { changeMonth: true, changeYear: true, maxDate: "today" });
+	});
+</script>
+  
   <!-- Fancybox -->
-	<script type="text/javascript" src="js/fancy/lib/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="js/fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
 	<script type="text/javascript" src="js/fancy/source/jquery.fancybox.js?v=2.1.5"></script>
 	<link rel="stylesheet" type="text/css" href="js/fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
@@ -95,16 +103,6 @@
 		box-shadow: 0 0 50px #222;
 	}
 </style>
-
-
-<script type="text/javascript">
-	$(function(){
-	     $.datepicker.setDefaults( $.datepicker.regional[ "it" ] );
-	     $('.datepicker').datepicker( { changeMonth: true, changeYear: true });
-	     $('.datepickerAnag').datepicker( { changeMonth: true, changeYear: true, yearRange: "-100:+0" }); 
-	     $('.datepickerProt').datepicker( { changeMonth: true, changeYear: true, maxDate: "today" });
-	});
-</script>
   
 </head>
 
