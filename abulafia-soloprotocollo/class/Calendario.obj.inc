@@ -36,14 +36,20 @@ public $ggmmaaaa;
 
 
 
-	function publdataitaliana ($datainglese,$separatore) //<man>metodo per stampare all'italiana la data, mettendo nel giusto ordine giorno, mese, anno, e passando come parametri la data inglese e il separatore che si vuole adottare</man>
-		{
+	public function publdataitaliana ($datainglese,$separatore) { //<man>metodo per stampare all'italiana la data, mettendo nel giusto ordine giorno, mese, anno, e passando come parametri la data inglese e il separatore che si vuole adottare</man>
 		$this->dataesplosa= explode('-',$datainglese);
 		$this->datagiorno= $this->dataesplosa[2];
 		$this->datamese= $this->dataesplosa[1];
 		$this->dataanno=$this->dataesplosa[0];
 		$this->dataitaliana =$this->datagiorno.$separatore.$this->datamese.$separatore.$this->dataanno;
-		}//fine metodo
+		$datanull = '00'.$separatore.'00'.$separatore.'0000';
+		if ($this->dataitaliana == $datanull) {
+			return '';
+		}
+		else {
+			return $this->dataitaliana;
+		}
+	}//fine metodo
 		
 
 	function publggmmaaaa ($separatore)//<man> Restituisce la data attuale nel formato numerico GG/MM/AAAA con $separatore come separatore</man>

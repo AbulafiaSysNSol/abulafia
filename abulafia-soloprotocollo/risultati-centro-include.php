@@ -3,6 +3,7 @@
 	//$annoprotocollo = $_SESSION['annoprotocollo'];
 	$risultatiperpagina = $_SESSION['risultatiperpagina']; //acquisisce la variabile di sessione che stabilisce quanti risultati vengono mostrati in ogni pagina
 	$currentpage = $_GET['currentpage'];
+	$my_calendario = new Calendario();
 
 	// se non settate da una form di invio, le seguenti variabili prendono valore da GET o da SESSION
 	if (!isset($_POST['cercato'])) {
@@ -237,11 +238,7 @@
 						<td style="vertical-align: middle" align="center"><?php echo $row['tipologia'];?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $row['cognome'];?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $row['nome'] ; ?> </td>
-						<td style="vertical-align: middle" align="center"><?php $data = $row['nascitadata'] ;
-										list($anno, $mese, $giorno) = explode("-", $data);
-										$data2 = "$giorno-$mese-$anno";
-										echo "$data2" ;?>
-						</td>
+						<td style="vertical-align: middle" align="center"><?php echo $my_calendario->publdataitaliana($row['nascitadata'], '/');?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $row['nascitacomune'];?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $row['nascitaprovincia'];?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $row['codicefiscale'];?></td>
