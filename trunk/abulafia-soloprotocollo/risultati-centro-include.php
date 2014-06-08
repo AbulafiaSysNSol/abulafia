@@ -220,7 +220,7 @@
 					<td style="vertical-align: middle" align="center"><b>Comune</b></td>
 					<td style="vertical-align: middle" align="center"><b>Prov.</b></td>
 					<td style="vertical-align: middle" align="center"><b>Codice Fiscale</b></td>
-					<td style="vertical-align: middle" align="center"><b>Opzioni</b></td>
+					<td style="vertical-align: middle" align="center" width="120"><b>Opzioni</b></td>
 				</tr>
 				<?php
 				while ($row = mysql_fetch_array($risultati)) {
@@ -235,7 +235,7 @@
 					?>
 					<tr bgcolor=<?php echo $colorelinee; ?>>
 						<td style="vertical-align: middle" align="center"><?php echo $row['idanagrafica'];?></td>
-						<td style="vertical-align: middle" align="center"><?php echo $row['tipologia'];?></td>
+						<td style="vertical-align: middle" align="center"><?php echo ucwords($row['tipologia']);?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $row['cognome'];?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $row['nome'] ; ?> </td>
 						<td style="vertical-align: middle" align="center"><?php echo $my_calendario->publdataitaliana($row['nascitadata'], '/');?></td>
