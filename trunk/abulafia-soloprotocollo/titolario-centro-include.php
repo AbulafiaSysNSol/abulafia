@@ -124,5 +124,8 @@
 
 </div>
 </div>
-<?php $_SESSION['my_database']=serialize($my_database);?>
+<?php 
+	$_SESSION['my_database']=serialize($my_database);
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO TITOLARIO' , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
+?>
 

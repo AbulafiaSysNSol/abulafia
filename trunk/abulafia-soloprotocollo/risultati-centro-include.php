@@ -208,8 +208,9 @@
 			}
 			?>
 			</ul>
-
+			
 			<br>
+			
 			<table class="table table-bordered">
 				<tr>
 					<td  style="vertical-align: middle" align="center"><b>Id</b></td>
@@ -461,7 +462,9 @@
 			?>
 			</ul>
 			<br>
-			
+			<center>
+			<div class="alert alert-warning"><b><i class="fa fa-warning"></i> Attenzione:</b> al momento la funzione "barcode" potrebbe non funzionare su tutti gli allegati.</div>
+			</center>
 			<table class="table table-bordered">
 				<tr align = "center">
 					<td style="vertical-align: middle"></td>

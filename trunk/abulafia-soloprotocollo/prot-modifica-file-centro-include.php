@@ -33,6 +33,7 @@
 		$target_path2=mysql_real_escape_string($target_path);
 		$inserisci=mysql_query("insert into joinlettereallegati values($idlettera, $annoprotocollo, '$name')");			
 		if($from == 'modifica-protocollo') {
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO ALLEGATO '. $name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -43,6 +44,7 @@
 			<?php
 		}
 		else {
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -55,6 +57,7 @@
 	} 
 	else { //se lo spostamento non va a buon fine
 		if($from == 'modifica-protocollo') {
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI MODIFICA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -65,6 +68,7 @@
 			<?php
 		}
 		else {
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI AGGIUNTA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;

@@ -18,6 +18,8 @@
 	else {
 		$from='';
 	}
+	
+	// CONTROLLO SE E' STATO INSERITO ALMENO UN MITTENTO O UN DESTINATARIO
 	$conteggiomittenti=mysql_query("select count(*) from joinletteremittenti$annoprotocollo where idlettera='$idlettera'"); 
 	$conteggiomittenti2 = mysql_fetch_row($conteggiomittenti);
 	if ($conteggiomittenti2[0] < 1) { 
@@ -29,6 +31,7 @@
 		$_SESSION['pratica'] = $_POST['pratica'];
 		$_SESSION['note'] = $_POST['note'];
 		
+		//RITORNO ALLA PAGINA DI REGISTRAZIONE  O DI MODIFICA SE NON E' STATO INSERITO NEMMENO UN MITTENTO O UN DESISTARIO
 		if($from != "modifica") {
 		?>
 			<SCRIPT LANGUAGE="Javascript">
@@ -50,6 +53,8 @@
 			exit();
 		}
 	}
+	// FINE CONTROLLO MITTENTI/DESTINATARI
+	
 	$speditaricevuta = $_POST['spedita-ricevuta'];
 	$oggetto= $_POST['oggetto'];
 	$data = $_POST['data'];
@@ -84,10 +89,27 @@
 	//controllo esistenza
 	$inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.pratica='$pratica', lettere$annoprotocollo.note='$note', lettere$annoprotocollo.dataregistrazione='$dataregistrazione' WHERE lettere$annoprotocollo.idlettera='$idlettera'");
 	echo  mysql_error();
-	if (!$inserimento) { echo "Inserimento non riuscito" ; }
+	
+	if ( (!$inserimento) && ($from == 'modifica') ) { 
+		echo "Modifica non riuscita" ; 
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA MODIFICA LETTERA '. $idlettera , 'FAILED' , '' , $_SESSION['historylog']);
+	}
+	if ( (!$inserimento) && ($from != 'modifica') ) { 
+		echo "Inserimento non riuscito" ; 
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $idlettera , 'FAILED' , '' , $_SESSION['historylog']);
+	}
+	if ( ($inserimento) && ($from == 'modifica') ) { 
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
+	}
+	if ( ($inserimento) && ($from != 'modifica') ) { 
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
+	}
+	
 	$ultimoid = mysql_insert_id();
 	$modifica =mysql_query("update joinlettereinserimento$annoprotocollo set joinlettereinserimento$annoprotocollo.idmod='$loginid', joinlettereinserimento$annoprotocollo.datamod='$dataregistrazione2' where joinlettereinserimento$annoprotocollo.idlettera='$idlettera' limit 1");
 	echo  mysql_error();
+	
+	//RESET VARIABILI DI SESSIONE 
 	unset($_SESSION['spedita-ricevuta']);
 	unset($_SESSION['oggetto']);
 	unset($_SESSION['data']);
