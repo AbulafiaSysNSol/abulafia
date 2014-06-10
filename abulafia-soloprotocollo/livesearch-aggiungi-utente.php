@@ -10,7 +10,7 @@ $q=$_GET['q'];
 
 //$id=$_GET['id'];
 
-$sql=mysql_query("SELECT * FROM anagrafica WHERE cognome like '$q%' and tipologia='persona' limit 5");
+$sql=mysql_query("SELECT * FROM anagrafica WHERE cognome like '%$q%' and tipologia='persona' limit 5");
 
 
 
