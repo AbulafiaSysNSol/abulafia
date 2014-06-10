@@ -3,10 +3,9 @@
 	$nome=$_GET['nome'];
 	$cognome=$_GET['cognome'];
 	
-	$nomenuovoutente= strlower($nome.'.'.$cognome);
+	$nomenuovoutente= strtolower($nome.'.'.$cognome);
 	$passwordnuovoutente= md5($nomenuovoutente);
 	$nuovoutente=mysql_query("insert into users values('$id',0,'$nomenuovoutente', '$passwordnuovoutente')");
-	echo "prova";
 ?>
 
 <SCRIPT LANGUAGE="Javascript">
