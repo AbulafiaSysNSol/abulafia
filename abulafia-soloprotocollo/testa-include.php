@@ -1,5 +1,12 @@
 <?php
 
+	if ($_SESSION['auth']< 1 ) {
+		echo 'Devi prima effettuare il login dalla<br>';
+		?> <a href="../"><?php echo 'pagina principale'; $_SESSION['auth']= 0 ;  ?></a>
+		<?php 
+		exit(); 
+	}
+	
 	include '../db-connessione-include.php'; //connessione al db-server
 	include 'maledetti-apici-centro-include.php';
 
@@ -20,12 +27,6 @@
 
 	$_SESSIONs['paginaprincipale'] = $setting2['paginaprincipale'];
 
-	if ($_SESSION['auth']< 1 ) {
-		echo 'Devi prima effettuare il login dalla<br>';
-		?> <a href="../"><?php echo 'pagina principale'; $_SESSION['auth']= 0 ;  ?></a>
-		<?php 
-		exit(); 
-	}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//IT" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -154,13 +155,14 @@
 		<li><a href="login0.php?corpus=segnala-bug"><span class="glyphicon glyphicon-warning-sign"></span> Segnala un Errore</a></li>
 		<li><a href="login0.php?corpus=settings"><span class="glyphicon glyphicon-cog"></span> Impostazioni</a></li>
 		<?php 
-			if ($_SESSION['auth'] > 50) {
+			if ($_SESSION['auth'] > 80) {
 				?>
 				<li class="divider"></li>
 				<li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users"></i> Gestione degli Utenti</a></li>
 				<li><a href="login0.php?corpus=advancedsettings"><span class="glyphicon glyphicon-wrench"></span> Advanced Settings</a></li>
 				<li><a href="download.php?lud=log/access.log&est=log"><span class="glyphicon glyphicon-download"></span> Scarica il log degli accessi</a></li>
 				<li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
+				<li><a href="login0.php?corpus=history"><span class="glyphicon glyphicon-time"></span> Visualizza il log delle azioni</a></li>
 				<?php
 			}
 		?>

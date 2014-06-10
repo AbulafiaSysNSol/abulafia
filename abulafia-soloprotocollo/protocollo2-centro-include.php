@@ -65,17 +65,21 @@
 		if ($insertid > 0) { 
 			$idlettera = $insertid;
 		}
+		
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRA NUOVO PROTOCOLLO' , 'OK' , 'NUMERO PROTOCOLLO '. $insertid, $_SESSION['historylog']);
 	}
 
 	if ($from == 'aggiungi') {
 			$idlettera=$_GET['idlettera'];
 			$my_lettera -> publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo); //richiamo del metodo
 			$add = true;
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO MITTENTE PROTOCOLLO '.$idlettera , 'OK' , 'ID MITTENTE AGGIUNTO '. $idanagrafica, $_SESSION['historylog']);
 		}
 
 	if ($from == 'elimina-mittente') { 
 		$idlettera=$_GET['idlettera'];
 		$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATO MITTENTE PROTOCOLLO '.$idlettera , 'OK' , 'ID MITTENTE ELIMINATO '. $idanagrafica, $_SESSION['historylog']);
 	}
 	
 	if ($from == 'urlpdf') {  
@@ -90,9 +94,10 @@
 				if (!$delete) {
 					echo "Si è verificato un problema con la cancellazione di un allegato.";
 				}
-		$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=idlettera AND annoprotocollo=$annoprotocollo AND pathfile='$nome'");
+		$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=$idlettera AND annoprotocollo=$annoprotocollo AND pathfile='$nome'");
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO ELIMINATO '. $nome, $_SESSION['historylog']);
 	}
-	
+
 ?>
 
 <!-- Modal -->

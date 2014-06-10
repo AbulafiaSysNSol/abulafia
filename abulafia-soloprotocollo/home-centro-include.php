@@ -125,3 +125,7 @@
 	</div>
 	
 </div>
+
+<?php
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO HOME' , 'OK' , $_SESSION['ip'], $_SESSION['historylog']);
+?>

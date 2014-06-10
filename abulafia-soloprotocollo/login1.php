@@ -34,6 +34,7 @@ $_SESSION['logdirectory'] = "log/";
 $errorlog='error.log';
 $logfile='access.log';
 $maillog='mail.log';
+$historylog = 'history.log';
 $data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 $userid = $_POST['userid']; // nome utente inserito nella form della pagina iniziale
 $usermd = md5($userid);
@@ -46,6 +47,7 @@ else {
 }
 $host = 'localhost'; 
 $ip = $_SERVER['REMOTE_ADDR']; //indirizzo ip di chi effettua il login
+$_SESSION['ip'] = $ip;
 if ($_SERVER['HTTP_USER_AGENT'] == '') { 
 	$client='No info, maybe localhost?';
 }
@@ -133,6 +135,7 @@ $_SESSION['headermail'] = $settings6['headermail'];
 $_SESSION['footermail'] = $settings6['footermail'];
 $_SESSION['logfile'] = $logfile;
 $_SESSION['maillog'] = $maillog;
+$_SESSION['historylog'] = $historylog;
 $_SESSION['errorlog'] = $errorlog;
 $_SESSION['logdirectory'] = $logdirectory;
 
