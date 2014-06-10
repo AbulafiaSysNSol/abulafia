@@ -9,7 +9,7 @@
 				$my_log->publleggilog('0', '15', ' ', $_SESSION['maillog']);//legge dal log delle email inviate
 			?>
 			</p>
-			<br><a href="download.php?lud=mail.log&est=log">Scarica il log delle mail</a>
+			<br><a href="download.php?lud=log/mail.log&est=log">Scarica il log delle mail</a>
 
 		</div>
 				
