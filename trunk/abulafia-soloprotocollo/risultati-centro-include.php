@@ -465,7 +465,7 @@
 			<table class="table table-bordered">
 				<tr align = "center">
 					<td style="vertical-align: middle"></td>
-					<td style="vertical-align: middle">N. Prot.</td>
+					<td style="vertical-align: middle">Prot.</td>
 					<td style="vertical-align: middle">Data Reg.</td>
 					<td style="vertical-align: middle">Pos.</td>
 					<td style="vertical-align: middle">Oggetto</td>
