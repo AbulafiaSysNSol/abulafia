@@ -80,7 +80,7 @@
 <!-- End Fancybox -->
 
 <script type="text/javascript">
-		$(document).ready(function() {
+		$(function() {
 			$('.fancybox').fancybox();
 
 			// Change title type, overlay closing speed
