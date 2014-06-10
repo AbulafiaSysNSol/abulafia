@@ -6,7 +6,7 @@
 	$nomenuovoutente= strlower($nome.'.'.$cognome);
 	$passwordnuovoutente= md5($nomenuovoutente);
 	$nuovoutente=mysql_query("insert into users values('$id',0,'$nomenuovoutente', '$passwordnuovoutente')");
-	echo mysql_error();
+	echo "prova";
 ?>
 
 <SCRIPT LANGUAGE="Javascript">
