@@ -156,9 +156,9 @@
 
 	
 		$num_righe = mysql_num_rows($risultati);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'EFFETTUATA RICERCA IN ANAGRAFICA' , 'OK' , 'VALORE CERCATO '.$cercato, $_SESSION['historylog']);
 		if  ($num_righe > 0) {
 			echo "Numero di risultati trovati: <b>$tot_records</b><br>"; 
-			
 			?>
 			<ul class="pagination">
 			<?php
@@ -421,6 +421,7 @@
 								$iniziorisultati , $risultatiperpagina
 						");
 		$num_righe = mysql_num_rows($risultati);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'EFFETTUATA RICERCA IN PROTOCOLLO' , 'OK' , 'VALORE CERCATO '.$cercato, $_SESSION['historylog']);
 		if  ($num_righe > 0 ) {
 			echo "Numero di risultati trovati: <b>$tot_records</b><br>"; 
 			
