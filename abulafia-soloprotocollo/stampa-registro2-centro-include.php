@@ -1,5 +1,9 @@
 <?php
 session_start();
+function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
+	require_once "class/" . $class_name.".obj.inc";
+}
+$my_log = new Log();
 include '../db-connessione-include.php';
 include 'maledetti-apici-centro-include.php';
 require('lib/fpdf/fpdf.php');
@@ -35,6 +39,7 @@ require('lib/fpdf/fpdf.php');
 		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine'"); 
 		$numerorisultati = mysql_fetch_row($query);
 		if($numerorisultati[0] < 1) {
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -46,6 +51,7 @@ require('lib/fpdf/fpdf.php');
 		}
 		else {
 			$query = mysql_query("SELECT * FROM lettere$anno WHERE lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine' ORDER BY lettere$anno.idlettera"); 
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 		}
 	}
 	if($from == "date") {
@@ -99,6 +105,7 @@ require('lib/fpdf/fpdf.php');
 		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
 		$numerorisultati = mysql_fetch_row($query);
 		if($numerorisultati[0] < 1) {
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -110,6 +117,7 @@ require('lib/fpdf/fpdf.php');
 		}
 		else {
 			$query = mysql_query("SELECT * FROM lettere$anno WHERE lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 		}	
 	}
 $now = date("d".'.'."m".'.'."Y");

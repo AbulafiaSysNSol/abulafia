@@ -44,7 +44,7 @@
 		$aggiungi=mysql_query("insert into joinletteremittenti$annoprotocollo values('$idlettera', '$idanagrafica')");
 		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
 	}
 	
 	if ($from == 'elimina-mittente') {  

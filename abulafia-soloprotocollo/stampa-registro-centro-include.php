@@ -1,3 +1,7 @@
+<?php
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO STAMPA REGISTRO' , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
+?>
+
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
