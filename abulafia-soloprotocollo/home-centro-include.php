@@ -6,25 +6,6 @@
 	$data = new Calendario();
 	$lettera = new Lettera();
 	$anno = $_SESSION['annoprotocollo'];
-?>
-
-<div class="panel panel-default">
-		
-	<div class="panel-heading">
-		<h3 class="panel-title"><span class="glyphicon glyphicon-inbox"></span> <strong><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'];?>: saper conservare, saper ritrovare.</strong></h3>
-	</div>
-				
-	<div class="panel-body">
-		<p>
-		Si evolvono gli uffici, pubblici e privati, per stare al passo con i tempi e con le rinnovate esigenze di gestione amministrativa
-		e del personale.<br><?php echo $_SESSION['nomeapplicativo'];?> vuole essere un piccolo contributo, aperto a chiunque abbia voglia di suggerire 
-		miglioramenti, per la gestione degli affari correnti delle segreterie dei volontari della CRI.
-		<br>Chiunque fosse interessato al progetto, puo' contattare l'amministratore del sito all'indirizzo email <strong><?php echo $_SESSION['email']; ?></strong> <span class="glyphicon glyphicon-envelope"></span></p>
-		<div class="text-right"><small>03 dicembre 2008</small></div>
-	</div>
-		
-</div>
-<?php
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00'");
 	$res_lettere = mysql_fetch_row($statslettere);
