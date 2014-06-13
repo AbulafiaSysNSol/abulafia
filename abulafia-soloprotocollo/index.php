@@ -103,7 +103,6 @@
 					</div>
 				</div>
 			</center>
-			<hr>
 			<center>
 				<small>
 					Abulafia is licensed under a: <a href="license.txt" target="_blank">GNU GPL V.3</a><br />
