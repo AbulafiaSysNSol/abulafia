@@ -21,7 +21,18 @@
 	</div>
 		
 </div>
-
+<?php
+	$annoprotocollo = $_SESSION['annoprotocollo'];
+	$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00'");
+	$res_lettere = mysql_fetch_row($statslettere);
+?>
+<hr>
+	<center>
+		<h2>
+			<i class="fa fa-calendar"></i>  Anno:<b> 2014</b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-book"></i>  Numero di protocollo attuale:<b> 2314</b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text-o"></i>  Lettere registrate:<b> <?php echo $res_lettere[0]; ?></b>
+		</h2>
+	</center>
+<hr>
 <div class="row">
 	<div class="col-xs-6">
 		
@@ -35,18 +46,11 @@
 				$anniusoapplicazione = (strtotime("now") - strtotime("apr 1 2008"))/60/60/24/365;
 				$giorniusoapplicazione = ((strtotime("now") - strtotime("apr 1 2008"))/60/60/24)-(int)$anniusoapplicazione*365;
 				echo 'Questa web-application e\' in uso da '.(int)$anniusoapplicazione.' anni e '.(int)$giorniusoapplicazione.' giorni.';?></p>
-			
-				<p><?php 
-					$annoprotocollo = $_SESSION['annoprotocollo'];
-				
-					$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00'");
-					$res_lettere = mysql_fetch_row($statslettere);
-					echo 'Nell\'anno corrente sono state registrate '.($res_lettere[0]) .' lettere.';?></p>
 
 					<p><?php 
 					if ($res_lettere[0] > 0) {
 					$statsusers1=mysql_query("select distinct * from users");
-					echo 'In dettaglio: <br>';
+					echo 'Dettaglio lettere registrate: <br>';
 					while ($statsusers2= mysql_fetch_array($statsusers1)) {
 					$statsusers2a=$statsusers2['idanagrafica'];
 					$statsusers3 = mysql_query("select count(*) from joinlettereinserimento$annoprotocollo where joinlettereinserimento$annoprotocollo.idinser = '$statsusers2a' AND datamod != '0000/00/00' ");
