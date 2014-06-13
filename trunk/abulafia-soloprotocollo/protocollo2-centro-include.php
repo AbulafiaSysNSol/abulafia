@@ -23,6 +23,9 @@
 	
 	//se la pagina da cui si proviene è crea nuovo protocollo
 	if ($from == 'crea') {  
+		
+		//CONTROLLO ULTIMO PROTOCOLLO VUOTO
+		/*
 		$lastrec= mysql_query("SELECT * 
 					FROM lettere$annoprotocollo 
 					ORDER BY idlettera 
@@ -36,11 +39,11 @@
 		$lastjoinletteremittenti=mysql_query("SELECT count(*) FROM joinletteremittenti$annoprotocollo where idlettera='$lastrec3'");
 		$lastjoinletteremittenti = mysql_fetch_array($lastjoinletteremittenti);
 			
-		if (($lastjoinletteremittenti[0] < 1) or (!$lasttopic)) { /*controlla che sia stato attribuito un oggetto 
-									e un mittente all'ultimo protocollo. In caso non sia stato fatto,
-									 lo cancella e lo riutilizza, in quanto ritenuto un protocollo 
-									 non correttamente registrato e probabile frutto di errore.
-									 */
+		if (($lastjoinletteremittenti[0] < 1) or (!$lasttopic)) { 	//controlla che sia stato attribuito un oggetto 
+										//e un mittente all'ultimo protocollo. In caso non sia stato fatto,
+										//lo cancella e lo riutilizza, in quanto ritenuto un protocollo 
+										//non correttamente registrato e probabile frutto di errore.
+									 
 			$cancella=mysql_query("DELETE FROM lettere$annoprotocollo WHERE idlettera='$lastrec3' limit 1 ");
 			$resetta=mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $lastrec3 ");
 			$cancella2=mysql_query("DELETE from joinletteremittenti$annoprotocollo where idlettera='$lastrec3' limit 1");
@@ -54,6 +57,7 @@
 			}
 			$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=$lastrec3 AND annoprotocollo=$annoprotocollo");
 		}
+		*/
 		
 		$dataregistrazione = strftime("%Y-%m-%d");
 		$crea=mysql_query("insert into lettere$annoprotocollo values('','','','$dataregistrazione','','','','','','')");
@@ -150,6 +154,14 @@
 		</div>
 	</form>
 <!--End Modal-->
+
+<center>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="alert alert-warning"><b><i class="fa fa-warning"></i> IMPORTANTE:</b> non lasciare questa pagina prima di aver completato la registrazione della lettera. </div>
+	</div>
+</div>
+</center>
 
 <div class="<?php if($errore) { echo "panel panel-danger";} else { echo "panel panel-default";} ?>">
 	
