@@ -3,6 +3,9 @@
 		echo '<center><div class="alert alert-warning"><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> non hai ancora modificato la tua password di default!<br>
 			Per questioni di sicurezza ti invitiamo a cambiarla al più presto. <a href="?corpus=cambio-password&loginid='. $_SESSION['loginid'] . '">Cambia la tua password ora</a></div></center>';
 	}
+	$data = new Calendario();
+	$lettera = new Lettera();
+	$anno = $_SESSION['annoprotocollo'];
 ?>
 
 <div class="panel panel-default">
@@ -25,11 +28,12 @@
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00'");
 	$res_lettere = mysql_fetch_row($statslettere);
+	$ultimoprot = $lettera->ultimoId($anno);
 ?>
 <hr>
 	<center>
 		<h2>
-			<i class="fa fa-calendar"></i>  Anno:<b> 2014</b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-book"></i>  Numero di protocollo attuale:<b> 2314</b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text-o"></i>  Lettere registrate:<b> <?php echo $res_lettere[0]; ?></b>
+			<i class="fa fa-calendar"></i>  Anno:<b> <?php echo $anno; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-book"></i>  Numero di protocollo attuale:<b> <?php echo $ultimoprot; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text-o"></i>  Lettere registrate:<b> <?php echo $res_lettere[0]; ?></b>
 		</h2>
 	</center>
 <hr>
@@ -89,9 +93,6 @@
 			
 			<div class="panel-body">
 				<?php
-					$data = new Calendario();
-					$anno = $_SESSION['annoprotocollo'];
-					$lettera = new Lettera();
 					$risultati = $lettera->ultimeLettere(5, $anno);
 				?>
 				<table class="table table-striped">
