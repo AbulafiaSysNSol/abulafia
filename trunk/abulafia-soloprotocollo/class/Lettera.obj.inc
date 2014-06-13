@@ -257,6 +257,12 @@ class Lettera {
 		}
 		return $res;
 	}
+	
+	public function ultimoId($anno) {
+		$query = mysql_query("SELECT idlettera FROM lettere$anno ORDER BY idlettera desc LIMIT 1");
+		$risultati = mysql_fetch_row($query);
+		return $risultati[0];
+	}
 
 }//chiusura della classe
 
