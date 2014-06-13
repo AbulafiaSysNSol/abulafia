@@ -46,7 +46,7 @@
   <!-- META -->
   
   <!-- CSS -->
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.10.4.custom.css"></link>
   <link href="css/grid.css" rel="stylesheet">
@@ -135,7 +135,7 @@
 		<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
+				<li><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');" ><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
 				<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione titolario</a></li>
 				<li><a href="login0.php?corpus=pratiche"><i class="fa fa-tags"></i> Gestione pratiche</a></li>
 				<li><a href="login0.php?corpus=stampa-registro"><span class="glyphicon glyphicon-print"></span> Stampa il registro</a></li>
@@ -163,6 +163,7 @@
 				<li><a href="download.php?lud=log/access.log&est=log"><span class="glyphicon glyphicon-download"></span> Scarica il log degli accessi</a></li>
 				<li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
 				<li><a href="login0.php?corpus=history"><span class="glyphicon glyphicon-time"></span> Visualizza il log delle azioni</a></li>
+				<li><a href="login0.php?corpus=backup"><span class="glyphicon glyphicon-floppy-save"></span> Backup</a></li>
 				<?php
 			}
 		?>
