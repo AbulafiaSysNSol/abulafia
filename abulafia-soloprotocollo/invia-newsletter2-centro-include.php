@@ -58,7 +58,7 @@
 		foreach ($urlfile as $valore) {
 				$f = 'lettere' . $annoricercaprotocollo . '/' . $idlettera . '/'. $valore[2];
 				$estensione = $my_file->estensioneFile($valore[2]);
-				$mail->addAttachment($f, 'AllegatoProt'.$idlettera.'-'.$i.$estensione);
+				$mail->addAttachment($f, 'AllegatoProt'.$idlettera.'-'.$i.'.'.$estensione);
 				$i++;
 		}
 	}
