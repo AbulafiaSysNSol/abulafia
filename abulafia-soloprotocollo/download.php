@@ -17,14 +17,10 @@
 
 	if ($idlettera!='') 
 	{
-		$tabella = 'lettere';
-		$path='/';
 		$fileprename='protocollo-';
 	} 
 	else 
 	{ 
-		$tabella =''; 
-		$path=''; 
 		if ($lud== 'log/access.log')
 		{
 			$fileprename='access';
@@ -37,17 +33,11 @@
 		{
 			$fileprename='history';
 		}
-		else {
-			$fileprename='abl';
-		}
-	}
-
-	if (isset($_GET['annoricercaprotocollo'])) {
-		$annoricercaprotocollo = $_GET['annoricercaprotocollo'];
 	}
 	
 	$lud2= stripslashes($lud);
 	$lud3=stripslashes($fileprename.$idlettera); // nome assegnato al file per il download
+	$filename = $lud3.'.'.$est;
 	$fp = fopen($lud2, 'rb');
 	
 		header("Pragma: public");
@@ -55,7 +45,7 @@
 		header("Cache-Control: must-revalidate, post-check=0, pre-check=0"); 
 		header("Cache-Control: private",false); 
 		header("Content-Type: application/octetstream");
-		header("Content-Disposition: attachment; filename=\"$lud3.$est\"");
+		header("Content-Disposition: attachment; filename='".$filename."' ");
 		header("Content-Transfer-Encoding:­ binary");
 		header("Content-Length: " . filesize($lud2));
 		header("Connection: close");
