@@ -47,7 +47,7 @@ Class File
               				}
               			
 
-				 $this->link = "<a href=" . str_replace(' ', '%20', $this->href . $this->opzionidownloadlink) . ">" . $this->testodownloadlink . " <i class=\"fa fa-download\"></i></a>";
+				 $this->link = "<a target=new href=" . str_replace(' ', '%20', $this->href . $this->opzionidownloadlink) . ">" . $this->testodownloadlink . " <i class=\"fa fa-download\"></i></a>";
 				 }
 				 
 			return $this->link;
