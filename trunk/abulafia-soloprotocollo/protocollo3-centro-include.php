@@ -152,7 +152,7 @@
 	<h3 class="panel-title"><strong>Opzioni:</strong></h3>
 	</div>
 	<div class="panel-body">
-		<p><a href="login0.php?corpus=protocollo2&from=crea"><i class="fa fa-plus-square"></i> Registrazione nuovo protocollo</a></p>
+		<p><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');"><i class="fa fa-plus-square"></i> Registrazione nuovo protocollo</a></p>
 		<p><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $idlettera;?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo Protocollo</a></p>
 		<p><a href="login0.php?corpus=invia-newsletter&id=<?php echo $idlettera;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite Email</a></p>					
 	</div>

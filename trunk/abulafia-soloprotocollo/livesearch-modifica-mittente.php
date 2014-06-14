@@ -23,9 +23,8 @@
 	$my_ricerca->publricercaespolosa($q, 'cognome');
 	$where= $my_ricerca->where;
 	
-	/*echo '<b><i><br>"' . $q . '"</i></b> non è presente nel database. <a href="#" data-toggle="modal" data-target="#myModal">Vai all\'inserimento rapido <span class="glyphicon glyphicon-share-alt"></span></a>
-				<br>oppure seleziona un elemento dall\'elenco seguente:<br>';
-	*/
+	//echo '<br>Se <b><i>"' . $q . '"</i></b> non è presente nell\'elenco sottostante <a href="#" data-toggle="modal" data-target="#myModal">vai all\'inserimento rapido <span class="glyphicon glyphicon-share-alt"></span></a><br>';
+	
 	$sql=mysql_query("SELECT * FROM anagrafica $where $filtro limit 5");
 	while($row = mysql_fetch_array($sql)) {
 	$row = array_map('stripslashes', $row);
