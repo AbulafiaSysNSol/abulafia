@@ -1,7 +1,25 @@
 <?php
+	include('lib/qrcode/qrlib.php');
+	$id = $_GET['id'];
+	$anno = $_GET['anno'];
+	
+	if (!is_dir('lettere'.$anno.'/qrcode/')) {
+		$creadir=mkdir('lettere'.$anno.'/qrcode/', 0777, true);
+		if (!$creadir) die ("Impossibile creare la directory: qrcode/");
+	}
+	
+	$pathqrcode = 'lettere'.$anno.'/qrcode/'.$id.$anno.'.png';
+	$param = 'Protocollo n° '.$id.' anno '.$anno;
+	$codeText = $param; 
+	$debugLog = ob_get_contents(); 
+	QRcode::png($codeText, $pathqrcode);
+?>
+
+<?php
 	session_start();
 	include '../db-connessione-include.php';
 	include 'maledetti-apici-centro-include.php';
+	 
 
 	function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
 		require_once "class/" . $class_name.".obj.inc";
@@ -42,11 +60,17 @@
 				$pdf->useTemplate($tplIdx, 5, 23, 200, 0, true); 
 				$pdf->SetFont('Arial', '', '9'); 
 				$pdf->SetTextColor(0,0,0);
-				$pdf->Write(0, 'Croce Rossa Italiana - Comitato Provinciale Catania');
+				$pdf->SetX(28);
+				$pdf->Write(0, 'Croce Rossa Italiana');
 				$pdf->Ln(4);
+				$pdf->SetX(28);
+				$pdf->Write(0, 'Comitato Provinciale Catania');
+				$pdf->Ln(4);
+				$pdf->SetX(28);
 				$pdf->Write(0, 'Protocollo n° '.$id.' del '.$datareg);
-				$pdf->Code39(11, 16, $id.' - '.$datareg);
-
+				$pdf->Image($pathqrcode, 1, 1);
+				
+	
 				//aggiunta delle altre pagine del pdf
 				$i = 2;
 				while($i<= $pageCount) {
