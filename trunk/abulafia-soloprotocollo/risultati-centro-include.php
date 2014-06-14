@@ -464,7 +464,7 @@
 			</ul>
 			<br>
 			<center>
-			<div class="alert alert-warning"><b><i class="fa fa-warning"></i> Attenzione:</b> al momento la funzione "barcode" potrebbe non funzionare su tutti gli allegati.</div>
+			<div class="alert alert-warning"><b><i class="fa fa-warning"></i> Attenzione:</b> al momento la funzione "qrcode" potrebbe non funzionare su tutti gli allegati.</div>
 			</center>
 			<table class="table table-bordered">
 				<tr align = "center">
