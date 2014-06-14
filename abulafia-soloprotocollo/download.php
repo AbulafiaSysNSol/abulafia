@@ -37,7 +37,9 @@
 		{
 			$fileprename='history';
 		}
-		else $fileprename='abl';
+		else {
+			$fileprename='abl';
+		}
 	}
 
 	if (isset($_GET['annoricercaprotocollo'])) {
@@ -58,7 +60,7 @@
 		header("Content-Length: " . filesize($lud2));
 		header("Connection: close");
 		fpassthru($fp);
-		//readfile($fp); 
+		readfile($fp); 
 	
 	exit;
 
