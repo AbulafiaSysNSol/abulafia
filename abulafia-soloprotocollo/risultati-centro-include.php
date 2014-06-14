@@ -537,7 +537,7 @@
 							if($file) {
 								?>
 								<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Invia tramite email" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span></a>
-								<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Imprimi barcode sugli allegati" href="barcode-centro-include.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-barcode"></span></a>
+								<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Imprimi qrcode sugli allegati" href="barcode-centro-include.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-qrcode"></span></a>
 								<?php
 							}
 							?>
