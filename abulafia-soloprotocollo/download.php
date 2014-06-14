@@ -51,7 +51,5 @@
 		header("Connection: close");
 		fpassthru($fp);
 		readfile($fp); 
-	
-	exit;
 
 ?>
