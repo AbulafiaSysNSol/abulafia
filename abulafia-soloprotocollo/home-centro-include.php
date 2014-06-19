@@ -1,16 +1,48 @@
 <?php
+	
 	if(isset($_GET['pass']) && ($_GET['pass'] == 1)) {
-		echo '<center><div class="alert alert-warning"><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> non hai ancora modificato la tua password di default!<br>
+		echo '<center><div class="alert alert-warning"><h3><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> non hai ancora modificato la tua password di default!</h3>
 			Per questioni di sicurezza ti invitiamo a cambiarla al più presto. <a href="?corpus=cambio-password&loginid='. $_SESSION['loginid'] . '">Cambia la tua password ora</a></div></center>';
 	}
+	
 	$data = new Calendario();
 	$lettera = new Lettera();
+	
 	$anno = $_SESSION['annoprotocollo'];
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00'");
 	$res_lettere = mysql_fetch_row($statslettere);
 	$ultimoprot = $lettera->ultimoId($anno);
-?>
+	
+	//patch protocolli saltati
+	if ($_SESSION['auth'] < 90) {
+		$protocollatore = $_SESSION['loginid'];
+		$query_prot_count = mysql_query("SELECT COUNT(lettere$anno.idlettera) FROM lettere$anno, joinlettereinserimento$anno WHERE lettere$anno.oggetto = '' AND joinlettereinserimento$anno.idinser = $protocollatore AND lettere$anno.idlettera = joinlettereinserimento$anno.idlettera ");
+		$query_prot = mysql_query("SELECT lettere$anno.idlettera FROM lettere$anno, joinlettereinserimento$anno WHERE lettere$anno.oggetto = '' AND joinlettereinserimento$anno.idinser = $protocollatore AND lettere$anno.idlettera = joinlettereinserimento$anno.idlettera ");
+	}
+	else {
+		$query_prot_count = mysql_query("SELECT idlettera FROM lettere$anno WHERE lettere$anno.oggetto = '' ");
+		$query_prot = mysql_query("SELECT idlettera FROM lettere$anno WHERE lettere$anno.oggetto = '' ");
+	}
+	
+	$result = mysql_fetch_row($query_prot_count);
+	
+	if ($result[0] > 0) {
+		?>
+		<center><div class="alert alert-danger"><b><h3><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> ci sono delle lettere <b>non</b> registrate correttamente!!!</h3>
+		Clicca sui numeri per continuare la registrazione: 
+		<?php
+		while ($idprot = mysql_fetch_array($query_prot)){
+			?>
+			<a href="?corpus=modifica-protocollo&from=correggi&id=<?php echo $idprot['idlettera']; ?>"><?php echo $idprot['idlettera'].';'; ?> 
+			<?php
+		}
+		?>
+		</a></div></center>
+		<?php
+	}
+	?>
+	
 <hr>
 	<center>
 		<h2>
