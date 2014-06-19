@@ -194,7 +194,7 @@
 			<label><span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta:</label>
 			<div class="row">
 			<div class="col-xs-2">
-			<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
+			<select required class="form-control" type="text" name="spedita-ricevuta" />
 				<OPTION selected value="<?php echo $row['speditaricevuta'];?>"> <?php echo $row['speditaricevuta'];?>
 				<OPTION value="ricevuta"> Ricevuta
 				<OPTION value="spedita"> Spedita
