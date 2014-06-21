@@ -35,13 +35,7 @@
 	$oggetto = stripslashes($_POST['oggetto']);
 	$messaggio = stripslashes($_POST['messaggio']);
 	
-	/*
-	$mail->isSMTP();                                      // Set mailer to use SMTP
-	$mail->Host = 'mail.cricatania.it';  // Specify main and backup SMTP servers
-	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-	$mail->Username = '';                 // SMTP username
-	$mail->Password = '';      
-	*/
+	include "../mail-conf-include.php";
 	
 	$mail->From = $mittente;
 	$mail->FromName = 'Comitato Provinciale CRI Catania';
