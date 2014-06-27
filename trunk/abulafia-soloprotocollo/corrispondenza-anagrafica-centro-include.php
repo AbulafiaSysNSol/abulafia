@@ -6,9 +6,11 @@
 	
 	if(isset($_GET['anno'])) {
 		$annoricercaprotocollo=$_GET['anno'];
+		$_SESSION['annoricercaprotocollo'] = $_GET['anno'];
 	}
 	else {
-		$annoricercaprotocollo=$_SESSION['annoprotocollo'];
+		$annoricercaprotocollo = $_SESSION['annoprotocollo'];
+		$_SESSION['annoricercaprotocollo'] = $_SESSION['annoprotocollo'];
 	}
 	
 	$my_file = new File(); //crea un nuovo oggetto 'file'

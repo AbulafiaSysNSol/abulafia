@@ -254,7 +254,7 @@
 			?>
 			
 			<div class="row">
-			<div class ="col-xs-5" id="content" style="display: none;">
+			<div class ="col-xs-6" id="content" style="display: none;">
 			<br>
 			<b>Caricamento in corso...</b>
 			<img src="images/progress.gif">
