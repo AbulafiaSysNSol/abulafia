@@ -17,7 +17,7 @@
 			?>
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica registrata correttamente!</div>
+					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica registrata <b>correttamente!</b></div>
 				</div>
 			</div>
 			<?php
@@ -27,7 +27,7 @@
 		?>
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica modificata correttamente!</div>
+				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica modificata <b>correttamente!</b></div>
 			</div>
 		</div>
 		<?php

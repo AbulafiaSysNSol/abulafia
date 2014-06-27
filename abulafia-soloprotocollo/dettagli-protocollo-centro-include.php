@@ -21,6 +21,6 @@
 	<div class="panel-body">
 		<p><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $_GET['id'];?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo Protocollo</a></p>
 		<p><a href="login0.php?corpus=invia-newsletter&id=<?php echo $_GET['id'];?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite Email</a></p>					
-		<p><a href="login0.php?corpus=protocollo"> <span class="glyphicon glyphicon-plus-sign"></span> Registra nuovo Protocollo</a></p>
+		<a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');"><span class="glyphicon glyphicon-plus-sign"></span> Registra nuovo Protocollo</a>
 	</div>
 </div>

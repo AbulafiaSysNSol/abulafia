@@ -15,7 +15,7 @@ if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per uti
 			?>
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="alert alert-danger">C'e' stato un errore nella modifica delle impostazioni, riprova in seguito o contatta l'amministratore del server.</div>
+					<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span><b> Attenzione:</b> c'e' stato un errore nella modifica delle impostazioni, riprova in seguito o contatta l'amministratore del server.</div>
 				</div>
 			</div>
 			<?php
@@ -27,7 +27,7 @@ if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per uti
 			?>
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Impostazioni modificate con successo!</div>
+					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Impostazioni modificate con <b>successo!</b></div>
 				</div>
 			</div>
 			<?php
@@ -74,7 +74,7 @@ Per rendere effettive le modifiche e' consigliato effettuare il logout.
 </label><br>
 <label> <br>Footer Mail-Protocollo <br><input class="form-control" size="50" type="text" name="footermail"  value="<?php echo $_SESSION['footermail'];?>"/>
 </label><br><br>
-<button class="btn btn-primary" onClick="Controllo()" />Modifica</button>
+<button class="btn btn-primary" onClick="Controllo()" /><span class="glyphicon glyphicon-edit"></span> Modifica</button>
 </form>
 
 </div>
