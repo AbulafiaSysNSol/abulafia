@@ -76,6 +76,7 @@
 								<OPTION value="persona" onclick="document.search.cercato.focus()"> Persone fisiche</OPTION>
 								<OPTION value="carica" onclick="document.search.cercato.focus()"> Carica o Incarico</OPTION>
 								<OPTION value="ente" onclick="document.search.cercato.focus()"> Ente</OPTION>
+								<OPTION value="fornitore" onclick="document.search.cercato.focus()"> Fornitore</OPTION>
 							</SELECT>
 						</div>
 					</div>
