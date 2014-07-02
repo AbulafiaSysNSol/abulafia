@@ -176,7 +176,7 @@
 				?>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="alert alert-danger">C'è stato un errore nell'associare la nuova anagrafica.</div>
+						<div class="alert alert-danger"><b><i class="fa fa-warning"></i>Attenzione:</b> c'è stato un errore nell'associare la nuova anagrafica.</div>
 					</div>
 				</div>
 				<?php
@@ -188,7 +188,7 @@
 				?>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="alert alert-danger">C'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+						<div class="alert alert-danger"><b><i class="fa fa-warning"></i>Attenzione:</b> c'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
 					</div>
 				</div>
 				<?php
@@ -200,7 +200,7 @@
 			?>
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="alert alert-success">File allegato correttamente!</div>
+					<div class="alert alert-success"><i class="fa fa-check"></i> File allegato <b>correttamente!</b></div>
 				</div>
 			</div>
 			<?php
@@ -256,8 +256,8 @@
 			<div class="row">
 			<div class ="col-xs-6" id="content" style="display: none;">
 			<br>
-			<b>Caricamento in corso...</b>
-			<img src="images/progress.gif">
+			<i class="fa fa-spinner fa-spin"></i><b> Caricamento allegato in corso...</b>
+			<br><img src="images/progress.gif">
 			</div>
 			</div>
 			
