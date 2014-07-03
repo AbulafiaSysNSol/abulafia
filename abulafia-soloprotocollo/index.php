@@ -1,117 +1,159 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//IT" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <?php
 	if(!isset($_GET['err'])) {
 		$_GET['err'] = 0;
 	}
 ?>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-<!-- META -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
- <!-- META -->
-  
-  <!-- CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <link href="css/grid.css" rel="stylesheet">
-  <!-- CSS -->  
-  
-  <!-- JS -->
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <!-- JS -->
-  
-<title>Abulafia - Login</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Abulafia - Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+    <!-- Custom Google Web Font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Add custom CSS here -->
+    <link href="css/landing-page.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div class="row">
-	<div class="col-md-8 col-md-offset-2">		
-		
-		<div class="container-login">
-			<center>
-				<div class="well"><label><h1 class="paneltitle">Abulafia</h1></label><br>Gestione delle segreterie dei Volontari della CRI</div>
-				<?php
-					if($_GET['err'] == 1) {
-						?>
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="alert alert-danger"> <span class="glyphicon glyphicon-remove"></span> Username o password errati</div>
-							</div>
-						</div>
-						<?php
-					}
-				?>
-			</center>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title"><span class="glyphicon glyphicon-inbox"></span> <strong>Abulafia: saper conservare, saper ritrovare.</strong></h3>
-							</div>
+    <div class="intro-header">
+	
+	<div class="login">
+		<div class="row">
+			<div class="col-xs-12">
+				<?php if($_GET['err'] == 1) {echo '<div class="danger"><i class="fa fa-warning"></i> Attenzione: username o password errati.</div><br>';} ?>
+				<form class="form-inline" action="login1.php" method="post" role="form">
+					<label>Username: </label>
+					<div class="form-group <?php if($_GET['err'] == 1) {echo 'has-error';} ?>">			
+						<input type="text" class="form-control input-sm" name="userid" placeholder="username">
+					</div>
 					
-							<div class="panel-body">
-								<div style="text-align: justify">
-									Si evolvono gli uffici, pubblici e privati, per stare al passo con i tempi e con le rinnovate esigenze di gestione amministrativa e del personale.
-									<br>Abulafia vuole essere un piccolo contributo, aperto a chiunque abbia voglia di suggerire 
-									miglioramenti, per la gestione degli affari correnti delle segreterie dei volontari della CRI.
-									<br><br>Chiunque fosse interessato al progetto, puo' contattare l'amministratore del sito all'indirizzo email <strong>informatica@cricatania.it</strong> <span class="glyphicon glyphicon-envelope"></span>
-								</div>
-								<div class="text-right">
-									<small>03 dicembre 2008</small>
-								</div>
-							</div>
-						</div>
+					<label>Password: </label>
+					<div class="form-group <?php if($_GET['err'] == 1) {echo 'has-error';} ?>">
+						<input type="password" class="form-control input-sm" name="password" placeholder="password">
 					</div>
-			<center>
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title"><b><span class="glyphicon glyphicon-log-in"></span> Login</b></h3>
-							</div>
-								
-							<div class="panel-body">
-								Per accedere al sistema, inserisci username e password:<br><br>
-			 
-								<form action="login1.php" method="post" role="form">
-									<div class="form-group">
-										<label>Username:</label>
-										<div class="row">
-											<div class="col-md-8 col-md-offset-2">
-												<input type="text" class="form-control" name="userid" placeholder="username">
-											</div>
-										</div>
-									</div>
-										
-									<div class="form-group">
-										<label>Password:</label>
-										<div class="row center">
-											<div class="col-md-8 col-md-offset-2">
-												<input type="password" class="form-control" name="password" placeholder="password">
-											</div>
-										</div>
-									</div>
-			  
-									<button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-ok"></span> Accedi</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</center>
-			<center>
-				<small>
-					Abulafia is licensed under a: <a href="license.txt" target="_blank">GNU GPL V.3</a><br />
-					&copy; 2008 - 2014 <strong>Abulafia Sys'n'Sol</strong>
-				</small>
-			</center>
+				
+					<button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Accedi</button>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
+        
+	<div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Abulafia</h1>
+                        <h3>Gestione delle Segreterie dei Volontari C.R.I.</h3>
+                        <hr class="intro-divider">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-7">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Saper conservare, saper ritrovare.
+                        </h2>
+                    <p class="lead">
+			Si evolvono gli uffici, pubblici e privati, per stare al passo con i tempi e con le rinnovate esigenze di gestione amministrativa e del personale.
+			Abulafia vuole essere un piccolo contributo, aperto a chiunque abbia voglia di suggerire 
+			miglioramenti, per la gestione degli affari correnti delle segreterie dei volontari della CRI.
+		</p>
+	        </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-5">
+                    <img class="img-responsive" src="img/ritrovare.png" width="65%">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Semplice, Veloce, Efficiente.</h2>
+                    <p class="lead">Archivia ordinatamente tutta la corrispondenza in entrata e in uscita, con possibilit&agrave; di gestione titolario e pratiche. 
+					Ricerca veloce fra la corrispondenza registrata con gli allegati a portata di click!</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-5  col-sm-6">
+                    <img class="img-responsive" src="img/lettera.png" width="75%">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+    
+      <div class="banner">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <h2>Per info e supporto:</h2>
+                </div>
+                <div class="col-lg-6">
+                    <h2>informatica@cricatania.it</h2>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.banner -->
+
+	<hr>
+            <div class="row">
+	    <center>
+                <div class="col-lg-12">
+			Abulafia is licensed under a: <a href="license.txt" target="_blank">GNU GPL V.3</a><br />
+			&copy; 2008 - 2014 <strong>Abulafia Sys'n'Sol</strong>
+			<br><br>
+                </div>
+	   </center>
+            </div>
+
+    <!-- JavaScript -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
 
 </body>
+
 </html>
