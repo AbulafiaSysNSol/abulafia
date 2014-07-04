@@ -9,7 +9,7 @@ $data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 
 //passaggio delle variabili dalla pagina del form
 $destinatario = $_SESSION['email'];
-$mittente = $_SESSION['loginname'];
+$mittente = $_SESSION['loginname'].'@abulafia.com';
 $oggetto = 'Segnalazione bug in '.$_SESSION['nomeapplicativo'];
 $messaggio = 'Pagina: '.$_POST['pagina-errore'].' -- Errore: '.$_POST['messaggio'];
 
