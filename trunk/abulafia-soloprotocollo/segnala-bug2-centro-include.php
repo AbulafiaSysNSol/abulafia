@@ -26,7 +26,7 @@ $messaggio = 'Pagina: '.$_POST['pagina-errore'].' -- Errore: '.$_POST['messaggio
 		echo '<a href="?corpus=home"><i class="fa fa-reply"></i> Torna alla home</a>';
 		$esito= 'FAILED';
 	} else {
-		echo '<div class="alert alert-success"><i class="fa fa-check"></i> Segnalazione inviata con successo!</div>';
+		echo '<div class="alert alert-success"><i class="fa fa-check"></i> Segnalazione inviata con <b>successo!</b></div>';
 		echo '<a href="?corpus=home"><i class="fa fa-reply"></i> Torna alla home</a>';
 		$esito= 'SUCCESSFUL';
 	}
