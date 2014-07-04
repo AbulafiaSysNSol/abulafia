@@ -16,7 +16,7 @@ $messaggio = 'Pagina: '.$_POST['pagina-errore'].' -- Errore: '.$_POST['messaggio
 	include "../mail-conf-include.php";
 	$mail->From = $mittente;
 	$mail->FromName = 'Segnalazione Bug Abulafia';
-	$mail->addAddress('informatica@cricatania.it');     // Add a recipient
+	$mail->addAddress($destinatario);     // Add a recipient
 	$mail->addReplyTo($mittente);
 	$mail->isHTML(true);   
 	$mail->Subject = $oggetto;
