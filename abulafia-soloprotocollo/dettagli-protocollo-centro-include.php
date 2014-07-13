@@ -11,6 +11,8 @@
 	
 	$dettagli = $my_lettera->getDettagli($id,$anno);
 	$mittenti = $my_lettera->getMittenti($id,$anno);
+	$inserimento = $my_lettera->getIns($id,$anno);
+	$modifica = $my_lettera->getLastMod($id,$anno);
 ?>
 
 <hr>
@@ -26,7 +28,7 @@
 
 
 		<div class="row">
-			<div class="col-xs-4">
+			<div class="col-xs-3">
 				<h3><i class="fa fa-info"></i> Dettagli Protocollo</h3>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
@@ -63,7 +65,7 @@
 				</div>
 			</div>
 			
-			<div class="col-xs-2">
+			<div class="col-xs-3">
 				<h3><i class="fa fa-files-o"></i> File Allegati</h3>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
@@ -100,3 +102,37 @@
 			</div>
 			
 		</div>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<h3><i class="fa fa-user"></i> Inserimento effettuato da:</h3>
+				<div class="row">
+					<div class="col-md-11 col-md-offset-1">
+					<ul><li>
+						<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $inserimento['idanagrafica'];?>"> 
+						<?php echo $inserimento['nome'] . '  ' . $inserimento['cognome'] . '</a> il ' . $calendario->dataSlash($dettagli['dataregistrazione']);?>
+					</li></ul>
+					</div>
+				</div>
+				
+				<h3><i class="fa fa-user"></i> Ultima modifica:</h3>
+				<div class="row">
+					<div class="col-md-11 col-md-offset-1">
+					<ul><li>
+						<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=
+						<?php echo $modifica['idanagrafica'];?>"> 
+						<?php echo $modifica['nome'] . '  ' . $modifica['cognome'] . '</a> il ' . $calendario->dataSlash($modifica['datamod']);?>
+					</li></ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-6">
+				<h3><i class="fa fa-paper-plane-o"></i> Protocollo inoltrato a:</h3>
+				<div class="row">
+					<div class="col-md-11 col-md-offset-1">
+					
+					</div>
+				</div>
+			</div>
+			</div>

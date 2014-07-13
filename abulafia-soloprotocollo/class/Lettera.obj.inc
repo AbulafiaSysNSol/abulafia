@@ -54,12 +54,12 @@ class Lettera {
 	
 	public function getIns( $id, $anno) {
 		$this -> leggilettera ($id, $anno); 
-		return $this->arrayinserimento;
+		return $this->arrayinserimento1;
 	}
 	
 	public function getLastMod( $id, $anno) {
 		$this -> leggilettera ($id, $anno); 
-		return $this->arraylmodifica;
+		return $this->arraymodifica1;
 	}
 	
 	public function getDescPratica ($idpratica) {
