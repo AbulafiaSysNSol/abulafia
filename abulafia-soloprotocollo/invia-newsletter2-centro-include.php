@@ -68,7 +68,7 @@
 		echo '<div class="alert alert-success"><i class="fa fa-check"></i> Email inviata con successo!</div>';
 		echo '<a href="?corpus=home"><i class="fa fa-reply"></i> Torna alla home</a>';
 		$esito= 'SUCCESSFUL';
-		$userid = $_SESSION['userid'];
+		$userid = $_SESSION['loginid'];
 		$data = date("Y-m-d");
 		foreach ($destinatari as $valore) {
 			$insert = mysql_query("INSERT INTO mailsend VALUES ( '', '$userid', '$valore', '$data', '$idlettera', '$annoricercaprotocollo')");
