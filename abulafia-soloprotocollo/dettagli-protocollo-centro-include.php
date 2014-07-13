@@ -13,6 +13,7 @@
 	$mittenti = $my_lettera->getMittenti($id,$anno);
 	$inserimento = $my_lettera->getIns($id,$anno);
 	$modifica = $my_lettera->getLastMod($id,$anno);
+	$mailsend = $my_lettera->getMailSend($id, $anno);
 ?>
 
 <hr>
@@ -55,7 +56,7 @@
 						foreach($mittenti as $valore) {
 							?>
 							<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $valore['idanagrafica'];?>"> 
-								<?php echo '<li><b>' . $valore['nome'] . '  ' . $valore['cognome'] . '</b></li>' ;?>
+								<?php echo '<li>' . $valore['nome'] . '  ' . $valore['cognome'] . '</li>' ;?>
 							</a>
 							<?php
 						}
@@ -103,8 +104,10 @@
 			
 		</div>
 		
+		<br>
+		
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<h3><i class="fa fa-user"></i> Inserimento effettuato da:</h3>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
@@ -127,11 +130,19 @@
 				</div>
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-8">
 				<h3><i class="fa fa-paper-plane-o"></i> Protocollo inoltrato a:</h3>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
-					
+						<ul>
+						<?php
+						foreach($mailsend as $valore) {
+							echo '<li><b>' . $valore['email'] . '</b> da  
+							<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=' . $valore['idanagrafica'] . ' "> ' .
+							$valore['nome'] . '  ' . $valore['cognome'] . '</a> il ' . $calendario->dataSlash($valore['data']);
+						}
+						?>
+						</ul>
 					</div>
 				</div>
 			</div>
