@@ -71,7 +71,8 @@
 		$userid = $_SESSION['userid'];
 		$data = date("Y-m-d");
 		foreach ($destinatari as $valore) {
-			$insert = mysql_query("INSERT INTO mailsend VALUES ( '', '$userid', '$valore', '$data', '$idlettera', '$annoricercaprotocollo'");
+			$insert = mysql_query("INSERT INTO mailsend VALUES ( '', '$userid', '$valore', '$data', '$idlettera', '$annoricercaprotocollo')");
+			echo mysql_error();
 		}
 	}
 	
