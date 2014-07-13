@@ -73,6 +73,15 @@ class Lettera {
 		$posizione=mysql_fetch_row($pos);
 		return stripslashes($posizione[2]);
 	}
+	
+	public function getMailSend($id, $anno) {
+		$arraysend = array();
+		$email=mysql_query("select * from mailsend, anagrafica WHERE mailsend.idlettera = '$id' AND mailsend.annolettera = '$anno' AND mailsend.user = anagrafica.idanagrafica");
+		while ($send = mysql_fetch_array($email)) {
+			array_push($arraysend, $send);
+		}
+		return $arraysend;
+	}
 
 	public function publdisplaylettera ($idlettera, $annoricercaprotocollo) { //<man>Stampa i dettagli di una lettera, passando come parametri id e anno di registrazione</man>
 		$this -> leggilettera ($idlettera, $annoricercaprotocollo); 
