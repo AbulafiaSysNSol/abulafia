@@ -2,7 +2,6 @@
 class Lettera {
 	private $mittentidestinatari='';
 	private $speditaricevuta='';
-	private $urlfile=array();
 	private $oggetto='';
 	private $datalettera='';
 	private $posizione='';
@@ -11,6 +10,11 @@ class Lettera {
 	private $loginname='';
 	private $annoricercaprotocollo='';
 	private $arraylettera;
+	private $urlfile=array();
+	private $arraylettera1=array();
+	private $arrayletteramittenti=array();
+	private $arrayinserimento1=array();
+	private $arraymodifica1=array();
 
 	private function leggilettera ($idlettera, $annoricercaprotocollo) { //<man>legge i dati dettagliati di una lettera in protocollo, indicandone id e anno di registrazione</man>
 		
@@ -32,6 +36,42 @@ class Lettera {
 		$this->arrayletteramittenti = $letteramittenti;
 		$this->arrayinserimento1 = $arrayinserimento;
 		$this->arraymodifica1 = $arraymodifica;
+	}
+	
+	public function getDettagli( $id, $anno) {
+		$this -> leggilettera ($id, $anno); 
+		return $this->arraylettera1;
+	}
+	
+	public function getMittenti( $id, $anno) {
+		$this -> leggilettera ($id, $anno); 
+		$arraymitt = array();
+		while ($mitt = mysql_fetch_array($this->arrayletteramittenti)) {
+			array_push($arraymitt, $mitt);
+		}
+		return $arraymitt;
+	}
+	
+	public function getIns( $id, $anno) {
+		$this -> leggilettera ($id, $anno); 
+		return $this->arrayinserimento;
+	}
+	
+	public function getLastMod( $id, $anno) {
+		$this -> leggilettera ($id, $anno); 
+		return $this->arraylmodifica;
+	}
+	
+	public function getDescPratica ($idpratica) {
+		$desc=mysql_query("select distinct * from pratiche WHERE id='$idpratica'");
+		$descrizione=mysql_fetch_row($desc);
+		return stripslashes($descrizione[1]);
+	}
+	
+	public function getDescPosizione ($codice) {
+		$pos=mysql_query("select distinct * from titolario WHERE codice='$codice'");
+		$posizione=mysql_fetch_row($pos);
+		return stripslashes($posizione[2]);
 	}
 
 	public function publdisplaylettera ($idlettera, $annoricercaprotocollo) { //<man>Stampa i dettagli di una lettera, passando come parametri id e anno di registrazione</man>

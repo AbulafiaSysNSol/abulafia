@@ -176,7 +176,7 @@
 				?>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="alert alert-danger"><b><i class="fa fa-warning"></i>Attenzione:</b> c'è stato un errore nell'associare la nuova anagrafica.</div>
+						<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b> c'è stato un errore nell'associare la nuova anagrafica.</div>
 					</div>
 				</div>
 				<?php
@@ -188,7 +188,7 @@
 				?>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="alert alert-danger"><b><i class="fa fa-warning"></i>Attenzione:</b> c'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+						<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b> c'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
 					</div>
 				</div>
 				<?php
