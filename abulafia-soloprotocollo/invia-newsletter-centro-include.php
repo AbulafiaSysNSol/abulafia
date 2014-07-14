@@ -10,7 +10,7 @@
 	<div class="panel-body">
 		<form action="login0.php?corpus=invia-newsletter2&id=<?php echo $idlettera;?>" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="mittente" value="<?php $_SESSION['mittente'] ?>">
-			<i> N.B. - Indirizzi multipli vanno separati da virgole.
+			<i> N.B. - Indirizzi multipli vanno separati da virgole, senza lasciare spazi.
 			<br> 
 			Ad esempio:<b> tizio@example.it,caio@example.it</b></i>
 			

@@ -83,6 +83,14 @@
 <script type="text/javascript">
 		$(function() {
 			$('.fancybox').fancybox();
+			
+			$(".iframe").fancybox({
+				type: 'iframe',
+				'padding' : 10,  
+				'autoDimensions' : false,
+				'width' : 490,
+				'height' : 'auto'
+			});
 
 			// Change title type, overlay closing speed
 			$(".fancybox-effects-a").fancybox({
