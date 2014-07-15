@@ -95,7 +95,7 @@
 		<?php
 		while ($row2 = mysql_fetch_array($risultati2)) {
 			echo '<tr>';
-			echo '<td>'.ucwords($row2['tipo']).'</td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-xs" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
+			echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-xs" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
 			<?php
 			echo '</tr>';
 		}
@@ -110,12 +110,13 @@
 					<label>Tipo:</label>
 					<div class="form-group">
 					<SELECT class="form-control" NAME="tipo">
-						<OPTION value="fisso">Fisso
-						<OPTION value="cell">Cellullare
+						<OPTION value="phone">Telefono
+						<OPTION value="mobile">Cellullare
 						<OPTION Value="fax">Fax
-						<OPTION Value="email">E-Mail
+						<OPTION Value="envelope-o">E-Mail
 						<OPTION Value="facebook">Facebook
 						<OPTION Value="twitter">Twitter
+						<OPTION value="linkedin"> Linkedin
 					</select>
 					</div>
 					

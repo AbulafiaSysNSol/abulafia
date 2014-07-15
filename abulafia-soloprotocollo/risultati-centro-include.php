@@ -39,8 +39,12 @@
 	}
 
 	$tabella = $_POST['tabella'];
+	
 	$annoricercaprotocollo=$_POST['annoricercaprotocollo'];
-	$_SESSION['annoricercaprotocollo']= $annoricercaprotocollo;
+	
+	if(isset($annoricercaprotocollo)) {
+		$_SESSION['annoricercaprotocollo']= $annoricercaprotocollo;
+	}
 	if(isset($_POST['group1'])) { 
 		$ordinerisultati= $_POST['group1'];
 	}

@@ -120,7 +120,7 @@
 							$icon = '<i class="fa fa-arrow-down"></i>';
 						}
 						echo "<tr><td>".$icon."</td><td>".$val[0]."</td><td>".$data->dataSlash($val[1])."</td><td>".$val[2]."</td>
-							<td width='55'><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."\">Vai <i class=\"fa fa-share\"></i></td></tr>";
+							<td width='55'><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">Vai <i class=\"fa fa-share\"></i></td></tr>";
 					}
 				}
 				?>

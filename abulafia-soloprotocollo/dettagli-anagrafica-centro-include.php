@@ -206,7 +206,7 @@
 						<?php
 						while ($row2 = mysql_fetch_array($risultati2)) {
 							if ($row2['numero'] != '') {
-								echo '<img src="images/'.$row2['tipo'].'.png" width="20" height="20"> '; echo strtolower($row2['numero']). '  -  ' .strtoupper($row2['tipo']);
+								echo '<i class="fa fa-'.$row2['tipo'].'"></i> '; echo strtolower($row2['numero']);
 							}
 							?>
 							<br> 

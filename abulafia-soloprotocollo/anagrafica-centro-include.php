@@ -217,12 +217,13 @@
 					<div class="col-xs-2">
 						<SELECT class="form-control input-sm" size=1 cols=4 NAME="tipo"  disabled><br>
 						<OPTION Value=""> seleziona tipo
-						<OPTION Value="fisso">Telefono
-						<OPTION value="cell"> Cellulare
-						<OPTION value="email"> Email
+						<OPTION Value="phone">Telefono
+						<OPTION value="mobile"> Cellulare
 						<OPTION Value="fax"> Fax
+						<OPTION value="envelope-o"> Email
 						<OPTION Value="facebook">Facebook
 						<OPTION Value="twitter"> Twitter
+						<OPTION Value="linkedin"> Linkedin
 						</select>
 					</div>
 

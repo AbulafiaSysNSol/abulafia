@@ -44,8 +44,7 @@
 				}
 				else {
 					foreach($mailsend as $valore) {
-						echo '<li><b>' . $valore['email'] . '</b> da  
-						<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=' . $valore['idanagrafica'] . ' "> ' .
+						echo '<li><b>' . $valore['email'] . '</b> da ' .
 						$valore['nome'] . '  ' . $valore['cognome'] . '</a> il ' . $calendario->dataSlash($valore['data']);
 					}
 				}
