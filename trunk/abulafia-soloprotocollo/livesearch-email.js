@@ -28,7 +28,7 @@ if (xmlhttp.readyState==4)
   {
   document.getElementById("livesearch").innerHTML=xmlhttp.responseText;
   document.getElementById("livesearch").style.border="0px solid #A5ACB2";
-  document.getElementById("livesearch").style.width="300px";
+  document.getElementById("livesearch").style.width="600px";
   }
 }
 
