@@ -68,9 +68,9 @@
 		?>
 	
 		<div class="row">
-		<div class="col-xs-2">
+		<div class="col-xs-3">
 			<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br>
-			<center><img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'images/nessuna.jpg';}?>" height="110"></center>
+			<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'images/nessuna.jpg';}?>" height="110">
 		</div>
 		
 		<div class="col-xs-3">

@@ -88,7 +88,7 @@
 				type: 'iframe',
 				'padding' : 10,  
 				'autoDimensions' : false,
-				'width' : 490,
+				'width' : 500,
 				'height' : 'auto'
 			});
 

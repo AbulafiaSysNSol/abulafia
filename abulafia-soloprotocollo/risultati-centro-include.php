@@ -467,9 +467,10 @@
 			?>
 			</ul>
 			<br>
-			<center>
+			<!--<center>
 			<div class="alert alert-warning"><b><i class="fa fa-warning"></i> Attenzione:</b> al momento la funzione "qrcode" potrebbe non funzionare su tutti gli allegati.</div>
 			</center>
+			-->
 			<table class="table table-bordered">
 				<tr align = "center">
 					<td style="vertical-align: middle"></td>
@@ -479,7 +480,7 @@
 					<td style="vertical-align: middle">Oggetto</td>
 					<td style="vertical-align: middle" width="150">File</td>
 					<td style="vertical-align: middle">Mitt./Dest.</td>
-					<td style="vertical-align: middle" width="183">Opzioni</td>
+					<td style="vertical-align: middle" width="150">Opzioni</td>
 				</tr>
 			<?php
 			
@@ -541,8 +542,8 @@
 							if($file) {
 								?>
 								<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Invia tramite email" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span></a>
-								<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Imprimi qrcode sugli allegati" href="barcode-centro-include.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-qrcode"></span></a>
-								<a class="btn btn-success iframe" data-fancybox-type="iframe" href="inoltro-email.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><i class="fa fa-paper-plane"></i></a>
+								<!-- <a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Imprimi qrcode sugli allegati" href="barcode-centro-include.php?id=<?php //echo $value[0];?>&anno=<?php //echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-qrcode"></span></a> -->
+								<a class="btn btn-primary iframe" data-fancybox-type="iframe" href="inoltro-email.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><i class="fa fa-paper-plane"></i></a>
 								<?php
 							}
 							?>
