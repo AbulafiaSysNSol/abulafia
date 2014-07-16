@@ -18,7 +18,7 @@
 			
 			<br><br>
 			<div class="row">
-				<div class="col-xs-6">
+				<div class="col-xs-5">
 					<div class="form-group">
 						<h4><i class="fa fa-users"></i> Destinatari:</h4>
 						<input id="email" required class="form-control" type="text" name="destinatario" placeholder="inserisci i destinatari separandoli con una virgola...">
@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				
-				<div class="col-xs-6">
+				<div class="col-xs-7">
 					<center>
 					<script type="text/javascript" src="livesearch-email.js"></script>
 					<h3><i class="fa fa-search"></i> <i class="fa fa-envelope-o"></i> Cerca indirizzo nell'anagrafica:</h3>
