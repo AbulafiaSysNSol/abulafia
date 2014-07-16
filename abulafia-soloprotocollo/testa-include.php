@@ -146,7 +146,7 @@
 				<li><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');" ><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
 				<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione titolario</a></li>
 				<li><a href="login0.php?corpus=pratiche"><i class="fa fa-tags"></i> Gestione pratiche</a></li>
-				<li><a href="login0.php?corpus=stampa-registro"><span class="glyphicon glyphicon-print"></span> Stampa il registro</a></li>
+				<li><a href="login0.php?corpus=stampa-registro"><i class="fa fa-file-pdf-o"></i> Esporta registro in PDF</a></li>
 			</ul>
 		</li>
 		
