@@ -2,6 +2,7 @@
 	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
 	$calendario = new Calendario();
 	$id = $_GET['id'];
+	
 	if (isset($_GET['anno'])) {
 		$anno = $_GET['anno'];
 	}
@@ -14,6 +15,14 @@
 	$inserimento = $my_lettera->getIns($id,$anno);
 	$modifica = $my_lettera->getLastMod($id,$anno);
 	$mailsend = $my_lettera->getMailSend($id, $anno);
+
+	if (isset($_GET['inoltro']) AND $_GET['inoltro'] == 'ok') {
+		echo '<div class="alert alert-success"><i class="fa fa-check"></i> Inoltro aggiunto con <b>successo!</b></div>';
+	}
+	
+	if (isset($_GET['inoltro']) AND $_GET['inoltro'] == 'fail') {
+		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:</b> si e\' verificato un problema, inoltro non registrato. Riprovare o contattare l\'amministratore del sistema.</div>';
+	}
 ?>
 
 <hr>
@@ -97,6 +106,7 @@
 							<li><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $_GET['id'];?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo Protocollo</a></li>
 							<li><a href="login0.php?corpus=invia-newsletter&id=<?php echo $_GET['id'];?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite Email</a></li>
 							<li><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');"><span class="glyphicon glyphicon-plus-sign"></span> Registra nuovo Protocollo</a></li>
+							<li><a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email</a></li>
 						</ul>
 					</div>
 				</div>
@@ -136,10 +146,15 @@
 					<div class="col-md-11 col-md-offset-1">
 						<ul>
 						<?php
-						foreach($mailsend as $valore) {
-							echo '<li><b>' . $valore['email'] . '</b> da  
-							<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=' . $valore['idanagrafica'] . ' "> ' .
-							$valore['nome'] . '  ' . $valore['cognome'] . '</a> il ' . $calendario->dataSlash($valore['data']);
+						if (!$mailsend) {
+							echo '<li>Nessun inoltro per il protocollo selezionato</li>';
+						}
+						else {
+							foreach($mailsend as $valore) {
+								echo '<li><b>' . $valore['email'] . '</b> da  
+								<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=' . $valore['idanagrafica'] . ' "> ' .
+								$valore['nome'] . '  ' . $valore['cognome'] . '</a> il ' . $calendario->dataSlash($valore['data']);
+							}
 						}
 						?>
 						</ul>

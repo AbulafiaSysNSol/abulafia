@@ -71,6 +71,12 @@ public $ggmmaaaa;
 		$dataslash = $date[2]."/".$date[1]."/".$date[0];
 		return $dataslash;
 	}
+	
+	public function dataDB($data) {
+		$date = explode("/",$data);
+		$datadb = $date[2]."/".$date[1]."/".$date[0];
+		return $datadb;
+	}
 
 
 	}//chiusura classe

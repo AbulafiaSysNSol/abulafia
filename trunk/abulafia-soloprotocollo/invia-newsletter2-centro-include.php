@@ -65,7 +65,7 @@
 		echo '<a href="?corpus=home"><i class="fa fa-reply"></i> Torna alla home</a>';
 		$esito= 'FAILED';
 	} else {
-		echo '<div class="alert alert-success"><i class="fa fa-check"></i> Email inviata con successo!</div>';
+		echo '<div class="alert alert-success"><i class="fa fa-check"></i> Email inviata con <b>successo!</b></div>';
 		echo '<a href="?corpus=home"><i class="fa fa-reply"></i> Torna alla home</a>';
 		$esito= 'SUCCESSFUL';
 		$userid = $_SESSION['loginid'];
