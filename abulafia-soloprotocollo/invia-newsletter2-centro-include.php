@@ -44,7 +44,7 @@
 		$mail->addAddress($valore);     // Add a recipient
 	}
 	
-	$mail->addReplyTo($mittente);
+	$mail->addReplyTo('cp.catania@cri.it');
 	
 	$urlfile = $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
 	if ($urlfile) {
