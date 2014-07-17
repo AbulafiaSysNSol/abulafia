@@ -1,5 +1,9 @@
 <?php
 	$idlettera= $_GET['id']; //acquisizione dell'id della lettera da inviare tramite newsletter
+	$anno = $_GET['anno'];
+	$lettera = new Lettera();
+	$oggetto = $lettera->getDettagli($idlettera, $anno);
+	$ogg = $oggetto['oggetto'];
 ?>
 
 <div class="panel panel-default">
@@ -26,12 +30,12 @@
 					
 					<div class="form-group">
 						<h4><i class="fa fa-certificate"></i> Oggetto:</h4>
-						<input required class="form-control" type="text" name="oggetto" placeholder="inserisci un oggetto...">
+						<input required value="<?php echo $ogg; ?>" class="form-control" type="text" name="oggetto" placeholder="inserisci un oggetto...">
 					</div>
 					
 					<div class="form-group">
 						<h4><i class="fa fa-file-text-o"></i> Messaggio:</h4>
-						<textarea required class="form-control" rows="5" name="messaggio" placeholder="aggiungi un messaggio..."></textarea>
+						<textarea required class="form-control" rows="5" name="messaggio" placeholder="aggiungi un messaggio...">Si trasmette nota pari ad oggetto.&#013;&#013;Cordiali Saluti.</textarea>
 					</div>
 					
 					<div class="form-group">
@@ -50,7 +54,7 @@
 					</center>
 					<div class="row">
 					<div class="col-xs-10 col-xs-offset-1">
-					<input class="form-control input-sm" type="text" name="oggetto" placeholder="inserisci nome, cognome o indirizzo email..." onkeyup="showResult(this.value)">
+					<input class="form-control input-sm" type="text" placeholder="inserisci nome, cognome o indirizzo email..." onkeyup="showResult(this.value)">
 					<div id="livesearch"></div>
 					</div>
 					</div>
