@@ -64,36 +64,39 @@
 				$giorniusoapplicazione = ((strtotime("now") - strtotime("apr 1 2008"))/60/60/24)-(int)$anniusoapplicazione*365;
 				echo 'Questa web-application e\' in uso da '.(int)$anniusoapplicazione.' anni e '.(int)$giorniusoapplicazione.' giorni.';?></p>
 
-					<p><?php 
-					if ($res_lettere[0] > 0) {
-					$statsusers1=mysql_query("select distinct * from users");
-					echo 'Dettaglio lettere registrate: <br>';
-					while ($statsusers2= mysql_fetch_array($statsusers1)) {
-					$statsusers2a=$statsusers2['idanagrafica'];
-					$statsusers3 = mysql_query("select count(*) from joinlettereinserimento$annoprotocollo where joinlettereinserimento$annoprotocollo.idinser = '$statsusers2a' AND datamod != '0000/00/00' ");
-					$res_statsusers3 = mysql_fetch_row($statsusers3);
-					if ($res_statsusers3[0] > 0) {
-					echo ($res_statsusers3[0]).' inserite da '.$statsusers2['loginname'].'<br>';
-					}
-					}
-					}?></p>
+					<p>
+					<?php 
+						if ($res_lettere[0] > 0) {
+							$statsusers1=mysql_query("select distinct * from users");
+							echo 'Dettaglio lettere registrate: <br>';
+							while ($statsusers2= mysql_fetch_array($statsusers1)) {
+								$statsusers2a=$statsusers2['idanagrafica'];
+								$statsusers3 = mysql_query("select count(*) from joinlettereinserimento$annoprotocollo where joinlettereinserimento$annoprotocollo.idinser = '$statsusers2a' AND datamod != '0000/00/00' ");
+								$res_statsusers3 = mysql_fetch_row($statsusers3);
+								if ($res_statsusers3[0] > 0) {
+									echo ($res_statsusers3[0]).' inserite da '.$statsusers2['loginname'].'<br>';
+								}
+							}
+						}
+					?>
+					</p>
 
-					<?php $statsanagrafica=mysql_query("select count(*) from anagrafica");
-					$res_anagrafica = mysql_fetch_row($statsanagrafica);
-					echo 'Nella tabella ANAGRAFICA sono presenti '.($res_anagrafica[0] - 1) .' occorrenze, di cui<br>';
-					$my_anagrafica->publcontaanagrafica('persona');
-					echo $my_anagrafica->contacomponenti.' persone fisiche<br>';
-					$my_anagrafica->publcontaanagrafica('carica');
-					echo $my_anagrafica->contacomponenti.' cariche o incarichi<br>';
-					$my_anagrafica->publcontaanagrafica('ente');
-					echo $my_anagrafica->contacomponenti.' enti<br>';
-					$my_anagrafica->publcontaanagrafica('fornitore');
-					echo $my_anagrafica->contacomponenti.' fornitori';
-				    ?>
+					<?php 
+						$statsanagrafica=mysql_query("select count(*) from anagrafica");
+						$res_anagrafica = mysql_fetch_row($statsanagrafica);
+						echo 'Nella tabella ANAGRAFICA sono presenti '.($res_anagrafica[0] - 1) .' occorrenze, di cui<br>';
+						$my_anagrafica->publcontaanagrafica('persona');
+						echo $my_anagrafica->contacomponenti.' Persone Fisiche<br>';
+						$my_anagrafica->publcontaanagrafica('carica');
+						echo $my_anagrafica->contacomponenti.' Cariche o Incarichi<br>';
+						$my_anagrafica->publcontaanagrafica('ente');
+						echo $my_anagrafica->contacomponenti.' Enti<br>';
+						$my_anagrafica->publcontaanagrafica('fornitore');
+						echo $my_anagrafica->contacomponenti.' Fornitori';
+					?>
 					
 			</div>
 		</div>
-		
 	</div>
 
 	<div class="col-xs-6">
