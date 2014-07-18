@@ -21,11 +21,11 @@ $messaggio = $_POST['feedback'];
 	$mail->Subject = 'Feedback Abulafia';
 	$mail->Body    = $messaggio;
 	if(!$mail->send()) {
-		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:</b> si è verificato un errore nell\'invio dell\'email.<br>'.$mail->ErrorInfo.'</div>';
+		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:</b> si è verificato un errore nell\'invio del feedback.<br>'.$mail->ErrorInfo.'</div>';
 		echo '<a href="?corpus=home"><i class="fa fa-reply"></i> Torna alla home</a>';
 		$esito= 'FAILED';
 	} else {
-		echo '<div class="alert alert-success"><i class="fa fa-check"></i> Segnalazione inviata con <b>successo!</b></div>';
+		echo '<div class="alert alert-success"><i class="fa fa-check"></i> Feedback inviato con <b>successo!</b></div>';
 		echo '<a href="?corpus=home"><i class="fa fa-reply"></i> Torna alla home</a>';
 		$esito= 'SUCCESSFUL';
 	}
