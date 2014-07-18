@@ -13,7 +13,7 @@
 		<div class="row">
 			<div class="col-xs-6">
 				<div class="form-group">
-					<form action="login0.php?corpus=segnala-bug2&idanagrafica=<?php echo $_SESSION['loginid'];?>" method="POST" enctype="multipart/form-data">
+					<form action="login0.php?corpus=feedback2" method="POST" enctype="multipart/form-data">
 						Feedback:<br>
 						<textarea required class="form-control" rows="6" name="feedback"></textarea>
 						<br>
