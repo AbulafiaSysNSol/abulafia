@@ -30,7 +30,7 @@
 	}
 
 	$mittente = $_SESSION['mittente'];
-	$destinatario = $_POST['destinatario'];
+	$destinatario = str_replace(' ', '', $_POST['destinatario']);
 	$destinatari = explode( ',' , $destinatario);
 	$oggetto = stripslashes($_POST['oggetto']);
 	$messaggio = stripslashes($_POST['messaggio']);
