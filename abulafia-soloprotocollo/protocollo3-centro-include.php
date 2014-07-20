@@ -155,7 +155,8 @@
 		<p><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');"><i class="fa fa-plus-square"></i> Registrazione nuovo protocollo</a></p>
 		<p><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $idlettera;?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo protocollo</a></p>
 		<p><a href="login0.php?corpus=invia-newsletter&id=<?php echo $idlettera;?>&anno=<?php echo $annoprotocollo;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite email</p>
-		<a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $idlettera;?>&anno=<?php echo $annoprotocollo;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email manuale</a>		
+		<p><a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $idlettera;?>&anno=<?php echo $annoprotocollo;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email manuale</a></p>	
+		<a href="stampa-protocollo.php?id=<?php echo $id; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print"></i> Stampa ricevuta Protocollo</a>
 	</div>
   
 </div>
