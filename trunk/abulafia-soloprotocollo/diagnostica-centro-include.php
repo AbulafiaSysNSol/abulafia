@@ -1,28 +1,20 @@
 <?php
-//controllo dell'autorizzazione necessaria alla gestione degli utenti di abulafia
-if ($_SESSION['auth'] < 11) { echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; exit ();}
+	if ($_SESSION['auth'] < 90) { echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; exit ();}
 ?>
-	<div id="primarycontent">
-		
-				<!-- primary content start -->
-		
-			<div class="post">
-				<div class="header">
-					<h3><u>Ricerca anomalie in ANAGRAFICA:</u></h3>
-				
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><b><span class="glyphicon glyphicon-wrench"></span> Diagnostica</b></h3>
+	</div>
+  
+	<div class="panel-body">
+		<h4><i class="fa fa-users"></i> Ricerca anomalie in Anagrafica:</h4>
+		<ul>
+			<div class="row">
+				<div class="cols-md-11 col-md-offset-1">
+					<li><a href="login0.php?corpus=anagrafica-cerca-anomalie&filtro=cognomenome">"Cognome + Nome" duplicato;</a></li>
 				</div>
-				<div class="content">
-					<p>
-<ul class="linklist">
-<li class="first"><a href="login0.php?corpus=anagrafica-cerca-anomalie&filtro=cognomenome">"Cognome + Nome" duplicato</a></li>
-<li><a href="login0.php?corpus=anagrafica-cerca-anomalie&filtro=inmolteplicigruppi">Pionieri contemporaneamente in piu' gruppi</a></li>
-</ul>
-
-
-</p></div></div>
-					
-
-			
-			<!-- post end -->
-
-		</div>
+			</div>
+		</ul>
+	</div>
+</div>

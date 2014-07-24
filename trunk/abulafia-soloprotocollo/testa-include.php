@@ -168,7 +168,8 @@
 				?>
 				<li class="divider"></li>
 				<li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users"></i> Gestione degli Utenti</a></li>
-				<li><a href="login0.php?corpus=advancedsettings"><span class="glyphicon glyphicon-wrench"></span> Advanced Settings</a></li>
+				<li><a href="login0.php?corpus=advancedsettings"><i class="fa fa-cogs"></i> Advanced Settings</a></li>
+				<li><a href="login0.php?corpus=diagnostica"><span class="glyphicon glyphicon-wrench"></span> Diagnostica</a></li>
 				<li><a href="download.php?lud=log/access.log&est=log"><span class="glyphicon glyphicon-download"></span> Scarica il log degli accessi</a></li>
 				<li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
 				<li><a href="login0.php?corpus=history"><span class="glyphicon glyphicon-time"></span> Visualizza il log delle azioni</a></li>
