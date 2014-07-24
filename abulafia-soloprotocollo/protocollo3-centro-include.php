@@ -128,12 +128,12 @@
 			<?php
 			if($from != "modifica") {
 				?>
-				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo registrato correttamente.</div>
+				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo registrato <b>correttamente.</b></div>
 				<?php
 			}
 			else {
 				?>
-				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo modificato correttamente.</div>
+				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo modificato <b>correttamente.</b></div>
 				<?php
 			}
 			?>
