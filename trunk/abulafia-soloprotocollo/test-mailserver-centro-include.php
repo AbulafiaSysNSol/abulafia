@@ -7,12 +7,12 @@
 	$res = $mail->smtpConnect();
 	if($res) {
 		?>
-		<div class="alert alert-success"><b><i class="fa fa-check"></i> SUCCESSO:</b> collegamento al mail server riuscito corretamente. </div>
+		<div class="alert alert-success"><b><i class="fa fa-check"></i> SUCCESSO:</b> collegamento al server mail riuscito corretamente. </div>
 		<?php
 	}
 	else {
 		?>
-		<div class="alert alert-danger"><b><i class="fa fa-warning"></i> ERRORE:</b> impossibile collegarsi al mail server. Controllare i parametri nel file mail-conf.php. </div>
+		<div class="alert alert-danger"><b><i class="fa fa-warning"></i> ERRORE:</b> impossibile collegarsi al server mail. Controllare i parametri nel file mail-conf.php. </div>
 		<?php
 	}
 ?>
