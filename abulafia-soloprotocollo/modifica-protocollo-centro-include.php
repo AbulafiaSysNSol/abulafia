@@ -117,7 +117,7 @@
 		?>
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="alert alert-success"><i class="fa fa-check"></i> File allegato correttamente!</div>
+				<div class="alert alert-success"><i class="fa fa-check"></i> File allegato <b>correttamente!</b></div>
 			</div>
 		</div>
 		<?php
