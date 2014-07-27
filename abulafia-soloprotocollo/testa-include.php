@@ -113,7 +113,7 @@
 	}
 </style>
 
-<script src="../pingdom.js"></script>
+<script src="pingdom.js"></script>
   
 </head>
 
