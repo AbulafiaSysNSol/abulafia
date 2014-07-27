@@ -83,6 +83,12 @@ class Lettera {
 		return $arraysend;
 	}
 
+	public function contaMittenti($id, $anno) {
+		$query=mysql_query("SELECT COUNT(joinletteremittenti$anno.idanagrafica) FROM joinletteremittenti$anno WHERE joinletteremittenti$anno.idlettera = '$id'");
+		$num = mysql_fetch_row($query);
+		return $num[0];
+	}
+
 	public function publdisplaylettera ($idlettera, $annoricercaprotocollo) { //<man>Stampa i dettagli di una lettera, passando come parametri id e anno di registrazione</man>
 		$this -> leggilettera ($idlettera, $annoricercaprotocollo); 
 		?>
