@@ -1,6 +1,7 @@
 <?php
 	$filtro=$_GET['filtro'];
 	$lettera = new Lettera();
+	$calendario = new Calendario;
 	$anno = $_SESSION['annoprotocollo'];
 ?>
 
@@ -25,7 +26,7 @@
 				</tr>
 
 			<?php
-				$risultati= mysql_query("select * from lettere$anno, anagrafica, joinletteremittenti$anno WHERE lettere$anno.speditaricevuta='ricevuta' AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica");
+				$risultati= mysql_query("select * from lettere$anno WHERE lettere$anno.speditaricevuta='ricevuta'");
 
 				if (!$risultati) {
 					echo 'Nessun risultato dalla query';
@@ -37,7 +38,7 @@
 						?>
 						<tr>
 							<td align="center"><a href="login0.php?corpus=dettagli-protocollo&id=<?php echo $row['idlettera'];?>"><?php echo $row['idlettera']; ?></td>
-							<td align="center" valign="middle"><?php echo $row['datalettera']; ?></td>
+							<td align="center" valign="middle"><?php echo $calendario->dataSlash($row['datalettera']); ?></td>
 							<td align="center" valign="middle"><?php echo $nummitt; ?></td>
 							<td valign="middle">
 								<?php
