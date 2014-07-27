@@ -7,7 +7,7 @@
 	$res = $mail->smtpConnect();
 	if($res) {
 		?>
-		<div class="alert alert-success"><b><i class="fa fa-check"></i> SUCCESSO:</b> collegamento al server mail riuscito corretamente. </div>
+		<div class="alert alert-success"><b><i class="fa fa-check"></i> SUCCESSO:</b> collegamento al server mail riuscito correttamente. </div>
 		<?php
 	}
 	else {

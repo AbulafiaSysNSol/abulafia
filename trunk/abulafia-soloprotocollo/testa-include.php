@@ -113,17 +113,7 @@
 	}
 </style>
 
-<script>
-var _prum = [['id', '53d3e4beabe53d9255170016'],
-             ['mark', 'firstbyte', (new Date()).getTime()]];
-(function() {
-    var s = document.getElementsByTagName('script')[0]
-      , p = document.createElement('script');
-    p.async = 'async';
-    p.src = '//rum-static.pingdom.net/prum.min.js';
-    s.parentNode.insertBefore(p, s);
-})();
-</script>
+<script type="text/javascript" src="../pingdom.js"></script>
   
 </head>
 
