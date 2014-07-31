@@ -1,4 +1,6 @@
 <?php
+	include("lib/pchart/pChart/pData.class");  
+	include("lib/pchart/pChart/pChart.class"); 
 	
 	if(isset($_GET['pass']) && ($_GET['pass'] == 1)) {
 		echo '<center><div class="alert alert-warning"><h3><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> non hai ancora modificato la tua password di default!</h3>
@@ -65,7 +67,10 @@
 				echo 'Questa web-application e\' in uso da '.(int)$anniusoapplicazione.' anni e '.(int)$giorniusoapplicazione.' giorni.';?></p>
 
 					<p>
+
 					<?php 
+						$DataSet = new pData;  
+						 
 						if ($res_lettere[0] > 0) {
 							$statsusers1=mysql_query("select distinct * from users");
 							echo 'Dettaglio lettere registrate: <br>';
@@ -75,12 +80,31 @@
 								$res_statsusers3 = mysql_fetch_row($statsusers3);
 								if ($res_statsusers3[0] > 0) {
 									echo ($res_statsusers3[0]).' inserite da '.$statsusers2['loginname'].'<br>';
+									$DataSet->AddPoint($res_statsusers3[0],"Serie1");  
+									$DataSet->AddPoint($statsusers2['loginname'],"Serie2");
 								}
 							}
 						}
+
+						$DataSet->AddAllSeries();  
+						$DataSet->SetAbsciseLabelSerie("Serie2");  
+						 
+						// Initialise the graph  
+						$Test = new pChart(450,200);  
+						$Test->drawFilledRoundedRectangle(7,7,373,193,5,240,240,240);  
+						$Test->drawRoundedRectangle(5,5,375,195,5,230,230,230);  
+						  
+						// Draw the pie chart  
+						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
+						$Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
+						$Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),250,250,250);  
+						  
+						$Test->Render("graphs/homegraph.png");  
 					?>
 					</p>
-
+	
+					<center><img src="graphs/homegraph.png"></center><br>
+		
 					<?php 
 						$statsanagrafica=mysql_query("select count(*) from anagrafica");
 						$res_anagrafica = mysql_fetch_row($statsanagrafica);
