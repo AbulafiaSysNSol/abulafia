@@ -137,7 +137,7 @@
 						// Initialise the graph  
 						$Test = new pChart(500,230);  
 						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
-						$Test->setGraphArea(50,30,350,200);  
+						$Test->setGraphArea(50,30,400,200);  
 						$Test->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
 						$Test->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
 						$Test->drawGraphArea(255,255,255,TRUE);  
@@ -153,7 +153,7 @@
 						  
 						// Finish the graph  
 						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
-						$Test->drawLegend(310,15,$DataSet->GetDataDescription(),255,255,255);  
+						$Test->drawLegend(370,15,$DataSet->GetDataDescription(),255,255,255);  
 						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",10);  
 						$Test->Render("graphs/anagrafica.png");  
 						
