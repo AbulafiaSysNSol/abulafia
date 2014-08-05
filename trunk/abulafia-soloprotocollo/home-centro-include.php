@@ -61,9 +61,20 @@
 			
 			<div class="panel-body">
 				<p><?php 
-				$anniusoapplicazione = (strtotime("now") - strtotime("apr 1 2008"))/60/60/24/365;
-				$giorniusoapplicazione = ((strtotime("now") - strtotime("apr 1 2008"))/60/60/24)-(int)$anniusoapplicazione*365;
-				echo 'Questa web-application e\' in uso da '.(int)$anniusoapplicazione.' anni e '.(int)$giorniusoapplicazione.' giorni.';?></p>
+				//modificata da da 01 aprile 2008 a 04 giugno 2014
+				$anniusoapplicazione = (strtotime("now") - strtotime("2014/6/4"))/60/60/24/365;
+				$giorniusoapplicazione = ((strtotime("now") - strtotime("2014/6/4"))/60/60/24)-(int)$anniusoapplicazione*365;
+				echo 'Questa web-application e\' in uso da '; 
+				
+				if( (int)$anniusoapplicazione > 0) { 
+					echo (int)$anniusoapplicazione . ' anni e ' .(int)$giorniusoapplicazione.' giorni.'; 
+				} 
+				else { 
+					echo (int)$giorniusoapplicazione.' giorni.'; 
+				} 
+				
+				?>
+				</p>
 
 					<p>
 
@@ -71,17 +82,12 @@
 						$DataSet = new pData;  
 						 
 						if ($res_lettere[0] > 0) {
-							$statsusers1=mysql_query("select distinct * from users");
+							$statsusers1=mysql_query("SELECT COUNT(joinlettereinserimento$anno.idinser) AS numerolettere, users.loginname FROM users, joinlettereinserimento$anno WHERE joinlettereinserimento$anno.idinser = users.idanagrafica AND datamod != '0000/00/00' GROUP BY users.idanagrafica ORDER BY numerolettere DESC");
 							echo 'Dettaglio lettere registrate: <br>';
 							while ($statsusers2= mysql_fetch_array($statsusers1)) {
-								$statsusers2a=$statsusers2['idanagrafica'];
-								$statsusers3 = mysql_query("select count(*) from joinlettereinserimento$annoprotocollo where joinlettereinserimento$annoprotocollo.idinser = '$statsusers2a' AND datamod != '0000/00/00' ");
-								$res_statsusers3 = mysql_fetch_row($statsusers3);
-								if ($res_statsusers3[0] > 0) {
-									echo ($res_statsusers3[0]).' inserite da '.$statsusers2['loginname'].'<br>';
-									$DataSet->AddPoint($res_statsusers3[0],"Serie1");  
+									echo $statsusers2['numerolettere'] . ' inserite da '. $statsusers2['loginname'] . '<br>';
+									$DataSet->AddPoint($statsusers2['numerolettere'],"Serie1");  
 									$DataSet->AddPoint($statsusers2['loginname'],"Serie2");
-								}
 							}
 						}
 
