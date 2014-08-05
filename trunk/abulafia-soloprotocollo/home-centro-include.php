@@ -54,7 +54,6 @@
 <hr>
 <div class="row">
 	<div class="col-xs-6">
-		
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title"><strong><span class="glyphicon glyphicon-stats"></span> Stats:</strong></h3>
@@ -105,20 +104,63 @@
 	
 					<center><img src="graphs/homegraph.png"></center><br>
 		
-					<?php 
+					<?php
+
+						$DataSet = new pData;
+						
 						$statsanagrafica=mysql_query("select count(*) from anagrafica");
 						$res_anagrafica = mysql_fetch_row($statsanagrafica);
 						echo 'Nella tabella ANAGRAFICA sono presenti '.($res_anagrafica[0] - 1) .' occorrenze, di cui<br>';
+						
 						$my_anagrafica->publcontaanagrafica('persona');
 						echo $my_anagrafica->contacomponenti.' Persone Fisiche<br>';
+						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie1");
+						
 						$my_anagrafica->publcontaanagrafica('carica');
 						echo $my_anagrafica->contacomponenti.' Cariche o Incarichi<br>';
+						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie2");
+						
 						$my_anagrafica->publcontaanagrafica('ente');
 						echo $my_anagrafica->contacomponenti.' Enti<br>';
+						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie3");
+						
 						$my_anagrafica->publcontaanagrafica('fornitore');
 						echo $my_anagrafica->contacomponenti.' Fornitori';
+						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie4");
+						  
+						$DataSet->AddAllSeries();  
+						$DataSet->SetSerieName("Persone Fisiche","Serie1");  
+						$DataSet->SetSerieName("Cariche o Incarichi","Serie2");  
+						$DataSet->SetSerieName("Enti","Serie3");
+						$DataSet->SetSerieName("Fornitori","Serie4");
+						  
+						// Initialise the graph  
+						$Test = new pChart(500,230);  
+						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
+						$Test->setGraphArea(50,30,490,200);  
+						$Test->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+						$Test->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+						$Test->drawGraphArea(255,255,255,TRUE);  
+						$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);     
+						$Test->drawGrid(4,TRUE,230,230,230,50);  
+						  
+						// Draw the 0 line  
+						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",6);  
+						$Test->drawTreshold(0,143,55,72,TRUE,TRUE);  
+						  
+						// Draw the bar graph  
+						$Test->drawBarGraph($DataSet->GetData(),$DataSet->GetDataDescription(),TRUE);  
+						  
+						// Finish the graph  
+						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
+						$Test->drawLegend(340,40,$DataSet->GetDataDescription(),255,255,255);  
+						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",10);  
+						$Test->Render("graphs/anagrafica.png");  
+						
 					?>
 					
+					<br><br>
+					<center><img src="graphs/anagrafica.png"></center>
 			</div>
 		</div>
 	</div>
@@ -156,17 +198,16 @@
 		
 		</div>
 		
-	</div>
-</div>
-
-<div class="panel panel-default">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><strong><span class="glyphicon glyphicon-calendar"></span> Log degli ultimi 3 accessi:</strong></h3>
+			</div>
+					
+			<div class="panel-body">
+				<p><?php $my_log -> publleggilog('1', '3', 'login', $_SESSION['logfile']); //legge dal log degli accessi ?></p>
+			</div>
+		</div>
 		
-	<div class="panel-heading">
-		<h3 class="panel-title"><strong><span class="glyphicon glyphicon-calendar"></span> Log degli ultimi 5 accessi:</strong></h3>
-	</div>
-			
-	<div class="panel-body">
-		<p><?php $my_log -> publleggilog('1', '5', 'login', $_SESSION['logfile']); //legge dal log degli accessi ?></p>
 	</div>
 	
 </div>
