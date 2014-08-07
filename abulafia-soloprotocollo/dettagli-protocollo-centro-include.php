@@ -96,6 +96,13 @@
 						?>
 					</div>
 				</div>
+				<?php
+					if ($urlfile) {
+						?>
+						<a href="zip.php?id=<?php echo $dettagli['idlettera']; ?>&anno=<?php echo $anno; ?>"><i class="fa fa-file-archive-o"></i> Scarica allegati come ZIP</a>
+						<?php
+					}
+				?>
 			</div>
 			
 			<div class="col-xs-3">

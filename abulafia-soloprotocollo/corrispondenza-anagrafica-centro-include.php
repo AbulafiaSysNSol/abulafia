@@ -129,7 +129,7 @@
 				<td style="vertical-align: middle">Pos.</td>
 				<td style="vertical-align: middle">Oggetto</td>
 				<td style="vertical-align: middle">File</td>
-				<td style="vertical-align: middle" width="150">Opzioni</td>
+				<td style="vertical-align: middle" width="182">Opzioni</td>
 			</tr>
 		<?php
 		
@@ -158,7 +158,7 @@
 					foreach ($urlfile as $valore) {
 						$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '14'); //richiamo del metodo "downloadlink" dell'oggetto file
 						$file = true;
-						echo $download."<br>";
+						echo $download.' - <a class="fancybox" data-fancybox-type="iframe" href="lettere'.$annoricercaprotocollo.'/'.$value[0].'/'.$valore[2].'"><i class="fa fa-eye"></i></a><br>';
 					}
 				}
 				else {
@@ -170,18 +170,20 @@
 
 				<td style="vertical-align: middle">
 					<div class="btn-group btn-group-sm">
-						<a class="btn btn-info" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
-						<a class="btn btn-warning" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
+						<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
 						<?php
 						if($file) {
 							?>
-							<a class="btn btn-success" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-envelope"></span></a>
-							<a class="btn btn-primary" href="barcode-centro-include.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-qrcode"></span></a>
+							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Invia tramite email" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><span class="glyphicon glyphicon-envelope"></span></a>
+							<!-- <a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Imprimi qrcode sugli allegati" href="barcode-centro-include.php?id=<?php //echo $value[0];?>&anno=<?php //echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-qrcode"></span></a> -->
 							<?php
 						}
 						?>
+						<a class="btn btn-primary iframe" data-fancybox-type="iframe" href="inoltro-email.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><i class="fa fa-paper-plane"></i></a>
+						<?php if($value[5] == 'ricevuta') { ?><a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Stampa ricevuta" href="stampa-protocollo.php?id=<?php echo $value[0]; ?>&anno=<?php echo $annoricercaprotocollo; ?>" target="_blank"><i class="fa fa-print"></i></a> <?php } ?>
 					</div>
-				</td>		
+				</td>
 			</tr>
 			<?php
 		}
