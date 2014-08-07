@@ -185,7 +185,6 @@ var _prum = [['id', '53d3e4beabe53d9255170016'],
 				<li><a href="download.php?lud=log/access.log&est=log"><span class="glyphicon glyphicon-download"></span> Scarica il log degli accessi</a></li>
 				<li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
 				<li><a href="login0.php?corpus=history"><span class="glyphicon glyphicon-time"></span> Visualizza il log delle azioni</a></li>
-				<li><a href="login0.php?corpus=backup"><span class="glyphicon glyphicon-floppy-save"></span> Backup</a></li>
 				<?php
 			}
 		?>
