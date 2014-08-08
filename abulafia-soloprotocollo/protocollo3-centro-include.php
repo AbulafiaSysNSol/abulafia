@@ -19,6 +19,14 @@
 		$from='';
 	}
 	
+	require('lib/phpmailer/PHPMailerAutoload.php');
+	$mail = new PHPMailer();
+	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
+	include "../mail-conf-include.php";
+	$mail->From = 'no-reply@abulafia.com';
+	$mail->FromName = 'no-reply@abulafia.com';
+	$mail->isHTML(true);
+	
 	// CONTROLLO SE E' STATO INSERITO ALMENO UN MITTENTO O UN DESTINATARIO
 	$conteggiomittenti=mysql_query("select count(*) from joinletteremittenti$annoprotocollo where idlettera='$idlettera'"); 
 	$conteggiomittenti2 = mysql_fetch_row($conteggiomittenti);
@@ -31,7 +39,7 @@
 		$_SESSION['pratica'] = $_POST['pratica'];
 		$_SESSION['note'] = $_POST['note'];
 		
-		//RITORNO ALLA PAGINA DI REGISTRAZIONE  O DI MODIFICA SE NON E' STATO INSERITO NEMMENO UN MITTENTO O UN DESISTARIO
+		//RITORNO ALLA PAGINA DI REGISTRAZIONE  O DI MODIFICA SE NON E' STATO INSERITO NEMMENO UN MITTENTO O UN DESTISTARIO
 		if($from != "modifica") {
 		?>
 			<SCRIPT LANGUAGE="Javascript">
@@ -98,10 +106,29 @@
 		echo "Inserimento non riuscito" ; 
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $idlettera , 'FAILED' , '' , $_SESSION['historylog']);
 	}
-	if ( ($inserimento) && ($from == 'modifica') ) { 
+	if ( ($inserimento) && ($from == 'modifica') ) {
+		//invio notifica
+		$mail->addAddress('biagiosaitta@hotmail.it');
+		$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
+		$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
+					' in data ' . $data . '<br>avente come oggetto: "'. $oggetto . '".<br><br>
+					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
+		$esito = $mail->send();
+		//scrittura log mail
+		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica', $_SESSION['maillog']);
+		//scrittura history log
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from != 'modifica') ) { 
+		//invio notifica
+		$mail->addAddress('biagiosaitta@hotmail.it');
+		$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
+		$mail->Body    = 'Con la presente si notifica la modifica da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
+					' in data ' . $data . '<br>avente come oggetto: "'. $oggetto . '".<br><br>
+					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
+		$esito = $mail->send();
+		//scrittura log mail
+		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica', $_SESSION['maillog']);
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	

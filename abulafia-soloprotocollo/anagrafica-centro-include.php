@@ -254,12 +254,14 @@
 				</div>
 			</div>
 			
-			<div class="col-sm-offset-2">
-			<button type="button" class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-check"></span> Inserisci</button>
+			<div class="row">
+				<div class="col-sm-2 col-sm-offset-2">
+					<button class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-check"></span> Inserisci</button>
+				</div>
 			</div>
 			
 			</form>
-
+			
 		</div>
 	</div>	
 </div>

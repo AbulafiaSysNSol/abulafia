@@ -128,6 +128,8 @@ $_SESSION['primocoloretabellarisultati'] = $settings4['primocoloretabellarisulta
 $_SESSION['secondocoloretabellarisultati'] = $settings4['secondocoloretabellarisultati'];//secondo colore delle righe che si alternano della tabella dei risultati della ricerca
 $_SESSION['fototargetpath']= $settings4['fototargetpath'] ; //percorso relativo per l'upload delle foto dell'anagrafica
 $_SESSION['splash']= $settings4['splash'] ; //percorso relativo per lo splash in alto a destra
+$_SESSION['notificains'] = $settings4['notificains'];
+$_SESSION['notificamod'] = $settings4['notificamod'];
 //fine caricamento dei settaggi personalizzati
 
 $_SESSION['mittente'] = $settings6['mittente'];
