@@ -3,7 +3,9 @@
 	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
 	$my_file = new File();
 	include('lib/phpmailer/PHPMailerAutoload.php');
-	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
+	$date=strftime("%d-%m-%Y /");
+	$ora = date("g:i:a");
+	$datamail = $date . ' alle ' . $ora;
 	
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	//inizio passaggio dati da pagina inserimento
@@ -114,8 +116,8 @@
 		include "../mail-conf-include.php";
 		$mail->addAddress('biagiosaitta@hotmail.it');
 		$mail->Subject = 'Notifica modifica lettera in ' . $_SESSION['nomeapplicativo'];
-		$mail->Body    = 'Con la presente si notifica la modifica da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
-					' in data ' . $data . '<br>avente come oggetto: "'. $oggetto . '".<br><br>
+		$mail->Body    = 'Con la presente si notifica la modifica da parte di <b>' . $_SESSION['loginname'] . '</b> della lettera n. <b>' . $idlettera . 
+					'</b> giorno ' . $datamail . '<br>avente come oggetto: <b>"'. $oggetto . '"</b>.<br><br>
 					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
 		$esito = $mail->send();
 		//scrittura log mail
@@ -134,8 +136,8 @@
 		include "../mail-conf-include.php";
 		$mail->addAddress('biagiosaitta@hotmail.it');
 		$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
-		$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
-					' in data ' . $data . '<br>avente come oggetto: "'. $oggetto . '".<br><br>
+		$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione da parte di <b>' . $_SESSION['loginname'] . '</b> della lettera n. <b>' . $idlettera . 
+					'</b> giorno ' . $datamail . '<br>avente come oggetto: <b>"'. $oggetto . '"</b>.<br><br>
 					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
 		$esito = $mail->send();
 		//scrittura log mail
