@@ -1,4 +1,8 @@
 <?php
+
+	include('lib/phpmailer/PHPMailerAutoload.php');
+	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
+	
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	//inizio passaggio dati da pagina inserimento
 	$loginid=$_SESSION['loginid'];
@@ -18,17 +22,7 @@
 	else {
 		$from='';
 	}
-	
-	/*
-	require('lib/phpmailer/PHPMailerAutoload.php');
-	$mail = new PHPMailer();
-	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
-	include "../mail-conf-include.php";
-	$mail->From = 'no-reply@abulafia.com';
-	$mail->FromName = 'no-reply@abulafia.com';
-	$mail->isHTML(true);
-	*/
-	
+		
 	// CONTROLLO SE E' STATO INSERITO ALMENO UN MITTENTO O UN DESTINATARIO
 	$conteggiomittenti=mysql_query("select count(*) from joinletteremittenti$annoprotocollo where idlettera='$idlettera'"); 
 	$conteggiomittenti2 = mysql_fetch_row($conteggiomittenti);
@@ -109,8 +103,13 @@
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $idlettera , 'FAILED' , '' , $_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from == 'modifica') ) {
-		/*
+		
 		//invio notifica
+		$mail = new PHPMailer();
+		$mail->From = 'no-reply@abulafia.com';
+		$mail->FromName = 'no-reply@abulafia.com';
+		$mail->isHTML(true);
+		include "../mail-conf-include.php";
 		$mail->addAddress('biagiosaitta@hotmail.it');
 		$mail->Subject = 'Notifica modifica lettera in ' . $_SESSION['nomeapplicativo'];
 		$mail->Body    = 'Con la presente si notifica la modifica da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
@@ -120,12 +119,17 @@
 		//scrittura log mail
 		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - modifica lettera', $_SESSION['maillog']);
 		//scrittura history log
-		*/
+		
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from != 'modifica') ) { 
-		/*
+		
 		//invio notifica
+		$mail = new PHPMailer();
+		$mail->From = 'no-reply@abulafia.com';
+		$mail->FromName = 'no-reply@abulafia.com';
+		$mail->isHTML(true);
+		include "../mail-conf-include.php";
 		$mail->addAddress('biagiosaitta@hotmail.it');
 		$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
 		$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
@@ -135,7 +139,7 @@
 		//scrittura log mail
 		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - inserisci lettera', $_SESSION['maillog']);
 		//scrittura history log
-		*/
+		
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	
@@ -173,24 +177,23 @@
 			?>
 		</div>
 	</div>
-	<b>Riepilogo:</b>
-	<br><br>
-	<?php 	
-	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
-	$my_lettera -> publdisplaylettera ($_GET['idlettera'], $annoprotocollo); //richiamo del metodo "mostra" dell'oggetto Lettera
-	?>
-	
+	<div class="row">
+		<div class="col-xs-5">
+			<h4><i class="fa fa-list"></i> Riepilogo:</h4>
+			<?php 	
+				$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
+				$my_lettera -> publdisplaylettera ($_GET['idlettera'], $annoprotocollo); //richiamo del metodo "mostra" dell'oggetto Lettera
+			?>
+		</div>
+		
+		<div class="col-xs-5">
+			<h4><i class="fa fa-cog"></i> Opzioni:</h4>
+			<p><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');"><i class="fa fa-plus-square"></i> Registrazione nuovo protocollo</a></p>
+			<p><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $idlettera;?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo protocollo</a></p>
+			<p><a href="login0.php?corpus=invia-newsletter&id=<?php echo $idlettera;?>&anno=<?php echo $annoprotocollo;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite email</p>
+			<p><a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $idlettera;?>&anno=<?php echo $annoprotocollo;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email manuale</a></p>	
+			<a href="stampa-protocollo.php?id=<?php echo $idlettera; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print"></i> Stampa ricevuta Protocollo</a>
+		</div>
+	</div>
   </div>
-  
-  	<div class="panel-heading">
-	<h3 class="panel-title"><strong>Opzioni:</strong></h3>
-	</div>
-	<div class="panel-body">
-		<p><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');"><i class="fa fa-plus-square"></i> Registrazione nuovo protocollo</a></p>
-		<p><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $idlettera;?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo protocollo</a></p>
-		<p><a href="login0.php?corpus=invia-newsletter&id=<?php echo $idlettera;?>&anno=<?php echo $annoprotocollo;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite email</p>
-		<p><a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $idlettera;?>&anno=<?php echo $annoprotocollo;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email manuale</a></p>	
-		<a href="stampa-protocollo.php?id=<?php echo $idlettera; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print"></i> Stampa ricevuta Protocollo</a>
-	</div>
-  
-</div>
+  </div>
