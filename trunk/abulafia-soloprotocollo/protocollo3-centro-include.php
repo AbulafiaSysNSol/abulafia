@@ -19,6 +19,7 @@
 		$from='';
 	}
 	
+	/*
 	require('lib/phpmailer/PHPMailerAutoload.php');
 	$mail = new PHPMailer();
 	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
@@ -26,6 +27,7 @@
 	$mail->From = 'no-reply@abulafia.com';
 	$mail->FromName = 'no-reply@abulafia.com';
 	$mail->isHTML(true);
+	*/
 	
 	// CONTROLLO SE E' STATO INSERITO ALMENO UN MITTENTO O UN DESTINATARIO
 	$conteggiomittenti=mysql_query("select count(*) from joinletteremittenti$annoprotocollo where idlettera='$idlettera'"); 
@@ -107,6 +109,7 @@
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $idlettera , 'FAILED' , '' , $_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from == 'modifica') ) {
+		/*
 		//invio notifica
 		$mail->addAddress('biagiosaitta@hotmail.it');
 		$mail->Subject = 'Notifica modifica lettera in ' . $_SESSION['nomeapplicativo'];
@@ -117,6 +120,7 @@
 		//scrittura log mail
 		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - modifica lettera', $_SESSION['maillog']);
 		//scrittura history log
+		*/
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from != 'modifica') ) { 
