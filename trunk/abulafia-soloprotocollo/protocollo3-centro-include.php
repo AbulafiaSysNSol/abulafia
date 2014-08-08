@@ -4,7 +4,7 @@
 	$my_file = new File();
 	include('lib/phpmailer/PHPMailerAutoload.php');
 	$date=strftime("%d/%m/%Y");
-	$ora = date("g:i:a");
+	$ora = date("g:i a");
 	$datamail = $date . ' alle ' . $ora;
 	
 	$annoprotocollo = $_SESSION['annoprotocollo'];
@@ -138,7 +138,7 @@
 		$mail->addAddress('biagiosaitta@hotmail.it');
 		$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
 		$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione della lettera n. <b>' . $idlettera . 
-					' avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
+					'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
 					Inserimento effettuato da <b>' . $_SESSION['loginname'] . '</b> il giorno ' . $datamail . '.<br><br>
 					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
 		$esito = $mail->send();
