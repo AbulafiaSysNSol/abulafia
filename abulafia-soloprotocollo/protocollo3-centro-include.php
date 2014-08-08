@@ -109,13 +109,13 @@
 	if ( ($inserimento) && ($from == 'modifica') ) {
 		//invio notifica
 		$mail->addAddress('biagiosaitta@hotmail.it');
-		$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
-		$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
+		$mail->Subject = 'Notifica modifica lettera in ' . $_SESSION['nomeapplicativo'];
+		$mail->Body    = 'Con la presente si notifica la modifica da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
 					' in data ' . $data . '<br>avente come oggetto: "'. $oggetto . '".<br><br>
 					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
 		$esito = $mail->send();
 		//scrittura log mail
-		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica', $_SESSION['maillog']);
+		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - modifica lettera', $_SESSION['maillog']);
 		//scrittura history log
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
@@ -123,12 +123,12 @@
 		//invio notifica
 		$mail->addAddress('biagiosaitta@hotmail.it');
 		$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
-		$mail->Body    = 'Con la presente si notifica la modifica da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
+		$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione da parte di ' . $_SESSION['loginname'] . ' della lettera n. ' . $idlettera . 
 					' in data ' . $data . '<br>avente come oggetto: "'. $oggetto . '".<br><br>
 					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
 		$esito = $mail->send();
 		//scrittura log mail
-		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica', $_SESSION['maillog']);
+		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - inserisci lettera', $_SESSION['maillog']);
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	
