@@ -1,5 +1,7 @@
 <?php
 
+	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
+	$my_file = new File();
 	include('lib/phpmailer/PHPMailerAutoload.php');
 	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 	
@@ -180,8 +182,7 @@
 	<div class="row">
 		<div class="col-xs-5">
 			<h4><i class="fa fa-list"></i> Riepilogo:</h4>
-			<?php 	
-				$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
+			<?php 
 				$my_lettera -> publdisplaylettera ($_GET['idlettera'], $annoprotocollo); //richiamo del metodo "mostra" dell'oggetto Lettera
 			?>
 		</div>
