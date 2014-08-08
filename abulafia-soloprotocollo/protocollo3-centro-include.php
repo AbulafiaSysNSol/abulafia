@@ -120,6 +120,7 @@
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from != 'modifica') ) { 
+		/*
 		//invio notifica
 		$mail->addAddress('biagiosaitta@hotmail.it');
 		$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
@@ -129,6 +130,8 @@
 		$esito = $mail->send();
 		//scrittura log mail
 		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - inserisci lettera', $_SESSION['maillog']);
+		//scrittura history log
+		*/
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	
