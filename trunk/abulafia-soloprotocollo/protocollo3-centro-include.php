@@ -2,6 +2,7 @@
 
 	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
 	$my_file = new File();
+	$anagrafica = new Anagrafica();
 	include('lib/phpmailer/PHPMailerAutoload.php');
 	$date=strftime("%d/%m/%Y");
 	$ora = date("g:i a");
@@ -108,44 +109,53 @@
 	}
 	if ( ($inserimento) && ($from == 'modifica') ) {
 		
-		//invio notifica
-		$mail = new PHPMailer();
-		$mail->From = 'no-reply@abulafia.com';
-		$mail->FromName = 'no-reply@abulafia.com';
-		$mail->isHTML(true);
-		include "../mail-conf-include.php";
-		$mail->addAddress('biagiosaitta@hotmail.it');
-		$mail->Subject = 'Notifica modifica lettera in ' . $_SESSION['nomeapplicativo'];
-		$mail->Body    = 'Con la presente si notifica la modifica della lettera n. <b>' . $idlettera . 
-					'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
-					Modifica effettuata da <b>' . $_SESSION['loginname'] . '</b> il giorno ' . $datamail . '<br><br>
-					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
-		$esito = $mail->send();
-		//scrittura log mail
-		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - modifica lettera', $_SESSION['maillog']);
-		//scrittura history log
+		$indirizzi = $anagrafica->getNotificationsMod();
+		if ($indirizzi) {
+			//invio notifica
+			$mail = new PHPMailer();
+			$mail->From = 'no-reply@cricatania.it';
+			$mail->FromName = 'Abulafia';
+			$mail->isHTML(true);
+			include "../mail-conf-include.php";
+			foreach ($indirizzi as $email) {
+				$mail->addAddress($email[0]);
+			}
+			$mail->Subject = 'Notifica modifica lettera in ' . $_SESSION['nomeapplicativo'];
+			$mail->Body    = 'Con la presente si notifica la modifica della lettera n. <b>' . $idlettera . 
+						'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
+						Modifica effettuata da <b>' . $_SESSION['loginname'] . '</b> il giorno ' . $datamail . '<br><br>
+						Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
+			$esito = $mail->send();
+			//scrittura log mail
+			$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - modifica lettera', $_SESSION['maillog']);
+			//scrittura history log
+		}
 		
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from != 'modifica') ) { 
 		
-		//invio notifica
-		$mail = new PHPMailer();
-		$mail->From = 'no-reply@abulafia.com';
-		$mail->FromName = 'no-reply@abulafia.com';
-		$mail->isHTML(true);
-		include "../mail-conf-include.php";
-		$mail->addAddress('biagiosaitta@hotmail.it');
-		$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
-		$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione della lettera n. <b>' . $idlettera . 
-					'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
-					Inserimento effettuato da <b>' . $_SESSION['loginname'] . '</b> il giorno ' . $datamail . '.<br><br>
-					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
-		$esito = $mail->send();
-		//scrittura log mail
-		$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - inserisci lettera', $_SESSION['maillog']);
-		//scrittura history log
-		
+		$indirizzi = $anagrafica->getNotificationsIns();
+		if ($indirizzi) {
+			//invio notifica
+			$mail = new PHPMailer();
+			$mail->From = 'no-reply@cricatania.it';
+			$mail->FromName = 'Abulafia';
+			$mail->isHTML(true);
+			include "../mail-conf-include.php";
+			foreach ($indirizzi as $email) {
+				$mail->addAddress($email[0]);
+			}
+			$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
+			$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione della lettera n. <b>' . $idlettera . 
+						'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
+						Inserimento effettuato da <b>' . $_SESSION['loginname'] . '</b> il giorno ' . $datamail . '.<br><br>
+						Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
+			$esito = $mail->send();
+			//scrittura log mail
+			$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - inserisci lettera', $_SESSION['maillog']);
+		}
+		//scrittura history log		
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	

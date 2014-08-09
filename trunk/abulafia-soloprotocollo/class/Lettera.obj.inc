@@ -144,41 +144,57 @@ class Lettera {
 			?>
 		</strong>
 			
-		<br>
-		Mezzo di trasmissione: 
-		<strong>
-			<?php 
-				echo $this->arraylettera1['posizione'];
-			?>
-		</strong> 
-          
-		<br>
-		Posizione: 
-		<strong>
-			<?php 
-				echo $this->arraylettera1['riferimento'];
-			?>
-		</strong>
-
-		<br>
-		Pratica: 
-		<strong>
-			<?php
-				$idpratica = $this->arraylettera1['pratica'];
-				$risultati=mysql_query("select distinct * from pratiche WHERE id='$idpratica'");
-				$risultati2=mysql_fetch_row($risultati);
-				echo stripslashes($risultati2[1]);
-			?>
-		</strong>
-
-		<br>
-		Note: 
-		<strong>
-			<?php 
-				echo $this->arraylettera1['note'];
-			?>
-		</strong> 
+		<?php if($this->arraylettera1['posizione']) { ?>
+			<br>
+			Mezzo di trasmissione: 
+			<strong>
+				<?php 
+					echo $this->arraylettera1['posizione'];
+				?>
+			</strong> 
+		<?php
+		}
 		
+		if($this->arraylettera1['riferimento']) {
+		?>
+			<br>
+			Posizione: 
+			<strong>
+				<?php 
+					echo $this->arraylettera1['riferimento'];
+				?>
+			</strong>
+		<?php
+		}
+		
+		$idpratica = $this->arraylettera1['pratica'];
+		$risultati=mysql_query("select distinct * from pratiche WHERE id='$idpratica'");
+		$risultati2=mysql_fetch_row($risultati);
+		if($risultati2[1]) {
+		?>
+			<br>
+			Pratica: 
+			<strong>
+				<?php
+					
+					echo stripslashes($risultati2[1]); 
+				?>
+			</strong>
+		<?php
+		}
+		
+		if($this->arraylettera1['note']) {
+		?>
+			<br>
+			Note: 
+			<strong>
+				<?php 
+					 echo $this->arraylettera1['note'];
+				?>
+			</strong> 
+		<?php
+		}
+		?>
 		<br><br>
 		Mittenti/Destinatari: 
 		<b>
