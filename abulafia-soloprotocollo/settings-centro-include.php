@@ -247,7 +247,7 @@
 				
 				</div>
 				<br>
-				<button class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-edit"></span> MODIFICA</button>
+				<center><button class="btn btn-success btn-lg" onClick="Controllo()"><i class="fa fa-save"></i> SALVA IMPOSTAZIONI</button></center>
 			</form>
 		</div>
 	</div>

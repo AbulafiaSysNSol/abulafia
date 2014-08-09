@@ -29,6 +29,38 @@ class Anagrafica {
 								group by nome
 								order by conteggio desc"); //query per contare i cognomi per diffusione
 	}
+	
+	public function getNotificationsIns() {
+		$mailaddress = array();
+		$query = mysql_query(" 	SELECT jointelefonipersone.numero 
+							FROM jointelefonipersone, defaultsettings, users 
+							WHERE jointelefonipersone.idanagrafica = defaultsettings.idanagrafica 
+							AND defaultsettings.idanagrafica = users.idanagrafica 
+							AND users.auth > 98 
+							AND defaultsettings.notificains = 1
+							AND jointelefonipersone.tipo = 'envelope-o'
+						");
+		while ($mail = mysql_fetch_array($query)) {
+			array_push($mailaddress, $mail);
+		}
+		return $mailaddress;	
+	}
+	
+		public function getNotificationsMod() {
+		$mailaddress = array();
+		$query = mysql_query(" 	SELECT jointelefonipersone.numero 
+							FROM jointelefonipersone, defaultsettings, users 
+							WHERE jointelefonipersone.idanagrafica = defaultsettings.idanagrafica 
+							AND defaultsettings.idanagrafica = users.idanagrafica 
+							AND users.auth > 98 
+							AND defaultsettings.notificamod = 1
+							AND jointelefonipersone.tipo = 'envelope-o'
+						");
+		while ($mail = mysql_fetch_array($query)) {
+			array_push($mailaddress, $mail);
+		}
+		return $mailaddress;	
+	}
 
 }
 

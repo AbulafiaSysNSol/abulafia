@@ -423,7 +423,7 @@
 			<button type="button" class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra</button>
 
 			</form>
-
+			
 		</div>
 	</div>	
 </div>
