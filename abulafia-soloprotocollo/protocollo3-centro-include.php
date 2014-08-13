@@ -101,15 +101,15 @@
 				into lettere$annoprotocollo
 				values
 				('', 
-				$oggetto,
-				$lettera_data,
-				$dataregistrazione,
+				'$oggetto',
+				'$lettera_data',
+				'$dataregistrazione',
 				'',
-				$speditaricevuta, 
-				$posizione, 
-				$riferimento, 
-				$pratica, 
-				$note)
+				'$speditaricevuta', 
+				'$posizione', 
+				'$riferimento', 
+				'$pratica', 
+				'$note')
 				");
 	echo  mysql_error();
 	
@@ -120,8 +120,8 @@
 					into joinletteremittenti$annoprotocollo
 					values
 					(
-					$ultimoid,
-					$key
+					'$ultimoid',
+					'$key'
 					");
 		}
 		
@@ -131,9 +131,9 @@
 					into joinlettereallegati
 					values
 					(
-					$ultimoid,
-					$annoprotocollo,
-					$key)
+					'$ultimoid',
+					'$annoprotocollo',
+					'$key')
 					");
 		if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
 								mkdir("lettere$annoprotocollo/".$ultimoid, 0777, true);
