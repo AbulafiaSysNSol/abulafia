@@ -26,6 +26,7 @@
 				$my_lettera = new Lettera(); //crea un nuovo oggetto
 				$my_lettera->idtemporaneo=$_SESSION['loginid'].'-'.time();//crea un id temporaneo per la lettera unendo id utente
 											// e timestamp
+				$idlettera=$my_lettera->idtemporaneo;
 
 	
 	}
@@ -56,7 +57,7 @@
 
 	if ($from == 'elimina-mittente') {
 	
-		$elimina=unset($my_lettera->arraymittenti[$idanagrafica]);
+		unset($my_lettera->arraymittenti[$idanagrafica]);
 		
 		/*$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
 	
