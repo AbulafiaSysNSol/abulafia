@@ -16,6 +16,8 @@ class Lettera {
 	private $arrayinserimento1=array();
 	private $arraymodifica1=array();
 	public  $idtemporaneo;
+	public  $arraymittenti=array();
+	public  $arrayallegati=array();
 
 	private function leggilettera ($idlettera, $annoricercaprotocollo) { //<man>legge i dati dettagliati di una lettera in protocollo, indicandone id e anno di registrazione</man>
 		
@@ -334,6 +336,14 @@ class Lettera {
 		$query = mysql_query("SELECT idlettera FROM lettere$anno ORDER BY idlettera desc LIMIT 1");
 		$risultati = mysql_fetch_row($query);
 		return $risultati[0];
+	}
+	
+	public function controllaEsistenzaMittente($idmittente, $arraymittenti)
+		{
+		return in_array ($idmittente,$arraymittenti);
+		}
+	
+	
 	}
 
 }//chiusura della classe
