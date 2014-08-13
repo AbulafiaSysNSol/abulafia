@@ -43,7 +43,7 @@
 			
 			if ($my_lettera->controllaEsistenzaMittente($idlettera, $my_lettera->arraymittenti)==false)
 				{
-				$my_lettera->arraymittenti[$idanagrafica]=$my_anagrafica->getName($idlettera);
+				$my_lettera->arraymittenti[$idanagrafica]=$my_anagrafica->getName($idanagrafica);
 				}
 			else { echo 'Mittente o Destinatario già inserito'; }
 			
@@ -305,7 +305,7 @@
 					<?php
 				}
 			}*/
-			if (array_count_values($my_lettera->arraymittenti)> 0)
+			if (count($my_lettera->arraymittenti)> 0)
 				{
 				foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti )
 					{
