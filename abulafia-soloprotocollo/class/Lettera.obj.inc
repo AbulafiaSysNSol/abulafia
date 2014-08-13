@@ -343,8 +343,6 @@ class Lettera {
 		return array_key_exists ($idmittente,$arraymittenti);
 		}
 	
-	
-	}
 
 }//chiusura della classe
 
