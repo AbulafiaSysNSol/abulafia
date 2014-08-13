@@ -17,7 +17,7 @@
 	$idlettera=$my_lettera->idtemporaneo; //setta l'id della lettera cui attribuire gli allegati
 	$time = time();
 	$name = $time.".".$my_file->estensioneFile (basename( $_FILES['uploadedfile']['name']));
-	$target_path = $target_path . $idlettera."/".$name; 
+	$target_path = $target_path ."temp/".$name; 
 												/*
 												aggiunge alla directory, 
 												una sotto-directory con l'id della lettera
@@ -47,13 +47,16 @@
 			<?php
 		}
 		else {
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
+			array_push($my_lettera->$arrayallegati, 
+			$my_lettera->arrayallegati[$name]=$target_path2;
+			$_SESSION['my_lettera']=serialize($my_lettera);
+			//$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
 			if (browser == "Netscape")
-			window.location="login0.php?corpus=protocollo2&annoprotocollo=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=success"; 
-			else window.location="login0.php?corpus=protocollo2&annoprotocollo=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=success";
+			window.location="login0.php?corpus=protocollo2&from=urlpdf&upfile=success"; 
+			else window.location="login0.php?corpus=protocollo2&from=urlpdf&upfile=success";
 			</SCRIPT>
 			<?php
 		}
