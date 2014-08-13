@@ -41,11 +41,13 @@
 		
 		//RITORNO ALLA PAGINA DI REGISTRAZIONE  O DI MODIFICA SE NON E' STATO INSERITO NEMMENO UN MITTENTO O UN DESTISTARIO
 		if($from != "modifica") {
+		$_SESSION['my_lettera']=serialize $my_lettera;
 		?>
+	
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
 			if (browser == "Netscape")
-			window.location="login0.php?corpus=protocollo2&idlettera=<?php echo $idlettera;?>&from=errore"; else window.location="login0.php?corpus=protocollo2&idlettera=<?php echo $idlettera;?>&from=errore";
+			window.location="login0.php?corpus=protocollo2&from=errore"; else window.location="login0.php?corpus=protocollo2&idlettera=<?php echo $idlettera;?>&from=errore";
 			</SCRIPT>
 			<?php
 			exit();
