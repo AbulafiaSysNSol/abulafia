@@ -2,6 +2,10 @@
 
 	set_time_limit(0);
 	
+	if(isset($_GET['idlettera'])) {
+		$idlettera = $_GET['idlettera'];
+	}
+	
 	if(isset($_GET['from'])) {
 		$from = $_GET['from'];
 	}
