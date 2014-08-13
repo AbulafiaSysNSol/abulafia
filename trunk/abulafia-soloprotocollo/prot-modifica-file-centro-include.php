@@ -47,7 +47,6 @@
 			<?php
 		}
 		else {
-			array_push($my_lettera->$arrayallegati, 
 			$my_lettera->arrayallegati[$name]=$target_path2;
 			$_SESSION['my_lettera']=serialize($my_lettera);
 			//$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
