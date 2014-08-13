@@ -41,7 +41,7 @@
 		
 		//RITORNO ALLA PAGINA DI REGISTRAZIONE  O DI MODIFICA SE NON E' STATO INSERITO NEMMENO UN MITTENTO O UN DESTISTARIO
 		if($from != "modifica") {
-		$_SESSION['my_lettera']=serialize $my_lettera;
+		$_SESSION['my_lettera']=serialize ($my_lettera);
 		?>
 	
 			<SCRIPT LANGUAGE="Javascript">
