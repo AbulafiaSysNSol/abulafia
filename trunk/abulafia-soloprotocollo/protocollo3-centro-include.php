@@ -1,6 +1,6 @@
 <?php
 
-	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
+	$my_lettera = unserialize($_SESSION['my_lettera']); //carica l'oggetto 'lettera'
 	$my_file = new File();
 	$anagrafica = new Anagrafica();
 	include('lib/phpmailer/PHPMailerAutoload.php');
@@ -11,7 +11,7 @@
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	//inizio passaggio dati da pagina inserimento
 	$loginid=$_SESSION['loginid'];
-	$idlettera=$_GET['idlettera'];
+
 	if(isset($_GET['dataoriginalegiorno'])) { 
 		$dataoriginalegiorno= $_GET['dataoriginalegiorno']; 
 	}
@@ -29,9 +29,8 @@
 	}
 		
 	// CONTROLLO SE E' STATO INSERITO ALMENO UN MITTENTO O UN DESTINATARIO
-	$conteggiomittenti=mysql_query("select count(*) from joinletteremittenti$annoprotocollo where idlettera='$idlettera'"); 
-	$conteggiomittenti2 = mysql_fetch_row($conteggiomittenti);
-	if ($conteggiomittenti2[0] < 1) { 
+	
+	if (count($my_lettera->arraymittenti) < 1) { 
 		$_SESSION['spedita-ricevuta'] = $_POST['spedita-ricevuta'];
 		$_SESSION['oggetto'] = $_POST['oggetto'];
 		$_SESSION['data'] = $_POST['data'];
@@ -96,7 +95,18 @@
 	//fine passaggio dati
 
 	//controllo esistenza
-	$inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.pratica='$pratica', lettere$annoprotocollo.note='$note', lettere$annoprotocollo.dataregistrazione='$dataregistrazione' WHERE lettere$annoprotocollo.idlettera='$idlettera'");
+	$inserimento = mysql_query("insert
+				into lettere$annoprotocollo
+				('', 
+				$speditaricevuta', 
+				$oggetto',
+				$lettera_data',
+				$posizione', 
+				$riferimento', 
+				$pratica', 
+				$note', 
+				$dataregistrazione'
+				");
 	echo  mysql_error();
 	
 	if ( (!$inserimento) && ($from == 'modifica') ) { 
