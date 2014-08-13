@@ -2,10 +2,11 @@
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$from= $_GET['from'];
 	$add = false;
+	$my_anagrafica= new Anagrafica();//crea un nuovo oggetto anagrafica
 	
-	if (isset($_session['dbname'])) { 
+	/*if (isset($_session['dbname'])) { 
 		$dbname=$_session['dbname']; 
-	}
+	}*/
 	
 	if (isset($_GET['idanagrafica'])) { 
 		$idanagrafica=$_GET['idanagrafica']; 
@@ -34,11 +35,10 @@
 		}
 
 	if ($from == 'aggiungi') {
-			$idlettera=$my_lettera->idtemporaneo
-			$my_lettera-> publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo); //richiamo del metodo
-			if ($my_lettera->controllaEsistenzaMittente==false)
+			$idlettera=$my_lettera->idtemporaneo;
+			if ($my_lettera->controllaEsistenzaMittente($idlettera, $my_lettera->arraymittenti)==false)
 				{
-				$my_lettera->arraymittenti[$idanagrafica]=
+				$my_lettera->arraymittenti[$idanagrafica]=$my_anagrafica->getName($idlettera);
 				}
 			else { echo 'Mittente o Destinatario già inserito'; }
 			$add = true;
