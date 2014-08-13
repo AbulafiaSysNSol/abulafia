@@ -130,7 +130,7 @@
 					(
 					$ultimoid,
 					$annoprotocollo,
-					$key
+					$key)
 					");
 		if (!is_dir("lettere$annoprotocollo/".$idlettera)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
 								mkdir("lettere$annoprotocollo/".$idlettera, 0777, true);
