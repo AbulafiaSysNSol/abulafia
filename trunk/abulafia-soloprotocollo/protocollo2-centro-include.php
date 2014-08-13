@@ -33,7 +33,9 @@
 	
 	else {	//se non si proviene da 'crea', si deserializzano gli oggetti già creati
 		$my_lettera=unserialize($_SESSION['my_lettera']);
-		$my_file=unserialize($_SESSION['my_file']);
+		if (isset($_SESSION['my_file'])) {
+						$my_file=unserialize($_SESSION['my_file']); //deserializza l'oggetto solo se è presente in sessione
+						}
 		$idlettera=$my_lettera->idtemporaneo;
 		}
 
@@ -71,7 +73,8 @@
 	}
 	
 	if ($from == 'urlpdf') {  
-		$idlettera=$_GET['idlettera'];
+		/*$idlettera=$_GET['idlettera'];*/
+		
 	}
 	
 	if ($from == 'eliminaallegato') {  
@@ -176,7 +179,12 @@
 				?>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b> c'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+						<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b>
+												 c'e' stato un errore nel caricamento
+												  del file sul server: controlla 
+												  la dimensione massima, riprova in seguito 
+												  o contatta l'amministratore del server.
+						</div>
 					</div>
 				</div>
 				<?php
@@ -225,13 +233,18 @@
 			$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
 			if ($urlfile) {
 				foreach ($urlfile as $valore) {
-					$download = $my_file->downloadlink($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download; ?> - <a href="login0.php?corpus=protocollo2
-																			&from=eliminaallegato
-																			&idlettera=<?php echo $idlettera;?>
-																			&anno=<?php echo $annoprotocollo;?>
-																			&nome=<?php echo $valore[2];?>"></span> 
-																			Elimina <span class="glyphicon glyphicon-remove"></a>
+					$download = $my_file->downloadlink($valore[2], 
+									$idlettera, 
+									$annoprotocollo, 
+									'30'); //richiamo del metodo "downloadlink" dell'oggetto file
+					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download; ?> - 
+										<a href="login0.php?corpus=protocollo2
+											&from=eliminaallegato
+											&idlettera=<?php echo $idlettera;?>
+											&anno=<?php echo $annoprotocollo;?>
+											&nome=<?php echo $valore[2];?>"></span> 
+											Elimina <span class="glyphicon glyphicon-remove">
+										</a>
 				<?php
 				}
 			}
@@ -416,6 +429,10 @@
 		</div>
 	</div>	
 </div>
+
+<?php
+$_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio dati alla sessione
+?>
 
 <script language="javascript">
 
