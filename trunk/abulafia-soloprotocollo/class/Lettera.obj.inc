@@ -15,6 +15,7 @@ class Lettera {
 	private $arrayletteramittenti=array();
 	private $arrayinserimento1=array();
 	private $arraymodifica1=array();
+	public  $idtemporaneo;
 
 	private function leggilettera ($idlettera, $annoricercaprotocollo) { //<man>legge i dati dettagliati di una lettera in protocollo, indicandone id e anno di registrazione</man>
 		
