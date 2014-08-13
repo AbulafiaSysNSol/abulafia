@@ -119,10 +119,10 @@
 		$inserimento= mysql_query("insert
 					into joinletteremittenti$annoprotocollo
 					values
-					(
-					'$ultimoid',
+					('$ultimoid',
 					'$key'
-					");
+					)");
+		echo  mysql_error();echo $key;
 		}
 		
 	foreach ($my_lettera->arrayallegati as $key => $value)
