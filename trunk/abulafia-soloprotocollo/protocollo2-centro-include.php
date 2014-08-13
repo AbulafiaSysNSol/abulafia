@@ -23,7 +23,7 @@
 	if ($from == 'crea') {  
 				$my_file = new File(); //crea un nuovo oggetto 'file'
 				$my_lettera = new Lettera(); //crea un nuovo oggetto
-				$my_lettera->idtemporanedo=$_SESSION['loginid'].'-'.time();//crea un id temporaneo per la lettera unendo id utente e timestamp
+				$my_lettera->idtemporaneo=$_SESSION['loginid'].'-'.time();//crea un id temporaneo per la lettera unendo id utente e timestamp
 
 	
 	}
@@ -34,8 +34,9 @@
 		}
 
 	if ($from == 'aggiungi') {
-			$idlettera=$_GET['idlettera'];
-			$my_lettera -> publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo); //richiamo del metodo
+			$idlettera=$my_lettera->idtemporaneo
+			$my_lettera-> publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo); //richiamo del metodo
+			$mylettera->arraymittenti
 			$add = true;
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO MITTENTE PROTOCOLLO '.$idlettera , 'OK' , 'ID MITTENTE AGGIUNTO '. $idanagrafica, $_SESSION['historylog']);
 		}
