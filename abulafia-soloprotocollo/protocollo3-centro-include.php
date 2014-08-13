@@ -135,7 +135,7 @@
 		if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
 								mkdir("lettere$annoprotocollo/".$ultimoid, 0777, true);
 								}
-		rename($value, 'lettere'.$annoprotocollo.'/'.$ultimoid.'/'.$value);
+		rename($value, "lettere$annoprotocollo".'/'.$ultimoid.'/'.$value);
 		}
 	
 	if ( (!$inserimento) && ($from == 'modifica') ) { 
@@ -144,7 +144,7 @@
 	}
 	if ( (!$inserimento) && ($from != 'modifica') ) { 
 		echo "Inserimento non riuscito" ; 
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $idlettera , 'FAILED' , '' , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 'FAILED' , '' , $_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from == 'modifica') ) {
 		
