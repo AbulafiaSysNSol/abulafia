@@ -524,7 +524,7 @@ $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio d
 	//mando i dati alla pagina
 	else 
 	{
-           document.modulo.action = "login0.php?corpus=protocollo3&idlettera=<?php echo $idlettera;?>";
+           document.modulo.action = "login0.php?corpus=protocollo3";
            document.modulo.submit();
       }
   }
