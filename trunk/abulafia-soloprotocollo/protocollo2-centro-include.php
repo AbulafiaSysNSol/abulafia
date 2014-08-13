@@ -24,7 +24,8 @@
 	if ($from == 'crea') {  
 				$my_file = new File(); //crea un nuovo oggetto 'file'
 				$my_lettera = new Lettera(); //crea un nuovo oggetto
-				$my_lettera->idtemporaneo=$_SESSION['loginid'].'-'.time();//crea un id temporaneo per la lettera unendo id utente e timestamp
+				$my_lettera->idtemporaneo=$_SESSION['loginid'].'-'.time();//crea un id temporaneo per la lettera unendo id utente
+											// e timestamp
 
 	
 	}
@@ -32,23 +33,40 @@
 	else {	//se non si proviene da 'crea', si deserializzano gli oggetti già creati
 		$my_lettera=unserialize($_SESSION['my_lettera']);
 		$my_file=unserialize($_SESSION['my_file']);
+		$idlettera=$my_lettera->idtemporaneo;
 		}
 
 	if ($from == 'aggiungi') {
-			$idlettera=$my_lettera->idtemporaneo;
+			
 			if ($my_lettera->controllaEsistenzaMittente($idlettera, $my_lettera->arraymittenti)==false)
 				{
 				$my_lettera->arraymittenti[$idanagrafica]=$my_anagrafica->getName($idlettera);
 				}
 			else { echo 'Mittente o Destinatario già inserito'; }
+			
 			$add = true;
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO MITTENTE PROTOCOLLO '.$idlettera , 'OK' , 'ID MITTENTE AGGIUNTO '. $idanagrafica, $_SESSION['historylog']);
-		}
+			/*$my_log -> publscrivilog( $_SESSION['loginname'], 
+						'AGGIUNTO MITTENTE PROTOCOLLO '
+						.$idlettera , 
+						'OK' , 
+						'ID MITTENTE AGGIUNTO '
+						. $idanagrafica, 
+						$_SESSION['historylog']);*/
+	}
 
-	if ($from == 'elimina-mittente') { 
-		$idlettera=$_GET['idlettera'];
-		$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATO MITTENTE PROTOCOLLO '.$idlettera , 'OK' , 'ID MITTENTE ELIMINATO '. $idanagrafica, $_SESSION['historylog']);
+	if ($from == 'elimina-mittente') {
+	
+		$elimina=unset($my_lettera->arraymittenti[$idanagrafica]);
+		
+		/*$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
+	
+		$my_log -> publscrivilog( $_SESSION['loginname'], 
+					'ELIMINATO MITTENTE PROTOCOLLO '
+					.$idlettera , 
+					'OK' , 
+					'ID MITTENTE ELIMINATO '
+					.$idanagrafica, 
+					$_SESSION['historylog']);*/
 	}
 	
 	if ($from == 'urlpdf') {  
