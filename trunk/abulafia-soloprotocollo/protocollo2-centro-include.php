@@ -27,6 +27,11 @@
 
 	
 	}
+	
+	else {	//se non si proviene da 'crea', si deserializzano gli oggetti già creati
+		$my_lettera=unserialize($_SESSION['my_lettera']);
+		$my_file=unserialize($_SESSION['my_file']);
+		}
 
 	if ($from == 'aggiungi') {
 			$idlettera=$_GET['idlettera'];
