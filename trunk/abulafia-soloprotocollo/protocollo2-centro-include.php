@@ -38,7 +38,7 @@
 			$my_lettera-> publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo); //richiamo del metodo
 			if ($my_lettera->controllaEsistenzaMittente==false)
 				{
-				array_push=
+				$my_lettera->arraymittenti[$idanagrafica]=
 				}
 			else { echo 'Mittente o Destinatario già inserito'; }
 			$add = true;
