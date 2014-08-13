@@ -1,5 +1,5 @@
 <?php
-
+	
 	if(isset($_POST['nome'])) {
 		$nome = $_POST['nome'];
 	}
@@ -8,7 +8,6 @@
 	}
 	$cognome = $_POST['cognome'];
 	$anagraficatipologia = $_POST['anagraficatipologia'];
-	$idlettera = $_GET['idlettera'];
 	$inserimento = mysql_query	("
 							INSERT INTO 
 								anagrafica 
@@ -32,7 +31,7 @@
 	<SCRIPT LANGUAGE="Javascript">
 		browser= navigator.appName;
 		if (browser == "Netscape")
-			window.location="login0.php?corpus=protocollo2&idanagrafica=<?php echo $lastid; ?>&idlettera=<?php echo $idlettera;?>&from=aggiungi"; 
+			window.location="login0.php?corpus=protocollo2&idanagrafica=<?php echo $lastid; ?>&from=aggiungi"; 
 		else 
-			"login0.php?corpus=protocollo2&idanagrafica=<?php echo $lastid; ?>&idlettera=<?php echo $idlettera;?>&from=aggiungi"
+			"login0.php?corpus=protocollo2&idanagrafica=<?php echo $lastid; ?>&from=aggiungi"
 	</SCRIPT>
