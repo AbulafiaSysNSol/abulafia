@@ -229,7 +229,20 @@
 			</form>
 			
 			<?php
-			$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
+			if (count($my_lettera->arrayallegati)> 0)
+				{
+				foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati )
+					{
+					echo $elencoallegati.' ';
+					?>- <a href="login0.php?corpus=protocollo2
+					&from=eliminaallegato
+					&nome=<?php echo $elencochiavi;?>"></span> 
+					Elimina <span class="glyphicon glyphicon-remove"></a><br>
+					<?php
+					}
+				}
+
+			/*$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
 			if ($urlfile) {
 				foreach ($urlfile as $valore) {
 					$download = $my_file->downloadlink($valore[2], 
@@ -246,7 +259,7 @@
 										</a>
 				<?php
 				}
-			}
+			}*/
 			else {
 				echo "<br>Nessun file associato.";
 			}
