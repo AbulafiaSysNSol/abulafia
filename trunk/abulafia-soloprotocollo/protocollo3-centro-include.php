@@ -135,7 +135,7 @@
 		if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
 								mkdir("lettere$annoprotocollo/".$ultimoid, 0777, true);
 								}
-		rename($value, "lettere$annoprotocollo".'/'.$ultimoid.'/'.$value);
+		rename($value, "lettere$annoprotocollo".'/'.$ultimoid.'/'.$key);
 		}
 	
 	if ( (!$inserimento) && ($from == 'modifica') ) { 
