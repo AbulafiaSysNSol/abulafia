@@ -36,7 +36,11 @@
 	if ($from == 'aggiungi') {
 			$idlettera=$my_lettera->idtemporaneo
 			$my_lettera-> publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo); //richiamo del metodo
-			$mylettera->arraymittenti
+			if ($my_lettera->controllaEsistenzaMittente==false)
+				{
+				array_push=
+				}
+			else { echo 'Mittente o Destinatario già inserito'; }
 			$add = true;
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO MITTENTE PROTOCOLLO '.$idlettera , 'OK' , 'ID MITTENTE AGGIUNTO '. $idanagrafica, $_SESSION['historylog']);
 		}

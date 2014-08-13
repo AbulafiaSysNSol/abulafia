@@ -340,7 +340,7 @@ class Lettera {
 	
 	public function controllaEsistenzaMittente($idmittente, $arraymittenti)
 		{
-		return in_array ($idmittente,$arraymittenti);
+		return array_key_exists ($idmittente,$arraymittenti);
 		}
 	
 	
