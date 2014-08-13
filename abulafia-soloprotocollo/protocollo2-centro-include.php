@@ -1,8 +1,6 @@
 <?php
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$from= $_GET['from'];
-	$my_file = new File(); //crea un nuovo oggetto 'file'
-	$my_lettera = new Lettera(); //crea un nuovo oggetto
 	$add = false;
 	
 	if (isset($_session['dbname'])) { 
@@ -23,54 +21,11 @@
 	
 	//se la pagina da cui si proviene è crea nuovo protocollo
 	if ($from == 'crea') {  
-		
-		//CONTROLLO ULTIMO PROTOCOLLO VUOTO
-		/*
-		$lastrec= mysql_query("SELECT * 
-					FROM lettere$annoprotocollo 
-					ORDER BY idlettera 
-					desc LIMIT 1");
-		
-		while ($lastrec2 = mysql_fetch_array($lastrec)) {
-			$lastrec3=$lastrec2['idlettera'];
-			$lasttopic=$lastrec2['oggetto'];
-		}
-		
-		$lastjoinletteremittenti=mysql_query("SELECT count(*) FROM joinletteremittenti$annoprotocollo where idlettera='$lastrec3'");
-		$lastjoinletteremittenti = mysql_fetch_array($lastjoinletteremittenti);
-			
-		if (($lastjoinletteremittenti[0] < 1) or (!$lasttopic)) { 	//controlla che sia stato attribuito un oggetto 
-										//e un mittente all'ultimo protocollo. In caso non sia stato fatto,
-										//lo cancella e lo riutilizza, in quanto ritenuto un protocollo 
-										//non correttamente registrato e probabile frutto di errore.
-									 
-			$cancella=mysql_query("DELETE FROM lettere$annoprotocollo WHERE idlettera='$lastrec3' limit 1 ");
-			$resetta=mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $lastrec3 ");
-			$cancella2=mysql_query("DELETE from joinletteremittenti$annoprotocollo where idlettera='$lastrec3' limit 1");
-			$cancella3=mysql_query("DELETE from joinlettereinserimento$annoprotocollo where idlettera='$lastrec3' limit 1");
-			$urlfile= $my_lettera->cercaAllegati($lastrec3, $annoprotocollo);
-			foreach ($urlfile as $valore) {
-				$delete = $my_file->cancellaAllegato($lastrec3, $annoprotocollo, $valore[2]);
-				if (!$delete) {
-					echo "Si è verificato un problema con la cancellazione di un allegato.";
-				}
-			}
-			$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=$lastrec3 AND annoprotocollo=$annoprotocollo");
-		}
-		*/
-		
-		$dataregistrazione = strftime("%Y-%m-%d");
-		$crea=mysql_query("insert into lettere$annoprotocollo values('','','','$dataregistrazione','','','','','','')");
-		$ultimoid=mysql_insert_id();
-		$insertid=$ultimoid;
-		$loginid=$_SESSION['loginid'];
-		$tracciautenteinserimento=mysql_query("insert into joinlettereinserimento$annoprotocollo values('$ultimoid', '$loginid','','')");
-		
-		if ($insertid > 0) { 
-			$idlettera = $insertid;
-		}
-		
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRA NUOVO PROTOCOLLO' , 'OK' , 'NUMERO PROTOCOLLO '. $insertid, $_SESSION['historylog']);
+				$my_file = new File(); //crea un nuovo oggetto 'file'
+				$my_lettera = new Lettera(); //crea un nuovo oggetto
+				$my_lettera->idtemporanedo=$_SESSION['loginid'].'-'.time();//crea un id temporaneo per la lettera unendo id utente e timestamp
+
+	
 	}
 
 	if ($from == 'aggiungi') {
@@ -166,7 +121,11 @@
 <div class="<?php if($errore) { echo "panel panel-danger";} else { echo "panel panel-default";} ?>">
 	
 		<div class="panel-heading">
-			<h3 class="panel-title"><strong>Protocollo numero: <?php echo $idlettera;?></strong><?php if($errore) { echo " - <b>ERRORE:</b> Bisogna inserire almeno un mittente o un destinatario.";} ?></h3>
+			<h3 class="panel-title"><strong>Identificativo Provvisorio Protocollo: <?php echo $my_lettera->idtemporaneo;?></strong>
+											<?php if($errore) { 
+													echo " - <b>ERRORE:</b> Bisogna inserire almeno un mittente o un destinatario.";
+													} ?>
+			</h3>
 		</div>
 		
 		<div class="panel-body">
@@ -402,6 +361,7 @@
 						echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
 					}
 					else {
+
 						echo '<option value="' . $risultati2['id'] . '">' .  $risultati2['descrizione'];
 					}
 				}
