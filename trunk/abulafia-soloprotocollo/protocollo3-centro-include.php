@@ -100,16 +100,28 @@
 	$inserimento = mysql_query("insert
 				into lettere$annoprotocollo
 				('', 
-				$speditaricevuta', 
 				$oggetto',
 				$lettera_data',
+				$dataregistrazione',
+				'',
+				$speditaricevuta', 
 				$posizione', 
 				$riferimento', 
 				$pratica', 
-				$note', 
-				$dataregistrazione'
+				$note')
 				");
 	echo  mysql_error();
+	
+	$ultimoid = mysql_insert_id();
+	foreach ($my_lettera->arraymittenti as $key => $value)
+		{
+		$inserimento= mysql_query("insert
+					into joinletteremittenti$annoprotocollo
+					(
+					$ultimoid,
+					$key
+					");
+		}
 	
 	if ( (!$inserimento) && ($from == 'modifica') ) { 
 		echo "Modifica non riuscita" ; 
