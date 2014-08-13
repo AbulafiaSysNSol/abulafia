@@ -269,7 +269,7 @@
 			$my_lettera->publcercamittente($idlettera,''); //richiamo del metodo
 			if($errore) { echo "</div>"; }
 
-			$risultati=mysql_query("select 
+			/*$risultati=mysql_query("select 
 						anagrafica.idanagrafica, 
 						anagrafica.cognome, 
 						anagrafica.nome, 
@@ -304,7 +304,20 @@
 												Elimina <span class="glyphicon glyphicon-remove"></a><br>
 					<?php
 				}
-			}
+			}*/
+			if (array_count_values($my_lettera->arraymittenti)> 0)
+				{
+				foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti )
+					{
+					echo $elencomittenti;
+					?>- <a href="login0.php?corpus=protocollo2
+					&from=elimina-mittente
+					&idanagrafica=<?php echo $elencochiavi;?>"></span> 
+					Elimina <span class="glyphicon glyphicon-remove"></a><br>
+					<?php
+					}
+				}
+
 			else {
 				echo 'Nessun mittente/destinatario associato.<br>';
 			}
