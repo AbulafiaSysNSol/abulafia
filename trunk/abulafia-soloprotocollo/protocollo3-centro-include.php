@@ -99,6 +99,7 @@
 	//controllo esistenza
 	$inserimento = mysql_query("insert
 				into lettere$annoprotocollo
+				values
 				('', 
 				$oggetto,
 				$lettera_data,
@@ -117,6 +118,7 @@
 		{
 		$inserimento= mysql_query("insert
 					into joinletteremittenti$annoprotocollo
+					values
 					(
 					$ultimoid,
 					$key
@@ -127,6 +129,7 @@
 		{
 		$inserimento= mysql_query("insert
 					into joinlettereallegati
+					values
 					(
 					$ultimoid,
 					$annoprotocollo,
