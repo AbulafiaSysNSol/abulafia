@@ -46,7 +46,7 @@ class Anagrafica {
 		return $mailaddress;	
 	}
 	
-		public function getNotificationsMod() {
+	public function getNotificationsMod() {
 		$mailaddress = array();
 		$query = mysql_query(" 	SELECT jointelefonipersone.numero 
 							FROM jointelefonipersone, defaultsettings, users 
@@ -60,6 +60,15 @@ class Anagrafica {
 			array_push($mailaddress, $mail);
 		}
 		return $mailaddress;	
+	}
+	
+	public function getName($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
+		$query = mysql_query("SELECT anagrafica.cognome, anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
+		$nome = mysql_fetch_row($query);
+		if($nome[1]) 
+			return $nome[0] . ' ' . $nome[1];
+		else 
+			return $nome[0];
 	}
 
 }
