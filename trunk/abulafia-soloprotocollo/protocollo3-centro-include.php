@@ -100,15 +100,15 @@
 	$inserimento = mysql_query("insert
 				into lettere$annoprotocollo
 				('', 
-				$oggetto',
-				$lettera_data',
-				$dataregistrazione',
+				$oggetto,
+				$lettera_data,
+				$dataregistrazione,
 				'',
-				$speditaricevuta', 
-				$posizione', 
-				$riferimento', 
-				$pratica', 
-				$note')
+				$speditaricevuta, 
+				$posizione, 
+				$riferimento, 
+				$pratica, 
+				$note)
 				");
 	echo  mysql_error();
 	
