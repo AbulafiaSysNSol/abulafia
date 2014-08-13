@@ -72,13 +72,13 @@
 			<?php
 		}
 		else {
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI AGGIUNTA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
+			//$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI AGGIUNTA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
 			if (browser == "Netscape")
-			window.location="login0.php?corpus=protocollo2&annoprotocollo=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=error"; 
-			else window.location="login0.php?corpus=protocollo2&annoprotocollo=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=error";
+			window.location="login0.php?corpus=protocollo2&from=urlpdf&upfile=error"; 
+			else window.location="login0.php?corpus=protocollo2&from=urlpdf&upfile=error";
 			</SCRIPT>
 			<?php
 		}

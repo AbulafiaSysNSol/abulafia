@@ -78,15 +78,19 @@
 	}
 	
 	if ($from == 'eliminaallegato') {  
+		$nome = $_GET['nome'];
+		unset($my_lettera->arrayallegati[$nome]);
+		unlink("lettere$annoprotocollo/temp/" . $nome);
+		/*
 		$idlettera=$_GET['idlettera'];
 		$anno = $_GET['anno'];
-		$nome = $_GET['nome'];
 		$delete = $my_file->cancellaAllegato($idlettera, $anno, $nome);
 				if (!$delete) {
 					echo "Si è verificato un problema con la cancellazione di un allegato.";
 				}
 		$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=$idlettera AND annoprotocollo=$annoprotocollo AND pathfile='$nome'");
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO ELIMINATO '. $nome, $_SESSION['historylog']);
+		*/
 	}
 
 ?>
@@ -231,9 +235,10 @@
 			<?php
 			if (count($my_lettera->arrayallegati)> 0)
 				{
+				echo '<br>';
 				foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati )
 					{
-					echo $elencoallegati.' ';
+					echo $elencochiavi.' ';
 					?>- <a href="login0.php?corpus=protocollo2
 					&from=eliminaallegato
 					&nome=<?php echo $elencochiavi;?>"></span> 
