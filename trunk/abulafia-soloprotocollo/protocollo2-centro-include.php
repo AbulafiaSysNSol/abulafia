@@ -208,8 +208,7 @@
 			<div class="form-group"> 
 			<form role="form" 
 				enctype="multipart/form-data" 
-				action="login0.php?corpus=prot-modifica-file
-					&idlettera=<?php echo $idlettera;?>" 
+				action="login0.php?corpus=prot-modifica-file" 
 				method="POST">
 			<table>
 			<tr>
@@ -309,7 +308,7 @@
 				{
 				foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti )
 					{
-					echo $elencomittenti;
+					echo $elencomittenti.' ';
 					?>- <a href="login0.php?corpus=protocollo2
 					&from=elimina-mittente
 					&idanagrafica=<?php echo $elencochiavi;?>"></span> 

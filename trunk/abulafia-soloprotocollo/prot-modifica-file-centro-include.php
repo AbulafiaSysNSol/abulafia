@@ -11,9 +11,10 @@
 
 	include 'maledetti-apici-centro-include.php';
 	$my_file= new File;
+	$my_lettera=unserialize($_SESSION['my_lettera']);
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$target_path = "lettere$annoprotocollo/"; //setta la directory di destinazione del file da caricare
-	$idlettera=$_GET['idlettera']; //setta l'id della lettera cui attribuire gli allegati
+	$idlettera=$my_lettera->idtemporaneo; //setta l'id della lettera cui attribuire gli allegati
 	$time = time();
 	$name = $time.".".$my_file->estensioneFile (basename( $_FILES['uploadedfile']['name']));
 	$target_path = $target_path . $idlettera."/".$name; 
@@ -23,9 +24,9 @@
 												e il nome del file da caricare
 												*/
 										
-	if (!is_dir("lettere$annoprotocollo/".$idlettera)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
+	/*if (!is_dir("lettere$annoprotocollo/".$idlettera)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
 		mkdir("lettere$annoprotocollo/".$idlettera, 0777, true);
-	}
+	}*/
 			
 	if (!is_dir("lettere$annoprotocollo/"."/temp/")) {//controlla se la directory TEMP esiste dentro la dir LETTERE, altrimenti la crea
 		mkdir("lettere$annoprotocollo/"."/temp/", 0777, true);
@@ -33,7 +34,7 @@
 				
 	if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) { //se lo spostamento del file va a buon fine
 		$target_path2=mysql_real_escape_string($target_path);
-		$inserisci=mysql_query("insert into joinlettereallegati values($idlettera, $annoprotocollo, '$name')");			
+		/*$inserisci=mysql_query("insert into joinlettereallegati values($idlettera, $annoprotocollo, '$name')");	*/		
 		if($from == 'modifica-protocollo') {
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO ALLEGATO '. $name , $_SESSION['historylog']);
 			?>
