@@ -51,6 +51,14 @@
 				</a>
 			</p>
 			<p>
+				<a href="login0.php?corpus=dettagli-protocollo
+					&id=<?php echo $ultimoid;?>&anno=<?php echo $annoprotocollo;?>"> 
+					<span class="glyphicon glyphicon-info-sign">
+					</span> 
+					Dettagli protocollo
+				</a>
+			</p>
+			<p>
 				<a href="login0.php?corpus=modifica-protocollo
 					&from=risultati
 					&id=<?php echo $ultimoid;?>"> 
