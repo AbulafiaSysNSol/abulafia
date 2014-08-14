@@ -104,8 +104,8 @@
 	$auth = $_SESSION['auth'] ;
 	//fine passaggio dati
 
-	//controllo esistenza
-	$inserimento = mysql_query("insert
+	//inserisce i dati della lettera nel database
+	$inserimento = mysql_query("insert 
 				into lettere$annoprotocollo
 				values
 				('', 
@@ -122,20 +122,20 @@
 	echo  mysql_error();
 	
 	$ultimoid = mysql_insert_id();
-	foreach ($my_lettera->arraymittenti as $key => $value)
+	foreach ($my_lettera->arraymittenti as $key => $value) //inserisce i dati dei mittenti nel db
 		{
-		$inserimento= mysql_query("insert
+		$inserimento1= mysql_query("insert
 					into joinletteremittenti$annoprotocollo
 					values
 					('$ultimoid',
 					'$key'
 					)");
-		echo  mysql_error();echo $key;
+		echo  mysql_error();
 		}
 		
-	foreach ($my_lettera->arrayallegati as $key => $value)
+	foreach ($my_lettera->arrayallegati as $key => $value) //inserisce i dati degli allegati nel db e provvede a spostare i file dalla dir temp
 		{
-		$inserimento= mysql_query("insert
+		$inserimento2= mysql_query("insert
 					into joinlettereallegati
 					values
 					(
@@ -143,6 +143,7 @@
 					'$annoprotocollo',
 					'$key')
 					");
+		echo  mysql_error();
 		if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, 
 								//la crea per ospitare gli allegati
 								mkdir("lettere$annoprotocollo/".$ultimoid, 0777, true);
@@ -158,7 +159,7 @@
 					'' , 
 					$_SESSION['historylog']);
 	}
-	if ( (!$inserimento) && ($from != 'modifica') ) { 
+	if ( (!$inserimento || !$inserimento1 || !$inserimento2) && ($from != 'modifica') ) { 
 		echo "Inserimento non riuscito" ; 
 		$my_log -> publscrivilog( $_SESSION['loginname'], 
 					'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 
@@ -231,7 +232,11 @@
 						$_SESSION['maillog']);
 		}
 		//scrittura history log		
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 
+					'REGISTRATA LETTERA '. $idlettera , 
+					'OK' , 
+					'' , 
+					$_SESSION['historylog']);
 	}
 	
 	$ultimoid = mysql_insert_id();
@@ -287,7 +292,7 @@
 		<div class="col-xs-5">
 			<h4><i class="fa fa-list"></i> Riepilogo:</h4>
 			<?php 
-				$my_lettera -> publdisplaylettera ($_GET['idlettera'], $annoprotocollo); //richiamo del metodo "mostra"
+				$my_lettera -> publdisplaylettera ($ultimoid, $annoprotocollo); //richiamo del metodo "mostra"
 			?>
 		</div>
 		
@@ -337,4 +342,4 @@
 		</div>
 	</div>
   </div>
-  </div>
+</div>
