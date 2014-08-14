@@ -1,21 +1,4 @@
 <?php
-	include('lib/qrcode/qrlib.php');
-	$id = $_GET['id'];
-	$anno = $_GET['anno'];
-	
-	if (!is_dir('lettere'.$anno.'/qrcode/')) {
-		$creadir=mkdir('lettere'.$anno.'/qrcode/', 0777, true);
-		if (!$creadir) die ("Impossibile creare la directory: qrcode/");
-	}
-	
-	$pathqrcode = 'lettere'.$anno.'/qrcode/'.$id.$anno.'.png';
-	$param = 'Protocollo n° '.$id.' anno '.$anno;
-	$codeText = $param; 
-	$debugLog = ob_get_contents(); 
-	QRcode::png($codeText, $pathqrcode);
-?>
-
-<?php
 session_start();
 function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
 	require_once "class/" . $class_name.".obj.inc";
@@ -57,6 +40,7 @@ $pdf->AddPage();
 $pdf->SetTitle('ricevutaprotocollo');
 $pdf->Ln(8);
 $pdf->SetFont('Times','',15);
+$pathqrcode = 'lettere'.$anno.'/qrcode/'.$id.$anno.'.png';
 $pdf->Image($pathqrcode, 7, 38);
 $pdf->SetX(33);
 $pdf->Write('','Protocollo N. ' . $dettagli['idlettera'] );

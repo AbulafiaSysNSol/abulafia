@@ -106,18 +106,11 @@
 			</div>
 			
 			<div class="col-xs-3">
-				<h3><i class="fa fa-cog"></i> Opzioni</h3>
-				<div class="row">
-					<div class="col-md-11 col-md-offset-1">
-						<ul>
-							<li><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $_GET['id'];?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo Protocollo</a></li>
-							<li><a href="login0.php?corpus=invia-newsletter&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite Email</a></li>
-							<li><a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email</a></li>
-							<?php if($dettagli['speditaricevuta'] == 'ricevuta') { ?><li><a href="stampa-protocollo.php?id=<?php echo $id; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print"></i> Stampa ricevuta Protocollo</a></li><?php } ?>
-							<li><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');"><span class="glyphicon glyphicon-plus-sign"></span> Registra nuovo Protocollo</a></li>
-						</ul>
-					</div>
-				</div>
+				<h3><i class="fa fa-qrcode"></i> Codice QR</h3>
+				<?php
+					$path= 'lettere'.$anno.'/qrcode/'.$id.$anno.'.png';
+				?>
+				<center><img src="<?php echo $path ?>"></center>
 			</div>
 			
 		</div>
@@ -148,7 +141,7 @@
 				</div>
 			</div>
 			
-			<div class="col-md-8">
+			<div class="col-md-5">
 				<h3><i class="fa fa-paper-plane-o"></i> Protocollo inoltrato a:</h3>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
@@ -169,4 +162,19 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="col-xs-3">
+				<h3><i class="fa fa-cog"></i> Opzioni</h3>
+				<div class="row">
+					<div class="col-md-11 col-md-offset-1">
+						<ul>
+							<li><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $_GET['id'];?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo Protocollo</a></li>
+							<li><a href="login0.php?corpus=invia-newsletter&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite Email</a></li>
+							<li><a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email</a></li>
+							<?php if($dettagli['speditaricevuta'] == 'ricevuta') { ?><li><a href="stampa-protocollo.php?id=<?php echo $id; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print"></i> Stampa ricevuta Protocollo</a></li><?php } ?>
+							<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus-sign"></span> Registra nuovo Protocollo</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
+		</div>
