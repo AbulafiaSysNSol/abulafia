@@ -144,6 +144,22 @@
 			rename($value, "lettere$annoprotocollo".'/'.$ultimoid.'/'.$key);
 		}
 		
+		//CREO IL QRCODE NELLA DIRECTORY LETTEREANNO/QRCODE
+		include('lib/qrcode/qrlib.php');
+		$id = $ultimoid;
+		$anno = $annoprotocollo;
+		
+		if (!is_dir('lettere'.$anno.'/qrcode/')) {
+			$creadir=mkdir('lettere'.$anno.'/qrcode/', 0777, true);
+			if (!$creadir) die ("Impossibile creare la directory: qrcode/");
+		}
+		
+		$pathqrcode = 'lettere'.$anno.'/qrcode/'.$id.$anno.'.png';
+		$param = 'Protocollo n° '.$id.' del '.$dataregistrazione;
+		$codeText = $param; 
+		$debugLog = ob_get_contents(); 
+		QRcode::png($codeText, $pathqrcode);
+		
 		//SE L'INSERIMENTO NON VA A BUON FINE SCRIVO NEL LOG L'ERRORE
 		if ( (!$inserimento || !$inserimento1) ) { 
 			echo "Inserimento non riuscito" ; 
@@ -322,8 +338,7 @@
 		<div class="col-xs-5">
 			<h4><i class="fa fa-cog"></i> Opzioni:</h4>
 			<p>	<a href="login0.php?corpus=protocollo2
-					&from=crea" 
-					onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');">
+					&from=crea">
 					<i class="fa fa-plus-square"></i> 
 					Registrazione nuovo protocollo
 				</a>
