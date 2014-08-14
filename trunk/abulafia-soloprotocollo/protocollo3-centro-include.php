@@ -58,8 +58,14 @@
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
 			if (browser == "Netscape")
-			window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>"; 
-			else window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>";
+			window.location="login0.php?corpus=modifica-protocollo
+					&from=errore
+					&tabella=protocollo
+					&id=<?php echo $idlettera;?>"; 
+			else window.location="login0.php?corpus=modifica-protocollo
+						&from=errore
+						&tabella=protocollo
+						&id=<?php echo $idlettera;?>";
 			</SCRIPT>
 			<?php
 			exit();
@@ -137,7 +143,8 @@
 					'$annoprotocollo',
 					'$key')
 					");
-		if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
+		if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, 
+								//la crea per ospitare gli allegati
 								mkdir("lettere$annoprotocollo/".$ultimoid, 0777, true);
 								}
 		rename($value, "lettere$annoprotocollo".'/'.$ultimoid.'/'.$key);
@@ -145,11 +152,19 @@
 	
 	if ( (!$inserimento) && ($from == 'modifica') ) { 
 		echo "Modifica non riuscita" ; 
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA MODIFICA LETTERA '. $idlettera , 'FAILED' , '' , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 
+					'TENTATA MODIFICA LETTERA '. $idlettera , 
+					'FAILED' , 
+					'' , 
+					$_SESSION['historylog']);
 	}
 	if ( (!$inserimento) && ($from != 'modifica') ) { 
 		echo "Inserimento non riuscito" ; 
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 'FAILED' , '' , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 
+					'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 
+					'FAILED' , 
+					'' , 
+					$_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from == 'modifica') ) {
 		
@@ -167,8 +182,10 @@
 			$mail->Subject = 'Notifica modifica lettera in ' . $_SESSION['nomeapplicativo'];
 			$mail->Body    = 'Con la presente si notifica la modifica della lettera n. <b>' . $idlettera . 
 						'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
-						Modifica effettuata da <b>' . $_SESSION['loginname'] . '</b> il giorno ' . $datamail . '<br><br>
-						Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
+						Modifica effettuata da <b>' . $_SESSION['loginname'] 
+						. '</b> il giorno ' . $datamail . '<br><br>
+						Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] 
+						.'.<br>Non rispondere a questa email.';
 			$esito = $mail->send();
 			//scrittura log mail
 			$my_log -> publscrivilog($_SESSION['loginname'],
@@ -178,7 +195,12 @@
 			//scrittura history log
 		}
 		
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 
+					'MODIFICATA LETTERA '. 
+					$idlettera , 
+					'OK' , 
+					'' , 
+					$_SESSION['historylog']);
 	}
 	if ( ($inserimento) && ($from != 'modifica') ) { 
 		
@@ -196,8 +218,10 @@
 			$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
 			$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione della lettera n. <b>' . $idlettera . 
 						'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
-						Inserimento effettuato da <b>' . $_SESSION['loginname'] . '</b> il giorno ' . $datamail . '.<br><br>
-						Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
+						Inserimento effettuato da <b>' . $_SESSION['loginname'] 
+						. '</b> il giorno ' . $datamail . '.<br><br>
+						Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] 
+						.'.<br>Non rispondere a questa email.';
 			$esito = $mail->send();
 			//scrittura log mail
 			$my_log -> publscrivilog($_SESSION['loginname'],
