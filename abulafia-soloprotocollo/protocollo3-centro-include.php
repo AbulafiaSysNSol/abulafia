@@ -104,6 +104,17 @@
 		
 		$ultimoid = mysql_insert_id();
 		
+		//SCRIVO L'UTENTE CHE HA FATTO L'INSERIMENTO
+		$utentemod =mysql_query("	INSERT INTO 
+								joinlettereinserimento$annoprotocollo 
+							VALUES ( 
+								'$ultimoid',
+								'$loginid',
+								'$loginid',
+								'$dataregistrazione'
+							)
+						");
+		
 		//SCRIVO I MITTENTI/DESTINATARI NEL DB
 		foreach ($my_lettera->arraymittenti as $key => $value) { //inserisce i dati dei mittenti nel db
 			$inserimento1= mysql_query("insert
@@ -199,6 +210,7 @@
 							LIMIT 1
 						");
 		echo mysql_error();
+		
 		$date=strftime("%Y-%m-%d");
 		//AGGIORNO L'UTENTE CHE HA FATTO LA MODIFICA
 		$utentemod =mysql_query("	UPDATE 

@@ -55,7 +55,7 @@
 		$count=mysql_query("select count(*) from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$count = mysql_fetch_row($count);
 		if($count[0] == 1) {
-			echo '<div class="alert alert-danger"><b>Errore:</b> impossibile eliminare l\'unico mittente o destinario delle lettera. Aggiungerne prima un altro.</div>';
+			echo '<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Errore:</b> impossibile eliminare l\'unico mittente o destinario delle lettera. Aggiungerne prima un altro.</div>';
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'FAILED' , 'TENTATIVO DI ELIMINARE MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
 		}
 		else {
@@ -105,7 +105,7 @@
 			?>
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="alert alert-danger"><b><i class="fa fa-warning"></i>Attenzione:</b> c'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+					<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b> c'e' stato un errore nel caricamento del file sul server: controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
 				</div>
 			</div>
 			<?php

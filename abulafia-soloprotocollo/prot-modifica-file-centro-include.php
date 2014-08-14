@@ -20,7 +20,12 @@
 	$target_path = "lettere$annoprotocollo/"; //setta la directory di destinazione del file da caricare
 	$time = time();
 	$name = $time.".".$my_file->estensioneFile (basename( $_FILES['uploadedfile']['name']));
-	$target_path = $target_path ."temp/".$name; 
+	if($from == 'modifica-protocollo') {
+		$target_path = $target_path . $idlettera . '/' .$name;
+	}
+	else {
+		$target_path = $target_path ."temp/".$name;
+	}
 												/*
 												aggiunge alla directory, 
 												una sotto-directory con l'id della lettera
@@ -37,8 +42,8 @@
 						
 	if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) { //se lo spostamento del file va a buon fine
 		$target_path2=mysql_real_escape_string($target_path);
-		/*$inserisci=mysql_query("insert into joinlettereallegati values($idlettera, $annoprotocollo, '$name')");	*/		
 		if($from == 'modifica-protocollo') {
+			$inserisci=mysql_query("insert into joinlettereallegati values($idlettera, $annoprotocollo, '$name')");
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO ALLEGATO '. $name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
@@ -52,7 +57,7 @@
 		else {
 			$my_lettera->arrayallegati[$name]=$target_path2;
 			$_SESSION['my_lettera']=serialize($my_lettera);
-			//$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -65,7 +70,7 @@
 	} 
 	else { //se lo spostamento non va a buon fine
 		if($from == 'modifica-protocollo') {
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI MODIFICA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI MODIFICA ALLEGATO PROTOCOLLO '. $my_lettera->idtemporaneo , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -76,7 +81,8 @@
 			<?php
 		}
 		else {
-			//$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI AGGIUNTA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI AGGIUNTA ALLEGATO PROTOCOLLO '. $my_lettera->idtemporaneo , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
+			$_SESSION['my_lettera']=serialize($my_lettera);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
