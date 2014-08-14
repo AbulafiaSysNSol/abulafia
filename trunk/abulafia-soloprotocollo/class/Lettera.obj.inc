@@ -9,7 +9,7 @@ class Lettera {
 	private $note='';
 	private $loginname='';
 	private $annoricercaprotocollo='';
-	private $arraylettera;
+	private $arraylettera=array();
 	private $urlfile=array();
 	private $arraylettera1=array();
 	private $arrayletteramittenti=array();
@@ -26,8 +26,8 @@ class Lettera {
 		$joinlettereinserimento='joinlettereinserimento'.$annoricercaprotocollo;
 		$risultati=mysql_query("select distinct * from $tabella where ($tabella.idlettera='$idlettera') ");
 		echo mysql_error();
-		$arraylettera = mysql_fetch_array($risultati);
-		$arraylettera = array_map('stripslashes', $arraylettera);
+		$this->arraylettera = mysql_fetch_array($risultati);
+		$this->arraylettera = array_map('stripslashes', $this->arraylettera);
 		$letteramittenti=mysql_query("select * from $joinletteremittenti, anagrafica where $joinletteremittenti.idlettera='$idlettera' and $joinletteremittenti.idanagrafica=anagrafica.idanagrafica ");
 		$risultati3=mysql_query("select * from $joinlettereinserimento, anagrafica where idlettera='$idlettera' and $joinlettereinserimento.idinser=anagrafica.idanagrafica");
 		echo mysql_error();
@@ -35,7 +35,7 @@ class Lettera {
 		$risultati4=mysql_query("select * from $joinlettereinserimento, anagrafica where idlettera='$idlettera' and $joinlettereinserimento.idmod=anagrafica.idanagrafica");
 		echo mysql_error();
 		$arraymodifica = mysql_fetch_array($risultati4);
-		$this->arraylettera1 = $arraylettera;
+		$this->arraylettera1 = $this->arraylettera;
 		$this->arrayletteramittenti = $letteramittenti;
 		$this->arrayinserimento1 = $arrayinserimento;
 		$this->arraymodifica1 = $arraymodifica;
