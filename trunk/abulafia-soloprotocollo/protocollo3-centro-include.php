@@ -47,7 +47,8 @@
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
 			if (browser == "Netscape")
-			window.location="login0.php?corpus=protocollo2&from=errore"; else window.location="login0.php?corpus=protocollo2&idlettera=<?php echo $idlettera;?>&from=errore";
+			window.location="login0.php?corpus=protocollo2&from=errore"; 
+			else window.location="login0.php?corpus=protocollo2&idlettera=<?php echo $idlettera;?>&from=errore";
 			</SCRIPT>
 			<?php
 			exit();
@@ -57,7 +58,8 @@
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
 			if (browser == "Netscape")
-			window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>"; else window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>";
+			window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>"; 
+			else window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>";
 			</SCRIPT>
 			<?php
 			exit();
@@ -169,7 +171,10 @@
 						Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
 			$esito = $mail->send();
 			//scrittura log mail
-			$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - modifica lettera', $_SESSION['maillog']);
+			$my_log -> publscrivilog($_SESSION['loginname'],
+						'send notifications' , 
+						$esito ,'notifica automatica - modifica lettera', 
+						$_SESSION['maillog']);
 			//scrittura history log
 		}
 		
@@ -195,14 +200,25 @@
 						Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] .'.<br>Non rispondere a questa email.';
 			$esito = $mail->send();
 			//scrittura log mail
-			$my_log -> publscrivilog($_SESSION['loginname'],'send notifications' , $esito ,'notifica automatica - inserisci lettera', $_SESSION['maillog']);
+			$my_log -> publscrivilog($_SESSION['loginname'],
+						'send notifications' , 
+						$esito ,
+						'notifica automatica - inserisci lettera', 
+						$_SESSION['maillog']);
 		}
 		//scrittura history log		
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $idlettera , 'OK' , '' , $_SESSION['historylog']);
 	}
 	
 	$ultimoid = mysql_insert_id();
-	$modifica =mysql_query("update joinlettereinserimento$annoprotocollo set joinlettereinserimento$annoprotocollo.idmod='$loginid', joinlettereinserimento$annoprotocollo.datamod='$dataregistrazione2' where joinlettereinserimento$annoprotocollo.idlettera='$idlettera' limit 1");
+	$modifica =mysql_query("update 
+				joinlettereinserimento$annoprotocollo 
+				set 
+				joinlettereinserimento$annoprotocollo.idmod='$loginid', 
+				joinlettereinserimento$annoprotocollo.datamod='$dataregistrazione2' 
+				where 
+				joinlettereinserimento$annoprotocollo.idlettera='$idlettera' 
+				limit 1");
 	echo  mysql_error();
 	
 	//RESET VARIABILI DI SESSIONE 
@@ -224,12 +240,20 @@
 			<?php
 			if($from != "modifica") {
 				?>
-				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo registrato <b>correttamente.</b></div>
+				<div class="alert alert-success">
+					<span class="glyphicon glyphicon-ok">
+					</span> 
+					Protocollo registrato <b>correttamente.</b>
+				</div>
 				<?php
 			}
 			else {
 				?>
-				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Protocollo modificato <b>correttamente.</b></div>
+				<div class="alert alert-success">
+					<span class="glyphicon glyphicon-ok">
+					</span> 
+					Protocollo modificato <b>correttamente.</b>
+				</div>
 				<?php
 			}
 			?>
@@ -239,17 +263,53 @@
 		<div class="col-xs-5">
 			<h4><i class="fa fa-list"></i> Riepilogo:</h4>
 			<?php 
-				$my_lettera -> publdisplaylettera ($_GET['idlettera'], $annoprotocollo); //richiamo del metodo "mostra" dell'oggetto Lettera
+				$my_lettera -> publdisplaylettera ($_GET['idlettera'], $annoprotocollo); //richiamo del metodo "mostra"
 			?>
 		</div>
 		
 		<div class="col-xs-5">
 			<h4><i class="fa fa-cog"></i> Opzioni:</h4>
-			<p><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');"><i class="fa fa-plus-square"></i> Registrazione nuovo protocollo</a></p>
-			<p><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $idlettera;?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo protocollo</a></p>
-			<p><a href="login0.php?corpus=invia-newsletter&id=<?php echo $idlettera;?>&anno=<?php echo $annoprotocollo;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite email</p>
-			<p><a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $idlettera;?>&anno=<?php echo $annoprotocollo;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email manuale</a></p>	
-			<a href="stampa-protocollo.php?id=<?php echo $idlettera; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print"></i> Stampa ricevuta Protocollo</a>
+			<p>	<a href="login0.php?corpus=protocollo2
+					&from=crea" 
+					onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');">
+					<i class="fa fa-plus-square"></i> 
+					Registrazione nuovo protocollo
+				</a>
+			</p>
+			<p>
+				<a href="login0.php?corpus=modifica-protocollo
+					&from=risultati
+					&id=<?php echo $idlettera;?>"> 
+					<span class="glyphicon glyphicon-edit">
+					</span> 
+					Modifica questo protocollo
+				</a>
+			</p>
+			<p>
+				<a href="login0.php?corpus=invia-newsletter
+					&id=<?php echo $idlettera;?>
+					&anno=<?php echo $annoprotocollo;?>"> 
+					<span class="glyphicon glyphicon-envelope">
+					</span> 
+					Invia tramite email
+				</a>
+			</p>
+			<p>
+				<a href="login0.php?corpus=aggiungi-inoltro
+				&id=<?php echo $idlettera;?>
+				&anno=<?php echo $annoprotocollo;?>"> 
+				<span class="glyphicon glyphicon-pencil">
+				</span> 
+				Aggiungi inoltro email manuale
+				</a>
+			</p>	
+			<a href="stampa-protocollo.php?id=<?php echo $idlettera; ?>
+				&anno=<?php echo $anno; ?>" 
+				target="_blank">
+				<i class="fa fa-print">
+				</i> 
+				Stampa ricevuta Protocollo
+			</a>
 		</div>
 	</div>
   </div>
