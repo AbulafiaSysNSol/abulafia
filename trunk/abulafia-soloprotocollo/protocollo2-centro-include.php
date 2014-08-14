@@ -148,7 +148,7 @@
 <center>
 <div class="row">
 	<div class="col-xs-12">
-		<div class="alert alert-warning"><b><i class="fa fa-warning"></i> IMPORTANTE:</b> non lasciare questa pagina prima di aver completato la registrazione della lettera. </div>
+		<div class="alert alert-warning"><b><i class="fa fa-warning"></i> ATTENZIONE:</b> il numero di protocollo verrà assegnato solo dopo aver concluso le operazioni di inserimento dei dati.</div>
 	</div>
 </div>
 </center>
@@ -213,22 +213,23 @@
 				enctype="multipart/form-data" 
 				action="login0.php?corpus=prot-modifica-file" 
 				method="POST">
-			<table>
-			<tr>
-			<td> <!--impostazione dimensione massima file-->
-			<input type="hidden" 
-				name="MAX_FILE_SIZE" 
-				value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
-			<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
-			<input required name="uploadedfile" type="file" id="exampleInputFile">
-			</td>
-			<td valign="bottom">
-			<button type="submit" 
-				class="btn btn-primary" 
-				onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
-			</td>
-			</tr>
-			</table>
+			<div class="row">
+				<div class="col-xs-3">
+					<input type="hidden" 
+						name="MAX_FILE_SIZE" 
+						value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
+					<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
+					<input required name="uploadedfile" type="file" id="exampleInputFile">
+				</div>
+				
+				<div class="col-xs-2">
+				<br>
+					<button type="submit" 
+						class="btn btn-primary input-sm" 
+						onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File
+					</button>
+				</div>
+			</div>
 			</form>
 			
 			<?php
@@ -459,7 +460,7 @@
 				</div>
 			</div>
 			
-			<button type="button" class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra</button>
+			<button type="button" class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
 
 			</form>
 			
