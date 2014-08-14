@@ -233,7 +233,7 @@
 		}
 		//scrittura history log		
 		$my_log -> publscrivilog( $_SESSION['loginname'], 
-					'REGISTRATA LETTERA '. $idlettera , 
+					'REGISTRATA LETTERA '. $ultimoid , 
 					'OK' , 
 					'' , 
 					$_SESSION['historylog']);
