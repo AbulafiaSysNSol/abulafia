@@ -237,7 +237,7 @@
 				echo '<br>';
 				foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati )
 					{
-					echo "<i class=\"fa fa-file-o\"></i> <b>File associato: </b>";
+					echo "<b><i class=\"fa fa-file-o\"></i> File associato: </b>";
 					echo $elencochiavi.' ';
 					?>
 					- <a href="login0.php?corpus=protocollo2
@@ -327,6 +327,7 @@
 			}*/
 			if (count($my_lettera->arraymittenti)> 0)
 				{
+				echo "<b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b><br><br>";
 				foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti )
 					{
 					?>
