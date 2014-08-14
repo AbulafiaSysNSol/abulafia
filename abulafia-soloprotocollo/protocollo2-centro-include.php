@@ -14,7 +14,6 @@
 	
 	if($from == "errore") {
 		$errore = true;
-		$idlettera = $_GET['idlettera'];
 	}
 	else {
 		$errore = false;
@@ -158,9 +157,9 @@
 	
 		<div class="panel-heading">
 			<h3 class="panel-title"><strong>Identificativo Provvisorio Protocollo: <?php echo $my_lettera->idtemporaneo;?></strong>
-											<?php if($errore) { 
-													echo " - <b>ERRORE:</b> Bisogna inserire almeno un mittente o un destinatario.";
-													} ?>
+				<?php if($errore) { 
+					echo " - <b><i class=\"fa fa-warning\"></i> ATTENZIONE:</b> Bisogna inserire almeno un mittente o un destinatario.";
+				} ?>
 			</h3>
 		</div>
 		

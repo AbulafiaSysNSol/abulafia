@@ -16,6 +16,7 @@
 	//RECUPERO VARIABILE FROM DAL GET
 	if(isset($_GET['from'])) { 
 		$from = $_GET['from']; 
+		$idlettera = $_GET['idlettera'];
 	}
 	else {
 		$from='';
@@ -40,7 +41,7 @@
 			browser= navigator.appName;
 			if (browser == "Netscape")
 			window.location="login0.php?corpus=protocollo2&from=errore"; 
-			else window.location="login0.php?corpus=protocollo2&idlettera=<?php echo $idlettera;?>&from=errore";
+			else window.location="login0.php?corpus=protocollo2&from=errore";
 			</SCRIPT>
 			<?php
 			exit();
