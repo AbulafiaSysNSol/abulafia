@@ -57,7 +57,7 @@
 		else {
 			$my_lettera->arrayallegati[$name]=$target_path2;
 			$_SESSION['my_lettera']=serialize($my_lettera);
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$my_lettera->idtemporaneo , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -70,7 +70,7 @@
 	} 
 	else { //se lo spostamento non va a buon fine
 		if($from == 'modifica-protocollo') {
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI MODIFICA ALLEGATO PROTOCOLLO '. $my_lettera->idtemporaneo , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI MODIFICA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
