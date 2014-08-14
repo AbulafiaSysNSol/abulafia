@@ -37,6 +37,7 @@
 					$datadinascita= list($anno, $mese, $giorno) = explode("-", $datagrezza);
 					$datadinascita2 = "$giorno-$mese-$anno";
 					$verificaduplicati= mysql_query("select COUNT(*) from anagrafica where anagrafica.cognome='$cognome' and anagrafica.nome='$nome'");
+					echo mysql_error();
 					$res_count=mysql_fetch_row($verificaduplicati);
 					
 					if ($res_count[0] > 1) { //caso in cui il gruppo cognome+nome risulti duplicato - primo if
