@@ -58,7 +58,16 @@
   <script type="text/javascript" src="js/jquery-1.10.4.custom.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
+  <script type="text/javascript" src="lib/tinymce/tinymce.min.js"></script>
   <!-- JS -->
+  
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea#editor",
+    menubar: false,
+    toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | fontselect | fontsizeselect",
+ });
+</script>
   
   <script type="text/javascript">
 	$(function(){
@@ -156,6 +165,7 @@ var _prum = [['id', '53d3e4beabe53d9255170016'],
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li><a href="login0.php?corpus=protocollo2&from=crea" onClick="return confirm('ATTENZIONE: OPERAZIONE NON REVERSIBILE\n\nCreare nuovo numero di protocollo?');" ><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
+				
 				<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione titolario</a></li>
 				<li><a href="login0.php?corpus=pratiche"><i class="fa fa-tags"></i> Gestione pratiche</a></li>
 				<li><a href="login0.php?corpus=stampa-registro"><i class="fa fa-file-pdf-o"></i> Esporta registro in PDF</a></li>
@@ -182,7 +192,7 @@ var _prum = [['id', '53d3e4beabe53d9255170016'],
 				<li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users"></i> Gestione degli Utenti</a></li>
 				<li><a href="login0.php?corpus=advancedsettings"><i class="fa fa-cogs"></i> Advanced Settings</a></li>
 				<li><a href="login0.php?corpus=diagnostica"><span class="glyphicon glyphicon-wrench"></span> Diagnostica</a></li>
-				<li><a href="download.php?lud=log/access.log&est=log"><span class="glyphicon glyphicon-download"></span> Scarica il log degli accessi</a></li>
+				<li><a href="login0.php?corpus=access-log"><i class="fa fa-key"></i> Visualizza il log degli accessi</a></li>
 				<li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
 				<li><a href="login0.php?corpus=history"><span class="glyphicon glyphicon-time"></span> Visualizza il log delle azioni</a></li>
 				<?php

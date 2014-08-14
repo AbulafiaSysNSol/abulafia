@@ -26,8 +26,8 @@ Class File
 			} //nel caso di nessun file associato al protocollo
 			else {
 			
-             			$this->opzionidownloadlink= "annoricercaprotocollo=".$annoricercaprotocollo 
-								      ."&lud=lettere".$annoricercaprotocollo."/".$idlettera."/".$nomefile
+             			$this->opzionidownloadlink= "anno=".$annoricercaprotocollo 
+								      ."&lud=" . $nomefile
 								      ."&idlettera=".$idlettera
 								      ."&est=".$this->estensioneFile($nomefile);//richiamo del metodo ricava estensione dal file di questa stessa classe
 								      
