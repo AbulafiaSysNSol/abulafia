@@ -239,7 +239,7 @@
 					$_SESSION['historylog']);
 	}
 	
-	$ultimoid = mysql_insert_id();
+
 	$modifica =mysql_query("update 
 				joinlettereinserimento$annoprotocollo 
 				set 
