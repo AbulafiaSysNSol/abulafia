@@ -26,7 +26,7 @@ require('lib/fpdf/fpdf.php');
 		function Footer()
 		{
 		    // Logo
-		    $this->Image('images/footer.jpg',0,281,209.97);
+		    $this->Image('images/footerlettere.jpg',0,255,209.97);
 		}
 	}
 
@@ -55,10 +55,10 @@ $pdf->Ln(25);
 $pdf->Write('',$iniziale);
 $pdf->Ln(25);
 $pdf->Write('','Catania, ' . $now);
-$pdf->SetXY(140,210);
+$pdf->SetXY(140,190);
 $pdf->Write('','L\'ADDETTO');
 $pdf->SetFont('Times','',11);
-$pdf->SetY(270);
+$pdf->SetY(240);
 $pdf->Write('',$finale);
 $pdf->Output('protocollo'.$now.'.pdf','I');
 ?>
