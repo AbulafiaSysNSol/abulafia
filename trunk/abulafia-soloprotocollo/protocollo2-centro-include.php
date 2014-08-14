@@ -238,11 +238,15 @@
 				echo '<br>';
 				foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati )
 					{
+					echo "<i class=\"fa fa-file-o\"></i> <b>File associato: </b>";
 					echo $elencochiavi.' ';
-					?>- <a href="login0.php?corpus=protocollo2
+					?>
+					- <a href="login0.php?corpus=protocollo2
 					&from=eliminaallegato
-					&nome=<?php echo $elencochiavi;?>"></span> 
-					Elimina <span class="glyphicon glyphicon-remove"></a><br>
+					&nome=<?php echo $elencochiavi;?>">
+					Elimina <span class="glyphicon glyphicon-trash"></span></a>
+					 - <a class="fancybox" data-fancybox-type="iframe" href="<?php echo 'lettere'.$annoprotocollo.'/temp/'.$elencochiavi;?>">
+					Anteprima <i class="fa fa-eye"></i></a><br>
 					<?php
 					}
 				}
@@ -326,11 +330,14 @@
 				{
 				foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti )
 					{
-					echo $elencomittenti.' ';
-					?>- <a href="login0.php?corpus=protocollo2
+					?>
+					<a href="anagrafica-mini.php?id=<?php echo$elencochiavi ?>" class="fancybox" data-fancybox-type="iframe">
+						<?php echo $elencomittenti.' '; ?>
+					</a>
+					- <a href="login0.php?corpus=protocollo2
 					&from=elimina-mittente
 					&idanagrafica=<?php echo $elencochiavi;?>"></span> 
-					Elimina <span class="glyphicon glyphicon-remove"></a><br>
+					Elimina <span class="glyphicon glyphicon-trash"></a><br>
 					<?php
 					}
 				}
