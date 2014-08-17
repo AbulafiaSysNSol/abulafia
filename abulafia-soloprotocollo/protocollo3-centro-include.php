@@ -1,9 +1,53 @@
 <?php
 
-	$my_lettera = unserialize($_SESSION['my_lettera']); //carica l'oggetto 'lettera'
-	
+	if (isset($_SESSION['my_lettera'])) {
+		$my_lettera = unserialize($_SESSION['my_lettera']); //carica l'oggetto 'lettera'
+		// CONTROLLO SE E' STATO INSERITO ALMENO UN MITTENTO O UN DESTINATARIO
+		if (count($my_lettera->arraymittenti) < 1) { 
+			$_SESSION['spedita-ricevuta'] = $_POST['spedita-ricevuta'];
+			$_SESSION['oggetto'] = $_POST['oggetto'];
+			$_SESSION['data'] = $_POST['data'];
+			$_SESSION['posizione'] = $_POST['posizione'];
+			$_SESSION['riferimento'] = $_POST['riferimento'];
+			$_SESSION['pratica'] = $_POST['pratica'];
+			$_SESSION['note'] = $_POST['note'];
+			
+			//RITORNO ALLA PAGINA DI REGISTRAZIONE  O DI MODIFICA SE NON E' STATO INSERITO NEMMENO UN MITTENTO O UN DESTISTARIO
+			$_SESSION['my_lettera']=serialize ($my_lettera);
+			if($from != "modifica") {
+			?>
+		
+				<SCRIPT LANGUAGE="Javascript">
+				browser= navigator.appName;
+				if (browser == "Netscape")
+				window.location="login0.php?corpus=protocollo2&from=errore"; 
+				else window.location="login0.php?corpus=protocollo2&from=errore";
+				</SCRIPT>
+				<?php
+				exit();
+			}
+			else {
+				?>
+				<SCRIPT LANGUAGE="Javascript">
+				browser= navigator.appName;
+				if (browser == "Netscape")
+				window.location="login0.php?corpus=modifica-protocollo
+						&from=errore
+						&tabella=protocollo
+						&id=<?php echo $idlettera;?>"; 
+				else window.location="login0.php?corpus=modifica-protocollo
+							&from=errore
+							&tabella=protocollo
+							&id=<?php echo $idlettera;?>";
+				</SCRIPT>
+				<?php
+				exit();
+			}
+		}
+		// FINE CONTROLLO MITTENTI/DESTINATARI
+	}
+
 	//CREAZIONE NUOVI OGGETTI
-	$my_file = new File();
 	$anagrafica = new Anagrafica();
 	$calendario = new Calendario();
 	
@@ -21,50 +65,6 @@
 	else {
 		$from='';
 	}
-	
-	// CONTROLLO SE E' STATO INSERITO ALMENO UN MITTENTO O UN DESTINATARIO
-	if (count($my_lettera->arraymittenti) < 1) { 
-		$_SESSION['spedita-ricevuta'] = $_POST['spedita-ricevuta'];
-		$_SESSION['oggetto'] = $_POST['oggetto'];
-		$_SESSION['data'] = $_POST['data'];
-		$_SESSION['posizione'] = $_POST['posizione'];
-		$_SESSION['riferimento'] = $_POST['riferimento'];
-		$_SESSION['pratica'] = $_POST['pratica'];
-		$_SESSION['note'] = $_POST['note'];
-		
-		//RITORNO ALLA PAGINA DI REGISTRAZIONE  O DI MODIFICA SE NON E' STATO INSERITO NEMMENO UN MITTENTO O UN DESTISTARIO
-		if($from != "modifica") {
-		$_SESSION['my_lettera']=serialize ($my_lettera);
-		?>
-	
-			<SCRIPT LANGUAGE="Javascript">
-			browser= navigator.appName;
-			if (browser == "Netscape")
-			window.location="login0.php?corpus=protocollo2&from=errore"; 
-			else window.location="login0.php?corpus=protocollo2&from=errore";
-			</SCRIPT>
-			<?php
-			exit();
-		}
-		else {
-			?>
-			<SCRIPT LANGUAGE="Javascript">
-			browser= navigator.appName;
-			if (browser == "Netscape")
-			window.location="login0.php?corpus=modifica-protocollo
-					&from=errore
-					&tabella=protocollo
-					&id=<?php echo $idlettera;?>"; 
-			else window.location="login0.php?corpus=modifica-protocollo
-						&from=errore
-						&tabella=protocollo
-						&id=<?php echo $idlettera;?>";
-			</SCRIPT>
-			<?php
-			exit();
-		}
-	}
-	// FINE CONTROLLO MITTENTI/DESTINATARI
 	
 	//VARIABILI DI SESSIONI
 	$annoprotocollo = $_SESSION['annoprotocollo'];
@@ -111,7 +111,7 @@
 							VALUES ( 
 								'$ultimoid',
 								'$loginid',
-								'$loginid',
+								'',
 								'$dataregistrazione'
 							)
 						");

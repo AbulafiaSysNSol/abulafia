@@ -217,7 +217,7 @@
 			
 			<table class="table table-bordered">
 				<tr>
-					<td  style="vertical-align: middle" align="center"><b>Id</b></td>
+					<td style="vertical-align: middle" align="center"><b>Id</b></td>
 					<td style="vertical-align: middle" align="center"><b>Tipo</b></td>
 					<td style="vertical-align: middle" align="center"><b>Cognome</b></td>
 					<td style="vertical-align: middle" align="center"><b>Nome</b></td>
