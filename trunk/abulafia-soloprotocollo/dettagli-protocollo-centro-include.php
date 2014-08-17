@@ -129,6 +129,9 @@
 					</div>
 				</div>
 				
+				<?php
+				if($modifica['idanagrafica'] != 0) {
+				?>
 				<h3><i class="fa fa-user"></i> Ultima modifica:</h3>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
@@ -139,6 +142,9 @@
 					</li></ul>
 					</div>
 				</div>
+				<?php
+				}
+				?>
 			</div>
 			
 			<div class="col-md-5">

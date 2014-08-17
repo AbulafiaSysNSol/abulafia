@@ -33,20 +33,20 @@
 	else {	//se non si proviene da 'crea', si deserializzano gli oggetti già creati
 		$my_lettera=unserialize($_SESSION['my_lettera']);
 		if (isset($_SESSION['my_file'])) {
-						$my_file=unserialize($_SESSION['my_file']); //deserializza l'oggetto solo se è presente in sessione
-						}
-		$idlettera=$my_lettera->idtemporaneo;
+			$my_file=unserialize($_SESSION['my_file']); //deserializza l'oggetto solo se è presente in sessione
 		}
+		$idlettera=$my_lettera->idtemporaneo;
+	}
 
 	if ($from == 'aggiungi') {
 			
-			if ($my_lettera->controllaEsistenzaMittente($idlettera, $my_lettera->arraymittenti)==false)
-				{
-				$my_lettera->arraymittenti[$idanagrafica]=$my_anagrafica->getName($idanagrafica);
-				}
-			else { echo 'Mittente o Destinatario già inserito'; }
-			
-			$add = true;
+		if ($my_lettera->controllaEsistenzaMittente($idlettera, $my_lettera->arraymittenti)==false) {
+			$my_lettera->arraymittenti[$idanagrafica]=$my_anagrafica->getName($idanagrafica);
+		}
+		else { 
+			echo 'Mittente o Destinatario già inserito'; 
+		}
+		$add = true;
 			/*$my_log -> publscrivilog( $_SESSION['loginname'], 
 						'AGGIUNTO MITTENTE PROTOCOLLO '
 						.$idlettera , 

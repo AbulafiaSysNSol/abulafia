@@ -189,7 +189,7 @@
 		$urlpdf=$row['urlpdf'];
 		?>
 		
-		<form class="form-group" action="login0.php?corpus=protocollo3&from=modifica&dataoriginalegiorno=<?php echo $giornor; ?>&dataoriginalemese=<?php echo $meser; ?>&dataoriginaleanno=<?php echo $annor; ?>&urlpdf=<?php echo $urlpdf;?>&idlettera=<?php echo $idlettera;?>" method="post" >
+		<form class="form-group" action="login0.php?corpus=protocollo3&from=modifica&idlettera=<?php echo $idlettera;?>" method="post" >
 			<br>
 			<label><span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta:</label>
 			<div class="row">
