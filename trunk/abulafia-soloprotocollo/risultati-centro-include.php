@@ -225,7 +225,7 @@
 					<td style="vertical-align: middle" align="center"><b>Comune</b></td>
 					<td style="vertical-align: middle" align="center"><b>Prov.</b></td>
 					<td style="vertical-align: middle" align="center"><b>Codice Fiscale</b></td>
-					<td style="vertical-align: middle" align="center" width="120"><b>Opzioni</b></td>
+					<td style="vertical-align: middle" align="center" nowrap><b>Opzioni</b></td>
 				</tr>
 				<?php
 				while ($row = mysql_fetch_array($risultati)) {
@@ -480,7 +480,7 @@
 					<td style="vertical-align: middle">Oggetto</td>
 					<td style="vertical-align: middle" width="150">File</td>
 					<td style="vertical-align: middle">Mitt./Dest.</td>
-					<td style="vertical-align: middle" width="182">Opzioni</td>
+					<td style="vertical-align: middle" nowrap>Opzioni</td>
 				</tr>
 			<?php
 			
