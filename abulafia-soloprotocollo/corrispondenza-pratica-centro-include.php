@@ -125,7 +125,7 @@
 				<td style="vertical-align: middle">Oggetto</td>
 				<td style="vertical-align: middle">File</td>
 				<td style="vertical-align: middle">Mitt./Dest.</td>
-				<td style="vertical-align: middle" width="182">Opzioni</td>
+				<td style="vertical-align: middle" nowrap>Opzioni</td>
 			</tr>
 		<?php
 		
