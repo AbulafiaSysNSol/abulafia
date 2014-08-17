@@ -478,7 +478,7 @@
 					<td style="vertical-align: middle">Data Reg.</td>
 					<td style="vertical-align: middle">Pos.</td>
 					<td style="vertical-align: middle">Oggetto</td>
-					<td style="vertical-align: middle" width="150">File</td>
+					<td style="vertical-align: middle" nowrap>File</td>
 					<td style="vertical-align: middle">Mitt./Dest.</td>
 					<td style="vertical-align: middle" nowrap>Opzioni</td>
 				</tr>
