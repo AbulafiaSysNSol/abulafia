@@ -1,6 +1,15 @@
 <?php
 
-	if (isset($_SESSION['my_lettera'])) {
+	//RECUPERO VARIABILE FROM DAL GET
+	if(isset($_GET['from'])) { 
+		$from = $_GET['from']; 
+		$idlettera = $_GET['idlettera'];
+	}
+	else {
+		$from='';
+	}
+
+	if (isset($_SESSION['my_lettera']) && ($from != 'modifica')) {
 		$my_lettera = unserialize($_SESSION['my_lettera']); //carica l'oggetto 'lettera'
 		// CONTROLLO SE E' STATO INSERITO ALMENO UN MITTENTO O UN DESTINATARIO
 		if (count($my_lettera->arraymittenti) < 1) { 
@@ -56,15 +65,6 @@
 	$date=strftime("%d/%m/%Y");
 	$ora = date("g:i a");
 	$datamail = $date . ' alle ' . $ora;
-
-	//RECUPERO VARIABILE FROM DAL GET
-	if(isset($_GET['from'])) { 
-		$from = $_GET['from']; 
-		$idlettera = $_GET['idlettera'];
-	}
-	else {
-		$from='';
-	}
 	
 	//VARIABILI DI SESSIONI
 	$annoprotocollo = $_SESSION['annoprotocollo'];
