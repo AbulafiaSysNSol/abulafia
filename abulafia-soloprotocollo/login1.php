@@ -150,5 +150,5 @@ $my_log -> publscrivilog($userid, 'login', 'ok', $client, $logfile );
 <SCRIPT LANGUAGE="Javascript">
 browser= navigator.appName;
 if (browser == "Netscape")
-window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>"; else window.location="login0.php?corpus=home<?php echo $pass; ?>";
+window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>&aggiornamento=ok"; else window.location="login0.php?corpus=home<?php echo $pass; ?>&aggiornamento=ok";
 </SCRIPT>

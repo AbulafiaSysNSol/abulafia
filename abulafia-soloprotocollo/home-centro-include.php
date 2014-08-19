@@ -43,6 +43,23 @@
 		</a></div></center>
 		<?php
 	}
+	
+	if (isset($_GET['firma']) &&($_GET['firma'] == 'ok')) {
+		?>
+		<center><div class="alert alert-success"><h3><i class="fa fa-check"></i> Lettera sottoposta alla firma <b>correttamente!</b></h3></div></center>
+		<?php
+	}
+	
+	if (isset($_GET['aggiornamento']) &&($_GET['aggiornamento'] == 'ok')) {
+		?>
+		<center><div class="alert alert-info">
+			<h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema</b></h3>
+			<h4>E' stato rilasciato un aggiornamento di sistema riguardande la registrazione delle lettere.
+			</h4>
+			<small>Se notate anomalie o malfunzionamenti comunicateceli mediante la <a href="login0.php?corpus=segnala-bug">pagina di segnalazione errori.</a>
+		</center>
+		<?php
+	}
 	?>
 	
 <hr>
