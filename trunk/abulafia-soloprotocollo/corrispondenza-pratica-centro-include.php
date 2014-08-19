@@ -125,7 +125,7 @@
 				<td style="vertical-align: middle">Oggetto</td>
 				<td style="vertical-align: middle">File</td>
 				<td style="vertical-align: middle">Mitt./Dest.</td>
-				<td style="vertical-align: middle" nowrap>Opzioni</td>
+				<td style="vertical-align: middle">Opzioni</td>
 			</tr>
 		<?php
 		
@@ -145,7 +145,7 @@
 				<td style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
 				<td style="vertical-align: middle"><?php echo $value[7] ;?></td>
 				<td style="vertical-align: middle"><?php echo $value[1] ;?></td>
-				<td style="vertical-align: middle"> 
+				<td nowrap style="vertical-align: middle"> 
 				
 				<?php
 				$file = false;
@@ -180,7 +180,7 @@
 					?>
 				</td>
 
-				<td style="vertical-align: middle">
+				<td nowrap style="vertical-align: middle">
 					<div class="btn-group btn-group-sm">
 						<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
 						<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
