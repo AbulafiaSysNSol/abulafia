@@ -2,8 +2,13 @@
 
 	set_time_limit(0);
 	
+	$annoprotocollo = $_SESSION['annoprotocollo'];
+	
 	if(isset($_GET['idlettera'])) {
 		$idlettera = $_GET['idlettera'];
+		if (!is_dir("lettere$annoprotocollo/".$idlettera)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
+			mkdir("lettere$annoprotocollo/".$idlettera, 0777, true);
+		}
 	}
 	
 	if(isset($_GET['from'])) {
@@ -16,7 +21,6 @@
 	include 'maledetti-apici-centro-include.php';
 	$my_file= new File;
 	$my_lettera=unserialize($_SESSION['my_lettera']);
-	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$target_path = "lettere$annoprotocollo/"; //setta la directory di destinazione del file da caricare
 	$time = time();
 	$name = $time.".".$my_file->estensioneFile (basename( $_FILES['uploadedfile']['name']));
@@ -32,9 +36,6 @@
 												e il nome del file da caricare
 												*/
 										
-	/*if (!is_dir("lettere$annoprotocollo/".$idlettera)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
-		mkdir("lettere$annoprotocollo/".$idlettera, 0777, true);
-	}*/
 			
 	if (!is_dir("lettere$annoprotocollo/"."/temp/")) {//controlla se la directory TEMP esiste dentro la dir LETTERE, altrimenti la crea
 		mkdir("lettere$annoprotocollo/"."/temp/", 0777, true);
