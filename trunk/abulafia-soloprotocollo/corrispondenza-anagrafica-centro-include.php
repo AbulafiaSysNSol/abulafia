@@ -129,7 +129,7 @@
 				<td style="vertical-align: middle">Pos.</td>
 				<td style="vertical-align: middle">Oggetto</td>
 				<td style="vertical-align: middle">File</td>
-				<td style="vertical-align: middle">Opzioni</td>
+				<td style="vertical-align: middle" width="200">Opzioni</td>
 			</tr>
 		<?php
 		
