@@ -35,7 +35,19 @@
 		if (isset($_SESSION['my_file'])) {
 			$my_file=unserialize($_SESSION['my_file']); //deserializza l'oggetto solo se è presente in sessione
 		}
+		else {
+			$my_file = new File();
+		}
 		$idlettera=$my_lettera->idtemporaneo;
+		if (count($my_lettera->arrayallegati)> 0) {
+			$doc = false;
+			foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati ) {
+				if( ($my_file->estensioneFile($elencoallegati) == 'doc') || ($my_file->estensioneFile($elencoallegati) == 'docx') || ($my_file->estensioneFile($elencoallegati) == 'odt')  ) {
+					$doc = true;
+				}
+			}
+		}
+		
 	}
 
 	if ($from == 'aggiungi') {
@@ -80,6 +92,14 @@
 		$nome = $_GET['nome'];
 		unset($my_lettera->arrayallegati[$nome]);
 		unlink("lettere$annoprotocollo/temp/" . $nome);
+		if (count($my_lettera->arrayallegati)> 0) {
+			$doc = false;
+			foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati ) {
+				if( ($my_file->estensioneFile($elencoallegati) == 'doc') || ($my_file->estensioneFile($elencoallegati) == 'docx') || ($my_file->estensioneFile($elencoallegati) == 'odt')  ) {
+					$doc = true;
+				}
+			}
+		}
 		/*
 		$idlettera=$_GET['idlettera'];
 		$anno = $_GET['anno'];
@@ -192,9 +212,13 @@
 				</div>
 				<?php
 			}
-			?>
 			
-			<?php
+			if($doc) {
+				?>
+				<div class="alert alert-info"><b><i class="fa fa-warning"></i> ATTENZIONE:</b> hai allegato un file <b>modificabile</b>. E' consigliato allegare file in PDF.</div>
+				<?php
+			}
+			
 			 if( isset($_GET['upfile']) && $_GET['upfile'] == "success") {
 			?>
 			<div class="row">
