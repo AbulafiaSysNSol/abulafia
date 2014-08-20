@@ -26,6 +26,7 @@
 				$my_lettera->idtemporaneo=$_SESSION['loginid'].'-'.time();//crea un id temporaneo per la lettera unendo id utente
 											// e timestamp
 				$idlettera=$my_lettera->idtemporaneo;
+				$doc = false;
 
 	
 	}
@@ -417,6 +418,7 @@
 						<OPTION value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected";} ?>> fax
 						<OPTION value="email" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "email") {echo "selected";} ?>> email
 						<OPTION value="consegna a mano" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "consegna a mano") {echo "selected";} ?>> consegna a mano
+						<OPTION value="PEC" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "PEC") {echo "selected";} ?>> PEC
 						</select>
 					</div>
 				</div>

@@ -233,6 +233,7 @@
 				<OPTION value="fax"> fax
 				<OPTION value="email"> email
 				<OPTION value="consegna a mano"> consegna a mano
+				<OPTION value="PEC"> PEC
 			</select>
 			</div>
 			</div>
