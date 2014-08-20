@@ -39,8 +39,8 @@
 			$my_file = new File();
 		}
 		$idlettera=$my_lettera->idtemporaneo;
+		$doc = false;
 		if (count($my_lettera->arrayallegati)> 0) {
-			$doc = false;
 			foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati ) {
 				if( ($my_file->estensioneFile($elencoallegati) == 'doc') || ($my_file->estensioneFile($elencoallegati) == 'docx') || ($my_file->estensioneFile($elencoallegati) == 'odt')  ) {
 					$doc = true;
@@ -92,8 +92,8 @@
 		$nome = $_GET['nome'];
 		unset($my_lettera->arrayallegati[$nome]);
 		unlink("lettere$annoprotocollo/temp/" . $nome);
+		$doc = false;
 		if (count($my_lettera->arrayallegati)> 0) {
-			$doc = false;
 			foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati ) {
 				if( ($my_file->estensioneFile($elencoallegati) == 'doc') || ($my_file->estensioneFile($elencoallegati) == 'docx') || ($my_file->estensioneFile($elencoallegati) == 'odt')  ) {
 					$doc = true;
