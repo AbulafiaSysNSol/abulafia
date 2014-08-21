@@ -22,7 +22,7 @@
 
 			<table class="table table-bordered">
 				<tr>
-					<td><b>ID</td>
+					<td><b>ID<br>(mantenere o riassociare)</td>
 					<td><b>Cognome</td>
 					<td><b>Nome</td>
 					<td><b>Data di Nascita</td>
@@ -54,11 +54,17 @@
 					
 					if ($res_count[0] > 1) { //caso in cui il gruppo cognome+nome risulti duplicato
 						?>
-						<tr>
-							<td><a href="login0.php?corpus=dettagli-anagrafica
+						<tr>								
+							<td>
+								<a href="login0.php?corpus=dettagli-anagrafica
 									&from=risultati
 									&tabella=anagrafica
 									&id=<?php echo $id ;?>"><?php echo $id; ?>
+								</a>
+								<br>
+								<input type="radio" name="group1" value="<?php echo $id; ?>"> M
+								<br>
+								<input type="radio" name="group2" value="<?php echo $id; ?>"> R
 							</td>
 							<td valign="middle"><?php echo $cognome; ?>
 							</td>
