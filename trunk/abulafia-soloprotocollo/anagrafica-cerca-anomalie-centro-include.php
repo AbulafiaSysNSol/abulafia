@@ -4,7 +4,13 @@
 
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title"><b><i class="fa fa-bug"></i> Elenco delle presunte anomalie: <?php echo '('.$filtro.')';?></b></h3>
+		<h3 class="panel-title">
+			<b>
+				<i class="fa fa-bug">
+				</i> 
+			Elenco delle presunte anomalie: <?php echo '('.$filtro.')';?>
+			</b>
+		</h3>
 	</div>
   
 	<div class="panel-body">
@@ -23,30 +29,43 @@
 				</tr>
 
 			<?php
-				$risultati= mysql_query("select * from anagrafica order by anagrafica.cognome, anagrafica.nome");
+				$risultati= mysql_query("select * 
+							from anagrafica 
+							order by anagrafica.cognome, anagrafica.nome");
 
 				if (!$risultati) {
 					echo 'Nessun risultato dalla query';
 				}
 
-				while ($row = mysql_fetch_array($risultati)) { //inizio ciclo while1
+				while ($row = mysql_fetch_array($risultati)) { //inizio ciclo while
 					$cognome= $row['cognome'];
 					$nome= $row['nome'];
 					$id= $row['idanagrafica'];
 					$datagrezza=$row['nascitadata'];
 					$datadinascita= list($anno, $mese, $giorno) = explode("-", $datagrezza);
 					$datadinascita2 = "$giorno-$mese-$anno";
-					$verificaduplicati= mysql_query("select COUNT(*) from anagrafica where anagrafica.cognome='$cognome' and anagrafica.nome='$nome'");
+					$verificaduplicati= mysql_query("select COUNT(*) 
+									from anagrafica 
+									where anagrafica.cognome='$cognome' 
+									and 
+									anagrafica.nome='$nome'");
 					echo mysql_error();
 					$res_count=mysql_fetch_row($verificaduplicati);
 					
-					if ($res_count[0] > 1) { //caso in cui il gruppo cognome+nome risulti duplicato - primo if
+					if ($res_count[0] > 1) { //caso in cui il gruppo cognome+nome risulti duplicato
 						?>
 						<tr>
-							<td><a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $id ;?>"><?php echo $id; ?></td>
-							<td valign="middle"><?php echo $cognome; ?></td>
-							<td valign="middle"><?php echo $nome; ?></td>
-							<td  valign="middle"><?php echo $datadinascita2; ?></td>
+							<td><a href="login0.php?corpus=dettagli-anagrafica
+									&from=risultati
+									&tabella=anagrafica
+									&id=<?php echo $id ;?>"><?php echo $id; ?>
+							</td>
+							<td valign="middle"><?php echo $cognome; ?>
+							</td>
+							<td valign="middle"><?php echo $nome; ?>
+							</td>
+							<td  valign="middle"><?php echo $datadinascita2; ?>
+							</td>
 						</tr>
 						<?php
 					}
