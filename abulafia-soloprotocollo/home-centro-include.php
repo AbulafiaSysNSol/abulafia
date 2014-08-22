@@ -78,10 +78,26 @@
 			
 			<div class="panel-body">
 				<p><?php 
-				//modificata da da 01 aprile 2008 a 04 giugno 2014
+				//Utilizzo Abulafia
+				$anniusoapplicazione = (strtotime("now") - strtotime("2008/4/1"))/60/60/24/365;
+				$giorniusoapplicazione = ((strtotime("now") - strtotime("2008/4/1"))/60/60/24)-(int)$anniusoapplicazione*365;
+				echo 'La Web-Application Abulafia e\' in uso da '; 
+				
+				if( (int)$anniusoapplicazione > 0) { 
+					echo (int)$anniusoapplicazione . ' anni e ' .(int)$giorniusoapplicazione.' giorni.'; 
+				} 
+				else { 
+					echo (int)$giorniusoapplicazione.' giorni.'; 
+				} 
+				
+				?>
+				</p>
+				
+				<p><?php 
+				//Utilizzo Catania
 				$anniusoapplicazione = (strtotime("now") - strtotime("2014/6/4"))/60/60/24/365;
 				$giorniusoapplicazione = ((strtotime("now") - strtotime("2014/6/4"))/60/60/24)-(int)$anniusoapplicazione*365;
-				echo 'Questa web-application e\' in uso da '; 
+				echo $_SESSION['nomeapplicativo'] . ' e\' in uso da '; 
 				
 				if( (int)$anniusoapplicazione > 0) { 
 					echo (int)$anniusoapplicazione . ' anni e ' .(int)$giorniusoapplicazione.' giorni.'; 
