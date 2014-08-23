@@ -120,7 +120,7 @@
      	 		}
   	 	}
   	 	
-  	 alert(group1+" "+group2)
+  	 alert(group1value+" - "+group2value)
   	 
 	 }
   
