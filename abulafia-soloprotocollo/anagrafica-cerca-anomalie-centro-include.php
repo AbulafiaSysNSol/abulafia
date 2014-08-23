@@ -84,7 +84,7 @@
 			?>
 			</table>
 			<button class="btn btn-primary" 
-				onClick="Controllo()">
+				onClick="showBoxes(this.form)">
 				<span class="glyphicon glyphicon-check">
 				</span> Fondi le anagrafiche selezionate
 			</button>
@@ -95,28 +95,33 @@
 		<a href="login0.php?corpus=diagnostica"><b><i class="fa fa-arrow-left"></i> Indietro</b></a>
 	</div>
 </div>
-<form name="testform" method="POST">
-<input id="r" type="radio" name="group3" value="R"> R
-<input id="e" type="radio" name="group3" value="e"> e
-<button onClick="showBoxes(this.form)">TEST
-</button>
-</form>
+
 <script language="javascript">
  <!--
+	function showBoxes(frm)
+	{
 
-
-	function showBoxes(frm){
-   	var message = "Your chose:\n\n"
-
-
-   	//For each radio button if it is checked get the value and break.
-  	 for (var i = 0; i < frm.group3.length; i++){
-     	 if (frm.group3[i].checked){
-        	 message = message + "\n" + frm.group3[i].value
-        	 break
-     	 }
-  	 }
-  	 alert(message)
+   		//For each radio button if it is checked get the value and break.
+  	 for (var i = 0; i < frm.group1.length; i++)
+  	 	{
+     	 	if (frm.group1[i].checked)
+     	 		{
+        	 		var group1value = frm.group1[i].value
+        	 		break
+     	 		}
+  	 	}
+  	 
+  	 for (var i = 0; i < frm.group2.length; i++)
+  	 	{
+     	 	if (frm.group2[i].checked)
+     	 		{
+        	 		var group2value = frm.group2[i].value
+        	 		break
+     	 		}
+  	 	}
+  	 	
+  	 alert(group1+" "+group2)
+  	 
 	 }
   
 //-->
