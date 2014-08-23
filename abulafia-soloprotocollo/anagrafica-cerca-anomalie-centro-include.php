@@ -119,6 +119,7 @@
         	 		break
      	 		}
   	 	}
+  	 	alert(group1value+" - "+group2value);
 	 }
   
 //-->
