@@ -107,13 +107,15 @@
 
 	function get_radio_value()
 		{
-		alert("Il campo Tipologia e' 33");
-		var oRadio = document.modulo[0].elements[group3];
- 
+		alert("Il campo Tipologia e' 1");
+		var oRadio = document.testform[0].elements[group3];
+ 		alert("Il campo Tipologia e' 2");
    		for(var i = 0; i < oRadio.length; i++)
   			 {
+  			 alert("Il campo Tipologia e' 3");
     			  if(oRadio[i].checked)
       				{
+      				alert("Il campo Tipologia e' 4");
          			return oRadio[i].value;
      				 }
    			}
