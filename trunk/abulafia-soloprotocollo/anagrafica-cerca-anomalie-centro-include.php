@@ -96,8 +96,8 @@
 	</div>
 </div>
 <form name="testform" method="POST">
-<input type="radio" name="group3" value="R"> R
-<input type="radio" name="group3" value="e"> e
+<input id="r" type="radio" name="group3" value="R"> R
+<input id="e" type="radio" name="group3" value="e"> e
 <button onClick="get_radio_value()">TEST
 </button>
 </form>
@@ -107,20 +107,10 @@
 
 	function get_radio_value()
 		{
-		alert("Il campo Tipologia e' 1");
-		var oRadio = document.testform[0].elements[group3];
- 		alert("Il campo Tipologia e' 2");
-   		for(var i = 0; i < oRadio.length; i++)
-  			 {
-  			 alert("Il campo Tipologia e' 3");
-    			  if(oRadio[i].checked)
-      				{
-      				alert("Il campo Tipologia e' 4");
-         			return oRadio[i].value;
-     				 }
-   			}
- 		alert("Il campo Tipologia e' "+oRadio[i].value);
-  		 return '';
+		if(document.getElementById('r').checked)
+			alert("Hai selezionato R");
+		if(document.getElementById('e').checked)
+			alert("Hai selezionato e");
       		}
 
   
