@@ -84,7 +84,7 @@
 			?>
 			</table>
 			<button class="btn btn-primary" 
-				onClick="showBoxes(this.form)">
+				onClick="getRadioButtonValues(this.form)">
 				<span class="glyphicon glyphicon-check">
 				</span> Fondi le anagrafiche selezionate
 			</button>
@@ -98,7 +98,7 @@
 
 <script language="javascript">
  <!--
-	function showBoxes(frm)
+	function getRadioButtonValues(frm)
 	{
 
    		//For each radio button if it is checked get the value and break.
@@ -119,9 +119,6 @@
         	 		break
      	 		}
   	 	}
-  	 	
-  	 alert(group1value+" - "+group2value)
-  	 
 	 }
   
 //-->
