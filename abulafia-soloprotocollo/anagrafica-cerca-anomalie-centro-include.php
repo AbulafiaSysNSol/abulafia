@@ -16,9 +16,14 @@
 	<div class="panel-body">
      
 		<?php
-		if ($filtro == 'cognomenome') { 
-		
+		if ($filtro == 'cognomenome') {
+			 
 			?> <!--inizio scelta filtro ='cognomenome'-->
+			
+			<form 	role="form" 
+				enctype="multipart/form-data"
+				name="modulo"  
+				method="POST">
 
 			<table class="table table-bordered">
 				<tr>
@@ -78,9 +83,44 @@
 				}
 			?>
 			</table>
+			<button class="btn btn-primary" 
+				onClick="Controllo()">
+				<span class="glyphicon glyphicon-check">
+				</span> Fondi le anagrafiche selezionate
+			</button>
+			</form>
 			<?php 
 		} //fine scelta filtro ='cognomenome'-->
 		?>
 		<a href="login0.php?corpus=diagnostica"><b><i class="fa fa-arrow-left"></i> Indietro</b></a>
 	</div>
 </div>
+<form name="testform" method="POST">
+<input type="radio" name="group3" value="R"> R
+<input type="radio" name="group3" value="e"> e
+<button onClick="get_radio_value()">TEST
+</button>
+</form>
+<script language="javascript">
+ <!--
+
+
+	function get_radio_value()
+		{
+		alert("Il campo Tipologia e' 33");
+		var oRadio = document.modulo[0].elements[group3];
+ 
+   		for(var i = 0; i < oRadio.length; i++)
+  			 {
+    			  if(oRadio[i].checked)
+      				{
+         			return oRadio[i].value;
+     				 }
+   			}
+ 		alert("Il campo Tipologia e' "+oRadio[i].value);
+  		 return '';
+      		}
+
+  
+//-->
+</script>
