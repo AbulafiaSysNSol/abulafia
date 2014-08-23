@@ -98,21 +98,26 @@
 <form name="testform" method="POST">
 <input id="r" type="radio" name="group3" value="R"> R
 <input id="e" type="radio" name="group3" value="e"> e
-<button onClick="get_radio_value()">TEST
+<button onClick="showBoxes(this.form)">TEST
 </button>
 </form>
 <script language="javascript">
  <!--
 
 
-	function get_radio_value()
-		{
-		if(document.getElementById('r').checked)
-			alert("Hai selezionato R");
-		if(document.getElementById('e').checked)
-			alert("Hai selezionato e");
-      		}
+	function showBoxes(frm){
+   	var message = "Your chose:\n\n"
 
+
+   	//For each radio button if it is checked get the value and break.
+  	 for (var i = 0; i < frm.group3.length; i++){
+     	 if (frm.group3[i].checked){
+        	 message = message + "\n" + frm.group3[i].value
+        	 break
+     	 }
+  	 }
+  	 alert(message)
+	 }
   
 //-->
 </script>
