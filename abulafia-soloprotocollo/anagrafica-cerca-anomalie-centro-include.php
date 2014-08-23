@@ -101,7 +101,7 @@
 	function getRadioButtonValues(frm)
 	{
 
-   		//For each radio button if it is checked get the value and break.
+   	//For each radio button if it is checked get the value and break.
   	 for (var i = 0; i < frm.group1.length; i++)
   	 	{
      	 	if (frm.group1[i].checked)
