@@ -119,7 +119,17 @@
         	 		break
      	 		}
   	 	}
-  	 	alert(group1value+" - "+group2value);
+  	 	
+  	 if (group1value===group2value) //se è stata selezionata la stessa anagrafica per entrambe le condizioni
+  	 	{
+  	 	alert('Non puoi selezionare la stessa anagrafica da mantenere e da riassociare');
+  	 	}
+  	 
+  	 if (group1value===undefined || group2value===undefined)
+  	 	{
+  	 	alert('Devi selezionare una anagrafica per la posizione M ed una per la posizione R');
+  	 	}
+  	 
 	 }
   
 //-->
