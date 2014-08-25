@@ -1,5 +1,10 @@
 <?php
 	$filtro=$_GET['filtro'];
+	
+	if(isset($_SESSION['message'])) //controlla che sia settata la variabile
+		{ 
+		$message= $_SESSION['message'].'<br>');
+		}
 ?>
 
 <div class="panel panel-default">
@@ -8,6 +13,7 @@
 			<b>
 				<i class="fa fa-bug">
 				</i> 
+			<?php echo $message;?>
 			Elenco delle presunte anomalie: <?php echo '('.$filtro.')';?>
 			</b>
 		</h3>
@@ -133,7 +139,7 @@
   	 else //altrimenti manda i dati alla pagina successiva
   	 	{
   	 	alert('Attenzione: i riferimenti all\'anagrafica '+group2value+' verranno riassegnate all\'anagrafica '+group1value);
-  	 	document.modulo.action = "login0.php?corpus=anagrafica-cerca-anomalie2";
+  	 	document.modulo.action = 'login0.php?corpus=anagrafica-cerca-anomalie2&id1='+group1value+'&id2='+group2value+'&filtro=cognomenome';
   	 	}
   	 
 	 }
