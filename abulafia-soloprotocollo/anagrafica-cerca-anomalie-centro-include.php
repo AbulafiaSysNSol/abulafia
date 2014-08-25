@@ -125,9 +125,15 @@
   	 	alert('Non puoi selezionare la stessa anagrafica da mantenere e da riassociare');
   	 	}
   	 
-  	 if (group1value===undefined || group2value===undefined)
+  	 if (group1value===undefined || group2value===undefined) //se manca una delle due selezioni
   	 	{
   	 	alert('Devi selezionare una anagrafica per la posizione M ed una per la posizione R');
+  	 	}
+  	 	
+  	 else //altrimenti manda i dati alla pagina successiva
+  	 	{
+  	 	alert('Attenzione: i riferimenti all\'anagrafica '+group2value+' verranno riassegnate all\'anagrafica '+group1value);
+  	 	document.modulo.action = "login0.php?corpus=anagrafica-cerca-anomalie2";
   	 	}
   	 
 	 }
