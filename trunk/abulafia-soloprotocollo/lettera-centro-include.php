@@ -19,7 +19,7 @@
 						<textarea id="editorOgg" class="form-control" rows="2" type="text" name="oggetto"></textarea>		
 						<br>
 						<h5><i class="fa fa-calendar"></i> Data della lettera:</h5>
-						<input required type="text" class="form-control input-sm datepicker" name="data">
+						<input required type="text" class="form-control input-sm datepickerProt" name="data">
 						<br>
 						<h5><i class="fa fa-paperclip"></i> Numero allegati:</h5>
 						<input type="text" class="form-control input-sm" name="allegati">
