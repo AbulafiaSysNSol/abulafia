@@ -65,7 +65,15 @@
 tinymce.init({
     selector: "textarea#editor",
     menubar: false,
-    toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | fontselect | fontsizeselect",
+    toolbar: "newdocument | undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | fontsizeselect"
+ });
+</script>
+
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea#editorOgg",
+    menubar: false,
+    toolbar: "bold underline italic"
  });
 </script>
   
@@ -165,10 +173,45 @@ var _prum = [['id', '53d3e4beabe53d9255170016'],
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
-				
 				<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione titolario</a></li>
 				<li><a href="login0.php?corpus=pratiche"><i class="fa fa-tags"></i> Gestione pratiche</a></li>
 				<li><a href="login0.php?corpus=stampa-registro"><i class="fa fa-file-pdf-o"></i> Esporta registro in PDF</a></li>
+			</ul>
+		</li>
+		
+		<?php
+		$query = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+		$num = mysql_fetch_row($query);
+		$prot = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE firmata = 1 AND protocollo = 0");
+		$protocollare = mysql_fetch_row($prot);
+		?>
+		<li class="dropdown <?php if($_GET['corpus'] == 'lettera' OR $_GET['corpus']=='lettera2' OR $_GET['corpus']=='elenco-lettere' OR $_GET['corpus']=='elenco-lettere-firma') { echo ' active'; }?>">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<?php 
+					if($protocollare[0] > 0) {
+						echo '<span class="badge alert-success"><i class="fa fa-exclamation"></i></span>';
+					}
+					else {
+						echo '<i class="fa fa-file-text-o"></i>';
+					}
+				?>
+				 Lettere
+				<?php 
+					if(($num[0] > 0) && ($_SESSION['auth']>98)) {
+						echo '<span class="badge alert-success">' . $num[0] . '</span>';
+					}
+				?>
+				<b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a href="login0.php?corpus=lettera"><span class="glyphicon glyphicon-pencil"></span> Scrivi lettera</a></li>
+				<li><a href="login0.php?corpus=elenco-lettere"><i class="fa fa-bars"></i> Elenco lettere <?php if($protocollare[0] > 0) { echo '<span class="badge alert-success">'. $protocollare[0] .' da protocollare!</span>'; } ?></a></li>
+				<?php 
+					if(($num[0] > 0) && ($_SESSION['auth']>98)) {
+						echo '<li class="divider"></li>';
+						echo '<li><a href="login0.php?corpus=elenco-lettere-firma"><i class="fa fa-pencil"></i> Lettere da Firmare <span class="badge alert-success">' . $num[0] . '</span></a></li>';
+					}
+				?>
 			</ul>
 		</li>
 		
@@ -179,7 +222,9 @@ var _prum = [['id', '53d3e4beabe53d9255170016'],
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b></a>
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			 Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b>
+		</a>
 		<ul class="dropdown-menu">
 		<li><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><span class="glyphicon glyphicon-edit"></span> Cambia Password</a></li>
 		<li><a href="login0.php?corpus=segnala-bug"><span class="glyphicon glyphicon-warning-sign"></span> Segnala un Errore</a></li>
