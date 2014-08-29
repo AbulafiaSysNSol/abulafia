@@ -27,7 +27,7 @@
 	//ACQUISISCO I DATI GIA' REGISTRATI DELLA LETTERA
 	$query = mysql_query("SELECT * FROM comp_lettera WHERE id = $id");
 	$dati = mysql_fetch_array($query);
-	$oggetto= $dati['oggetto'];
+	$oggetto= str_replace('<p>', '', str_replace('</p>', '', $dati['oggetto']));
 	$datalettera = $dati['data'];
 	$speditaricevuta = 'spedita';
 	
