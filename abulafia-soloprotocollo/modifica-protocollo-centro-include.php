@@ -3,6 +3,7 @@
 	$my_file = new File(); //crea un nuovo oggetto 'file'
 	$my_lettera = new Lettera();
 	$from= $_GET['from'];
+	
 	if ( isset($_GET['id'])) {
 		$idlettera=$_GET['id'];
 	}
@@ -10,9 +11,16 @@
 		$idlettera = $_GET['idlettera'];
 	}
 	
+	if ( isset($_GET['anno'])) {
+		$anno=$_GET['anno'];
+	}
+	else {
+		$anno = $_SESSION['annoricercaprotocollo'];
+	}
+	
 	$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 	$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-	if ($_SESSION['annoricercaprotocollo'] != $annoprotocollo) { echo 'Non puoi modificare una registrazione di un protocollo in archivio'; exit();}
+	if ($anno != $annoprotocollo) { echo 'Non puoi modificare una registrazione di un protocollo in archivio'; exit();}
 
 	//controllo dell'autorizazione necessaria alla modifica del protocollo
 	$risultati3=mysql_query("select * from joinlettereinserimento$annoprotocollo, users where joinlettereinserimento$annoprotocollo.idlettera='$idlettera' and joinlettereinserimento$annoprotocollo.idinser=users.idanagrafica ");

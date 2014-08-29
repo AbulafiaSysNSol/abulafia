@@ -174,7 +174,7 @@
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
 						<ul>
-							<li><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $_GET['id'];?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo Protocollo</a></li>
+							<li><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno; ?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo Protocollo</a></li>
 							<li><a href="login0.php?corpus=invia-newsletter&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite Email</a></li>
 							<li><a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email</a></li>
 							<?php if($dettagli['speditaricevuta'] == 'ricevuta') { ?><li><a href="stampa-protocollo.php?id=<?php echo $id; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print"></i> Stampa ricevuta Protocollo</a></li><?php } ?>
