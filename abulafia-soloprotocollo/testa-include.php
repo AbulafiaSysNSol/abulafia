@@ -65,7 +65,7 @@
 tinymce.init({
     selector: "textarea#editor",
     menubar: false,
-    toolbar: "newdocument | undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | fontsizeselect"
+    toolbar: "newdocument | undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
  });
 </script>
 
