@@ -157,7 +157,7 @@
 																			&idlettera=<?php echo $idlettera;?>
 																			&anno=<?php echo $annoprotocollo;?>
 																			&nome=<?php echo $valore[2];?>"></span> 
-																			Elimina <span class="glyphicon glyphicon-remove"></a>
+																			Elimina <span class="glyphicon glyphicon-trash"></a>
 				<?php
 				}
 			}
@@ -188,7 +188,7 @@
 			echo '<b><i class="fa fa-users"></i> Mittenti/Destinatari attuali:</b><br><br>';
 			while ($row2 = mysql_fetch_array($risultati2)) {
 				$row2 = array_map('stripslashes', $row2);
-				echo $row2['cognome'] . ' ' . $row2['nome'] ;?> - <a href="login0.php?corpus=modifica-protocollo&from=elimina-mittente&id=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $row['urlpdf'];?>">Elimina <span class="glyphicon glyphicon-remove"></span></a><br><?php
+				echo '<a href="anagrafica-mini.php?id=' . $row2['idanagrafica'].'" class="fancybox" data-fancybox-type="iframe">' . $row2['cognome'] . ' ' . $row2['nome'] ;?></a> - <a href="login0.php?corpus=modifica-protocollo&from=elimina-mittente&id=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $row['urlpdf'];?>">Elimina <span class="glyphicon glyphicon-trash"></span></a><br><?php
 			}
 		}
 		else {
