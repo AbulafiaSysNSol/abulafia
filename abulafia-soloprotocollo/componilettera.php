@@ -31,7 +31,7 @@
 	}
 	require('lib/html2pdf/html2pdf.class.php');
 	$content = '
-	<page backtop="30mm" backbottom="55mm" backleft="10mm" backright="10mm">
+	<page backtop="35mm" backbottom="55mm" backleft="10mm" backright="10mm">
 		
 		<page_header>
 			<img align="right" src="images/headerlettere2.jpg" width="700">
@@ -167,7 +167,6 @@
 		<br><br>
 		'.$testo.'
 		</div>
-		<br><br><br><br>
 		<div style="font-size: 16;">
 			<div style="margin-left: 500px;">
 				IL PRESIDENTE';
