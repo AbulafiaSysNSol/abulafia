@@ -41,91 +41,42 @@
 			<img align="center" src="images/footerlettere.jpg" width="753">
 		</page_footer>
 		
-		<div style="font-size: 15;">
+		<span style="font-size: 15;">
 		
-		<table border="0" cellspacing="0">
-			<tr>
-				<td colspan="2" width="380">
-					Catania, '.$data.'
-					<br><br><br>';
-					if($protocollo != 0) {
-						$content = $content.'Protocollo n&ordm; '.$protocollo.' del '.$dataprot.'<br><br>';
-					}
-					else {
-						$content = $content.'Protocollo n&ordm; ________ del ______________<br><br>';
-					}
-					$content = $content.'
-					Allegati: '.$allegati.'<br><br><br>
-				</td>
-				
-				<td rowspan="2" width="285">
-					<br>
-					<table border="0">';
-						
-						$destlettera = '';
-						//destinatari
-						$dest = mysql_query("	SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo
-										FROM anagrafica, comp_destinatari
-										WHERE comp_destinatari.idlettera = $id
-										AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
-										AND comp_destinatari.conoscenza = 0 ");echo mysql_error();
-						while($destinatari=mysql_fetch_array($dest)) {
-							$destinatari = array_map('stripslashes', $destinatari);
-							if($destinatari['attributo'] == 'Al Volontario') {
-								$destlettera = $destlettera. '<tr>	<td width="60">Al</td>
-														<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
-														</td>
-													<br><br>
-													</tr>';
-							}
-							else if($destinatari['attributo'] == 'Alla Volontaria') {
-								$destlettera = $destlettera. '<tr>	<td width="60">Alla</td>
-														<td width="208">Volontaria '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
-														</td>
-													<br><br>
-													</tr>';
-							}
-							else if($destinatari['attributo'] == 'Ai Volontari') {
-								$destlettera = $destlettera. '<tr>	<td width="60">Ai</td>
-														<td width="208">Volontari '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
-														</td>
-													</tr>';
-							}
-							else {
-								$destlettera = $destlettera. '<tr>	<td width="60">'.$destinatari['attributo'].'</td>
-														<td width="208">'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
-														</td>
-													</tr>';
-							}
+			<table border="0" cellspacing="0">
+				<tr>
+					<td colspan="2" width="380">
+						Catania, '.$data.'
+						<br><br><br>';
+						if($protocollo != 0) {
+							$content = $content.'Protocollo n&ordm; '.$protocollo.' del '.$dataprot.'<br><br>';
 						}
-			
-						//destinatari x conoscenza
-						$dest2 = mysql_query("	SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo
-										FROM anagrafica, comp_destinatari
-										WHERE comp_destinatari.idlettera = $id
-										AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
-										AND comp_destinatari.conoscenza = 1 ");
-
-						$count = mysql_query("SELECT COUNT(anagrafica.idanagrafica)
-										FROM anagrafica, comp_destinatari
-										WHERE comp_destinatari.idlettera = $id
-										AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
-										AND comp_destinatari.conoscenza = 1 ");
-						$num=mysql_fetch_row($count);
-						if($num[0]>0) {
-							$destlettera = $destlettera. '<tr>	<td width="60">E, p.c.</td>
-														<td width="208"><br><br>
-														</td>
-													<br><br>
-												</tr>';
-							while($destinatari=mysql_fetch_array($dest2)) {
+						else {
+							$content = $content.'Protocollo n&ordm; ________ del ______________<br><br>';
+						}
+						$content = $content.'
+						Allegati: '.$allegati.'<br><br><br>
+					</td>
+					
+					<td rowspan="2" width="285">
+						<br>
+						<table border="0">';
+							
+							$destlettera = '';
+							//destinatari
+							$dest = mysql_query("	SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo
+											FROM anagrafica, comp_destinatari
+											WHERE comp_destinatari.idlettera = $id
+											AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
+											AND comp_destinatari.conoscenza = 0 ");echo mysql_error();
+							while($destinatari=mysql_fetch_array($dest)) {
 								$destinatari = array_map('stripslashes', $destinatari);
 								if($destinatari['attributo'] == 'Al Volontario') {
-								$destlettera = $destlettera. '<tr>	<td width="60">Al</td>
-														<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
-														</td>
-													<br><br>
-													</tr>';
+									$destlettera = $destlettera. '<tr>	<td width="60">Al</td>
+															<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+															</td>
+														<br><br>
+														</tr>';
 								}
 								else if($destinatari['attributo'] == 'Alla Volontaria') {
 									$destlettera = $destlettera. '<tr>	<td width="60">Alla</td>
@@ -147,37 +98,84 @@
 														</tr>';
 								}
 							}
-						}
-						
-						$content = $content.$destlettera;
-						$content = $content.'
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td width="60">
-					Oggetto:
-				</td>
-				<td width="310">
-					<div style="margin-right: 10px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
-				</td>
-			</tr>
-		</table>
-		
-		<br><br>
-		'.$testo.'
-		</div>
-		<div style="font-size: 16;">
-			<div style="margin-left: 500px;">
-				IL PRESIDENTE';
-				if($firma == 1) {
-					$content = $content.'	</div>
-									<div style="margin-left: 350px;">
-									<img src="images/firma.png" width="400">';
-				}
-				$content = $content.'
-			</div>
-		</div>
+				
+							//destinatari x conoscenza
+							$dest2 = mysql_query("	SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo
+											FROM anagrafica, comp_destinatari
+											WHERE comp_destinatari.idlettera = $id
+											AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
+											AND comp_destinatari.conoscenza = 1 ");
+
+							$count = mysql_query("SELECT COUNT(anagrafica.idanagrafica)
+											FROM anagrafica, comp_destinatari
+											WHERE comp_destinatari.idlettera = $id
+											AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
+											AND comp_destinatari.conoscenza = 1 ");
+							$num=mysql_fetch_row($count);
+							if($num[0]>0) {
+								$destlettera = $destlettera. '<tr>	<td width="60">E, p.c.</td>
+															<td width="208"><br><br>
+															</td>
+														<br><br>
+													</tr>';
+								while($destinatari=mysql_fetch_array($dest2)) {
+									$destinatari = array_map('stripslashes', $destinatari);
+									if($destinatari['attributo'] == 'Al Volontario') {
+									$destlettera = $destlettera. '<tr>	<td width="60">Al</td>
+															<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+															</td>
+														<br><br>
+														</tr>';
+									}
+									else if($destinatari['attributo'] == 'Alla Volontaria') {
+										$destlettera = $destlettera. '<tr>	<td width="60">Alla</td>
+																<td width="208">Volontaria '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+																</td>
+															<br><br>
+															</tr>';
+									}
+									else if($destinatari['attributo'] == 'Ai Volontari') {
+										$destlettera = $destlettera. '<tr>	<td width="60">Ai</td>
+																<td width="208">Volontari '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+																</td>
+															</tr>';
+									}
+									else {
+										$destlettera = $destlettera. '<tr>	<td width="60">'.$destinatari['attributo'].'</td>
+																<td width="208">'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+																</td>
+															</tr>';
+									}
+								}
+							}
+							
+							$content = $content.$destlettera;
+							$content = $content.'
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td width="60">
+						Oggetto:
+					</td>
+					<td width="310">
+						<div style="margin-right: 10px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
+					</td>
+				</tr>
+			</table>
+			<br><br>
+			'.$testo.'
+			<br><br><br>
+			<span style="font-size: 16; margin-left: 500px;">
+					IL PRESIDENTE
+			</span>';
+					if($firma == 1) {
+						$content = $content.'	<div style="margin-left: 350px;">
+											<img src="images/firma.png" width="400">
+										</div>';
+					}
+					$content = $content.'
+		</span>
 	</page>';
 
 	$html2pdf = new HTML2PDF('P','A4','it');
