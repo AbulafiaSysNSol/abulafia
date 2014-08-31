@@ -31,7 +31,7 @@
 	}
 	require('lib/html2pdf/html2pdf.class.php');
 	$content = '
-	<page backtop="35mm" backbottom="55mm" backleft="10mm" backright="10mm">
+	<page backtop="35mm" backbottom="45mm" backleft="10mm" backright="10mm">
 		
 		<page_header>
 			<img align="right" src="images/headerlettere2.jpg" width="700">
@@ -43,13 +43,13 @@
 		
 		<span style="font-size: 15;">
 		
-			<table border="0" cellspacing="0">
+			<table style="vertical-align: top;" border="0" cellspacing="0">
 				<tr>
 					<td colspan="2" width="380">
 						Catania, '.$data.'
-						<br><br><br>';
+						<br><br>';
 						if($protocollo != 0) {
-							$content = $content.'Protocollo n&ordm; '.$protocollo.' del '.$dataprot.'<br><br>';
+							$content = $content.'<table border="0"><tr><td rowspan=2"><img src="lettere'.$anno.'/qrcode/'.$protocollo.$anno.'.png" width="90"></td><td style="vertical-align: bottom;">Protocollo n&ordm; '.$protocollo.'</td></tr><tr><td style="vertical-align: top;">del '.$dataprot.'</td></tr></table><br>';
 						}
 						else {
 							$content = $content.'Protocollo n&ordm; ________ del ______________<br><br>';
@@ -59,8 +59,8 @@
 					</td>
 					
 					<td rowspan="2" width="285">
-						<br>
-						<table border="0">';
+						<br><br>
+						<table style="vertical-align: top;" border="0">';
 							
 							$destlettera = '';
 							//destinatari
@@ -87,7 +87,7 @@
 								}
 								else if($destinatari['attributo'] == 'Ai Volontari') {
 									$destlettera = $destlettera. '<tr>	<td width="60">Ai</td>
-															<td width="208">Volontari '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+															<td width="208">Volontari:<br><br>'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 															</td>
 														</tr>';
 								}
@@ -136,7 +136,7 @@
 									}
 									else if($destinatari['attributo'] == 'Ai Volontari') {
 										$destlettera = $destlettera. '<tr>	<td width="60">Ai</td>
-																<td width="208">Volontari '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+																<td width="208">Volontari:<br><br>'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 																</td>
 															</tr>';
 									}
@@ -155,23 +155,27 @@
 					</td>
 				</tr>
 				<tr>
-					<td width="60">
+					<td width="58">
 						Oggetto:
 					</td>
-					<td width="310">
-						<div style="margin-right: 10px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
+					<td width="312">
+						<div style="text-align: justify; margin-right: 14px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
 					</td>
 				</tr>
 			</table>
 			<br><br>
 			'.$testo.'
 			<br><br><br>
-			<span style="font-size: 16; margin-left: 500px;">
-					IL PRESIDENTE
+			<span style="margin-left: 500px;">
+					Il Presidente
+			</span>
+			<br>
+			<span style="margin-left: 422px;">
+					Comitato Provinciale CRI Catania
 			</span>';
 					if($firma == 1) {
-						$content = $content.'	<div style="margin-left: 350px;">
-											<img src="images/firma.png" width="400">
+						$content = $content.'	<div style="margin-left: 400px;">
+											<img src="images/firma.jpg" width="280">
 										</div>';
 					}
 					$content = $content.'
