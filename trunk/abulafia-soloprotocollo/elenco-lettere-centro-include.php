@@ -20,7 +20,7 @@ $query = mysql_query("SELECT * FROM comp_lettera ORDER BY id DESC");
 		<?php
 			if (isset($_GET['from']) &&($_GET['from'] == 'nessuna-lettera')) {
 			?>
-				<center><div class="alert alert-info"><i class="fa fa-check"></i> Tutte le lettere sono state firmate <b>correttamente!</b></div></center>
+				<center><div class="alert alert-info"><i class="fa fa-check"></i> Non ci sono lettere da <b>firmare!</b></div></center>
 			<?php
 			}
 		?>
