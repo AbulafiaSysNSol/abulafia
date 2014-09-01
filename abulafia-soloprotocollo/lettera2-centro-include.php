@@ -107,10 +107,10 @@
 		
 		<a href="?corpus=modifica-lettera&idlettera=<?php echo $id; ?>&from=lettera2"><button class="btn btn-warning btn-lg" type="button"><i class="fa fa-arrow-left"></i> Torna ai dettagli</button></a>
 		<a class="fancybox" data-fancybox-type="iframe" href="componilettera.php?id=<?php echo $id; ?>"><button class="btn btn-info btn-lg" type="button"><i class="fa fa-file-o"></i> Anteprima Lettera</button></a>
-		<?php if($_SESSION['auth'] > 99) { ?>
+		<?php if($_SESSION['auth'] < 100) { ?>
 			<a href="sottoponi-lettera-firma.php?idlettera=<?php echo $id; ?>"><button class="btn btn-success btn-lg" type="button"><i class="fa fa-check"></i> Manda alla firma</button></a>
 		<?php } else { ?>
-		<a href="firma-lettera.php?id=<?php echo $id; ?>&from=elenco-lettere"><button class="btn btn-success btn-lg" type="button"><i class="fa fa-pencil"></i> Firma</button></a>
+			<a href="firma-lettera.php?id=<?php echo $id; ?>&from=elenco-lettere"><button class="btn btn-success btn-lg" type="button"><i class="fa fa-pencil"></i> Firma</button></a>
 		<?php } ?>
 	</div>
 </div>

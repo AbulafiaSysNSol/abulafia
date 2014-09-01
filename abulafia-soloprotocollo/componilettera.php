@@ -34,14 +34,14 @@
 	<page backtop="35mm" backbottom="45mm" backleft="10mm" backright="10mm">
 		
 		<page_header>
-			<img align="right" src="images/headerlettere2.jpg" width="700">
+			<img align="right" src="images/headerpresidente.jpg" width="700">
 		</page_header>
 		
 		<page_footer>
-			<img align="center" src="images/footerlettere.jpg" width="753">
+			<img align="center" src="images/footerlettere.png" width="753">
 		</page_footer>
 		
-		<span style="font-size: 15;">
+		<span style="font-family: Times, Verdana, Georgia, Serif; font-size: 16;">
 		
 			<table style="vertical-align: top;" border="0" cellspacing="0">
 				<tr>
@@ -72,27 +72,27 @@
 							while($destinatari=mysql_fetch_array($dest)) {
 								$destinatari = array_map('stripslashes', $destinatari);
 								if($destinatari['attributo'] == 'Al Volontario') {
-									$destlettera = $destlettera. '<tr>	<td width="60">Al</td>
+									$destlettera = $destlettera. '<tr>	<td width="60"> Al</td>
 															<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 															</td>
 														<br><br>
 														</tr>';
 								}
 								else if($destinatari['attributo'] == 'Alla Volontaria') {
-									$destlettera = $destlettera. '<tr>	<td width="60">Alla</td>
+									$destlettera = $destlettera. '<tr>	<td width="60"> Alla</td>
 															<td width="208">Volontaria '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 															</td>
 														<br><br>
 														</tr>';
 								}
 								else if($destinatari['attributo'] == 'Ai Volontari') {
-									$destlettera = $destlettera. '<tr>	<td width="60">Ai</td>
+									$destlettera = $destlettera. '<tr>	<td width="60"> Ai</td>
 															<td width="208">Volontari:<br><br>'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 															</td>
 														</tr>';
 								}
 								else {
-									$destlettera = $destlettera. '<tr>	<td width="60">'.$destinatari['attributo'].'</td>
+									$destlettera = $destlettera. '<tr>	<td width="60"> '.$destinatari['attributo'].'</td>
 															<td width="208">'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 															</td>
 														</tr>';
@@ -121,27 +121,27 @@
 								while($destinatari=mysql_fetch_array($dest2)) {
 									$destinatari = array_map('stripslashes', $destinatari);
 									if($destinatari['attributo'] == 'Al Volontario') {
-									$destlettera = $destlettera. '<tr>	<td width="60">Al</td>
+									$destlettera = $destlettera. '<tr>	<td width="60"> Al</td>
 															<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 															</td>
 														<br><br>
 														</tr>';
 									}
 									else if($destinatari['attributo'] == 'Alla Volontaria') {
-										$destlettera = $destlettera. '<tr>	<td width="60">Alla</td>
+										$destlettera = $destlettera. '<tr>	<td width="60"> Alla</td>
 																<td width="208">Volontaria '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 																</td>
 															<br><br>
 															</tr>';
 									}
 									else if($destinatari['attributo'] == 'Ai Volontari') {
-										$destlettera = $destlettera. '<tr>	<td width="60">Ai</td>
+										$destlettera = $destlettera. '<tr>	<td width="60"> Ai</td>
 																<td width="208">Volontari:<br><br>'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 																</td>
 															</tr>';
 									}
 									else {
-										$destlettera = $destlettera. '<tr>	<td width="60">'.$destinatari['attributo'].'</td>
+										$destlettera = $destlettera. '<tr>	<td width="60"> '.$destinatari['attributo'].'</td>
 																<td width="208">'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
 																</td>
 															</tr>';
@@ -159,24 +159,27 @@
 						Oggetto:
 					</td>
 					<td width="312">
-						<div style="text-align: justify; margin-right: 14px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
+						<div style="text-align: justify; margin-right: 15px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
 					</td>
 				</tr>
 			</table>
 			<br><br>
 			'.$testo.'
-			<br><br><br>
-			<span style="margin-left: 500px;">
-					Il Presidente
-			</span>
-			<br>
-			<span style="margin-left: 422px;">
-					Comitato Provinciale CRI Catania
-			</span>';
+			<br><br><br>';
+			
 					if($firma == 1) {
 						$content = $content.'	<div style="margin-left: 400px;">
-											<img src="images/firma.jpg" width="280">
+											<img src="../firma.jpg" width="280">
 										</div>';
+					}
+					else {
+						$content = $content.' <span style="margin-left: 500px;">
+											Il Presidente
+										</span>
+										<br>
+										<span style="margin-left: 422px;">
+											Comitato Provinciale CRI Catania
+										</span>';
 					}
 					$content = $content.'
 		</span>
