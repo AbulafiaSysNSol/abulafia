@@ -43,32 +43,33 @@
    }
    ?>
  
+ <center><div class="alert alert-info"><i class="fa fa-lock"></i> Ti consigliamo di inserire una password che contenga <b>almeno 6 caratteri</b> e che sia composta da <b>lettere e numeri.</b></div></center>
     <form action="login0.php?corpus=cambio-password2" method="post" role="form">
   <div class="form-group">
-    <label>Password attuale:</label>
+    <label><i class="fa fa-key"></i> Password attuale:</label>
 	<div class="row">
-	<div class="col-xs-4">
-		<input class="form-control" size="40" type="password" name="vecchiapassword" />
+	<div class="col-xs-3">
+		<input class="form-control input-sm" size="40" type="password" name="vecchiapassword" />
 	</div>
 	</div>
   </div>
   <div class="form-group">
-    <label>Nuova password:</label>
+    <label><i class="fa fa-key"></i> Nuova password:</label>
 	<div class="row">
-	<div class="col-xs-4">
-		<input class="form-control" size="40" type="password" name="nuovapassword1" />
+	<div class="col-xs-3">
+		<input class="form-control input-sm" size="40" type="password" name="nuovapassword1" />
 	</div>
 	</div>
   </div>
   <div class="form-group">
-    <label>Ripeti nuova password:</label>
+    <label><i class="fa fa-key"></i> Ripeti nuova password:</label>
 	<div class="row">
-	<div class="col-xs-4">
-		<input class="form-control" size="40" type="password" name="nuovapassword2" />
+	<div class="col-xs-3">
+		<input class="form-control input-sm" size="40" type="password" name="nuovapassword2" />
 	</div>
 	</div>
   </div>
-  <button type="submit" class="btn btn-default">Modifica</button>
+  <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Cambia Password</button>
 </form>
 </div>
 </div>
