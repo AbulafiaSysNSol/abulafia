@@ -15,8 +15,9 @@
 	if (!isset($_POST['tabella'])) {
 		$_POST['tabella'] = $_GET['tabella'];
 	}
-	if (!isset($_POST['annoricercaprotocollo'])) {
-		$_POST['annoricercaprotocollo'] = $_SESSION['annoricercaprotocollo'];
+	if (isset($_POST['annoricercaprotocollo'])) {
+		$annoricercaprotocollo = $_POST['annoricercaprotocollo'];
+		$_SESSION['annoricercaprotocollo'] = $_POST['annoricercaprotocollo'];
 	}
 	if (!isset($_POST['anagraficatipologia'])) {
 		if (isset($_GET['anagraficatipologia'])) {
@@ -40,11 +41,6 @@
 
 	$tabella = $_POST['tabella'];
 	
-	$annoricercaprotocollo=$_POST['annoricercaprotocollo'];
-	
-	if(isset($annoricercaprotocollo)) {
-		$_SESSION['annoricercaprotocollo']= $annoricercaprotocollo;
-	}
 	if(isset($_POST['group1'])) { 
 		$ordinerisultati= $_POST['group1'];
 	}
