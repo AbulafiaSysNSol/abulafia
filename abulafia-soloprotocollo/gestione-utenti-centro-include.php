@@ -42,7 +42,7 @@ var id=0;
 				while ($risultati2=mysql_fetch_array($risultati))	{
 					$risultati2 = array_map('stripslashes', $risultati2);
 					?>
-					<tr align="center"><td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo ucwords($risultati2['cognome'].' '.$risultati2['nome']);?></a></td><td> Auth = <?php echo $risultati2['auth'];?></td><td><a href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"> Modifica</a> - <a href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>">Elimina</a></td></tr>
+					<tr align="center"><td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo ucwords($risultati2['cognome'].' '.$risultati2['nome']);?></a></td><td> Auth = <?php echo $risultati2['auth'];?></td><td><a href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"> Modifica</a> - <a onclick="return confirm('Sicuro di voler cancellare l\'utente')" href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>">Elimina</a></td></tr>
 					<?php 
 				} 
 				?>
