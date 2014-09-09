@@ -122,7 +122,7 @@
 					
 					<label>Numero/Descrizione:</label>
 					<div class="form-group">
-					<input required size="40" class="form-control" type="text" name="numero">
+						<input required size="30" class="form-control" type="text" name="numero">
 					</div>
 					
 					<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Aggiungi</button>
