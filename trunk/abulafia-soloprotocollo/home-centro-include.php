@@ -54,7 +54,7 @@
 		?>
 		<center><div class="alert alert-info">
 			<h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema</b></h3>
-			<h4>E' stato rilasciato un aggiornamento di sistema riguardande la composizione delle lettere.
+			<h4>E' stato rilasciato un aggiornamento di sistema riguardante la composizione delle lettere.
 			<br>
 			<br>E' possibile da oggi infatti comporre le lettere direttamente da Abulafia, attraverso il menu "Lettere" nella barra in alto.
 			</h4>
