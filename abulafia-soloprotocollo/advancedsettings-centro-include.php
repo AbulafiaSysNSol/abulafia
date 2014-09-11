@@ -6,78 +6,95 @@ if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per uti
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-		<h3 class="panel-title"><strong>Advanced Settings</strong></h3>
+			<h3 class="panel-title"><strong><i class="fa fa-cogs"></i> Advanced Settings</strong></h3>
 		</div>
 		<div class="panel-body">
-		
-		<?php
-			 if( isset($_GET['update']) && $_GET['update'] == "error") {
-			?>
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span><b> Attenzione:</b> c'e' stato un errore nella modifica delle impostazioni, riprova in seguito o contatta l'amministratore del server.</div>
-				</div>
-			</div>
 			<?php
-			}
+				 if( isset($_GET['update']) && $_GET['update'] == "error") {
+				?>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span><b> Attenzione:</b> c'e' stato un errore nella modifica delle impostazioni, riprova in seguito o contatta l'amministratore del server.</div>
+					</div>
+				</div>
+				<?php
+				}
+				?>
+				
+				<?php
+				 if( isset($_GET['update']) && $_GET['update'] == "success") {
+				?>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Impostazioni modificate con <b>successo!</b></div>
+					</div>
+				</div>
+				<?php
+				}
+			?>
+
+			<?php //funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
+			$contalettere=mysql_query("select count(*) from lettere$annoprotocollo where lettere$annoprotocollo.datalettera!='0000-00-00'");
+			$res_count=mysql_fetch_row($contalettere);
+			$contalettere= $res_count[0] +1 ;
+			//fine funzione per determinare se la tabella "lettere" è vuota. 
 			?>
 			
-			<?php
-			 if( isset($_GET['update']) && $_GET['update'] == "success") {
-			?>
+			<form name="modifica" method="post" class="form-group">
 			<div class="row">
-				<div class="col-xs-12">
-					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Impostazioni modificate con <b>successo!</b></div>
+				<div class="col-xs-6">
+					<label>Nome dell'applicativo:</label>
+					<input class="form-control" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>"/>
+					<br>
+					<label>Descrizione breve (in alto a destra)</label>
+					<input class="form-control" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>"/>
+					<br>
+					<label>Numero Versione</label>
+					<input class="form-control" type="text" name="version"  value="<?php echo $_SESSION['version'];?>"/>
+					<br>
+					<label>Email</label>
+					<input class="form-control" type="text" name="email"  value="<?php echo $_SESSION['email'];?>"/>
+					<br>
+					<label>Max File Size (allegati del Protocollo, <b>espressi in byte</b>)</label>
+					<input class="form-control" type="text" name="protocollomaxfilesize"  value="<?php echo $_SESSION['protocollomaxfilesize'];?>"/>
+					<br>
+					<label>Anno Corrente per il Protocollo</label>
+					<input class="form-control" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled/>
+				</div>
+				
+				<div class="col-xs-6">
+					<label>Numero iniziale per il Protocollo (settabile solo nella prima installazione)</label>
+					<input class="form-control" size="50" type="text" name="primoprotocollo"  value="<?php echo $contalettere;?>"/>
+						<script language="javascript">
+						var primoprotocollo = document.modifica.primoprotocollo.value;
+							if (primoprotocollo > 1) 
+							{
+								 document.modifica.primoprotocollo.disabled = true;
+							}
+						</script>
+					<br>
+					<label>Max File Size (foto dell'anagrafica, <b>espresse in byte</b>)</label>
+					<input class="form-control" size="50" type="text" name="fotomaxfilesize"  value="<?php echo $_SESSION['fotomaxfilesize'];?>"/>
+					<br>
+					<label>Pagina principale</label>
+					<input class="form-control" size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>"/>
+					<br>
+					<label>Mittente Mail-Protocollo</label>
+					<input class="form-control" size="50" type="text" name="mittente"  value="<?php echo $_SESSION['mittente'];?>"/>
+					<br>
+					<label>Header Mail-Protocollo</label>
+					<input class="form-control" size="50" type="text" name="headermail"  value="<?php echo $_SESSION['headermail'];?>"/>
+					<br>
+					<label>Footer Mail-Protocollo</label>
+					<input class="form-control" size="50" type="text" name="footermail"  value="<?php echo $_SESSION['footermail'];?>"/>
 				</div>
 			</div>
-			<?php
-			}
-		?>
-
-<?php //funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
-$contalettere=mysql_query("select count(*) from lettere$annoprotocollo where lettere$annoprotocollo.datalettera!='0000-00-00'");
-$res_count=mysql_fetch_row($contalettere);
-$contalettere= $res_count[0] +1 ;
-//fine funzione per determinare se la tabella "lettere" è vuota. 
-?>
-Per rendere effettive le modifiche e' consigliato effettuare il logout.
-<br>
-<form name="modifica" method="post" class="form-group">
-<label> <br>Nome dell'applicativo:<br><input class="form-control" size="50" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>"/>
-</label><br>
-<label> <br>Descrizione breve (in alto a destra)<br><input class="form-control" size="50" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>"/>
-</label><br>
-<label> <br>Numero Versione <br><input class="form-control" size="50" type="text" name="version"  value="<?php echo $_SESSION['version'];?>"/>
-</label><br>
-<label> <br>Email <br><input class="form-control" size="50" type="text" name="email"  value="<?php echo $_SESSION['email'];?>"/>
-</label><br>
-<label> <br>Max File Size (allegati del Protocollo, <b>espressi in byte</B>) <br><input class="form-control" size="50" type="text" name="protocollomaxfilesize"  value="<?php echo $_SESSION['protocollomaxfilesize'];?>"/>
-</label><br>
-<label> <br>Anno Corrente per il Protocollo <br><input class="form-control" size="50" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled/>
-</label><br>
-<label> <br>Numero iniziale per il Protocollo (settabile solo nella prima installazione) <br><input class="form-control" size="50" type="text" name="primoprotocollo"  value="<?php echo $contalettere;?>"/>
-	<script language="javascript">
-	var primoprotocollo = document.modifica.primoprotocollo.value;
-		if (primoprotocollo > 1) 
-		{
-	 		 document.modifica.primoprotocollo.disabled = true;
-		}
-	</script>
-</label><br>
-<label> <br>Max File Size (foto dell'anagrafica, <b>espresse in byte</B>) <br><input class="form-control" size="50" type="text" name="fotomaxfilesize"  value="<?php echo $_SESSION['fotomaxfilesize'];?>"/>
-</label><br>
-<label> <br>Pagina principale<br><input class="form-control" size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>"/>
-</label><br>
-<label> <br>Mittente Mail-Protocollo <br><input class="form-control" size="50" type="text" name="mittente"  value="<?php echo $_SESSION['mittente'];?>"/>
-</label><br>
-<label> <br>Header Mail-Protocollo <br><input class="form-control" size="50" type="text" name="headermail"  value="<?php echo $_SESSION['headermail'];?>"/>
-</label><br>
-<label> <br>Footer Mail-Protocollo <br><input class="form-control" size="50" type="text" name="footermail"  value="<?php echo $_SESSION['footermail'];?>"/>
-</label><br><br>
-<button class="btn btn-primary" onClick="Controllo()" /><span class="glyphicon glyphicon-edit"></span> Modifica</button>
-</form>
-
-</div>
+			<br>
+			<center>
+			<button class="btn btn-info btn-lg" onClick="Controllo()" /><span class="glyphicon glyphicon-edit"></span> Modifica</button>
+			</center>
+			</form>
+		</div>
 </div>
 
 

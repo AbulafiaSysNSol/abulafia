@@ -31,7 +31,7 @@
 	}
 	require('lib/html2pdf/html2pdf.class.php');
 	$content = '
-	<page backtop="35mm" backbottom="45mm" backleft="10mm" backright="10mm">
+	<page backtop="35mm" backbottom="50mm" backleft="10mm" backright="10mm">
 		
 		<page_header>
 			<img align="right" src="images/headerpresidente.jpg" width="700">

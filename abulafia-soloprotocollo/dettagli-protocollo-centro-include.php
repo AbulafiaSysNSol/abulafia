@@ -184,3 +184,41 @@
 				</div>
 			</div>
 		</div>
+		
+		<?php
+		if($modifica['idanagrafica'] != 0) {
+			$anagrafica = new Anagrafica();
+			$query = mysql_query("SELECT * FROM storico_modifiche, lettere$anno WHERE storico_modifiche.protocollo ='$id' AND lettere$anno.idlettera = storico_modifiche.protocollo AND dataregistrazione BETWEEN '$anno-01-01' AND '$anno-12-31' ORDER BY id");
+			echo mysql_error();
+			?>
+			<br>
+			<h3><span class="glyphicon glyphicon-time"></span> Storico delle modifiche:</h3>
+			<div class="row">
+				<div class="col-xs-12">
+					<table class="table table-bordered">
+						<tr>
+							<td style="vertical-align: middle" align="center" >Data</td>
+							<td style="vertical-align: middle" align="center" >Utente</td>
+							<td style="vertical-align: middle" align="center" >Modifica</td>
+							<td style="vertical-align: middle" align="center" >Valore precedente</td>
+							<td style="vertical-align: middle" align="center" >Valore attuale</td>
+						</tr>
+						<?php
+							while($mod = mysql_fetch_array($query)) {
+								?>
+								<tr bgcolor="<?php echo $mod['color']; ?>">
+									<td style="vertical-align: middle" align="center" ><?php echo date('d/m/Y H:i',$mod['time']); ?></td>
+									<td style="vertical-align: middle" align="center" ><?php echo $anagrafica->getName($mod['user']); ?></td>
+									<td style="vertical-align: middle" align="center" ><?php echo $mod['modifica']; ?></td>
+									<td style="vertical-align: middle" align="center" ><?php echo $mod['prima']; ?></td>
+									<td style="vertical-align: middle" align="center" ><?php echo $mod['dopo']; ?></td>
+								</tr>
+								<?php
+							}
+						?>
+					</table>
+				</div>
+			</div>
+			<?php
+		}
+		?>

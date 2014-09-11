@@ -45,6 +45,9 @@
 		$target_path2=mysql_real_escape_string($target_path);
 		if($from == 'modifica-protocollo') {
 			$inserisci=mysql_query("insert into joinlettereallegati values($idlettera, $annoprotocollo, '$name')");
+			$user = $_SESSION['loginid'];
+			$time = time();
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Aggiunto allegato', '$user', '$time', '#DEFEB4', ' ', '$name')");
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO ALLEGATO '. $name , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
