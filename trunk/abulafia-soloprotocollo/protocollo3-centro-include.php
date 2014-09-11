@@ -76,7 +76,12 @@
 	$datalettera = $calendario->dataDB($_POST['data']);
 	$posizione = $_POST['posizione'];
 	$riferimento = $_POST['riferimento'];
-	$pratica = $_POST['pratica'];
+	if($_POST['pratica'] != '') {
+		$pratica = $_POST['pratica'];
+	}
+	else {
+		$pratica = 0;
+	}
 	$note  = $_POST['note'];
 	$dataregistrazione = strftime("%Y-%m-%d");
 	$loginid = $_SESSION['loginid'];
@@ -212,6 +217,43 @@
 	if($from == 'modifica') {
 	
 		$idlettera = $_GET['idlettera'];
+		
+		//salvo le modifiche nel DB
+		include 'class/Lettera.obj.inc';
+		$lettera = new Lettera();
+		$dettagli = $lettera->getDettagli( $idlettera, $annoprotocollo);
+		$user = $_SESSION['loginid'];
+		$time = time();
+		if($dettagli['speditaricevuta'] != $speditaricevuta) {
+			$old = $dettagli['speditaricevuta'];
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato spedita/ricevuta', '$user', '$time', '#FFFFCC', '$old', '$speditaricevuta')");
+		}
+		if($dettagli['oggetto'] != $oggetto) {
+			$old = $dettagli['oggetto'];
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato oggetto', '$user', '$time', '#FFFFCC', '$old', '$oggetto')");
+		}
+		if($dettagli['datalettera'] != $datalettera) {
+			$old = $calendario->dataSlash($dettagli['datalettera']);
+			$new = $calendario->dataSlash($datalettera);
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata data', '$user', '$time', '#FFFFCC', '$old', '$new')");
+		}
+		if($dettagli['posizione'] != $posizione) {
+			$old = $dettagli['posizione'];
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato mezzo di trasmissione', '$user', '$time', '#FFFFCC', '$old', '$posizione')");
+		}
+		if($dettagli['riferimento'] != $riferimento) {
+			$old = $dettagli['riferimento'];
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata posizione', '$user', '$time', '#FFFFCC', '$old', '$riferimento')");
+		}
+		if($dettagli['pratica'] != $pratica) {
+			$old = $dettagli['pratica'];
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata pratica', '$user', '$time', '#FFFFCC', '$old', '$pratica')");
+		}
+		if($dettagli['note'] != $note) {
+			$old = $dettagli['note'];
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata nota', '$user', '$time', '#FFFFCC', '$old', '$note')");
+		}
+		
 		$modifica = mysql_query("	UPDATE 
 								lettere$annoprotocollo 
 							SET 

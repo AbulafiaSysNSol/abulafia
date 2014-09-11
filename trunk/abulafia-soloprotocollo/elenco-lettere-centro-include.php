@@ -52,7 +52,7 @@ $query = mysql_query("SELECT * FROM comp_lettera ORDER BY id DESC");
 				?>
 				<tr bgcolor=<?php echo $colorelinee; ?>>
 					<td style="vertical-align: middle" align="center"><?php echo $risultati2['id'];?></td>
-					<td style="vertical-align: middle"><?php echo $risultati2['oggetto'];?></td>
+					<td style="vertical-align: middle"><?php echo strip_tags($risultati2['oggetto']);?></td>
 					<td style="vertical-align: middle" align="center"><?php if($risultati2['vista'] == 2) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-times"></i>'; }?></td>
 					<td style="vertical-align: middle" align="center"><?php if($risultati2['firmata'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-times"></i>'; }?></td>
 					<td style="vertical-align: middle" align="center"><?php if($risultati2['protocollo'] != 0) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-times"></i>'; }?></td>
