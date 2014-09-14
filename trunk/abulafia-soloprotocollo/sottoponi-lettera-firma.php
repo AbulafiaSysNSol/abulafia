@@ -12,10 +12,11 @@
 		$mail->isHTML(true);
 		include "../mail-conf-include.php";
 		$mail->addAddress('biagiosaitta@hotmail.it');
+		$mail->addAddress('stefano.principato@cri.it');
 		$mail->Subject = 'Nuova lettera da firmare!';
 		$mail->Body    = 'Ciao Presidente,<br><br>
-					è stata scritta una nuova che richiede la tua firma!!<br>
-					Triverai la lettera sotto il menu "Lettere" alla voce "Lettere da firmare".
+					è stata scritta una nuova lettera che richiede la tua firma!!<br>
+					Troverai la nuova lettera sotto il menu "Lettere" alla voce "Lettere da firmare".
 					<br><br>
 					Messaggio automatico inviato da Abulafia. 
 					<br>Non rispondere a questa email.';
