@@ -19,6 +19,7 @@
 	echo mysql_error();
 	
 	if($update) {
+		include('lib/phpmailer/PHPMailerAutoload.php');
 		$mail = new PHPMailer();
 		$mail->From = 'no-reply@cricatania.it';
 		$mail->FromName = 'Abulafia';
