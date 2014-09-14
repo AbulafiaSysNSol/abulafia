@@ -19,6 +19,20 @@
 	echo mysql_error();
 	
 	if($update) {
+		$mail = new PHPMailer();
+		$mail->From = 'no-reply@cricatania.it';
+		$mail->FromName = 'Abulafia';
+		$mail->isHTML(true);
+		include "../mail-conf-include.php";
+		$mail->addAddress('biagiosaitta@hotmail.it');
+		$mail->Subject = 'Nuova lettera da firmare!';
+		$mail->Body    = 'Ciao Presidente,<br><br>
+					è stata scritta una nuova che richiede la tua firma!!<br>
+					Triverai la lettera sotto il menu "Lettere" alla voce "Lettere da firmare".
+					<br><br>
+					Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] 
+					.'.<br>Non rispondere a questa email.';
+		$esito = $mail->send();
 		header("Location: login0.php?corpus=".$from."&id=" . $id);
 	}
 	else {
