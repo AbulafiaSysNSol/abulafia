@@ -221,7 +221,7 @@
 					<td style="vertical-align: middle" align="center"><b>Comune</b></td>
 					<td style="vertical-align: middle" align="center"><b>Prov.</b></td>
 					<td style="vertical-align: middle" align="center"><b>Codice Fiscale</b></td>
-					<td style="vertical-align: middle" align="center"><b>Opzioni</b></td>
+					<td width="150" style="vertical-align: middle" align="center"><b>Opzioni</b></td>
 				</tr>
 				<?php
 				while ($row = mysql_fetch_array($risultati)) {
