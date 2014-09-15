@@ -263,9 +263,9 @@
 			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata nota', '$user', '$time', '#FFFFCC', '$old', '$note')");
 			$change = true;
 		}
-		if(!$change) {
+		/*if(!$change) {
 			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Nessuna modifica apportata', '$user', '$time', '#FFFFFF', '', '')");
-		}
+		}*/
 		
 		$modifica = mysql_query("	UPDATE 
 								lettere$annoprotocollo 
