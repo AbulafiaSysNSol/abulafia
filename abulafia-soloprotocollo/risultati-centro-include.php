@@ -19,6 +19,9 @@
 		$annoricercaprotocollo = $_POST['annoricercaprotocollo'];
 		$_SESSION['annoricercaprotocollo'] = $_POST['annoricercaprotocollo'];
 	}
+	if (!isset($_POST['annoricercaprotocollo'])) {
+		$annoricercaprotocollo = $_SESSION['annoricercaprotocollo'];
+	}
 	if (!isset($_POST['anagraficatipologia'])) {
 		if (isset($_GET['anagraficatipologia'])) {
 			$_POST['anagraficatipologia']= $_GET['anagraficatipologia'];
