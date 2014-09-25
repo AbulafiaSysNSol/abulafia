@@ -61,10 +61,17 @@
 				</div>
 			</div>
 			<small>(Per utilizzare una intestazione ed una firma personalizzata deselezionare le caselle)</small>
-			<br><br><button type="submit" class="btn btn-success"><i class="fa fa-share"></i> Invia</button>
+			<br><br><button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Invio email in corso..." type="submit" class="btn btn-success"><i class="fa fa-share"></i> Invia</button>
 		</form>
 	</div>
 </div>
+
+<script>
+  $("#buttonl").click(function() {
+    var $btn = $(this);
+    $btn.button('loading');
+});
+</script>
 
 <script type="text/javascript">
   function changeEmail(valore) { 

@@ -312,10 +312,17 @@
 			</div>
 			
 			<br>
-			<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> MODIFICA</button>
+			<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Modifica in corso..." type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Modifica Protocollo</button>
 		</form>
 	</div>
 </div>
+
+<script>
+  $("#buttonl").click(function() {
+    var $btn = $(this);
+    $btn.button('loading');
+});
+</script>
 
 <script language="javascript">
  <!--
