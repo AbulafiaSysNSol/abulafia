@@ -250,7 +250,7 @@
 				<div class="col-xs-2">
 				<br>
 					<button type="submit" 
-						class="btn btn-primary input-sm" 
+						class="btn btn-primary" 
 						onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File
 					</button>
 				</div>
@@ -486,7 +486,7 @@
 				</div>
 			</div>
 			
-			<button type="button" class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
+			<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrazione in corso..." type="button" class="btn btn-success" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
 
 			</form>
 			
@@ -497,6 +497,13 @@
 <?php
 $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio dati alla sessione
 ?>
+
+<script>
+  $("#buttonl").click(function() {
+    var $btn = $(this);
+    $btn.button('loading');
+});
+</script>
 
 <script language="javascript">
 

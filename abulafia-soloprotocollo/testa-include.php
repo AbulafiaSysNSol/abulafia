@@ -54,13 +54,13 @@
   
   <!-- JS -->
   <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/jquery-1.10.4.custom.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
   <script type="text/javascript" src="lib/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- JS -->
-  
+
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea#editor",
