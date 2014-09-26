@@ -499,10 +499,16 @@ $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio d
 ?>
 
 <script>
-  $("#buttonl").click(function() {
-    var $btn = $(this);
-    $btn.button('loading');
-});
+	$("#buttonl").click(function() {
+		var $btn = $(this);
+		var oggetto = document.modulo.oggetto.value;
+		if ((oggetto == "") || (oggetto == "undefined")) {
+			return false;
+		}
+		else {
+			$btn.button('loading');
+		}
+	});
 </script>
 
 <script language="javascript">

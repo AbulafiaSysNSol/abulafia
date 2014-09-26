@@ -30,12 +30,12 @@
 					
 					<div class="form-group">
 						<h4><i class="fa fa-certificate"></i> Oggetto:</h4>
-						<input required value="<?php echo $ogg; ?>" class="form-control" type="text" name="oggetto" placeholder="inserisci un oggetto...">
+						<input required id="ogg" value="<?php echo $ogg; ?>" class="form-control" type="text" name="oggetto" placeholder="inserisci un oggetto...">
 					</div>
 					
 					<div class="form-group">
 						<h4><i class="fa fa-file-text-o"></i> Messaggio:</h4>
-						<textarea required class="form-control" rows="5" name="messaggio" placeholder="aggiungi un messaggio...">Si trasmette nota pari ad oggetto.&#013;&#013;Cordiali Saluti.</textarea>
+						<textarea id="editorMail" class="form-control" rows="7" name="messaggio" placeholder="aggiungi un messaggio...">Si trasmette nota pari ad oggetto.<br><br>Cordiali Saluti.</textarea>
 					</div>
 					
 					<div class="form-group">
@@ -67,10 +67,18 @@
 </div>
 
 <script>
-  $("#buttonl").click(function() {
-    var $btn = $(this);
-    $btn.button('loading');
-});
+	$("#buttonl").click(function() {
+		var $btn = $(this);
+		var oggetto = document.getElementById("ogg").value;
+		var dest = document.getElementById("email").value;
+		var mess = document.getElementById("editorMail").value;
+		if ((oggetto == "") || (oggetto == "undefined") || (dest == "") || (dest == "undefined")) {
+			return;
+		}
+		else {
+			$btn.button('loading');
+		}
+	});
 </script>
 
 <script type="text/javascript">
