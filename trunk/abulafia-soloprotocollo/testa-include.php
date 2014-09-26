@@ -71,6 +71,14 @@ tinymce.init({
 
 <script type="text/javascript">
 tinymce.init({
+    selector: "textarea#editorMail",
+    menubar: false,
+    toolbar: "bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+ });
+</script>
+
+<script type="text/javascript">
+tinymce.init({
     selector: "textarea#editorOgg",
     menubar: false,
     toolbar: "bold underline italic"

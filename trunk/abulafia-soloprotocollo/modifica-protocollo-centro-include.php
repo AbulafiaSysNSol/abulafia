@@ -223,7 +223,7 @@
 			<label><span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
 			<div class="row">
 			<div class="col-xs-5">
-			<input required class="form-control" size="40" type="text" name="oggetto" value="<?php echo $row['oggetto'];?>"/>
+			<input required id="ogg" class="form-control" size="40" type="text" name="oggetto" value="<?php echo $row['oggetto'];?>"/>
 			</div>
 			</div>
 			
@@ -318,10 +318,16 @@
 </div>
 
 <script>
-  $("#buttonl").click(function() {
-    var $btn = $(this);
-    $btn.button('loading');
-});
+	$("#buttonl").click(function() {
+		var $btn = $(this);
+		var oggetto = document.getElementById("ogg").value;
+		if ((oggetto == "") || (oggetto == "undefined")) {
+			return;
+		}
+		else {
+			$btn.button('loading');
+		}
+	});
 </script>
 
 <script language="javascript">
