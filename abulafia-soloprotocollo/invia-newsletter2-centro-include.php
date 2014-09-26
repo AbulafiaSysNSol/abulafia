@@ -19,7 +19,7 @@
 		$headermail = '';
 	}
 	else {
-		$headermail = $setting2['headermail'].'<br>';	
+		$headermail = $setting2['headermail'].'<br><br>';	
 	}
 
 	if ($firma != 'firma') {
