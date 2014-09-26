@@ -19,14 +19,14 @@
 		$headermail = '';
 	}
 	else {
-		$headermail = $setting2['headermail'].'<br><br>';	
+		$headermail = $setting2['headermail'].'<br>';	
 	}
 
 	if ($firma != 'firma') {
 		$footermail = '';
 	}
 	else {
-		$footermail = '<br><br>'.$setting2['footermail'];	
+		$footermail = $setting2['footermail'];	
 	}
 
 	$mittente = $_SESSION['mittente'];
