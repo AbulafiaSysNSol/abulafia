@@ -117,14 +117,14 @@
 						$DataSet = new pData;  
 						 
 						if ($res_lettere[0] > 0) {
-							$statsusers1=mysql_query("SELECT COUNT(joinlettereinserimento$anno.idinser) AS numerolettere, users.loginname, anagrafica.cognome, anagrafica.nome FROM anagrafica, users, joinlettereinserimento$anno WHERE users.idanagrafica = anagrafica.idanagrafica AND joinlettereinserimento$anno.idinser = users.idanagrafica AND datamod != '0000/00/00' GROUP BY users.idanagrafica ORDER BY numerolettere DESC");
+							$statsusers1=mysql_query("SELECT COUNT(joinlettereinserimento$anno.idinser) AS numerolettere, anagrafica.cognome, anagrafica.nome FROM anagrafica, joinlettereinserimento$anno WHERE  joinlettereinserimento$anno.idinser = anagrafica.idanagrafica AND datamod != '0000/00/00' GROUP BY anagrafica.idanagrafica ORDER BY numerolettere DESC");
 							echo mysql_error();
 							echo 'Dettaglio lettere registrate: <br>';
 							while ($statsusers2= mysql_fetch_array($statsusers1)) {
 									$statsusers2 = array_map('stripslashes', $statsusers2);
 									echo $statsusers2['numerolettere'] . ' inserite da '. ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])) . '<br>';
 									$DataSet->AddPoint($statsusers2['numerolettere'],"Serie1");  
-									$DataSet->AddPoint($statsusers2['loginname'],"Serie2");
+									$DataSet->AddPoint(ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])),"Serie2");
 							}
 
 							$DataSet->AddAllSeries();  
