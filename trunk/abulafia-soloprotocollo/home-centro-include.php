@@ -235,10 +235,9 @@
 				?>
 				<div class="progress">
 					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
-						<?php echo round($percentuale,3).'%'; ?>
 					</div>
 				</div>
-				<center><?php echo $dim.' MB su ' . $max . ' MB'; ?></center>
+				<center><?php echo $dim.' MB su ' . $max . ' MB (' . round($percentuale,3).'%)'; ?></center>
 			</div>
 		
 		</div>
