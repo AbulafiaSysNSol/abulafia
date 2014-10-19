@@ -71,6 +71,7 @@
 		</h2>
 	</center>
 <hr>
+
 <div class="row">
 	<div class="col-xs-6">
 		<div class="panel panel-default">
@@ -83,6 +84,7 @@
 				//Utilizzo Abulafia
 				$anniusoapplicazione = (strtotime("now") - strtotime("2008/4/1"))/60/60/24/365;
 				$giorniusoapplicazione = ((strtotime("now") - strtotime("2008/4/1"))/60/60/24)-(int)$anniusoapplicazione*365;
+				
 				echo 'La Web-Application Abulafia e\' in uso da '; 
 				
 				if( (int)$anniusoapplicazione > 0) { 
@@ -211,6 +213,35 @@
 	</div>
 
 	<div class="col-xs-6">
+		
+		<div class="panel panel-default">
+		
+			<div class="panel-heading">
+				<h3 class="panel-title"><strong><i class="fa fa-hdd-o"></i> Quota su disco</strong></h3>
+			</div>
+			
+			<div class="panel-body">
+				<?php
+				$file = new File();
+				$dim =  round($file->sizeDirectory("../public/") / (1024*1024), 2) ;
+				$max = 2000000;
+				$percentuale = ( $dim / $max ) * 100;
+				if($percentuale <=50)
+					$class = "progress-bar-success";
+				else if($percentuale <=80)
+					$class = "progress-bar-warning";
+				else
+					$class = "progress-bar-danger";
+				?>
+				<div class="progress">
+					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
+						<?php echo round($percentuale,3).'%'; ?>
+					</div>
+				</div>
+				<center><?php echo $dim.' MB su ' . $max . ' MB'; ?></center>
+			</div>
+		
+		</div>
 		
 		<div class="panel panel-default">
 		

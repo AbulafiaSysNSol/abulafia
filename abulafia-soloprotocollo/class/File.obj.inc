@@ -58,6 +58,23 @@ Class File
 			$delete = unlink($deletepath);
 			return $delete;
 		}
+		
+		public function sizeDirectory($DirectoryPath) {
+			$Size = 0;
+			$Dir = opendir($DirectoryPath);
+			if (!$Dir) {
+				return -1;
+			}
+			while (($File = readdir($Dir)) !== false) {
+				if ($File[0] == '.') continue;
+				if (is_dir($DirectoryPath . $File))           
+					$Size += $this->sizeDirectory($DirectoryPath . $File . '/');
+				else
+					$Size += filesize($DirectoryPath . $File);       
+			}
+			closedir($Dir);
+			return $Size;
+		}
 
 	}//fine classe
 ?>
