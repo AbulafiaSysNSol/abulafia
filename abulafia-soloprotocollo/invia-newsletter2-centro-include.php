@@ -1,5 +1,6 @@
 <?php
-
+	
+	set_time_limit(0);
 	
 	$my_lettera = new Lettera();
 	$my_file = new File();
