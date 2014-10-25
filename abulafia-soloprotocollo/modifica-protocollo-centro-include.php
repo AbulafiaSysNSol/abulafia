@@ -46,6 +46,10 @@
 	else {
 		$errore = false;
 	}
+	
+	if($from == "correggi") {
+		$_SESSION['block'] = false;
+	}
 
 	if ($from =='aggiungi') {
 		$idanagrafica=$_GET['idanagrafica'];
@@ -54,7 +58,9 @@
 		$time = time();
 		$anagrafica = new Anagrafica();
 		$name = $anagrafica->getName($idanagrafica);
-		$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Aggiunto mittente/destinatario', '$user', '$time', '#DEFEB4', ' ', '$name')");
+		if(!$_SESSION['block']) {
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Aggiunto mittente/destinatario', '$user', '$time', '#DEFEB4', ' ', '$name')");
+		}
 		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
@@ -77,7 +83,9 @@
 			$time = time();
 			$anagrafica = new Anagrafica();
 			$name = $anagrafica->getName($idanagrafica);
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso mittente/destinatario', '$user', '$time', '#FC9E9E', '$name', ' ')");
+			if(!$_SESSION['block']) {
+				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso mittente/destinatario', '$user', '$time', '#FC9E9E', '$name', ' ')");
+			}
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
 		}
 		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
@@ -91,7 +99,9 @@
 		$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=idlettera AND annoprotocollo=$annoprotocollo AND pathfile='$nome'");
 		$user = $_SESSION['loginid'];
 		$time = time();
-		$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso allegato', '$user', '$time', '#FC9E9E', '$nome', ' ')");
+		if(!$_SESSION['block']) {
+			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso allegato', '$user', '$time', '#FC9E9E', '$nome', ' ')");
+		}
 		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO ALLEGATO '. $nome , $_SESSION['historylog']);
@@ -108,11 +118,26 @@
 		$dataregistrazione = $row['dataregistrazione'] ;
 		list($annor, $meser, $giornor) = explode("-", $dataregistrazione);
 	}
+	
+	if($_SESSION['block']) {
+		?>
+		<h3>
+		<center>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="alert alert-info"><b><i class="fa fa-lock"></i> Numero di Protocollo: <?php echo $row['idlettera'];?>
+				<h5>Non</b> lasciare questa pagina prima di aver inserito i dettagli mancanti.</h5></div>
+			</div>
+		</div>
+		</center>
+		</h3>
+		<?php
+	}
 ?>
 
 <div class="<?php if($errore) { echo "panel panel-danger";} else { echo "panel panel-default";} ?>">
 	<div class="panel-heading">
-		<h3 class="panel-title"><strong>Modifica protocollo numero: <?php echo $row['idlettera'];?></strong><?php if($errore) { echo " - <b>ERRORE:</b> Bisogna inserire almeno un mittente o un destinatario.";} ?></h3>
+		<h3 class="panel-title"><strong><?php if($_SESSION['block']) echo 'Completa'; else echo 'Modifica'; ?> protocollo numero: <?php echo $row['idlettera'];?></strong><?php if($errore) { echo " - <b>ERRORE:</b> Bisogna inserire almeno un mittente o un destinatario.";} ?></h3>
 	</div>
 	
 	<div class="panel-body">
@@ -211,7 +236,7 @@
 			<label><span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta:</label>
 			<div class="row">
 			<div class="col-xs-2">
-			<select required class="form-control" type="text" name="spedita-ricevuta" />
+			<select required class="form-control" type="text" name="spedita-ricevuta" id="sped" />
 				<OPTION selected value="<?php echo $row['speditaricevuta'];?>"> <?php echo $row['speditaricevuta'];?>
 				<OPTION value="ricevuta"> Ricevuta
 				<OPTION value="spedita"> Spedita
@@ -229,6 +254,12 @@
 			
 			<br>
 			<?php
+				if($giorno == 0)
+					$giorno = strftime("%d");
+				if($mese == 0)
+					$mese = strftime("%m");
+				if($anno == 0)
+					$anno = strftime("%Y");
 				$data = $giorno.'/'.$mese.'/'.$anno;
 			?>
 			<label><span class="glyphicon glyphicon-calendar"></span> Data della lettera</label>
@@ -312,7 +343,18 @@
 			</div>
 			
 			<br>
-			<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Modifica in corso..." type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Modifica Protocollo</button>
+			<?php
+			if(!$_SESSION['block']) {
+				?>
+				<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Modifica in corso..." type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Modifica Protocollo</button>
+				<?php
+			}
+			else {
+				?>
+				<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrazione in corso..." type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
+				<?php
+			}
+			?>
 		</form>
 	</div>
 </div>
@@ -321,7 +363,8 @@
 	$("#buttonl").click(function() {
 		var $btn = $(this);
 		var oggetto = document.getElementById("ogg").value;
-		if ((oggetto == "") || (oggetto == "undefined")) {
+		var spedita = document.getElementById("sped").value;
+		if ((oggetto == "") || (oggetto == "undefined") || (spedita == "") || (spedita == "undefined")) {
 			return;
 		}
 		else {

@@ -7,6 +7,7 @@
 			Per questioni di sicurezza ti invitiamo a cambiarla al più presto. <a href="?corpus=cambio-password&loginid='. $_SESSION['loginid'] . '">Cambia la tua password ora</a></div></center>';
 	}
 	
+	$_SESSION['block'] = false;
 	$data = new Calendario();
 	$lettera = new Lettera();
 	
@@ -31,8 +32,8 @@
 	
 	if ($result[0] > 0) {
 		?>
-		<center><div class="alert alert-danger"><b><h3><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> ci sono delle lettere <b>non</b> registrate correttamente!!!</h3>
-		Clicca sui numeri per continuare la registrazione: 
+		<h3><center><div class="alert alert-danger"><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> è stata rilevata un'anomalia nel registro di protocollo.
+		<h5>Alcune lettere non sono state registrate correttamente. Clicca sui numeri per inserire i dettagli mancanti: 
 		<?php
 		while ($idprot = mysql_fetch_array($query_prot)){
 			?>
@@ -40,7 +41,7 @@
 			<?php
 		}
 		?>
-		</a></div></center>
+		</a></h5></div></center></h3>
 		<?php
 	}
 	

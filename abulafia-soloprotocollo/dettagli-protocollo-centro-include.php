@@ -2,6 +2,7 @@
 	$my_lettera = new Lettera(); //crea un nuovo oggetto 'lettera'
 	$calendario = new Calendario();
 	$id = $_GET['id'];
+	$_SESSION['block'] = false;
 	
 	if (isset($_GET['anno'])) {
 		$anno = $_GET['anno'];
