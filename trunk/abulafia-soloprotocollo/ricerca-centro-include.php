@@ -1,7 +1,6 @@
 <body onload="setFocus()">
 <?php
 	$_SESSION['block'] = false;
-	$_SESSION['annoricercaprotocollo'] = '';
 	$level = $_SESSION['auth'];
 	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO RICERCA' , 'OK' , $_SESSION['ip'], $_SESSION['historylog']);
 
