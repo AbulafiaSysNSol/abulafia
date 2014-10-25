@@ -141,6 +141,8 @@ $_SESSION['historylog'] = $historylog;
 $_SESSION['errorlog'] = $errorlog;
 $_SESSION['logdirectory'] = $logdirectory;
 
+$_SESSION['block'] = false;
+
 //fine del settaggio delle variabili di sessione e avvio del refresh automatico
 echo 'Loading, please wait...<br><br>'; //nel caso che il login sia andato a buon fine
 

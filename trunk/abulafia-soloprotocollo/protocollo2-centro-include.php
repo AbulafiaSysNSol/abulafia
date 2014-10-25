@@ -169,7 +169,7 @@
 <center>
 <div class="row">
 	<div class="col-xs-12">
-		<div class="alert alert-warning"><b><i class="fa fa-warning"></i> ATTENZIONE:</b> il numero di protocollo verrà assegnato solo dopo aver concluso le operazioni di inserimento dei dati.</div>
+		<div class="alert alert-warning"><b><i class="fa fa-warning"></i> ATTENZIONE:</b> il numero di protocollo verrà assegnato dopo aver concluso l'inserimento dei dati, in alternativa è possibile <a href="login0.php?corpus=blocca-protocollo" onClick="return confirm('Una volta bloccato il protocollo è necessario ultimare la registrazione senza abbandonare la pagina. Continuare?');">bloccare il numero di protocollo <i class="fa fa-lock"></i></a></div>
 	</div>
 </div>
 </center>

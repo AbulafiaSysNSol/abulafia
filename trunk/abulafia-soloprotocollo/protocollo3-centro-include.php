@@ -21,39 +21,48 @@
 			$_SESSION['pratica'] = $_POST['pratica'];
 			$_SESSION['note'] = $_POST['note'];
 			
-			//RITORNO ALLA PAGINA DI REGISTRAZIONE  O DI MODIFICA SE NON E' STATO INSERITO NEMMENO UN MITTENTO O UN DESTISTARIO
+			//RITORNO ALLA PAGINA DI REGISTRAZIONE SE NON E' STATO INSERITO NEMMENO UN MITTENT O UN DESTISTARIO
 			$_SESSION['my_lettera']=serialize ($my_lettera);
-			if($from != "modifica") {
 			?>
 		
-				<SCRIPT LANGUAGE="Javascript">
+			<SCRIPT LANGUAGE="Javascript">
 				browser= navigator.appName;
 				if (browser == "Netscape")
-				window.location="login0.php?corpus=protocollo2&from=errore"; 
-				else window.location="login0.php?corpus=protocollo2&from=errore";
-				</SCRIPT>
-				<?php
-				exit();
-			}
-			else {
-				?>
-				<SCRIPT LANGUAGE="Javascript">
-				browser= navigator.appName;
-				if (browser == "Netscape")
-				window.location="login0.php?corpus=modifica-protocollo
-						&from=errore
-						&tabella=protocollo
-						&id=<?php echo $idlettera;?>"; 
-				else window.location="login0.php?corpus=modifica-protocollo
-							&from=errore
-							&tabella=protocollo
-							&id=<?php echo $idlettera;?>";
-				</SCRIPT>
-				<?php
-				exit();
-			}
+					window.location="login0.php?corpus=protocollo2&from=errore"; 
+				else 
+					window.location="login0.php?corpus=protocollo2&from=errore";
+			</SCRIPT>
+			
+			<?php
+			exit();
 		}
 		// FINE CONTROLLO MITTENTI/DESTINATARI
+	}
+	
+	if($from == "modifica") {
+		$mitt = new Lettera();
+		$mittenti = $mitt->getMittenti($idlettera, $_SESSION['annoprotocollo']);
+		if(count($mittenti) < 1) { 
+			/*
+			$_SESSION['spedita-ricevuta'] = $_POST['spedita-ricevuta'];
+			$_SESSION['oggetto'] = $_POST['oggetto'];
+			$_SESSION['data'] = $_POST['data'];
+			$_SESSION['posizione'] = $_POST['posizione'];
+			$_SESSION['riferimento'] = $_POST['riferimento'];
+			$_SESSION['pratica'] = $_POST['pratica'];
+			$_SESSION['note'] = $_POST['note'];
+			*/
+			?>
+			<SCRIPT LANGUAGE="Javascript">
+				browser= navigator.appName;
+				if (browser == "Netscape")
+					window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>"; 
+				else 
+					window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>";
+			</SCRIPT>
+			<?php
+			exit();
+		}
 	}
 
 	//CREAZIONE NUOVI OGGETTI
@@ -220,52 +229,54 @@
 		$change = false;
 		
 		//salvo le modifiche nel DB
-		include 'class/Lettera.obj.inc';
 		$lettera = new Lettera();
 		$dettagli = $lettera->getDettagli( $idlettera, $annoprotocollo);
 		$user = $_SESSION['loginid'];
 		$time = time();
-		if($dettagli['speditaricevuta'] != $speditaricevuta) {
-			$old = $dettagli['speditaricevuta'];
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato spedita/ricevuta', '$user', '$time', '#FFFFCC', '$old', '$speditaricevuta')");
-			$change = true;
+		
+		if(!$_SESSION['block']) {
+			if($dettagli['speditaricevuta'] != $speditaricevuta) {
+				$old = $dettagli['speditaricevuta'];
+				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato spedita/ricevuta', '$user', '$time', '#FFFFCC', '$old', '$speditaricevuta')");
+				$change = true;
+			}
+			if($dettagli['oggetto'] != $oggetto) {
+				$old = $dettagli['oggetto'];
+				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato oggetto', '$user', '$time', '#FFFFCC', '$old', '$oggetto')");
+				$change = true;
+			}
+			if($dettagli['datalettera'] != $datalettera) {
+				$old = $calendario->dataSlash($dettagli['datalettera']);
+				$new = $calendario->dataSlash($datalettera);
+				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata data', '$user', '$time', '#FFFFCC', '$old', '$new')");
+				$change = true;
+			}
+			if($dettagli['posizione'] != $posizione) {
+				$old = $dettagli['posizione'];
+				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato mezzo di trasmissione', '$user', '$time', '#FFFFCC', '$old', '$posizione')");
+				$change = true;
+			}
+			if($dettagli['riferimento'] != $riferimento) {
+				$old = $dettagli['riferimento'] . ' - ' . $lettera->getDescPosizione($dettagli['riferimento']);
+				$now = $riferimento . ' - ' . $lettera->getDescPosizione($riferimento);
+				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata posizione', '$user', '$time', '#FFFFCC', '$old', '$now')");
+				$change = true;
+			}
+			if($dettagli['pratica'] != $pratica) {
+				$old = $lettera->getDescPratica($dettagli['pratica']);
+				$now = $lettera->getDescPratica($pratica);
+				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata pratica', '$user', '$time', '#FFFFCC', '$old', '$now')");
+				$change = true;
+			}
+			if($dettagli['note'] != $note) {
+				$old = $dettagli['note'];
+				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata nota', '$user', '$time', '#FFFFCC', '$old', '$note')");
+				$change = true;
+			}
+			/*if(!$change) {
+				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Nessuna modifica apportata', '$user', '$time', '#FFFFFF', '', '')");
+			}*/
 		}
-		if($dettagli['oggetto'] != $oggetto) {
-			$old = $dettagli['oggetto'];
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato oggetto', '$user', '$time', '#FFFFCC', '$old', '$oggetto')");
-			$change = true;
-		}
-		if($dettagli['datalettera'] != $datalettera) {
-			$old = $calendario->dataSlash($dettagli['datalettera']);
-			$new = $calendario->dataSlash($datalettera);
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata data', '$user', '$time', '#FFFFCC', '$old', '$new')");
-			$change = true;
-		}
-		if($dettagli['posizione'] != $posizione) {
-			$old = $dettagli['posizione'];
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato mezzo di trasmissione', '$user', '$time', '#FFFFCC', '$old', '$posizione')");
-			$change = true;
-		}
-		if($dettagli['riferimento'] != $riferimento) {
-			$old = $dettagli['riferimento'] . ' - ' . $lettera->getDescPosizione($dettagli['riferimento']);
-			$now = $riferimento . ' - ' . $lettera->getDescPosizione($riferimento);
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata posizione', '$user', '$time', '#FFFFCC', '$old', '$now')");
-			$change = true;
-		}
-		if($dettagli['pratica'] != $pratica) {
-			$old = $lettera->getDescPratica($dettagli['pratica']);
-			$now = $lettera->getDescPratica($pratica);
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata pratica', '$user', '$time', '#FFFFCC', '$old', '$now')");
-			$change = true;
-		}
-		if($dettagli['note'] != $note) {
-			$old = $dettagli['note'];
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata nota', '$user', '$time', '#FFFFCC', '$old', '$note')");
-			$change = true;
-		}
-		/*if(!$change) {
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Nessuna modifica apportata', '$user', '$time', '#FFFFFF', '', '')");
-		}*/
 		
 		$modifica = mysql_query("	UPDATE 
 								lettere$annoprotocollo 
@@ -285,16 +296,18 @@
 		
 		$date=strftime("%Y-%m-%d");
 		//AGGIORNO L'UTENTE CHE HA FATTO LA MODIFICA
-		$utentemod =mysql_query("	UPDATE 
-								joinlettereinserimento$annoprotocollo 
-							SET 
-								joinlettereinserimento$annoprotocollo.idmod='$loginid', 
-								joinlettereinserimento$annoprotocollo.datamod='$date' 
-							WHERE 
-								joinlettereinserimento$annoprotocollo.idlettera='$idlettera' 
-							LIMIT 1
-						");
-	
+		if(!$_SESSION['block']) {
+			$utentemod =mysql_query("	UPDATE 
+									joinlettereinserimento$annoprotocollo 
+								SET 
+									joinlettereinserimento$annoprotocollo.idmod='$loginid', 
+									joinlettereinserimento$annoprotocollo.datamod='$date' 
+								WHERE 
+									joinlettereinserimento$annoprotocollo.idlettera='$idlettera' 
+								LIMIT 1
+							");
+		}
+		
 		//SE LA MODIFICA NON E' ANDATA A BUON FINE SCRIVO L'ERRORE NEL LOG
 		if (!$modifica) { 
 			echo "Modifica non riuscita" ; 

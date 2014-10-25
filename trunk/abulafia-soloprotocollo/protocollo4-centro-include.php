@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<?php
-			if($from != "modifica") {
+			if($from != "modifica" OR $_SESSION['block']) {
 				?>
 				<div class="alert alert-success">
 					<span class="glyphicon glyphicon-ok">
@@ -96,3 +96,7 @@
 	</div>
   </div>
 </div>
+
+<?php
+	$_SESSION['block'] = false;
+?>
