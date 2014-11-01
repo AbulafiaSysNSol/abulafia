@@ -269,7 +269,7 @@ class Lettera {
 	public function publcercamittente ($idlettera, $tipologia) { //<man>Elenca in ajax i risultati della ricerca in anagrafica per cercare il mittente/destinatario di una lettera, passando l'id della lettera e filtrando per tipologia</man>
 		?>
 		<script type="text/javascript" src="livesearch-cerca-mittente.js"></script>
-		<form name="cercato">
+		<form name="cercato" onSubmit="return false">
 			<div class="form-group">
 				<label> <span class="glyphicon glyphicon-search"></span> Ricerca mittente o destinatario:</label>
 				<div class="row">
@@ -286,7 +286,7 @@ class Lettera {
 	public function modificaMittente ($idlettera, $tipologia) { //<man>Elenca in ajax i risultati della ricerca in anagrafica per cercare il mittente/destinatario di una lettera, passando l'id della lettera e filtrando per tipologia</man>
 		?>
 		<script type="text/javascript" src="livesearch-modifica-mittente.js"></script>
-		<form name="cercato">
+		<form name="cercato" onSubmit="return false">
 			<div class="form-group">
 				<label><span class="glyphicon glyphicon-search"></span> Ricerca mittente o destinatario:</label>
 				<div class="row">
