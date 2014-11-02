@@ -3,6 +3,8 @@ firma.jpg
 mail-conf-include.php
 /public/lettere*
 public/graphs/*
+!public/graphs/.gitkeep
 public/log/*
+!public/log/.gitkeep
 /public/foto/*
 !/public/foto/sagoma.jpg
