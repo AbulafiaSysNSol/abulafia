@@ -157,8 +157,8 @@
 					</div>
 			
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
-						<button type="submit" class="btn btn-primary">Salva ed associa al protocollo</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Chiudi</button>
+						<button type="submit" class="btn btn-success"><i class="fa fa-arrow-down"></i> Salva ed associa al protocollo</button>
 					</div>
 				</div>
 			</div>
@@ -169,7 +169,7 @@
 <center>
 <div class="row">
 	<div class="col-xs-12">
-		<div class="alert alert-warning"><b><i class="fa fa-warning"></i> ATTENZIONE:</b> il numero di protocollo verrà assegnato dopo aver concluso l'inserimento dei dati. <!-- , in alternativa è possibile <a href="login0.php?corpus=blocca-protocollo" onClick="return confirm('Una volta bloccato il protocollo è necessario ultimare la registrazione senza abbandonare la pagina. Continuare?');">bloccare il numero di protocollo <i class="fa fa-lock"></i> --></a></div>
+		<div class="alert alert-warning"><b><i class="fa fa-warning"></i> ATTENZIONE:</b> il numero di protocollo verrà assegnato dopo aver concluso l'inserimento dei dati.<!-- , in alternativa è possibile <a href="login0.php?corpus=blocca-protocollo" onClick="return confirm('Una volta bloccato il protocollo è necessario ultimare la registrazione senza abbandonare la pagina. Continuare?');">bloccare il numero di protocollo <i class="fa fa-lock"></i> --></a></div>
 	</div>
 </div>
 </center>
@@ -177,7 +177,7 @@
 <div class="<?php if($errore) { echo "panel panel-danger";} else { echo "panel panel-default";} ?>">
 	
 		<div class="panel-heading">
-			<h3 class="panel-title"><strong>Identificativo Provvisorio Protocollo: <?php echo $my_lettera->idtemporaneo;?></strong>
+			<h3 class="panel-title"><strong><i class="fa fa-info-circle"></i> Identificativo Provvisorio Protocollo: <?php echo $my_lettera->idtemporaneo;?></strong>
 				<?php if($errore) { 
 					echo " - <b><i class=\"fa fa-warning\"></i> ATTENZIONE:</b> Bisogna inserire almeno un mittente o un destinatario.";
 				} ?>
@@ -232,80 +232,46 @@
 			?>
 			
 			<!--form caricamento allegati-->
-			
+		<div class="row">
+		<div class="col-xs-6">
+		
 			<div class="form-group"> 
-			<form role="form" 
-				enctype="multipart/form-data" 
-				action="login0.php?corpus=prot-modifica-file" 
-				method="POST">
-			<div class="row">
-				<div class="col-xs-3">
-					<input type="hidden" 
-						name="MAX_FILE_SIZE" 
-						value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
-					<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
-					<input required name="uploadedfile" type="file" id="exampleInputFile">
-				</div>
-				
-				<div class="col-xs-2">
-				<br>
-					<button type="submit" 
-						class="btn btn-primary" 
-						onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File
-					</button>
-				</div>
+				<form role="form" enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file" method="POST">
+					<div class="row">
+						<div class="col-xs-12">
+							<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
+							<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
+							<input required name="uploadedfile" type="file" id="exampleInputFile">
+							<br>
+							<button type="submit" class="btn btn-primary" onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
+						</div>
+					</div>
+				</form>
 			</div>
-			</form>
 			
 			<?php
-			if (count($my_lettera->arrayallegati)> 0)
-				{
-				echo '<br>';
-				foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati )
-					{
+			if (count($my_lettera->arrayallegati)> 0) {
+				foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati ) {
 					echo "<b><i class=\"fa fa-file-o\"></i> File associato: </b>";
 					echo $elencochiavi.' ';
 					?>
-					- <a href="login0.php?corpus=protocollo2
-					&from=eliminaallegato
-					&nome=<?php echo $elencochiavi;?>">
-					Elimina <span class="glyphicon glyphicon-trash"></span></a>
-					 - <a class="fancybox" data-fancybox-type="iframe" href="<?php echo 'lettere'.$annoprotocollo.'/temp/'.$elencochiavi;?>">
-					Anteprima <i class="fa fa-eye"></i></a><br>
+					- <a href="login0.php?corpus=protocollo2&from=eliminaallegato&nome=<?php echo $elencochiavi;?>">Elimina <span class="glyphicon glyphicon-trash"></span></a>
+					- <a class="fancybox" data-fancybox-type="iframe" href="<?php echo 'lettere'.$annoprotocollo.'/temp/'.$elencochiavi;?>">Anteprima <i class="fa fa-eye"></i></a>
+					<br>
 					<?php
-					}
 				}
-
-			/*$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
-			if ($urlfile) {
-				foreach ($urlfile as $valore) {
-					$download = $my_file->downloadlink($valore[2], 
-									$idlettera, 
-									$annoprotocollo, 
-									'30'); //richiamo del metodo "downloadlink" dell'oggetto file
-					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download; ?> - 
-										<a href="login0.php?corpus=protocollo2
-											&from=eliminaallegato
-											&idlettera=<?php echo $idlettera;?>
-											&anno=<?php echo $annoprotocollo;?>
-											&nome=<?php echo $valore[2];?>"></span> 
-											Elimina <span class="glyphicon glyphicon-remove">
-										</a>
-				<?php
-				}
-			}*/
-			else {
-				echo "<br>Nessun file associato.";
 			}
-	
+			else {
+				echo "Nessun file associato.";
+			}
 			?>
 			
 			<div class="row">
-			<div class ="col-xs-6" id="content" style="display: none;">
-			<br>
-			<i class="fa fa-spinner fa-spin"></i><b> Caricamento allegato in corso...</b>
-			<br><img src="images/progress.gif">
-			</div>
+				<div class ="col-xs-12" id="content" style="display: none;">
+					<br>
+					<i class="fa fa-spinner fa-spin"></i><b> Caricamento allegato in corso...</b>
+					<br><img src="images/progress.gif">
+				</div>
 			</div>
 			
 			<br>
@@ -315,183 +281,139 @@
 			$my_lettera->publcercamittente($idlettera,''); //richiamo del metodo
 			if($errore) { echo "</div>"; }
 
-			/*$risultati=mysql_query("select 
-						anagrafica.idanagrafica, 
-						anagrafica.cognome, 
-						anagrafica.nome, 
-						joinletteremittenti$annoprotocollo.idlettera, 
-						joinletteremittenti$annoprotocollo.idanagrafica 
-						from 
-						anagrafica, joinletteremittenti$annoprotocollo 
-						where 
-						anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica 
-						and 
-						joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
-			if ($row = mysql_fetch_array($risultati)) {
-				echo '<b><i class="fa fa-users"></i> Mittenti/Destinatari:<br><br></b>';
-				$risultati2=mysql_query("select 
-							anagrafica.idanagrafica, 
-							anagrafica.cognome, 
-							anagrafica.nome, 
-							joinletteremittenti$annoprotocollo.idlettera, 
-							joinletteremittenti$annoprotocollo.idanagrafica 
-							from 
-							anagrafica, joinletteremittenti$annoprotocollo 
-							where 
-							anagrafica.idanagrafica = joinletteremittenti$annoprotocollo.idanagrafica 
-							and 
-							joinletteremittenti$annoprotocollo.idlettera='$idlettera'");
-				while ($row2 = mysql_fetch_array($risultati2)) {
-				$row2 = array_map('stripslashes', $row2);
-					echo ucwords($row2['cognome'] . ' ' . $row2['nome']) ;?> - <a href="login0.php?corpus=protocollo2
-												&from=elimina-mittente
-												&idlettera=<?php echo $idlettera;?>
-												&idanagrafica=<?php echo $row2['idanagrafica'];?>"></span> 
-												Elimina <span class="glyphicon glyphicon-remove"></a><br>
-					<?php
-				}
-			}*/
-			if (count($my_lettera->arraymittenti)> 0)
-				{
+			if (count($my_lettera->arraymittenti)> 0) {
 				echo "<b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b><br><br>";
-				foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti )
-					{
+				foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti ) {
 					?>
 					<a href="anagrafica-mini.php?id=<?php echo$elencochiavi ?>" class="fancybox" data-fancybox-type="iframe">
 						<?php echo $elencomittenti.' '; ?>
 					</a>
-					- <a href="login0.php?corpus=protocollo2
-					&from=elimina-mittente
-					&idanagrafica=<?php echo $elencochiavi;?>"></span> 
-					Elimina <span class="glyphicon glyphicon-trash"></a><br>
+					- <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"></span> Elimina <span class="glyphicon glyphicon-trash"></a>
+					<br>
 					<?php
-					}
 				}
-
+			}
 			else {
 				echo 'Nessun mittente/destinatario associato.<br>';
 			}
 			echo '<br>';
 			?>
-
+		</div>
+		<div class="col-xs-6">
 			<form name="modulo" method="post" >
 			
-			<div class="form-group">
-				<label> <span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta</label>
-				<div class="row">
-					<div class="col-xs-2">
-						<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
-						<OPTION value="ricevuta" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "ricevuta") {echo "selected";} ?>> Ricevuta
-						<OPTION value="spedita" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "spedita") {echo "selected";} ?>> Spedita
-						</select>
+				<div class="form-group">
+					<label> <span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta</label>
+					<div class="row">
+						<div class="col-xs-11">
+							<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
+								<option value="ricevuta" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "ricevuta") {echo "selected";} ?>> Ricevuta</option>
+								<option value="spedita" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "spedita") {echo "selected";} ?>> Spedita</option>
+							</select>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="form-group">
-				<label> <span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
-				<div class="row">
-					<div class="col-xs-5">
-						<input required type="text" class="form-control" name="oggetto" <?php if( ($errore || $add) && isset($_SESSION['oggetto']) ) { echo "value=\"".$_SESSION['oggetto']."\"";} ?> >
+				<div class="form-group">
+					<label> <span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
+					<div class="row">
+						<div class="col-xs-11">
+							<input required type="text" class="form-control" name="oggetto" <?php if( ($errore || $add) && isset($_SESSION['oggetto']) ) { echo "value=\"".$_SESSION['oggetto']."\"";} ?> >
+						</div>
 					</div>
 				</div>
-			</div>
 			
-			<div class="form-group">
-				<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
-				<div class="row">
-					<div class="col-xs-2">
-						<input type="text" class="form-control datepickerProt" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} else { echo 'value='.date("d/m/Y"); } ?> >
+				<div class="form-group">
+					<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
+					<div class="row">
+						<div class="col-xs-11">
+							<input type="text" class="form-control datepickerProt" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} else { echo 'value='.date("d/m/Y"); } ?> >
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="form-group">
-				<label> <span class="glyphicon glyphicon-briefcase"></span> Mezzo di trasmissione:</label>
-				<div class="row">
-					<div class="col-xs-2">
-						<select class="form-control" size=1 cols=4 NAME="posizione">
-						<OPTION selected value="">
-						<OPTION value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected";} ?>> posta ordinaria
-						<OPTION value="raccomandata"<?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "raccomandata") {echo "selected";} ?>> raccomandata
-						<OPTION Value="telegramma" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "telegramma") {echo "selected";} ?>> telegramma
-						<OPTION value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected";} ?>> fax
-						<OPTION value="email" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "email") {echo "selected";} ?>> email
-						<OPTION value="consegna a mano" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "consegna a mano") {echo "selected";} ?>> consegna a mano
-						<OPTION value="PEC" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "PEC") {echo "selected";} ?>> PEC
-						</select>
+				<div class="form-group">
+					<label> <span class="glyphicon glyphicon-briefcase"></span> Mezzo di trasmissione:</label>
+					<div class="row">
+						<div class="col-xs-11">
+							<select class="form-control" size=1 cols=4 NAME="posizione">
+								<option selected value=""></option>
+								<option value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected";} ?>> posta ordinaria</option>
+								<option value="raccomandata"<?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "raccomandata") {echo "selected";} ?>> raccomandata</option>
+								<option Value="telegramma" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "telegramma") {echo "selected";} ?>> telegramma</option>
+								<option value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected";} ?>> fax</option>
+								<option value="email" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "email") {echo "selected";} ?>> email</option>
+								<option value="consegna a mano" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "consegna a mano") {echo "selected";} ?>> consegna a mano</option>
+								<option value="PEC" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "PEC") {echo "selected";} ?>> PEC</option>
+							</select>
+						</div>
 					</div>
 				</div>
-			</div>
 			
-			<div class="form-group">
-				<div class="row">
-				<div class="col-xs-3">
-				<label> <i class="fa fa-archive"></i> Titolazione:</label>
-				<?php
-				$risultati=mysql_query("select distinct * from titolario");
-				?>
-				<select class="form-control" size=1 cols=4 NAME="riferimento">
-				<option value="">nessuna titolazione
-				<?php
-				while ($risultati2=mysql_fetch_array($risultati))
-				{
-					$risultati2 = array_map("stripslashes",$risultati2);
-					 if( ($errore || $add) && isset($_SESSION['riferimento']) && $_SESSION['riferimento'] == $risultati2['codice'] ) {
-						echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
-					}
-					else {
-						echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
-					}
-				}
-				echo '</select>';
-				?>
-				</div>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<div class="row">
-				<div class="col-xs-4">
-				<label> <i class="fa fa-tag"></i> Pratica:</label>
-				<?php
-				$risultati=mysql_query("select distinct * from pratiche");
-				?>
-				<select class="form-control" size=1 cols=4 NAME="pratica">
-				<option value="">nessuna pratica
-				<?php
-				while ($risultati2=mysql_fetch_array($risultati))
-				{
-					$risultati2 = array_map("stripslashes",$risultati2);
-					 if( ($errore || $add) && isset($_SESSION['pratica']) && $_SESSION['pratica'] == $risultati2['id'] ) {
-						echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
-					}
-					else {
-
-						echo '<option value="' . $risultati2['id'] . '">' .  $risultati2['descrizione'];
-					}
-				}
-				echo '</select>';
-				?>
-				</div>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label> <span class="glyphicon glyphicon-comment"></span> Note:</label>
-				<div class="row">
-					<div class="col-xs-5">
-						<input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-11">
+							<label> <i class="fa fa-archive"></i> Titolazione:</label>
+							<?php
+								$risultati=mysql_query("select distinct * from titolario");
+							?>
+							<select class="form-control" size=1 cols=4 NAME="riferimento">
+								<option value="">nessuna titolazione
+								<?php
+								while ($risultati2=mysql_fetch_array($risultati)) {
+									$risultati2 = array_map("stripslashes",$risultati2);
+									if( ($errore || $add) && isset($_SESSION['riferimento']) && $_SESSION['riferimento'] == $risultati2['codice'] ) {
+										echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
+									}
+									else {
+										echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
+									}
+								}
+								?>
+							</select>
+						</div>
 					</div>
 				</div>
-			</div>
 			
-			<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrazione in corso..." type="button" class="btn btn-success" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
-
-			</form>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-11">
+							<label> <i class="fa fa-tag"></i> Pratica:</label>
+							<?php
+								$risultati=mysql_query("select distinct * from pratiche");
+							?>
+							<select class="form-control" size=1 cols=4 NAME="pratica">
+								<option value="">nessuna pratica
+								<?php
+								while ($risultati2=mysql_fetch_array($risultati)) {
+									$risultati2 = array_map("stripslashes",$risultati2);
+									if( ($errore || $add) && isset($_SESSION['pratica']) && $_SESSION['pratica'] == $risultati2['id'] ) {
+										echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
+									}
+									else {
+										echo '<option value="' . $risultati2['id'] . '">' .  $risultati2['descrizione'];
+									}
+								}
+								?>
+							</select>
+						</div>
+					</div>
+				</div>
 			
+				<div class="form-group">
+					<label> <span class="glyphicon glyphicon-comment"></span> Note:</label>
+					<div class="row">
+						<div class="col-xs-11">
+							<input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
+						</div>
+					</div>
+				</div>
+		
+				<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrazione in corso..." type="button" class="btn btn-success btn-lg" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
 		</div>
-	</div>	
+		</div>
+			</form>
+		</div>
 </div>
 
 <?php
