@@ -1,3 +1,8 @@
 db-connessione-include.php
 firma.jpg
 mail-conf-include.php
+/public/lettere*
+/public/graphs/*
+/public/logs/*
+/public/foto/*
+!/public/foto/sagoma.jpg
