@@ -15,6 +15,10 @@ $protocollomaxfilesize = $_POST['protocollomaxfilesize'];
 $fotomaxfilesize = $_POST['fotomaxfilesize'];
 $paginaprincipale = $_POST['paginaprincipale'];
 $headerdescription = $_POST['headerdescription'];
+$sede = $_POST['sede'];
+$denominazione = $_POST['denominazione'];
+$vertice = $_POST['vertice'];
+$inizio = $_POST['inizio'];
 
 //Settaggio Mail
 $mittente = $_POST['mittente'];
@@ -23,7 +27,9 @@ $footermail = $_POST['footermail'];
 //fine settaggio mail
 
 //eventuale settaggio del primo numero del nuovo protocollo
-$primoprotocollo= $_POST['primoprotocollo'];
+if(isset($_POST['primoprotocollo'])) {
+	$primoprotocollo= $_POST['primoprotocollo'];
+}
 $contalettere=mysql_query("select count(*) from lettere$annoprotocollo");
 $res_count=mysql_fetch_row($contalettere);
 $contalettere= $res_count[0] +1 ;
@@ -33,7 +39,7 @@ if (!$queryprimoprotocollo) { echo 'Variazione del primo numero del protocollo N
 }
 //fine eventuale settaggio del primo numero del nuovo protocollo
 
-$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription'");
+$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio'");
 
 $inserimento2=mysql_query("update mailsettings set mailsettings.mittente = '$mittente', mailsettings.headermail = '$headermail', mailsettings.footermail = '$footermail'");
 
@@ -59,6 +65,10 @@ else {
 	$_SESSION['mittente'] = $mittente; 
 	$_SESSION['headermail'] = $headermail; 
 	$_SESSION['footermail'] = $footermail;
+	$_SESSION['sede'] = $sede;
+	$_SESSION['denominazione'] = $denominazione;
+	$_SESSION['vertice'] = $vertice;
+	$_SESSION['inizio'] = $inizio;
 }
 ?>
 

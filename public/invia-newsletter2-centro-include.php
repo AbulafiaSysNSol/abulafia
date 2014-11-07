@@ -39,7 +39,7 @@
 	include "../mail-conf-include.php";
 	
 	$mail->From = $mittente;
-	$mail->FromName = 'Comitato Provinciale CRI Catania';
+	$mail->FromName = $_SESSION['denominazione'];
 	
 	foreach ($destinatari as $valore) {
 		$mail->addAddress($valore);     // Add a recipient

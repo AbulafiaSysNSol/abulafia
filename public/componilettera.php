@@ -3,6 +3,7 @@
 	include '../db-connessione-include.php'; //connessione al db-server
 	include "class/Calendario.obj.inc";
 	$calendario = new Calendario();
+	$margin = 480 - ((strlen($_SESSION["denominazione"]) / 2) * 4.8 );
 	$id = $_GET['id'];
 	if(isset($_GET['from'])) {
 		$from = $_GET['from'];
@@ -46,7 +47,7 @@
 			<table style="vertical-align: top;" border="0" cellspacing="0">
 				<tr>
 					<td colspan="2" width="380">
-						Catania, '.$data.'
+						' . $_SESSION["sede"] . ', '.$data.'
 						<br><br>';
 						if($protocollo != 0) {
 							$content = $content.'<table border="0"><tr><td rowspan=2"><img src="lettere'.$anno.'/qrcode/'.$protocollo.$anno.'.png" width="90"></td><td style="vertical-align: bottom;">Protocollo n&ordm; '.$protocollo.'</td></tr><tr><td style="vertical-align: top;">del '.$dataprot.'</td></tr></table><br>';
@@ -173,12 +174,12 @@
 										</div>';
 					}
 					else {
-						$content = $content.' <span style="margin-left: 500px;">
-											Il Presidente
+						$content = $content.' <span style="margin-left: 480px;">
+											Il ' . $_SESSION["vertice"] . '
 										</span>
 										<br>
-										<span style="margin-left: 422px;">
-											Comitato Provinciale CRI Catania
+										<span style="margin-left: ' . $margin . 'px;">
+											' . $_SESSION["denominazione"] . '
 										</span>';
 					}
 					$content = $content.'

@@ -54,11 +54,11 @@ $pdf->Write('6','Oggetto: ' . $dettagli['oggetto']);
 $pdf->Ln(25);
 $pdf->Write('',$iniziale);
 $pdf->Ln(25);
-$pdf->Write('','Catania, ' . $now);
+$pdf->Write('',$_SESSION['sede'] . ', ' . $now);
 $pdf->SetXY(140,190);
 $pdf->Write('','L\'ADDETTO');
 $pdf->SetFont('Times','',11);
 $pdf->SetY(240);
 $pdf->Write('',$finale);
-$pdf->Output('protocollo'.$now.'.pdf','I');
+$pdf->Output('ricevutaprotocollo.pdf','I');
 ?>

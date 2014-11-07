@@ -100,8 +100,8 @@
 				
 				<p><?php 
 				//Utilizzo Catania
-				$anniusoapplicazione = (strtotime("now") - strtotime("2014/6/4"))/60/60/24/365;
-				$giorniusoapplicazione = ((strtotime("now") - strtotime("2014/6/4"))/60/60/24)-(int)$anniusoapplicazione*365;
+				$anniusoapplicazione = (strtotime("now") - strtotime($_SESSION['inizio']))/60/60/24/365;
+				$giorniusoapplicazione = ((strtotime("now") - strtotime($_SESSION['inizio']))/60/60/24)-(int)$anniusoapplicazione*365;
 				echo $_SESSION['nomeapplicativo'] . ' e\' in uso da '; 
 				
 				if( (int)$anniusoapplicazione > 0) { 
@@ -225,7 +225,7 @@
 				<?php
 				$file = new File();
 				$dim =  round($file->sizeDirectory("../public/") / (1024*1024), 2) ;
-				$max = 2000000;
+				$max = $_SESSION['quota'];
 				$percentuale = ( $dim / $max ) * 100;
 				if($percentuale <=50)
 					$class = "progress-bar-success";
@@ -238,7 +238,7 @@
 					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
 					</div>
 				</div>
-				<center><?php echo $dim.' MB su 2 TB (' . round($percentuale,3).'%)'; ?></center>
+				<center><?php echo $dim.' MB su ' . $max . ' MB (' . round($percentuale,3).'%)'; ?></center>
 			</div>
 		
 		</div>

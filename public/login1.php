@@ -130,6 +130,11 @@ $_SESSION['fototargetpath']= $settings4['fototargetpath'] ; //percorso relativo 
 $_SESSION['splash']= $settings4['splash'] ; //percorso relativo per lo splash in alto a destra
 $_SESSION['notificains'] = $settings4['notificains'];
 $_SESSION['notificamod'] = $settings4['notificamod'];
+$_SESSION['sede'] = $settings4['sede'];
+$_SESSION['denominazione'] = $settings4['denominazione'];
+$_SESSION['vertice'] = $settings4['vertice'];
+$_SESSION['inizio'] = $settings4['inizio'];
+$_SESSION['quota'] = $settings4['quota'];
 //fine caricamento dei settaggi personalizzati
 
 $_SESSION['mittente'] = $settings6['mittente'];

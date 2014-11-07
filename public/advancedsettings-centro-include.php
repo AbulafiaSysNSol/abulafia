@@ -46,7 +46,7 @@ if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per uti
 					<label>Nome dell'applicativo:</label>
 					<input class="form-control" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>"/>
 					<br>
-					<label>Descrizione breve (in alto a destra)</label>
+					<label>Descrizione breve:</label>
 					<input class="form-control" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>"/>
 					<br>
 					<label>Numero Versione</label>
@@ -60,6 +60,12 @@ if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per uti
 					<br>
 					<label>Anno Corrente per il Protocollo</label>
 					<input class="form-control" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled/>
+					<br>
+					<label>Sede (città)</label>
+					<input class="form-control" type="text" name="sede"  value="<?php echo $_SESSION['sede'];?>"/>
+					<br>
+					<label>Denominazione Comitato</label>
+					<input class="form-control" type="text" name="denominazione"  value="<?php echo $_SESSION['denominazione'];?>"/>
 				</div>
 				
 				<div class="col-xs-6">
@@ -87,6 +93,12 @@ if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per uti
 					<br>
 					<label>Footer Mail-Protocollo</label>
 					<input class="form-control" size="50" type="text" name="footermail"  value="<?php echo $_SESSION['footermail'];?>"/>
+					<br>
+					<label>Vertice (presidente/commissario)</label>
+					<input class="form-control" type="text" name="vertice"  value="<?php echo $_SESSION['vertice'];?>"/>
+					<br>
+					<label>Inizio utilizzo Abulafia (aaaa/mm/gg)</label>
+					<input class="form-control" type="text" name="inizio"  value="<?php echo $_SESSION['inizio'];?>" />
 				</div>
 			</div>
 			<br>
