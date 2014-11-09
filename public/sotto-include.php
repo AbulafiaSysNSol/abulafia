@@ -11,7 +11,7 @@
 		<td align="right">
 			<a href="?corpus=home">Home Page</a> &middot;
 			<a href="?corpus=informazioni">Info</a> &middot;
-			<a href="#"><strong>Guida</strong></a>
+			<a href="http://wiki.abulafia.cricatania.it" target="_blank"><strong>Wiki</strong></a>
 			<br><strong>If you want something done right, do it yourself.</strong>
 		</td>
 		</tr>
