@@ -64,6 +64,7 @@
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea#editor",
+    statusbar : false,
     menubar: false,
     toolbar: "newdocument | undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect",
  });
@@ -72,6 +73,7 @@ tinymce.init({
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea#editorMail",
+    statusbar : false,
     menubar: false,
     toolbar: "bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
  });
@@ -80,6 +82,7 @@ tinymce.init({
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea#editorOgg",
+    statusbar : false,
     menubar: false,
     toolbar: "bold underline italic"
  });
