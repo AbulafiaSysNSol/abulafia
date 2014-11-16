@@ -60,7 +60,7 @@
 						?>
 						</select>
 						<br><br>
-						<button class="btn btn-primary" type="submit"><i class="fa fa-file-pdf-o"></i> Genera PDF</button>
+						<button class="btn btn-danger" type="submit"><i class="fa fa-file-pdf-o"></i> Genera PDF</button>
 					
 					</form>
 				</div>
@@ -78,7 +78,7 @@
 						<input name="datafine" size="10" type="text" class="form-control datepickerProt">
 						</div>
 						<br><br>
-						<button class="btn btn-primary" type="submit"><i class="fa fa-file-pdf-o"></i> Genera PDF</button>
+						<button class="btn btn-danger" type="submit"><i class="fa fa-file-pdf-o"></i> Genera PDF</button>
 					
 					</form>
 				</div>

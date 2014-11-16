@@ -91,6 +91,12 @@ class Lettera {
 		$num = mysql_fetch_row($query);
 		return $num[0];
 	}
+	
+	public function contaAllegati($id, $anno) {
+		$query=mysql_query("SELECT COUNT(*) FROM joinlettereallegati WHERE idlettera = '$id' AND annoprotocollo='$anno'");
+		$num = mysql_fetch_row($query);
+		return $num[0];
+	}
 
 	public function publdisplaylettera ($idlettera, $annoricercaprotocollo) { //<man>Stampa i dettagli di una lettera, passando come parametri id e anno di registrazione</man>
 		$this -> leggilettera ($idlettera, $annoricercaprotocollo); 
@@ -338,10 +344,9 @@ class Lettera {
 		return $risultati[0];
 	}
 	
-	public function controllaEsistenzaMittente($idmittente, $arraymittenti)
-		{
+	public function controllaEsistenzaMittente($idmittente, $arraymittenti) {
 		return array_key_exists ($idmittente,$arraymittenti);
-		}
+	}
 	
 
 }//chiusura della classe

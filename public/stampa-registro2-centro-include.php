@@ -4,6 +4,7 @@ function __autoload ($class_name) { //funzione predefinita che si occupa di cari
 	require_once "class/" . $class_name.".obj.inc";
 }
 $my_log = new Log();
+$lettera = new Lettera();
 include '../db-connessione-include.php';
 include 'maledetti-apici-centro-include.php';
 require('lib/fpdf/fpdf.php');
@@ -22,7 +23,7 @@ require('lib/fpdf/fpdf.php');
 		function Footer()
 		{
 		    // Logo
-		    $this->Image('images/footer.jpg',0,281,209.97);
+		    $this->Image('images/footer.jpg',5,278,209.97);
 		    // Position at 1.5 cm from bottom
 		    $this->SetY(-15);
 		    // Page number
@@ -132,28 +133,38 @@ $pdf->Text(10,45,$intestazione);
 $pdf->Ln(10);
 while($query2 = mysql_fetch_array($query)) {
 	$query2 = array_map('stripslashes', $query2);
-	if ( $contatorelinee % 2 == 1 ) { $r = 255; $g = 253; $b = 170; }
-	else { $r = 255; $g = 255; $b = 255; }
+	if ( $contatorelinee % 2 == 1 ) { 
+		$r = 255; $g = 253; $b = 170; 
+	}
+	else { 
+		$r = 255; $g = 255; $b = 255; 
+	}
+	
+	//intestazione
 	$pdf->SetFillColor($r,$g,$b);
-	$pdf->Cell(13,7,'N.',1,0,'C',true);
-	$pdf->Cell(23,7,'Data Reg.',1,0,'C',true);
-	$pdf->Cell(22,7,'Sped./Ric.',1,0,'C',true);
-	$pdf->Cell(23,7,'Data Lettera',1,0,'C',true);
-	$pdf->Cell(10,7,'Pos.',1,0,'C',true);
-	$pdf->Cell(10,7,'All.',1,0,'C',true);
-	$pdf->Cell(0,7,'Note',1,1,'C',true);
-	$pdf->Cell(13,7,$query2['idlettera'],1,0,'C',true);
+	$pdf->Cell(22,7,'N.',1,0,'C',true);
+	$pdf->Cell(25,7,'Data Reg.',1,0,'C',true);
+	$pdf->Cell(25,7,'Sped./Ric.',1,0,'C',true);
+	$pdf->Cell(25,7,'Data Lettera',1,0,'C',true);
+	$pdf->Cell(43,7,'Mezzo di Trasmissione',1,0,'C',true);
+	$pdf->Cell(25,7,'Posizione',1,0,'C',true);
+	$pdf->Cell(25,7,'Numero All.',1,1,'C',true);
+	
+	//campi
+	$pdf->Cell(22,7,$query2['idlettera'],1,0,'C',true);
 	list($anno, $mese, $giorno) = explode("-", $query2['dataregistrazione']);
 	$data = $giorno.'/'.$mese.'/'.$anno;
-	$pdf->Cell(23,7,$data,1,0,'C',true);
-	$pdf->Cell(22,7,$query2['speditaricevuta'],1,0,'C',true);
+	$pdf->Cell(25,7,$data,1,0,'C',true);
+	$pdf->Cell(25,7,$query2['speditaricevuta'],1,0,'C',true);
 	list($anno, $mese, $giorno) = explode("-", $query2['datalettera']);
 	$data = $giorno.'/'.$mese.'/'.$anno;
-	$pdf->Cell(23,7,$data,1,0,'C',true);
-	$pdf->Cell(10,7,$query2['riferimento'],1,0,'C',true);
-	$pdf->Cell(10,7,'X',1,0,'C',true);
-	$pdf->Cell(0,7,$query2['note'],1,1,'L',true);
-	$pdf->MultiCell(0,7,'Oggetto: ' . $query2['oggetto'],1,'L',true);
+	$pdf->Cell(25,7,$data,1,0,'C',true);
+	$pdf->Cell(43,7,$query2['posizione'],1,0,'C',true);
+	$pdf->Cell(25,7,$query2['riferimento'],1,0,'C',true);
+	$pdf->Cell(25,7,$lettera->contaAllegati($query2['idlettera'], $annoricerca),1,1,'C',true);
+	
+	//campi dimensione variabile
+	$pdf->MultiCell(0,7,'Oggetto: ' . $query2['oggetto'],1,1,'L',true);
 	if($query2['speditaricevuta'] == 'ricevuta') { $sd = 'Mittenti'; } else { $sd = 'Destinatari'; }
 	$destinatari = mysql_query("Select * From anagrafica, joinletteremittenti$annoricerca Where anagrafica.idanagrafica=joinletteremittenti$annoricerca.idanagrafica AND joinletteremittenti$annoricerca.idlettera=$query2[0]");
 	echo mysql_error();
@@ -166,7 +177,10 @@ while($query2 = mysql_fetch_array($query)) {
 		}
 		$d = $d.';';
 	}
-	$pdf->MultiCell(0,7,$sd . ': ' . $d,1,'L',true);
+	$pdf->MultiCell(0,7,$sd . ': ' . $d,1,1,'L',true);
+	if ($query2['note'] != '') {
+		$pdf->MultiCell(0,7,'Note: '.$query2['note'],1,1,'L',true);
+	}
 	$pdf->Ln(5);
 	$contatorelinee = $contatorelinee + 1;
 }
