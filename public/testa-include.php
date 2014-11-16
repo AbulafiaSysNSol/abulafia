@@ -66,7 +66,7 @@ tinymce.init({
     selector: "textarea#editor",
     statusbar : false,
     menubar: false,
-    toolbar: "newdocument | undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect",
+    toolbar: "newdocument | undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect"
  });
 </script>
 
@@ -75,7 +75,7 @@ tinymce.init({
     selector: "textarea#editorMail",
     statusbar : false,
     menubar: false,
-    toolbar: "bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+    toolbar: "bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent"
  });
 </script>
 
@@ -140,18 +140,6 @@ tinymce.init({
 		box-shadow: 0 0 50px #222;
 	}
 </style>
-
-<script>
-var _prum = [['id', '53d3e4beabe53d9255170016'],
-             ['mark', 'firstbyte', (new Date()).getTime()]];
-(function() {
-    var s = document.getElementsByTagName('script')[0]
-      , p = document.createElement('script');
-    p.async = 'async';
-    p.src = '//rum-static.pingdom.net/prum.min.js';
-    s.parentNode.insertBefore(p, s);
-})();
-</script>
   
 </head>
 

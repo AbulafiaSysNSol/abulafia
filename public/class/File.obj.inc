@@ -75,6 +75,15 @@ Class File
 			closedir($Dir);
 			return $Size;
 		}
+		
+		public function unitaMisura($dim) {
+			if($dim >= 1000000)
+				return $dim / 1000000 . ' TB';
+			else if($dim >= 1000)
+				return $dim / 1000 . ' GB';
+			else 
+				return $dim . ' MB';
+		}
 
 	}//fine classe
 ?>
