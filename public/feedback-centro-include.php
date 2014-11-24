@@ -17,7 +17,7 @@
 						Feedback:<br>
 						<textarea required class="form-control" rows="6" name="feedback"></textarea>
 						<br>
-						<button class="btn btn-success" type="submit"><i class="fa fa-share"></i> Invia</button>
+						<button class="btn btn-success" type="submit">Invia <i class="fa fa-arrow-right"></i></button>
 					</form>
 				</div>
 			</div>

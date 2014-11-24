@@ -30,8 +30,8 @@
 		}
 		?>
 			<div class="row">
-			
-				<div class="col-xs-4">
+				<center>
+				<div class="col-xs-3">
 					Stampa intervallo numerico:<br><br>
 					<form class="form-inline" role="form" method="post" target="_BLANK" action="stampa-registro2-centro-include.php?search=num">
 				
@@ -82,7 +82,7 @@
 					
 					</form>
 				</div>
-			
+				</center>
 			</div>
 			
 		</div>

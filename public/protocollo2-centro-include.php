@@ -231,11 +231,20 @@
 			}
 			?>
 			
-			<!--form caricamento allegati-->
+		<div class="row">
+			<div class="col-xs-6">
+				<h3><b><small><i class="fa fa-square-o"></i></small> Primo Step: <small>allegati <i class="fa fa-folder-open-o"></i> e mittenti/destinatari <i class="fa fa-group"></i> </b></small></h3>
+			</div>
+			<div class="col-xs-6">
+				<h3><b><small><i class="fa fa-square-o"></i></small> Secondo Step: <small>dettagli della lettera <i class="fa fa-file-text-o"></i></b></small></h3>
+			</div>
+		</div>
+		
 		<div class="row">
 		<div class="col-xs-6">
-		
+		<hr>
 			<div class="form-group"> 
+				<!--form caricamento allegati-->
 				<form role="form" enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file" method="POST">
 					<div class="row">
 						<div class="col-xs-12">
@@ -274,7 +283,7 @@
 				</div>
 			</div>
 			
-			<br>
+			<hr>
 			<?php
 			
 			if($errore) { echo "<div class=\"alert alert-danger\">"; }
@@ -300,6 +309,7 @@
 			?>
 		</div>
 		<div class="col-xs-6">
+		<hr>
 			<form name="modulo" method="post" >
 			
 				<div class="form-group">
