@@ -87,7 +87,7 @@
 		</p>
 	        </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-5">
-                    <img class="img-responsive" src="img/ritrovare.png" width="65%">
+                    <img class="img-responsive" src="img/ritrovare.png">
                 </div>
             </div>
 
@@ -110,7 +110,7 @@
 					Ricerca veloce fra la corrispondenza registrata con gli allegati a portata di click!</p>
                 </div>
                 <div class="col-lg-5 col-sm-pull-5  col-sm-6">
-                    <img class="img-responsive" src="img/lettera.png" width="75%">
+                    <img class="img-responsive" src="img/lettera.png">
                 </div>
             </div>
 
