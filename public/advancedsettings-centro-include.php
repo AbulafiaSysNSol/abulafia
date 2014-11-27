@@ -1,7 +1,12 @@
 <?php
-$annoprotocollo = $_SESSION['annoprotocollo'];
-//controllo dell'autorizzazione necessaria alla gestione degli utenti di abulafia
-if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; exit ();}
+	$annoprotocollo = $_SESSION['annoprotocollo'];
+	//controllo dell'autorizzazione necessaria alla gestione degli utenti di abulafia
+	if ($_SESSION['auth'] < 99) { 
+		echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; 
+		exit ();
+	}
+	$anag = new Anagrafica();
+	$admin = $anag->isAdmin($_SESSION['loginid']);
 ?>
 <div class="panel panel-default">
 	
@@ -44,22 +49,22 @@ if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per uti
 			<div class="row">
 				<div class="col-xs-6">
 					<label>Nome dell'applicativo:</label>
-					<input class="form-control" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>"/>
+					<input class="form-control" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
 					<br>
 					<label>Descrizione breve:</label>
-					<input class="form-control" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>"/>
+					<input class="form-control" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
 					<br>
 					<label>Numero Versione</label>
-					<input class="form-control" type="text" name="version"  value="<?php echo $_SESSION['version'];?>"/>
+					<input class="form-control" type="text" name="version"  value="<?php echo $_SESSION['version'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
 					<br>
 					<label>Email</label>
-					<input class="form-control" type="text" name="email"  value="<?php echo $_SESSION['email'];?>"/>
+					<input class="form-control" type="text" name="email"  value="<?php echo $_SESSION['email'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
 					<br>
 					<label>Max File Size (allegati del Protocollo, <b>espressi in byte</b>)</label>
-					<input class="form-control" type="text" name="protocollomaxfilesize"  value="<?php echo $_SESSION['protocollomaxfilesize'];?>"/>
+					<input class="form-control" type="text" name="protocollomaxfilesize"  value="<?php echo $_SESSION['protocollomaxfilesize'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
 					<br>
 					<label>Anno Corrente per il Protocollo</label>
-					<input class="form-control" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled/>
+					<input class="form-control" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled />
 					<br>
 					<label>Sede (città)</label>
 					<input class="form-control" type="text" name="sede"  value="<?php echo $_SESSION['sede'];?>"/>
@@ -80,10 +85,10 @@ if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per uti
 						</script>
 					<br>
 					<label>Max File Size (foto dell'anagrafica, <b>espresse in byte</b>)</label>
-					<input class="form-control" size="50" type="text" name="fotomaxfilesize"  value="<?php echo $_SESSION['fotomaxfilesize'];?>"/>
+					<input class="form-control" size="50" type="text" name="fotomaxfilesize"  value="<?php echo $_SESSION['fotomaxfilesize'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
 					<br>
 					<label>Pagina principale</label>
-					<input class="form-control" size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>"/>
+					<input class="form-control" size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
 					<br>
 					<label>Mittente Mail-Protocollo</label>
 					<input class="form-control" size="50" type="text" name="mittente"  value="<?php echo $_SESSION['mittente'];?>"/>
@@ -98,7 +103,7 @@ if ($_SESSION['auth'] < 99) { echo 'Non hai l\'autorizzazione necessaria per uti
 					<input class="form-control" type="text" name="vertice"  value="<?php echo $_SESSION['vertice'];?>"/>
 					<br>
 					<label>Inizio utilizzo Abulafia (aaaa/mm/gg)</label>
-					<input class="form-control" type="text" name="inizio"  value="<?php echo $_SESSION['inizio'];?>" />
+					<input class="form-control" type="text" name="inizio"  value="<?php echo $_SESSION['inizio'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
 				</div>
 			</div>
 			<br>
