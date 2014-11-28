@@ -97,6 +97,15 @@ class Lettera {
 		$num = mysql_fetch_row($query);
 		return $num[0];
 	}
+	
+	public function getAttributi() {
+		$query = mysql_query("SELECT attributo FROM attributi");
+		$attributi = array();
+		while ($attr = mysql_fetch_array($query)) {
+			array_push($attributi, $attr);
+		}
+		return $attributi;
+	}
 
 	public function publdisplaylettera ($idlettera, $annoricercaprotocollo) { //<man>Stampa i dettagli di una lettera, passando come parametri id e anno di registrazione</man>
 		$this -> leggilettera ($idlettera, $annoricercaprotocollo); 
