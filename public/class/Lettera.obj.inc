@@ -71,10 +71,28 @@ class Lettera {
 		return stripslashes($descrizione[1]);
 	}
 	
+	public function getPratiche() {
+		$query = mysql_query("SELECT id FROM pratiche");
+		$pratiche = array();
+		while ($prat = mysql_fetch_array($query)) {
+			array_push($pratiche, $prat);
+		}
+		return $pratiche;
+	}
+	
 	public function getDescPosizione ($codice) {
 		$pos=mysql_query("select distinct * from titolario WHERE codice='$codice'");
 		$posizione=mysql_fetch_row($pos);
 		return stripslashes($posizione[2]);
+	}
+	
+	public function getPosizioni() {
+		$query = mysql_query("SELECT codice FROM titolario");
+		$posizioni = array();
+		while ($pos = mysql_fetch_array($query)) {
+			array_push($posizioni, $pos);
+		}
+		return $posizioni;
 	}
 	
 	public function getMailSend($id, $anno) {
