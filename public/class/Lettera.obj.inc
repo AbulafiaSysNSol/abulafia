@@ -323,7 +323,7 @@ class Lettera {
 			<div class="form-group">
 				<label><span class="glyphicon glyphicon-search"></span> Ricerca mittente o destinatario:</label>
 				<div class="row">
-					<div class="col-xs-5">
+					<div class="col-xs-11">
 						<input placeholder="digita il COGNOME o la RAGIONE SOCIALE" type="text" name="valore" class="form-control" onkeyup="showResult(this.value,'<?php echo $tipologia;?>',<?php echo $idlettera;?>)">
 						<div id="livesearch"></div> <!-- spazio riservato ai risultati live della ricerca -->
 					</div>

@@ -15,7 +15,7 @@
 			<br><i class="fa fa-pencil-square-o"></i> Descrizione dell'errore:<br>
 			<textarea required class="form-control" rows="6" name="messaggio"></textarea>
 			<br>
-			<button class="btn btn-primary" type="submit"><i class="fa fa-mail-forward"></i> Invia Segnalazione</button>
+			<button class="btn btn-success" type="submit">Invia Segnalazione <i class="fa fa-mail-forward"></i></button>
 			</form>
 			</div>
 			</div>
