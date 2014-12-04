@@ -70,6 +70,15 @@ class Anagrafica {
 		else 
 			return $nome[0];
 	}
+	
+	public function isAdmin($id) {
+		$query = mysql_query("SELECT admin FROM users WHERE idanagrafica = $id");
+		$admin = mysql_fetch_row($query);
+		if ($admin[0] == 1) 
+			return true;
+		else
+			return false;
+	}
 
 }
 

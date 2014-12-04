@@ -9,53 +9,59 @@
 <div class="panel panel-default">
 	
 	<div class="panel-heading">
-		<h3 class="panel-title"><strong>Gestione Utente: <?php echo ucwords(stripslashes($row['cognome'].' '.$row['nome']));?></strong></h3>
+		<h3 class="panel-title"><strong><i class="fa fa-user"></i> Gestione Utente: <?php echo ucwords(stripslashes($row['cognome'].' '.$row['nome']));?></strong></h3>
 	</div>
   
 	<div class="panel-body">
 		<form name="modifica" method="post" >
 			<div class="form-group">
 				<div class="row">
-				<div class="col-xs-3">
-				<label>Username:</label>
-					<input class="form-control input-sm" type="text" name="nomeutente"  value="<?php echo $row3['loginname'];?>"/>
-				</div>
-				</div>
+					<div class="col-xs-2">
+						<label>Username:</label>
+						<input class="form-control input-sm" type="text" name="nomeutente"  value="<?php echo $row3['loginname'];?>"/>
+					</div>
 				
-				<div class="row">
-				<div class="col-xs-2">
-				<br><label>Auth:</label>
-					<select class="form-control input-sm" type="text" name="authlevel1" />
-						<OPTION selected value="<?php echo $row3['auth'];?>"> <?php echo $row3['auth'];?>
-						<?php
-						$iterazioneauth = 0;
-						while ($iterazioneauth < 100) { 
-							$iterazioneauth = $iterazioneauth +1;
+					<div class="col-xs-1">
+						<label>Auth:</label>
+						<select class="form-control input-sm" type="text" name="authlevel1" />
+							<OPTION selected value="<?php echo $row3['auth'];?>"> <?php echo $row3['auth'];?>
+							<?php
+							$iterazioneauth = 0;
+							while ($iterazioneauth < 100) { 
+								$iterazioneauth = $iterazioneauth +1;
+								?>
+								<OPTION value="<?php echo $iterazioneauth;?>"> <?php echo $iterazioneauth;?> 
+								<?php 
+							} 
 							?>
-							<OPTION value="<?php echo $iterazioneauth;?>"> <?php echo $iterazioneauth;?> 
-							<?php 
-						} 
-						?>
-					</select>
-				</div>
-				</div>
-				
-				<div class="row">
-				<div class="col-xs-3">
-				<br><label>Password</label>
-					<input class="form-control input-sm" type="password" name="nuovapassword1" />
-				</div>
-				</div>
-				
-				<div class="row">
-				<div class="col-xs-3">
-				<br><label>Ripeti password</label>
-					<input class="form-control input-sm" type="password" name="nuovapassword2" />
-				</div>
+						</select>
+					</div>
+
+					<div class="col-xs-2">
+						<label>Password:</label>
+						<input class="form-control input-sm" type="password" name="nuovapassword1" />
+					</div>
+
+					<div class="col-xs-2">
+						<label>Ripeti password:</label>
+						<input class="form-control input-sm" type="password" name="nuovapassword2" />
+					</div>
+					
+					<?php
+					$anag = new Anagrafica();
+					if ($anag->isAdmin($_SESSION['loginid'])) {
+					?>
+					<div class="col-xs-1">
+						<label>Admin:</label><br>
+						<center><input type="checkbox" name="admin" value="1" <?php if($row3['admin'] == 1) echo 'checked'; ?>/></center>
+					</div>
+					<?php
+					}
+					?>
 				</div>
 				
 				<br>
-				<button class="btn btn-primary" onClick="Controllo()">MODIFICA</button>
+				<button class="btn btn-success" onClick="Controllo()"><i class="fa fa-edit"></i> Modifica</button>
 			
 			</div>
 		</form>
