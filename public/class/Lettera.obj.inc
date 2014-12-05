@@ -71,10 +71,28 @@ class Lettera {
 		return stripslashes($descrizione[1]);
 	}
 	
+	public function getPratiche() {
+		$query = mysql_query("SELECT id FROM pratiche");
+		$pratiche = array();
+		while ($prat = mysql_fetch_array($query)) {
+			array_push($pratiche, $prat);
+		}
+		return $pratiche;
+	}
+	
 	public function getDescPosizione ($codice) {
 		$pos=mysql_query("select distinct * from titolario WHERE codice='$codice'");
 		$posizione=mysql_fetch_row($pos);
 		return stripslashes($posizione[2]);
+	}
+	
+	public function getPosizioni() {
+		$query = mysql_query("SELECT codice FROM titolario");
+		$posizioni = array();
+		while ($pos = mysql_fetch_array($query)) {
+			array_push($posizioni, $pos);
+		}
+		return $posizioni;
 	}
 	
 	public function getMailSend($id, $anno) {
@@ -96,6 +114,15 @@ class Lettera {
 		$query=mysql_query("SELECT COUNT(*) FROM joinlettereallegati WHERE idlettera = '$id' AND annoprotocollo='$anno'");
 		$num = mysql_fetch_row($query);
 		return $num[0];
+	}
+	
+	public function getAttributi() {
+		$query = mysql_query("SELECT attributo FROM attributi");
+		$attributi = array();
+		while ($attr = mysql_fetch_array($query)) {
+			array_push($attributi, $attr);
+		}
+		return $attributi;
 	}
 
 	public function publdisplaylettera ($idlettera, $annoricercaprotocollo) { //<man>Stampa i dettagli di una lettera, passando come parametri id e anno di registrazione</man>
@@ -296,7 +323,7 @@ class Lettera {
 			<div class="form-group">
 				<label><span class="glyphicon glyphicon-search"></span> Ricerca mittente o destinatario:</label>
 				<div class="row">
-					<div class="col-xs-5">
+					<div class="col-xs-11">
 						<input placeholder="digita il COGNOME o la RAGIONE SOCIALE" type="text" name="valore" class="form-control" onkeyup="showResult(this.value,'<?php echo $tipologia;?>',<?php echo $idlettera;?>)">
 						<div id="livesearch"></div> <!-- spazio riservato ai risultati live della ricerca -->
 					</div>

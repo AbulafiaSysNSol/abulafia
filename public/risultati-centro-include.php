@@ -27,20 +27,55 @@
 			$_POST['anagraficatipologia']= $_GET['anagraficatipologia'];
 		}
 	}
-
 	if (isset($_POST['anagraficatipologia'])) {
 		$filtro = $_POST['anagraficatipologia'];
 	}
-
+	
+	//filtri aggiuntivi
+	if(isset($_POST['speditaricevuta'])) {
+		$speditaricevuta = $_POST['speditaricevuta'];
+		if($speditaricevuta == "") {
+			$sped = '';
+		}
+		if($speditaricevuta == "sped") {
+			$sped = " AND speditaricevuta = 'spedita' ";
+		}
+		if($speditaricevuta == "ric") {
+			$sped = " AND speditaricevuta = 'ricevuta' ";
+		}
+	}
+	if(isset($_POST['posizione'])) {
+		$posizione = $_POST['posizione'];
+		if($posizione == "") {
+			$pos = '';
+		}
+		else {
+			$pos = " AND riferimento = '$posizione' ";
+		}
+	}
+	if(isset($_POST['pratica'])) {
+		$pratica = $_POST['pratica'];
+		if($pratica == "") {
+			$prat = '';
+		}
+		else {
+			$prat = " AND pratica = '$pratica' ";
+		}
+	}
+	if( ($_POST['data1'] != "") && ($_POST['data2'] != "") ) {
+		$data1 = $_POST['data1'];
+		$data2 = $_POST['data2'];
+		$datainizio = $my_calendario->dataDB($data1);
+		$datafine = $my_calendario->dataDB($data2);
+		$dataricercadb = " AND dataregistrazione BETWEEN '$datainizio' AND '$datafine' ";
+	}
+	else {
+		$dataricercadb = "";
+	}
+	
 	$ordinerisultati = $_POST['ordinerisultati'];
 	$cercato = $_POST['cercato']; //parola chiave da ricercare
 	$nomecercato = NULL;
-
-	if ($cercato != '') {
-		if ( substr_count($cercato, "+") > 0) {
-			list($cognomecercato, $nomecercato) = explode("+", $cercato);
-		}
-	}
 
 	$tabella = $_POST['tabella'];
 	
@@ -55,6 +90,13 @@
 
 	//scelta 'anagrafica'
 	if ($tabella == 'anagrafica') {
+	
+		if ($cercato != '') {
+			if ( substr_count($cercato, "+") > 0) {
+				list($cognomecercato, $nomecercato) = explode("+", $cercato);
+			}
+		}
+	
 		if ($ordinerisultati == 'alfabetico') { 
 			$_SESSION['ordinerisultati'] = 'order by anagrafica.cognome, anagrafica.nome';
 		}
@@ -332,9 +374,9 @@
 			//fine controllo pagine avanti-indietro
 		}
 		else {
-			echo "Non ci sono risultati con i filtri applicati."; 
-			?> 
-			<a href="login0.php?corpus=ricerca"><br><br><i class="fa fa-reply"></i> Torna alla pagina di ricerca</a><br></a>
+			?>
+			<h4><div align="center" class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <b>Nessun</b> risultato trovato con i filtri di ricerca selezionati.</div></h4>
+			<a href="login0.php?corpus=ricerca"><i class="fa fa-arrow-left"></i> Torna alla pagina di ricerca</a>
 			<?php
 		}
 
@@ -356,6 +398,34 @@
 	if ($tabella == 'lettere') {
 		$tabella= $tabella.$annoricercaprotocollo;
 		$joinletteremittenti= 'joinletteremittenti'.$annoricercaprotocollo;
+		
+		//ricerca parole non continue
+		$cercato2='';
+		$cercato3='';
+		if ($cercato != '') {
+			if ( substr_count($cercato, " ") > 0) {
+				$parolaspezzata = explode(" ", $cercato);
+				$i=1;
+				foreach($parolaspezzata as $value) {
+					if($i == 1) {
+						$cercato2 = " OR ( $tabella.oggetto like '%".$value."%' ";
+						$cercato3 = " OR ( $tabella.note like '%".$value."%' ";
+					}
+					else {
+						$cercato2 = $cercato2 . " AND $tabella.oggetto like '%".$value."%' ";
+						$cercato3 = $cercato3 . " AND $tabella.note like '%".$value."%' ";
+					}
+					$i++;
+				}
+				$cercato2 = $cercato2 . " )";
+				$cercato3 = $cercato3 . " )";
+			}
+			else {
+				$cercato2='';
+				$cercato3='';
+			}
+		}
+		
 		if ($ordinerisultati == 'alfabetico') { 
 			$_SESSION['ordinerisultati'] = 'order by '.$tabella.'.oggetto';
 		}
@@ -373,22 +443,24 @@
 						WHERE 
 							($tabella.idlettera like '%$cercato%' 
 							OR 
-							$tabella.oggetto like '%$cercato%' 
+								($tabella.oggetto like '%$cercato%'
+								$cercato2)
 							OR 
-							$tabella.speditaricevuta like '%$cercato%' 
-							OR 
-							$tabella.note like '%$cercato%' 
-							OR
-							$tabella.posizione like '%$cercato%' 
-							OR
-							$tabella.riferimento like '%$cercato%' 
+								($tabella.note like '%$cercato%' 
+								$cercato3)
 							OR
 							$tabella.datalettera like '$data')
-							and
-							($tabella.speditaricevuta!=''
-							and
-							$tabella.oggetto!='')"
+							AND
+								($tabella.speditaricevuta!=''
+								AND
+								$tabella.oggetto!='')
+							$sped
+							$pos
+							$prat
+							$dataricercadb
+							"
 						);
+						
 		//conteggio per divisione in pagine dei risultati
 		$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
 		$tot_records = $res_count[0];//conteggio per divisione in pagine dei risultati
@@ -403,22 +475,22 @@
 								$tabella
 							WHERE
 								($tabella.idlettera like '%$cercato%' 
-								OR
-								$tabella.oggetto like '%$cercato%' 
-								OR
-								$tabella.speditaricevuta like '%$cercato%' 
-								OR
-								$tabella.note like '%$cercato%' 
-								OR
-								$tabella.posizione like '%$cercato%' 
-								OR
-								$tabella.riferimento like '%$cercato%' 
+								OR 
+									($tabella.oggetto like '%$cercato%'
+									$cercato2)
+								OR 
+									($tabella.note like '%$cercato%' 
+									$cercato3)
 								OR
 								$tabella.datalettera like '$data')
-								and
-								($tabella.speditaricevuta!=''
-								and
-								$tabella.oggetto!='')
+								AND
+									($tabella.speditaricevuta!=''
+									AND
+									$tabella.oggetto!='')
+							$sped
+							$pos
+							$prat
+							$dataricercadb
 							$ordinerisultati 
 							LIMIT
 								$iniziorisultati , $risultatiperpagina
@@ -595,9 +667,9 @@
 			//fine controllo pagine avanti-indietro
 		}
 		else {
-			echo "Nessun risultato trovato con i filtri di ricerca applicati."; 
 			?> 
-			<br><br><a href="login0.php?corpus=ricerca"><i class="fa fa-reply"></i> Torna alla pagina di ricerca</a><br><?php
+			<h4><div align="center" class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <b>Nessun</b> risultato trovato con i filtri di ricerca selezionati.</div></h4>
+			<a href="login0.php?corpus=ricerca"><i class="fa fa-arrow-left"></i> Torna alla pagina di ricerca</a><?php
 		} 
 	}
 ?>

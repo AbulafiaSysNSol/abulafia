@@ -1,11 +1,12 @@
 <?php 
-	$id=$_GET['id'];
-	$nome=$_GET['nome'];
-	$cognome=$_GET['cognome'];
+	$id = $_GET['id'];
+	$nome = $_GET['nome'];
+	$cognome = $_GET['cognome'];
 	
-	$nomenuovoutente= strtolower($nome.'.'.$cognome);
-	$passwordnuovoutente= md5($nomenuovoutente);
-	$nuovoutente=mysql_query("insert into users values('$id',0,'$nomenuovoutente', '$passwordnuovoutente')");
+	$nomenuovoutente = strtolower($nome.'.'.$cognome);
+	$passwordnuovoutente = md5($nomenuovoutente);
+	$nuovoutente = mysql_query("INSERT INTO users VALUES('$id',0,'$nomenuovoutente', '$passwordnuovoutente', '')");
+	$setting = mysql_query("INSERT INTO usersettings VALUES('$id', 30, 'images/splash.jpg', '#DEFEB4', '#FFFFCC', '100%', '', '')");
 ?>
 
 <SCRIPT LANGUAGE="Javascript">

@@ -1,6 +1,6 @@
 <?php
 	$calendario = new Calendario();
-	
+	$lett = new Lettera();
 	$id = $_GET['id'];
 	$lettera = mysql_query(" SELECT * FROM comp_lettera WHERE id = $id ");
 	$datilettera = mysql_fetch_row($lettera);
@@ -37,26 +37,33 @@
 					while ($dest = mysql_fetch_array($query)) {
 						?>
 						<script type="text/javascript" src="livesearch-cambia-attributo.js"></script>
-						<tr><td style="vertical-align: middle" align="center">
-						<select class="form-control input-sm" onChange="changeAttr(<?php echo $dest['idanagrafica']; ?>,<?php echo $id;?>,this.value)">
-							<option value="<?php echo $dest['attributo']; ?>"><?php echo $dest['attributo']; ?></option>
-							<option value="Al ">Al:</option>
-							<option value="Alla ">Alla:</option>
-							<option value="Agli ">Agli:</option>
-							<option value="Ai ">Ai:</option>
-							<option value="A ">A:</option>
-							<option value="Al Volontario ">Al Volontario:</option>
-							<option value="Alla Volontaria ">Alla Volontaria:</option>
-							<option value="Ai Volontari ">Ai Volontari:</option>
-							<option value="A Tutti i ">A Tutti i:</option>
-							<option value="Spett.">Spett.:</option>
-							<option value=""></option>
-						</select>
-						</td>
-						<td style="vertical-align: middle">
-						<?php
-						echo stripslashes($dest['cognome'] . ' ' . $dest['nome']) . '</td><td style="vertical-align: middle"><a href="comp-lettera-elimina-destinatario.php?idanagrafica=' . $dest['idanagrafica'] . '&idlettera=' . $id . '&conoscenza=' . $dest['conoscenza'] . '"><i class="fa fa-trash-o"></i> elimina</a>';
-						echo '</td></tr>';
+						<tr>
+							<td style="vertical-align: middle" align="center">
+								<select class="form-control input-sm" onChange="changeAttr(<?php echo $dest['idanagrafica']; ?>,<?php echo $id;?>,this.value)">
+									<option value="<?php echo $dest['attributo']; ?>"><?php echo $dest['attributo']; ?></option>
+									<?php
+									$attributi = $lett->getAttributi();
+									foreach($attributi as $value) {
+										echo '<option value="' . $value[0] . '">' . $value[0] . '</option>';
+									}
+									?>
+									<option value=""></option>
+								</select>
+							</td>
+							
+							<td style="vertical-align: middle">
+								<?php
+								echo stripslashes($dest['cognome'] . ' ' . $dest['nome']);
+								?>
+							</td>
+							
+							<td style="vertical-align: middle">
+								<center>
+									<a href="comp-lettera-elimina-destinatario.php?idanagrafica=<?php echo $dest['idanagrafica']; ?>&idlettera=<?php echo $id; ?>&conoscenza=<?php echo $dest['conoscenza']; ?>"><i class="fa fa-trash-o"></i></a>
+								</center>
+							</td>
+						</tr>
+					<?php
 					}
 					echo '</table>';
 				?>
@@ -82,16 +89,12 @@
 						<tr><td style="vertical-align: middle" align="center">
 						<select class="form-control input-sm" onChange="changeAttr(<?php echo $dest['idanagrafica']; ?>,<?php echo $id;?>,this.value)">
 							<option value="<?php echo $dest['attributo']; ?>"><?php echo $dest['attributo']; ?></option>
-							<option value="Al ">Al:</option>
-							<option value="Alla ">Alla:</option>
-							<option value="Agli ">Agli:</option>
-							<option value="Ai ">Ai:</option>
-							<option value="A ">A:</option>
-							<option value="Al Volontario ">Al Volontario:</option>
-							<option value="Alla Volontaria ">Alla Volontaria:</option>
-							<option value="Ai Volontari ">Ai Volontari:</option>
-							<option value="A Tutti i ">A Tutti i:</option>
-							<option value="Spett. ">Spett.:</option>
+							<?php
+								$attributi = $lett->getAttributi();
+								foreach($attributi as $value) {
+									echo '<option value="' . $value[0] . '">' . $value[0] . '</option>';
+								}
+							?>
 							<option value=""></option>
 						</select>
 						</td>

@@ -204,6 +204,7 @@ tinymce.init({
 			</a>
 			<ul class="dropdown-menu">
 				<li><a href="login0.php?corpus=lettera"><span class="glyphicon glyphicon-pencil"></span> Scrivi lettera</a></li>
+				<li><a href="login0.php?corpus=attributi"><i class="fa fa-font"></i> Gestione Attributi</a></li>
 				<li><a href="login0.php?corpus=elenco-lettere"><i class="fa fa-bars"></i> Elenco lettere <?php if($protocollare[0] > 0) { echo '<span class="badge alert-success">'. $protocollare[0] .' da protocollare!</span>'; } ?></a></li>
 				<?php 
 					if(($num[0] > 0) && ($_SESSION['auth']>98)) {

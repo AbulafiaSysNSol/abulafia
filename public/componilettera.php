@@ -187,6 +187,7 @@
 	</page>';
 
 	$html2pdf = new HTML2PDF('P','A4','it');
+	$html2pdf->setDefaultFont("times");
 	$html2pdf->WriteHTML($content);
 
 	if($from == 'protocolla-lettera') {

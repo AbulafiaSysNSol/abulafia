@@ -18,7 +18,7 @@
 			<form id="login_form" action="lettera3.php?idlettera=<?php echo $id; ?>&from=<?php echo $from; ?>" method="POST" enctype="multipart/form-data">	
 				<div class="row">
 					<div class="col-xs-8">
-						<h5><i class="fa fa-file-text-o"></i> Testo della lettera:</h5>
+						<h5><i class="fa fa-file-text-o"></i> Testo della lettera: <small>(NB: per un interlinea singola premere SHIFT + INVIO, per un interlinea doppia solo INVIO)</small></h5>
 						<textarea id="editor" class="form-control" rows="17" name="message"><?php echo $dettagli['testo']; ?></textarea>
 					</div>
 				

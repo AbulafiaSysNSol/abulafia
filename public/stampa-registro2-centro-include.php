@@ -98,15 +98,46 @@ require('lib/fpdf/fpdf.php');
 			<?php 
 			exit();
 		}
+	}
+	if($from == "day") {
+		if(isset($_POST['day'])) {
+			$inizio = $_POST['day'];
+			$datai = explode("/", $inizio);
+			if(isset($datai[0])) {
+				$giornoi = $datai[0];
+			}
+			if(isset($datai[1])) {
+				$mesei = $datai[1];
+			}
+			if(isset($datai[2])) {
+				$annoi = $datai[2];
+			}
+			else {
+				$annoi = 0;
+			}
+			$dataf = explode("/", $inizio);
+			if(isset($dataf[0])) {
+				$giornof = $dataf[0];
+			}
+			if(isset($dataf[1])) {
+				$mesef = $dataf[1];
+			}
+			if(isset($dataf[2])) {
+				$annof = $dataf[2];
+			}
+			else {
+				$annof = 1;
+			}
+		}
 		$anno = $annoi;
 		$annoricerca = $anno;
-		$intestazione = 'Registro di protocollo ' . $anno . ' dal '. $inizio .' al '. $fine.':';
+		$intestazione = 'Registro di protocollo giornaliero del ' . $inizio . ':';
 		$inizio = $annoi.'-'.$mesei.'-'.$giornoi;
 		$fine = $annof.'-'.$mesef.'-'.$giornof;
 		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
 		$numerorisultati = mysql_fetch_row($query);
 		if($numerorisultati[0] < 1) {
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DEL ' . $inizio , $_SESSION['historylog']);
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;

@@ -15,7 +15,7 @@
 		?>
 		<div class="row">
 		<div class="col-xs-12">
-		<div class="alert alert-danger">Nessun risultato trovato. Provare a variare i parametri di ricerca.</div></div></div>
+		<div class="alert alert-danger"><b><i class="fa fa-exclamation-triangle"></i> Nessun risultato trovato.</b> Provare a variare i parametri di ricerca.</div></div></div>
 		<?php
 		}
 		?>	
@@ -25,23 +25,37 @@
 		?>
 		<div class="row">
 		<div class="col-xs-12">
-		<div class="alert alert-danger">Indicare date di ricerca appartenenti allo stesso anno.</div></div></div>
+		<div class="alert alert-danger"><b><i class="fa fa-exclamation-triangle"></i> Errore:</b> indicare date di ricerca appartenenti allo stesso anno.</div></div></div>
 		<?php
 		}
 		?>
 			<div class="row">
 				<center>
 				<div class="col-xs-3">
+					Stampa registro giornaliero:<br><br>
+					<form class="form-inline" role="form" method="post" target="_BLANK" action="stampa-registro2-centro-include.php?search=day">
+				
+						Giorno:
+						<div class="form-group">
+						<input name="day" size="10" type="text" class="form-control datepickerProt" required>
+						</div>
+						<br><br>
+						<button class="btn btn-danger" type="submit"><i class="fa fa-file-pdf-o"></i> Genera PDF</button>
+					
+					</form>
+				</div>
+				
+				<div class="col-xs-3">
 					Stampa intervallo numerico:<br><br>
 					<form class="form-inline" role="form" method="post" target="_BLANK" action="stampa-registro2-centro-include.php?search=num">
 				
 						Dal n. 
 						<div class="form-group">
-						<input name="numeroinizio" size="2" type="text" class="form-control">
+						<input name="numeroinizio" size="2" type="text" class="form-control" required>
 						</div>
 						al n.
 						<div class="form-group">
-						<input name="numerofine" size="2" type="text" class="form-control">
+						<input name="numerofine" size="2" type="text" class="form-control" required>
 						</div>
 						<br><br>Anno protocollo:
 						<SELECT class="form-control input-sm" name="annoprotocollo" >
@@ -71,11 +85,11 @@
 				
 						Dal 
 						<div class="form-group">
-						<input name="datainizio" size="10" type="text" class="form-control datepickerProt">
+						<input name="datainizio" size="10" type="text" class="form-control datepickerProt" required>
 						</div>
 						al
 						<div class="form-group">
-						<input name="datafine" size="10" type="text" class="form-control datepickerProt">
+						<input name="datafine" size="10" type="text" class="form-control datepickerProt" required>
 						</div>
 						<br><br>
 						<button class="btn btn-danger" type="submit"><i class="fa fa-file-pdf-o"></i> Genera PDF</button>
