@@ -55,6 +55,7 @@ require('lib/fpdf/fpdf.php');
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 		}
 	}
+	
 	if($from == "date") {
 		if(isset($_POST['datainizio'])) {
 			$inizio = $_POST['datainizio'];
@@ -98,7 +99,30 @@ require('lib/fpdf/fpdf.php');
 			<?php 
 			exit();
 		}
+		$anno = $annoi;
+		$annoricerca = $anno;
+		$intestazione = 'Registro di protocollo ' . $anno . ' dal '. $inizio .' al '. $fine.':';
+		$inizio = $annoi.'-'.$mesei.'-'.$giornoi;
+		$fine = $annof.'-'.$mesef.'-'.$giornof;
+		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
+		$numerorisultati = mysql_fetch_row($query);
+		if($numerorisultati[0] < 1) {
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
+			?>
+			<SCRIPT LANGUAGE="Javascript">
+			browser= navigator.appName;
+			if (browser == "Netscape")
+			window.location="login0.php?corpus=stampa-registro&noresult=1"; else window.location="login0.php?corpus=stampa-registro&noresult=1";
+			</SCRIPT>
+			<?php 
+			exit();
+		}
+		else {
+			$query = mysql_query("SELECT * FROM lettere$anno WHERE lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
+		}	
 	}
+	
 	if($from == "day") {
 		if(isset($_POST['day'])) {
 			$inizio = $_POST['day'];
