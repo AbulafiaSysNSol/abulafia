@@ -145,14 +145,16 @@
 							  
 							$Test->Render("graphs/homegraph.png");  
 							
-						}
+						
 
-					?>
-					</p>
-	
-					<center><img src="graphs/homegraph.png"></center><br>
-		
-					<?php
+							?>
+							</p>
+			
+							<center><img src="graphs/homegraph.png"></center><br>
+				
+							<?php
+					
+						}
 
 						$DataSet = new pData;
 						
