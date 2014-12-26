@@ -56,7 +56,7 @@
 							$content = $content.'Protocollo n&ordm; ________ del ______________<br><br>';
 						}
 						$content = $content.'
-						Allegati: '.$allegati.'<br><br><br>
+						Allegati: '.$allegati.'<br><br>
 					</td>
 					
 					<td rowspan="2" width="285">
@@ -164,9 +164,9 @@
 					</td>
 				</tr>
 			</table>
-			<br><br>
+			<br>
 			'.$testo.'
-			<br><br><br>';
+			<br>';
 			
 					if($firma == 1) {
 						$content = $content.'	<div style="margin-left: 400px;">

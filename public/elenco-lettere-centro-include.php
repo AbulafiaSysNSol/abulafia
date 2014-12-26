@@ -78,12 +78,12 @@ $query = mysql_query("SELECT * FROM comp_lettera ORDER BY id DESC");
 									<i class="fa fa-users"></i>
 							</a>
 							<?php }
-							if($risultati2['vista'] != 2 && $_SESSION['auth'] > 98) { ?>
+							if($risultati2['vista'] != 2 && $_SESSION['auth'] >= 90) { ?>
 							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Segna come vista" href="vista-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere">
 									<i class="fa fa-eye"></i>
 							</a>
 							<?php }
-							if($risultati2['firmata'] != 1 && $_SESSION['auth'] > 98) { ?>
+							if($risultati2['firmata'] != 1 && $_SESSION['auth'] >= 90) { ?>
 							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Firma" href="firma-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere">
 									<i class="fa fa-pencil"></i>
 							</a>
@@ -93,7 +93,7 @@ $query = mysql_query("SELECT * FROM comp_lettera ORDER BY id DESC");
 									<i class="fa fa-book"></i>
 							</a>
 							<?php }
-							if($risultati2['protocollo'] == 0 && $_SESSION['auth'] > 98) { ?>
+							if($risultati2['protocollo'] == 0 && $_SESSION['auth'] >= 99) { ?>
 							<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina" onclick="return confirm('Sicuro di voler cancellare la lettera?')" href="elimina-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere">
 									<i class="fa fa-trash-o"></i>
 							</a>

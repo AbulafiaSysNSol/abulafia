@@ -1,6 +1,6 @@
 <?php
 //controllo dell'autorizzazione necessaria alla gestione degli utenti di abulafia
-if ($_SESSION['auth'] < 99) { 
+if ($_SESSION['auth'] < 90) { 
 	echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; 
 	exit ();
 }

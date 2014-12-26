@@ -196,7 +196,7 @@ tinymce.init({
 				?>
 				 Lettere
 				<?php 
-					if(($num[0] > 0) && ($_SESSION['auth']>98)) {
+					if(($num[0] > 0) && ($_SESSION['auth']>=90)) {
 						echo '<span class="badge alert-success">' . $num[0] . '</span>';
 					}
 				?>
@@ -207,7 +207,7 @@ tinymce.init({
 				<li><a href="login0.php?corpus=attributi"><i class="fa fa-font"></i> Gestione Attributi</a></li>
 				<li><a href="login0.php?corpus=elenco-lettere"><i class="fa fa-bars"></i> Elenco lettere <?php if($protocollare[0] > 0) { echo '<span class="badge alert-success">'. $protocollare[0] .' da protocollare!</span>'; } ?></a></li>
 				<?php 
-					if(($num[0] > 0) && ($_SESSION['auth']>98)) {
+					if(($num[0] > 0) && ($_SESSION['auth']>=90)) {
 						echo '<li class="divider"></li>';
 						echo '<li><a href="login0.php?corpus=elenco-lettere-firma"><i class="fa fa-pencil"></i> Lettere da Firmare <span class="badge alert-success">' . $num[0] . '</span></a></li>';
 					}
@@ -232,7 +232,7 @@ tinymce.init({
 		<li><a href="login0.php?corpus=feedback"><i class="fa fa-thumbs-o-up"></i> Invia Feedback</a></li>
 		<li><a href="login0.php?corpus=settings"><span class="glyphicon glyphicon-cog"></span> Impostazioni</a></li>
 		<?php 
-			if ($_SESSION['auth'] > 80) {
+			if ($_SESSION['auth'] > 95) {
 				?>
 				<li class="divider"></li>
 				<li role="presentation" class="dropdown-header">ADVANCED</li>
