@@ -32,12 +32,12 @@
 			<div class="row">
 				<center>
 				<div class="col-xs-3">
-					Stampa registro giornaliero:<br><br>
+					<i class="fa fa-calendar-o"></i> Stampa registro giornaliero:<br><br>
 					<form class="form-inline" role="form" method="post" target="_BLANK" action="stampa-registro2-centro-include.php?search=day">
 				
 						Giorno:
 						<div class="form-group">
-						<input name="day" size="10" type="text" class="form-control datepickerProt" required>
+						<input name="day" size="10" type="text" class="form-control input-sm datepickerProt" required>
 						</div>
 						<br><br>
 						<button class="btn btn-danger" type="submit"><i class="fa fa-file-pdf-o"></i> Genera PDF</button>
@@ -45,19 +45,19 @@
 					</form>
 				</div>
 				
-				<div class="col-xs-3">
-					Stampa intervallo numerico:<br><br>
+				<div class="col-xs-5">
+					<i class="fa fa-list-ol"></i> Stampa intervallo numerico:<br><br>
 					<form class="form-inline" role="form" method="post" target="_BLANK" action="stampa-registro2-centro-include.php?search=num">
 				
 						Dal n. 
 						<div class="form-group">
-						<input name="numeroinizio" size="2" type="text" class="form-control" required>
+						<input name="numeroinizio" size="2" type="text" class="form-control input-sm" required>
 						</div>
 						al n.
 						<div class="form-group">
-						<input name="numerofine" size="2" type="text" class="form-control" required>
+						<input name="numerofine" size="2" type="text" class="form-control input-sm" required>
 						</div>
-						<br><br>Anno protocollo:
+						 Anno protocollo:
 						<SELECT class="form-control input-sm" name="annoprotocollo" >
 						<?php
 							$esistenzatabella1=mysql_query("show tables like 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
@@ -80,16 +80,16 @@
 				</div>
 				
 				<div class="col-xs-4">
-					Stampa intervallo temporale:<br><br>
+					<i class="fa fa-calendar"></i> Stampa intervallo temporale:<br><br>
 					<form class="form-inline" role="form" method="post" target="_BLANK" action="stampa-registro2-centro-include.php?search=date">
 				
 						Dal 
 						<div class="form-group">
-						<input name="datainizio" size="10" type="text" class="form-control datepickerProt" required>
+						<input name="datainizio" size="10" type="text" class="form-control input-sm datepickerProt" required>
 						</div>
 						al
 						<div class="form-group">
-						<input name="datafine" size="10" type="text" class="form-control datepickerProt" required>
+						<input name="datafine" size="10" type="text" class="form-control input-sm datepickerProt" required>
 						</div>
 						<br><br>
 						<button class="btn btn-danger" type="submit"><i class="fa fa-file-pdf-o"></i> Genera PDF</button>

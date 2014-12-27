@@ -125,7 +125,7 @@
 							echo 'Dettaglio lettere registrate: <br>';
 							while ($statsusers2= mysql_fetch_array($statsusers1)) {
 									$statsusers2 = array_map('stripslashes', $statsusers2);
-									echo $statsusers2['numerolettere'] . ' inserite da '. ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])) . '<br>';
+									echo $statsusers2['numerolettere'] . ' inserite da '. ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])) . ';<br>';
 									$DataSet->AddPoint($statsusers2['numerolettere'],"Serie1");  
 									$DataSet->AddPoint(ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])),"Serie2");
 							}
@@ -160,22 +160,22 @@
 						
 						$statsanagrafica=mysql_query("select count(*) from anagrafica");
 						$res_anagrafica = mysql_fetch_row($statsanagrafica);
-						echo 'Nella tabella ANAGRAFICA sono presenti '.($res_anagrafica[0] - 1) .' occorrenze, di cui<br>';
+						echo 'Nella tabella ANAGRAFICA sono presenti '.($res_anagrafica[0]) .' occorrenze, di cui<br>';
 						
 						$my_anagrafica->publcontaanagrafica('persona');
-						echo $my_anagrafica->contacomponenti.' Persone Fisiche<br>';
+						echo $my_anagrafica->contacomponenti.' Persone Fisiche;<br>';
 						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie1");
 						
 						$my_anagrafica->publcontaanagrafica('carica');
-						echo $my_anagrafica->contacomponenti.' Cariche o Incarichi<br>';
+						echo $my_anagrafica->contacomponenti.' Cariche o Incarichi;<br>';
 						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie2");
 						
 						$my_anagrafica->publcontaanagrafica('ente');
-						echo $my_anagrafica->contacomponenti.' Enti<br>';
+						echo $my_anagrafica->contacomponenti.' Enti;<br>';
 						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie3");
 						
 						$my_anagrafica->publcontaanagrafica('fornitore');
-						echo $my_anagrafica->contacomponenti.' Fornitori';
+						echo $my_anagrafica->contacomponenti.' Fornitori;';
 						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie4");
 						  
 						$DataSet->AddAllSeries();  
