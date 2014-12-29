@@ -159,7 +159,7 @@
 					</td>
 				</tr>
 				<tr>
-					<br><td width="58">
+					<td width="58">
 						<b>Oggetto</b>:
 					</td>
 					<td width="312">
