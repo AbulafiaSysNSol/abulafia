@@ -33,7 +33,7 @@ class Anagrafica {
 	public function getNotificationsIns() {
 		$mailaddress = array();
 		$query = mysql_query(" 	SELECT jointelefonipersone.numero 
-							FROM jointelefonipersone, defaultsettings, users 
+							FROM jointelefonipersone, usersettings, users 
 							WHERE jointelefonipersone.idanagrafica = defaultsettings.idanagrafica 
 							AND defaultsettings.idanagrafica = users.idanagrafica 
 							AND users.auth > 98 
@@ -49,7 +49,7 @@ class Anagrafica {
 	public function getNotificationsMod() {
 		$mailaddress = array();
 		$query = mysql_query(" 	SELECT jointelefonipersone.numero 
-							FROM jointelefonipersone, defaultsettings, users 
+							FROM jointelefonipersone, usersettings, users 
 							WHERE jointelefonipersone.idanagrafica = defaultsettings.idanagrafica 
 							AND defaultsettings.idanagrafica = users.idanagrafica 
 							AND users.auth > 98 

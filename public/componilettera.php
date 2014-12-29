@@ -2,6 +2,9 @@
 	session_start();
 	include '../db-connessione-include.php'; //connessione al db-server
 	include "class/Calendario.obj.inc";
+	$immagine = "images/footerlettere.png";
+	$dimensioni = getimagesize($immagine);
+	$altezza = ($dimensioni[1] + 5) / 3.779;
 	$calendario = new Calendario();
 	$margin = 480 - ((strlen($_SESSION["denominazione"]) / 2) * 4.8 );
 	$id = $_GET['id'];
@@ -32,7 +35,7 @@
 	}
 	require('lib/html2pdf/html2pdf.class.php');
 	$content = '
-	<page backtop="35mm" backbottom="50mm" backleft="10mm" backright="10mm">
+	<page backtop="35mm" backbottom="' . $altezza . 'mm" backleft="10mm" backright="10mm">
 		
 		<page_header>
 			<img align="right" src="images/headerpresidente.jpg" width="700">
@@ -48,15 +51,15 @@
 				<tr>
 					<td colspan="2" width="380">
 						' . $_SESSION["sede"] . ', '.$data.'
-						<br><br>';
+						<br>';
 						if($protocollo != 0) {
-							$content = $content.'<table border="0"><tr><td rowspan=2"><img src="lettere'.$anno.'/qrcode/'.$protocollo.$anno.'.png" width="90"></td><td style="vertical-align: bottom;">Protocollo n&ordm; '.$protocollo.'</td></tr><tr><td style="vertical-align: top;">del '.$dataprot.'</td></tr></table><br>';
+							$content = $content.'<table border="0"><tr><td rowspan=2"><img src="lettere'.$anno.'/qrcode/'.$protocollo.$anno.'.png" width="90"></td><td style="vertical-align: bottom;">Protocollo n&ordm; '.$protocollo.'</td></tr><tr><td style="vertical-align: top;">del '.$dataprot.'</td></tr></table>';
 						}
 						else {
-							$content = $content.'Protocollo n&ordm; ________ del ______________<br><br>';
+							$content = $content.'<br><br>Protocollo n&ordm; ________ del ______________<br><br><br>';
 						}
 						$content = $content.'
-						Allegati: '.$allegati.'<br><br>
+						Allegati: '.$allegati.'<br><br><br>
 					</td>
 					
 					<td rowspan="2" width="285">
@@ -156,8 +159,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td width="58">
-						Oggetto:
+					<br><td width="58">
+						<b>Oggetto</b>:
 					</td>
 					<td width="312">
 						<div style="text-align: justify; margin-right: 15px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
