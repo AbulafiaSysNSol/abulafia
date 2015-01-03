@@ -252,7 +252,7 @@
 							<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
 							<input required name="uploadedfile" type="file" id="exampleInputFile">
 							<br>
-							<button type="submit" class="btn btn-primary" onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
+							<button id="buttonload" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
 						</div>
 					</div>
 				</form>
@@ -438,6 +438,13 @@ $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio d
 			return false;
 		}
 		else {
+			$btn.button('loading');
+		}
+	});
+	
+	$("#buttonload").click(function() {
+		var $btn = $(this);
+		 if(document.getElementById("exampleInputFile").value != '') {
 			$btn.button('loading');
 		}
 	});

@@ -20,7 +20,15 @@
 	
 	$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 	$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-	if ($anno != $annoprotocollo) { echo 'Non puoi modificare una registrazione di un protocollo in archivio'; exit();}
+	
+	//controllo se l'anno del protocollo da modificare è uguale a quello in corso
+	if ($anno != $annoprotocollo) { 
+		?>
+		<h4><div align="center" class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <b>Attenzione:</b> non puoi modificare una registrazione di un protocollo in archivio.</div></h4>
+		<?php
+		include 'sotto-include.php'; //carica il file con il footer.
+		exit();
+	}
 
 	//controllo dell'autorizazione necessaria alla modifica del protocollo
 	$risultati3=mysql_query("select * from joinlettereinserimento$annoprotocollo, users where joinlettereinserimento$annoprotocollo.idlettera='$idlettera' and joinlettereinserimento$annoprotocollo.idinser=users.idanagrafica ");

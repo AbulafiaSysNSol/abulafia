@@ -34,10 +34,10 @@ class Anagrafica {
 		$mailaddress = array();
 		$query = mysql_query(" 	SELECT jointelefonipersone.numero 
 							FROM jointelefonipersone, usersettings, users 
-							WHERE jointelefonipersone.idanagrafica = defaultsettings.idanagrafica 
-							AND defaultsettings.idanagrafica = users.idanagrafica 
+							WHERE jointelefonipersone.idanagrafica = usersettings.idanagrafica 
+							AND usersettings.idanagrafica = users.idanagrafica 
 							AND users.auth > 98 
-							AND defaultsettings.notificains = 1
+							AND usersettings.notificains = 1
 							AND jointelefonipersone.tipo = 'envelope-o'
 						");
 		while ($mail = mysql_fetch_array($query)) {
@@ -50,10 +50,10 @@ class Anagrafica {
 		$mailaddress = array();
 		$query = mysql_query(" 	SELECT jointelefonipersone.numero 
 							FROM jointelefonipersone, usersettings, users 
-							WHERE jointelefonipersone.idanagrafica = defaultsettings.idanagrafica 
-							AND defaultsettings.idanagrafica = users.idanagrafica 
+							WHERE jointelefonipersone.idanagrafica = usersettings.idanagrafica 
+							AND usersettings.idanagrafica = users.idanagrafica 
 							AND users.auth > 98 
-							AND defaultsettings.notificamod = 1
+							AND usersettings.notificamod = 1
 							AND jointelefonipersone.tipo = 'envelope-o'
 						");
 		while ($mail = mysql_fetch_array($query)) {

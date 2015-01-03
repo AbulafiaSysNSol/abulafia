@@ -46,7 +46,7 @@
   <!-- META -->
   
   <!-- CSS -->
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.10.4.custom.css"></link>
   <link href="css/grid.css" rel="stylesheet">
@@ -66,7 +66,8 @@ tinymce.init({
     selector: "textarea#editor",
     statusbar : false,
     menubar: false,
-    toolbar: "newdocument | undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect"
+    plugins: "table",
+    toolbar: "undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | table"
  });
 </script>
 
