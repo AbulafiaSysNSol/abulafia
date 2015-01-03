@@ -98,8 +98,9 @@
 				?>
 				</p>
 				
-				<p><?php 
-				//Utilizzo Catania
+				<p>
+				<?php 
+				//Utilizzo comitato
 				$anniusoapplicazione = (strtotime("now") - strtotime($_SESSION['inizio']))/60/60/24/365;
 				$giorniusoapplicazione = ((strtotime("now") - strtotime($_SESSION['inizio']))/60/60/24)-(int)$anniusoapplicazione*365;
 				echo $_SESSION['nomeapplicativo'] . ' e\' in uso da '; 

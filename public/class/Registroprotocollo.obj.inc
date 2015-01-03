@@ -3,6 +3,16 @@
 class Registroprotocollo { //apertura classe
 
 	var $annodb; 
+	
+	public function getAnni() {
+		$anni = array();
+		$tablettere=mysql_query("show tables like 'lettere%'");
+		while ($tablettere2 = mysql_fetch_array($tablettere, MYSQL_NUM)) {
+			$anno = explode("lettere", $tablettere2[0]);
+			array_push($anni, $anno[1]);
+		}
+		return $anni;
+	}
 
 	private function selezionaanno ($var) { // modulo per la selezione dell'anno di uso del registro protocollo
 		$this->annodb = mysql_fetch_array(mysql_query("SELECT annoprotocollo FROM defaultsettings"));

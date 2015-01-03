@@ -13,6 +13,11 @@ class Log
 	private $ciclo='';
 	private $riga='';
 	private $filtro='';
+	
+	public function contaLog($logfile) {
+		$num = count(file($_SESSION['logdirectory'].'/'.$logfile));
+		return $num;
+	}
 
 	private function scrivilog ($username, $operazione, $esito, $client, $logfile) 
 		{
