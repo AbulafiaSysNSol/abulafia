@@ -14,6 +14,11 @@
 		
 		<div class="panel-body">
 			<div class="form-group">
+				
+				<div align="center" class="col-xs-12 alert alert-info" style="display: none;" id="content">
+					<i class="fa fa-warning"></i> Ricerca <b>COGNOME+NOME</b>: è possibile effettuare una ricerca <b>esatta</b> per cognome e nome (esempio <b>Saitta+Biagio</b>)
+				</div>
+				
 				<form name="search" method="post">
 					
 					<div class="row">
@@ -121,10 +126,6 @@
 									}
 								?>
 							</SELECT>
-						</div>
-						
-						<div align="center" class="col-xs-6 alert alert-info" style="display: none;" id="content">
-							<i class="fa fa-warning"></i> Ricerca <b>COGNOME+NOME</b>: è possibile effettuare una ricerca <b>esatta</b> per cognome e nome (esempio <b>Saitta+Biagio</b>)
 						</div>
 						
 					</div>

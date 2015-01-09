@@ -617,7 +617,7 @@
 								<?php
 							}
 							?>
-							<a class="btn btn-primary iframe" data-fancybox-type="iframe" href="inoltro-email.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><i class="fa fa-paper-plane"></i></a>
+							<a class="btn btn-primary iframe" data-toggle="tooltip" data-placement="left" title="Inoltro email" data-fancybox-type="iframe" href="inoltro-email.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><i class="fa fa-paper-plane"></i></a>
 							<?php if($value[5] == 'ricevuta') { ?><a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Stampa ricevuta" href="stampa-protocollo.php?id=<?php echo $value[0]; ?>&anno=<?php echo $annoricercaprotocollo; ?>" target="_blank"><i class="fa fa-print"></i></a> <?php } ?>
 						</div>
 					</td>		

@@ -188,18 +188,11 @@
 		<hr>
 		
 		<form enctype="multipart/form-data" action="login0.php?from=modifica-protocollo&corpus=prot-modifica-file&idlettera=<?php echo $idlettera;?>" method="POST">
-		<table>
-		<tr>
-		<td>
 		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />
 		<label for="exampleInputFile"><span class="glyphicon glyphicon-upload"></span> Carica allegato</label> 
 		<input required name="uploadedfile" type="file" id="exampleInputFile" />
-		</td>
-		<td valign="bottom">
-		<button type="submit" class="btn btn-primary" onClick="loading()"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
-		</td>
-		</tr>
-		</table>
+		<br>
+		<button id="buttonload" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
 		</form>
 		
 		<?php
@@ -396,6 +389,13 @@
 			return;
 		}
 		else {
+			$btn.button('loading');
+		}
+	});
+		
+	$("#buttonload").click(function() {
+		var $btn = $(this);
+		 if(document.getElementById("exampleInputFile").value != '') {
 			$btn.button('loading');
 		}
 	});
