@@ -30,7 +30,7 @@
 	$maillog='mail.log';
 	$historylog = 'history.log';
 	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
-	$userid = $_POST['userid']; // nome utente inserito nella form della pagina iniziale
+	$userid = strip_tags($_POST['userid']); // nome utente inserito nella form della pagina iniziale
 	$usermd = md5($userid);
 	$password = md5($_POST['password']); // password inserita nella form della pagina iniziale
 
