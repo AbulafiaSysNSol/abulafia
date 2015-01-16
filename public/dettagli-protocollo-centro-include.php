@@ -40,7 +40,7 @@
 
 		<div class="row">
 			<div class="col-xs-3">
-				<h3><i class="fa fa-info"></i> Dettagli Protocollo</h3>
+				<h3><i class="fa fa-info"></i> Dettagli Protocollo</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
 						<?php
@@ -58,7 +58,7 @@
 			</div>
 			
 			<div class="col-xs-3">
-				<h3><i class="fa fa-users"></i> <?php if($dettagli['speditaricevuta'] == 'spedita') { echo 'Destinatari'; } else { echo 'Mittenti';} ?></h3>
+				<h3><i class="fa fa-users"></i> <?php if($dettagli['speditaricevuta'] == 'spedita') { echo 'Destinatari'; } else { echo 'Mittenti';} ?></h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
 						<ul>
@@ -77,7 +77,7 @@
 			</div>
 			
 			<div class="col-xs-3">
-				<h3><i class="fa fa-files-o"></i> File Allegati</h3>
+				<h3><i class="fa fa-files-o"></i> File Allegati</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
 						<?php
@@ -151,7 +151,7 @@
 			</div>
 			
 			<div class="col-md-5">
-				<h3><i class="fa fa-paper-plane-o"></i> Protocollo inoltrato a:</h3>
+				<h3><i class="fa fa-paper-plane-o"></i> Protocollo inoltrato a:</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
 						<ul>
@@ -173,7 +173,7 @@
 			</div>
 			
 			<div class="col-xs-3">
-				<h3><i class="fa fa-cog"></i> Opzioni</h3>
+				<h3><i class="fa fa-cog"></i> Opzioni</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
 						<ul>
@@ -198,7 +198,7 @@
 			echo mysql_error();
 			?>
 			<br>
-			<h3><span class="glyphicon glyphicon-time"></span> Storico delle modifiche:</h3>
+			<h3><span class="glyphicon glyphicon-time"></span> Storico delle modifiche:</h3><br>
 			<div class="row">
 				<div class="col-xs-12">
 					<table class="table table-bordered">
