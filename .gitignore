@@ -8,3 +8,7 @@ public/log/*
 !public/log/.gitkeep
 /public/foto/*
 !/public/foto/sagoma.jpg
+/public/images/intestazione.jpg
+/public/images/footer.jpg
+/public/images/footerlettere.png
+/public/images/headerpresidente.jpg
