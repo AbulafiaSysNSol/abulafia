@@ -66,6 +66,7 @@ tinymce.init({
     selector: "textarea#editor",
     statusbar : false,
     menubar: false,
+    forced_root_block:false,
     plugins: "table",
     toolbar: "undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | table"
  });
@@ -76,6 +77,7 @@ tinymce.init({
     selector: "textarea#editorMail",
     statusbar : false,
     menubar: false,
+    forced_root_block:false,
     toolbar: "bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent"
  });
 </script>
@@ -85,6 +87,7 @@ tinymce.init({
     selector: "textarea#editorOgg",
     statusbar : false,
     menubar: false,
+    forced_root_block:false,
     toolbar: "bold underline italic"
  });
 </script>

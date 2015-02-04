@@ -4,7 +4,7 @@
 	include "class/Calendario.obj.inc";
 	$immagine = "images/footerlettere.png";
 	$dimensioni = getimagesize($immagine);
-	$altezza = ($dimensioni[1] + 5) / 3.779;
+	$altezza = (($dimensioni[1] / 150) * 25.4) + 4;
 	$calendario = new Calendario();
 	$margin = 480 - ((strlen($_SESSION["denominazione"]) / 2) * 4.8 );
 	$id = $_GET['id'];
@@ -168,8 +168,7 @@
 				</tr>
 			</table>
 			<br>
-			'.$testo.'
-			<br>';
+			'.$testo;
 			
 					if($firma == 1) {
 						$content = $content.'	<div style="margin-left: 400px;">
