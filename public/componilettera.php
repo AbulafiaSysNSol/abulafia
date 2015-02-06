@@ -6,7 +6,7 @@
 	$dimensioni = getimagesize($immagine);
 	$altezza = (($dimensioni[1] / 150) * 25.4) + 4;
 	$calendario = new Calendario();
-	$margin = 480 - ((strlen($_SESSION["denominazione"]) / 2) * 4.8 );
+	$margin = 470 - ((strlen($_SESSION["denominazione"]) / 2) * 4.3);
 	$id = $_GET['id'];
 	if(isset($_GET['from'])) {
 		$from = $_GET['from'];
@@ -168,15 +168,16 @@
 				</tr>
 			</table>
 			<br>
-			'.$testo;
+			'.$testo.'
+			<br>';
 			
 					if($firma == 1) {
-						$content = $content.'	<div style="margin-left: 400px;">
+						$content = $content.'	<div style="margin-left: 350px;">
 											<img src="../firma.jpg" width="280">
 										</div>';
 					}
 					else {
-						$content = $content.' <span style="margin-left: 480px;">
+						$content = $content.' <span style="margin-left: 470px;">
 											Il ' . $_SESSION["vertice"] . '
 										</span>
 										<br>
