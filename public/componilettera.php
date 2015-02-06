@@ -169,7 +169,7 @@
 			</table>
 			<br>
 			'.$testo.'
-			<br>';
+			<br><br>';
 			
 					if($firma == 1) {
 						$content = $content.'	<div style="margin-left: 350px;">

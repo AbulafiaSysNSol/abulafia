@@ -47,7 +47,7 @@
 	
 	if (isset($_GET['firma']) &&($_GET['firma'] == 'ok')) {
 		?>
-		<center><div class="alert alert-success"><h3><i class="fa fa-check"></i> Lettera sottoposta alla firma <b>correttamente!</b></h3></div></center>
+		<center><h3><div class="alert alert-success"><i class="fa fa-check"></i> Lettera sottoposta alla firma <b>correttamente!</b></div></h3></center>
 		<?php
 	}
 	

@@ -8,6 +8,8 @@
 	$allegati = $datilettera[6];
 	$testo = $datilettera[5];
 	$oggetto = $datilettera[4];
+	$verificaDest = false;
+	$verificaDestCon = false;
 
 ?>
 
@@ -54,6 +56,7 @@
 							<td style="vertical-align: middle">
 								<?php
 								echo stripslashes($dest['cognome'] . ' ' . $dest['nome']);
+								$verificaDest = true;
 								?>
 							</td>
 							
@@ -64,6 +67,9 @@
 							</td>
 						</tr>
 					<?php
+					}
+					if(!$verificaDest) {
+						echo "<br>Nessun destinatario inserito.";
 					}
 					echo '</table>';
 				?>
@@ -100,21 +106,28 @@
 						</td>
 						<td style="vertical-align: middle">
 						<?php
-						echo stripslashes($dest['cognome'] . ' ' . $dest['nome']) . '</td><td style="vertical-align: middle"><a href="comp-lettera-elimina-destinatario.php?idanagrafica=' . $dest['idanagrafica'] . '&idlettera=' . $id . '&conoscenza=' . $dest['conoscenza'] . '"><i class="fa fa-trash-o"></i> elimina</a>';
+						echo stripslashes($dest['cognome'] . ' ' . $dest['nome']) . '</td><td style="vertical-align: middle" align="center"><a href="comp-lettera-elimina-destinatario.php?idanagrafica=' . $dest['idanagrafica'] . '&idlettera=' . $id . '&conoscenza=' . $dest['conoscenza'] . '"><i class="fa fa-trash-o"></i></a>';
+						$verificaDestCon = true;
 						echo '</td></tr>';
+					}
+					if(!$verificaDestCon) {
+						echo "<br>Nessun destinatario per conoscenza inserito.";
 					}
 					echo '</table>';
 				?>
 			</div>
 		</div>
-		
+		<hr>
+		<center>
 		<a href="?corpus=modifica-lettera&idlettera=<?php echo $id; ?>&from=lettera2"><button class="btn btn-warning btn-lg" type="button"><i class="fa fa-arrow-left"></i> Torna ai dettagli</button></a>
 		<a class="fancybox" data-fancybox-type="iframe" href="componilettera.php?id=<?php echo $id; ?>"><button class="btn btn-info btn-lg" type="button"><i class="fa fa-file-o"></i> Anteprima Lettera</button></a>
-		<?php if($_SESSION['auth'] < 100) { ?>
-			<a href="sottoponi-lettera-firma.php?idlettera=<?php echo $id; ?>"><button class="btn btn-success btn-lg" type="button"><i class="fa fa-check"></i> Manda alla firma</button></a>
-		<?php } else { ?>
-			<a href="firma-lettera.php?id=<?php echo $id; ?>&from=elenco-lettere"><button class="btn btn-success btn-lg" type="button"><i class="fa fa-pencil"></i> Firma</button></a>
+		<?php if( ($_SESSION['auth'] < 100) && ($verificaDest) ) { ?>
+				<a href="sottoponi-lettera-firma.php?idlettera=<?php echo $id; ?>"><button class="btn btn-success btn-lg" type="button"><i class="fa fa-check"></i> Manda alla firma</button></a>
+		<?php }
+			if( ($_SESSION['auth'] == 100) && ($verificaDest) ) { ?>
+				<a href="firma-lettera.php?id=<?php echo $id; ?>&from=elenco-lettere"><button class="btn btn-success btn-lg" type="button"><i class="fa fa-pencil"></i> Firma</button></a>
 		<?php } ?>
+		</center>
 	</div>
 </div>
 

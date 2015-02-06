@@ -78,11 +78,11 @@ Class File
 		
 		public function unitaMisura($dim) {
 			if($dim >= 1000000)
-				return $dim / 1000000 . ' TB';
+				return round(($dim / 1000000),2) . ' TB';
 			else if($dim >= 1000)
-				return $dim / 1000 . ' GB';
+				return round(($dim / 1000),2) . ' GB';
 			else 
-				return $dim . ' MB';
+				return round($dim,2) . ' MB';
 		}
 
 	}//fine classe
