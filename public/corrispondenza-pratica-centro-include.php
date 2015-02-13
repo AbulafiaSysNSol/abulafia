@@ -125,7 +125,7 @@
 				<td style="vertical-align: middle">Oggetto</td>
 				<td style="vertical-align: middle">File</td>
 				<td style="vertical-align: middle">Mitt./Dest.</td>
-				<td style="vertical-align: middle" width="200">Opzioni</td>
+				<td style="vertical-align: middle" width="240">Opzioni</td>
 			</tr>
 		<?php
 		
@@ -194,6 +194,7 @@
 						?>
 						<a class="btn btn-primary iframe" data-fancybox-type="iframe" href="inoltro-email.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><i class="fa fa-paper-plane"></i></a>
 						<?php if($value[5] == 'ricevuta') { ?><a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Stampa ricevuta" href="stampa-protocollo.php?id=<?php echo $value[0]; ?>&anno=<?php echo $annoricercaprotocollo; ?>" target="_blank"><i class="fa fa-print"></i></a> <?php } ?>
+						<a class="btn btn-info iframe" data-toggle="tooltip" data-placement="left" title="Stampa etichetta barcode" data-fancybox-type="iframe" href="stampa-barcode.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"> <span class="glyphicon glyphicon-barcode"></span></a>
 					</div>
 				</td>		
 			</tr>

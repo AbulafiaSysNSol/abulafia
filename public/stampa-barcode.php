@@ -3,25 +3,21 @@
 	session_start();
 	
 	include 'lib/barcode/barcode.php';
-	include 'lib/fpdf/fpdf.php';
+	require('lib/html2pdf/html2pdf.class.php');
 	
 	$id = $_GET['id'];
 	$anno = $_GET['anno'];
 	
 	barcode($id, $anno, 45, "code128");
 	$image = "images/barcode/".$id.".".$anno.".png";
-	$header = "CRI - ";
+	$header = "CRI - ".$_SESSION['denominazione'];
 	$footer = "Protocollo n. ".$id."/".$anno;
 	
-	$pdf = new FPDF('L', 'mm', array(30,50));
-	$pdf->SetMargins(3, 3, 3);
-	$pdf->SetFontSize(5);
-	$pdf->SetX(0);
-	$pdf->Write(5, $header);
-	$pdf->SetX(0);
-	$pdf->Image($image);
-	$pdf->SetX(0);
-	$pdf->Write(5, $footer);
-	$pdf->Output('barcode.pdf', 'I');
+	$content = '<div align="center">'.$header.'<br><img src="'.$image.'"><br>'.$footer.'</div>';
+	$html2pdf = new HTML2PDF('L',array(33,75),'it');
+	$html2pdf->setDefaultFont("times");
+	$html2pdf->WriteHTML($content);
+	ob_end_clean();
+	$html2pdf->Output('barcode.pdf', 'I');
 	
 ?>

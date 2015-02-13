@@ -184,6 +184,7 @@
 							<?php
 								}
 								if($dettagli['speditaricevuta'] == 'ricevuta') { ?><li><a href="stampa-protocollo.php?id=<?php echo $id; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print"></i> Stampa ricevuta Protocollo</a></li><?php } ?>
+							<li><a class="iframe" data-fancybox-type="iframe" href="stampa-barcode.php?id=<?php echo $id;?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-barcode"></span> Stampa etichetta barcode</a></li>
 							<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus-sign"></span> Registra nuovo Protocollo</a></li>
 						</ul>
 					</div>

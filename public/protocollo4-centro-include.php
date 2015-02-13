@@ -85,6 +85,13 @@
 				Aggiungi inoltro email manuale
 				</a>
 			</p>	
+			<p>
+				<a 	class="iframe" 
+					data-fancybox-type="iframe" 
+					href="stampa-barcode.php?id=<?php echo $ultimoid;?>&anno=<?php echo $annoprotocollo;?>"> 
+					<span class="glyphicon glyphicon-barcode"></span> Stampa etichetta barcode
+				</a>
+			</p>
 			<a href="stampa-protocollo.php?id=<?php echo $ultimoid; ?>
 				&anno=<?php echo $annoprotocollo; ?>"
 				target="_blank">
