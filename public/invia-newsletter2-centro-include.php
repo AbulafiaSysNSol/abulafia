@@ -27,7 +27,7 @@
 		$footermail = '';
 	}
 	else {
-		$footermail = $setting2['footermail'];	
+		$footermail = '<br><br>'.$setting2['footermail'];	
 	}
 
 	$mittente = $_SESSION['mittente'];
