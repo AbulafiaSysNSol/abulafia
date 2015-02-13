@@ -12,3 +12,5 @@ public/log/*
 /public/images/footer.jpg
 /public/images/footerlettere.png
 /public/images/headerpresidente.jpg
+public/images/barcode/*
+!public/images/barcode/.gitkeep
