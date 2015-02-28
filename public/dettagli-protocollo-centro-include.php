@@ -77,7 +77,7 @@
 			</div>
 			
 			<div class="col-xs-3">
-				<h3><i class="fa fa-files-o"></i> File Allegati</h3><br>
+				<h3><i class="fa fa-folder-open-o"></i> File Allegati</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
 						<?php
