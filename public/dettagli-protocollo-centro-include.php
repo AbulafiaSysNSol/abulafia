@@ -217,8 +217,8 @@
 									<td style="vertical-align: middle" align="center" ><?php echo date('d/m/Y H:i',$mod['time']); ?></td>
 									<td style="vertical-align: middle" align="center" ><?php echo $anagrafica->getName($mod['user']); ?></td>
 									<td style="vertical-align: middle" align="center" ><?php echo $mod['modifica']; ?></td>
-									<td style="vertical-align: middle" align="center" ><?php echo $mod['prima']; ?></td>
-									<td style="vertical-align: middle" align="center" ><?php echo $mod['dopo']; ?></td>
+									<td style="vertical-align: middle" align="center" ><?php echo stripslashes($mod['prima']); ?></td>
+									<td style="vertical-align: middle" align="center" ><?php echo stripslashes($mod['dopo']); ?></td>
 								</tr>
 								<?php
 							}
