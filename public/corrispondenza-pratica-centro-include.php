@@ -87,7 +87,7 @@
 			$previouspage= $currentpage - 1;
 			?> 
 			<li>
-			<a href="login0.php?corpus=corrispondenza-anagrafica&anno=<?php echo $annoricercaprotocollo; ?>&iniziorisultati=<?php echo $paginaprecedente; ?>&id=<?php echo $idanagrafica; ?>&currentpage=<?php echo $previouspage; ?>">&laquo;</a>
+			<a href="login0.php?corpus=corrispondenza-pratica&anno=<?php echo $annoricercaprotocollo; ?>&iniziorisultati=<?php echo $paginaprecedente; ?>&id=<?php echo $idpratica; ?>&currentpage=<?php echo $previouspage; ?>">&laquo;</a>
 			</li>
 			<?php 
 		} 
@@ -97,7 +97,7 @@
 			$pagina = $i * $risultatiperpagina;
 			$currentpage = $_GET['currentpage'];
 			?>
-			<li <?php if( ($i+1) == $currentpage) { echo "class=\"active\""; } ?>><a href="login0.php?corpus=corrispondenza-anagrafica&anno=<?php echo $annoricercaprotocollo; ?>&iniziorisultati=<?php echo $pagina; ?>&id=<?php echo $idanagrafica; ?>&currentpage=<?php  echo $i+1; ?>"><?php echo $i+1 ?></a></li>
+			<li <?php if( ($i+1) == $currentpage) { echo "class=\"active\""; } ?>><a href="login0.php?corpus=corrispondenza-pratica&anno=<?php echo $annoricercaprotocollo; ?>&iniziorisultati=<?php echo $pagina; ?>&id=<?php echo $idpratica; ?>&currentpage=<?php  echo $i+1; ?>"><?php echo $i+1 ?></a></li>
 			<?php
 			$i++;
 		} while ($i < $tot_pages);
@@ -107,7 +107,7 @@
 			$nextpage = $currentpage + 1;
 			?> 				
 			<li>
-			<a href="login0.php?corpus=corrispondenza-anagrafica&iniziorisultati=<?php echo $paginasuccessiva; ?>&anno=<?php echo $annoricercaprotocollo; ?>&id=<?php echo $idanagrafica; ?>&currentpage=<?php echo $nextpage ;?>">&raquo;</a>
+			<a href="login0.php?corpus=corrispondenza-pratica&iniziorisultati=<?php echo $paginasuccessiva; ?>&anno=<?php echo $annoricercaprotocollo; ?>&id=<?php echo $idpratica; ?>&currentpage=<?php echo $nextpage ;?>">&raquo;</a>
 			</li>
 			<?php 
 		}
@@ -212,7 +212,7 @@
 				$previouspage= $currentpage - 1;
 				?> 
 				<li>
-				<a href="login0.php?corpus=corrispondenza-anagrafica&anno=<?php echo $annoricercaprotocollo; ?>&iniziorisultati=<?php echo $paginaprecedente; ?>&id=<?php echo $idanagrafica; ?>&currentpage=<?php echo $previouspage; ?>">&laquo;</a>
+				<a href="login0.php?corpus=corrispondenza-pratica&anno=<?php echo $annoricercaprotocollo; ?>&iniziorisultati=<?php echo $paginaprecedente; ?>&id=<?php echo $idpratica; ?>&currentpage=<?php echo $previouspage; ?>">&laquo;</a>
 				</li>
 				<?php 
 			} 
@@ -222,7 +222,7 @@
 				$pagina = $i * $risultatiperpagina;
 				$currentpage = $_GET['currentpage'];
 				?>
-				<li <?php if( ($i+1) == $currentpage) { echo "class=\"active\""; } ?>><a href="login0.php?corpus=corrispondenza-anagrafica&anno=<?php echo $annoricercaprotocollo; ?>&iniziorisultati=<?php echo $pagina; ?>&id=<?php echo $idanagrafica; ?>&currentpage=<?php  echo $i+1; ?>"><?php echo $i+1 ?></a></li>
+				<li <?php if( ($i+1) == $currentpage) { echo "class=\"active\""; } ?>><a href="login0.php?corpus=corrispondenza-pratica&anno=<?php echo $annoricercaprotocollo; ?>&iniziorisultati=<?php echo $pagina; ?>&id=<?php echo $idpratica; ?>&currentpage=<?php  echo $i+1; ?>"><?php echo $i+1 ?></a></li>
 				<?php
 				$i++;
 			} while ($i < $tot_pages);
@@ -232,7 +232,7 @@
 				$nextpage = $currentpage + 1;
 				?> 				
 				<li>
-				<a href="login0.php?corpus=corrispondenza-anagrafica&iniziorisultati=<?php echo $paginasuccessiva; ?>&id=<?php echo $idanagrafica; ?>&anno=<?php echo $annoricercaprotocollo; ?>&currentpage=<?php echo $nextpage ;?>">&raquo;</a>
+				<a href="login0.php?corpus=corrispondenza-pratica&iniziorisultati=<?php echo $paginasuccessiva; ?>&id=<?php echo $idpratica; ?>&anno=<?php echo $annoricercaprotocollo; ?>&currentpage=<?php echo $nextpage ;?>">&raquo;</a>
 				</li>
 				<?php 
 			}
