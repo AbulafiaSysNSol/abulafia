@@ -33,8 +33,8 @@
 	$mittente = $_SESSION['mittente'];
 	$destinatario = str_replace(' ', '', $_POST['destinatario']);
 	$destinatari = explode(',' , $destinatario);
-	$oggetto = $_POST['oggetto'];
-	$messaggio = $_POST['messaggio'];
+	$oggetto = stripslashes($_POST['oggetto']);
+	$messaggio = stripslashes($_POST['messaggio']);
 	
 	include "../mail-conf-include.php";
 	
@@ -66,8 +66,8 @@
 	$mail->addReplyTo($_SESSION['mittente']);
 	
 	$mail->isHTML(true);   
-	$mail->Subject = $oggetto;
-	$mail->Body = $headermail.$messaggio.$footermail;
+	$mail->Subject = stripslashes($oggetto);
+	$mail->Body = $headermail.stripslashes($messaggio).$footermail;
 	
 	$result = $mail->send();
 
