@@ -32,9 +32,9 @@
 
 	$mittente = $_SESSION['mittente'];
 	$destinatario = str_replace(' ', '', $_POST['destinatario']);
-	$destinatari = explode( ',' , $destinatario);
-	$oggetto = stripslashes($_POST['oggetto']);
-	$messaggio = stripslashes($_POST['messaggio']);
+	$destinatari = explode(',' , $destinatario);
+	$oggetto = $_POST['oggetto'];
+	$messaggio = $_POST['messaggio'];
 	
 	include "../mail-conf-include.php";
 	

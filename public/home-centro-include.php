@@ -15,6 +15,10 @@
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00'");
 	$res_lettere = mysql_fetch_row($statslettere);
+	$ricevute=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00' and speditaricevuta='ricevuta'");
+	$ric = mysql_fetch_row($ricevute);
+	$spedite=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00' and speditaricevuta='spedita'");
+	$sped = mysql_fetch_row($spedite);
 	$ultimoprot = $lettera->ultimoId($anno);
 	
 	//patch protocolli saltati
@@ -68,7 +72,7 @@
 <hr>
 	<center>
 		<h2>
-			<i class="fa fa-calendar"></i>  Anno:<b> <?php echo $anno; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-book"></i>  Numero di protocollo attuale:<b> <?php echo $ultimoprot; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text-o"></i>  Lettere registrate:<b> <?php echo $res_lettere[0]; ?></b>
+			<i class="fa fa-calendar"></i>  Anno:<b> <?php echo $anno; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-book"></i>  Numero di protocollo attuale:<b> <?php echo $ultimoprot; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-down"></i> Ricevute:<b> <?php echo $ric[0]; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-up"></i> Inviate:<b> <?php echo $sped[0]; ?></b>
 		</h2>
 	</center>
 <hr>
@@ -123,7 +127,7 @@
 						if ($res_lettere[0] > 0) {
 							$statsusers1=mysql_query("SELECT COUNT(joinlettereinserimento$anno.idinser) AS numerolettere, anagrafica.cognome, anagrafica.nome FROM anagrafica, joinlettereinserimento$anno WHERE  joinlettereinserimento$anno.idinser = anagrafica.idanagrafica AND datamod != '0000/00/00' GROUP BY anagrafica.idanagrafica ORDER BY numerolettere DESC");
 							echo mysql_error();
-							echo 'Dettaglio lettere registrate: <br>';
+							echo 'Sono state registrate ' . $res_lettere[0] . ' lettere, nel dettaglio: <br>';
 							while ($statsusers2= mysql_fetch_array($statsusers1)) {
 									$statsusers2 = array_map('stripslashes', $statsusers2);
 									echo $statsusers2['numerolettere'] . ' inserite da '. ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])) . ';<br>';
