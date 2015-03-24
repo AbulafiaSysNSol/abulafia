@@ -72,7 +72,7 @@
 <hr>
 	<center>
 		<h2>
-			<i class="fa fa-calendar"></i>  Anno:<b> <?php echo $anno; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-book"></i>  Numero di protocollo attuale:<b> <?php echo $ultimoprot; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-down"></i> Ricevute:<b> <?php echo $ric[0]; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-up"></i> Inviate:<b> <?php echo $sped[0]; ?></b>
+			<i class="fa fa-calendar"></i>  Anno:<b> <?php echo $anno; ?></b>&nbsp;&nbsp;<i class="fa fa-book"></i>  Numero di protocollo attuale:<b> <?php echo $ultimoprot; ?></b>&nbsp;&nbsp;<i class="fa fa-arrow-down"></i> Ricevute:<b> <?php echo $ric[0]; ?></b>&nbsp;&nbsp;<i class="fa fa-arrow-up"></i> Inviate:<b> <?php echo $sped[0]; ?></b>
 		</h2>
 	</center>
 <hr>
