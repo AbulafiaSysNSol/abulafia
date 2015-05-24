@@ -176,6 +176,7 @@ tinymce.init({
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
+				<li><a href="login0.php?corpus=ricerca-protocollo"><span class="glyphicon glyphicon-search"></span> Ricerca nel protocollo</a></li>
 				<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione titolario</a></li>
 				<li><a href="login0.php?corpus=pratiche"><i class="fa fa-tags"></i> Gestione pratiche</a></li>
 				<li><a href="login0.php?corpus=stampa-registro"><i class="fa fa-file-pdf-o"></i> Esporta registro in PDF</a></li>
@@ -209,7 +210,8 @@ tinymce.init({
 			<ul class="dropdown-menu">
 				<li><a href="login0.php?corpus=lettera"><span class="glyphicon glyphicon-pencil"></span> Scrivi lettera</a></li>
 				<li><a href="login0.php?corpus=attributi"><i class="fa fa-font"></i> Gestione Attributi</a></li>
-				<li><a href="login0.php?corpus=elenco-lettere"><i class="fa fa-bars"></i> Elenco lettere <?php if($protocollare[0] > 0) { echo '<span class="badge alert-success">'. $protocollare[0] .' da protocollare!</span>'; } ?></a></li>
+				<li><a href="login0.php?corpus=elenco-lettere"><i class="fa fa-wrench"></i> Lettere in Lavorazione <?php if($protocollare[0] > 0) { echo '<span class="badge alert-success">'. $protocollare[0] .' da protocollare!</span>'; } ?></a></li>
+				<li><a href="login0.php?corpus=lettere-archiviate"><i class="fa fa-archive"></i> Lettere Archiviate</a></li>
 				<?php 
 					if(($num[0] > 0) && ($_SESSION['auth']>=90)) {
 						echo '<li class="divider"></li>';
@@ -219,10 +221,16 @@ tinymce.init({
 			</ul>
 		</li>
 		
-		<li <?php if($_GET['corpus'] == 'anagrafica') { echo 'class="active"'; }?>><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-user"></span> Anagrafica</a></li>
-		<li <?php if($_GET['corpus'] == 'ricerca' OR $_GET['corpus']=='risultati') { echo 'class="active"'; }?>><a href="login0.php?corpus=ricerca"><span class="glyphicon glyphicon-search"></span> Ricerca</a></li>
+		<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Anagrafica <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus"></span> Inserisci nuova anagrafica</a></li>
+				<li><a href="login0.php?corpus=ricerca-anagrafica"><span class="glyphicon glyphicon-search"></span> Ricerca in anagrafica</a></li>
+			</ul>
+		</li>
+		
 		<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto"><span class="glyphicon glyphicon-question-sign"></span> F.A.Q.</a></li>
-		<li <?php if($_GET['corpus'] == 'informazioni') { echo 'class="active"'; }?>><a href="login0.php?corpus=informazioni"><span class="glyphicon glyphicon-info-sign"></span> Informazioni</a></li>
+		<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><span class="glyphicon glyphicon-info-sign"></span> Wiki</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">

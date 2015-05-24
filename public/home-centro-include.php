@@ -55,15 +55,14 @@
 		<?php
 	}
 	
-	if (isset($_GET['aggiornamento']) &&($_GET['aggiornamento'] == 'ok')) {
+	if (isset($_GET['aggiornamento']) && ($_GET['aggiornamento'] == 'ok')) {
 		?>
 		<center><div class="alert alert-info">
-			<h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema</b></h3>
-			<h4>E' stato rilasciato un aggiornamento di sistema riguardante la composizione delle lettere.
-			<br>
-			<br>E' possibile da oggi infatti comporre le lettere direttamente da Abulafia, attraverso il menu "Lettere" nella barra in alto.
-			</h4>
-			<small>Se notate anomalie o malfunzionamenti comunicateceli mediante la <a href="login0.php?corpus=segnala-bug">pagina di segnalazione errori.</a></small>
+			<h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema - Ver. 10.0</b></h3>
+			<br><b>Modifiche introdotte con l'aggiornamento:</b>
+			<br> - scissione pagina di ricerca; e adesso possibile ricercare solo i protocolli o solo le anagrafiche mediante i sottomenu "protollo" e "anagrafica";
+			<br> - scissione delle lettere tra "lettere in lavorazione" e "lettere archiviate";
+			<br><br><small>Se notate anomalie o malfunzionamenti comunicateceli mediante la <a href="login0.php?corpus=segnala-bug">pagina di segnalazione errori.</a></small>
 		</center>
 		<?php
 	}

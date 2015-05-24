@@ -62,7 +62,7 @@
 			$prat = " AND pratica = '$pratica' ";
 		}
 	}
-	if( ($_POST['data1'] != "") && ($_POST['data2'] != "") ) {
+	if( (isset($_POST['data1'])) && ($_POST['data1'] != "") && ($_POST['data2'] != "") ) {
 		$data1 = $_POST['data1'];
 		$data2 = $_POST['data2'];
 		$datainizio = $my_calendario->dataDB($data1);

@@ -13,7 +13,7 @@
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-		<h3 class="panel-title"><strong>Inserimento di un nuovo soggetto in anagrafica</strong></h3>
+		<h3 class="panel-title"><strong><span class="glyphicon glyphicon-plus"></span> Inserimento di un nuovo soggetto in anagrafica</strong></h3>
 		</div>
 		<div class="panel-body">
 		
