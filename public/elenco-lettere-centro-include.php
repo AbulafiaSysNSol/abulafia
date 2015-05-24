@@ -1,13 +1,13 @@
 <?php
 
-$query = mysql_query("SELECT * FROM comp_lettera ORDER BY id DESC");
+$query = mysql_query("SELECT * FROM comp_lettera WHERE protocollo = 0 ORDER BY id DESC");
 
 ?>
 
 <div class="panel panel-default">
 	
 	<div class="panel-heading">
-		<h3 class="panel-title"><strong><i class="fa fa-file-text-o"></i> Elenco Lettere</strong></h3>
+		<h3 class="panel-title"><strong><i class="fa fa-wrench"></i> <i class="fa fa-file-text-o"></i> Elenco lettere in lavorazione:</strong></h3>
 	</div>
 
 	<div class="panel-body">
@@ -93,7 +93,7 @@ $query = mysql_query("SELECT * FROM comp_lettera ORDER BY id DESC");
 									<i class="fa fa-book"></i>
 							</a>
 							<?php }
-							if($risultati2['protocollo'] == 0 && $_SESSION['auth'] >= 99) { ?>
+							if($risultati2['protocollo'] == 0 && $_SESSION['auth'] >= 90) { ?>
 							<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina" onclick="return confirm('Sicuro di voler cancellare la lettera?')" href="elimina-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere">
 									<i class="fa fa-trash-o"></i>
 							</a>
