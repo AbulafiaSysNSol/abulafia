@@ -211,7 +211,7 @@ tinymce.init({
 				<li><a href="login0.php?corpus=lettera"><span class="glyphicon glyphicon-pencil"></span> Scrivi lettera</a></li>
 				<li><a href="login0.php?corpus=attributi"><i class="fa fa-font"></i> Gestione Attributi</a></li>
 				<li><a href="login0.php?corpus=elenco-lettere"><i class="fa fa-wrench"></i> Lettere in Lavorazione <?php if($protocollare[0] > 0) { echo '<span class="badge alert-success">'. $protocollare[0] .' da protocollare!</span>'; } ?></a></li>
-				<li><a href="login0.php?corpus=lettere-archiviate"><i class="fa fa-archive"></i> Lettere Archiviate</a></li>
+				<li><a href="login0.php?corpus=archivio-lettere"><i class="fa fa-archive"></i> Lettere Archiviate</a></li>
 				<?php 
 					if(($num[0] > 0) && ($_SESSION['auth']>=90)) {
 						echo '<li class="divider"></li>';
