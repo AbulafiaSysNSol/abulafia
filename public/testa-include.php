@@ -67,8 +67,11 @@ tinymce.init({
     statusbar : false,
     menubar: false,
     forced_root_block: false,
-    plugins: "table",
-    toolbar: "undo redo | bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | table"
+    fontsize_formats: "6pt 8pt 9pt 10pt 11pt 12pt 13pt 14pt 15pt 16pt 18pt 20pt 22pt 24pt 26pt 36pt 54pt 72pt",
+   plugins: [
+                "advlist  lists table charmap",
+        ],
+    toolbar: "bold underline italic subscript superscript charmap | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | table"
  });
 </script>
 
