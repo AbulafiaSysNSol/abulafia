@@ -168,9 +168,7 @@
 				</tr>
 			</table>
 			<br><br>
-			<span style="line-height: 1.6">
-			'.$testo.'
-			</span>
+			<span style="line-height: 1.6">'.$testo.'</span>
 			<br><br>';
 			
 					if($firma == 1) {
