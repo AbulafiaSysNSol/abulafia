@@ -163,12 +163,14 @@
 						<b>Oggetto</b>:
 					</td>
 					<td width="312">
-						<div style="text-align: justify; margin-right: 15px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
+						<div style="text-align: left; margin-right: 15px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
 					</td>
 				</tr>
 			</table>
-			<br>
+			<br><br>
+			<span style="line-height: 1.6">
 			'.$testo.'
+			</span>
 			<br><br>';
 			
 					if($firma == 1) {
