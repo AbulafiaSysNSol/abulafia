@@ -12,16 +12,17 @@
 				<div align="center" class="dropdown-header">PRODOTTI</div>
 				<a href="?corpus=farm-aggiungi-prodotto"><i class="fa fa-plus-circle"></i> Aggiungi Prodotto </a> <br>
 				<a href=""><i class="fa fa-search"></i> Ricerca Prodotto </a> <br>
+				<a href=""><i class="fa fa-arrow-right"></i> Assegna Prodotto </a> <hr>
+				
+				<div align="center" class="dropdown-header">MAGAZZINO</div>
+				<a href=""><i class="fa fa-suitcase"></i> Depositi </a> <br>
+				<a href=""><i class="fa fa-file-text-o"></i> Documenti di Magazzino </a><br>
 				<a href=""><i class="fa fa-arrow-circle-o-down"></i> Consumi </a><br>
 				<a href=""><i class="fa fa-exchange"></i> Movimenti di un Prodotto </a><hr>
 				
-				<div align="center" class="dropdown-header">MAGAZZINI</div>
-				<a href=""><i class="fa fa-plus-circle"></i> Aggiungi Magazzino </a> <br>
-				<a href=""><i class="fa fa-search"></i> Elenco Magazzini </a><hr>
-				
-				<div align="center" class="dropdown-header">CENTRI DI COSTO</div>
-				<a href=""><i class="fa fa-plus-circle"></i> Aggiungi Centro di Costo </a> <br>
-				<a href=""><i class="fa fa-search"></i> Elenco Centri di Costo </a>
+				<div align="center" class="dropdown-header">SERVIZI</div>
+				<a href=""><i class="fa fa-plus-circle"></i> Aggiungi Servizio </a> <br>
+				<a href=""><i class="fa fa-search"></i> Elenco Servizi </a>
 				
 		</div>
 					
