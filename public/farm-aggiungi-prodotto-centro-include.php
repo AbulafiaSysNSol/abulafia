@@ -37,7 +37,7 @@
 							<div class="row">
 								<div class="col-xs-2">
 									<div class="input-group">
-										<input type="text" class="form-control input-sm" name="prezzo"><div class="input-group-addon">€</div>
+										<input type="text" class="form-control input-sm" name="prezzo"><div class="input-group-addon"><i class="fa fa-euro"></i></div>
 									</div>
 								</div>
 							</div>

@@ -11,7 +11,7 @@
 		
 				<div align="center" class="dropdown-header">PRODOTTI</div>
 				<a href="?corpus=farm-aggiungi-prodotto"><i class="fa fa-plus-circle"></i> Aggiungi Prodotto </a> <br>
-				<a href=""><i class="fa fa-search"></i> Ricerca Prodotto </a> <br>
+				<a href="?corpus=farm-ricerca-prodotto"><i class="fa fa-search"></i> Ricerca Prodotto </a> <br>
 				<a href=""><i class="fa fa-arrow-right"></i> Assegna Prodotto </a> <hr>
 				
 				<div align="center" class="dropdown-header">MAGAZZINO</div>
