@@ -376,7 +376,7 @@
 		else {
 			?>
 			<h4><div align="center" class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <b>Nessun</b> risultato trovato con i filtri di ricerca selezionati.</div></h4>
-			<a href="login0.php?corpus=ricerca"><i class="fa fa-arrow-left"></i> Torna alla pagina di ricerca</a>
+			<a href="login0.php?corpus=ricerca-anagrafica"><i class="fa fa-arrow-left"></i> Torna alla pagina di ricerca</a>
 			<?php
 		}
 
@@ -670,7 +670,7 @@
 		else {
 			?> 
 			<h4><div align="center" class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <b>Nessun</b> risultato trovato con i filtri di ricerca selezionati.</div></h4>
-			<a href="login0.php?corpus=ricerca"><i class="fa fa-arrow-left"></i> Torna alla pagina di ricerca</a><?php
+			<a href="login0.php?corpus=ricerca-protocollo"><i class="fa fa-arrow-left"></i> Torna alla pagina di ricerca</a><?php
 		} 
 	}
 ?>
