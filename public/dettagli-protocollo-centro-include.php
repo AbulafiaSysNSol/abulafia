@@ -122,7 +122,7 @@
 		
 		<div class="row">
 			<div class="col-md-4">
-				<h3><i class="fa fa-user"></i> Inserimento effettuato da:</h3><br>
+				<h3><i class="fa fa-user"></i> Inserimento effettuato da:</h3>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
 					<ul><li>
@@ -135,7 +135,7 @@
 				<?php
 				if($modifica['idanagrafica'] != 0) {
 				?>
-				<h3><i class="fa fa-user"></i> Ultima modifica:</h3><br>
+				<h3><i class="fa fa-user"></i> Ultima modifica:</h3>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
 					<ul><li>
