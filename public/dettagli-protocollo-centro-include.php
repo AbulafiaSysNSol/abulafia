@@ -122,27 +122,23 @@
 		
 		<div class="row">
 			<div class="col-md-4">
-				<h3><i class="fa fa-user"></i> Inserimento effettuato da:</h3>
+				<h3><i class="fa fa-user"></i> Inserimento effettuato da:</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
-					<ul><li>
-						<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $inserimento['idanagrafica'];?>"> 
+						- <a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $inserimento['idanagrafica'];?>"> 
 						<?php echo $inserimento['nome'] . '  ' . $inserimento['cognome'] . '</a> il ' . $calendario->dataSlash($dettagli['dataregistrazione']);?>
-					</li></ul>
 					</div>
 				</div>
 				
 				<?php
 				if($modifica['idanagrafica'] != 0) {
 				?>
-				<h3><i class="fa fa-user"></i> Ultima modifica:</h3>
+				<br><h3><i class="fa fa-user"></i> Ultima modifica:</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
-					<ul><li>
-						<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=
+						 - <a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=
 						<?php echo $modifica['idanagrafica'];?>"> 
 						<?php echo $modifica['nome'] . '  ' . $modifica['cognome'] . '</a> il ' . $calendario->dataSlash($modifica['datamod']);?>
-					</li></ul>
 					</div>
 				</div>
 				<?php

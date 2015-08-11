@@ -9,7 +9,7 @@
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-			<h3 class="panel-title"><strong><span class="glyphicon glyphicon-search"></span> Ricerca nel database</strong></h3>
+			<h3 class="panel-title"><strong><span class="glyphicon glyphicon-search"></span> Ricerca PROTOCOLLO</strong></h3>
 		</div>
 		
 		<div class="panel-body">

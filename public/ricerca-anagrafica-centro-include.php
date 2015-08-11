@@ -9,7 +9,7 @@
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-			<h3 class="panel-title"><strong><span class="glyphicon glyphicon-search"></span> Ricerca nelle anagrafiche</strong></h3>
+			<h3 class="panel-title"><strong><span class="glyphicon glyphicon-search"></span> Ricerca ANAGRAFICA</strong></h3>
 		</div>
 		
 		<div class="panel-body">

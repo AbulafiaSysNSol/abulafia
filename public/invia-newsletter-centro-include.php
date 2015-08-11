@@ -3,7 +3,7 @@
 	$anno = $_GET['anno'];
 	$lettera = new Lettera();
 	$oggetto = $lettera->getDettagli($idlettera, $anno);
-	$ogg = $oggetto['oggetto'];
+	$ogg = str_replace('"', "&quot;", $oggetto['oggetto']);
 ?>
 
 <div class="panel panel-default">
