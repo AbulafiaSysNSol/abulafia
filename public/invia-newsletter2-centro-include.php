@@ -79,8 +79,7 @@
 			<div class="col-xs-6">
 				<div class="alert alert-success"><i class="fa fa-check"></i> Email inviata con <b>successo!</b></div>
 			</div>
-		</div>
-		<a href="?corpus=dettagli-protocollo&id=<?php echo $idlettera; ?>&anno=<?php echo $annoricercaprotocollo; ?>"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo</a> - <a href="?corpus=home"><i class="fa fa-home"></i> Torna alla home</a>
+		</div>		
 		<?php
 		$esito= 'SUCCESSFUL';
 		$userid = $_SESSION['loginid'];
@@ -91,7 +90,7 @@
 			echo mysql_error();
 			$erroreallegati = 1;
 		}
-		if($erroreallegati == 1) {
+		if($erroreallegati == 0) {
 			?>
 			<div class="col-xs-6">
 				<div class="alert alert-danger"><i class="fa fa-times"></i> <b>Attenzione:</b> si è verificato un problema con l'invio degli allegati. Riprovare.</div>
@@ -105,6 +104,9 @@
 			</div>
 			<?php
 		}
+		?>
+		<a href="?corpus=dettagli-protocollo&id=<?php echo $idlettera; ?>&anno=<?php echo $annoricercaprotocollo; ?>"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo</a> - <a href="?corpus=home"><i class="fa fa-home"></i> Torna alla home</a>
+		<?php
 	}
 	
 	$my_log -> publscrivilog($_SESSION['loginname'],'mail' , $esito , 'oggetto '.$oggetto.' - prot '.$idlettera.' - destinatari:'.str_replace(',',', ',$destinatario), $_SESSION['maillog']);
