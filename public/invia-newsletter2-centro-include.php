@@ -70,17 +70,10 @@
 
 	if(!$result) {
 		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:</b> si è verificato un errore nell\'invio dell\'email.<br>'.$mail->ErrorInfo.'</div>';
-		echo '<a href="?corpus=dettagli-protocollo&id=<?php echo $idlettera; ?>&anno=<?php echo $annoricercaprotocollo; ?>"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo</a> - <a href="?corpus=home"><i class="fa fa-home"></i> Torna alla home</a>';
+		echo '<a href="?corpus=dettagli-protocollo&id=' . $idlettera . '&anno=' . $annoricercaprotocollo . '"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo</a> - <a href="?corpus=home"><i class="fa fa-home"></i> Torna alla home</a>';
 		$esito= 'FAILED';
 	} 
 	else {
-		?>
-		<div class="row">
-			<div class="col-xs-6">
-				<div class="alert alert-success"><i class="fa fa-check"></i> Email inviata con <b>successo!</b></div>
-			</div>
-		</div>		
-		<?php
 		$esito= 'SUCCESSFUL';
 		$userid = $_SESSION['loginid'];
 		$data = date("Y-m-d");
@@ -90,21 +83,29 @@
 			echo mysql_error();
 			$erroreallegati = 1;
 		}
-		if($erroreallegati == 0) {
-			?>
-			<div class="col-xs-6">
-				<div class="alert alert-danger"><i class="fa fa-times"></i> <b>Attenzione:</b> si è verificato un problema con l'invio degli allegati. Riprovare.</div>
-			</div>
-			<?php
-		}
-		else {
-			?>
-			<div class="col-xs-6">
-				<div class="alert alert-success"><i class="fa fa-check"></i> Allegati inviati con <b>successo!</b></div>
-			</div>
-			<?php
-		}
 		?>
+		<div class="row">
+			<div class="col-xs-6">
+				<div class="alert alert-success"><i class="fa fa-check"></i> Email inviata con <b>successo!</b></div>
+			</div>
+			
+			<?php
+			if($erroreallegati == 0) {
+				?>
+				<div class="col-xs-6">
+					<div class="alert alert-danger"><i class="fa fa-times"></i> <b>Attenzione:</b> si è verificato un problema con l'invio degli allegati. Riprovare.</div>
+				</div>
+				<?php
+			}
+			else {
+				?>
+				<div class="col-xs-6">
+					<div class="alert alert-success"><i class="fa fa-check"></i> Allegati inviati con <b>successo!</b></div>
+				</div>
+				<?php
+			}
+			?>
+		</div>
 		<a href="?corpus=dettagli-protocollo&id=<?php echo $idlettera; ?>&anno=<?php echo $annoricercaprotocollo; ?>"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo</a> - <a href="?corpus=home"><i class="fa fa-home"></i> Torna alla home</a>
 		<?php
 	}
