@@ -233,7 +233,7 @@ tinymce.init({
 		</li>
 		
 		<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto"><span class="glyphicon glyphicon-question-sign"></span> F.A.Q.</a></li>
-		<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><span class="glyphicon glyphicon-info-sign"></span> Wiki</a></li>
+		<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><i class="fa fa-wikipedia-w"></i> Wiki</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
