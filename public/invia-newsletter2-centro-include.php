@@ -9,7 +9,7 @@
 	$mail = new PHPMailer();
 	
 	$idlettera= $_GET['id'];
-	$annoricercaprotocollo=$_SESSION['annoricercaprotocollo'];
+	$annoricercaprotocollo=$_GET['anno'];
 	$tabella= 'lettere'.$annoricercaprotocollo;
 	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 	$setting=mysql_query("select * from mailsettings");
