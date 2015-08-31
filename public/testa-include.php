@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 	if ($_SESSION['auth']< 1 ) {
 		echo 'Devi prima effettuare il login dalla<br>';
