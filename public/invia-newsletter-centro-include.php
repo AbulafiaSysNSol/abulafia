@@ -12,7 +12,7 @@
 	</div>
 	
 	<div class="panel-body">
-		<form name="sendmail" action="login0.php?corpus=invia-newsletter2&id=<?php echo $idlettera;?>" method="POST" enctype="multipart/form-data">
+		<form name="sendmail" action="login0.php?corpus=invia-newsletter2&id=<?php echo $idlettera;?>&anno=<?php echo $anno;?>" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="mittente" value="<?php $_SESSION['mittente'] ?>">
 			<i>
 			N.B. - Indirizzi multipli vanno separati da virgole, <ins>senza lasciare spazi.</ins>

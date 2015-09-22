@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 	if ($_SESSION['auth']< 1 ) {
 		echo 'Devi prima effettuare il login dalla<br>';
@@ -239,7 +239,8 @@ tinymce.init({
 			</ul>
 		</li>
 		
-		<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><span class="glyphicon glyphicon-info-sign"></span> Wiki</a></li>
+		<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><i class="fa fa-wikipedia-w"></i> Wiki</a></li>
+		
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">

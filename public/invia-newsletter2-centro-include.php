@@ -9,7 +9,7 @@
 	$mail = new PHPMailer();
 	
 	$idlettera= $_GET['id'];
-	$annoricercaprotocollo=$_SESSION['annoricercaprotocollo'];
+	$annoricercaprotocollo=$_GET['anno'];
 	$tabella= 'lettere'.$annoricercaprotocollo;
 	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 	$setting=mysql_query("select * from mailsettings");
@@ -42,7 +42,6 @@
 	$mail->FromName = $_SESSION['denominazione'];
 	
 	//inserisco gli allegati
-	$all = 0;
 	$urlfile = $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
 	if ($urlfile) {
 		$i = 1;
@@ -50,9 +49,7 @@
 				$f = 'lettere' . $annoricercaprotocollo . '/' . $idlettera . '/'. $valore[2];
 				$estensione = $my_file->estensioneFile($valore[2]);
 				$nameall = 'AllegatoProt'.$idlettera.'-'.$i.'.'.$estensione;
-				if(!$mail->addAttachment($f, $nameall)) {
-					$all = 1;
-				}
+				$mail->addAttachment($f, $nameall);
 				$i++;
 		}
 	}
@@ -73,38 +70,44 @@
 
 	if(!$result) {
 		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:</b> si è verificato un errore nell\'invio dell\'email.<br>'.$mail->ErrorInfo.'</div>';
-		echo '<a href="?corpus=home"><i class="fa fa-reply"></i> Torna alla home</a>';
+		echo '<a href="?corpus=dettagli-protocollo&id=' . $idlettera . '&anno=' . $annoricercaprotocollo . '"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo</a> - <a href="?corpus=home"><i class="fa fa-home"></i> Torna alla home</a>';
 		$esito= 'FAILED';
 	} 
 	else {
+		$esito= 'SUCCESSFUL';
+		$userid = $_SESSION['loginid'];
+		$data = date("Y-m-d");
+		$erroreallegati = 0;
+		foreach ($destinatari as $valore) {
+			$insert = mysql_query("INSERT INTO mailsend VALUES ( '', '$userid', '$valore', '$data', '$idlettera', '$annoricercaprotocollo')");
+			echo mysql_error();
+			$erroreallegati = 1;
+		}
 		?>
 		<div class="row">
 			<div class="col-xs-6">
 				<div class="alert alert-success"><i class="fa fa-check"></i> Email inviata con <b>successo!</b></div>
 			</div>
-			<div class="col-xs-6">
-				<?php
-				if($all) {
-					$class="alert alert-danger";
-					$message = '<b><i class="fa fa-times"></i> Attenzione:</b> si è verificato un problema di invio con l\'allegato!';
-				}
-				else {
-					$class="alert alert-success";
-					$message = '<i class="fa fa-check"></i> Allegato inviato <b>correttamente!</b>';
-				}
+			
+			<?php
+			if($erroreallegati == 0) {
 				?>
-				<div class="<?php echo $class; ?>"><?php echo $message; ?></div>
-			</div>
+				<div class="col-xs-6">
+					<div class="alert alert-danger"><i class="fa fa-times"></i> <b>Attenzione:</b> si è verificato un problema con l'invio degli allegati. Riprovare.</div>
+				</div>
+				<?php
+			}
+			else {
+				?>
+				<div class="col-xs-6">
+					<div class="alert alert-success"><i class="fa fa-check"></i> Allegati inviati con <b>successo!</b></div>
+				</div>
+				<?php
+			}
+			?>
 		</div>
-		<a href="?corpus=home"><i class="fa fa-reply"></i> Torna alla home</a>
+		<a href="?corpus=dettagli-protocollo&id=<?php echo $idlettera; ?>&anno=<?php echo $annoricercaprotocollo; ?>"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo</a> - <a href="?corpus=home"><i class="fa fa-home"></i> Torna alla home</a>
 		<?php
-		$esito= 'SUCCESSFUL';
-		$userid = $_SESSION['loginid'];
-		$data = date("Y-m-d");
-		foreach ($destinatari as $valore) {
-			$insert = mysql_query("INSERT INTO mailsend VALUES ( '', '$userid', '$valore', '$data', '$idlettera', '$annoricercaprotocollo')");
-			echo mysql_error();
-		}
 	}
 	
 	$my_log -> publscrivilog($_SESSION['loginname'],'mail' , $esito , 'oggetto '.$oggetto.' - prot '.$idlettera.' - destinatari:'.str_replace(',',', ',$destinatario), $_SESSION['maillog']);
