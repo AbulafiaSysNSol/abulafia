@@ -155,7 +155,7 @@ tinymce.init({
   
   <div class="container">
 	 <div class="row">
-		 <div class="col-md-12">
+		 <div class="col-xs-12">
 			<div class="page-header">
 			<table border="0" width="100%">
 			<tr>
@@ -175,6 +175,14 @@ tinymce.init({
 	      <ul class="nav navbar-nav">
 		<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 				
+		<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Anagrafica <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus"></span> Inserisci nuova anagrafica</a></li>
+				<li><a href="login0.php?corpus=ricerca-anagrafica"><span class="glyphicon glyphicon-search"></span> Ricerca in anagrafica</a></li>
+			</ul>
+		</li>
+		
 		<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
 			<ul class="dropdown-menu">
@@ -224,16 +232,18 @@ tinymce.init({
 			</ul>
 		</li>
 		
-		<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Anagrafica <b class="caret"></b></a>
+		<li class="dropdown <?php if($_GET['corpus'] == 'farm-magazzino' OR $_GET['corpus']=='farmacia') { echo ' active'; }?>">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-th"></i> Magazzino <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus"></span> Inserisci nuova anagrafica</a></li>
-				<li><a href="login0.php?corpus=ricerca-anagrafica"><span class="glyphicon glyphicon-search"></span> Ricerca in anagrafica</a></li>
+				<li><a href="login0.php?corpus=magazzino-prodotti"><i class="fa fa-asterisk"></i> Prodotti</a></li>
+				<li><a href="#"><i class="fa fa-suitcase"></i> Depositi</a></li>
+				<li><a href="#"><i class="fa fa-pencil-square-o"></i> Richieste</a></li>
+				<li><a href="#"><i class="fa fa-truck"></i> Ordini</a></li>
 			</ul>
 		</li>
 		
-		<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto"><span class="glyphicon glyphicon-question-sign"></span> F.A.Q.</a></li>
 		<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><i class="fa fa-wikipedia-w"></i> Wiki</a></li>
+		
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
