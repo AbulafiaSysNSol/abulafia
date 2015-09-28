@@ -10,7 +10,7 @@
 	$res = $p -> inserisciProdotto($descrizione, $prezzo, $note, $unita); 
 	
 	if($res) {
-		header("Location: login0.php?corpus=farm-aggiungi-prodotto&insert=ok");
+		header("Location: login0.php?corpus=magazzino-aggiungi-prodotto&insert=ok");
 	}
 	else {
 		echo 'Errore nella registrazione dei dati';

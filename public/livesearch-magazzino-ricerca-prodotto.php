@@ -49,13 +49,13 @@
 				</td>
 			</tr>
 			<tr align="center">
-				<b><td>Codice</td> <td>Descrizione</td> <td>Prezzo</td> <td>Note</td> <td>U.M.</td></b>
+				<b><td>Codice</td> <td>Descrizione</td> <td>Prezzo</td> <td>U.M.</td> <td>Note.</td></b>
 			</tr>
 			<?php
 			foreach($res as $val) {
 				?>
 				<tr>
-					<td align="center"><?php echo $val['codice']; ?></td> <td><?php echo $val['descrizione']; ?></td> <td align="right"><?php echo $val['prezzo'] . ' &euro;'; ?></td> <td><?php echo $val['note']; ?></td> <td align="center"><?php echo $val['unita_misura']; ?></td>
+					<td align="center"><?php echo $val['codice']; ?></td> <td><?php echo $val['descrizione']; ?></td> <td align="right"><?php echo $val['prezzo'] . ' &euro;'; ?></td> <td><?php echo $val['unita_misura']; ?></td> <td align="center"><?php echo $val['note']; ?></td>
 				</tr>
 				<?php
 			}

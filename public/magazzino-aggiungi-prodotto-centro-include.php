@@ -21,7 +21,7 @@
 					}
 					?>
 				
-					<form class="form-horizontal" role="form" name="modulo" method="post" action="farm-aggiungi-prodotto2.php">
+					<form class="form-horizontal" role="form" name="modulo" method="post" action="magazzino-aggiungi-prodotto2.php">
 
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Descrizione Prodotto:</label>
@@ -44,15 +44,6 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Note:</label>
-							<div class="row">
-								<div class="col-xs-8">
-									<input type="text" class="form-control input-sm" name="note">
-								</div>
-							</div>
-						</div>
-						
-						<div class="form-group">
 							<label class="col-sm-3 control-label">Unità di Misura:</label>
 							<div class="row">
 								<div class="col-xs-2">
@@ -63,6 +54,15 @@
 									<OPTION value="FLC"> FLC
 									<OPTION value="CFZ"> CFZ
 									</select>
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Note:</label>
+							<div class="row">
+								<div class="col-xs-8">
+									<input type="text" class="form-control input-sm" name="note">
 								</div>
 							</div>
 						</div>
@@ -79,7 +79,5 @@
 				</div>
 		</div>
 	</div>
-	
-	<?php include "farm-menu.php"; ?>
 	
 </div>

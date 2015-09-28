@@ -9,7 +9,7 @@ function showResult(str) {
 		return null;
 	}
 
-	var url="livesearch-farm-ricerca-prodotto.php";
+	var url="livesearch-magazzino-ricerca-prodotto.php";
 	url=url+"?q="+str;
 	
 	xmlhttp.onreadystatechange=stateChanged ;
