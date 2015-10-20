@@ -1,6 +1,6 @@
 <div class="row">
 	
-	<div class="col-xs-9">
+	<div class="col-xs-12">
 		<div class="panel panel-default">
 			
 				<div class="panel-heading">
@@ -63,6 +63,15 @@
 							<div class="row">
 								<div class="col-xs-8">
 									<input type="text" class="form-control input-sm" name="note">
+								</div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Codice a Barre:</label>
+							<div class="row">
+								<div class="col-xs-5">
+									<input type="text" class="form-control input-sm" name="codicebarre">
 								</div>
 							</div>
 						</div>
