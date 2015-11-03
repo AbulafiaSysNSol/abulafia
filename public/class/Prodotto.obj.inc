@@ -7,6 +7,11 @@
 			return $query;
 		}
 		
+		public function modificaProdotto($codice, $descrizione, $prezzo, $note, $unita, $barcode) {
+			$query = mysql_query("UPDATE anagrafica_prodotto SET descrizione='$descrizione', prezzo='$prezzo', note='$note', unita_misura='$unita', codicebarre='$barcode' WHERE codice='$codice'");
+			return $query;
+		}
+		
 		public function contaProdotto($descrizione) {
 			if( ($descrizione == '') OR ($descrizione == NULL) ) {
 				$query = mysql_query("SELECT COUNT(*) FROM anagrafica_prodotto");
@@ -17,6 +22,12 @@
 			
 			$count = mysql_fetch_row($query);
 			return $count[0];
+		}
+		
+		public function getInfo($id) {
+			$query = mysql_query("SELECT * FROM anagrafica_prodotto WHERE codice = '$id'");
+			$result = mysql_fetch_array($query);
+			return $result;
 		}
 		
 		public function ricercaProdotto($descrizione) {

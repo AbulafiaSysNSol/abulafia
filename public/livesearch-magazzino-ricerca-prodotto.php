@@ -55,7 +55,7 @@
 					<td align="center"><?php echo $val['codicebarre']; ?></td> 
 					<td nowrap style="vertical-align: middle" align="center">
 						<div class="btn-group btn-group-sm">
-							<a class="btn btn-warning" href="">
+							<a class="btn btn-warning" href="?corpus=magazzino-modifica-prodotto&id=<?php echo $val['codice']; ?>">
 								<i class="fa fa-pencil"></i> Modifica
 							</a>
 							<a class="btn btn-info" href="">
