@@ -9,6 +9,18 @@
 			
 			<div class="panel-body">
 
+				<?php
+					 if( isset($_GET['insert']) && $_GET['insert'] == "ok") {
+					?>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="alert alert-success"><i class="fa fa-check"></i> Prodotto assegnato <b>correttamente!</b></div>
+						</div>
+					</div>
+					<?php
+					}
+				?>
+
 				<div align="left">
 					<a href="?corpus=magazzino-aggiungi-prodotto"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi Prodotto</button></a><br><br>
 				</div>

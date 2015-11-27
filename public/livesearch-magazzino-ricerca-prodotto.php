@@ -42,23 +42,23 @@
 				</td>
 			</tr>
 			<tr align="center">
-				<b><td>Codice</td> <td>Descrizione</td> <td>Prezzo</td> <td>U.M.</td> <td>Codice a Barre</td> <td>Azioni</td></b>
+				<b><td style="vertical-align: middle">Codice</td> <td style="vertical-align: middle">Descrizione</td> <td style="vertical-align: middle">Prezzo</td> <td style="vertical-align: middle">U.M.</td> <td style="vertical-align: middle">Codice a Barre</td> <td style="vertical-align: middle">Azioni</td></b>
 			</tr>
 			<?php
 			foreach($res as $val) {
 				?>
 				<tr>
-					<td align="center"><?php echo $val['codice']; ?></td>
-					<td><?php echo strtoupper($val['descrizione']); ?></td>
-					<td align="right"><?php echo number_format($val['prezzo'], 2, ',', '.') . ' &euro;'; ?></td>
-					<td><?php echo $val['unita_misura']; ?></td>
-					<td align="center"><?php echo $val['codicebarre']; ?></td> 
-					<td nowrap style="vertical-align: middle" align="center">
+					<td style="vertical-align: middle" align="center"><?php echo $val['codice']; ?></td>
+					<td style="vertical-align: middle"><?php echo strtoupper($val['descrizione']); ?></td>
+					<td style="vertical-align: middle" align="right"><?php echo number_format($val['prezzo'], 2, ',', '.') . ' &euro;'; ?></td>
+					<td style="vertical-align: middle"><?php echo $val['unita_misura']; ?></td>
+					<td style="vertical-align: middle" align="center"><?php echo $val['codicebarre']; ?></td> 
+					<td style="vertical-align: middle" nowrap style="vertical-align: middle" align="center">
 						<div class="btn-group btn-group-sm">
 							<a class="btn btn-warning" href="?corpus=magazzino-modifica-prodotto&id=<?php echo $val['codice']; ?>">
 								<i class="fa fa-pencil"></i> Modifica
 							</a>
-							<a class="btn btn-info" href="">
+							<a class="btn btn-info" href="?corpus=magazzino-assegna-prodotto&id=<?php echo $val['codice']; ?>">
 								<i class="fa fa-arrow-right"></i> Assegna
 							</a>
 							<a class="btn btn-danger" href="">

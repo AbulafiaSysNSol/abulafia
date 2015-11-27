@@ -12,6 +12,11 @@
 			return $query;
 		}
 		
+		public function assegnaProdotto($codiceprodotto, $magazzino, $settore, $scortaminima, $riordino, $giacenzainiziale, $confezionamento) {
+			$query = mysql_query("INSERT INTO joinprodottimagazzini VALUES ('', '$codiceprodotto', '$magazzino', '$settore', '$scortaminima', '$riordino', '$giacenzainiziale', '$giacenzainiziale', '$confezionamento' )");
+			return $query;
+		}
+		
 		public function contaProdotto($descrizione) {
 			if( ($descrizione == '') OR ($descrizione == NULL) ) {
 				$query = mysql_query("SELECT COUNT(*) FROM anagrafica_prodotto");
