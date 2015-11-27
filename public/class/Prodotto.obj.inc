@@ -50,6 +50,31 @@
 			return $result;		
 		}
 		
+		public function ricercaDeposito($prodotto, $magazzino) {
+			if ($magazzino == "") {
+				$query = mysql_query("SELECT * FROM servizi, anagrafica_prodotto, joinprodottimagazzini WHERE joinprodottimagazzini.codicemagazzino = servizi.codice AND joinprodottimagazzini.idprodotto = anagrafica_prodotto.codice AND ((anagrafica_prodotto.codice LIKE '%$prodotto%') OR (anagrafica_prodotto.descrizione LIKE '%$prodotto%'))  ORDER BY anagrafica_prodotto.descrizione ASC");
+			}
+			else {
+				$query = mysql_query("SELECT * FROM servizi, anagrafica_prodotto, joinprodottimagazzini WHERE joinprodottimagazzini.codicemagazzino = servizi.codice AND joinprodottimagazzini.idprodotto = anagrafica_prodotto.codice AND joinprodottimagazzini.codicemagazzino = '$magazzino' AND ((anagrafica_prodotto.codice LIKE '%$prodotto%') OR (anagrafica_prodotto.descrizione LIKE '%$prodotto%'))  ORDER BY anagrafica_prodotto.descrizione ASC");
+			}
+			$result = array();
+			while ($query2 = mysql_fetch_array($query)) {
+				array_push($result, $query2);
+			}
+			return $result;		
+		}
+		
+		public function contaDeposito($prodotto, $magazzino) {
+			if ($magazzino == "") {
+				$query = mysql_query("SELECT COUNT(*) FROM anagrafica_prodotto, servizi, joinprodottimagazzini WHERE joinprodottimagazzini.codicemagazzino = servizi.codice AND joinprodottimagazzini.idprodotto = anagrafica_prodotto.codice AND ((anagrafica_prodotto.codice LIKE '%$prodotto%') OR (anagrafica_prodotto.descrizione LIKE '%$prodotto%'))  ORDER BY anagrafica_prodotto.descrizione ASC");
+			}
+			else {
+				$query = mysql_query("SELECT COUNT(*) FROM anagrafica_prodotto, servizi, joinprodottimagazzini WHERE joinprodottimagazzini.codicemagazzino = servizi.codice AND joinprodottimagazzini.idprodotto = anagrafica_prodotto.codice AND joinprodottimagazzini.codicemagazzino = '$magazzino' AND ((anagrafica_prodotto.codice LIKE '%$prodotto%') OR (anagrafica_prodotto.descrizione LIKE '%$prodotto%'))  ORDER BY anagrafica_prodotto.descrizione ASC");
+			}
+			$count = mysql_fetch_row($query);
+			return $count[0];
+		}
+		
 		public function ricercaProdottoInizioFine($descrizione, $inizio, $max) {
 			if( ($descrizione == '') OR ($descrizione == NULL) ) {
 				$query = mysql_query("SELECT * FROM anagrafica_prodotto ORDER BY descrizione ASC LIMIT $inizio, $max");

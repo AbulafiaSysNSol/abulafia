@@ -237,7 +237,7 @@ tinymce.init({
 			<ul class="dropdown-menu">
 				<li><a href="login0.php?corpus=magazzino-prodotti"><i class="fa fa-asterisk"></i> Prodotti</a></li>
 				<li><a href="?corpus=magazzino-servizi"><i class="fa fa-building-o"></i> Servizi</a></li>
-				<li><a href="#"><i class="fa fa-suitcase"></i> Depositi</a></li>
+				<li><a href="?corpus=magazzino-depositi"><i class="fa fa-suitcase"></i> Depositi</a></li>
 				<!-- <li><a href="#"><i class="fa fa-pencil-square-o"></i> Richieste</a></li>
 				<li><a href="#"><i class="fa fa-truck"></i> Ordini</a></li> -->
 			</ul>
