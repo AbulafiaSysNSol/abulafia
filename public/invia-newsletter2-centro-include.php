@@ -38,7 +38,6 @@
 	
 	include "../mail-conf-include.php";
 	
-	$mail->From = $mittente;
 	$mail->FromName = $_SESSION['denominazione'];
 	
 	//inserisco gli allegati
@@ -58,9 +57,6 @@
 	foreach ($destinatari as $valore) {
 		$mail->addAddress($valore);     // Add a recipient
 	}
-	
-	//setto l'indirizzo di risposta
-	$mail->addReplyTo($_SESSION['mittente']);
 	
 	$mail->isHTML(true);   
 	$mail->Subject = stripslashes($oggetto);
