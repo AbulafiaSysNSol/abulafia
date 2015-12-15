@@ -118,7 +118,11 @@
 	$settings5=mysql_query("select distinct * from mailsettings");
 	$settings6=mysql_fetch_array($settings5);
 	//assegnazione settaggi email
-	$_SESSION['mittente'] = $settings6['mittente'];
+	$_SESSION['usernamemail'] = $settings6['username'];
+	$_SESSION['passwordmail'] = base64_decode($settings6['password']);
+	$_SESSION['smtp'] = $settings6['smtp'];
+	$_SESSION['porta'] = $settings6['porta'];
+	$_SESSION['protocolloemail'] = $settings6['protocollo'];
 	$_SESSION['headermail'] = $settings6['headermail'];
 	$_SESSION['footermail'] = $settings6['footermail'];
 	
