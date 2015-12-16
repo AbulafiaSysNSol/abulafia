@@ -37,7 +37,7 @@
 	
 	include "../mail-conf-include.php";
 	
-	$mail->setFrom = $_SESSION['usernamemail'];
+	$mail->From = $_SESSION['usernamemail'];
 	$mail->addReplyTo = $_SESSION['usernamemail'];
 	$mail->FromName = $_SESSION['denominazione'];
 	
