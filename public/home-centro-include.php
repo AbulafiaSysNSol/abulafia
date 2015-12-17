@@ -10,6 +10,7 @@
 	$_SESSION['block'] = false;
 	$data = new Calendario();
 	$lettera = new Lettera();
+	$e = new Mail();
 	
 	$anno = $_SESSION['annoprotocollo'];
 	$annoprotocollo = $_SESSION['annoprotocollo'];
@@ -52,6 +53,18 @@
 	if (isset($_GET['firma']) &&($_GET['firma'] == 'ok')) {
 		?>
 		<center><h3><div class="alert alert-success"><i class="fa fa-check"></i> Lettera sottoposta alla firma <b>correttamente!</b></div></h3></center>
+		<?php
+	}
+	
+	if (isset($_GET['email']) &&($_GET['email'] == 'ok')) {
+		?>
+		<center><h4><div class="alert alert-info"><i class="fa fa-check"></i> Impostazioni server mail salvate <b>correttamente!</b></div></h4></center>
+		<?php
+	}
+	
+	if (!$e->isSetMail()) {
+		?>
+		<center><h4><div class="alert alert-warning"><i class="fa fa-warning"></i> <b>Attenzione:</b> per poter inviare email bisogna configurare il server email in <a href="?corpus=server-mail">questa pagina</a>.</div></h4></center>
 		<?php
 	}
 	

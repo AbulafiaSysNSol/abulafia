@@ -30,7 +30,6 @@
 		$footermail = '<br><br>'.$setting2['footermail'];	
 	}
 
-	$mittente = $_SESSION['mittente'];
 	$destinatario = str_replace(' ', '', $_POST['destinatario']);
 	$destinatari = explode(',' , $destinatario);
 	$oggetto = stripslashes($_POST['oggetto']);
@@ -38,7 +37,8 @@
 	
 	include "../mail-conf-include.php";
 	
-	$mail->From = $mittente;
+	$mail->From = $_SESSION['usernamemail'];
+	$mail->addReplyTo = $_SESSION['usernamemail'];
 	$mail->FromName = $_SESSION['denominazione'];
 	
 	//inserisco gli allegati
@@ -58,9 +58,6 @@
 	foreach ($destinatari as $valore) {
 		$mail->addAddress($valore);     // Add a recipient
 	}
-	
-	//setto l'indirizzo di risposta
-	$mail->addReplyTo($_SESSION['mittente']);
 	
 	$mail->isHTML(true);   
 	$mail->Subject = stripslashes($oggetto);
