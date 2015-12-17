@@ -2,6 +2,12 @@
 
 Class Mail {
 
+	public function getMail() {
+		$query = mysql_query("SELECT * FROM mailsettings");
+		$res = mysql_fetch_row($query);
+		return $res;
+	}
+
 	public function isSetMail() {
 		$query = mysql_query("SELECT COUNT(username) FROM mailsettings WHERE username != '' AND password != '' AND smtp != '' ");
 		$res = mysql_fetch_row($query);

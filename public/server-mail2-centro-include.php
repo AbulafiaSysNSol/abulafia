@@ -13,6 +13,11 @@
 		echo 'ERRORE NELLA MODIFICA:' . mysql_error();
 	}
 	else {
+		$_SESSION['usernamemail'] = $username;
+		$_SESSION['passwordmail'] = $password;
+		$_SESSION['smtp'] = $smtp;
+		$_SESSION['porta'] = $porta;
+		$_SESSION['protocolloemail'] = $protocollo;
 ?>
 
 <SCRIPT LANGUAGE="Javascript">
