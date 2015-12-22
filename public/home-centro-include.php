@@ -73,7 +73,7 @@
 		<center><div class="alert alert-info">
 			<h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema - Ver. 10.0</b></h3>
 			<br><b>Modifiche introdotte con l'aggiornamento:</b>
-			<br> - scissione pagina di ricerca; è adesso possibile ricercare solo i protocolli o solo le anagrafiche mediante i sottomenu "protollo" e "anagrafica";
+			<br> - scissione pagina di ricerca;  &egrave adesso possibile ricercare solo i protocolli o solo le anagrafiche mediante i sottomenu "protollo" e "anagrafica";
 			<br> - scissione delle lettere tra "lettere in lavorazione" e "lettere archiviate";
 			<br><br><small>Se notate anomalie o malfunzionamenti comunicateceli mediante la <a href="login0.php?corpus=segnala-bug">pagina di segnalazione errori.</a></small>
 		</center>
