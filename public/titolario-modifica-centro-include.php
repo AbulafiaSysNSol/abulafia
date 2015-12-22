@@ -13,7 +13,7 @@ $id = $_GET['id'];
   
   <div class="row">
 
-	<div class="col-xs-6">   
+	<div class="col-sm-6">   
 		<?php
 		$fascicolo=mysql_query("select count(*) from titolario");
 		$num=mysql_fetch_row($fascicolo);
@@ -39,7 +39,7 @@ $id = $_GET['id'];
 			echo '<tr>';
 			echo '<td>' . $risultati2['codice'] . '</td><td>' . $risultati2['descrizione'] . '</td>
 			<td>
-				<div class="btn-group btn-group-xs">
+				<div class="btn-group btn-group-sm">
 					<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Visualizza protocolli per questa posizione" href="login0.php?corpus=corrispondenza-titolario&currentpage=1&iniziorisultati=0&id=' . $risultati2['codice'] . '"><i class="fa fa-bars"></i></button></a>
 					<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica posizione" href="login0.php?corpus=titolario-modifica&id=' . $risultati2['id'] . '"><span class="glyphicon glyphicon-pencil"></span></button></a> 
 					<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina posizione" onClick="return confirm(\'Vuoi veramente cancellare questa posizione?\');" href="login0.php?corpus=titolario-elimina&id='. $risultati2['id'] . '"><span class="glyphicon glyphicon-trash"></button></a>
@@ -52,7 +52,7 @@ $id = $_GET['id'];
 		</table>
 	</div>
 	
-	<div class="col-xs-6">   
+	<div class="col-sm-6">   
 	 
 		 <?php
 			$risultati=mysql_query("select * from titolario where id='$id'");
@@ -65,15 +65,15 @@ $id = $_GET['id'];
 		  <div class="form-group">
 			
 			<div class="row">
-				<div class="col-xs-4">
+				<div class="col-sm-4">
 					<label>Codice posizione:</label> <input value="<?php echo $risultati2['codice']; ?>" class="form-control" size="10" type="text" name="codice" />
 				</div>
-				<div class="col-xs-8">
+				<div class="col-sm-8">
 					<label>Descrizione posizione:</label><input value="<?php echo str_replace("\"", '&quot;',$risultati2['descrizione']); ?>" class="form-control" size="40" type="text" name="descrizione" />			
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<br><button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-pencil"></span> Modifica Posizione</button>
 				</div>
 			</div>

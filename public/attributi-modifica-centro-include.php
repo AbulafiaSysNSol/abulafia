@@ -13,7 +13,7 @@ $id = $_GET['id'];
   
   <div class="row">
 
-	<div class="col-xs-6">   
+	<div class="col-sm-6">   
 		<?php
 		$attributo=mysql_query("select count(*) from attributi");
 		
@@ -43,7 +43,7 @@ $id = $_GET['id'];
 				echo '<tr>';
 				echo '<td>' . $risultati2['id'] . '</td><td>' . $risultati2['attributo'] . '</td>
 					<td>
-					<div class="btn-group btn-group-xs">
+					<div class="btn-group btn-group-sm">
 						<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica attributo" href="login0.php?corpus=attributi-modifica&id=' . $risultati2['id'] . '"><span class="glyphicon glyphicon-pencil"></span></button></a> 
 						<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina attributo" onClick="return confirm(\'Vuoi veramente cancellare questo attributo?\');" href="login0.php?corpus=attributi-elimina&id='. $risultati2['id'] . '"><span class="glyphicon glyphicon-trash"></button></a>
 					</div>
@@ -55,7 +55,7 @@ $id = $_GET['id'];
 		</table>
 	</div>
 	
-	<div class="col-xs-6">   
+	<div class="col-sm-6">   
 	 
 		 <?php
 			$risultati=mysql_query("select * from attributi where id='$id'");
@@ -68,12 +68,12 @@ $id = $_GET['id'];
 		  <div class="form-group">
 			
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<label>Descrizione attributo:</label><input value="<?php echo str_replace("\"", '&quot;',$risultati2['attributo']); ?>" class="form-control" size="40" type="text" name="descrizione" />			
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<br><button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-pencil"></span> Modifica Attributo</button>
 				</div>
 			</div>

@@ -82,21 +82,21 @@
 		}
 		?>
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<div class="alert alert-success"><i class="fa fa-check"></i> Email inviata con <b>successo!</b></div>
 			</div>
 			
 			<?php
 			if($erroreallegati == 0) {
 				?>
-				<div class="col-xs-6">
+				<div class="col-sm-6">
 					<div class="alert alert-danger"><i class="fa fa-times"></i> <b>Attenzione:</b> si è verificato un problema con l'invio degli allegati. Riprovare.</div>
 				</div>
 				<?php
 			}
 			else {
 				?>
-				<div class="col-xs-6">
+				<div class="col-sm-6">
 					<div class="alert alert-success"><i class="fa fa-check"></i> Allegati inviati con <b>successo!</b></div>
 				</div>
 				<?php

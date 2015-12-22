@@ -14,7 +14,7 @@
 		 if( isset($_GET['noresult']) && $_GET['noresult'] == 1) {
 		?>
 		<div class="row">
-		<div class="col-xs-12">
+		<div class="col-sm-12">
 		<div class="alert alert-danger"><b><i class="fa fa-exclamation-triangle"></i> Nessun risultato trovato.</b> Provare a variare i parametri di ricerca.</div></div></div>
 		<?php
 		}
@@ -24,14 +24,14 @@
 		 if( isset($_GET['noresult']) && $_GET['noresult'] == 2) {
 		?>
 		<div class="row">
-		<div class="col-xs-12">
+		<div class="col-sm-12">
 		<div class="alert alert-danger"><b><i class="fa fa-exclamation-triangle"></i> Errore:</b> indicare date di ricerca appartenenti allo stesso anno.</div></div></div>
 		<?php
 		}
 		?>
 			<div class="row">
 				<center>
-				<div class="col-xs-3">
+				<div class="col-sm-3">
 					<i class="fa fa-calendar-o"></i> Stampa registro giornaliero:<br><br>
 					<form class="form-inline" role="form" method="post" target="_BLANK" action="stampa-registro2-centro-include.php?search=day">
 				
@@ -45,7 +45,7 @@
 					</form>
 				</div>
 				
-				<div class="col-xs-5">
+				<div class="col-sm-5">
 					<i class="fa fa-list-ol"></i> Stampa intervallo numerico:<br><br>
 					<form class="form-inline" role="form" method="post" target="_BLANK" action="stampa-registro2-centro-include.php?search=num">
 				
@@ -79,7 +79,7 @@
 					</form>
 				</div>
 				
-				<div class="col-xs-4">
+				<div class="col-sm-4">
 					<i class="fa fa-calendar"></i> Stampa intervallo temporale:<br><br>
 					<form class="form-inline" role="form" method="post" target="_BLANK" action="stampa-registro2-centro-include.php?search=date">
 				

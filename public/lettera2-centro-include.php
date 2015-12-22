@@ -23,7 +23,7 @@
 	
 		<div class="row">		
 			<script type="text/javascript" src="livesearch-cerca-destinatario.js"></script>
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<h5><i class="fa fa-search"></i> Cerca destinatari:</h5>
 				<input class="form-control input-sm" type="text" name="valore" placeholder="ricerca destinatario per cognome o ragione sociale..." onkeyup="showResult(this.value,<?php echo $id;?>,0)">
 				<div id="livesearch"></div>
@@ -76,7 +76,7 @@
 				
 			</div>
 			
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<h5><i class="fa fa-search"></i> Cerca destinatari per conoscenza:</h5>
 				<input class="form-control input-sm" type="text" name="valore" placeholder="ricerca destinatario per cognome o ragione sociale..." onkeyup="showResult(this.value,<?php echo $id;?>,1)">
 				<div id="livesearch2"></div>

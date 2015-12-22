@@ -10,7 +10,7 @@
 		<small>Mandaci i tuoi suggerimenti o le possibili migliorie. Tutte le proposte saranno vagliate ed eventualmente implementate.</small>
 		<br><br>
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<div class="form-group">
 					<form action="login0.php?corpus=feedback2" method="POST" enctype="multipart/form-data">
 						Feedback:<br>

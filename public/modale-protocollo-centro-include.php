@@ -24,7 +24,7 @@
 						<div class="form-group">
 							<label> <span class="glyphicon glyphicon-briefcase"></span> Mezzo di trasmissione:</label>
 							<div class="row">
-								<div class="col-xs-5">
+								<div class="col-sm-5">
 									<select class="form-control" size=1 cols=4 NAME="posizione">
 									<OPTION selected value="">
 									<OPTION value="posta ordinaria"> posta ordinaria
@@ -41,7 +41,7 @@
 						
 						<div class="form-group">
 							<div class="row">
-							<div class="col-xs-8">
+							<div class="col-sm-8">
 							<label> <i class="fa fa-archive"></i> Titolazione:</label>
 							<?php
 							$risultati=mysql_query("select distinct * from titolario");
@@ -62,7 +62,7 @@
 						
 						<div class="form-group">
 							<div class="row">
-							<div class="col-xs-8">
+							<div class="col-sm-8">
 							<label> <i class="fa fa-tag"></i> Pratica:</label>
 							<?php
 							$risultati=mysql_query("select distinct * from pratiche");

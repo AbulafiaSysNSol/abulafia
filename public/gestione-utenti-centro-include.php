@@ -41,7 +41,7 @@
 		?>
 		
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<p><b><i class="fa fa-reorder"></i> Elenco utenti attuali:</b>
 				<div class="table-responsive">
 					<table class="table">
@@ -62,7 +62,7 @@
 				</div>
 			</div>
 		
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<p><b><i class="fa fa-plus"></i> Aggiungi Utente:</b>
 					<form>
 						<input class="form-control" placeholder="digita il cognome o parte di esso..." type="text" id="txt1" onkeyup="showResult(this.value)" />

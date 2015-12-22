@@ -21,7 +21,6 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
     <!-- Custom Google Web Font -->
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-
     <!-- Add custom CSS here -->
     <link href="css/landing-page.css" rel="stylesheet">
 
@@ -29,11 +28,15 @@
 
 <body>
 
+	<!-- JavaScript -->
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/bootstrap.js"></script>
+    
     <div class="intro-header">
 	
 	<div class="login">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-sm-12">
 				<?php if($_GET['err'] == 1) {echo '<div class="danger"><i class="fa fa-warning"></i> Attenzione: username o password errati.</div><br>';} ?>
 				<form class="form-inline" action="login1.php" method="post" role="form">
 					<label>Username: </label>
@@ -55,7 +58,7 @@
 	<div class="container">
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <div class="intro-message">
                         <h1>Abulafia</h1>
                         <h3>Gestione delle Segreterie dei Volontari C.R.I.</h3>
@@ -75,7 +78,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-5 col-sm-7">
+                <div class="col-sm-5 col-sm-7">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">Saper conservare, saper ritrovare.
@@ -86,7 +89,7 @@
 			miglioramenti, per la gestione degli affari correnti delle segreterie dei volontari della CRI.
 		</p>
 	        </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-5">
+                <div class="col-sm-5 col-sm-offset-2 col-sm-5">
                     <img class="img-responsive" src="img/ritrovare.png">
                 </div>
             </div>
@@ -102,14 +105,14 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                <div class="col-sm-5 col-sm-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">Semplice, Veloce, Efficiente.</h2>
                     <p class="lead">Archivia ordinatamente tutta la corrispondenza in entrata e in uscita, con possibilit&agrave; di gestione titolario e pratiche. 
 					Ricerca veloce fra la corrispondenza registrata con gli allegati a portata di click!</p>
                 </div>
-                <div class="col-lg-5 col-sm-pull-5  col-sm-6">
+                <div class="col-sm-5 col-sm-pull-5  col-sm-6">
                     <img class="img-responsive" src="img/lettera.png">
                 </div>
             </div>
@@ -125,10 +128,10 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-5">
+                <div class="col-sm-5">
                     <h2>Per info e supporto:</h2>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-sm-6">
                     <h2>informatica@cricatania.it</h2>
                 </div>
             </div>
@@ -142,17 +145,13 @@
 	<hr>
             <div class="row">
 	    <center>
-                <div class="col-lg-12">
+                <div class="col-sm-12">
 			Abulafia is licensed under a: <a href="license.txt" target="_blank">GNU GPL V.3</a><br />
 			&copy; 2008 - 2014 <strong>Abulafia Sys'n'Sol</strong>
 			<br><br>
                 </div>
 	   </center>
             </div>
-
-    <!-- JavaScript -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.js"></script>
 
 </body>
 

@@ -129,7 +129,7 @@
 						<div class="form-group">
 							<label>Tipologia:</label>
 							<div class="row">
-								<div class="col-xs-5">
+								<div class="col-sm-5">
 									<select class="form-control input-sm" name="anagraficatipologia" onChange="changeSelect()">
 									<OPTION value="persona"> Persona Fisica</OPTION>
 									<OPTION value="carica"> Carica Elettiva o Incarico</OPTION>
@@ -142,14 +142,14 @@
 							<label id="lblcognome">Cognome:</label>
 							<label id="lblden" style="display: none;">Denominazione:</label>
 							<div class="row">
-								<div class="col-xs-8">
+								<div class="col-sm-8">
 									<input type="text" class="form-control input-sm" name="cognome" required>
 								</div>
 							</div>
 							<br>
 							<label id="lblnome">Nome:</label>
 							<div class="row">
-								<div class="col-xs-8">
+								<div class="col-sm-8">
 									<input id="txtnome" type="text" class="form-control input-sm" name="nome" required>
 								</div>
 							</div>
@@ -168,7 +168,7 @@
 
 <center>
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-sm-12">
 		<div class="alert alert-warning"><b><i class="fa fa-warning"></i> ATTENZIONE:</b> il numero di protocollo verrà assegnato dopo aver concluso l'inserimento dei dati.<!-- , in alternativa è possibile <a href="login0.php?corpus=blocca-protocollo" onClick="return confirm('Una volta bloccato il protocollo è necessario ultimare la registrazione senza abbandonare la pagina. Continuare?');">bloccare il numero di protocollo <i class="fa fa-lock"></i> --></a></div>
 	</div>
 </div>
@@ -190,7 +190,7 @@
 			if( isset($_GET['insert']) && $_GET['insert'] == "error") {
 				?>
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-sm-12">
 						<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b> c'è stato un errore nell'associare la nuova anagrafica.</div>
 					</div>
 				</div>
@@ -202,7 +202,7 @@
 			if( isset($_GET['upfile']) && $_GET['upfile'] == "error") {
 				?>
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-sm-12">
 						<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b>
 												 c'e' stato un errore nel caricamento
 												  del file sul server: controlla 
@@ -223,7 +223,7 @@
 			 if( isset($_GET['upfile']) && $_GET['upfile'] == "success") {
 			?>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<div class="alert alert-success"><i class="fa fa-check"></i> File allegato <b>correttamente!</b></div>
 				</div>
 			</div>
@@ -232,22 +232,22 @@
 			?>
 			
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<h3><b><small><i class="fa fa-square-o"></i></small> Primo Step: <small>allegati <i class="fa fa-folder-open-o"></i> e mittenti/destinatari <i class="fa fa-group"></i> </b></small></h3>
 			</div>
-			<div class="col-xs-6">
+			<div class="col-sm-6">
 				<h3><b><small><i class="fa fa-square-o"></i></small> Secondo Step: <small>dettagli della lettera <i class="fa fa-file-text-o"></i></b></small></h3>
 			</div>
 		</div>
 		
 		<div class="row">
-		<div class="col-xs-6">
+		<div class="col-sm-6">
 		<hr>
 			<div class="form-group"> 
 				<!--form caricamento allegati-->
 				<form role="form" enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file" method="POST">
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-sm-12">
 							<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
 							<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
 							<input required name="uploadedfile" type="file" id="exampleInputFile">
@@ -276,7 +276,7 @@
 			?>
 			
 			<div class="row">
-				<div class ="col-xs-12" id="content" style="display: none;">
+				<div class ="col-sm-12" id="content" style="display: none;">
 					<br>
 					<i class="fa fa-spinner fa-spin"></i><b> Caricamento allegato in corso...</b>
 					<br><img src="images/progress.gif">
@@ -308,14 +308,14 @@
 			echo '<br>';
 			?>
 		</div>
-		<div class="col-xs-6">
+		<div class="col-sm-6">
 		<hr>
 			<form name="modulo" method="post" >
 			
 				<div class="form-group">
 					<label> <span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta</label>
 					<div class="row">
-						<div class="col-xs-11">
+						<div class="col-sm-11">
 							<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
 								<option value="ricevuta" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "ricevuta") {echo "selected";} ?>> Ricevuta</option>
 								<option value="spedita" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "spedita") {echo "selected";} ?>> Spedita</option>
@@ -327,7 +327,7 @@
 				<div class="form-group">
 					<label> <span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
 					<div class="row">
-						<div class="col-xs-11">
+						<div class="col-sm-11">
 							<input required type="text" class="form-control" name="oggetto" <?php if( ($errore || $add) && isset($_SESSION['oggetto']) ) { echo "value=\"".$_SESSION['oggetto']."\"";} ?> >
 						</div>
 					</div>
@@ -336,7 +336,7 @@
 				<div class="form-group">
 					<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
 					<div class="row">
-						<div class="col-xs-11">
+						<div class="col-sm-11">
 							<input type="text" class="form-control datepickerProt" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} else { echo 'value='.date("d/m/Y"); } ?> >
 						</div>
 					</div>
@@ -345,7 +345,7 @@
 				<div class="form-group">
 					<label> <span class="glyphicon glyphicon-briefcase"></span> Mezzo di trasmissione:</label>
 					<div class="row">
-						<div class="col-xs-11">
+						<div class="col-sm-11">
 							<select class="form-control" size=1 cols=4 NAME="posizione">
 								<option selected value=""></option>
 								<option value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected";} ?>> posta ordinaria</option>
@@ -362,7 +362,7 @@
 			
 				<div class="form-group">
 					<div class="row">
-						<div class="col-xs-11">
+						<div class="col-sm-11">
 							<label> <i class="fa fa-archive"></i> Titolazione:</label>
 							<?php
 								$risultati=mysql_query("select distinct * from titolario");
@@ -387,7 +387,7 @@
 			
 				<div class="form-group">
 					<div class="row">
-						<div class="col-xs-11">
+						<div class="col-sm-11">
 							<label> <i class="fa fa-tag"></i> Pratica:</label>
 							<?php
 								$risultati=mysql_query("select distinct * from pratiche");
@@ -413,7 +413,7 @@
 				<div class="form-group">
 					<label> <span class="glyphicon glyphicon-comment"></span> Note:</label>
 					<div class="row">
-						<div class="col-xs-11">
+						<div class="col-sm-11">
 							<input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
 						</div>
 					</div>

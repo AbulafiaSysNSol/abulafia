@@ -15,14 +15,14 @@
 		<div class="panel-body">
 			<div class="form-group">
 				
-				<div align="center" class="col-xs-12 alert alert-info" style="display: none;" id="content">
+				<div align="center" class="col-sm-12 alert alert-info" style="display: none;" id="content">
 					<i class="fa fa-warning"></i> Ricerca <b>COGNOME+NOME</b>: è possibile effettuare una ricerca <b>esatta</b> per cognome e nome (esempio <b>Saitta+Biagio</b>)
 				</div>
 				
 				<form name="search" method="post">
 					
 					<div class="row">
-						<div class="col-xs-4">
+						<div class="col-sm-4">
 							<h4><b><i class="fa fa-navicon"></i> Criteri di ricerca:</b></h4><br>
 							<label><i class="fa fa-pencil"></i> Inserisci il valore da cercare:</label>
 							<input class="form-control input-sm" placeholder="lasciare vuoto per una ricerca di tutte le parole..." type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
@@ -36,10 +36,10 @@
 							<button  id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ricerca in corso..." class="btn btn-success btn-lg btn-block" type="button" onClick="autorized(<?php echo $level ?>)"><span class="glyphicon glyphicon-search"></span> Cerca</button>
 						</div>
 					
-						<div class="col-xs-3">
+						<div class="col-sm-3">
 							<h4><b><i class="fa fa-filter"></i> Filtri aggiuntivi:</b></h4><br>
 							
-							<div id="prot" class="col-xs-12">
+							<div id="prot" class="col-sm-12">
 								<label><i class="fa fa-book"></i> Anno Protocollo:</label>
 								<SELECT class="form-control input-sm" name="annoricercaprotocollo" >
 									<?php
@@ -59,7 +59,7 @@
 								</SELECT>
 							</div>
 				
-							<div id="anag" style="display: none;" class="col-xs-12">
+							<div id="anag" style="display: none;" class="col-sm-12">
 								<label>Tipologia:</label>
 								<SELECT class="form-control input-sm" NAME="anagraficatipologia"  disabled>
 									<OPTION value="anagrafica.tipologia" onclick="document.search.cercato.focus()" selected> Nessun filtro</OPTION>
@@ -70,7 +70,7 @@
 								</SELECT>
 							</div>
 							
-							<div class="col-xs-12">
+							<div class="col-sm-12">
 								<br><label><i class="fa fa-sort-alpha-asc"></i> Elenca in ordine:</label>
 								<SELECT class="form-control input-sm" NAME="group1">
 									<OPTION value="alfabetico" onclick="document.search.cercato.focus()"> Alfabetico</OPTION>
@@ -83,7 +83,7 @@
 						
 						<br><br><br>
 						
-						<div id="prot1" class="col-xs-2">
+						<div id="prot1" class="col-sm-2">
 							<label><i class="fa fa-exchange"></i> Spedita/Ricevuta:</label>
 							<SELECT class="form-control input-sm" NAME="speditaricevuta">
 								<OPTION value="" onclick="document.search.cercato.focus()">tutte</OPTION>
@@ -104,13 +104,13 @@
 							</SELECT>
 						</div>
 						
-						<div id="prot2" class="col-xs-3">
+						<div id="prot2" class="col-sm-3">
 							<label><i class="fa fa-calendar"></i> Registrati dal - al:</label>
 							<div class="row">
-								<div class="col-xs-6">
+								<div class="col-sm-6">
 									<input type="text" class="form-control input-sm datepickerProt" name="data1" placeholder="dal...">
 								</div>
-								<div class="col-xs-6">
+								<div class="col-sm-6">
 									<input type="text" class="form-control input-sm datepickerProt" name="data2" placeholder="al...">							
 								</div>
 							</div>

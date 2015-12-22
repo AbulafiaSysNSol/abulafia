@@ -13,14 +13,14 @@
 			<div class="form-group">
 				<i class="fa fa-envelope-o"></i> indirizzo email:
 				<div class="row">
-					<div class="col-xs-5">
+					<div class="col-sm-5">
 						<input type="text" class="form-control input-sm" name="email" required>
 					</div>
 				</div>
 				<br>
 				<i class="fa fa-calendar"></i> data invio:
 				<div class="row">
-					<div class="col-xs-3">
+					<div class="col-sm-3">
 						<input type="text" class="form-control input-sm datepickerProt" name="data" required>
 					</div>
 					<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Aggiungi</button>

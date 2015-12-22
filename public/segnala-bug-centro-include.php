@@ -6,7 +6,7 @@
 		<div class="panel-body">
 			
 			<div class="row">
-			<div class="col-xs-5">
+			<div class="col-sm-5">
 			<div class="form-group">
 			<form action="login0.php?corpus=segnala-bug2&idanagrafica=<?php echo $_SESSION['loginid'];?>" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="mittente" value="informatica@cricatania.it">

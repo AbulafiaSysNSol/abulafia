@@ -33,7 +33,7 @@
 			
 	<div class="panel-body">
 		<div class="row">
-			<div class="col-xs-5">
+			<div class="col-sm-5">
 				<i class="fa fa-calendar"></i>
 				<?php 
 					echo $_SESSION['nomeapplicativo'] . ' e\' in uso da <b>'; 
@@ -70,7 +70,7 @@
 				<i class="fa fa-envelope-o"></i> Sono state inviate <b><?php echo $numemail[0]; ?></b> email;
 			</div>
 			
-			<div class="col-xs-7">
+			<div class="col-sm-7">
 				<img src="images/stats.jpg">
 			</div>
 		</div>

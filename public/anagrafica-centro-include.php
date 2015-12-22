@@ -21,7 +21,7 @@
 			if( isset($_GET['upfoto']) && $_GET['upfoto'] == "error") {
 			?>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<div class="alert alert-danger">C'e' stato un errore nel caricamento della foto, controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
 				</div>
 			</div>
@@ -33,7 +33,7 @@
 			 if( isset($_GET['upfoto']) && $_GET['upfoto'] == "success") {
 			?>
 			<div class="row">
-				<div class="col-xs-5">
+				<div class="col-sm-5">
 					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Foto inserita correttamente</div>
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 
 				<label>Tipologia:</label>
 				<div class="row">
-					<div class="col-xs-3">
+					<div class="col-sm-3">
 						<select class="form-control input-sm" NAME="anagraficatipologia" onChange="Change()">
 						<OPTION selected value="">Scegli...
 						<OPTION value="persona"> Persona Fisica
@@ -80,7 +80,7 @@
 				<label id="lblcog" class="col-sm-2 control-label">Cognome:</label>
 				<label id="lblden" style="display: none;" class="col-sm-2 control-label">Denominazione:</label>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<input type="text" class="form-control input-sm" size="40" name="cognome" disabled>
 					</div>
 				</div>
@@ -89,7 +89,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Nome:</label>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<input type="text" class="form-control input-sm" size="40" name="nome" disabled>
 					</div>
 				</div>
@@ -98,14 +98,14 @@
 			<div class="form-group">
 			<label class="col-sm-2 control-label">Nato il:</label>
 			<div class="row">
-			<div class="col-xs-2">
+			<div class="col-sm-2">
 			<input type="text" class="form-control input-sm datepickerAnag" name="datanascita" disabled>
 			</div></div></div>
 			
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Comune di nascita:</label>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<input type="text" class="form-control input-sm" size="30" name="nascitacomune" disabled>
 					</div>
 				</div>
@@ -114,7 +114,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Provincia di nascita:</label>
 				<div class="row">
-					<div class="col-xs-1">
+					<div class="col-sm-1">
 						<input type="text" class="form-control input-sm" size="40" name="nascitaprovincia" disabled>
 					</div>
 				</div>
@@ -123,7 +123,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Stato:</label>
 				<div class="row">
-					<div class="col-xs-3">
+					<div class="col-sm-3">
 						<input type="text" class="form-control input-sm" size="40" name="nascitastato" disabled>
 					</div>
 				</div>
@@ -132,7 +132,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Residente in via:</label>
 				<div class="row">
-					<div class="col-xs-5">
+					<div class="col-sm-5">
 						<input type="text" class="form-control input-sm" size="40" name="residenzavia" disabled>
 					</div>
 				</div>
@@ -141,7 +141,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">N:</label>
 				<div class="row">
-					<div class="col-xs-1">
+					<div class="col-sm-1">
 						<input type="text" class="form-control input-sm" size="40" name="residenzacivico" disabled>
 					</div>
 				</div>
@@ -150,7 +150,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Comune di:</label>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<input type="text" class="form-control input-sm" size="40" name="residenzacomune" disabled>
 					</div>
 				</div>
@@ -159,7 +159,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Provincia:</label>
 				<div class="row">
-					<div class="col-xs-1">
+					<div class="col-sm-1">
 						<input type="text" class="form-control input-sm" size="40" name="residenzaprovincia" disabled>
 					</div>
 				</div>
@@ -168,7 +168,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">CAP:</label>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-sm-2">
 						<input type="text" class="form-control input-sm" size="40" name="residenzacap" disabled>
 					</div>
 				</div>
@@ -177,7 +177,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Stato di residenza:</label>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<input type="text" class="form-control input-sm" size="40" name="residenzastato" disabled>
 					</div>
 				</div>
@@ -186,7 +186,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Gruppo sanguigno:</label>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-sm-2">
 						<select class="form-control input-sm"  size=1 cols=4 NAME="grupposanguigno" onChange="Change()" disabled>
 						<OPTION selected value="">
 						<OPTION value="0rh+"> 0rh+
@@ -205,7 +205,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Codice Fiscale:</label>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<input type="text" class="form-control input-sm" size="40" name="codicefiscale" disabled>
 					</div>
 				</div>
@@ -214,7 +214,7 @@
 			<div class="form-group">
 			<label class="col-sm-2 control-label">Recapito:</label>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-sm-2">
 						<SELECT class="form-control input-sm" size=1 cols=4 NAME="tipo"  disabled><br>
 						<OPTION Value=""> seleziona tipo
 						<OPTION Value="phone">Telefono
@@ -227,7 +227,7 @@
 						</select>
 					</div>
 
-					<div class="col-xs-3">
+					<div class="col-sm-3">
 						<input type="text" class="form-control input-sm" size="40" name="numero" disabled>
 					</div>
 				</div>
@@ -236,7 +236,7 @@
 			<div class="form-group">
 			<label class="col-sm-2 control-label">Altro recapito:</label>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-sm-2">
 						<SELECT class="form-control input-sm" size=1 cols=4 NAME="tipo2"  disabled><br>
 						<OPTION Value=""> seleziona tipo
 						<OPTION Value="phone">Telefono
@@ -249,7 +249,7 @@
 						</select>
 					</div>
 
-					<div class="col-xs-3">
+					<div class="col-sm-3">
 						<input type="text" class="form-control input-sm" size="40" name="numero2" disabled>
 					</div>
 				</div>

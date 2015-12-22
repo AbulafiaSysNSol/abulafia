@@ -4,7 +4,7 @@
 			?>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-sm-12">
 						<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> <b>Errore:</b> il soggetto è già presente in anagrafica, controlla.</div>
 					</div>
 				</div>
@@ -16,7 +16,7 @@
 		else {
 			?>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica registrata <b>correttamente!</b></div>
 				</div>
 			</div>
@@ -26,7 +26,7 @@
 	if( isset($_GET['from']) && $_GET['from'] == 'modifica') {
 		?>
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-sm-12">
 				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Anagrafica modificata <b>correttamente!</b></div>
 			</div>
 		</div>

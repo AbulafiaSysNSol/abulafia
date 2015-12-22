@@ -18,7 +18,7 @@
 				 if( isset($_GET['update']) && $_GET['update'] == "error") {
 				?>
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-sm-12">
 						<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span><b> Attenzione:</b> c'e' stato un errore nella modifica delle impostazioni, riprova in seguito o contatta l'amministratore del server.</div>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 				 if( isset($_GET['update']) && $_GET['update'] == "success") {
 				?>
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-sm-12">
 						<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Impostazioni modificate con <b>successo!</b></div>
 					</div>
 				</div>
@@ -47,7 +47,7 @@
 			
 			<form name="modifica" method="post" class="form-group">
 			<div class="row">
-				<div class="col-xs-6">
+				<div class="col-sm-6">
 					<label>Nome dell'applicativo:</label>
 					<input class="form-control" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
 					<br>
@@ -73,7 +73,7 @@
 					<input class="form-control" type="text" name="denominazione"  value="<?php echo $_SESSION['denominazione'];?>"/>
 				</div>
 				
-				<div class="col-xs-6">
+				<div class="col-sm-6">
 					<label>Numero iniziale per il Protocollo (settabile solo nella prima installazione)</label>
 					<input class="form-control" size="50" type="text" name="primoprotocollo"  value="<?php echo $contalettere;?>"/>
 						<script language="javascript">

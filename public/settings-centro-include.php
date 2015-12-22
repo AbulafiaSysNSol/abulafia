@@ -10,7 +10,7 @@
 		 if( isset($_GET['update']) && $_GET['update'] == "error") {
 		?>
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-sm-12">
 				<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <b>Attenzione:</b> c'e' stato un errore nella modifica delle impostazioni, riprova in seguito o contatta l'amministratore del server.</div>
 			</div>
 		</div>
@@ -22,7 +22,7 @@
 		 if( isset($_GET['update']) && $_GET['update'] == "success") {
 		?>
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-sm-12">
 				<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Impostazioni utente modificate con <b>successo!</b></div>
 			</div>
 		</div>
@@ -33,7 +33,7 @@
 		<div class="form-group">
 			<form name="modifica" method="post" >
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<h4><i class="fa fa-image"></i> Logo
 						<br><small> Logo visualizzato in alto a destra.</small></h4>
 						<table border="0">
@@ -82,7 +82,7 @@
 						</table>
 					</div>
 			
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<h4><i class="fa fa-tint"></i> Primo colore risultati
 						<br><small> Primo colore di sfondo nei risultati.</small></h4>
 						<table border="0" cellspacing="4">
@@ -212,7 +212,7 @@
 						</table>			
 					</div>
 				
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<h4><i class="fa fa-list-ol"></i> Numero di risultati per pagina
 						<br><small> N. di record visualizzati nella ricerca.</small></h4>
 						<input class="form-control"size="3" type="text" name="risultatiperpagina"  value="<?php echo $_SESSION['risultatiperpagina'];?>"/>

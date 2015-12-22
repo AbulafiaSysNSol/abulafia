@@ -17,12 +17,12 @@
 		<div class="form-group">
 			<form id="login_form" action="lettera3.php?idlettera=<?php echo $id; ?>&from=<?php echo $from; ?>" method="POST" enctype="multipart/form-data">	
 				<div class="row">
-					<div class="col-xs-8">
+					<div class="col-sm-8">
 						<h5><i class="fa fa-file-text-o"></i> Testo della lettera:</h5>
 						<textarea id="editor" class="form-control" rows="17" name="message"><?php echo $dettagli['testo']; ?></textarea>
 					</div>
 				
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<h5><i class="fa fa-certificate"></i> Oggetto:</h5>
 						<textarea id="editorOgg" class="form-control" rows="2" type="text" name="oggetto"><?php echo $dettagli['oggetto']; ?></textarea>		
 						<br>

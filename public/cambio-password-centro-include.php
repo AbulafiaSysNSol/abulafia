@@ -9,35 +9,35 @@
     if( isset($_GET['pass']) && $_GET['pass'] == "ok") {
 	?>
 	<div class="row">
-	<div class="col-xs-4">
+	<div class="col-sm-4">
 	<div class="alert alert-success">Password modifcata!</div></div></div>
 	<?php
    }
     if( isset($_GET['pass']) && $_GET['pass'] == "leng") {
 	?>
 	<div class="row">
-	<div class="col-xs-4">
+	<div class="col-sm-4">
 	<div class="alert alert-danger">La password deve contenere almeno 6 caratteri</div></div></div>
 	<?php
    }
     if( isset($_GET['pass']) && $_GET['pass'] == "empty") {
 	?>
 	<div class="row">
-	<div class="col-xs-4">
+	<div class="col-sm-4">
 	<div class="alert alert-danger">Assicurati di aver compilato tutti i campi</div></div></div>
 	<?php
    }
     if( isset($_GET['pass']) && $_GET['pass'] == "old") {
 	?>
 	<div class="row">
-	<div class="col-xs-4">
+	<div class="col-sm-4">
 	<div class="alert alert-danger">La password attuale non è corretta!</div></div></div>
 	<?php
    }
     if( isset($_GET['pass']) && $_GET['pass'] == "nomatch") {
 	?>
 	<div class="row">
-	<div class="col-xs-4">
+	<div class="col-sm-4">
 	<div class="alert alert-danger">Le due password non coincidono</div></div></div>
 	<?php
    }
@@ -48,7 +48,7 @@
   <div class="form-group">
     <label><i class="fa fa-key"></i> Password attuale:</label>
 	<div class="row">
-	<div class="col-xs-3">
+	<div class="col-sm-3">
 		<input class="form-control input-sm" size="40" type="password" name="vecchiapassword" />
 	</div>
 	</div>
@@ -56,7 +56,7 @@
   <div class="form-group">
     <label><i class="fa fa-key"></i> Nuova password:</label>
 	<div class="row">
-	<div class="col-xs-3">
+	<div class="col-sm-3">
 		<input class="form-control input-sm" size="40" type="password" name="nuovapassword1" />
 	</div>
 	</div>
@@ -64,7 +64,7 @@
   <div class="form-group">
     <label><i class="fa fa-key"></i> Ripeti nuova password:</label>
 	<div class="row">
-	<div class="col-xs-3">
+	<div class="col-sm-3">
 		<input class="form-control input-sm" size="40" type="password" name="nuovapassword2" />
 	</div>
 	</div>

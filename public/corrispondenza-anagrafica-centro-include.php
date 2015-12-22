@@ -54,7 +54,7 @@
 	?>
 	<center>
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-sm-12">
 			Anno di ricerca corrispondenza:
 			<SELECT id="annoricerca" class="form-inline input-sm" name="annoricercaprotocollo" onChange="change()">
 			<?php

@@ -39,7 +39,7 @@
 
 
 		<div class="row">
-			<div class="col-xs-3">
+			<div class="col-sm-3">
 				<h3><i class="fa fa-info"></i> Dettagli Protocollo</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			
-			<div class="col-xs-3">
+			<div class="col-sm-3">
 				<h3><i class="fa fa-users"></i> <?php if($dettagli['speditaricevuta'] == 'spedita') { echo 'Destinatari'; } else { echo 'Mittenti';} ?></h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
@@ -76,7 +76,7 @@
 				</div>
 			</div>
 			
-			<div class="col-xs-3">
+			<div class="col-sm-3">
 				<h3><i class="fa fa-folder-open-o"></i> File Allegati</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
@@ -108,7 +108,7 @@
 				?>
 			</div>
 			
-			<div class="col-xs-3">
+			<div class="col-sm-3">
 				<h3><i class="fa fa-qrcode"></i> Codice QR</h3>
 				<?php
 					$path= 'lettere'.$anno.'/qrcode/'.$id.$anno.'.png';
@@ -168,7 +168,7 @@
 				</div>
 			</div>
 			
-			<div class="col-xs-3">
+			<div class="col-sm-3">
 				<h3><i class="fa fa-cog"></i> Opzioni</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
@@ -197,7 +197,7 @@
 			<br>
 			<h3><span class="glyphicon glyphicon-time"></span> Storico delle modifiche:</h3><br>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<table class="table table-bordered">
 						<tr>
 							<td style="vertical-align: middle" align="center" >Data</td>
