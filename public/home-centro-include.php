@@ -90,7 +90,7 @@
 <hr>
 
 <div class="row">
-	<div class="col-xs-6">
+	<div class="col-sm-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title"><strong><span class="glyphicon glyphicon-stats"></span> Stats:</strong></h3>
@@ -232,7 +232,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-6">
+	<div class="col-sm-6">
 		
 		<div class="panel panel-default">
 		
