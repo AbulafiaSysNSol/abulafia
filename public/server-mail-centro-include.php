@@ -24,7 +24,7 @@
 				<label><i class="fa fa-key"></i> Password:</label>
 				<div class="row">
 					<div class="col-xs-4">
-						<input class="form-control input-sm" type="password" value="<?php echo $imp[1]; ?>" name="password" />
+						<input class="form-control input-sm" type="password" value="<?php echo base64_decode($imp[1]); ?>" name="password" />
 					</div>
 				</div>
 			  </div>
