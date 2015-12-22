@@ -154,18 +154,20 @@ tinymce.init({
 <body>
   
   <div class="container">
-	 <div class="row">
-		 <div class="col-sm-12">
-			<div class="page-header">
-			<table border="0" width="100%">
-			<tr>
-			<td><img width="60" src="images/abulafia logo-scont.png"></td>
-			<td><h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2></td> 
-			<td align="right"><img src="<?php echo $_SESSION['splash']; ?>"></td>
-			</tr>
-			</table>
+	 
+	 <div class="page-header">
+		<div class="row">
+			<div class="col-sm-1">
+				<img width="60" src="images/abulafia logo-scont.png">
 			</div>
-		 </div>
+			<div class="col-sm-6">
+				<h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2> 
+			</div>
+			
+			<div class="col-sm-5" align="right">
+				<img src="<?php echo $_SESSION['splash']; ?>">
+			</div>
+		</div>
 	</div>
 	
 	<nav class="navbar navbar-default" role="navigation">
