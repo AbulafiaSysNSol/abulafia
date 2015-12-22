@@ -16,12 +16,12 @@
 		<form name="modifica" method="post" >
 			<div class="form-group">
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-sm-2">
 						<label>Username:</label>
 						<input class="form-control input-sm" type="text" name="nomeutente"  value="<?php echo $row3['loginname'];?>"/>
 					</div>
 				
-					<div class="col-xs-1">
+					<div class="col-sm-1">
 						<label>Auth:</label>
 						<select class="form-control input-sm" type="text" name="authlevel1" />
 							<OPTION selected value="<?php echo $row3['auth'];?>"> <?php echo $row3['auth'];?>
@@ -37,12 +37,12 @@
 						</select>
 					</div>
 
-					<div class="col-xs-2">
+					<div class="col-sm-2">
 						<label>Password:</label>
 						<input class="form-control input-sm" type="password" name="nuovapassword1" />
 					</div>
 
-					<div class="col-xs-2">
+					<div class="col-sm-2">
 						<label>Ripeti password:</label>
 						<input class="form-control input-sm" type="password" name="nuovapassword2" />
 					</div>
@@ -51,7 +51,7 @@
 					$anag = new Anagrafica();
 					if ($anag->isAdmin($_SESSION['loginid'])) {
 					?>
-					<div class="col-xs-1">
+					<div class="col-sm-1">
 						<label>Admin:</label><br>
 						<center><input type="checkbox" name="admin" value="1" <?php if($row3['admin'] == 1) echo 'checked'; ?>/></center>
 					</div>

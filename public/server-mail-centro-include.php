@@ -14,7 +14,7 @@
 			  <div class="form-group">
 				<label><i class="fa fa-at"></i> Indirizzo Email:</label>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<input class="form-control input-sm" type="text" value="<?php echo $imp[0]; ?>" name="username" />
 					</div>
 				</div>
@@ -23,7 +23,7 @@
 			  <div class="form-group">
 				<label><i class="fa fa-key"></i> Password:</label>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<input class="form-control input-sm" type="password" value="<?php echo base64_decode($imp[1]); ?>" name="password" />
 					</div>
 				</div>
@@ -32,7 +32,7 @@
 			  <div class="form-group">
 				<label><i class="fa fa-cog"></i> Server SMTP:</label>
 				<div class="row">
-					<div class="col-xs-4">
+					<div class="col-sm-4">
 						<input class="form-control input-sm" type="text" value="<?php echo $imp[2]; ?>" name="smtp" />
 					</div>
 				</div>
@@ -41,7 +41,7 @@
 			  <div class="form-group">
 				<label><i class="fa fa-exchange"></i> Porta:</label>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-sm-2">
 						<input class="form-control input-sm" type="text" value="<?php echo $imp[3]; ?>" name="porta" />
 					</div>
 				</div>
@@ -50,7 +50,7 @@
 			    <div class="form-group">
 				<label><i class="fa fa-envelope"></i> Protocollo:</label>
 				<div class="row">
-					<div class="col-xs-2">
+					<div class="col-sm-2">
 						<input class="form-control input-sm" type="text" value="<?php echo $imp[4]; ?>" name="protocollo" />
 					</div>
 				</div>

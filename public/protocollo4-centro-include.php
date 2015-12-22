@@ -11,7 +11,7 @@
   <div class="panel-body">
    
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-sm-12">
 			<?php
 			if($from != "modifica" OR $_SESSION['block']) {
 				?>
@@ -35,14 +35,14 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-5">
+		<div class="col-sm-5">
 			<h4><i class="fa fa-list"></i> Riepilogo:</h4>
 			<?php 
 				$my_lettera -> publdisplaylettera ($ultimoid, $annoprotocollo); //richiamo del metodo "mostra"
 			?>
 		</div>
 		
-		<div class="col-xs-5">
+		<div class="col-sm-5">
 			<h4><i class="fa fa-cog"></i> Opzioni:</h4>
 			<p>	<a href="login0.php?corpus=protocollo2
 					&from=crea">
