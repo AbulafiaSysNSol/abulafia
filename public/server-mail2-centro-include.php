@@ -14,7 +14,7 @@
 	}
 	else {
 		$_SESSION['usernamemail'] = $username;
-		$_SESSION['passwordmail'] = $password;
+		$_SESSION['passwordmail'] = base64_decode($password);
 		$_SESSION['smtp'] = $smtp;
 		$_SESSION['porta'] = $porta;
 		$_SESSION['protocolloemail'] = $protocollo;
