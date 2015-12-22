@@ -169,106 +169,119 @@ tinymce.init({
 	</div>
 	
 	<nav class="navbar navbar-default" role="navigation">
-		<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-				
-				<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
-						<li><a href="login0.php?corpus=ricerca-protocollo"><span class="glyphicon glyphicon-search"></span> Ricerca nel protocollo</a></li>
-						<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione titolario</a></li>
-						<li><a href="login0.php?corpus=pratiche"><i class="fa fa-tags"></i> Gestione pratiche</a></li>
-						<li><a href="login0.php?corpus=stampa-registro"><i class="fa fa-file-pdf-o"></i> Esporta registro in PDF</a></li>
-					</ul>
-				</li>
 		
-				<?php
-				$query = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
-				$num = mysql_fetch_row($query);
-				$prot = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE firmata = 1 AND protocollo = 0");
-				$protocollare = mysql_fetch_row($prot);
-				?>
-				<li class="dropdown <?php if($_GET['corpus'] == 'lettera' OR $_GET['corpus']=='lettera2' OR $_GET['corpus']=='elenco-lettere' OR $_GET['corpus']=='elenco-lettere-firma') { echo ' active'; }?>">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<?php 
-							if($protocollare[0] > 0) {
-								echo '<span class="badge alert-success"><i class="fa fa-exclamation"></i></span>';
-							}
-							else {
-								echo '<i class="fa fa-file-text-o"></i>';
-							}
-						?>
-						 Lettere
-						<?php 
-							if(($num[0] > 0) && ($_SESSION['auth']>=90)) {
-								echo '<span class="badge alert-success">' . $num[0] . '</span>';
-							}
-						?>
-						<b class="caret"></b>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="login0.php?corpus=lettera"><span class="glyphicon glyphicon-pencil"></span> Scrivi lettera</a></li>
-						<li><a href="login0.php?corpus=attributi"><i class="fa fa-font"></i> Gestione Attributi</a></li>
-						<li><a href="login0.php?corpus=elenco-lettere"><i class="fa fa-wrench"></i> Lettere in Lavorazione <?php if($protocollare[0] > 0) { echo '<span class="badge alert-success">'. $protocollare[0] .' da protocollare!</span>'; } ?></a></li>
-						<li><a href="login0.php?corpus=archivio-lettere"><i class="fa fa-archive"></i> Lettere Archiviate</a></li>
-						<?php 
-							if(($num[0] > 0) && ($_SESSION['auth']>=90)) {
-								echo '<li class="divider"></li>';
-								echo '<li><a href="login0.php?corpus=elenco-lettere-firma"><i class="fa fa-pencil"></i> Lettere da Firmare <span class="badge alert-success">' . $num[0] . '</span></a></li>';
-							}
-						?>
-					</ul>
-				</li>
-				
-				<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Anagrafica <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus"></span> Inserisci nuova anagrafica</a></li>
-						<li><a href="login0.php?corpus=ricerca-anagrafica"><span class="glyphicon glyphicon-search"></span> Ricerca in anagrafica</a></li>
-					</ul>
-				</li>
-				
-				<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto"><span class="glyphicon glyphicon-question-sign"></span> F.A.Q.</a></li>
-				<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><i class="fa fa-wikipedia-w"></i> Wiki</a></li>
-			</ul>
-	   
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b>
-					</a>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Brand</a>
+			</div>
+		
+			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 					
-					<ul class="dropdown-menu">
-						<li role="presentation" class="dropdown-header">OPZIONI</li>
-						<li><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><span class="glyphicon glyphicon-edit"></span> Cambia Password</a></li>
-						<li><a href="login0.php?corpus=segnala-bug"><span class="glyphicon glyphicon-warning-sign"></span> Segnala un Errore</a></li>
-						<li><a href="login0.php?corpus=feedback"><i class="fa fa-thumbs-o-up"></i> Invia Feedback</a></li>
-						<li><a href="login0.php?corpus=settings"><span class="glyphicon glyphicon-cog"></span> Impostazioni</a></li>
-						<li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o"></i> Impostazioni Server Mail</a></li>
-						<li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart"></i> Statistiche</a></li>
-						<?php 
-							if ($_SESSION['auth'] > 95) {
-								?>
-								<li class="divider"></li>
-								<li role="presentation" class="dropdown-header">ADVANCED</li>
-								<li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users"></i> Gestione degli Utenti</a></li>
-								<li><a href="login0.php?corpus=advancedsettings"><i class="fa fa-cogs"></i> Advanced Settings</a></li>
-								<li><a href="login0.php?corpus=diagnostica"><span class="glyphicon glyphicon-wrench"></span> Diagnostica</a></li>
-								<li class="divider"></li>
-								<li role="presentation" class="dropdown-header">LOG</li>
-								<li><a href="login0.php?corpus=access-log"><i class="fa fa-key"></i> Visualizza il log degli accessi</a></li>
-								<li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
-								<li><a href="login0.php?corpus=history"><span class="glyphicon glyphicon-time"></span> Visualizza il log delle azioni</a></li>
-								<?php
-							}
-						?>
-						<li class="divider"></li>
-						<li><a href="logout.php"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
-					</ul>
-				</li>
-			</ul>
+					<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus"></span> Crea nuovo numero progressivo</a></li>
+							<li><a href="login0.php?corpus=ricerca-protocollo"><span class="glyphicon glyphicon-search"></span> Ricerca nel protocollo</a></li>
+							<li><a href="login0.php?corpus=titolario"><span class="glyphicon glyphicon-list"></span> Gestione titolario</a></li>
+							<li><a href="login0.php?corpus=pratiche"><i class="fa fa-tags"></i> Gestione pratiche</a></li>
+							<li><a href="login0.php?corpus=stampa-registro"><i class="fa fa-file-pdf-o"></i> Esporta registro in PDF</a></li>
+						</ul>
+					</li>
+			
+					<?php
+					$query = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+					$num = mysql_fetch_row($query);
+					$prot = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE firmata = 1 AND protocollo = 0");
+					$protocollare = mysql_fetch_row($prot);
+					?>
+					<li class="dropdown <?php if($_GET['corpus'] == 'lettera' OR $_GET['corpus']=='lettera2' OR $_GET['corpus']=='elenco-lettere' OR $_GET['corpus']=='elenco-lettere-firma') { echo ' active'; }?>">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<?php 
+								if($protocollare[0] > 0) {
+									echo '<span class="badge alert-success"><i class="fa fa-exclamation"></i></span>';
+								}
+								else {
+									echo '<i class="fa fa-file-text-o"></i>';
+								}
+							?>
+							 Lettere
+							<?php 
+								if(($num[0] > 0) && ($_SESSION['auth']>=90)) {
+									echo '<span class="badge alert-success">' . $num[0] . '</span>';
+								}
+							?>
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="login0.php?corpus=lettera"><span class="glyphicon glyphicon-pencil"></span> Scrivi lettera</a></li>
+							<li><a href="login0.php?corpus=attributi"><i class="fa fa-font"></i> Gestione Attributi</a></li>
+							<li><a href="login0.php?corpus=elenco-lettere"><i class="fa fa-wrench"></i> Lettere in Lavorazione <?php if($protocollare[0] > 0) { echo '<span class="badge alert-success">'. $protocollare[0] .' da protocollare!</span>'; } ?></a></li>
+							<li><a href="login0.php?corpus=archivio-lettere"><i class="fa fa-archive"></i> Lettere Archiviate</a></li>
+							<?php 
+								if(($num[0] > 0) && ($_SESSION['auth']>=90)) {
+									echo '<li class="divider"></li>';
+									echo '<li><a href="login0.php?corpus=elenco-lettere-firma"><i class="fa fa-pencil"></i> Lettere da Firmare <span class="badge alert-success">' . $num[0] . '</span></a></li>';
+								}
+							?>
+						</ul>
+					</li>
+					
+					<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Anagrafica <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus"></span> Inserisci nuova anagrafica</a></li>
+							<li><a href="login0.php?corpus=ricerca-anagrafica"><span class="glyphicon glyphicon-search"></span> Ricerca in anagrafica</a></li>
+						</ul>
+					</li>
+					
+					<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto"><span class="glyphicon glyphicon-question-sign"></span> F.A.Q.</a></li>
+					<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><i class="fa fa-wikipedia-w"></i> Wiki</a></li>
+				</ul>
+		   
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b>
+						</a>
+						
+						<ul class="dropdown-menu">
+							<li role="presentation" class="dropdown-header">OPZIONI</li>
+							<li><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><span class="glyphicon glyphicon-edit"></span> Cambia Password</a></li>
+							<li><a href="login0.php?corpus=segnala-bug"><span class="glyphicon glyphicon-warning-sign"></span> Segnala un Errore</a></li>
+							<li><a href="login0.php?corpus=feedback"><i class="fa fa-thumbs-o-up"></i> Invia Feedback</a></li>
+							<li><a href="login0.php?corpus=settings"><span class="glyphicon glyphicon-cog"></span> Impostazioni</a></li>
+							<li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o"></i> Impostazioni Server Mail</a></li>
+							<li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart"></i> Statistiche</a></li>
+							<?php 
+								if ($_SESSION['auth'] > 95) {
+									?>
+									<li class="divider"></li>
+									<li role="presentation" class="dropdown-header">ADVANCED</li>
+									<li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users"></i> Gestione degli Utenti</a></li>
+									<li><a href="login0.php?corpus=advancedsettings"><i class="fa fa-cogs"></i> Advanced Settings</a></li>
+									<li><a href="login0.php?corpus=diagnostica"><span class="glyphicon glyphicon-wrench"></span> Diagnostica</a></li>
+									<li class="divider"></li>
+									<li role="presentation" class="dropdown-header">LOG</li>
+									<li><a href="login0.php?corpus=access-log"><i class="fa fa-key"></i> Visualizza il log degli accessi</a></li>
+									<li><a href="login0.php?corpus=log-mail"><span class="glyphicon glyphicon-envelope"></span> Visualizza il log delle mail</a></li>
+									<li><a href="login0.php?corpus=history"><span class="glyphicon glyphicon-time"></span> Visualizza il log delle azioni</a></li>
+									<?php
+								}
+							?>
+							<li class="divider"></li>
+							<li><a href="logout.php"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div> 
 		</div>
 	</nav>
 	
