@@ -178,7 +178,6 @@ tinymce.init({
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Brand</a>
 			</div>
 		
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
