@@ -163,7 +163,6 @@ tinymce.init({
 			<div class="col-sm-7">
 				<h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2> 
 			</div>
-			
 			<div class="col-sm-4" align="right">
 				<img src="<?php echo $_SESSION['splash']; ?>">
 			</div>
