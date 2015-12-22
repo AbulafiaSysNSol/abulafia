@@ -132,24 +132,6 @@
 	var headermail = document.modifica.headermail.value;
 	var footermail = document.modifica.footermail.value;
 	
-	if ((footermail == "") || (footermail == "undefined")) 
-	{
-           alert("Il campo Footer Mail-Protocollo è obbligatorio");
-           document.modifica.versione.focus();
-           return false;
-      }
-	if ((headermail == "") || (headermail == "undefined")) 
-	{
-           alert("Il campo Header Mail-Protocollo è obbligatorio");
-           document.modifica.versione.focus();
-           return false;
-      }	
-	if ((mittente == "") || (mittente == "undefined")) 
-	{
-           alert("Il campo Mittente Mail-Protocollo è obbligatorio");
-           document.modifica.versione.focus();
-           return false;
-      }
 	if ((version == "") || (version == "undefined")) 
 	{
            alert("Il campo Versione è obbligatorio");

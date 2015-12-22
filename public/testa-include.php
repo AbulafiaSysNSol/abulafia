@@ -259,6 +259,7 @@ tinymce.init({
 		<li><a href="login0.php?corpus=segnala-bug"><span class="glyphicon glyphicon-warning-sign"></span> Segnala un Errore</a></li>
 		<li><a href="login0.php?corpus=feedback"><i class="fa fa-thumbs-o-up"></i> Invia Feedback</a></li>
 		<li><a href="login0.php?corpus=settings"><span class="glyphicon glyphicon-cog"></span> Impostazioni</a></li>
+		<li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o"></i> Impostazioni Server Mail</a></li>
 		<li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart"></i> Statistiche</a></li>
 		<?php 
 			if ($_SESSION['auth'] > 95) {
