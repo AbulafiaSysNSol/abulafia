@@ -7,7 +7,7 @@
 	
 	require('lib/phpmailer/PHPMailerAutoload.php');
 	$mail = new PHPMailer();
-	
+
 	$idlettera= $_GET['id'];
 	$annoricercaprotocollo=$_GET['anno'];
 	$tabella= 'lettere'.$annoricercaprotocollo;
@@ -40,7 +40,7 @@
 	$mail->From = $_SESSION['usernamemail'];
 	$mail->addReplyTo = $_SESSION['usernamemail'];
 	$mail->FromName = $_SESSION['denominazione'];
-	
+
 	//inserisco gli allegati
 	$urlfile = $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
 	if ($urlfile) {
@@ -53,7 +53,7 @@
 				$i++;
 		}
 	}
-	
+
 	//aggiungo i destinatari
 	foreach ($destinatari as $valore) {
 		$mail->addAddress($valore);     // Add a recipient
@@ -64,7 +64,7 @@
 	$mail->Body = $headermail.stripslashes($messaggio).$footermail;
 	
 	$result = $mail->send();
-
+	
 	if(!$result) {
 		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:</b> si è verificato un errore nell\'invio dell\'email.<br>'.$mail->ErrorInfo.'</div>';
 		echo '<a href="?corpus=dettagli-protocollo&id=' . $idlettera . '&anno=' . $annoricercaprotocollo . '"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo</a> - <a href="?corpus=home"><i class="fa fa-home"></i> Torna alla home</a>';

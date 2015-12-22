@@ -39,11 +39,11 @@
 					</div>
 					
 					<div class="form-group">
-						<input type="checkbox" name="intestazione" value="intestazione" checked="checked"> Intestazione Standard<br />
+						<input type="checkbox" name="intestazione" value="intestazione"> Intestazione Standard<br />
 					</div>
 					
 					<div class="form-group">
-						<input type="checkbox" name="firma" value="firma" checked="checked"> Firma Standard
+						<input type="checkbox" name="firma" value="firma"> Firma Standard
 					</div>
 				</div>
 				
@@ -60,7 +60,7 @@
 					</div>
 				</div>
 			</div>
-			<small>(Per utilizzare una intestazione ed una firma personalizzata deselezionare le caselle)</small>
+			<small>(Per utilizzare una intestazione ed una firma standard, impostarla nelle impostazioni e selezionare le caselle)</small>
 			<br><br><button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Invio email in corso..." type="submit" class="btn btn-success"><i class="fa fa-share"></i> Invia</button>
 		</form>
 	</div>
