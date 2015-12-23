@@ -128,7 +128,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     <h2>Per info e supporto:</h2>
                 </div>
                 <div class="col-sm-6">
