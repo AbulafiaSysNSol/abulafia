@@ -23,7 +23,7 @@
 					<div class="modal-body">
 						<div class="form-group">
 							<div class="row">
-								<div class="col-xs-7">
+								<div class="col-sm-7">
 									<label>Magazzino/Servizio:</label>
 									<select class="form-control input-sm" name="magazzino">
 										<?php
@@ -37,7 +37,7 @@
 									</select>
 								</div>
 
-								<div class="col-xs-5">
+								<div class="col-sm-5">
 									<label>Settore:</label>
 									<select class="form-control input-sm" name="settore">
 										<?php
@@ -54,22 +54,22 @@
 							<br>
 							
 							<div class="row">
-								<div class="col-xs-3">
+								<div class="col-sm-3">
 									<label id="lblcognome">Scorta Minima:</label>
 									<input type="text" class="form-control input-sm" name="scortaminima">
 								</div>
 							
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<label id="lblnome">Riordino:</label>
 									<input type="text" class="form-control input-sm" name="riordino">
 								</div>
 							
-								<div class="col-xs-4">
+								<div class="col-sm-4">
 									<label id="lblcognome">Giacenza Iniziale:</label>
 									<input type="text" class="form-control input-sm" name="giacenzainiziale">
 								</div>
 							
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<label id="lblcognome">Confezionamento:</label>
 									<input type="text" class="form-control input-sm" name="confezionamento">
 								</div>
