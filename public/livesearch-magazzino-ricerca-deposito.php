@@ -1,5 +1,4 @@
 <?php
-
 	session_start();
 	include '../db-connessione-include.php';
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
@@ -18,8 +17,8 @@
 		mysql_close ($verificaconnessione);
 		exit();
 	}
-
 	$p = new Prodotto();
+	$m = new Magazzino();
 	
 	$res = $p->ricercaDeposito($q, $z);
 	$count = $p->contaDeposito($q, $z);
@@ -46,7 +45,7 @@
 					<td style="vertical-align: middle" align="center"><?php echo $val['codice']; ?></td>
 					<td style="vertical-align: middle"><?php echo strtoupper($val['descrizione']); ?></td>
 					<td style="vertical-align: middle" align="center"><?php echo $val['giacenza']; ?></td>
-					<td style="vertical-align: middle" align="center"><?php echo $val['settore']; ?></td>
+					<td style="vertical-align: middle" align="center"><?php echo $val['settore'] . ' - ' . $m->getSettoreById($val['settore']); ?></td>
 					<td style="vertical-align: middle" align="center"><?php echo $val['scortaminima']; ?></td>
 					<td style="vertical-align: middle" align="center"><?php echo $val['confezionamento']; ?></td>
 				</tr>

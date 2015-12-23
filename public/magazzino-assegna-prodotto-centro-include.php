@@ -7,6 +7,7 @@
 <?php
 	$id = $_GET['id'];
 	$s = new Servizio();
+	$m = new Magazzino();
 ?>
 
 <!-- Modal -->
@@ -39,10 +40,14 @@
 								<div class="col-xs-5">
 									<label>Settore:</label>
 									<select class="form-control input-sm" name="settore">
-										<option value="0">0 - SETTORE 0</option>
-										<option value="1">1 - FARMACI</option>
-										<option value="2">2 - SANITARI</option>
-										<option value="3">3 - DISPOSITIVI MEDICI</option>
+										<?php
+											$settori = $m->getSettori();
+											foreach($settori as $val) {
+												?>
+												<option value="<?php echo $val['id']; ?>"><?php echo $val['id'] . ' - ' . $val['descrizione']; ?></option>
+												<?php
+											}
+										?>
 									</select>
 								</div>
 							</div>
