@@ -166,18 +166,10 @@
 	</form>
 <!--End Modal-->
 
-<center>
-<div class="row">
-	<div class="col-sm-12">
-		<div class="alert alert-warning"><b><i class="fa fa-warning"></i> ATTENZIONE:</b> il numero di protocollo verrà assegnato dopo aver concluso l'inserimento dei dati.<!-- , in alternativa è possibile <a href="login0.php?corpus=blocca-protocollo" onClick="return confirm('Una volta bloccato il protocollo è necessario ultimare la registrazione senza abbandonare la pagina. Continuare?');">bloccare il numero di protocollo <i class="fa fa-lock"></i> --></a></div>
-	</div>
-</div>
-</center>
-
 <div class="<?php if($errore) { echo "panel panel-danger";} else { echo "panel panel-default";} ?>">
 	
 		<div class="panel-heading">
-			<h3 class="panel-title"><strong><i class="fa fa-info-circle"></i> Identificativo Provvisorio Protocollo: <?php echo $my_lettera->idtemporaneo;?></strong>
+			<h3 class="panel-title"><i class="fa fa-warning"></i> Il numero di protocollo verrà assegnato dopo aver concluso l'inserimento dei dati --- <i class="fa fa-info-circle"></i> Identificativo Provvisorio Protocollo: <strong><?php echo $my_lettera->idtemporaneo;?></strong> 
 				<?php if($errore) { 
 					echo " - <b><i class=\"fa fa-warning\"></i> ATTENZIONE:</b> Bisogna inserire almeno un mittente o un destinatario.";
 				} ?>
@@ -295,7 +287,7 @@
 				foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti ) {
 					?>
 					<a href="anagrafica-mini.php?id=<?php echo$elencochiavi ?>" class="fancybox" data-fancybox-type="iframe">
-						<?php echo $elencomittenti.' '; ?>
+						<?php echo stripslashes($elencomittenti).' '; ?>
 					</a>
 					- <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"></span> Elimina <span class="glyphicon glyphicon-trash"></a>
 					<br>
