@@ -167,7 +167,7 @@
 							?>
 							</p>
 			
-							<center><img src="graphs/homegraph.png"></center><br>
+							<center><img src="graphs/homegraph.png" width="100%"></center><br>
 				
 							<?php
 					
@@ -227,7 +227,7 @@
 					?>
 					
 					<br><br>
-					<center><img src="graphs/anagrafica.png"></center>
+					<center><img src="graphs/anagrafica.png" width="100%"></center>
 			</div>
 		</div>
 	</div>
@@ -272,7 +272,7 @@
 				<?php
 					$risultati = $lettera->ultimeLettere(5, $anno);
 				?>
-				<table class="table table-striped">
+				<table class="table table-striped" width="100%">
 				<?php
 				if($risultati) {
 					echo "<tr><td></td><td><b>NUM.</b></td><td><b>DATA</b></td><td><b>OGGETTO</b></td><td></td></tr>";
