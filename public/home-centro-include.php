@@ -37,7 +37,7 @@
 	
 	if ($result[0] > 0) {
 		?>
-		<h3><center><div class="alert alert-danger"><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> è stata rilevata un'anomalia nel registro di protocollo.
+		<h3><center><div class="alert alert-danger"><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> &egrave; stata rilevata un'anomalia nel registro di protocollo.
 		<h5>Alcune lettere non sono state registrate correttamente. Clicca sui numeri per inserire i dettagli mancanti: 
 		<?php
 		while ($idprot = mysql_fetch_array($query_prot)){
@@ -84,7 +84,17 @@
 <hr>
 	<center>
 		<h2>
-			<i class="fa fa-calendar"></i>  Anno:<b> <?php echo $anno; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-book"></i>  Numero di protocollo attuale:<b> <?php echo $ultimoprot; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-down"></i> <b> <?php echo $ric[0]; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-up"></i> <b> <?php echo $sped[0]; ?></b>
+			<div class="row">
+				<div class="col-sm-3">
+					<i class="fa fa-calendar"></i> Anno:<b> <?php echo $anno; ?></b>
+				</div>
+				<div class="col-sm-6">
+					<i class="fa fa-book"></i> Numero di protocollo attuale:<b> <?php echo $ultimoprot; ?></b>
+				</div>
+				<div class="col-sm-3">
+					<i class="fa fa-arrow-down"></i> <b> <?php echo $ric[0]; ?></b> <i class="fa fa-arrow-up"></i> <b> <?php echo $sped[0]; ?></b>
+				</div>
+			</div>
 		</h2>
 	</center>
 <hr>
@@ -167,7 +177,7 @@
 							?>
 							</p>
 			
-							<center><img src="graphs/homegraph.png"></center><br>
+							<center><img src="graphs/homegraph.png" width="100%"></center><br>
 				
 							<?php
 					
@@ -227,7 +237,7 @@
 					?>
 					
 					<br><br>
-					<center><img src="graphs/anagrafica.png"></center>
+					<center><img src="graphs/anagrafica.png" width="100%"></center>
 			</div>
 		</div>
 	</div>
@@ -272,7 +282,7 @@
 				<?php
 					$risultati = $lettera->ultimeLettere(5, $anno);
 				?>
-				<table class="table table-striped">
+				<table class="table table-striped" width="100%">
 				<?php
 				if($risultati) {
 					echo "<tr><td></td><td><b>NUM.</b></td><td><b>DATA</b></td><td><b>OGGETTO</b></td><td></td></tr>";
