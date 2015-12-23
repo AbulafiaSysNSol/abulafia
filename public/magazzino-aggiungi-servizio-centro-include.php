@@ -1,6 +1,6 @@
 <div class="row">
 	
-	<div class="col-xs-12">
+	<div class="col-sm-12">
 		<div class="panel panel-default">
 			
 				<div class="panel-heading">
@@ -13,7 +13,7 @@
 					 if( isset($_GET['insert']) && $_GET['insert'] == "ok") {
 					?>
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-sm-12">
 							<div class="alert alert-success"><i class="fa fa-check"></i> Servizio registrato <b>correttamente!</b></div>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Codice Servizio*:</label>
 							<div class="row">
-								<div class="col-xs-3">
+								<div class="col-sm-3">
 									<input type="text" class="form-control input-sm" name="codice" required>
 								</div>
 							</div>
@@ -35,7 +35,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Descrizione Servizio:</label>
 							<div class="row">
-								<div class="col-xs-8">
+								<div class="col-sm-8">
 									<input type="text" class="form-control input-sm" name="descrizione" required>
 								</div>
 							</div>
@@ -44,7 +44,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Indirizzo:</label>
 							<div class="row">
-								<div class="col-xs-8">
+								<div class="col-sm-8">
 									<input type="text" class="form-control input-sm" name="indirizzo" required>
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Città:</label>
 							<div class="row">
-								<div class="col-xs-6">
+								<div class="col-sm-6">
 									<input type="text" class="form-control input-sm" name="citta" required>
 								</div>
 							</div>
@@ -62,7 +62,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">CAP:</label>
 							<div class="row">
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<input type="text" class="form-control input-sm" name="cap" required>
 								</div>
 							</div>
@@ -71,7 +71,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Telefono:</label>
 							<div class="row">
-								<div class="col-xs-3">
+								<div class="col-sm-3">
 									<input type="text" class="form-control input-sm" name="telefono">
 								</div>
 							</div>
@@ -80,7 +80,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Email:</label>
 							<div class="row">
-								<div class="col-xs-3">
+								<div class="col-sm-3">
 									<input type="text" class="form-control input-sm" name="email">
 								</div>
 							</div>
@@ -89,7 +89,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Magazzino</label>
 							<div class="row">
-								<div class="col-xs-3">
+								<div class="col-sm-3">
 									<input type="checkbox" name="magazzino" value="1">
 								</div>
 							</div>

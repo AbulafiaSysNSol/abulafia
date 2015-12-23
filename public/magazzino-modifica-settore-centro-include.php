@@ -12,7 +12,7 @@
    
    <div class="row">
 
-	<div class="col-xs-6">   
+	<div class="col-sm-6">   
 		<?php
 			$settori = $m->getSettori();
 		?>
@@ -28,7 +28,7 @@
 				<tr>
 					<td><?php echo $val['id']; ?></td><td><?php echo stripslashes($val['descrizione']); ?></td>
 					<td>
-						<div class="btn-group btn-group-xs">
+						<div class="btn-group btn-group-sm">
 							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Settore" href="login0.php?corpus=magazzino-modifica-settore&id=<?php echo $val['id']; ?>"><span class="glyphicon glyphicon-pencil"></span></button></a> 
 							<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina Settore" onClick="return confirm('Vuoi veramente cancellare questo settore?');" href="login0.php?corpus=magazzino-elimina-settore&id=<?php echo $val['id']; ?>"><span class="glyphicon glyphicon-trash"></button></a>
 						</div>
@@ -40,17 +40,17 @@
 		</table>
 	</div>
 	
-	<div class="col-xs-6">   
+	<div class="col-sm-6">   
 	 <label><span class="glyphicon glyphicon-plus"></span> Modifica Settore: "<?php echo $id . ' - ' . $descrizione; ?>"</label><br><br>
 	    <form action="login0.php?corpus=magazzino-modifica-settore2&id=<?php echo $id; ?>" method="post" role="form">
 		  <div class="form-group">
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<label>Descrizione Settore:</label><input class="form-control" type="text" value="<?php echo $descrizione; ?>" name="descrizione" required />			
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<br><button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-plus"></span> Modifica Settore</button>
 				</div>
 			</div>

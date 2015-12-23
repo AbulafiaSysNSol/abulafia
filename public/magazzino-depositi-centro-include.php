@@ -3,7 +3,7 @@
 ?>
 
 <div class="row">
-	<div class="col-xs-12">
+	<div class="col-sm-12">
 
 		<div class="panel panel-default">
 			
@@ -17,7 +17,7 @@
 					 if( isset($_GET['insert']) && $_GET['insert'] == "ok") {
 					?>
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-sm-12">
 							<div class="alert alert-success"><i class="fa fa-check"></i> Prodotto assegnato <b>correttamente!</b></div>
 						</div>
 					</div>

@@ -8,7 +8,7 @@
 
 <div class="row">
 	
-	<div class="col-xs-12">
+	<div class="col-sm-12">
 		<div class="panel panel-default">
 			
 				<div class="panel-heading">
@@ -24,7 +24,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Descrizione Prodotto:</label>
 							<div class="row">
-								<div class="col-xs-8">
+								<div class="col-sm-8">
 									<input type="text" class="form-control input-sm" name="descrizione" value="<?php echo $prodotto['descrizione']; ?>" required>
 								</div>
 							</div>
@@ -33,7 +33,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Prezzo:</label>
 							<div class="row">
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<div class="input-group">
 										<input type="text" class="form-control input-sm" name="prezzo" value="<?php echo $prodotto['prezzo']; ?>"><div class="input-group-addon"><i class="fa fa-euro"></i></div>
 									</div>
@@ -44,7 +44,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Unità di Misura:</label>
 							<div class="row">
-								<div class="col-xs-2">
+								<div class="col-sm-2">
 									<select class="form-control input-sm"  size=1 cols=4 NAME="unitadimisura">
 										<option value="<?php echo $prodotto['unita_misura']; ?>"><?php echo $prodotto['unita_misura']; ?></option>
 										<option value="PZ"> PZ </option>
@@ -64,7 +64,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Note:</label>
 							<div class="row">
-								<div class="col-xs-8">
+								<div class="col-sm-8">
 									<input type="text" class="form-control input-sm" name="note" value="<?php echo $prodotto['note']; ?>">
 								</div>
 							</div>
@@ -73,7 +73,7 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Codice a Barre:</label>
 							<div class="row">
-								<div class="col-xs-5">
+								<div class="col-sm-5">
 									<input type="text" class="form-control input-sm" name="codicebarre" value="<?php echo $prodotto['codicebarre']; ?>">
 								</div>
 							</div>
