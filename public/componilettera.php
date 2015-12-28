@@ -4,7 +4,7 @@
 	include "class/Calendario.obj.inc";
 	$immagine = "images/footerlettere.png";
 	$dimensioni = getimagesize($immagine);
-	$altezza = (($dimensioni[1] / 150) * 25.4) + 4;
+	$altezza = (($dimensioni[1] / 150) * 25.4) + 0.3;
 	$calendario = new Calendario();
 	$margin = 470 - ((strlen($_SESSION["denominazione"]) / 2) * 4.3);
 	$id = $_GET['id'];
@@ -53,10 +53,10 @@
 						' . $_SESSION["sede"] . ', '.$data.'
 						<br>';
 						if($protocollo != 0) {
-							$content = $content.'<table border="0"><tr><td rowspan=2"><img src="lettere'.$anno.'/qrcode/'.$protocollo.$anno.'.png" width="90"></td><td style="vertical-align: bottom;">Protocollo n&ordm; '.$protocollo.'</td></tr><tr><td style="vertical-align: top;">del '.$dataprot.'</td></tr></table>';
+							$content = $content.'<br>Protocollo n&ordm; <b>'.$protocollo.'</b> del <b>'.$dataprot.'</b><br><br>';
 						}
 						else {
-							$content = $content.'<br><br>Protocollo n&ordm; ________ del ______________<br><br><br>';
+							$content = $content.'<br>Protocollo n&ordm; ________ del ______________<br><br>';
 						}
 						$content = $content.'
 						Allegati: '.$allegati.'<br><br><br>
@@ -163,13 +163,12 @@
 						<b>Oggetto</b>:
 					</td>
 					<td width="312">
-						<div style="text-align: left; margin-right: 15px;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
+						<div style="text-align: left; margin-right: 15px; line-height: 1.3;">'.str_replace('<p>', '', str_replace('</p>', '', $oggetto)).'</div>
 					</td>
 				</tr>
 			</table>
-			<br><br>
-			<span style="line-height: 1.6">'.$testo.'</span>
-			<br><br>';
+			<br>
+			<span style="line-height: 1.5">'.$testo.'</span>';
 			
 					if($firma == 1) {
 						$content = $content.'	<div style="margin-left: 350px;">
@@ -177,13 +176,9 @@
 										</div>';
 					}
 					else {
-						$content = $content.' <span style="margin-left: 470px;">
-											Il ' . $_SESSION["vertice"] . '
-										</span>
-										<br>
-										<span style="margin-left: ' . $margin . 'px;">
-											' . $_SESSION["denominazione"] . '
-										</span>';
+						$content = $content.' <div style="margin-left: 350px;">
+											<img src="../firmaprova.jpg" width="280">
+										</div>';
 					}
 					$content = $content.'
 		</span>
