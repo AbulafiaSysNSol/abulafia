@@ -4,7 +4,7 @@
 	
 	if(isset($_GET['pass']) && ($_GET['pass'] == 1)) {
 		echo '<center><div class="alert alert-warning"><h3><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> non hai ancora modificato la tua password di default!</h3>
-			Per questioni di sicurezza ti invitiamo a cambiarla al più presto. <a href="?corpus=cambio-password&loginid='. $_SESSION['loginid'] . '">Cambia la tua password ora</a></div></center>';
+			Per questioni di sicurezza ti invitiamo a cambiarla al pi&ugrave; presto. <a href="?corpus=cambio-password&loginid='. $_SESSION['loginid'] . '">Cambia la tua password ora</a></div></center>';
 	}
 	
 	$_SESSION['block'] = false;
@@ -64,7 +64,7 @@
 	
 	if (!$e->isSetMail()) {
 		?>
-		<center><h4><div class="alert alert-warning"><i class="fa fa-warning"></i> <b>Attenzione:</b> per poter inviare email bisogna configurare il server email in <a href="?corpus=server-mail">questa pagina</a>.</div></h4></center>
+		<center><h4><div class="alert alert-warning"><i class="fa fa-warning"></i> <b>Attenzione:</b> per poter inviare email bisogna configurare il server mail in <a href="?corpus=server-mail">questa pagina</a>.</div></h4></center>
 		<?php
 	}
 	
@@ -73,7 +73,7 @@
 		<center><div class="alert alert-info">
 			<h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema - Ver. 10.0</b></h3>
 			<br><b>Modifiche introdotte con l'aggiornamento:</b>
-			<br> - scissione pagina di ricerca;  &egrave adesso possibile ricercare solo i protocolli o solo le anagrafiche mediante i sottomenu "protollo" e "anagrafica";
+			<br> - scissione pagina di ricerca;  &egrave; adesso possibile ricercare solo i protocolli o solo le anagrafiche mediante i sottomenu "protollo" e "anagrafica";
 			<br> - scissione delle lettere tra "lettere in lavorazione" e "lettere archiviate";
 			<br><br><small>Se notate anomalie o malfunzionamenti comunicateceli mediante la <a href="login0.php?corpus=segnala-bug">pagina di segnalazione errori.</a></small>
 		</center>

@@ -51,7 +51,7 @@
 				<tr>
 					<td colspan="2" width="380">
 						' . $_SESSION["sede"] . ', '.$data.'
-						<br>';
+						<br><br>';
 						if($protocollo != 0) {
 							$content = $content.'<br>Protocollo n&ordm; <b>'.$protocollo.'</b> del <b>'.$dataprot.'</b><br><br>';
 						}

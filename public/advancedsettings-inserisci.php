@@ -21,7 +21,6 @@
 	$inizio = $_POST['inizio'];
 
 	//passaggio variabili mail
-	$mittente = $_POST['mittente'];
 	$headermail = $_POST['headermail'];
 	$footermail = $_POST['footermail'];
 
@@ -42,7 +41,7 @@
 	}
 
 	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio'");
-	$inserimento2=mysql_query("update mailsettings set mailsettings.mittente = '$mittente', mailsettings.headermail = '$headermail', mailsettings.footermail = '$footermail'");
+	$inserimento2=mysql_query("update mailsettings set mailsettings.headermail = '$headermail', mailsettings.footermail = '$footermail'");
 
 	if (!$inserimento && !$inserimento2) {
 		?>
@@ -54,6 +53,7 @@
 				window.location="login0.php?corpus=advancedsettings&update=error";
 		</SCRIPT> 
 		<?php
+		echo mysql_error();
 		exit();
 	}
 	else { 
@@ -65,7 +65,6 @@
 		$_SESSION['fotomaxfilesize']= $fotomaxfilesize; 
 		$_SESSION['annoprotocollo']= $annoprotocollo; 
 		$_SESSION['headerdescription']= $headerdescription; 
-		$_SESSION['mittente'] = $mittente; 
 		$_SESSION['headermail'] = $headermail; 
 		$_SESSION['footermail'] = $footermail;
 		$_SESSION['sede'] = $sede;

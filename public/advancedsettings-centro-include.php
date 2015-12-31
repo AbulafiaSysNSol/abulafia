@@ -77,9 +77,8 @@
 					<label>Numero iniziale per il Protocollo (settabile solo nella prima installazione)</label>
 					<input class="form-control" size="50" type="text" name="primoprotocollo"  value="<?php echo $contalettere;?>"/>
 						<script language="javascript">
-						var primoprotocollo = document.modifica.primoprotocollo.value;
-							if (primoprotocollo > 1) 
-							{
+							var primoprotocollo = document.modifica.primoprotocollo.value;
+							if (primoprotocollo > 1) {
 								 document.modifica.primoprotocollo.disabled = true;
 							}
 						</script>
@@ -89,9 +88,6 @@
 					<br>
 					<label>Pagina principale</label>
 					<input class="form-control" size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>" <?php if(!$admin) echo 'disabled'; ?>/>
-					<br>
-					<label>Mittente Mail-Protocollo</label>
-					<input class="form-control" size="50" type="text" name="mittente"  value="<?php echo $_SESSION['mittente'];?>"/>
 					<br>
 					<label>Header Mail-Protocollo</label>
 					<input class="form-control" size="50" type="text" name="headermail"  value="<?php echo $_SESSION['headermail'];?>"/>
@@ -128,7 +124,6 @@
 	var protocollomaxfilesize = document.modifica.protocollomaxfilesize.value;
 	var annoprotocollo = document.modifica.annoprotocollo.value;
 	var fotomaxfilesize = document.modifica.fotomaxfilesize.value;
-	var mittente = document.modifica.mittente.value;
 	var headermail = document.modifica.headermail.value;
 	var footermail = document.modifica.footermail.value;
 	
