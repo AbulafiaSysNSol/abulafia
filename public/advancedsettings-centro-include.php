@@ -68,10 +68,10 @@
 					<input class="form-control" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled />
 					<br>
 					<label>Sede (città)</label>
-					<input class="form-control" type="text" name="sede"  value="<?php echo $_SESSION['sede'];?>"/>
+					<input class="form-control" type="text" name="sede"  value="<?php echo stripslashes($_SESSION['sede']);?>"/>
 					<br>
 					<label>Denominazione Comitato</label>
-					<input class="form-control" type="text" name="denominazione"  value="<?php echo $_SESSION['denominazione'];?>"/>
+					<input class="form-control" type="text" name="denominazione"  value="<?php echo stripslashes($_SESSION['denominazione']);?>"/>
 				</div>
 				
 				<div class="col-sm-6">
@@ -91,10 +91,10 @@
 					<input class="form-control" size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Header Mail-Protocollo</label>
-					<input class="form-control" size="50" type="text" name="headermail"  value="<?php echo $_SESSION['headermail'];?>"/>
+					<input class="form-control" size="50" type="text" name="headermail"  value="<?php echo stripslashes($_SESSION['headermail']);?>"/>
 					<br>
 					<label>Footer Mail-Protocollo</label>
-					<input class="form-control" size="50" type="text" name="footermail"  value="<?php echo $_SESSION['footermail'];?>"/>
+					<input class="form-control" size="50" type="text" name="footermail"  value="<?php echo stripslashes($_SESSION['footermail']);?>"/>
 					<br>
 					<label>Vertice (presidente/commissario)</label>
 					<input class="form-control" type="text" name="vertice"  value="<?php echo $_SESSION['vertice'];?>"/>
