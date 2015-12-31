@@ -36,8 +36,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <title><?php echo $_SESSION['nomeapplicativo'] . ' ' . $_SESSION['version'];?></title>
-<meta name="keywords" content="<?php echo $_SESSION['keywords'];?>" />
-<meta name="description" content="<?php echo $_SESSION['description'];?>" />
+<meta name="keywords" content="abulafia, protocollo, informatico, volontari, croce rossa italiana, cri, segreteria" />
+<meta name="description" content="Abulafia - Protocollo Informatico dei Volontari C.R.I." />
+<meta name="author" content="Biagio Saitta & Alfio Musmarra" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="style.php"/>
 
@@ -67,9 +68,10 @@ tinymce.init({
     statusbar : false,
     menubar: false,
     forced_root_block: false,
+    nonbreaking_force_tab: true,
     fontsize_formats: "6pt 8pt 9pt 10pt 11pt 12pt 13pt 14pt 15pt 16pt 18pt 20pt 22pt 24pt 26pt 36pt 54pt 72pt",
    plugins: [
-                "advlist  lists table charmap",
+                "advlist  lists table charmap nonbreaking",
         ],
     toolbar: "bold underline italic subscript superscript charmap | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | table"
  });

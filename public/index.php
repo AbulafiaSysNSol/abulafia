@@ -11,8 +11,9 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Abulafia - Protocollo Informatico dei Volontari C.R.I.">
+    <meta name="author" content="Biagio Saitta & Alfio Musmarra">
+    <meta name="keywords" content="abulafia, protocollo, informatico, volontari, croce rossa italiana, cri, segreteria">
 
     <title>Abulafia - Login</title>
 
@@ -123,36 +124,31 @@
     </div>
     <!-- /.content-section-b -->
     
-      <div class="banner">
+	<div class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<center><h2>Per info e supporto: abulafia@cricatania.it</h2><center>
+				</div>
+			</div>
+		</div>
+		<!-- /.container -->
+	</div>
+	<!-- /.banner -->
 
-        <div class="container">
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <h2>Per info e supporto:</h2>
-                </div>
-                <div class="col-sm-6">
-                    <h2>informatica@cricatania.it</h2>
-                </div>
-            </div>
-
-        </div>
-        <!-- /.container -->
-
-    </div>
-    <!-- /.banner -->
-
-	<hr>
-            <div class="row">
-	    <center>
-                <div class="col-sm-12">
-			Abulafia is licensed under a: <a href="license.txt" target="_blank">GNU GPL V.3</a><br />
-			&copy; 2008 - 2014 <strong>Abulafia Sys'n'Sol</strong>
-			<br><br>
-                </div>
-	   </center>
-            </div>
-
+	<div class="container">
+		<hr>
+		 <div class="row">
+			<center>
+				<div class="col-sm-12">
+					Abulafia is licensed under a: <a href="license.txt" target="_blank">GNU GPL V.3</a><br>
+					&copy; 2008 - 2015 <strong>Abulafia Sys'n'Sol</strong>
+					<br><br>
+				</div>
+			</center>
+		</div>
+	</div>
+	
 </body>
 
 </html>

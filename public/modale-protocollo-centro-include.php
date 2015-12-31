@@ -26,13 +26,12 @@
 							<div class="row">
 								<div class="col-sm-5">
 									<select class="form-control" size=1 cols=4 NAME="posizione">
-									<OPTION selected value="">
-									<OPTION value="posta ordinaria"> posta ordinaria
-									<OPTION value="raccomandata"> raccomandata
-									<OPTION Value="telegramma"> telegramma
-									<OPTION value="fax"> fax
-									<OPTION value="email"> email
-									<OPTION value="consegna a mano"> consegna a mano
+									<OPTION value="posta ordinaria"> Posta Ordinaria
+									<OPTION value="raccomandata"> Raccomandata
+									<OPTION Value="telegramma"> Telegramma
+									<OPTION value="fax"> Fax
+									<OPTION value="email"> Email
+									<OPTION value="consegna a mano"> Consegna a Mano
 									<OPTION value="PEC"> PEC
 									</select>
 								</div>
