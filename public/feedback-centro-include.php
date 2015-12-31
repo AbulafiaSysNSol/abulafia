@@ -14,9 +14,9 @@
 				<div class="form-group">
 					<form action="login0.php?corpus=feedback2" method="POST" enctype="multipart/form-data">
 						Feedback:<br>
-						<textarea required class="form-control" rows="6" name="feedback"></textarea>
+						<textarea required id="feed" class="form-control" rows="6" name="feedback"></textarea>
 						<br>
-						<button class="btn btn-success" type="submit">Invia <i class="fa fa-mail-forward"></i></button>
+						<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Invio email in corso..." class="btn btn-success" type="submit">Invia <i class="fa fa-mail-forward"></i></button>
 					</form>
 				</div>
 			</div>
@@ -24,4 +24,17 @@
 	</div>
 
 </div>
+
+<script>
+	$("#buttonl").click(function() {
+		var $btn = $(this);
+		var feed = document.getElementById("feed").value;
+		if ((feed == "") || (feed == "undefined")) {
+			return;
+		}
+		else {
+			$btn.button('loading');
+		}
+	});
+</script>
 

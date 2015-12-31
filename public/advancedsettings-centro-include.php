@@ -38,7 +38,8 @@
 				}
 			?>
 
-			<?php //funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
+			<?php 
+			//funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
 			$contalettere=mysql_query("select count(*) from lettere$annoprotocollo where lettere$annoprotocollo.datalettera!='0000-00-00'");
 			$res_count=mysql_fetch_row($contalettere);
 			$contalettere= $res_count[0] +1 ;
@@ -49,19 +50,19 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<label>Nome dell'applicativo:</label>
-					<input class="form-control" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>" <?php if(!$admin) { echo 'disabled'; } ?>/>
+					<input class="form-control" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Descrizione breve:</label>
-					<input class="form-control" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>" <?php if(!$admin) { echo 'disabled'; } ?>/>
+					<input class="form-control" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Numero Versione</label>
-					<input class="form-control" type="text" name="version"  value="<?php echo $_SESSION['version'];?>" <?php if(!$admin) { echo 'disabled'; } ?>/>
+					<input class="form-control" type="text" name="version"  value="<?php echo $_SESSION['version'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Email</label>
-					<input class="form-control" type="text" name="email"  value="<?php echo $_SESSION['email'];?>" <?php if(!$admin) { echo 'disabled'; } ?>/>
+					<input class="form-control" type="text" name="email"  value="<?php echo $_SESSION['email'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Max File Size (allegati del Protocollo, <b>espressi in byte</b>)</label>
-					<input class="form-control" type="text" name="protocollomaxfilesize"  value="<?php echo $_SESSION['protocollomaxfilesize'];?>" <?php if(!$admin) { echo 'disabled'; } ?>/>
+					<input class="form-control" type="text" name="protocollomaxfilesize"  value="<?php echo $_SESSION['protocollomaxfilesize'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Anno Corrente per il Protocollo</label>
 					<input class="form-control" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled />
@@ -84,10 +85,10 @@
 						</script>
 					<br>
 					<label>Max File Size (foto dell'anagrafica, <b>espresse in byte</b>)</label>
-					<input class="form-control" size="50" type="text" name="fotomaxfilesize"  value="<?php echo $_SESSION['fotomaxfilesize'];?>" <?php if(!$admin) { echo 'disabled'; } ?>/>
+					<input class="form-control" size="50" type="text" name="fotomaxfilesize"  value="<?php echo $_SESSION['fotomaxfilesize'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Pagina principale</label>
-					<input class="form-control" size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>" <?php if(!$admin) { echo 'disabled'; } ?>/>
+					<input class="form-control" size="50" type="text" name="paginaprincipale"  value="<?php echo $_SESSION['paginaprincipale'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Header Mail-Protocollo</label>
 					<input class="form-control" size="50" type="text" name="headermail"  value="<?php echo $_SESSION['headermail'];?>"/>
@@ -99,7 +100,7 @@
 					<input class="form-control" type="text" name="vertice"  value="<?php echo $_SESSION['vertice'];?>"/>
 					<br>
 					<label>Inizio utilizzo Abulafia (aaaa/mm/gg)</label>
-					<input class="form-control" type="text" name="inizio"  value="<?php echo $_SESSION['inizio'];?>" <?php if(!$admin) { echo 'disabled'; } ?>/>
+					<input class="form-control" type="text" name="inizio"  value="<?php echo $_SESSION['inizio'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 				</div>
 			</div>
 			<br>

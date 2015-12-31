@@ -63,7 +63,6 @@
 		$_SESSION['paginaprincipale']= $paginaprincipale; 
 		$_SESSION['protocollomaxfilesize']= $protocollomaxfilesize; 
 		$_SESSION['fotomaxfilesize']= $fotomaxfilesize; 
-		$_SESSION['annoprotocollo']= $annoprotocollo; 
 		$_SESSION['headerdescription']= $headerdescription; 
 		$_SESSION['headermail'] = $headermail; 
 		$_SESSION['footermail'] = $footermail;
