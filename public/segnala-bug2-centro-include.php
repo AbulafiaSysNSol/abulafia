@@ -9,15 +9,14 @@ $data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 
 //passaggio delle variabili dalla pagina del form
 $destinatario = $_SESSION['email'];
-$mittente = $_SESSION['loginname'].'@abulafia.com';
 $oggetto = 'Segnalazione bug in '.$_SESSION['nomeapplicativo'];
 $messaggio = 'Pagina: '.$_POST['pagina-errore'].' -- Errore: '.$_POST['messaggio'];
 
 	include "../mail-conf-include.php";
-	$mail->From = $mittente;
-	$mail->FromName = 'Segnalazione Bug Abulafia';
-	$mail->addAddress($destinatario);     // Add a recipient
-	$mail->addReplyTo($mittente);
+	$mail->From = $_SESSION['usernamemail'];
+	$mail->FromName = $_SESSION['denominazione'];
+	$mail->addAddress($destinatario);
+	$mail->addReplyTo = $_SESSION['usernamemail'];
 	$mail->isHTML(true);   
 	$mail->Subject = $oggetto;
 	$mail->Body    = $messaggio;
