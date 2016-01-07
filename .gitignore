@@ -11,7 +11,7 @@ public/log/*
 !/public/foto/sagoma.jpg
 /public/images/intestazione.jpg
 /public/images/footer.jpg
-/public/images/footerlettere.png
+/public/images/footerlettere.jpg
 /public/images/headerpresidente.jpg
 public/images/barcode/*
 !public/images/barcode/.gitkeep
