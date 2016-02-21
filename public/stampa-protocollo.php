@@ -26,7 +26,7 @@ require('lib/fpdf/fpdf.php');
 		function Footer()
 		{
 		    // Logo
-		    $this->Image('images/footerlettere.png',0,255,209.97);
+		    $this->Image('images/footerlettere.jpg',0,255,209.97);
 		}
 	}
 
