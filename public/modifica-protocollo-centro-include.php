@@ -2,6 +2,8 @@
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$my_file = new File(); //crea un nuovo oggetto 'file'
 	$my_lettera = new Lettera();
+	$loginid=$_SESSION['loginid'];
+	$date=strftime("%Y-%m-%d");
 	$from= $_GET['from'];
 	
 	if ( isset($_GET['id'])) {
@@ -113,6 +115,7 @@
 		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO ALLEGATO '. $nome , $_SESSION['historylog']);
+		$utentemod =mysql_query("UPDATE joinlettereinserimento$anno SET joinlettereinserimento$anno.idmod='$loginid', joinlettereinserimento$anno.datamod='$date' WHERE joinlettereinserimento$anno.idlettera='$idlettera' LIMIT 1");
 	}
 	
 	if ($from == 'urlpdf') {  
@@ -125,6 +128,7 @@
 		list($anno, $mese, $giorno) = explode("-", $datalettera);
 		$dataregistrazione = $row['dataregistrazione'] ;
 		list($annor, $meser, $giornor) = explode("-", $dataregistrazione);
+		$utentemod =mysql_query("UPDATE joinlettereinserimento$anno SET joinlettereinserimento$anno.idmod='$loginid', joinlettereinserimento$anno.datamod='$date' WHERE joinlettereinserimento$anno.idlettera='$idlettera' LIMIT 1");
 	}
 	
 	if($_SESSION['block']) {

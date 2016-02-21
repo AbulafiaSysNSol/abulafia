@@ -32,6 +32,10 @@
 	}
 	
 	//filtri aggiuntivi
+	$sped = '';
+	$pos = '';
+	$prat = '';
+	$dataricercadb = "";
 	if(isset($_POST['speditaricevuta'])) {
 		$speditaricevuta = $_POST['speditaricevuta'];
 		if($speditaricevuta == "") {

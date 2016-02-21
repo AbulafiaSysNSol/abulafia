@@ -191,7 +191,7 @@
 		<?php
 		if($modifica['idanagrafica'] != 0) {
 			$anagrafica = new Anagrafica();
-			$query = mysql_query("SELECT * FROM storico_modifiche, lettere$anno WHERE storico_modifiche.protocollo ='$id' AND lettere$anno.idlettera = storico_modifiche.protocollo AND dataregistrazione BETWEEN '$anno-01-01' AND '$anno-12-31' ORDER BY id");
+			$query = mysql_query("SELECT * FROM storico_modifiche, lettere$anno WHERE storico_modifiche.protocollo ='$id' AND storico_modifiche.anno ='$anno' AND lettere$anno.idlettera = storico_modifiche.protocollo ORDER BY id");
 			echo mysql_error();
 			?>
 			<br>
