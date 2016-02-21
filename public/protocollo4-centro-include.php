@@ -61,7 +61,8 @@
 			<p>
 				<a href="login0.php?corpus=modifica-protocollo
 					&from=risultati
-					&id=<?php echo $ultimoid;?>"> 
+					&id=<?php echo $ultimoid;?>
+					&anno=<?php echo $annoprotocollo;?>"> 
 					<span class="glyphicon glyphicon-edit">
 					</span> 
 					Modifica questo protocollo

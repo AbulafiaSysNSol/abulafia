@@ -53,8 +53,8 @@
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
 			if (browser == "Netscape")
-			window.location="login0.php?corpus=modifica-protocollo&annoprotocollo=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=success"; 
-			else window.location="login0.php?corpus=protocollo2&annoprotocollo=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=success";
+			window.location="login0.php?corpus=modifica-protocollo&anno=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=success"; 
+			else window.location="login0.php?corpus=protocollo2&anno=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=success";
 			</SCRIPT>
 			<?php
 		}
@@ -79,8 +79,8 @@
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
 			if (browser == "Netscape")
-			window.location="login0.php?corpus=modifica-protocollo&annoprotocollo=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=error"; 
-			else window.location="login0.php?corpus=protocollo2&annoprotocollo=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=error";
+			window.location="login0.php?corpus=modifica-protocollo&anno=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=error"; 
+			else window.location="login0.php?corpus=protocollo2&anno=<?php echo $annoprotocollo;?>&idlettera=<?php echo $idlettera;?>&from=urlpdf&upfile=error";
 			</SCRIPT>
 			<?php
 		}

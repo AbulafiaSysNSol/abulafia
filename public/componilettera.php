@@ -2,7 +2,7 @@
 	session_start();
 	include '../db-connessione-include.php'; //connessione al db-server
 	include "class/Calendario.obj.inc";
-	$immagine = "images/footerlettere.png";
+	$immagine = "images/footerlettere.jpg";
 	$dimensioni = getimagesize($immagine);
 	$altezza = (($dimensioni[1] / 150) * 25.4) + 0.3;
 	$calendario = new Calendario();
@@ -42,7 +42,7 @@
 		</page_header>
 		
 		<page_footer>
-			<img align="center" src="images/footerlettere.png" width="753">
+			<img align="center" src="images/footerlettere.jpg" width="753">
 		</page_footer>
 		
 		<span style="font-family: Times, Verdana, Georgia, Serif; font-size: 16;">
