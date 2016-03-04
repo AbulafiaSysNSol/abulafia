@@ -69,11 +69,16 @@ tinymce.init({
     menubar: false,
     forced_root_block: false,
     nonbreaking_force_tab: true,
+    paste_as_text: true,
     fontsize_formats: "6pt 8pt 9pt 10pt 11pt 12pt 13pt 14pt 15pt 16pt 18pt 20pt 22pt 24pt 26pt 36pt 54pt 72pt",
-   plugins: [
-                "advlist  lists table charmap nonbreaking",
-        ],
-    toolbar: "bold underline italic subscript superscript charmap | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | table"
+    plugins: [
+		'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+		'searchreplace wordcount visualblocks visualchars code fullscreen',
+		'insertdatetime media nonbreaking save table contextmenu directionality',
+		'emoticons template paste textcolor colorpicker textpattern imagetools'
+    ],
+    toolbar1: "bold underline italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | table",
+    toolbar2: "subscript superscript charmap | link image | paste | preview visualblocks visualchars code"
  });
 </script>
 
@@ -188,6 +193,14 @@ tinymce.init({
 				<ul class="nav navbar-nav">
 					<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 					
+					<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Anagrafica <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus"></span> Inserisci nuova anagrafica</a></li>
+							<li><a href="login0.php?corpus=ricerca-anagrafica"><span class="glyphicon glyphicon-search"></span> Ricerca in anagrafica</a></li>
+						</ul>
+					</li>
+					
 					<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -237,15 +250,6 @@ tinymce.init({
 						</ul>
 					</li>
 					
-					<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Anagrafica <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="login0.php?corpus=anagrafica"><span class="glyphicon glyphicon-plus"></span> Inserisci nuova anagrafica</a></li>
-							<li><a href="login0.php?corpus=ricerca-anagrafica"><span class="glyphicon glyphicon-search"></span> Ricerca in anagrafica</a></li>
-						</ul>
-					</li>
-					
-					<li <?php if($_GET['corpus'] == 'aiuto') { echo 'class="active"'; }?>><a href="login0.php?corpus=aiuto"><span class="glyphicon glyphicon-question-sign"></span> F.A.Q.</a></li>
 					<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><i class="fa fa-wikipedia-w"></i> Wiki</a></li>
 				</ul>
 		   
