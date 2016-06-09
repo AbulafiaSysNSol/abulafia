@@ -12,6 +12,11 @@
 			return $query;
 		}
 		
+		public function eliminaProdotto($codice) {
+			$query = mysql_query("DELETE FROM anagrafica_prodotto WHERE codice='$codice'");
+			return $query;
+		}
+		
 		public function assegnaProdotto($codiceprodotto, $magazzino, $settore, $scortaminima, $riordino, $giacenzainiziale, $confezionamento) {
 			$query = mysql_query("INSERT INTO joinprodottimagazzini VALUES ('', '$codiceprodotto', '$magazzino', '$settore', '$scortaminima', '$riordino', '$giacenzainiziale', '$giacenzainiziale', '$confezionamento' )");
 			return $query;
@@ -22,7 +27,7 @@
 				$query = mysql_query("SELECT COUNT(*) FROM anagrafica_prodotto");
 			}
 			else {
-				$query = mysql_query("SELECT COUNT(*) FROM anagrafica_prodotto WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') ORDER BY descrizione ASC");
+				$query = mysql_query("SELECT COUNT(*) FROM anagrafica_prodotto WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') OR (codicebarre LIKE '%$descrizione%') ORDER BY descrizione ASC");
 			}
 			
 			$count = mysql_fetch_row($query);
@@ -40,7 +45,7 @@
 				$query = mysql_query("SELECT * FROM anagrafica_prodotto ORDER BY descrizione ASC");
 			}
 			else {
-				$query = mysql_query("SELECT * FROM anagrafica_prodotto WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') ORDER BY descrizione ASC");
+				$query = mysql_query("SELECT * FROM anagrafica_prodotto WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') OR (codicebarre LIKE '%$descrizione%') ORDER BY descrizione ASC");
 			}
 			
 			$result = array();
@@ -80,7 +85,7 @@
 				$query = mysql_query("SELECT * FROM anagrafica_prodotto ORDER BY descrizione ASC LIMIT $inizio, $max");
 			}
 			else {
-				$query = mysql_query("SELECT * FROM anagrafica_prodotto WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') ORDER BY descrizione ASC LIMIT $inizio, $max");
+				$query = mysql_query("SELECT * FROM anagrafica_prodotto WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') OR (codicebarre LIKE '%$descrizione%') ORDER BY descrizione ASC LIMIT $inizio, $max");
 			}
 			
 			$result = array();

@@ -61,7 +61,7 @@
 							<a class="btn btn-info" href="?corpus=magazzino-assegna-prodotto&id=<?php echo $val['codice']; ?>">
 								<i class="fa fa-arrow-right"></i> Assegna
 							</a>
-							<a class="btn btn-danger" href="">
+							<a class="btn btn-danger" onClick="return confirm('Vuoi veramente cancellare questo prodotto?');" href="?corpus=magazzino-elimina-prodotto&id=<?php echo $val['codice']; ?>">
 								<i class="fa fa-trash"></i> Elimina
 							</a>
 						</div>

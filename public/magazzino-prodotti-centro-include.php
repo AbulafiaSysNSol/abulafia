@@ -19,6 +19,22 @@
 					</div>
 					<?php
 					}
+
+					if( isset($_GET['canc']) && $_GET['canc'] == "ok") {
+					?>
+					<div class="row">
+					<div class="col-sm-12">
+					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Prodotto eliminato con successo!</div></div></div>
+					<?php
+					}
+					
+					if( isset($_GET['canc']) && $_GET['canc'] == "no") {
+						?>
+						<div class="row">
+						<div class="col-sm-12">
+						<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Si è verificato un errore nella cancellazione del prodotto</div></div></div>
+						<?php
+					}
 				?>
 
 				<div align="left">
@@ -28,7 +44,7 @@
 				<script type="text/javascript" src="livesearch-magazzino-ricerca-prodotto.js" onLoad="showResult('')"></script>
 				<form name="cercato" onSubmit="return false">
 					<div class="input-group">
-						<div class="input-group-addon"><i class="fa fa-search"></i></div><input placeholder="digita il codice o la descrizione del prodotto" type="text" name="valore" class="form-control" onkeyup="showResult(this.value)">
+						<div class="input-group-addon"><i class="fa fa-search"></i></div><input placeholder="digita il codice, la descrizione o il codice a barre del prodotto" type="text" name="valore" class="form-control" onkeyup="showResult(this.value)">
 					</div>
 				</form>
 				<br>

@@ -16,7 +16,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<a href="?corpus=magazzino-prodotti"><button type="button" class="close">&times;</button></a>
 						<h4 class="modal-title" id="myModalLabel"><i class="fa fa-arrow-right"></i> Assegna Prodotto a Magazzino/Servizio - Codice Prodotto <?php echo $id; ?></h4>
 					</div>
 	      

@@ -28,7 +28,7 @@
 				<tr>
 					<td><?php echo $val['id']; ?></td><td><?php echo stripslashes($val['descrizione']); ?></td>
 					<td>
-						<div class="btn-group btn-group-sm">
+						<div class="btn-group btn-group-xs">
 							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Settore" href="login0.php?corpus=magazzino-modifica-settore&id=<?php echo $val['id']; ?>"><span class="glyphicon glyphicon-pencil"></span></button></a> 
 							<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina Settore" onClick="return confirm('Vuoi veramente cancellare questo settore?');" href="login0.php?corpus=magazzino-elimina-settore&id=<?php echo $val['id']; ?>"><span class="glyphicon glyphicon-trash"></button></a>
 						</div>
