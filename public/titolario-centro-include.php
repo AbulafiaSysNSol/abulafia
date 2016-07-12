@@ -16,14 +16,14 @@
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-danger">Si è verificato un errore, controlla di aver inserito tutti i campi oppure riprova più tardi.</div></div></div>
+	<div class="alert alert-danger">Si Ã¨ verificato un errore, controlla di aver inserito tutti i campi oppure riprova piÃ¹ tardi.</div></div></div>
 	<?php
    }
     if( isset($_GET['add']) && $_GET['add'] == "duplicato") {
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-danger">Impossibile aggiungere: esiste già una posizione con lo stesso nome!</div></div></div>
+	<div class="alert alert-danger">Impossibile aggiungere: esiste giÃ  una posizione con lo stesso nome!</div></div></div>
 	<?php
    }
    if( isset($_GET['mod']) && $_GET['mod'] == "ok") {
@@ -37,7 +37,7 @@
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Si è verificato un errore nella modifica della posizione.</div></div></div>
+	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Si Ã¨ verificato un errore nella modifica della posizione.</div></div></div>
 	<?php
    }
    if( isset($_GET['canc']) && $_GET['canc'] == "ok") {
@@ -51,7 +51,7 @@
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Si è verificato un errore nella cancellazione della posizione</div></div></div>
+	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Si Ã¨ verificato un errore nella cancellazione della posizione</div></div></div>
 	<?php
    }
    ?>
@@ -63,13 +63,13 @@
 		  <div class="form-group">
 			
 			<div class="row">
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<label>Codice posizione:</label> <input class="form-control" size="10" type="text" name="codice" required />
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-6">
 					<label>Descrizione posizione:</label><input class="form-control" size="40" type="text" name="descrizione" required />			
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<br><button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> Aggiungi Posizione</button>
 				</div>
 			</div>
@@ -88,33 +88,33 @@
 		}
 		else {
 
-		?>
-		<br><label><span class="glyphicon glyphicon-list"></span> Elenco posizioni:</label><br><br>
-		<?php
+			?>
+			<br><label><span class="glyphicon glyphicon-list"></span> Elenco Posizioni:</label><br><br>
+			<?php
 
-		$risultati=mysql_query("select distinct * from titolario");
-		?>
-		<table class="table table-striped table-hover">
-		<tr>
-		<td><b>Codice</b></td><td><b>Descrizione</b></td><td><b>Opzioni</b></td>
-		</tr>
-		<?php
-		while ($risultati2=mysql_fetch_array($risultati))	{
-			$risultati2 = array_map ("stripslashes",$risultati2);
-			echo '<tr>';
-			echo '<td>' . $risultati2['codice'] . '</td><td>' . $risultati2['descrizione'] . '</td>
-				<td>
-				<div class="btn-group btn-group-sm">
-					<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Visualizza protocolli per questa posizione" href="login0.php?corpus=corrispondenza-titolario&currentpage=1&iniziorisultati=0&id=' . $risultati2['codice'] . '"><i class="fa fa-bars"></i> Protocolli</button></a>
-					<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica posizione" href="login0.php?corpus=titolario-modifica&id=' . $risultati2['id'] . '"><span class="glyphicon glyphicon-pencil"></span> Modifica</button></a> 
-					<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina posizione" onClick="return confirm(\'Vuoi veramente cancellare questa posizione?\');" href="login0.php?corpus=titolario-elimina&id='. $risultati2['id'] . '"><span class="glyphicon glyphicon-trash"></span> Elimina</button></a>
-				</div>
-				</td>
-				</tr>';
+			$risultati=mysql_query("select distinct * from titolario");
+			?>
+			<table class="table table-striped table-hover">
+			<tr>
+			<td><b>Codice</b></td><td><b>Descrizione</b></td><td><b>Opzioni</b></td>
+			</tr>
+			<?php
+			while ($risultati2=mysql_fetch_array($risultati))	{
+				$risultati2 = array_map ("stripslashes",$risultati2);
+				echo '<tr>';
+				echo '<td>' . $risultati2['codice'] . '</td><td>' . $risultati2['descrizione'] . '</td>
+					<td>
+					<div class="btn-group btn-group-sm">
+						<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Visualizza protocolli per questa posizione" href="login0.php?corpus=corrispondenza-titolario&currentpage=1&iniziorisultati=0&id=' . $risultati2['codice'] . '"><i class="fa fa-bars"></i> Protocolli</button></a>
+						<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica posizione" href="login0.php?corpus=titolario-modifica&id=' . $risultati2['id'] . '"><span class="glyphicon glyphicon-pencil"></span> Modifica</button></a> 
+						<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina posizione" onClick="return confirm(\'Vuoi veramente cancellare questa posizione?\');" href="login0.php?corpus=titolario-elimina&id='. $risultati2['id'] . '"><span class="glyphicon glyphicon-trash"></span> Elimina</button></a>
+					</div>
+					</td>
+					</tr>';
+			}
 		}
-		}
 		?>
-		</table>
+		</table>	
 	</div>
 	
 </div>
