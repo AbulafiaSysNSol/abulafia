@@ -7,7 +7,7 @@ $id = $_GET['id'];
 
 <div class="panel panel-default">
  	<div class="panel-heading">
-    	<h3 class="panel-title" bgcolor="red"><b><i class="fa fa-archive"></i> Gestione Titolario</b></h3>
+    	<h3 class="panel-title" bgcolor="red"><b><i class="fa fa-archive"></i> Gestione Titolario - Modifica</b></h3>
   	</div>
   	<div class="panel-body">
   
@@ -19,7 +19,7 @@ $id = $_GET['id'];
 					$risultati2=mysql_fetch_array($risultati);
 					$risultati2=array_map("stripslashes",$risultati2);
 				?>
-				<label><span class="glyphicon glyphicon-pencil"></span> Modifica posizione: "<?php echo $risultati2['codice'] . ' - ' . $risultati2['descrizione']; ?>" - <a href="login0.php?corpus=titolario"><i class="fa fa-arrow-left"></i> <b>Indietro</b></a></label><br><br>
+				<label><span class="glyphicon glyphicon-pencil"></span> Modifica posizione: "<?php echo $risultati2['codice'] . ' - ' . $risultati2['descrizione']; ?>" --- <a href="login0.php?corpus=titolario"><i class="fa fa-arrow-left"></i> <b>Indietro</b></a></label><br><br>
 				
 				<form action="login0.php?corpus=titolario-modifica2&id=<?php echo $id ?>" method="post" role="form">
 				<div class="form-group">	
@@ -39,7 +39,7 @@ $id = $_GET['id'];
 			 
 			</div>
 		</div>
-
+		<br>
 		<div class="row">
 			<div class="col-sm-12">   
 				<?php
@@ -68,9 +68,9 @@ $id = $_GET['id'];
 					echo '<td>' . $risultati2['codice'] . '</td><td>' . $risultati2['descrizione'] . '</td>
 					<td>
 						<div class="btn-group btn-group-block btn-group-sm">
-							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Visualizza protocolli per questa posizione" href="login0.php?corpus=corrispondenza-titolario&currentpage=1&iniziorisultati=0&id=' . $risultati2['codice'] . '"><i class="fa fa-bars"></i></button></a>
-							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica posizione" href="login0.php?corpus=titolario-modifica&id=' . $risultati2['id'] . '"><span class="glyphicon glyphicon-pencil"></span></button></a> 
-							<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina posizione" onClick="return confirm(\'Vuoi veramente cancellare questa posizione?\');" href="login0.php?corpus=titolario-elimina&id='. $risultati2['id'] . '"><span class="glyphicon glyphicon-trash"></button></a>
+							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Visualizza protocolli per questa posizione" href="login0.php?corpus=corrispondenza-titolario&currentpage=1&iniziorisultati=0&id=' . $risultati2['codice'] . '"><i class="fa fa-bars"></i></button> Protocolli</a>
+							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica posizione" href="login0.php?corpus=titolario-modifica&id=' . $risultati2['id'] . '"><span class="glyphicon glyphicon-pencil"></span></button> Modifica</a> 
+							<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina posizione" onClick="return confirm(\'Vuoi veramente cancellare questa posizione?\');" href="login0.php?corpus=titolario-elimina&id='. $risultati2['id'] . '"><span class="glyphicon glyphicon-trash"></span></button> Elimina</a>
 						</div>
 					</td>
 					</tr>';
