@@ -63,7 +63,7 @@
 			</div>
 		
 			<div class="col-sm-6">
-				<p><b><i class="fa fa-plus"></i> Aggiungi Utente:</b>
+				<p><b><i class="fa fa-user-plus"></i> Aggiungi Utente:</b>
 					<form>
 						<input class="form-control" placeholder="digita il cognome o parte di esso..." type="text" id="txt1" onkeyup="showResult(this.value)" />
 						<div id="livesearch"></div>

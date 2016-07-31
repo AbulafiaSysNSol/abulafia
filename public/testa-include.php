@@ -259,6 +259,7 @@ tinymce.init({
 							<li><a href="?corpus=magazzino-documenti"><i class="fa fa-file-text-o fa-fw"></i> Documenti di Magazzino</a></li>
 							<li class="divider"></li>
 							<li><a href="?corpus=magazzino-settori"><i class="fa fa-bars fa-fw"></i> Settori</a></li>
+							<li><a href="?corpus=magazzino-causali"><i class="fa fa-bars fa-fw"></i> Causali</a></li>
 							<!-- <li><a href="#"><i class="fa fa-pencil-square-o"></i> Richieste</a></li>
 							<li><a href="#"><i class="fa fa-truck"></i> Ordini</a></li> -->
 						</ul>
