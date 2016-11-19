@@ -30,5 +30,10 @@
 			$query = mysql_query("UPDATE settori SET descrizione = '$descrizione' WHERE id = '$id'");
 			return $query;
 		}
+
+		public function newDocument($datadocumento, $magazzino, $riferimento, $causale, $datariferimento, $note) { //<man>Inserisce un nuovo documento</man>
+			$query = mysql_query("INSERT INTO documenti_magazzino VALUES ('', '$datadocumento', '$magazzino', '$riferimento', '$causale', '$datariferimento', '$note') ");
+			return $query;
+		}
 	}
 ?>

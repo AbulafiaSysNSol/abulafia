@@ -8,16 +8,7 @@
 			</div>
 			
 			<div class="panel-body">
-				
-				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#testata">Testata</a></li>
-					<li><a data-toggle="tab" href="#righe">Righe</a></li>
-				</ul>
-
-				<div class="tab-content">
-				  	<div id="testata" class="tab-pane fade in active">
-				    	<br>   	
-				    	<form class="form-horizontal" role="form" name="testata" method="post" >						
+				    	<form class="form-horizontal" role="form" name="testata" method="post" action="magazzino-documenti-carico2.php">						
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Documento num. </label>
 								<div class="row">
@@ -26,7 +17,7 @@
 									</div>
 									<label class="col-sm-1 control-label"> del </label>
 									<div class="col-sm-2">
-										<input type="text" class="form-control input-sm datepickerProt" name="data" value="<?php echo date('d/m/Y'); ?>">
+										<input type="text" class="form-control input-sm datepickerProt" name="datadocumento" value="<?php echo date('d/m/Y'); ?>">
 									</div>
 								</div>
 							</div>
@@ -48,7 +39,17 @@
 								<label class="col-sm-2 control-label">Magazzino/Servizio </label>
 								<div class="row">
 									<div class="col-sm-5">
-										<input type="text" class="form-control input-sm" name="magazzino">
+										<select class="form-control input-sm" name="magazzino">
+											<?php
+												$s = new Servizio();
+												$res = $s->ricercaServizio('');
+												foreach($res as $val) {
+													?>
+													<option value="<?php echo $val['codice']; ?>"><?php echo strtoupper($val['codice'] . ' - ' . $val['descrizione']); ?></option>
+													<?php
+												}
+											?>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -56,17 +57,11 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Causale</label>
 								<div class="row">
-									<div class="col-sm-4">
-										
+									<div class="col-sm-2">
 										<select class="form-control input-sm" name="causale">
-											<?php
-												/*$res = $s->ricercaServizio('');
-												foreach($res as $val) {
-													?>
-													<option value="<?php echo $val['codice']; ?>"><?php echo strtoupper($val['descrizione']); ?></option>
-													<?php
-												}*/
-											?>
+											<option value="acquisto">Acquisto</option>
+											<option value="omaggio">Omaggio</option>
+											<option value="prestito">Prestito</option>
 										</select>
 									</div>
 								</div>
@@ -83,19 +78,11 @@
 							
 							<div class="row">
 								<div class="col-sm-2 col-sm-offset-2">
-									<button class="btn btn-primary" onClick="Controllo()"><i class="fa fa-save"></i> Salva</button>
+									<button class="btn btn-primary" ><i class="fa fa-save"></i> Salva e inserisci prodotti <i class="fa fa-arrow-right"></i></button>
 								</div>
 							</div>
 						</form>
 
-
-				  	</div>
-
-				  	<div id="righe" class="tab-pane fade">
-				    	<br>
-				    	
-				  	</div>
-				</div>
 			</div>
 		</div>
 	</div>

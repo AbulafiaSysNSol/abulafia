@@ -45,7 +45,7 @@
 							<label class="col-sm-3 control-label">Indirizzo:</label>
 							<div class="row">
 								<div class="col-sm-8">
-									<input type="text" class="form-control input-sm" name="indirizzo" required>
+									<input type="text" class="form-control input-sm" name="indirizzo">
 								</div>
 							</div>
 						</div>
@@ -54,7 +54,7 @@
 							<label class="col-sm-3 control-label">Città:</label>
 							<div class="row">
 								<div class="col-sm-6">
-									<input type="text" class="form-control input-sm" name="citta" required>
+									<input type="text" class="form-control input-sm" name="citta">
 								</div>
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 							<label class="col-sm-3 control-label">CAP:</label>
 							<div class="row">
 								<div class="col-sm-2">
-									<input type="text" class="form-control input-sm" name="cap" required>
+									<input type="text" class="form-control input-sm" name="cap">
 								</div>
 							</div>
 						</div>
