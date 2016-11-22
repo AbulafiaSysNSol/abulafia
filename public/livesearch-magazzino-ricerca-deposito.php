@@ -9,7 +9,7 @@
 	
 	$q=$_GET['q'];
 	$z=$_GET['z'];
-	
+
 	if ($q=='' && $z=='') {
 		?>
 		<center><div class="alert alert-warning"><b><i class="fa fa-warning"></i></b> Seleziona <b>almeno</b> un magazzino o un prodotto.</div></center>
@@ -22,39 +22,61 @@
 	
 	$res = $p->ricercaDeposito($q, $z);
 	$count = $p->contaDeposito($q, $z);
-	
 ?>
 
 <?php
 	if($count > 0) {
-		?>
-		<table class="table table-bordered" width="100%">
-			<tr>
-				<td colspan="7" style="vertical-align: middle">
-					Risultati: <b><?php echo $count; ?></b>
-				</td>
-			</tr>
-			<tr align="center">
-				<b><td style="vertical-align: middle">Magazzino</td>  <td style="vertical-align: middle">Prodotto</td> <td style="vertical-align: middle">Descrizione</td> <td style="vertical-align: middle">Giacenza</td> <td style="vertical-align: middle">Settore</td> <td style="vertical-align: middle">Scorta Minima</td> <td style="vertical-align: middle">Confezionamento</td></b>
-			</tr>
-			<?php
-			foreach($res as $val) {
+		
+		//tabella per i documenti di carico scarico
+		if ( (isset($_GET['doc'])) && ($_GET['doc']) ) {
+			?>
+			<table class="table table-stripe" width="100%">
+				<?php
+				foreach($res as $val) {
+					?>
+						<tr>
+							<td style="vertical-align: middle" align="center"><a href="javascript:selectProdotto('<?php echo $val['codice'];?>','<?php echo strtoupper($val['descrizione']);?>');"><?php echo $val['codice']; ?></a></td>
+							<td style="vertical-align: middle"><a href="javascript:selectProdotto('<?php echo $val['codice'];?>','<?php echo strtoupper($val['descrizione']);?>');"><?php echo strtoupper($val['descrizione']); ?></a></td>
+							<td style="vertical-align: middle" align="center"><?php echo $val['giacenza']; ?></td>
+						</tr>
+					<?php
+				}
 				?>
+			</table>
+			<?php
+		}
+
+		//tabella per la ricerca dei depositi
+		else {
+			?>
+			<table class="table table-bordered" width="100%">
 				<tr>
-					<td style="vertical-align: middle" align="center"><?php echo $val[0]; ?></td>
-					<td style="vertical-align: middle" align="center"><?php echo $val['codice']; ?></td>
-					<td style="vertical-align: middle"><?php echo strtoupper($val['descrizione']); ?></td>
-					<td style="vertical-align: middle" align="center"><?php echo $val['giacenza']; ?></td>
-					<td style="vertical-align: middle" align="center"><?php echo $val['settore'] . ' - ' . $m->getSettoreById($val['settore']); ?></td>
-					<td style="vertical-align: middle" align="center"><?php echo $val['scortaminima']; ?></td>
-					<td style="vertical-align: middle" align="center"><?php echo $val['confezionamento']; ?></td>
+					<td colspan="7" style="vertical-align: middle">
+						Risultati: <b><?php echo $count; ?></b>
+					</td>
+				</tr>
+				<tr align="center">
+					<b><td style="vertical-align: middle">Magazzino</td>  <td style="vertical-align: middle">Prodotto</td> <td style="vertical-align: middle">Descrizione</td> <td style="vertical-align: middle">Giacenza</td> <td style="vertical-align: middle">Settore</td> <td style="vertical-align: middle">Scorta Minima</td> <td style="vertical-align: middle">Confezionamento</td></b>
 				</tr>
 				<?php
-			}
-			?>
-			
-		</table>
-		<?php
+				foreach($res as $val) {
+					?>
+					<tr>
+						<td style="vertical-align: middle" align="center"><?php echo $val[0]; ?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $val['codice']; ?></td>
+						<td style="vertical-align: middle"><?php echo strtoupper($val['descrizione']); ?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $val['giacenza']; ?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $val['settore'] . ' - ' . $m->getSettoreById($val['settore']); ?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $val['scortaminima']; ?></td>
+						<td style="vertical-align: middle" align="center"><?php echo $val['confezionamento']; ?></td>
+					</tr>
+					<?php
+				}
+				?>
+				
+			</table>
+			<?php
+		}
 	}
 	else {
 		?>
@@ -64,3 +86,17 @@
 	
 	mysql_close ($verificaconnessione);
 ?>
+
+<script type="text/javascript">
+ 
+  function selectProdotto(codice,descrizione) { 
+	
+  	document.getElementById("prodotto1").value = codice;
+  	document.getElementById("descrizione1").value = descrizione;
+  	document.getElementById("prodotto1").disabled = true;
+  	document.getElementById("quantita1").disabled = false;
+  	document.getElementById("nota1").disabled = false;
+  
+  }
+
+</script>

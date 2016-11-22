@@ -1,14 +1,18 @@
+<?php
+	$tipologia = $_GET['tipologia'];
+?>
+
 <div class="row">
 	<div class="col-sm-12">
 
 		<div class="panel panel-default">
 			
 			<div class="panel-heading">
-				<h3 class="panel-title"><strong><i class="fa fa-plus"></i> Nuovo Documento di Carico</strong></h3>
+				<h3 class="panel-title"><strong><i class="fa fa-plus"></i> Nuovo Documento di <?php echo strtoupper($tipologia); ?></strong></h3>
 			</div>
 			
 			<div class="panel-body">
-				    	<form class="form-horizontal" role="form" name="testata" method="post" action="magazzino-documenti-carico2.php">						
+				    	<form class="form-horizontal" role="form" name="testata" method="post" action="magazzino-documenti-carico-scarico2.php?tipologia=<?php echo $tipologia; ?>">						
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Documento num. </label>
 								<div class="row">
@@ -59,9 +63,26 @@
 								<div class="row">
 									<div class="col-sm-2">
 										<select class="form-control input-sm" name="causale">
-											<option value="acquisto">Acquisto</option>
-											<option value="omaggio">Omaggio</option>
-											<option value="prestito">Prestito</option>
+											<?php
+											if ($tipologia == 'carico') {
+												?>
+												<option value="acquisto">Acquisto</option>
+												<option value="rettifica +">Rettifica Inventario +</option>
+												<option value="omaggio">Omaggio</option>
+												<option value="prestito">Prestito</option>
+												<option value="restituzione magazizno">Restituzione a Magazzino</option>
+												<?php
+											}
+											else {
+												?>
+												<option value="distribuzione">Distribuzione</option>
+												<option value="rettifica -">Rettifica Inventario -</option>
+												<option value="ritiro">Ritiro dal Commercio</option>
+												<option value="scaduti">Dispositivi Alterati o Scaduti</option>
+												<option value="reso">Reso</option>
+												<?php
+											}
+											?>
 										</select>
 									</div>
 								</div>

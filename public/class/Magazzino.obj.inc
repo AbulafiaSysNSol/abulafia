@@ -31,9 +31,64 @@
 			return $query;
 		}
 
-		public function newDocument($datadocumento, $magazzino, $riferimento, $causale, $datariferimento, $note) { //<man>Inserisce un nuovo documento</man>
-			$query = mysql_query("INSERT INTO documenti_magazzino VALUES ('', '$datadocumento', '$magazzino', '$riferimento', '$causale', '$datariferimento', '$note') ");
+		public function newDocument($datadocumento, $magazzino, $riferimento, $causale, $datariferimento, $note, $tipologia) { //<man>Inserisce un nuovo documento</man>
+			$query = mysql_query("INSERT INTO documenti_magazzino VALUES ('', '$datadocumento', '$magazzino', '$riferimento', '$causale', '$datariferimento', '$note', '$tipologia') ");                     
 			return $query;
+		}
+
+		public function getDocument($limit) {
+			$query = mysql_query("SELECT * FROM documenti_magazzino ORDER BY id DESC LIMIT $limit");
+			$documenti = array();
+			while ($res = mysql_fetch_array($query)) {
+				array_push($documenti,$res);
+			}
+			return $documenti;
+		}
+
+		public function getDocumentById($id) {
+			$query = mysql_query("SELECT * FROM documenti_magazzino WHERE id = '$id'");
+			$res = mysql_fetch_row($query);
+			return $res;
+		}
+
+		public function getGiacenza($prodotto,$magazzino) { //<man>Restituisce la descrizione del settore pasando l'id</man>
+			$query = mysql_query("SELECT giacenza FROM joinprodottimagazzini WHERE codicemagazzino = '$magazzino' AND idprodotto = '$prodotto'");
+			$res = mysql_fetch_row($query);
+			return $res[0];
+		}
+
+		public function sumGiacenza($prodotto,$magazzino,$val) {
+			$gnow = $this->getGiacenza($prodotto,$magazzino);
+			$newg = $gnow + $val;
+			$query = mysql_query("UPDATE joinprodottimagazzini SET giacenza = '$newg' WHERE codicemagazzino = '$magazzino' AND idprodotto = '$prodotto'");
+			return $query;
+		}
+
+		public function subGiacenza($prodotto,$magazzino,$val) {
+			$gnow = $this->getGiacenza($prodotto,$magazzino);
+			$newg = $gnow - $val;
+			$query = mysql_query("UPDATE joinprodottimagazzini SET giacenza = '$newg' WHERE codicemagazzino = '$magazzino' AND idprodotto = '$prodotto'");
+			return $query;
+		}
+
+		public function newRigaDocumento($documento, $prodotto, $quantita, $note, $tipologia, $magazzino) { //<man>Inserisce una nuova riga nel documento</man>
+			$query = mysql_query("INSERT INTO joindocumentiprodotti VALUES ('', '$documento', '$prodotto', '$quantita', '$note') ");
+			if ($tipologia == 'carico') {
+				$this->sumGiacenza($prodotto, $magazzino, $quantita);
+			} 
+			else {
+				$this->subGiacenza($prodotto, $magazzino, $quantita);	
+			}                    
+			return $query;
+		}
+
+		public function righeDocumento($id) {
+			$query = mysql_query("SELECT * FROM joindocumentiprodotti, anagrafica_prodotto, documenti_magazzino WHERE joindocumentiprodotti.prodotto = anagrafica_prodotto.codice AND joindocumentiprodotti.documento = documenti_magazzino.id AND documenti_magazzino.id = '$id' ORDER BY joindocumentiprodotti.id DESC");
+			$righe = array();
+			while ($res = mysql_fetch_array($query)) {
+				array_push($righe,$res);
+			}
+			return $righe;
 		}
 	}
 ?>

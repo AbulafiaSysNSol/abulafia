@@ -6,6 +6,12 @@
 			$query = mysql_query("INSERT INTO servizi VALUES ('$codice', '$descrizione', '$indirizzo', '$citta', '$cap', '$telefono', '$email', '$magazzino')");
 			return $query;
 		}
+
+		public function getServizioById($id) { //<man>Restituisce la descrizione del settore pasando l'id</man>
+			$query = mysql_query("SELECT * FROM servizi WHERE codice = '$id'");
+			$res = mysql_fetch_row($query);
+			return $res[1];
+		}
 		
 		public function ricercaServizio($descrizione) {
 			if( ($descrizione == '') OR ($descrizione == NULL) ) {

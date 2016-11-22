@@ -251,15 +251,15 @@ tinymce.init({
 					</li>
 					
 					<li class="dropdown <?php if($_GET['corpus'] == 'farm-magazzino' OR $_GET['corpus']=='farmacia') { echo ' active'; }?>">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-th"></i> Magazzino <b class="caret"></b></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> Magazzino <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="?corpus=magazzino-prodotti"><i class="fa fa-asterisk fa-fw"></i> Prodotti</a></li>
 							<li><a href="?corpus=magazzino-servizi"><i class="fa fa-building-o fa-fw"></i> Servizi</a></li>
 							<li><a href="?corpus=magazzino-depositi"><i class="fa fa-suitcase fa-fw"></i> Depositi</a></li>
 							<li><a href="?corpus=magazzino-documenti"><i class="fa fa-file-text-o fa-fw"></i> Documenti di Magazzino</a></li>
 							<li class="divider"></li>
-							<li><a href="?corpus=magazzino-settori"><i class="fa fa-bars fa-fw"></i> Settori</a></li>
-							<li><a href="?corpus=magazzino-causali"><i class="fa fa-bars fa-fw"></i> Causali</a></li>
+							<li><a href="?corpus=magazzino-settori"><i class="fa fa-list-ul fa-fw"></i> Settori</a></li>
+							<li><a href="?corpus=magazzino-causali"><i class="fa fa-list-ul fa-fw"></i> Causali</a></li>
 							<!-- <li><a href="#"><i class="fa fa-pencil-square-o"></i> Richieste</a></li>
 							<li><a href="#"><i class="fa fa-truck"></i> Ordini</a></li> -->
 						</ul>
