@@ -37,7 +37,8 @@
 	
 	include "../mail-conf-include.php";
 	
-	$mail->setFrom = ($_SESSION['usernamemail'], $_SESSION['denominazione']);
+	$mail->setFrom ($_SESSION['usernamemail'], $_SESSION['denominazione']);
+	$mail->addReplyTo($_SESSION['usernamemail']);
 
 	//inserisco gli allegati
 	$urlfile = $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
