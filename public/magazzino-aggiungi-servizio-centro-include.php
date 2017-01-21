@@ -87,10 +87,10 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Magazzino</label>
+							<label class="col-sm-3 control-label">Magazzino:</label>
 							<div class="row">
 								<div class="col-sm-3">
-									<input type="checkbox" name="magazzino" value="1">
+									<input style="vertical-align: middle" type="checkbox" name="magazzino" value="1">
 								</div>
 							</div>
 						</div>

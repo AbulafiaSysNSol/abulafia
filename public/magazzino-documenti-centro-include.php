@@ -39,7 +39,10 @@
 							}
 							?>
 							<tr bgcolor= <?php echo $colorelinee;?> >
-								<td><?php echo $val['id']; ?></td><td><?php echo $c->dataSlash($val['datadocumento']); ?></td><td><?php echo $val['magazzino'] . ' - ' . $s->getServizioById($val['magazzino']); ?></td><td align="center"><?php echo strtoupper($val['causale']); ?></td>
+								<td style="vertical-align: middle"><?php echo $val['id']; ?></td>
+								<td style="vertical-align: middle"><?php echo $c->dataSlash($val['datadocumento']); ?></td>
+								<td style="vertical-align: middle"><?php echo $val['magazzino'] . ' - ' . $s->getServizioById($val['magazzino']); ?></td>
+								<td style="vertical-align: middle" align="center"><?php echo strtoupper($val['causale']); ?></td>
 								<td align="center" nowrap style="vertical-align: middle">
 									<div class="btn-group btn-group-sm" role="group">
 										<a class="btn btn-info" href=""><i class="fa fa-info fa-fw"></i></a>

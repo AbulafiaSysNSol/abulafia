@@ -113,6 +113,11 @@
 	$_SESSION['vertice'] = $settings4['vertice'];
 	$_SESSION['inizio'] = $settings4['inizio'];
 	$_SESSION['quota'] = $settings4['quota'];
+	$_SESSION['mod_anagrafica'] = $settings4['anagrafica'];
+	$_SESSION['mod_protocollo'] = $settings4['protocollo'];
+	$_SESSION['mod_lettere'] = $settings4['lettere'];
+	$_SESSION['mod_magazzino'] = $settings4['magazzino'];
+	$_SESSION['mod_contabilita'] = $settings4['contabilita'];
 	
 	//caricamento settaggi email
 	$settings5=mysql_query("select distinct * from mailsettings");

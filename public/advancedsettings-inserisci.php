@@ -19,6 +19,41 @@
 	$denominazione = $_POST['denominazione'];
 	$vertice = $_POST['vertice'];
 	$inizio = $_POST['inizio'];
+	
+	if(isset($_POST['anagrafica'])) {
+		$anagrafica = 1;
+	}
+	else {
+		$anagrafica = 0;
+	}
+
+	if(isset($_POST['protocollo'])) {
+		$protocollo = 1;
+	}
+	else {
+		$protocollo = 0;
+	}
+
+	if(isset($_POST['lettere'])) {
+		$lettere = 1;
+	}
+	else {
+		$lettere = 0;
+	}
+
+	if(isset($_POST['magazzino'])) {
+		$magazzino = 1;
+	}
+	else {
+		$magazzino = 0;
+	}
+
+	if(isset($_POST['contabilita'])) {
+		$contabilita = 1;
+	}
+	else {
+		$contabilita = 0;
+	}
 
 	//passaggio variabili mail
 	$headermail = $_POST['headermail'];
@@ -40,7 +75,7 @@
 		}
 	}
 
-	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio'");
+	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio', defaultsettings.anagrafica = '$anagrafica', defaultsettings.protocollo = '$protocollo', defaultsettings.lettere = '$lettere', defaultsettings.magazzino = '$magazzino', defaultsettings.contabilita = '$contabilita'");
 	$inserimento2=mysql_query("update mailsettings set mailsettings.headermail = '$headermail', mailsettings.footermail = '$footermail'");
 
 	if (!$inserimento && !$inserimento2) {
@@ -70,6 +105,11 @@
 		$_SESSION['denominazione'] = $denominazione;
 		$_SESSION['vertice'] = $vertice;
 		$_SESSION['inizio'] = $inizio;
+		$_SESSION['mod_anagrafica'] = $anagrafica;
+		$_SESSION['mod_protocollo'] = $protocollo;
+		$_SESSION['mod_lettere'] = $lettere;
+		$_SESSION['mod_magazzino'] = $magazzino;
+		$_SESSION['mod_contabilita'] = $contabilita;
 	}
 ?>
 
