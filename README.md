@@ -1,3 +1,3 @@
 # abulafia
 
-Protocollo Informatico dei Volontari CRI
+Protocollo Informatico e Gestione Magazzini dei Volontari CRI
