@@ -62,7 +62,7 @@
                 <div class="col-sm-12">
                     <div class="intro-message">
                         <h1>Abulafia</h1>
-                        <h3>Gestione delle Segreterie dei Volontari C.R.I.</h3>
+                        <h3>Gestione delle Segreterie e dei Magazzini</h3>
                         <hr class="intro-divider">
                     </div>
                 </div>
@@ -142,7 +142,7 @@
 			<center>
 				<div class="col-sm-12">
 					Abulafia is licensed under a: <a href="license.txt" target="_blank">GNU GPL V.3</a><br>
-					&copy; 2008 - 2015 <strong>Abulafia Sys'n'Sol</strong>
+					&copy; 2008 - 2017 <strong>Abulafia Sys'n'Sol</strong>
 					<br><br>
 				</div>
 			</center>

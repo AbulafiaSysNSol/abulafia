@@ -5,7 +5,7 @@
 		<tr>
 		<td align="left">
 			Abulafia <?php echo $_SESSION['version']; ?> is licensed under a: <a href="license.txt" target="_blank">GNU GPL V.3</a><br />
-			&copy; 2008 - 2016 <strong>Abulafia Sys'n'Sol</strong>
+			&copy; 2008 - 2017 <strong>Abulafia Sys'n'Sol</strong>
                     </td>
 		
 		<td align="right">
