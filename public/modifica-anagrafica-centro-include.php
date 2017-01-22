@@ -67,67 +67,70 @@
 			}
 		?>
 	
-		<div class="row">
-		<div class="col-sm-3">
-			<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br>
-			<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'images/nessuna.jpg';}?>" height="110">
-		</div>
-		
-		<div class="col-sm-3">
-		<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
-			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
-			<label><span class="glyphicon glyphicon-camera"></span> Modifica foto:</label>
-			<br>
-			<input required size="22" name="uploadedfile" type="file" />
-			<br>
-			<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-upload"></span> Upload</button>
-		</form>
-		</div>
+		<div class="alert alert-info">
+			<div class="row">
+				<div class="col-sm-2">
+					<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br>
+					<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'] . "\" width=\"100%\"";} else {echo 'foto/sagoma.png';}?>">
+				</div>
+				
+				<div class="col-sm-7">
+				<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
+					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
+					<label><span class="glyphicon glyphicon-camera"></span> Modifica foto:</label>
+					<br><br>
+					<input required name="uploadedfile" type="file" />
+					<br><br>
+					<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-upload"></span> Upload</button>
+				</form>
+				</div>
+			</div>
 		</div>
 
 		<body onLoad="Change()">
 
-		<br>
-		<div class="row">
-		<div class="col-sm-4">
-		<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br>
-		<table class="table">
-		<?php
-		while ($row2 = mysql_fetch_array($risultati2)) {
-			echo '<tr>';
-			echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
-			<?php
-			echo '</tr>';
-		}
-		?>
-		</table>
-		</div>
-		
-		<div class="col-sm-8">
-			<form class="form-inline" role="form" action="login0.php?corpus=modifica-anagrafica&from=numero-modifica&id=<?php echo $id;?>" method="post" >
-				<label><span class="glyphicon glyphicon-plus-sign"></span> Aggiungi Recapito:</label><br>
-						
-					<label>Tipo:</label>
-					<div class="form-group">
-					<SELECT class="form-control" NAME="tipo">
-						<OPTION value="phone">Telefono
-						<OPTION value="mobile">Cellullare
-						<OPTION Value="fax">Fax
-						<OPTION Value="envelope-o">E-Mail
-						<OPTION Value="facebook">Facebook
-						<OPTION Value="twitter">Twitter
-						<OPTION value="linkedin"> Linkedin
-					</select>
-					</div>
-					
-					<label>Numero/Descrizione:</label>
-					<div class="form-group">
-						<input required size="30" class="form-control" type="text" name="numero">
-					</div>
-					
-					<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Aggiungi</button>
-			</form>
-		</div>
+		<div class="alert alert-warning">
+			<div class="row">
+				<div class="col-sm-4">
+				<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br><br>
+				<table class="table">
+				<?php
+				while ($row2 = mysql_fetch_array($risultati2)) {
+					echo '<tr>';
+					echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
+					<?php
+					echo '</tr>';
+				}
+				?>
+				</table>
+				</div>
+				
+				<div class="col-sm-8">
+					<form class="form-inline" role="form" action="login0.php?corpus=modifica-anagrafica&from=numero-modifica&id=<?php echo $id;?>" method="post" >
+						<label><span class="glyphicon glyphicon-plus-sign"></span> Aggiungi Recapito:</label><br><br>
+								
+							<label>Tipo:</label>
+							<div class="form-group">
+							<SELECT class="form-control" NAME="tipo">
+								<OPTION value="phone">Telefono
+								<OPTION value="mobile">Cellullare
+								<OPTION Value="fax">Fax
+								<OPTION Value="envelope-o">E-Mail
+								<OPTION Value="facebook">Facebook
+								<OPTION Value="twitter">Twitter
+								<OPTION value="linkedin"> Linkedin
+							</select>
+							</div>
+							
+							<label>Numero/Descrizione:</label>
+							<div class="form-group">
+								<input required size="30" class="form-control" type="text" name="numero">
+							</div>
+							
+							<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Aggiungi</button>
+					</form>
+				</div>
+			</div>
 		</div>
 
 		<form class="form-horizontal" role="form" name="modulo" method="post">
@@ -303,8 +306,9 @@
 
 			</body>
 
+			<br>
 			<div class="col-sm-offset-2">
-			<button class="btn btn-primary" onClick="Controllo()"><span class="glyphicon glyphicon-edit"></span> MODIFICA</button>
+			<button class="btn btn-warning btn-lg" onClick="Controllo()"><span class="glyphicon glyphicon-edit"></span> Modifica Anagrafica</button>
 			</div>
 		</form>
 	</div>
