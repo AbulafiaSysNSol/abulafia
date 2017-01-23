@@ -232,7 +232,7 @@
 		else {
 			echo "<br><center><div class=\"alert alert-danger\"><b><i class=\"fa fa-warning\"></i> Nessuna</b> corrispondenza trovata con l'anagrafica per l'anno selezionato. Provare a variare l'anno di ricerca.</div></center>"; 
 			?> 
-			<a href="login0.php?corpus=ricerca"><i class="fa fa-reply"></i> Vai alla pagina di ricerca</a><br><?php
+			<a href="login0.php?corpus=ricerca-anagrafica"><i class="fa fa-reply"></i> Vai alla pagina di ricerca</a><br><?php
 		} 
 ?>
 

@@ -41,20 +41,45 @@
 		?>
 		
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-8">
 				<p><b><i class="fa fa-reorder"></i> Elenco utenti attuali:</b>
 				<div class="table-responsive">
 					<table class="table">
 						<?php
 						$risultati=mysql_query("select distinct * from users, anagrafica where users.idanagrafica=anagrafica.idanagrafica order by users.auth desc, anagrafica.cognome, anagrafica.nome ");
 						?>
-						<tr><td><b>Utente</b></td><td align="center"><b>Auth</b></td><td align="center"><b>Admin</b></td><td align="center"><b>Opzioni</b></td></tr>
+						<tr>
+							<td><b>Utente</b></td>
+							<td align="center"><b>Auth</b></td>
+							<td align="center"><b>Admin</b></td>
+							<td align="center"><b>Angrafica</b></td>
+							<td align="center"><b>Protocollo</b></td>
+							<td align="center"><b>Lettere</b></td>
+							<td align="center"><b>Magazzino</b></td>
+							<td align="center"><b>Contabilit&agrave</b></td>
+							<td align="center"><b>Opzioni</b></td>
+						</tr>
 						<?php
 						while ($risultati2=mysql_fetch_array($risultati))	{
 							$risultati2 = array_map('stripslashes', $risultati2);
 							?>
-							<tr><td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo ucwords($risultati2['cognome'].' '.$risultati2['nome']);?></a></td><td align="center"><?php echo $risultati2['auth'];?></td><td align="center"><input type="checkbox" <?php if($risultati2['admin'] == 1) { echo 'checked'; }?> disabled></td><td align="center"><a href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"> Modifica</a><?php if($anag->isAdmin($_SESSION['loginid'])) { ?> - <a onclick="return confirm('Sicuro di voler cancellare l\'utente')" href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>">Elimina</a><?php } ?></td></tr>
-							<?php 
+							<tr>
+								<td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo ucwords($risultati2['cognome'].' '.$risultati2['nome']);?></a></td>
+								<td align="center"><?php echo $risultati2['auth'];?></td>
+								<td align="center"><?php if($risultati2['admin'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['anagrafica'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['protocollo'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['lettere'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['magazzino'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['contabilita'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
+								<td align="center">
+									<div class="btn-group btn-group-xs">
+										<a class="btn btn-warning" href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
+										<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><a class="btn btn-danger" onclick="return confirm('Sicuro di voler cancellare l\'utente')" href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-trash"></span></a><?php } ?>
+									</div>
+								</td>								
+							</tr>
+							<?php
 						} 
 						?>
 					</table>
@@ -62,7 +87,7 @@
 				</div>
 			</div>
 		
-			<div class="col-sm-6">
+			<div class="col-sm-4">
 				<p><b><i class="fa fa-user-plus"></i> Aggiungi Utente:</b>
 					<form>
 						<input class="form-control" placeholder="digita il cognome o parte di esso..." type="text" id="txt1" onkeyup="showResult(this.value)" />

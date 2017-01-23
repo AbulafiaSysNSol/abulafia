@@ -128,7 +128,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<center><h2>Per info e supporto: abulafia@cricatania.it</h2><center>
+					<center><h3>Per info e supporto: abulafia@cricatania.it</h3><center>
 				</div>
 			</div>
 		</div>

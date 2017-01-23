@@ -71,7 +71,7 @@
 			</div>
 			
 			<div class="col-sm-7">
-				<img src="images/stats.jpg">
+				<img src="images/stats.jpg" width="65%">
 			</div>
 		</div>
 	</div>

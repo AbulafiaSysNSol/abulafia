@@ -80,6 +80,51 @@ class Anagrafica {
 			return false;
 	}
 
+	public function isAnagrafica($id) {
+		$query = mysql_query("SELECT anagrafica FROM users WHERE idanagrafica = $id");
+		$anagrafica = mysql_fetch_row($query);
+		if ($anagrafica[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
+	public function isProtocollo($id) {
+		$query = mysql_query("SELECT protocollo FROM users WHERE idanagrafica = $id");
+		$protocollo = mysql_fetch_row($query);
+		if ($protocollo[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
+	public function isLettere($id) {
+		$query = mysql_query("SELECT lettere FROM users WHERE idanagrafica = $id");
+		$lettere = mysql_fetch_row($query);
+		if ($lettere[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
+	public function isMagazzino($id) {
+		$query = mysql_query("SELECT magazzino FROM users WHERE idanagrafica = $id");
+		$magazzino = mysql_fetch_row($query);
+		if ($magazzino[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
+	public function isContabilita($id) {
+		$query = mysql_query("SELECT contabilita FROM users WHERE idanagrafica = $id");
+		$contabilita = mysql_fetch_row($query);
+		if ($contabilita[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
 }
 
 ?>

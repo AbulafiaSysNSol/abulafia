@@ -160,6 +160,10 @@ tinymce.init({
 
 <body>
   
+	<?php
+		$anag = new Anagrafica();
+	?>
+
   <div class="container">
 	 
 	 <div class="page-header">
@@ -193,7 +197,7 @@ tinymce.init({
 				<ul class="nav navbar-nav">
 					<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><i class="fa fa-home"></i> Home</a></li>
 					
-					<?php if($_SESSION['mod_anagrafica']) { ?>
+					<?php if($_SESSION['mod_anagrafica'] && $anag->isAnagrafica($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> Anagrafica <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -203,7 +207,7 @@ tinymce.init({
 						</li>
 					<?php } ?>
 
-					<?php if($_SESSION['mod_protocollo']) { ?>
+					<?php if($_SESSION['mod_protocollo'] && $anag->isProtocollo($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -218,7 +222,7 @@ tinymce.init({
 
 
 					<?php
-					if($_SESSION['mod_lettere']) {
+					if($_SESSION['mod_lettere'] && $anag->isLettere($_SESSION['loginid'])) {
 						$query = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
 						$num = mysql_fetch_row($query);
 						$prot = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE firmata = 1 AND protocollo = 0");
@@ -257,7 +261,7 @@ tinymce.init({
 						</li>
 					<?php } ?>
 
-					<?php if($_SESSION['mod_magazzino']) { ?>
+					<?php if($_SESSION['mod_magazzino'] && $anag->isMagazzino($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'farm-magazzino' OR $_GET['corpus']=='farmacia') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> Magazzino <b class="caret"></b></a>
 							<ul class="dropdown-menu">

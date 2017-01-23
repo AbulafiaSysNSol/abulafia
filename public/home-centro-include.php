@@ -11,6 +11,7 @@
 	$data = new Calendario();
 	$lettera = new Lettera();
 	$e = new Mail();
+	$a = new Anagrafica();
 	
 	$anno = $_SESSION['annoprotocollo'];
 	$annoprotocollo = $_SESSION['annoprotocollo'];
@@ -99,20 +100,20 @@
 	</center>
 <hr>
 
-<div class="row">
-	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title"><strong><span class="glyphicon glyphicon-stats"></span> Stats:</strong></h3>
-			</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><strong><span class="glyphicon glyphicon-stats"></span> Stats:</strong></h3>
+	</div>
 			
-			<div class="panel-body">
-				<p><?php 
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-6">
+				<?php 
 				//Utilizzo Abulafia
 				$anniusoapplicazione = (strtotime("now") - strtotime("2008/4/1"))/60/60/24/365;
 				$giorniusoapplicazione = ((strtotime("now") - strtotime("2008/4/1"))/60/60/24)-(int)$anniusoapplicazione*365;
 				
-				echo 'La Web-Application Abulafia e\' in uso da '; 
+				/*echo 'La Web-Application Abulafia e\' in uso da '; 
 				
 				if( (int)$anniusoapplicazione > 0) { 
 					echo (int)$anniusoapplicazione . ' anni e ' .(int)$giorniusoapplicazione.' giorni.'; 
@@ -120,9 +121,9 @@
 				else { 
 					echo (int)$giorniusoapplicazione.' giorni.'; 
 				} 
-				
+				*/
 				?>
-				</p>
+				
 				
 				<p>
 				<?php 
@@ -130,7 +131,7 @@
 				$anniusoapplicazione = (strtotime("now") - strtotime($_SESSION['inizio']))/60/60/24/365;
 				$giorniusoapplicazione = ((strtotime("now") - strtotime($_SESSION['inizio']))/60/60/24)-(int)$anniusoapplicazione*365;
 				echo $_SESSION['nomeapplicativo'] . ' e\' in uso da '; 
-				
+						
 				if( (int)$anniusoapplicazione > 0) { 
 					echo (int)$anniusoapplicazione . ' anni e ' .(int)$giorniusoapplicazione.' giorni.'; 
 				} 
@@ -140,138 +141,105 @@
 				
 				?>
 				</p>
-
-					<p>
-
-					<?php 
-						$DataSet = new pData;  
-						 
-						if ($res_lettere[0] > 0) {
-							$statsusers1=mysql_query("SELECT COUNT(joinlettereinserimento$anno.idinser) AS numerolettere, anagrafica.cognome, anagrafica.nome FROM anagrafica, joinlettereinserimento$anno WHERE  joinlettereinserimento$anno.idinser = anagrafica.idanagrafica AND datamod != '0000/00/00' GROUP BY anagrafica.idanagrafica ORDER BY numerolettere DESC");
-							echo mysql_error();
-							echo 'Sono state registrate ' . $res_lettere[0] . ' lettere, nel dettaglio: <br>';
-							while ($statsusers2= mysql_fetch_array($statsusers1)) {
-									$statsusers2 = array_map('stripslashes', $statsusers2);
-									echo $statsusers2['numerolettere'] . ' inserite da '. ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])) . ';<br>';
-									$DataSet->AddPoint($statsusers2['numerolettere'],"Serie1");  
-									$DataSet->AddPoint(ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])),"Serie2");
-							}
-
-							$DataSet->AddAllSeries();  
-							$DataSet->SetAbsciseLabelSerie("Serie2");  
+				<p>
+				<?php 
+				$DataSet = new pData;  
+				 
+				if ($res_lettere[0] > 0) {
+					$statsusers1=mysql_query("SELECT COUNT(joinlettereinserimento$anno.idinser) AS numerolettere, anagrafica.cognome, anagrafica.nome FROM anagrafica, joinlettereinserimento$anno WHERE  joinlettereinserimento$anno.idinser = anagrafica.idanagrafica AND datamod != '0000/00/00' GROUP BY anagrafica.idanagrafica ORDER BY numerolettere DESC");
+					echo mysql_error();
+					echo 'Sono state registrate ' . $res_lettere[0] . ' lettere, nel dettaglio:<br><br>';
+					while ($statsusers2= mysql_fetch_array($statsusers1)) {
+							$statsusers2 = array_map('stripslashes', $statsusers2);
+							echo $statsusers2['numerolettere'] . ' inserite da '. ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])) . ';<br>';
+							$DataSet->AddPoint($statsusers2['numerolettere'],"Serie1");  
+							$DataSet->AddPoint(ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])),"Serie2");
+					}
+					$DataSet->AddAllSeries();  
+					$DataSet->SetAbsciseLabelSerie("Serie2");  
 							 
-							// Initialise the graph  
-							$Test = new pChart(450,200);  
-							$Test->drawFilledRoundedRectangle(7,7,373,193,5,240,240,240);  
-							$Test->drawRoundedRectangle(5,5,375,195,5,230,230,230);  
-							  
-							// Draw the pie chart  
-							$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
-							$Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
-							$Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),250,250,250);  
-							  
-							$Test->Render("graphs/homegraph.png");  
-							
-						
-
-							?>
-							</p>
-			
-							<center><img src="graphs/homegraph.png" width="80%"></center><br>
-				
-							<?php
-					
-						}
-
-						$DataSet = new pData;
-						
-						$statsanagrafica=mysql_query("select count(*) from anagrafica");
-						$res_anagrafica = mysql_fetch_row($statsanagrafica);
-						echo 'Nella tabella ANAGRAFICA sono presenti '.($res_anagrafica[0]) .' occorrenze, di cui<br>';
-						
-						$my_anagrafica->publcontaanagrafica('persona');
-						echo $my_anagrafica->contacomponenti.' Persone Fisiche;<br>';
-						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie1");
-						
-						$my_anagrafica->publcontaanagrafica('carica');
-						echo $my_anagrafica->contacomponenti.' Cariche o Incarichi;<br>';
-						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie2");
-						
-						$my_anagrafica->publcontaanagrafica('ente');
-						echo $my_anagrafica->contacomponenti.' Enti;<br>';
-						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie3");
-						
-						$my_anagrafica->publcontaanagrafica('fornitore');
-						echo $my_anagrafica->contacomponenti.' Fornitori;';
-						$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie4");
+					// Initialise the graph  
+					$Test = new pChart(450,200);  
+					$Test->drawFilledRoundedRectangle(7,7,373,193,5,240,240,240);  
+					$Test->drawRoundedRectangle(5,5,375,195,5,230,230,230);  
+								  
+					// Draw the pie chart  
+					$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
+					$Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),150,90,110,PIE_PERCENTAGE,TRUE,50,20,5);  
+					$Test->drawPieLegend(310,15,$DataSet->GetData(),$DataSet->GetDataDescription(),250,250,250);  
 						  
-						$DataSet->AddAllSeries();  
-						$DataSet->SetSerieName("Persone Fisiche","Serie1");  
-						$DataSet->SetSerieName("Cariche o Incarichi","Serie2");  
-						$DataSet->SetSerieName("Enti","Serie3");
-						$DataSet->SetSerieName("Fornitori","Serie4");
-						  
-						// Initialise the graph  
-						$Test = new pChart(500,230);  
-						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
-						$Test->setGraphArea(50,30,400,200);  
-						$Test->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
-						$Test->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
-						$Test->drawGraphArea(255,255,255,TRUE);  
-						$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);     
-						$Test->drawGrid(4,TRUE,230,230,230,50);  
-						  
-						// Draw the 0 line  
-						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",6);  
-						$Test->drawTreshold(0,143,55,72,TRUE,TRUE);  
-						  
-						// Draw the bar graph  
-						$Test->drawBarGraph($DataSet->GetData(),$DataSet->GetDataDescription(),TRUE);  
-						  
-						// Finish the graph  
-						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
-						$Test->drawLegend(370,15,$DataSet->GetDataDescription(),255,255,255);  
-						$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",10);  
-						$Test->Render("graphs/anagrafica.png");  
-						
+					$Test->Render("graphs/homegraph.png");  
+		
 					?>
+					</p>
+					<center><img src="graphs/homegraph.png" width="100%"></center><br>
+					<?php
+				}
+				?>
+			</div>
+			<div class="col-sm-6">
+				<?php
+				$DataSet = new pData;
 					
-					<br><br>
-					<center><img src="graphs/anagrafica.png" width="80%"></center>
+				$statsanagrafica=mysql_query("select count(*) from anagrafica");
+				$res_anagrafica = mysql_fetch_row($statsanagrafica);
+				echo 'Nella tabella ANAGRAFICA sono presenti '.($res_anagrafica[0]) .' occorrenze, di cui:<br><br>';
+					
+				$my_anagrafica->publcontaanagrafica('persona');
+				echo $my_anagrafica->contacomponenti.' Persone Fisiche;<br>';
+				$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie1");
+				
+				$my_anagrafica->publcontaanagrafica('carica');
+				echo $my_anagrafica->contacomponenti.' Cariche o Incarichi;<br>';
+				$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie2");
+				
+				$my_anagrafica->publcontaanagrafica('ente');
+				echo $my_anagrafica->contacomponenti.' Enti;<br>';
+				$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie3");
+					
+				$my_anagrafica->publcontaanagrafica('fornitore');
+				echo $my_anagrafica->contacomponenti.' Fornitori;';
+				$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie4");
+					  
+				$DataSet->AddAllSeries();  
+				$DataSet->SetSerieName("Persone Fisiche","Serie1");  
+				$DataSet->SetSerieName("Cariche o Incarichi","Serie2");  
+				$DataSet->SetSerieName("Enti","Serie3");
+				$DataSet->SetSerieName("Fornitori","Serie4");
+				  
+				// Initialise the graph  
+				$Test = new pChart(500,230);  
+				$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
+				$Test->setGraphArea(50,30,400,200);  
+				$Test->drawFilledRoundedRectangle(7,7,693,223,5,240,240,240);  
+				$Test->drawRoundedRectangle(5,5,695,225,5,230,230,230);  
+				$Test->drawGraphArea(255,255,255,TRUE);  
+				$Test->drawScale($DataSet->GetData(),$DataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2,TRUE);     
+				$Test->drawGrid(4,TRUE,230,230,230,50);  
+					  
+				// Draw the 0 line  
+				$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",6);  
+				$Test->drawTreshold(0,143,55,72,TRUE,TRUE);  
+				  
+				// Draw the bar graph  
+				$Test->drawBarGraph($DataSet->GetData(),$DataSet->GetDataDescription(),TRUE);  
+					  
+				// Finish the graph  
+				$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",8);  
+				$Test->drawLegend(370,15,$DataSet->GetDataDescription(),255,255,255);  
+				$Test->setFontProperties("lib/pchart/Fonts/tahoma.ttf",10);  
+				$Test->Render("graphs/anagrafica.png");  
+				
+				?>
+				<br><br>
+				<center><img src="graphs/anagrafica.png" width="100%"></center>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="col-sm-6">
-		
-		<div class="panel panel-default">
-		
-			<div class="panel-heading">
-				<h3 class="panel-title"><strong><i class="fa fa-hdd-o"></i> Quota su disco</strong></h3>
-			</div>
-			
-			<div class="panel-body">
-				<?php
-				$file = new File();
-				$dim =  round($file->sizeDirectory("../public/") / (1024*1024), 2) ;
-				$max = $_SESSION['quota'];
-				$percentuale = ( $dim / $max ) * 100;
-				if($percentuale <=50)
-					$class = "progress-bar-success";
-				else if($percentuale <=80)
-					$class = "progress-bar-warning";
-				else
-					$class = "progress-bar-danger";
-				?>
-				<div class="progress">
-					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
-					</div>
-				</div>
-				<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,3).'%)'; ?></center>
-			</div>
-		
-		</div>
-		
+<div class="row">
+	<div class="col-sm-12">
 		<div class="panel panel-default">
 		
 			<div class="panel-heading">
@@ -300,23 +268,55 @@
 				?>
 				</table>
 			</div>
-		
 		</div>
-		
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title"><strong><span class="glyphicon glyphicon-calendar"></span> Log degli ultimi 3 accessi:</strong></h3>
-			</div>
-					
-			<div class="panel-body">
-				<p><?php $my_log -> publleggilog('1', '3', 'login', $_SESSION['logfile']); //legge dal log degli accessi ?></p>
-			</div>
-		</div>
-		
 	</div>
-	
 </div>
 
-<?php
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO HOME' , 'OK' , $_SESSION['ip'], $_SESSION['historylog']);
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-hdd-o"></i> Quota su disco:</strong></h3>
+	</div>
+			
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<?php
+				$file = new File();
+				$dim =  round($file->sizeDirectory("../public/") / (1024*1024), 2) ;
+				$max = $_SESSION['quota'];
+				$percentuale = ( $dim / $max ) * 100;
+				if($percentuale <=50)
+					$class = "progress-bar-success";
+				else if($percentuale <=80)
+					$class = "progress-bar-warning";
+				else
+					$class = "progress-bar-danger";
+				?>
+				<div class="progress">
+					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;"></div>
+				</div>
+				<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,3).'%)'; ?></center>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php 
+if($a->isAdmin($_SESSION['loginid'])) { ?>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong><span class="glyphicon glyphicon-calendar"></span> Log degli ultimi 5 accessi:</strong></h3>
+				</div>
+						
+				<div class="panel-body">
+					<p><?php $my_log -> publleggilog('1', '5', 'login', $_SESSION['logfile']); //legge dal log degli accessi ?></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+}	
+$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO HOME' , 'OK' , $_SESSION['ip'], $_SESSION['historylog']);
 ?>

@@ -16,7 +16,7 @@
 		<form name="modifica" method="post" >
 			<div class="form-group">
 				<div class="row">
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<label>Username:</label>
 						<input class="form-control input-sm" type="text" name="nomeutente"  value="<?php echo $row3['loginname'];?>"/>
 					</div>
@@ -36,16 +36,6 @@
 							?>
 						</select>
 					</div>
-
-					<div class="col-sm-2">
-						<label>Password:</label>
-						<input class="form-control input-sm" type="password" name="nuovapassword1" />
-					</div>
-
-					<div class="col-sm-2">
-						<label>Ripeti password:</label>
-						<input class="form-control input-sm" type="password" name="nuovapassword2" />
-					</div>
 					
 					<?php
 					$anag = new Anagrafica();
@@ -58,8 +48,48 @@
 					<?php
 					}
 					?>
+
+					<div class="col-sm-1">
+						<label>Anagrafica:</label><br>
+						<center><input type="checkbox" name="anagrafica" value="1" <?php if($row3['anagrafica'] == 1) echo 'checked'; ?>/></center>
+					</div>
+
+					<div class="col-sm-1">
+						<label>Protocollo:</label><br>
+						<center><input type="checkbox" name="protocollo" value="1" <?php if($row3['protocollo'] == 1) echo 'checked'; ?>/></center>
+					</div>
+
+					<div class="col-sm-1">
+						<label>Lettere:</label><br>
+						<center><input type="checkbox" name="lettere" value="1" <?php if($row3['lettere'] == 1) echo 'checked'; ?>/></center>
+					</div>
+
+					<div class="col-sm-1">
+						<label>Magazzino:</label><br>
+						<center><input type="checkbox" name="magazzino" value="1" <?php if($row3['magazzino'] == 1) echo 'checked'; ?>/></center>
+					</div>
+
+					<div class="col-sm-1">
+						<label>Contabilit&agrave:</label><br>
+						<center><input type="checkbox" name="contabilita" value="1" <?php if($row3['contabilita'] == 1) echo 'checked'; ?>/></center>
+					</div>
+
 				</div>
-				
+
+				<br>
+
+				<div class="row">
+					<div class="col-sm-3">
+						<label>Password:</label>
+						<input class="form-control input-sm" type="password" name="nuovapassword1" />
+					</div>
+
+					<div class="col-sm-3">
+						<label>Ripeti password:</label>
+						<input class="form-control input-sm" type="password" name="nuovapassword2" />
+					</div>
+				</div>
+
 				<br>
 				<button class="btn btn-success" onClick="Controllo()"><i class="fa fa-edit"></i> Modifica</button>
 			
