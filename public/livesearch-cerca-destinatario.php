@@ -12,7 +12,7 @@
 	$idlettera=$_GET['idlettera'];
 	$conoscenza = $_GET['conoscenza'];
 	
-	$sql=mysql_query("SELECT * FROM anagrafica WHERE cognome LIKE '%$q%' limit 6");
+	$sql=mysql_query("SELECT * FROM anagrafica WHERE cognome LIKE '%$q%' limit 10");
 	while($row = mysql_fetch_array($sql)) {
 		$row = array_map('stripslashes', $row);
 		?>
