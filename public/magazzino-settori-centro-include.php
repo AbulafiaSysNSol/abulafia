@@ -5,6 +5,9 @@
   <div class="panel-body">
   
 <?php
+	
+	$a = new Anagrafica();
+	$admin = $a->isAdmin($_SESSION['loginid']);
 	$m = new Magazzino();
 	
 	if( isset($_GET['add']) && $_GET['add'] == "ok") {
@@ -98,7 +101,7 @@
 						<td>
 							<div class="btn-group btn-group-sm">
 								<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Settore" href="login0.php?corpus=magazzino-modifica-settore&id=<?php echo $val['id']; ?>"><span class="glyphicon glyphicon-pencil"></span></button> Modifica</a> 
-								<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina Settore" onClick="return confirm('Vuoi veramente cancellare questo settore?');" href="login0.php?corpus=magazzino-elimina-settore&id=<?php echo $val['id']; ?>"><span class="glyphicon glyphicon-trash"></span></button> Elimina</a>
+								<?php if($admin) { ?> <a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina Settore" onClick="return confirm('Vuoi veramente cancellare questo settore?');" href="login0.php?corpus=magazzino-elimina-settore&id=<?php echo $val['id']; ?>"><span class="glyphicon glyphicon-trash"></span></button> Elimina</a><?php } ?>
 							</div>
 						</td>
 					</tr>

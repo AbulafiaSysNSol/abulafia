@@ -11,6 +11,8 @@
 	$q=$_GET['q'];
 	
 	$p = new Prodotto();
+	$a = new Anagrafica();
+	$admin = $a->isAdmin($_SESSION['loginid']);
 	
 	if(isset($_GET['page'])) {
 		$page = $_GET['page'];
@@ -61,9 +63,11 @@
 							<a class="btn btn-info" href="?corpus=magazzino-assegna-prodotto&id=<?php echo $val['codice']; ?>">
 								<i class="fa fa-arrow-right"></i> Assegna
 							</a>
-							<a class="btn btn-danger" onClick="return confirm('Vuoi veramente cancellare questo prodotto?');" href="?corpus=magazzino-elimina-prodotto&id=<?php echo $val['codice']; ?>">
-								<i class="fa fa-trash"></i> Elimina
-							</a>
+							<?php if($admin) { ?>
+								<a class="btn btn-danger" onClick="return confirm('Vuoi veramente cancellare questo prodotto?');" href="?corpus=magazzino-elimina-prodotto&id=<?php echo $val['codice']; ?>">
+									<i class="fa fa-trash"></i> Elimina
+								</a>
+							<?php } ?>
 						</div>
 					</td>
 				</tr>

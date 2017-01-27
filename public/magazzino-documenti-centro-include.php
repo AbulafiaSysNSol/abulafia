@@ -26,6 +26,8 @@
 
 					<?php
 						$contatorelinee = 0;
+						$a = new Anagrafica();
+						$admin = $a->isAdmin($_SESSION['loginid']);
 						$m = new Magazzino();
 						$s = new Servizio();
 						$c = new Calendario();
@@ -47,7 +49,9 @@
 									<div class="btn-group btn-group-sm" role="group">
 										<a class="btn btn-info" href=""><i class="fa fa-info fa-fw"></i></a>
 										<a class="btn btn-warning" href="?corpus=magazzino-documenti-carico-scarico-prodotti&id=<?php echo $val['id']; ?>&tipologia=<?php echo $val['tipologia']; ?>"><i class="fa fa-pencil fa-fw"></i></a>
-										<a class="btn btn-danger" href=""><i class="fa fa-trash fa-fw"></i></a>
+										<?php if($admin) { ?>	
+											<a class="btn btn-danger" href=""><i class="fa fa-trash fa-fw"></i></a>
+										<?php } ?>
 										<a class="btn btn-primary" href=""><i class="fa fa-envelope-o fa-fw"></i></a>
 										<a class="btn btn-danger" href=""><i class="fa fa-file-pdf-o fa-fw"></i></a>
 									</div>

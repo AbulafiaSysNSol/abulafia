@@ -11,7 +11,9 @@
 	$q=$_GET['q'];
 	
 	$p = new Servizio();
-	
+	$a = new Anagrafica();
+	$admin = $a->isAdmin($_SESSION['loginid']);
+
 	if(isset($_GET['page'])) {
 		$page = $_GET['page'];
 	}
@@ -54,12 +56,14 @@
 					<td align="center"><?php echo $val['email']; ?></td>					
 					<td nowrap style="vertical-align: middle" align="center">
 						<div class="btn-group btn-group-sm">
-							<a class="btn btn-warning" href="">
+							<a class="btn btn-warning" href="?corpus=magazzino-modifica-servizio&id=<?php echo $val['codice']; ?>">
 								<i class="fa fa-pencil"></i> Modifica
 							</a>
-							<a class="btn btn-danger" href="">
-								<i class="fa fa-trash"></i> Elimina
-							</a>
+							<?php if($admin) { ?>
+								<a class="btn btn-danger" href="">
+									<i class="fa fa-trash"></i> Elimina
+								</a>
+							<?php } ?>
 						</div>
 					</td>
 				</tr>
