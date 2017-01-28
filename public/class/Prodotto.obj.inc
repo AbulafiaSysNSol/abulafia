@@ -80,12 +80,12 @@
 			return $count[0];
 		}
 		
-		public function ricercaProdottoInizioFine($descrizione, $inizio, $max) {
+		public function ricercaProdottoInizioFine($descrizione, $inizio, $max, $ordine) {
 			if( ($descrizione == '') OR ($descrizione == NULL) ) {
-				$query = mysql_query("SELECT * FROM anagrafica_prodotto ORDER BY descrizione ASC LIMIT $inizio, $max");
+				$query = mysql_query("SELECT * FROM anagrafica_prodotto $ordine LIMIT $inizio, $max");
 			}
 			else {
-				$query = mysql_query("SELECT * FROM anagrafica_prodotto WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') OR (codicebarre LIKE '%$descrizione%') ORDER BY descrizione ASC LIMIT $inizio, $max");
+				$query = mysql_query("SELECT * FROM anagrafica_prodotto WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') OR (codicebarre LIKE '%$descrizione%') $ordine LIMIT $inizio, $max");
 			}
 			
 			$result = array();

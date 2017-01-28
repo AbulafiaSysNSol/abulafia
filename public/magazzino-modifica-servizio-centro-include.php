@@ -27,7 +27,7 @@
 					}
 					?>
 				
-					<form class="form-horizontal" role="form" name="modulo" method="post" action="magazzino-modifica-servizio2.php?id=<?php echo $info[0]['codice']; ?>">
+					<form class="form-horizontal" role="form" name="modulo" method="post" action="magazzino-modifica-servizio2.php?id=<?php echo $info[0]['codice'];?>">
 
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Codice Servizio*:</label>

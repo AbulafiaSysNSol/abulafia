@@ -67,7 +67,7 @@
 											if ($tipologia == 'carico') {
 												?>
 												<option value="acquisto">Acquisto</option>
-												<option value="rettifica +">Rettifica Inventario +</option>
+												<option value="rettifica+">Rettifica Inventario +</option>
 												<option value="omaggio">Omaggio</option>
 												<option value="prestito">Prestito</option>
 												<option value="restituzione magazizno">Restituzione a Magazzino</option>
@@ -76,7 +76,8 @@
 											else {
 												?>
 												<option value="distribuzione">Distribuzione</option>
-												<option value="rettifica -">Rettifica Inventario -</option>
+												<option value="consumointerno">Consumo Interno</option>
+												<option value="rettifica-">Rettifica Inventario -</option>
 												<option value="ritiro">Ritiro dal Commercio</option>
 												<option value="scaduti">Dispositivi Alterati o Scaduti</option>
 												<option value="reso">Reso</option>

@@ -82,6 +82,19 @@
 			return $query;
 		}
 
+		public function getInfoRigaById($id) {
+			$query = mysql_query("SELECT * FROM joindocumentiprodotti WHERE id = '$id'");
+			$res = mysql_fetch_row($query);
+			return $res;
+		}
+
+		public function eliminaRigaDocumento($idriga, $magazzino) { //<man>Inserisce una nuova riga nel documento</man>
+			$info = $this->getInfoRigaById($idriga);
+			$this->subGiacenza($info[2], $magazzino, $info[3]);
+			$query = mysql_query("DELETE FROM joindocumentiprodotti WHERE id = '$idriga'");
+			return $query;
+		}
+
 		public function righeDocumento($id) {
 			$query = mysql_query("SELECT * FROM joindocumentiprodotti, anagrafica_prodotto, documenti_magazzino WHERE joindocumentiprodotti.prodotto = anagrafica_prodotto.codice AND joindocumentiprodotti.documento = documenti_magazzino.id AND documenti_magazzino.id = '$id' ORDER BY joindocumentiprodotti.id DESC");
 			$righe = array();

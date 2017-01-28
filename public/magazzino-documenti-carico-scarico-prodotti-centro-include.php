@@ -63,15 +63,15 @@
 						<td width=5%></td>
 					</tr>
 					<?php
-					$res = $m->righedocumento($id);
+					$res = $m->righeDocumento($id);
 						foreach($res as $val) {
 							?>
 							<tr>
-								<td><?php echo $val['codice']; ?></td>
-								<td><?php echo strtoupper($val['descrizione']); ?></td>
-								<td align="center"><?php echo $val['quantita'] ?></td>
-								<td><?php echo $val['note']; ?></td>
-								<td align="center"><a class="btn btn-danger" href=""><i class="fa fa-trash fa-fw"></i></a></td>		
+								<td style="vertical-align: middle"><?php echo $val['codice']; ?></td>
+								<td style="vertical-align: middle"><?php echo strtoupper($val['descrizione']); ?></td>
+								<td style="vertical-align: middle" align="center"><?php echo $val['quantita'] ?></td>
+								<td style="vertical-align: middle"><?php echo $val[4]; ?></td>
+								<td style="vertical-align: middle" align="center"><a class="btn btn-danger" href="?corpus=magazzino-documenti-carico-scarico-elimina-riga-documento&id=<?php echo $val[0]; ?>&documento=<?php echo $id; ?>"><i class="fa fa-trash fa-fw"></i></a></td>		
 							</tr>
 						<?php
 						}

@@ -52,8 +52,8 @@
 										<?php if($admin) { ?>	
 											<a class="btn btn-danger" href=""><i class="fa fa-trash fa-fw"></i></a>
 										<?php } ?>
-										<a class="btn btn-primary" href=""><i class="fa fa-envelope-o fa-fw"></i></a>
-										<a class="btn btn-danger" href=""><i class="fa fa-file-pdf-o fa-fw"></i></a>
+										<!--<a class="btn btn-primary" href=""><i class="fa fa-envelope-o fa-fw"></i></a>-->
+										<!--<a class="btn btn-danger" href=""><i class="fa fa-file-pdf-o fa-fw"></i></a>-->
 									</div>
 								</td>		
 							</tr>

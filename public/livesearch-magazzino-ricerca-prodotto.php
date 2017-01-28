@@ -9,6 +9,8 @@
 	}
 	
 	$q=$_GET['q'];
+	$ordine=$_GET['ord'];
+	$num=$_GET['num'];
 	
 	$p = new Prodotto();
 	$a = new Anagrafica();
@@ -21,14 +23,7 @@
 		$page = 0;
 	}
 	
-	if(isset($_GET['num'])) {
-		$num = $_GET['num'];
-	}
-	else {
-		$num = 25;
-	}
-	
-	$res = $p->ricercaProdottoInizioFine($q, ($page * $num), $num);
+	$res = $p->ricercaProdottoInizioFine($q, ($page * $num), $num, $ordine);
 	$count = $p->contaProdotto($q);
 	$totpages = ceil($count / $num);
 	

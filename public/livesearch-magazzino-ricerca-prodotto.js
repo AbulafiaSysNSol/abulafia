@@ -1,6 +1,6 @@
 var xmlhttp;
 
-function showResult(str) {
+function showResult(str,ord,num) {
 	
 	xmlhttp=GetXmlHttpObject()
 
@@ -10,7 +10,7 @@ function showResult(str) {
 	}
 
 	var url="livesearch-magazzino-ricerca-prodotto.php";
-	url=url+"?q="+str;
+	url=url+"?q="+str+"&ord="+ord+"&num="+num;
 	
 	xmlhttp.onreadystatechange=stateChanged ;
 	xmlhttp.open("GET",url,true);
