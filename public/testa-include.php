@@ -271,14 +271,13 @@ tinymce.init({
 								<li><a href="?corpus=magazzino-documenti"><i class="fa fa-file-text-o fa-fw"></i> Documenti di Magazzino</a></li>
 								<li class="divider"></li>
 								<li><a href="?corpus=magazzino-settori"><i class="fa fa-list-ul fa-fw"></i> Settori</a></li>
-								<li><a href="?corpus=magazzino-causali"><i class="fa fa-list-ul fa-fw"></i> Causali</a></li>
-								<!-- <li><a href="#"><i class="fa fa-pencil-square-o"></i> Richieste</a></li>
+								<!--<li><a href="?corpus=magazzino-causali"><i class="fa fa-list-ul fa-fw"></i> Causali</a></li>
+								<li><a href="#"><i class="fa fa-pencil-square-o"></i> Richieste</a></li>
 								<li><a href="#"><i class="fa fa-truck"></i> Ordini</a></li> -->
 							</ul>
 						</li>
 					<?php } ?>
 					
-					<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><i class="fa fa-wikipedia-w"></i> Wiki</a></li>
 				</ul>
 		   
 				<ul class="nav navbar-nav navbar-right">
@@ -295,6 +294,7 @@ tinymce.init({
 							<li><a href="login0.php?corpus=settings"><i class="fa fa-cog fa-fw"></i> Impostazioni</a></li>
 							<li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o fa-fw"></i> Impostazioni Server Mail</a></li>
 							<li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart fa-fw"></i> Statistiche</a></li>
+							<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><i class="fa fa-wikipedia-w fa-fw"></i> Wiki</a></li>
 							<?php 
 								if ($_SESSION['auth'] > 95) {
 									?>

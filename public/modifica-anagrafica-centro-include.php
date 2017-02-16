@@ -69,12 +69,12 @@
 	
 		<div class="alert alert-info">
 			<div class="row">
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 					<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br>
 					<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'] . "\" width=\"100%\"";} else {echo 'foto/sagoma.png';}?>">
 				</div>
 				
-				<div class="col-sm-7">
+				<div class="col-sm-9">
 				<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
 					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
 					<label><span class="glyphicon glyphicon-camera"></span> Modifica foto:</label>

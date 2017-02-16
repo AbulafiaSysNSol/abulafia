@@ -17,12 +17,12 @@
 			</div>
 			
 			<div class="panel-body">
+				
 				<h5>N. Documento: <b><?php echo $info[0];?></b> del <b><?php echo $c->dataSlash($info[1]);?></b> | Riferimento: <b><?php echo $info[3];?></b> del <b><?php echo $c->dataSlash($info[5]);?></b></h5>
 				<h5>Magazzino: <b><?php echo $s->getServizioById($info[2]);?></b> | Causale: <b><?php echo strtoupper($info[4]);?></b> | Note: <b><?php echo strtoupper($info[6]);?></b></h5>
 				<br>
 
-				
-				Ricerca Prodotti da inserire nel documento:<br><br>
+				<h4><i class="fa fa-search fa-fw"></i> Ricerca Prodotti da inserire nel documento:</h4>
 				<!--Inizio tabella con inserimento prodotti e quantità-->
 				<table id="prodotti" class="table table-bordered">
 					<tr style="vertical-align: middle">
@@ -53,7 +53,7 @@
 				<br>
 				<table id="prodotti" class="table table-condensed">
 					<tr>
-						<td colspan="5">Prodotti nel documento:</td>
+						<td colspan="5"><h4><i class="fa fa-list-ul fa-fw"></i> Prodotti nel documento:</h4></td>
 					</tr>
 					<tr style="vertical-align: middle">
 						<td width=20%><b>Codice</b></td>

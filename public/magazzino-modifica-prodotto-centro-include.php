@@ -48,14 +48,15 @@
 									<select class="form-control input-sm"  size=1 cols=4 NAME="unitadimisura">
 										<option value="<?php echo $prodotto['unita_misura']; ?>"><?php echo $prodotto['unita_misura']; ?></option>
 										<option value="PZ"> PZ </option>
+										<option value="BX"> BX </option>
+										<option value="UNI"> UNI </option>
 										<option value="CPR"> CPR </option>
 										<option Value="FL"> FL </option>
 										<option value="FLC"> FLC </option>
 										<option value="CFZ"> CFZ </option>
+										<option value="TB"> TB </option>
 										<option value="LT"> LT </option>
 										<option value="KG"> KG </option>
-										<option value="BX"> BX </option>
-										<option value="UNI"> UNI </option>
 									</select>
 								</div>
 							</div>

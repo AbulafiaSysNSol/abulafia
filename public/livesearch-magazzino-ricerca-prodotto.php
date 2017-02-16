@@ -48,7 +48,7 @@
 					<td style="vertical-align: middle" align="center"><?php echo $val['codice']; ?></td>
 					<td style="vertical-align: middle"><?php echo strtoupper($val['descrizione']); ?></td>
 					<td style="vertical-align: middle" align="right"><?php echo number_format($val['prezzo'], 2, ',', '.') . ' &euro;'; ?></td>
-					<td style="vertical-align: middle"><?php echo $val['unita_misura']; ?></td>
+					<td style="vertical-align: middle" align="center"><?php echo $val['unita_misura']; ?></td>
 					<td style="vertical-align: middle" align="center"><?php echo $val['codicebarre']; ?></td> 
 					<td style="vertical-align: middle" nowrap style="vertical-align: middle" align="center">
 						<div class="btn-group btn-group-sm">

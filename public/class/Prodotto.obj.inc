@@ -39,6 +39,12 @@
 			$result = mysql_fetch_array($query);
 			return $result;
 		}
+
+		public function getProdottoById($id) { //<man>Restituisce la descrizione del prodottoe pasando l'id</man>
+			$query = mysql_query("SELECT * FROM anagrafica_prodotto WHERE codice = '$id'");
+			$res = mysql_fetch_row($query);
+			return $res[1];
+		}
 		
 		public function ricercaProdotto($descrizione) {
 			if( ($descrizione == '') OR ($descrizione == NULL) ) {

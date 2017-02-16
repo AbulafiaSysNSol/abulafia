@@ -66,6 +66,27 @@
 								</center>
 							</td>
 						</tr>
+						<tr>
+							<td rowspan="2"></td>
+							<td>
+								<input class="form-control input-sm" type="text" name="riga1">
+							</td>
+							<td style="vertical-align: middle">
+								<center>
+									<a href=""><i class="fa fa-save"></i></a>
+								</center>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input class="form-control input-sm" type="text" name="riga2">
+							</td>
+							<td style="vertical-align: middle">
+								<center>
+									<a href=""><i class="fa fa-save"></i></a>
+								</center>
+							</td>
+						</tr>
 					<?php
 					}
 					if(!$verificaDest) {

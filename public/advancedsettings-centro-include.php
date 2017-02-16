@@ -112,19 +112,19 @@
 					<center><h3><i class="fa fa-server"></i> Moduli:</h3><br></center>
 					<table class="table table-hover">
 						<tr>
-							<td><label>Anagrafica </label></td><td><input type="checkbox" name="anagrafica" <?php if($_SESSION['mod_anagrafica']) echo 'checked'; ?> ></td>
+							<td><label>Anagrafica </label></td><td><input type="checkbox" name="anagrafica" <?php if($_SESSION['mod_anagrafica']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
 						</tr>
 						<tr>
-							<td><label>Protocollo </label></td><td><input type="checkbox" name="protocollo" <?php if($_SESSION['mod_protocollo']) echo 'checked'; ?> ></td>
+							<td><label>Protocollo </label></td><td><input type="checkbox" name="protocollo" <?php if($_SESSION['mod_protocollo']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
 						</tr>
 						<tr>
-							<td><label>Lettere </label></td><td><input type="checkbox" name="lettere" <?php if($_SESSION['mod_lettere']) echo 'checked'; ?> ></td>
+							<td><label>Lettere </label></td><td><input type="checkbox" name="lettere" <?php if($_SESSION['mod_lettere']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
 						</tr>
 						<tr>
-							<td><label>Magazzino </label></td><td><input type="checkbox" name="magazzino" <?php if($_SESSION['mod_magazzino']) echo 'checked'; ?> ></td>
+							<td><label>Magazzino </label></td><td><input type="checkbox" name="magazzino" <?php if($_SESSION['mod_magazzino']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
 						</tr>
 						<tr>
-							<td><label>Contabilità </label></td><td><input type="checkbox" name="contabilita" <?php if($_SESSION['mod_contabilita']) echo 'checked'; ?> ></td>
+							<td><label>Contabilità </label></td><td><input type="checkbox" name="contabilita" <?php if($_SESSION['mod_contabilita']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
 						</tr>
 					</table>					
 				</div>

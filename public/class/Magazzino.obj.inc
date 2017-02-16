@@ -11,6 +11,17 @@
 			$res = mysql_fetch_row($query);
 			return $res[1];
 		}
+
+		public function getDepositoById($id) { //<man>Restituisce la descrizione del settore pasando l'id</man>
+			$query = mysql_query("SELECT * FROM joinprodottimagazzini WHERE id = '$id'");
+			$res = mysql_fetch_array($query);
+			return $res;
+		}
+
+		public function modificaDeposito($id, $settore, $scortaminima, $riordino, $confezionamento) {
+			$query = mysql_query("UPDATE joinprodottimagazzini SET settore = '$settore', scortaminima = '$scortaminima', puntoriordino = '$riordino', confezionamento = '$confezionamento' WHERE id = '$id'");
+			return $query;
+		}
 		
 		public function getSettori() { //<man>Restituisce un array contente tutti i settori registrati nel DB</man>
 			$query = mysql_query("SELECT * FROM settori");
