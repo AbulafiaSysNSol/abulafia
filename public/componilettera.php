@@ -49,7 +49,7 @@
 		
 			<table style="vertical-align: top;" border="0" cellspacing="0">
 				<tr>
-					<td colspan="2" width="380">
+					<td colspan="2" width="360">
 						' . $_SESSION["sede"] . ', '.$data.'
 						<br><br>';
 						if($protocollo != 0) {
@@ -62,13 +62,13 @@
 						Allegati: '.$allegati.'<br><br><br>
 					</td>
 					
-					<td rowspan="2" width="285">
+					<td rowspan="2" width="305">
 						<br><br>
 						<table style="vertical-align: top;" border="0">';
 							
 							$destlettera = '';
 							//destinatari
-							$dest = mysql_query("	SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo
+							$dest = mysql_query("SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo, comp_destinatari.riga1, comp_destinatari.riga2
 											FROM anagrafica, comp_destinatari
 											WHERE comp_destinatari.idlettera = $id
 											AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
@@ -77,34 +77,44 @@
 								$destinatari = array_map('stripslashes', $destinatari);
 								if($destinatari['attributo'] == 'Al Volontario') {
 									$destlettera = $destlettera. '<tr>	<td width="60"> Al</td>
-															<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+															<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'];
+															if($destinatari['riga1'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga1']; } 
+															if($destinatari['riga2'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga2']; }
+															$destlettera = $destlettera . '<br><br>
 															</td>
-														<br><br>
 														</tr>';
 								}
 								else if($destinatari['attributo'] == 'Alla Volontaria') {
 									$destlettera = $destlettera. '<tr>	<td width="60"> Alla</td>
-															<td width="208">Volontaria '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+															<td width="208">Volontaria '.$destinatari['cognome'] . ' ' . $destinatari['nome'];
+															if($destinatari['riga1'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga1']; } 
+															if($destinatari['riga2'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga2']; }
+															$destlettera = $destlettera . '<br><br>
 															</td>
-														<br><br>
 														</tr>';
 								}
 								else if($destinatari['attributo'] == 'Ai Volontari') {
 									$destlettera = $destlettera. '<tr>	<td width="60"> Ai</td>
-															<td width="208">Volontari:<br><br>'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+															<td width="208">Volontari:<br><br>'.$destinatari['cognome'] . ' ' . $destinatari['nome'];
+															if($destinatari['riga1'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga1']; } 
+															if($destinatari['riga2'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga2']; }
+															$destlettera = $destlettera . '<br><br>
 															</td>
 														</tr>';
 								}
 								else {
 									$destlettera = $destlettera. '<tr>	<td width="60"> '.$destinatari['attributo'].'</td>
-															<td width="208">'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+															<td width="208">'.$destinatari['cognome'] . ' ' . $destinatari['nome'];
+															if($destinatari['riga1'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga1']; } 
+															if($destinatari['riga2'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga2']; }
+															$destlettera = $destlettera . '<br><br>
 															</td>
 														</tr>';
 								}
 							}
 				
 							//destinatari x conoscenza
-							$dest2 = mysql_query("	SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo
+							$dest2 = mysql_query("SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo, comp_destinatari.riga1, comp_destinatari.riga2
 											FROM anagrafica, comp_destinatari
 											WHERE comp_destinatari.idlettera = $id
 											AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
@@ -126,27 +136,38 @@
 									$destinatari = array_map('stripslashes', $destinatari);
 									if($destinatari['attributo'] == 'Al Volontario') {
 									$destlettera = $destlettera. '<tr>	<td width="60"> Al</td>
-															<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+															<td width="208">Volontario '.$destinatari['cognome'] . ' ' . $destinatari['nome'];
+															if($destinatari['riga1'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga1']; } 
+															if($destinatari['riga2'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga2']; }
+															$destlettera = $destlettera . '<br><br>
 															</td>
-														<br><br>
 														</tr>';
 									}
 									else if($destinatari['attributo'] == 'Alla Volontaria') {
 										$destlettera = $destlettera. '<tr>	<td width="60"> Alla</td>
-																<td width="208">Volontaria '.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+																<td width="208">Volontaria '.$destinatari['cognome'] . ' ' . $destinatari['nome'];
+																if($destinatari['riga1'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga1']; } 
+																if($destinatari['riga2'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga2']; }
+																$destlettera = $destlettera . '<br><br>
 																</td>
 															<br><br>
 															</tr>';
 									}
 									else if($destinatari['attributo'] == 'Ai Volontari') {
 										$destlettera = $destlettera. '<tr>	<td width="60"> Ai</td>
-																<td width="208">Volontari:<br><br>'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+																<td width="208">Volontari:<br><br>'.$destinatari['cognome'] . ' ' . $destinatari['nome'];
+																if($destinatari['riga1'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga1']; } 
+																if($destinatari['riga2'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga2']; }
+																$destlettera = $destlettera . '<br><br>
 																</td>
 															</tr>';
 									}
 									else {
 										$destlettera = $destlettera. '<tr>	<td width="60"> '.$destinatari['attributo'].'</td>
-																<td width="208">'.$destinatari['cognome'] . ' ' . $destinatari['nome'].'<br><br>
+																<td width="208">'.$destinatari['cognome'] . ' ' . $destinatari['nome'];
+																if($destinatari['riga1'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga1']; } 
+																if($destinatari['riga2'] != '') { $destlettera = $destlettera . '<br>' . $destinatari['riga2']; }
+																$destlettera = $destlettera . '<br><br>
 																</td>
 															</tr>';
 									}
