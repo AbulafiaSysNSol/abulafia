@@ -19,6 +19,7 @@
 	}
 	$p = new Prodotto();
 	$m = new Magazzino();
+	$s = new Servizio();
 	
 	$res = $p->ricercaDeposito($q, $z);
 	$count = $p->contaDeposito($q, $z);
@@ -56,26 +57,24 @@
 					</td>
 				</tr>
 				<tr align="center">
-					<td style="vertical-align: middle">Magazzino</td>
-					<td style="vertical-align: middle">Prodotto</td>
-					<td style="vertical-align: middle">Descrizione</td>
-					<td style="vertical-align: middle">Giacenza</td>
-					<td style="vertical-align: middle">Scorta Minima</td>
-					<td style="vertical-align: middle">Confezionamento</td>
-					<td style="vertical-align: middle">Settore</td>
+					<td style="vertical-align: middle"><b>Magazzino</b></td>
+					<td style="vertical-align: middle"><b>Prodotto</b></td>
+					<td style="vertical-align: middle"><b>Descrizione</b></td>
+					<td style="vertical-align: middle"><b>Giacenza</b></td>
+					<td style="vertical-align: middle"><b>U.M.</b></td>
+					<td style="vertical-align: middle"><b>Scorta Min.</b></td>
 					<td></td>
 				</tr>
 				<?php
 				foreach($res as $val) {
 					?>
 					<tr>
-						<td style="vertical-align: middle" align="center"><?php echo $val[0]; ?></td>
+						<td style="vertical-align: middle" align="left"><?php echo $s->getServizioById($val[0]); ?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $val['codice']; ?></td>
 						<td style="vertical-align: middle"><?php echo strtoupper($val['descrizione']); ?></td>
 						<td style="vertical-align: middle" align="center"><b><?php echo $val['giacenza']; ?></b></td>
+						<td style="vertical-align: middle" align="center"><?php echo $val['unita_misura']; ?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $val['scortaminima']; ?></td>
-						<td style="vertical-align: middle" align="center"><?php echo $val['confezionamento']; ?></td>
-						<td style="vertical-align: middle" align="center"><?php echo $val['settore'] . ' - ' . $m->getSettoreById($val['settore']); ?></td>
 						<td align="center"><a class="btn btn-warning btn-sm" href="?corpus=magazzino-modifica-deposito&id=<?php echo $val[14] ?>"><i class="fa fa-edit fa-fw"></i></a></td>
 					</tr>
 					<?php

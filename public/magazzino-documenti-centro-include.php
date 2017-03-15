@@ -12,13 +12,13 @@
 				<div align="left">
 					<a href="?corpus=magazzino-documenti-carico-scarico&tipologia=carico"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Carico</button></a>
 					<a href="?corpus=magazzino-documenti-carico-scarico&tipologia=scarico"><button type="button" class="btn btn-danger"><i class="fa fa-minus"></i> Scarico</button></a>
-					<a href="#"><button type="button" class="btn btn-info"><i class="fa fa-exchange"></i> Trasferimento</button></a>
+					<!--<a href="#"><button type="button" class="btn btn-info"><i class="fa fa-exchange"></i> Trasferimento</button></a>
 					<a href="#"><button type="button" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Reso</button></a>
-					<a href="#"><button type="button" class="btn btn-warning"><i class="fa fa-search"></i> Ricerca</button></a>
+					<a href="#"><button type="button" class="btn btn-warning"><i class="fa fa-search"></i> Ricerca</button></a>-->
 				</div>
 				<br><br>
 				
-				<label>Ultimi documenti emessi:</label><br><br>
+				<label>Ultimi Documenti Emessi:</label><br><br>
 				<table class="table table-bordered" width="100%">
 					<tr>
 						<td>Num. Doc.</td><td>Data</td><td>Magazzino</td><td>Causale</td><td>Opzioni</td>	
@@ -34,10 +34,10 @@
 						$res = $m->getDocument(20);
 						foreach($res as $val) {
 							if ( $val['tipologia'] == 'carico' ) { 
-								$colorelinee = '#BEFFD3'; 
+								$colorelinee = '#D0F0C0'; 
 							}
 							else { 
-								$colorelinee = '#FAA9A9'; 
+								$colorelinee = '#FFD1DC'; 
 							}
 							?>
 							<tr bgcolor= <?php echo $colorelinee;?> >

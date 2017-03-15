@@ -239,10 +239,10 @@
 				<!--form caricamento allegati-->
 				<form role="form" enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file" method="POST">
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-sm-11">
 							<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
-							<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegato</label>
-							<input required name="uploadedfile" type="file" id="exampleInputFile">
+							<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegati:</label>
+							<input required name="uploadedfile" type="file" class="filestyle" data-buttonBefore="true" id="exampleInputFile">
 							<br>
 							<button id="buttonload" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
 						</div>

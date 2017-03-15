@@ -192,11 +192,15 @@
 		<hr>
 		
 		<form enctype="multipart/form-data" action="login0.php?from=modifica-protocollo&corpus=prot-modifica-file&idlettera=<?php echo $idlettera;?>" method="POST">
-		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />
-		<label for="exampleInputFile"><span class="glyphicon glyphicon-upload"></span> Carica allegato</label> 
-		<input required name="uploadedfile" type="file" id="exampleInputFile" />
-		<br>
-		<button id="buttonload" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
+			<div class="row">
+				<div class="col-sm-11">
+					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />
+					<label for="exampleInputFile"><span class="glyphicon glyphicon-upload"></span> Carica allegato</label> 
+					<input required name="uploadedfile" type="file" class="filestyle" data-buttonBefore="true" id="exampleInputFile" />
+					<br>
+					<button id="buttonload" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File</button>
+				</div>
+			</div>
 		</form>
 		
 		<?php

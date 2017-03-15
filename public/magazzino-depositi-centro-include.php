@@ -40,12 +40,6 @@
 					}
 				?>
 
-				<div align="left">
-					<a href="#"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Nuovo Deposito</button></a>
-					<a href="#"><button type="button" class="btn btn-warning"><i class="fa fa-search"></i> Ricerca Avanzata</button></a>
-					<br><br>
-				</div>
-
 				<script type="text/javascript" src="livesearch-magazzino-ricerca-deposito.js" <?php if($edit) { ?> onLoad="showResult('<?php echo $prodotto; ?>','<?php echo $magazzino; ?>')" <?php } else { ?>onLoad="showResult('','')" <?php } ?> ></script>
 				<form name="cercato" onSubmit="return false">
 					<div class="row">

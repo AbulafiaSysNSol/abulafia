@@ -74,8 +74,8 @@
 								<td align="center"><?php if($risultati2['contabilita'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
 								<td align="center">
 									<div class="btn-group btn-group-xs">
-										<a class="btn btn-warning" href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
-										<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><a class="btn btn-danger" onclick="return confirm('Sicuro di voler cancellare l\'utente')" href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-trash"></span></a><?php } ?>
+										<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><a class="btn btn-warning" href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
+										<a class="btn btn-danger" onclick="return confirm('Sicuro di voler cancellare l\'utente')" href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-trash"></span></a><?php } ?>
 									</div>
 								</td>								
 							</tr>

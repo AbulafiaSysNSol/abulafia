@@ -60,6 +60,7 @@
   <script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
   <script type="text/javascript" src="lib/tinymce/tinymce.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap-filestyle.min.js"> </script>
   <!-- JS -->
 
 <script type="text/javascript">

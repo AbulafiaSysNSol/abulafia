@@ -12,7 +12,7 @@
 			return $res[1];
 		}
 
-		public function getDepositoById($id) { //<man>Restituisce la descrizione del settore pasando l'id</man>
+		public function getDepositoById($id) {
 			$query = mysql_query("SELECT * FROM joinprodottimagazzini WHERE id = '$id'");
 			$res = mysql_fetch_array($query);
 			return $res;
