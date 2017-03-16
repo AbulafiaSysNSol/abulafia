@@ -1,6 +1,6 @@
 <style>
-#progress-bar {background-color: #12CC1A;height:20px;color: #FFFFFF;width:0%;-webkit-transition: width .3s;-moz-transition: width .3s;transition: width .3s;}
-#progress-div {border:#0FA015 1px solid;padding: 5px 0px;margin:30px 0px;border-radius:4px;text-align:center;}
+#progress-bar {background-color: #12CC1A;height:30px;color: #FFFFFF;width:0%;-webkit-transition: width .3s;-moz-transition: width .3s;transition: width .3s;}
+#progress-div {border:#0FA015 1px solid;padding: 5px 0px;margin:30px 0px;border-radius:4px;text-align:center;display:none;}
 #targetLayer{width:100%;text-align:center;}
 </style>
 
@@ -251,10 +251,10 @@
 							<input required id="uploadedfile" name="uploadedfile" type="file" class="filestyle" data-buttonBefore="true" id="exampleInputFile">
 							<br>
 							<button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
-							<div style="display:none;" id="progress-div">
+							<div id="progress-div">
 								<div id="progress-bar"></div>
 							</div>
-							<div id="targetLayer"></div>
+							<div id="targetLayer" style="display:none;"></div>
 						</div>
 					</div>
 				</form>
@@ -456,7 +456,7 @@ $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio d
 
  <!--
 function showbar() {
-	document.getElementById("progress-div").style.display="table";	
+	document.getElementById("progress-div").style.display="block";	
 }
 
  function changeSelect() {
