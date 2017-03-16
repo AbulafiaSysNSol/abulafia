@@ -56,6 +56,7 @@
   <!-- JS -->
   <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/jquery-1.10.4.custom.js"></script>
+  <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
   <script type="text/javascript" src="lib/tinymce/tinymce.min.js"></script>

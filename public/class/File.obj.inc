@@ -85,6 +85,21 @@ Class File
 				return round($dim,2) . ' MB';
 		}
 
+		public function getIcon($ext) {
+			if($ext == 'pdf')
+				return '<i class="fa fa-file-pdf-o fa-2x"></i>';
+			else if($ext == 'doc' || $ext == 'docx')
+				return '<i class="fa fa-file-word-o fa-2x"></i>';
+			else if($ext == 'zip' || $ext == 'rar' || $ext == 'tar')
+				return '<i class="fa fa-file-archive-o fa-2x"></i>';
+			else if($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'tiff' || $ext == 'gif')
+				return '<i class="fa fa-file-image-o fa-2x"></i>';
+			else if($ext == 'xls' || $ext == 'xlsx')
+				return '<i class="fa fa-file-excel-o fa-2x"></i>';
+			else
+				return '<i class="fa fa-file-text-o fa-2x"></i>';
+		}
+
 	}//fine classe
 ?>
 

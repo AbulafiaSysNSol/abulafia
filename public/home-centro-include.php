@@ -71,13 +71,13 @@
 	
 	if (isset($_GET['aggiornamento']) && ($_GET['aggiornamento'] == 'ok')) {
 		?>
-		<center><div class="alert alert-info">
-			<h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema - Ver. 10.0</b></h3>
-			<br><b>Modifiche introdotte con l'aggiornamento:</b>
-			<br> - scissione pagina di ricerca;  &egrave; adesso possibile ricercare solo i protocolli o solo le anagrafiche mediante i sottomenu "protollo" e "anagrafica";
-			<br> - scissione delle lettere tra "lettere in lavorazione" e "lettere archiviate";
-			<br><br><small>Se notate anomalie o malfunzionamenti comunicateceli mediante la <a href="login0.php?corpus=segnala-bug">pagina di segnalazione errori.</a></small>
-		</center>
+			<div class="alert alert-info">
+			<center><h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema - Ver. 11.5</b></h3></center>
+			<br><h4><b>Modifiche introdotte con l'aggiornamento:</b></h4>
+			Upload Multipli:  &egrave; adesso possibile caricare contemporaneamente pi&ugrave; file alla volta durante la registrazione di un protocollo, basta selezionarne pi&ugrave; di uno dopo aver cliccato sul pulsante "scegli file";
+			<br><br>
+			<small>Se notate anomalie o malfunzionamenti comunicateceli mediante la <a href="login0.php?corpus=segnala-bug">pagina di segnalazione errori.</a></small>
+			</div>
 		<?php
 	}
 	?>
