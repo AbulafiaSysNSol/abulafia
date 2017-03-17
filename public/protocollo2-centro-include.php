@@ -250,7 +250,7 @@
 						<div class="col-sm-11">
 							<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
 							<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegati:</label>
-							<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true" id="exampleInputFile">
+							<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true">
 							<br>
 							<button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
 							<div id="progress-div">
@@ -461,7 +461,7 @@ $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio d
 	
 	$("#buttonload").click(function() {
 		var $btn = $(this);
-		 if(document.getElementById("exampleInputFile").value != '') {
+		 if(document.getElementById("uploadedfile").value != '') {
 			$btn.button('loading');
 		}
 	});
@@ -471,7 +471,9 @@ $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio d
 
  <!--
 function showbar() {
-	document.getElementById("progress-div").style.display="block";	
+	if(document.getElementById("uploadedfile").value != '') {
+		document.getElementById("progress-div").style.display="block";	
+	}
 }
 
  function changeSelect() {
@@ -557,7 +559,7 @@ $(document).ready(function() {
 					$("#progress-bar").width(percentComplete + '%');
 					$("#progress-bar").html('<div id="progress-status">' + percentComplete +' %</div>')
 				},
-				resetForm: true 
+				resetForm: true; 
 			}); 
 			return false; 
 		}
