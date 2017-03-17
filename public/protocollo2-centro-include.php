@@ -559,7 +559,7 @@ $(document).ready(function() {
 					$("#progress-bar").width(percentComplete + '%');
 					$("#progress-bar").html('<div id="progress-status">' + percentComplete +' %</div>')
 				},
-				resetForm: true; 
+				resetForm: true
 			}); 
 			return false; 
 		}
