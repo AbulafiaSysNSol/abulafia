@@ -171,13 +171,13 @@ tinymce.init({
 	 <div class="page-header">
 		<div class="row">
 			<div class="col-sm-1">
-				<img width="60" src="images/abulafia logo-scont.png">
+				<center><img width="60" src="images/abulafia logo-scont.png"></center>
 			</div>
 			<div class="col-sm-7">
 				<h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2> 
 			</div>
 			<div class="col-sm-4" align="right">
-				<img src="<?php echo $_SESSION['splash']; ?>">
+				<center><img src="<?php echo $_SESSION['splash']; ?>"></center>
 			</div>
 		</div>
 	</div>

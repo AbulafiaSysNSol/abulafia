@@ -275,7 +275,6 @@
 			</div>
 		</div>
 	</div>	
-</div>
 
 <script language="javascript">
  <!--

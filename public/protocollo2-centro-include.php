@@ -234,213 +234,207 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<h3><b><small><i class="fa fa-square-o"></i></small> Primo Step: <small>allegati <i class="fa fa-folder-open-o"></i> e mittenti/destinatari <i class="fa fa-group"></i> </b></small></h3>
-			</div>
-			<div class="col-sm-6">
-				<h3><b><small><i class="fa fa-square-o"></i></small> Secondo Step: <small>dettagli della lettera <i class="fa fa-file-text-o"></i></b></small></h3>
-			</div>
-		</div>
-		
-		<div class="row">
-		<div class="col-sm-6">
-		<hr>
-			<div class="form-group"> 
-				<!--form caricamento allegati-->
-				<form id="uploadForm" role="form" enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file" method="POST">
-					<div class="row">
-						<div class="col-sm-11">
-							<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
-							<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegati:</label>
-							<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true">
-							<br>
-							<button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
-							<div id="progress-div">
-								<div id="progress-bar"></div>
+				<hr>
+					<div class="form-group"> 
+						<!--form caricamento allegati-->
+						<form id="uploadForm" role="form" enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file" method="POST">
+							<div class="row">
+								<div class="col-sm-11">
+									<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
+									<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegati:</label>
+									<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true">
+									<br>
+									<button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
+									<div id="progress-div">
+										<div id="progress-bar"></div>
+									</div>
+									<div id="targetLayer"></div>
+								</div>
 							</div>
-							<div id="targetLayer"></div>
-						</div>
+						</form>
 					</div>
-				</form>
-			</div>
-			
-			<?php
-			if (count($my_lettera->arrayallegati)> 0) {
-				?>
-				<table class="table table-condensed">
-				<?php
-				foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati ) {
-					?>
-					<tr>
-						<td>
-							<?php echo $my_file->getIcon($my_file->estensioneFile($elencochiavi)); ?>
-						</td>
-						<td style="vertical-align: middle">
-							<?php echo $elencochiavi.' '; ?>
-						</td>
-						<td>
-							<a class="fancybox btn btn-info" data-fancybox-type="iframe" href="<?php echo 'lettere'.$annoprotocollo.'/temp/'.$elencochiavi;?>"><i class="fa fa-file-o fa-fw"></i></a>
-							<a class="btn btn-danger" href="login0.php?corpus=protocollo2&from=eliminaallegato&nome=<?php echo $elencochiavi;?>"><i class="fa fa-trash fa-fw"></i></a>
-						</td>
-					</tr>	
+					
 					<?php
-				}
-				?>
-				</table>
-				<?php
-			}
-			else {
-				echo "Nessun file associato.";
-			}
-			?>
-			
-			<div class="row">
-				<div class ="col-sm-12" id="content" style="display: none;">
-					<br>
-					<i class="fa fa-spinner fa-spin"></i><b> Caricamento allegato in corso...</b>
-					<br><img src="images/progress.gif">
-				</div>
-			</div>
-			
-			<hr>
-			<?php
-			
-			if($errore) { echo "<div class=\"alert alert-danger\">"; }
-			$my_lettera->publcercamittente($idlettera,''); //richiamo del metodo
-			if($errore) { echo "</div>"; }
-
-			if (count($my_lettera->arraymittenti)> 0) {
-				echo "<b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b><br><br>";
-				foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti ) {
+					if (count($my_lettera->arrayallegati)> 0) {
+						?>
+						<table class="table table-condensed">
+						<?php
+						foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati ) {
+							?>
+							<tr>
+								<td>
+									<?php echo $my_file->getIcon($my_file->estensioneFile($elencochiavi)); ?>
+								</td>
+								<td style="vertical-align: middle">
+									<?php echo $elencochiavi.' '; ?>
+								</td>
+								<td>
+									<a class="fancybox btn btn-info" data-fancybox-type="iframe" href="<?php echo 'lettere'.$annoprotocollo.'/temp/'.$elencochiavi;?>"><i class="fa fa-file-o fa-fw"></i></a>
+									<a class="btn btn-danger" href="login0.php?corpus=protocollo2&from=eliminaallegato&nome=<?php echo $elencochiavi;?>"><i class="fa fa-trash fa-fw"></i></a>
+								</td>
+							</tr>	
+							<?php
+						}
+						?>
+						</table>
+						<?php
+					}
+					else {
+						echo "Nessun file associato.";
+					}
 					?>
-					<a href="anagrafica-mini.php?id=<?php echo$elencochiavi ?>" class="fancybox" data-fancybox-type="iframe">
-						<?php echo stripslashes($elencomittenti).' '; ?>
-					</a>
-					- <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"></span> Elimina <span class="glyphicon glyphicon-trash"></a>
-					<br>
+					
+					<div class="row">
+						<div class ="col-sm-12" id="content" style="display: none;">
+							<br>
+							<i class="fa fa-spinner fa-spin"></i><b> Caricamento allegato in corso...</b>
+							<br><img src="images/progress.gif">
+						</div>
+					</div>
+					
+					<hr>
 					<?php
-				}
-			}
-			else {
-				echo 'Nessun mittente/destinatario associato.<br>';
-			}
-			echo '<br>';
-			?>
-		</div>
-		<div class="col-sm-6">
-		<hr>
-			<form name="modulo" method="post" >
-			
-				<div class="form-group">
-					<label> <span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta</label>
-					<div class="row">
-						<div class="col-sm-11">
-							<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
-								<option value="ricevuta" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "ricevuta") {echo "selected";} ?>> Ricevuta</option>
-								<option value="spedita" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "spedita") {echo "selected";} ?>> Spedita</option>
-							</select>
-						</div>
-					</div>
+					
+					if($errore) { echo "<div class=\"alert alert-danger\">"; }
+					$my_lettera->publcercamittente($idlettera,''); //richiamo del metodo
+					if($errore) { echo "</div>"; }
+
+					if (count($my_lettera->arraymittenti)> 0) {
+						echo "<b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b><br><br>";
+						foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti ) {
+							?>
+							<a href="anagrafica-mini.php?id=<?php echo$elencochiavi ?>" class="fancybox" data-fancybox-type="iframe">
+								<?php echo stripslashes($elencomittenti).' '; ?>
+							</a>
+							- <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"></span> Elimina <span class="glyphicon glyphicon-trash"></a>
+							<br>
+							<?php
+						}
+					}
+					else {
+						echo 'Nessun mittente/destinatario associato.<br>';
+					}
+					echo '<br>';
+					?>
 				</div>
 
-				<div class="form-group">
-					<label> <span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
-					<div class="row">
-						<div class="col-sm-11">
-							<input required type="text" class="form-control" name="oggetto" <?php if( ($errore || $add) && isset($_SESSION['oggetto']) ) { echo "value=\"".$_SESSION['oggetto']."\"";} ?> >
+				<div class="col-sm-6">
+					<h3><b><small><i class="fa fa-square-o"></i></small> Secondo Step: <small>dettagli della lettera <i class="fa fa-file-text-o"></i></b></small></h3>
+					<hr>
+					<form name="modulo" method="post" >
+					
+						<div class="form-group">
+							<label> <span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta</label>
+							<div class="row">
+								<div class="col-sm-11">
+									<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
+										<option value="ricevuta" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "ricevuta") {echo "selected";} ?>> Ricevuta</option>
+										<option value="spedita" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "spedita") {echo "selected";} ?>> Spedita</option>
+									</select>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			
-				<div class="form-group">
-					<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
-					<div class="row">
-						<div class="col-sm-11">
-							<input type="text" class="form-control datepickerProt" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} else { echo 'value='.date("d/m/Y"); } ?> >
-						</div>
-					</div>
-				</div>
 
-				<div class="form-group">
-					<label> <span class="glyphicon glyphicon-briefcase"></span> Mezzo di trasmissione:</label>
-					<div class="row">
-						<div class="col-sm-11">
-							<select class="form-control" size=1 cols=4 NAME="posizione">
-								<option selected value=""></option>
-								<option value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected";} ?>> posta ordinaria</option>
-								<option value="raccomandata"<?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "raccomandata") {echo "selected";} ?>> raccomandata</option>
-								<option Value="telegramma" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "telegramma") {echo "selected";} ?>> telegramma</option>
-								<option value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected";} ?>> fax</option>
-								<option value="email" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "email") {echo "selected";} ?>> email</option>
-								<option value="consegna a mano" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "consegna a mano") {echo "selected";} ?>> consegna a mano</option>
-								<option value="PEC" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "PEC") {echo "selected";} ?>> PEC</option>
-							</select>
+						<div class="form-group">
+							<label> <span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
+							<div class="row">
+								<div class="col-sm-11">
+									<input required type="text" class="form-control" name="oggetto" <?php if( ($errore || $add) && isset($_SESSION['oggetto']) ) { echo "value=\"".$_SESSION['oggetto']."\"";} ?> >
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			
-				<div class="form-group">
-					<div class="row">
-						<div class="col-sm-11">
-							<label> <i class="fa fa-archive"></i> Titolazione:</label>
-							<?php
-								$risultati=mysql_query("select distinct * from titolario");
-							?>
-							<select class="form-control" size=1 cols=4 NAME="riferimento">
-								<option value="">nessuna titolazione
-								<?php
-								while ($risultati2=mysql_fetch_array($risultati)) {
-									$risultati2 = array_map("stripslashes",$risultati2);
-									if( ($errore || $add) && isset($_SESSION['riferimento']) && $_SESSION['riferimento'] == $risultati2['codice'] ) {
-										echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
-									}
-									else {
-										echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
-									}
-								}
-								?>
-							</select>
+					
+						<div class="form-group">
+							<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
+							<div class="row">
+								<div class="col-sm-11">
+									<input type="text" class="form-control datepickerProt" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} else { echo 'value='.date("d/m/Y"); } ?> >
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			
-				<div class="form-group">
-					<div class="row">
-						<div class="col-sm-11">
-							<label> <i class="fa fa-tag"></i> Pratica:</label>
-							<?php
-								$risultati=mysql_query("select distinct * from pratiche");
-							?>
-							<select class="form-control" size=1 cols=4 NAME="pratica">
-								<option value="">nessuna pratica
-								<?php
-								while ($risultati2=mysql_fetch_array($risultati)) {
-									$risultati2 = array_map("stripslashes",$risultati2);
-									if( ($errore || $add) && isset($_SESSION['pratica']) && $_SESSION['pratica'] == $risultati2['id'] ) {
-										echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
-									}
-									else {
-										echo '<option value="' . $risultati2['id'] . '">' .  $risultati2['descrizione'];
-									}
-								}
-								?>
-							</select>
+
+						<div class="form-group">
+							<label> <span class="glyphicon glyphicon-briefcase"></span> Mezzo di trasmissione:</label>
+							<div class="row">
+								<div class="col-sm-11">
+									<select class="form-control" size=1 cols=4 NAME="posizione">
+										<option selected value=""></option>
+										<option value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected";} ?>> posta ordinaria</option>
+										<option value="raccomandata"<?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "raccomandata") {echo "selected";} ?>> raccomandata</option>
+										<option Value="telegramma" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "telegramma") {echo "selected";} ?>> telegramma</option>
+										<option value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected";} ?>> fax</option>
+										<option value="email" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "email") {echo "selected";} ?>> email</option>
+										<option value="consegna a mano" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "consegna a mano") {echo "selected";} ?>> consegna a mano</option>
+										<option value="PEC" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "PEC") {echo "selected";} ?>> PEC</option>
+									</select>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			
-				<div class="form-group">
-					<label> <span class="glyphicon glyphicon-comment"></span> Note:</label>
-					<div class="row">
-						<div class="col-sm-11">
-							<input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
+					
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-11">
+									<label> <i class="fa fa-archive"></i> Titolazione:</label>
+									<?php
+										$risultati=mysql_query("select distinct * from titolario");
+									?>
+									<select class="form-control" size=1 cols=4 NAME="riferimento">
+										<option value="">nessuna titolazione
+										<?php
+										while ($risultati2=mysql_fetch_array($risultati)) {
+											$risultati2 = array_map("stripslashes",$risultati2);
+											if( ($errore || $add) && isset($_SESSION['riferimento']) && $_SESSION['riferimento'] == $risultati2['codice'] ) {
+												echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
+											}
+											else {
+												echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
+											}
+										}
+										?>
+									</select>
+								</div>
+							</div>
 						</div>
-					</div>
+					
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-11">
+									<label> <i class="fa fa-tag"></i> Pratica:</label>
+									<?php
+										$risultati=mysql_query("select distinct * from pratiche");
+									?>
+									<select class="form-control" size=1 cols=4 NAME="pratica">
+										<option value="">nessuna pratica
+										<?php
+										while ($risultati2=mysql_fetch_array($risultati)) {
+											$risultati2 = array_map("stripslashes",$risultati2);
+											if( ($errore || $add) && isset($_SESSION['pratica']) && $_SESSION['pratica'] == $risultati2['id'] ) {
+												echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
+											}
+											else {
+												echo '<option value="' . $risultati2['id'] . '">' .  $risultati2['descrizione'];
+											}
+										}
+										?>
+									</select>
+								</div>
+							</div>
+						</div>
+					
+						<div class="form-group">
+							<label> <span class="glyphicon glyphicon-comment"></span> Note:</label>
+							<div class="row">
+								<div class="col-sm-11">
+									<input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
+								</div>
+							</div>
+						</div>
+				
+						<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrazione in corso..." type="button" class="btn btn-success btn-lg" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
+					</form>
 				</div>
-		
-				<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrazione in corso..." type="button" class="btn btn-success btn-lg" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
 		</div>
-		</div>
-			</form>
-		</div>
+	</div>
 </div>
 
 <?php
