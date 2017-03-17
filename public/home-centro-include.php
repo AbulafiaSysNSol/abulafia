@@ -172,7 +172,7 @@
 		
 					?>
 					</p>
-					<center><img src="graphs/homegraph.png"></center><br>
+					<center><img src="graphs/homegraph.png" width="90%"></center><br>
 					<?php
 				}
 				?>
@@ -232,7 +232,7 @@
 				
 				?>
 				<br><br>
-				<center><img src="graphs/anagrafica.png"></center>
+				<center><img src="graphs/anagrafica.png" width="90%"></center>
 			</div>
 		</div>
 	</div>
