@@ -241,7 +241,7 @@
 							<div class="row">
 								<div class="col-sm-11">
 									<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
-									<label for="exampleInputFile"> <span class="glyphicon glyphicon-upload"></span> Carica allegati:</label>
+									<label for="exampleInputFile"> <i class="fa fa-upload"></i> Carica allegati:</label>
 									<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true">
 									<br>
 									<button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
@@ -257,6 +257,7 @@
 					<?php
 					if (count($my_lettera->arrayallegati)> 0) {
 						?>
+						<i class="fa fa-folder-o"></i> <b>File associati:</b>
 						<table class="table table-condensed">
 						<?php
 						foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati ) {
@@ -300,16 +301,27 @@
 					if($errore) { echo "</div>"; }
 
 					if (count($my_lettera->arraymittenti)> 0) {
-						echo "<b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b><br><br>";
-						foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti ) {
-							?>
-							<a href="anagrafica-mini.php?id=<?php echo$elencochiavi ?>" class="fancybox" data-fancybox-type="iframe">
-								<?php echo stripslashes($elencomittenti).' '; ?>
-							</a>
-							- <a href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"></span> Elimina <span class="glyphicon glyphicon-trash"></a>
-							<br>
+						echo "<b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b>";
+						?>
+						<table class="table table-condensed">
 							<?php
-						}
+							foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti ) {
+								?>
+								<tr>
+									<td style="vertical-align: middle">
+										<a href="anagrafica-mini.php?id=<?php echo$elencochiavi ?>" class="fancybox" data-fancybox-type="iframe">
+										<?php echo stripslashes($elencomittenti).' '; ?>
+										</a>
+									</td>
+									<td>
+										<a class="btn btn-danger" href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"><i class="fa fa-trash"></i></a>
+									</td>
+								</tr>
+							<?php
+							}
+						?>	
+						</table>
+						<?php
 					}
 					else {
 						echo 'Nessun mittente/destinatario associato.<br>';
