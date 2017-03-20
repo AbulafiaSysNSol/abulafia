@@ -93,13 +93,19 @@
 					<span class="glyphicon glyphicon-barcode"></span> Stampa etichetta barcode
 				</a>
 			</p>
-			<a href="stampa-protocollo.php?id=<?php echo $ultimoid; ?>
-				&anno=<?php echo $annoprotocollo; ?>"
-				target="_blank">
-				<i class="fa fa-print">
-				</i> 
-				Stampa ricevuta Protocollo
-			</a>
+			<?php
+			if(!$my_lettera->isSpedita($ultimoid, $annoprotocollo)) {
+				?>
+				<a href="stampa-protocollo.php?id=<?php echo $ultimoid; ?>
+					&anno=<?php echo $annoprotocollo; ?>"
+					target="_blank">
+					<i class="fa fa-print">
+					</i> 
+					Stampa ricevuta Protocollo
+				</a>
+				<?php
+			}
+			?>
 		</div>
 	</div>
   </div>

@@ -70,6 +70,15 @@ class Anagrafica {
 		else 
 			return $nome[0];
 	}
+
+	public function getFoto($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
+		$query = mysql_query("SELECT anagrafica.urlfoto FROM anagrafica WHERE idanagrafica = $id");
+		$foto = mysql_fetch_row($query);
+		if($foto[0]) 
+			return 'foto/' . $foto[0];
+		else 
+			return 'foto/sagoma.png';
+	}
 	
 	public function isAdmin($id) {
 		$query = mysql_query("SELECT admin FROM users WHERE idanagrafica = $id");

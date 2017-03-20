@@ -370,6 +370,17 @@ class Lettera {
 		$risultati = mysql_fetch_row($query);
 		return $risultati[0];
 	}
+
+	public function isSpedita($id, $anno) {
+		$query = mysql_query("SELECT speditaricevuta FROM lettere$anno WHERE idlettera='$id' ");
+		$risultati = mysql_fetch_row($query);
+		if($risultati[0] == 'spedita') {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	public function controllaEsistenzaMittente($idmittente, $arraymittenti) {
 		return array_key_exists ($idmittente,$arraymittenti);

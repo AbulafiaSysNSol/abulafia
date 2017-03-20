@@ -301,20 +301,24 @@
 					if($errore) { echo "</div>"; }
 
 					if (count($my_lettera->arraymittenti)> 0) {
-						echo "<b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b>";
+						echo "<br><b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b>";
 						?>
 						<table class="table table-condensed">
 							<?php
 							foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti ) {
 								?>
 								<tr>
-									<td style="vertical-align: middle">
-										<a href="anagrafica-mini.php?id=<?php echo$elencochiavi ?>" class="fancybox" data-fancybox-type="iframe">
-										<?php echo stripslashes($elencomittenti).' '; ?>
-										</a>
+									<td style="vertical-align: middle" width="12%">
+										<img src="<?php echo $my_anagrafica->getFoto($elencochiavi); ?>" class="img-circle img-responsive">
 									</td>
-									<td>
-										<a class="btn btn-danger" href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"><i class="fa fa-trash"></i></a>
+									<td style="vertical-align: middle">
+										<?php echo stripslashes($elencomittenti).' '; ?>
+									</td>
+									<td style="vertical-align: middle">
+										<a href="anagrafica-mini.php?id=<?php echo $elencochiavi ?>" class="fancybox btn btn-info" data-fancybox-type="iframe">
+											<i class="fa fa-info fa-fw"></i>
+										</a>
+										<a class="btn btn-danger" href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"><i class="fa fa-trash fa-fw"></i></a>
 									</td>
 								</tr>
 							<?php
