@@ -1,4 +1,11 @@
 <?php
+
+    session_start();
+    
+    if ($_SESSION['auth'] > 1 ) {
+        header("Location: login0.php?corpus=home");
+    }
+
 	if(!isset($_GET['err'])) {
 		$_GET['err'] = 0;
 	}

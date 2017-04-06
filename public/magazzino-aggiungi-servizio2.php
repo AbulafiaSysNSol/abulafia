@@ -1,4 +1,14 @@
 <?php
+
+	session_start();
+
+	if ($_SESSION['auth']< 1 ) {
+		echo 'Devi prima effettuare il login dalla<br>';
+		?> <a href="../"><?php echo 'pagina principale'; $_SESSION['auth']= 0 ;  ?></a>
+		<?php 
+		exit(); 
+	}
+	
 	include '../db-connessione-include.php';
 	include 'class/Servizio.obj.inc';
 	$p = new Servizio();
