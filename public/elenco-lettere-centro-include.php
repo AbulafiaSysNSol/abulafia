@@ -13,14 +13,15 @@ $query = mysql_query("SELECT * FROM comp_lettera WHERE protocollo = 0 ORDER BY i
 	<div class="panel-body">
 	
 		<?php
+
+			$l = new Lettera();
+
 			if (isset($_GET['from']) &&($_GET['from'] == 'nessuna-lettera')) {
 			?>
 				<center><div class="alert alert-info"><i class="fa fa-check"></i> Non ci sono lettere da <b>firmare!</b></div></center>
 			<?php
 			}
-		?>
-		
-		<?php
+
 			if (isset($_GET['delete']) &&($_GET['delete'] == 'ok')) {
 			?>
 				<center><div class="alert alert-danger"><i class="fa fa-check"></i> Lettera cancellata <b>correttamente!</b></div></center>
@@ -83,7 +84,7 @@ $query = mysql_query("SELECT * FROM comp_lettera WHERE protocollo = 0 ORDER BY i
 									<i class="fa fa-eye"></i>
 							</a>
 							<?php }
-							if($risultati2['firmata'] != 1 && $_SESSION['auth'] >= 90) { ?>
+							if($risultati2['firmata'] != 1 && $_SESSION['auth'] >= 90 && $l->destinatariOk($risultati2['id'])) { ?>
 							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Firma" href="firma-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere">
 									<i class="fa fa-pencil"></i>
 							</a>

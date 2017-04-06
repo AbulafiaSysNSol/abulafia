@@ -5,6 +5,8 @@ if ($_SESSION['auth'] < 90) {
 	exit ();
 }
 
+$l = new Lettera();
+
 $count = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
 $num = mysql_fetch_row($count);
 if($num[0] == 0) {
@@ -85,10 +87,13 @@ $query = mysql_query("SELECT * FROM comp_lettera WHERE (vista = 1 OR vista = 2) 
 							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Segna come vista" href="vista-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere-firma">
 									<i class="fa fa-eye"></i>
 							</a>
-							<?php } ?>
+							<?php }
+							if($l->destinatariOk($risultati2['id'])) {
+							 ?>
 							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Firma" href="firma-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere-firma">
 									<i class="fa fa-pencil"></i>
 							</a>
+							<?php } ?>
 							<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina" onclick="return confirm('Sicuro di voler cancellare la lettera?')" href="elimina-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere-firma">
 									<i class="fa fa-trash-o"></i>
 							</a>

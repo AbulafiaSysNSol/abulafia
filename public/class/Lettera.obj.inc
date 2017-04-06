@@ -381,6 +381,17 @@ class Lettera {
 			return false;
 		}
 	}
+
+	public function destinatariOk($id) {
+		$query = mysql_query("SELECT COUNT(id) FROM comp_destinatari WHERE idlettera='$id' ");
+		$risultati = mysql_fetch_row($query);
+		if($risultati[0] > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	public function controllaEsistenzaMittente($idmittente, $arraymittenti) {
 		return array_key_exists ($idmittente,$arraymittenti);
