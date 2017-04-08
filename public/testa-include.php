@@ -47,6 +47,7 @@
   <!-- META -->
   
   <!-- CSS -->
+  <link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.10.4.custom.css"></link>
