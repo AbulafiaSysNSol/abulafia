@@ -73,6 +73,7 @@ tinymce.init({
     forced_root_block: false,
     nonbreaking_force_tab: true,
     paste_as_text: true,
+    paste_auto_cleanup_on_paste : true,
     fontsize_formats: "6pt 8pt 9pt 10pt 11pt 12pt 13pt 14pt 15pt 16pt 18pt 20pt 22pt 24pt 26pt 36pt 54pt 72pt",
     plugins: [
 		'advlist autolink lists link image charmap print preview hr anchor pagebreak',
@@ -80,8 +81,8 @@ tinymce.init({
 		'insertdatetime media nonbreaking save table contextmenu directionality',
 		'emoticons template paste textcolor colorpicker textpattern imagetools'
     ],
-    toolbar1: "bold underline italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect | table",
-    toolbar2: "subscript superscript charmap | link image | paste | preview visualblocks visualchars code"
+    toolbar1: "bold underline italic strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | fontsizeselect",
+    toolbar2: "table | subscript superscript charmap | link image | paste | preview visualblocks visualchars code"
  });
 </script>
 
@@ -91,7 +92,12 @@ tinymce.init({
     statusbar : false,
     menubar: false,
     forced_root_block: false,
-    toolbar: "bold underline italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent"
+    paste_as_text: true,
+    paste_auto_cleanup_on_paste : true,
+    plugins: [
+		'paste'
+    ],
+    toolbar: "bold underline italic strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent"
  });
 </script>
 
@@ -101,7 +107,12 @@ tinymce.init({
     statusbar : false,
     menubar: false,
     forced_root_block: false,
-    toolbar: "bold underline italic"
+    paste_as_text: true,
+    paste_auto_cleanup_on_paste : true,
+     plugins: [
+		'paste'
+    ],
+    toolbar: "bold underline italic strikethrough"
  });
 </script>
   

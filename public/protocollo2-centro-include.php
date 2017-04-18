@@ -242,7 +242,7 @@
 								<div class="col-sm-11">
 									<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
 									<label for="exampleInputFile"> <i class="fa fa-upload"></i> Carica allegati:</label>
-									<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true">
+									<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true" data-placeholder="nessun file selezionato.">
 									<br>
 									<button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
 									<div id="progress-div">
@@ -482,7 +482,7 @@ $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio d
  <!--
 function showbar() {
 	if(document.getElementById("uploadedfile").value != '') {
-		document.getElementById("progress-div").style.display="block";	
+		document.getElementById("progress-div").style.display="block";
 	}
 }
 

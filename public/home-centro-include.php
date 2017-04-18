@@ -295,9 +295,9 @@
 					$class = "progress-bar-danger";
 				?>
 				<div class="progress">
-					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;"></div>
+					<div class="progress-bar <?php echo $class; ?> progress-bar-striped" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;"><?php echo round($percentuale,1); ?> %</div>
 				</div>
-				<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,3).'%)'; ?></center>
+				<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max); ?></center>
 			</div>
 		</div>
 	</div>
