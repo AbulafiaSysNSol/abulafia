@@ -392,6 +392,19 @@ class Lettera {
 			return false;
 		}
 	}
+
+	public function duplicaLettera($id) {
+		$idins = $_SESSION['loginid'];
+		$query = mysql_query("INSERT INTO comp_lettera (protocollo, anno, data, oggetto, testo, allegati, vista, firmata, idins) SELECT 0, 0, data, oggetto, testo, allegati, 0, 0, $idins FROM comp_lettera WHERE id = '$id' ");
+		$idlettera = mysql_insert_id();
+		$query1 = mysql_query("INSERT INTO comp_destinatari (idlettera, idanagrafica, conoscenza, attributo, riga1, riga2) SELECT $idlettera, idanagrafica, conoscenza, attributo, riga1, riga2 FROM comp_destinatari WHERE idlettera = '$id' ");
+		if($query && $query1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	
 	public function controllaEsistenzaMittente($idmittente, $arraymittenti) {
 		return array_key_exists ($idmittente,$arraymittenti);

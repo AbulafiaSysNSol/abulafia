@@ -60,6 +60,11 @@
 								Vedi Dettagli <i class="fa fa-arrow-right"></i>
 						</a>
 						<?php }
+						if($risultati2['protocollo'] != 0) { ?>
+						<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Duplica" href="lettera-duplica.php?id=<?php echo $risultati2['id'] ?>">
+								Duplica <i class="fa fa-copy"></i>
+						</a>
+						<?php }
 						if($risultati2['firmata'] == 0) { ?>
 						<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica lettera" href="login0.php?corpus=modifica-lettera&idlettera=<?php echo $risultati2['id'] ?>&from=elenco-lettere">
 								<i class="fa fa-edit"></i>
