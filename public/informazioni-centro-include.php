@@ -6,7 +6,7 @@
 		<div class="panel-body">
 			<p><strong>STAFF:</strong> 
 				<?php echo $_SESSION['nomeapplicativo'];?> e' stato inizialmente ideato da Biagio Saitta ed Alfio Musmarra
-				 ed oggi realizzato e mantenuto dagli stessi insieme a Federico D'urso e Stefano Principato.
+				 ed oggi realizzato e mantenuto dagli stessi insieme a Federico D'Urso e Stefano Principato.
 				 Preziose collaborazioni sono state fornite da Alfio Costanzo, Roberto Parrinello, 
 				 Laura Ferrara, Giovanni Susinni, Luigi Pistara', Laura Astolfi, Mara Basile e Marianna Schillaci.
 			</p>
