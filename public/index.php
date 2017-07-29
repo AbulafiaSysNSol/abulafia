@@ -94,7 +94,7 @@
                     <p class="lead">
 			Si evolvono gli uffici, pubblici e privati, per stare al passo con i tempi e con le rinnovate esigenze di gestione amministrativa e del personale.
 			Abulafia vuole essere un piccolo contributo, aperto a chiunque abbia voglia di suggerire 
-			miglioramenti, per la gestione degli affari correnti delle segreterie dei volontari della CRI.
+			miglioramenti, per la gestione degli affari correnti delle segreterie dei volontari della C.R.I.
 		</p>
 	        </div>
                 <div class="col-sm-5 col-sm-offset-2 col-sm-5">
