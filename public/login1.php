@@ -2,6 +2,7 @@
 
 	session_start(); //avvio della sessione per caricare le variabili
 
+
 	function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
 		require_once "class/" . $class_name.".obj.inc";
 	}
