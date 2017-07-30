@@ -2,6 +2,8 @@
 
 	session_start(); //avvio della sessione per caricare le variabili
 
+	include '../db-connessione-include.php'; //connessione al db-server
+	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 
 	function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
 		require_once "class/" . $class_name.".obj.inc";
@@ -52,11 +54,10 @@
 	}
 	$client=$ip.' - '.$client;
 	
-	include '../db-connessione-include.php'; //connessione al db-server
-	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 
-	$login=mysql_query("SELECT count(*) from users where loginname='$userid' and password='$password'"); //controllo della correttezza di username e password
-	$login2 = mysql_fetch_array($login);
+
+	$login=$verificaconnessione->query("SELECT count(*) from users where loginname='$userid' and password='$password'"); //controllo della correttezza di username e password
+	$login2 = $login->fetch_array();
 	if ($login2[0] < 1 ) {
 		$my_log -> publscrivilog($userid, 'login', 'denied', $client , $logfile);
 		$_SESSION['auth']= 0 ;
@@ -71,19 +72,19 @@
 	}
 	
 	//inizio settaggio delle variabili di sessione
-	$logindata=mysql_query("select * from users where loginname='$userid'");
-	$logindata2=mysql_fetch_array($logindata);
+	$logindata=$verificaconnessione->query("select * from users where loginname='$userid'");
+	$logindata2=$logindata->fetch_array();
 	$idperricerca=$logindata2['idanagrafica']; //setta l'id dell'user che ha effettuato il login
-	$logindata3=mysql_query("select * from anagrafica where idanagrafica='$idperricerca'");
-	$logindata4=mysql_fetch_array($logindata3); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
+	$logindata3=$verificaconnessione->query("select * from anagrafica where idanagrafica='$idperricerca'");
+	$logindata4=$logindata3->fetch_array(); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
 	$_SESSION['loginurlfoto']= $logindata4['urlfoto']; //seleziona l'url della foto dell'user che ha fatto login
 	$_SESSION['auth']= $logindata2['auth']; //livello di autorizzazione dell'utente, prelevato dal db
 	$_SESSION['loginname'] = $logindata2['loginname']; //nome utente prelevato dalla tabella users
 	$_SESSION['loginid']=$logindata2['idanagrafica']; //id prelevato dalla tabella users, identica a quella dell'anagrafica
 
 	//caricamento dei settaggi personalizzati
-	$settings=mysql_query("SELECT * FROM usersettings WHERE idanagrafica='$idperricerca'");
-	$settings2=mysql_fetch_array($settings);
+	$settings=$verificaconnessione->query("SELECT * FROM usersettings WHERE idanagrafica='$idperricerca'");
+	$settings2=$settings->fetch_array();
 	//assegnazione settaggi personali
 	$_SESSION['risultatiperpagina'] = $settings2['risultatiperpagina'];
 	$_SESSION['primocoloretabellarisultati'] = $settings2['primocoloretabellarisultati'];//primo colore delle righe che si alternano della tabella dei risultati della ricerca
@@ -94,8 +95,8 @@
 	$_SESSION['notificamod'] = $settings2['notificamod'];
 	
 	//caricamento dei settaggi del software
-	$settings3=mysql_query("select distinct * from defaultsettings");
-	$settings4=mysql_fetch_array($settings3);
+	$settings3=$verificaconnessione->query("select distinct * from defaultsettings");
+	$settings4=$settings3->fetch_array();
 	//assegnazione settaggi del software
 	$_SESSION['keywords'] = $settings4['keywords'];
 	$_SESSION['description'] = $settings4['description'];
@@ -121,8 +122,8 @@
 	$_SESSION['mod_contabilita'] = $settings4['contabilita'];
 	
 	//caricamento settaggi email
-	$settings5=mysql_query("select distinct * from mailsettings");
-	$settings6=mysql_fetch_array($settings5);
+	$settings5=$verificaconnessione->query("select distinct * from mailsettings");
+	$settings6=$settings5->fetch_array();
 	//assegnazione settaggi email
 	$_SESSION['usernamemail'] = $settings6['username'];
 	$_SESSION['passwordmail'] = base64_decode($settings6['password']);
@@ -146,6 +147,8 @@
 
 	//log degli accessi con esito positivo
 	$my_log -> publscrivilog($userid, 'login', 'ok', $client, $logfile );
+
+	mysqli_close($verificaconnessione);//chiude le connessioni al database
 ?>
 
 <SCRIPT LANGUAGE="Javascript">
