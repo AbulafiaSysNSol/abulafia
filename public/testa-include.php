@@ -357,6 +357,6 @@ tinymce.init({
 	
 <?php
 	if ($_GET['corpus'] != 'cambioanno') { 
-		$my_registroprotocollo->publcontrolloanno (); //controllo della corrispondenza fra l'anno corrente e l'anno in uso dal db
+		$my_registroprotocollo->publcontrolloanno ($verificaconnessione); //controllo della corrispondenza fra l'anno corrente e l'anno in uso dal db
 	}
 ?>

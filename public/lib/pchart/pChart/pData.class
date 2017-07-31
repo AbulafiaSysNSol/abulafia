@@ -52,8 +52,8 @@
 
    function pData()
     {
-     $this->Data                           = "";
-     $this->DataDescription                = "";
+     $this->Data                           = array();
+     $this->DataDescription                = array();//corretto da alfio m. - luglio 2017, era =""; e non funz. l'array
      $this->DataDescription["Position"]    = "Name";
      $this->DataDescription["Format"]["X"] = "number";
      $this->DataDescription["Format"]["Y"] = "number";

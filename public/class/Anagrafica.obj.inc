@@ -4,9 +4,11 @@ class Anagrafica {
 
 	var $contacomponenti;
 
-	function publcontaanagrafica ($tipologia) { //<man> Restituisce il numero di anagrafiche presenti nel database, passando come argomento la tipologia (es. persona, carica etc...)</man>
-		$contacomponenti2= mysql_query("select count(*) from anagrafica where tipologia='$tipologia'"); //query per contare le anagrafiche per tipologia
-		$contacomponenti1= mysql_fetch_row($contacomponenti2);
+	function publcontaanagrafica ($tipologia, $verificaconnessione) { //<man> Restituisce il numero di anagrafiche presenti nel database, passando come argomento la tipologia (es. persona, carica etc...)</man>
+		$contacomponenti2= $verificaconnessione->query("select count(*) 
+								from anagrafica 
+								where tipologia='$tipologia'"); //query per contare le anagrafiche per tipologia
+		$contacomponenti1= $contacomponenti2->fetch_row();
 		$this->contacomponenti= $contacomponenti1[0];
 	}
 
@@ -80,9 +82,11 @@ class Anagrafica {
 			return 'foto/sagoma.png';
 	}
 	
-	public function isAdmin($id) {
-		$query = mysql_query("SELECT admin FROM users WHERE idanagrafica = $id");
-		$admin = mysql_fetch_row($query);
+	public function isAdmin($id, $verificaconnessione) {
+		$query = $verificaconnessione->query("SELECT admin 
+							FROM users 
+							WHERE idanagrafica = $id");
+		$admin = $query->fetch_row();
 		if ($admin[0] == 1) 
 			return true;
 		else

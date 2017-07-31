@@ -14,16 +14,21 @@ class Registroprotocollo { //apertura classe
 		return $anni;
 	}
 
-	private function selezionaanno ($var) { // modulo per la selezione dell'anno di uso del registro protocollo
-		$this->annodb = mysql_fetch_array(mysql_query("SELECT annoprotocollo FROM defaultsettings"));
+	private function selezionaanno ($var, $verificaconnessione) { // modulo per la selezione dell'anno di uso del registro protocollo
+		//$this->annodb = mysql_fetch_array($verificaconnessione->query("SELECT annoprotocollo 
+		//								FROM defaultsettings"));
+		$this->selezionaanno=$verificaconnessione->query("SELECT annoprotocollo FROM defaultsettings");		
+		$this->annodb=$this->selezionaanno->fetch_array();
+	
+	
 	}
 
-	function publselezionaanno ($var) { //<man>Legge dal DB l'anno corrente di uso del protocollo</man>
-		$this->selezionaanno($var);
+	function publselezionaanno ($var, $verificaconnessione) { //<man>Legge dal DB l'anno corrente di uso del protocollo</man>
+		$this->selezionaanno($var, $verificaconnessione);
 	}
 
-	private function controlloanno() { //controllo fra l'anno corrente e l'anno del sistema
-		$this->selezionaanno('0');
+	private function controlloanno($verificaconnessione) { //controllo fra l'anno corrente e l'anno del sistema
+		$this->selezionaanno('0', $verificaconnessione);
 		$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
 		$my_calendario-> publadesso();
 		if ( $this->annodb['annoprotocollo'] !=  $my_calendario->anno ) {
@@ -46,8 +51,8 @@ class Registroprotocollo { //apertura classe
 		}
 	}
 
-	function publcontrolloanno() { //<man>Controlla la corrispondenza tra l'anno del protocollo e l'anno solare corrente</man>
-		$this->controlloanno ();
+	function publcontrolloanno($verificaconnessione) { //<man>Controlla la corrispondenza tra l'anno del protocollo e l'anno solare corrente</man>
+		$this->controlloanno ($verificaconnessione);
 	}
 
 }//chiusura classe

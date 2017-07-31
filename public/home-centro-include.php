@@ -15,33 +15,48 @@
 	
 	$anno = $_SESSION['annoprotocollo'];
 	$annoprotocollo = $_SESSION['annoprotocollo'];
-	$statslettere=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00'");
-	$res_lettere = mysql_fetch_row($statslettere);
-	$ricevute=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00' and speditaricevuta='ricevuta'");
-	$ric = mysql_fetch_row($ricevute);
-	$spedite=mysql_query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00' and speditaricevuta='spedita'");
-	$sped = mysql_fetch_row($spedite);
-	$ultimoprot = $lettera->ultimoId($anno);
+	$statslettere=$verificaconnessione->query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00'");
+	$res_lettere = $statslettere->fetch_row();
+	$ricevute=$verificaconnessione->query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00' and speditaricevuta='ricevuta'");
+	$ric = $ricevute->fetch_row();
+	$spedite=$verificaconnessione->query("select count(*) from lettere$annoprotocollo where datalettera != '0000/00/00' and speditaricevuta='spedita'");
+	$sped = $spedite->fetch_row();
+	$ultimoprot = $lettera->ultimoId($anno, $verificaconnessione);
 	
 	//patch protocolli saltati
 	if ($_SESSION['auth'] < 90) {
 		$protocollatore = $_SESSION['loginid'];
-		$query_prot_count = mysql_query("SELECT COUNT(lettere$anno.idlettera) FROM lettere$anno, joinlettereinserimento$anno WHERE lettere$anno.oggetto = '' AND joinlettereinserimento$anno.idinser = $protocollatore AND lettere$anno.idlettera = joinlettereinserimento$anno.idlettera");
-		$query_prot = mysql_query("SELECT lettere$anno.idlettera FROM lettere$anno, joinlettereinserimento$anno WHERE lettere$anno.oggetto = '' AND joinlettereinserimento$anno.idinser = $protocollatore AND lettere$anno.idlettera = joinlettereinserimento$anno.idlettera ORDER BY lettere$anno.idlettera ASC");
+		$query_prot_count = $verificaconnessione->query("SELECT COUNT(lettere$anno.idlettera) 
+								FROM lettere$anno, joinlettereinserimento$anno 
+								WHERE lettere$anno.oggetto = '' 
+								AND joinlettereinserimento$anno.idinser = $protocollatore 
+								AND lettere$anno.idlettera = joinlettereinserimento$anno.idlettera");
+		$query_prot = $verificaconnessione->query("SELECT lettere$anno.idlettera 
+								FROM lettere$anno, joinlettereinserimento$anno 
+								WHERE lettere$anno.oggetto = '' 
+								AND joinlettereinserimento$anno.idinser = $protocollatore 
+								AND lettere$anno.idlettera = joinlettereinserimento$anno.idlettera 
+								ORDER BY lettere$anno.idlettera ASC");
 	}
 	else {
-		$query_prot_count = mysql_query("SELECT idlettera FROM lettere$anno WHERE lettere$anno.oggetto = '' ");
-		$query_prot = mysql_query("SELECT idlettera FROM lettere$anno WHERE lettere$anno.oggetto = '' ORDER BY lettere$anno.idlettera ASC");
+		$query_prot_count = $verificaconnessione->query("SELECT idlettera 
+								FROM lettere$anno 
+								WHERE lettere$anno.oggetto = '' ");
+
+		$query_prot = $verificaconnessione->query("SELECT idlettera 
+								FROM lettere$anno 
+								WHERE lettere$anno.oggetto = '' 
+								ORDER BY lettere$anno.idlettera ASC");
 	}
 	
-	$result = mysql_fetch_row($query_prot_count);
+	$result = $query_prot_count->fetch_row();
 	
 	if ($result[0] > 0) {
 		?>
 		<h3><center><div class="alert alert-danger"><b><i class="fa fa-exclamation-triangle"></i> Attenzione:</b> &egrave; stata rilevata un'anomalia nel registro di protocollo.
 		<h5>Alcune lettere non sono state registrate correttamente. Clicca sui numeri per inserire i dettagli mancanti: 
 		<?php
-		while ($idprot = mysql_fetch_array($query_prot)){
+		while ($idprot = $query_prot->fetch_array()){
 			?>
 			<a href="?corpus=modifica-protocollo&from=correggi&id=<?php echo $idprot['idlettera']; ?>"><?php echo $idprot['idlettera'].';'; ?> 
 			<?php
@@ -63,7 +78,7 @@
 		<?php
 	}
 	
-	if (!$e->isSetMail()) {
+	if (!$e->isSetMail($verificaconnessione)) {
 		?>
 		<center><h4><div class="alert alert-warning"><i class="fa fa-warning"></i> <b>Attenzione:</b> per poter inviare email bisogna configurare il server mail in <a href="?corpus=server-mail">questa pagina</a>.</div></h4></center>
 		<?php
@@ -146,10 +161,17 @@
 				$DataSet = new pData;  
 				 
 				if ($res_lettere[0] > 0) {
-					$statsusers1=mysql_query("SELECT COUNT(joinlettereinserimento$anno.idinser) AS numerolettere, anagrafica.cognome, anagrafica.nome FROM anagrafica, joinlettereinserimento$anno WHERE  joinlettereinserimento$anno.idinser = anagrafica.idanagrafica AND datamod != '0000/00/00' GROUP BY anagrafica.idanagrafica ORDER BY numerolettere DESC");
-					echo mysql_error();
+					$statsusers1=$verificaconnessione->query("SELECT 
+										COUNT(joinlettereinserimento$anno.idinser) 
+										AS numerolettere, anagrafica.cognome, anagrafica.nome 
+										FROM anagrafica, joinlettereinserimento$anno 
+										WHERE  joinlettereinserimento$anno.idinser = anagrafica.idanagrafica 
+										AND datamod != '0000/00/00' 
+										GROUP BY anagrafica.idanagrafica 
+										ORDER BY numerolettere DESC");
+					echo mysqli_error($verificaconnessione);
 					echo 'Sono state registrate ' . $res_lettere[0] . ' lettere, nel dettaglio:<br><br>';
-					while ($statsusers2= mysql_fetch_array($statsusers1)) {
+					while ($statsusers2= $statsusers1->fetch_array()) {
 							$statsusers2 = array_map('stripslashes', $statsusers2);
 							echo $statsusers2['numerolettere'] . ' inserite da '. ucwords(strtolower($statsusers2['nome'] . ' ' . $statsusers2['cognome'])) . ';<br>';
 							$DataSet->AddPoint($statsusers2['numerolettere'],"Serie1");  
@@ -181,23 +203,23 @@
 				<?php
 				$DataSet = new pData;
 					
-				$statsanagrafica=mysql_query("select count(*) from anagrafica");
-				$res_anagrafica = mysql_fetch_row($statsanagrafica);
+				$statsanagrafica=$verificaconnessione->query("select count(*) from anagrafica");
+				$res_anagrafica = $statsanagrafica->fetch_row();
 				echo 'Nella tabella ANAGRAFICA sono presenti '.($res_anagrafica[0]) .' occorrenze, di cui:<br><br>';
 					
-				$my_anagrafica->publcontaanagrafica('persona');
+				$my_anagrafica->publcontaanagrafica('persona', $verificaconnessione);
 				echo $my_anagrafica->contacomponenti.' Persone Fisiche;<br>';
 				$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie1");
 				
-				$my_anagrafica->publcontaanagrafica('carica');
+				$my_anagrafica->publcontaanagrafica('carica', $verificaconnessione);
 				echo $my_anagrafica->contacomponenti.' Cariche o Incarichi;<br>';
 				$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie2");
 				
-				$my_anagrafica->publcontaanagrafica('ente');
+				$my_anagrafica->publcontaanagrafica('ente', $verificaconnessione);
 				echo $my_anagrafica->contacomponenti.' Enti;<br>';
 				$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie3");
 					
-				$my_anagrafica->publcontaanagrafica('fornitore');
+				$my_anagrafica->publcontaanagrafica('fornitore', $verificaconnessione);
 				echo $my_anagrafica->contacomponenti.' Fornitori;';
 				$DataSet->AddPoint($my_anagrafica->contacomponenti,"Serie4");
 					  
@@ -238,7 +260,7 @@
 	</div>
 </div>
 
-<?php if($a->isProtocollo($_SESSION['loginid'])) { ?>
+<?php if($a->isProtocollo($_SESSION['loginid'], $verificaconnessione)) { ?>
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="panel panel-default">
@@ -249,7 +271,7 @@
 				
 				<div class="panel-body">
 					<?php
-						$risultati = $lettera->ultimeLettere(5, $anno);
+						$risultati = $lettera->ultimeLettere(5, $anno, $verificaconnessione);
 					?>
 					<table class="table table-striped" width="100%">
 					<?php
@@ -304,7 +326,7 @@
 </div>
 
 <?php 
-if($a->isAdmin($_SESSION['loginid'])) { ?>
+if($a->isAdmin($_SESSION['loginid'], $verificaconnessione)) { ?>
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="panel panel-default">

@@ -355,19 +355,27 @@ class Lettera {
 		return $this->urlfile;
 	}//fine metodo
 	
-	public function ultimeLettere($numerolettere, $anno) {
+	public function ultimeLettere($numerolettere, $anno, $verificaconnessione) {
 		$res = array();
-		$query = mysql_query("SELECT idlettera, dataregistrazione, oggetto, speditaricevuta FROM lettere$anno WHERE datalettera != '0000-00-00' ORDER BY idlettera desc LIMIT $numerolettere ");
-		while ($risultati  = mysql_fetch_array($query)) {
+		$query = $verificaconnessione->query("SELECT idlettera, dataregistrazione, oggetto, speditaricevuta 
+							FROM lettere$anno 
+							WHERE datalettera != '0000-00-00' 
+							ORDER BY idlettera desc 
+							LIMIT $numerolettere ");
+
+		while ($risultati  = $query->fetch_array()) {
 			$risultati = array_map('stripslashes', $risultati);
 			array_push ($res, $risultati);
 		}
 		return $res;
 	}
 	
-	public function ultimoId($anno) {
-		$query = mysql_query("SELECT idlettera FROM lettere$anno ORDER BY idlettera desc LIMIT 1");
-		$risultati = mysql_fetch_row($query);
+	public function ultimoId($anno, $verificaconnessione) {
+		$query = $verificaconnessione->query("SELECT idlettera 
+							FROM lettere$anno 
+							ORDER BY idlettera desc 
+							LIMIT 1");
+		$risultati = $query->fetch_row();
 		return $risultati[0];
 	}
 

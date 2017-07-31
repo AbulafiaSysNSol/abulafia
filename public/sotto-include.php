@@ -27,6 +27,6 @@
 </html>
 
 <?php
-mysql_close ($verificaconnessione);
+mysqli_close($verificaconnessione);//chiude le connessioni al database
 ?>
 

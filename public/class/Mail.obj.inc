@@ -8,9 +8,13 @@ Class Mail {
 		return $res;
 	}
 
-	public function isSetMail() {
-		$query = mysql_query("SELECT COUNT(username) FROM mailsettings WHERE username != '' AND password != '' AND smtp != '' ");
-		$res = mysql_fetch_row($query);
+	public function isSetMail($verificaconnessione) {
+		$query = $verificaconnessione->query("SELECT COUNT(username) 
+							FROM mailsettings 
+							WHERE username != '' 
+							AND password != '' 
+							AND smtp != '' ");
+		$res = $query->fetch_row();
 		if ($res[0] > 0) {
 			return true;
 		}
