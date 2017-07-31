@@ -90,8 +90,8 @@ class Anagrafica {
 	}
 
 	public function isAnagrafica($id) {
-		$query = mysql_query("SELECT anagrafica FROM users WHERE idanagrafica = $id");
-		$anagrafica = mysql_fetch_row($query);
+		$query = $verificaconnessione_query("SELECT anagrafica FROM users WHERE idanagrafica = $id");
+		$anagrafica = $query->fetch_row();
 		if ($anagrafica[0] == 1) 
 			return true;
 		else

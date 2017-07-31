@@ -153,8 +153,6 @@
 
 <SCRIPT LANGUAGE="Javascript">
 	browser= navigator.appName;
-	if (browser == "Netscape")
-		window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>&aggiornamento=null";
-	else 
-		window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>&aggiornamento=null";
+	window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>&aggiornamento=null";
+	
 </SCRIPT>

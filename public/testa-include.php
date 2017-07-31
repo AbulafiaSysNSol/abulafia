@@ -22,8 +22,8 @@
 	$my_manuale= unserialize($_SESSION['my_manuale']);//deserializzazione 
 	$my_tabellahtml= unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
 	$my_database= unserialize($_SESSION['my_database']);//deserializzazione 
-	$setting=mysql_query("select * from defaultsettings");
-	$setting2=mysql_fetch_array($setting);
+	$setting=$verificaconnessione->query("select * from defaultsettings");
+	$setting2=$setting->fetch_array();
 
 	$_SESSIONs['paginaprincipale'] = $setting2['paginaprincipale'];
 
@@ -209,7 +209,12 @@ tinymce.init({
 		
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><i class="fa fa-home"></i> Home</a></li>
+					<li <?php if($_GET['corpus'] == 'home') 
+							{ echo 'class="active"'; }?> >
+						<a href="login0.php?corpus=home">
+						<i class="fa fa-home"></i> 
+						Home</a>
+					</li>
 					
 					<?php if($_SESSION['mod_anagrafica'] && $anag->isAnagrafica($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
@@ -237,10 +242,16 @@ tinymce.init({
 
 					<?php
 					if($_SESSION['mod_lettere'] && $anag->isLettere($_SESSION['loginid'])) {
-						$query = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
-						$num = mysql_fetch_row($query);
-						$prot = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE firmata = 1 AND protocollo = 0");
-						$protocollare = mysql_fetch_row($prot);
+						$query = $verificaconnessione->query("SELECT COUNT(*) 
+											FROM comp_lettera 
+											WHERE (vista = 1 OR vista = 2) 
+											AND firmata = 0");
+						$num = $query->fetch_row();
+						$prot = $verificaconnessione->query("SELECT COUNT(*) 
+											FROM comp_lettera 
+											WHERE firmata = 1 
+											AND protocollo = 0");
+						$protocollare = $prot->fetch_row();
 						?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'lettera' OR $_GET['corpus']=='lettera2' OR $_GET['corpus']=='elenco-lettere' OR $_GET['corpus']=='elenco-lettere-firma') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
