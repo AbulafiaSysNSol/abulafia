@@ -89,8 +89,8 @@ class Anagrafica {
 			return false;
 	}
 
-	public function isAnagrafica($id) {
-		$query = $verificaconnessione_query("SELECT anagrafica FROM users WHERE idanagrafica = $id");
+	public function isAnagrafica($id, $verificaconnessione) {
+		$query = $verificaconnessione->query("SELECT anagrafica FROM users WHERE idanagrafica = $id");
 		$anagrafica = $query->fetch_row();
 		if ($anagrafica[0] == 1) 
 			return true;
@@ -98,27 +98,27 @@ class Anagrafica {
 			return false;
 	}
 
-	public function isProtocollo($id) {
-		$query = mysql_query("SELECT protocollo FROM users WHERE idanagrafica = $id");
-		$protocollo = mysql_fetch_row($query);
+	public function isProtocollo($id, $verificaconnessione) {
+		$query = $verificaconnessione->query("SELECT protocollo FROM users WHERE idanagrafica = $id");
+		$protocollo = $query->fetch_row();
 		if ($protocollo[0] == 1) 
 			return true;
 		else
 			return false;
 	}
 
-	public function isLettere($id) {
-		$query = mysql_query("SELECT lettere FROM users WHERE idanagrafica = $id");
-		$lettere = mysql_fetch_row($query);
+	public function isLettere($id, $verificaconnessione) {
+		$query = $verificaconnessione->query("SELECT lettere FROM users WHERE idanagrafica = $id");
+		$lettere = $query->fetch_row();
 		if ($lettere[0] == 1) 
 			return true;
 		else
 			return false;
 	}
 
-	public function isMagazzino($id) {
-		$query = mysql_query("SELECT magazzino FROM users WHERE idanagrafica = $id");
-		$magazzino = mysql_fetch_row($query);
+	public function isMagazzino($id, $verificaconnessione) {
+		$query = $verificaconnessione->query("SELECT magazzino FROM users WHERE idanagrafica = $id");
+		$magazzino = $query->fetch_row();
 		if ($magazzino[0] == 1) 
 			return true;
 		else
