@@ -120,7 +120,7 @@
 		
 	//SE L'INSERIMENTO VA A BUON FINE SCRIVO NEL LOG E SE SONO ATTIVE LE NOTIFICHE MANDO EMAIL
 	else { 
-		$indirizzi = $anagrafica->getNotificationsIns();
+		$indirizzi = $anagrafica->getNotificationsIns($verificaconnessione);
 		if ($indirizzi) {
 			//invio notifica
 			$mail = new PHPMailer();
