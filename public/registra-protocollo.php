@@ -158,8 +158,7 @@
 
 <SCRIPT LANGUAGE="Javascript">
 	browser= navigator.appName;
-	if (browser == "Netscape")
+
 		window.location="componilettera.php?id=<?php echo $idnext ?>&from=protocolla-lettera"; 
-	else 
-		window.location="componilettera.php?id=<?php echo $idnext ?>&from=protocolla-lettera"; 
+	
 </SCRIPT>

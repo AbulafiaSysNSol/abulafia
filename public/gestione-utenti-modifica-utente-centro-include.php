@@ -1,9 +1,13 @@
 <?php
 	$id= $_GET['id'];
-	$risultati=mysql_query("select * from anagrafica where idanagrafica='$id'");
-	$risultati3=mysql_query("select * from users where idanagrafica='$id'");
-	$row = mysql_fetch_array($risultati);
-	$row3 = mysql_fetch_array($risultati3);
+	$risultati=$verificaconnessione->query("select * from anagrafica 
+						where idanagrafica='$id'");
+
+	$risultati3=$verificaconnessione->query("select * from users 
+						where idanagrafica='$id'");
+
+	$row = $risultati->fetch_array();
+	$row3 = $risultati->fetch_array();
 ?>
 
 <div class="panel panel-default">
@@ -38,7 +42,7 @@
 					</div>
 					
 					<?php
-					$anag = new Anagrafica();
+					$anag = new Anagrafica($verificaconnessione);
 					if ($anag->isAdmin($_SESSION['loginid'])) {
 					?>
 					<div class="col-sm-1">
