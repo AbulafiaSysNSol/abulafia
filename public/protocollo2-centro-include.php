@@ -368,87 +368,138 @@ if ($from == 'eliminaallegato') {
 						} else {
 							echo "Nessun file associato.";
 						}
-							?>
-					
-					<div class="row">
-						<div class ="col-sm-12" id="content" style="display: none;">
-							
-						<br>
-							
-						<i class="fa fa-spinner fa-spin"></i>
-						<b> Caricamento allegato in corso...</b>
-						<br>
-						<img src="images/progress.gif">
-						</div>
-					</div>
-					
-					<hr>
-
-					<?php
-					
-					if($errore) { echo "<div class=\"alert alert-danger\">"; }
-					$my_lettera->publcercamittente($idlettera,''); //richiamo del metodo
-					if($errore) { echo "</div>"; }
-
-					if (count($my_lettera->arraymittenti)> 0) {
-						echo "<br><b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b>";
 						?>
-						<table class="table table-condensed">
-							<?php
+
+						<div class="row">
+							<div class ="col-sm-12" 
+								id="content" 
+								style="display: none;">
+							
+							<br>
+							
+							<i class="fa fa-spinner fa-spin"></i>
+							<b> Caricamento allegato in corso...</b>
+							<br>
+							<img src="images/progress.gif">
+							</div>
+						</div>
+					
+						<hr>
+						<?php
+							if($errore) { 
+								echo "<div class=\"alert alert-danger\">"; 
+							}
+					
+							$my_lettera->publcercamittente($idlettera,''); //richiamo del metodo
+
+							if($errore) { echo "</div>"; 
+							}
+
+						if (count($my_lettera->arraymittenti)> 0) {
+							echo "<br><b><i class=\"fa fa-users\"></i> 
+								Mittenti/Destinatari attuali: </b>";
+								?>
+								<table class="table table-condensed">
+								<?php
 							foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti ) {
 								?>
 								<tr>
-									<td style="vertical-align: middle" width="12%">
-										<img src="<?php echo $my_anagrafica->getFoto($elencochiavi, $verificaconnessione); ?>" class="img-circle img-responsive">
-									</td>
-									<td style="vertical-align: middle">
-										<?php echo stripslashes($elencomittenti).' '; ?>
-									</td>
-									<td style="vertical-align: middle">
-										<a href="anagrafica-mini.php?id=<?php echo $elencochiavi ?>" class="fancybox btn btn-info" data-fancybox-type="iframe">
-											<i class="fa fa-info fa-fw"></i>
-										</a>
-										<a class="btn btn-danger" href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"><i class="fa fa-trash fa-fw"></i></a>
-									</td>
+
+								<td style="vertical-align: middle" width="12%">
+									<img src="
+									<?php
+ 									echo $my_anagrafica->getFoto($elencochiavi, $verificaconnessione); 
+									?>" 
+									class="img-circle img-responsive">
+								</td>
+
+								<td style="vertical-align: middle">
+									<?php echo stripslashes($elencomittenti).' '; ?>
+								</td>
+
+								<td style="vertical-align: middle">
+									<a href="anagrafica-mini.php?
+										id=<?php echo $elencochiavi ?>"
+					 					class="fancybox btn btn-info" 
+										data-fancybox-type="iframe">
+										<i class="fa fa-info fa-fw"></i>
+									</a>
+									<a class="btn btn-danger" 
+										href="login0.php?
+											corpus=protocollo2
+											&from=elimina-mittente
+											&idanagrafica=<?php echo $elencochiavi;?>">
+										<i class="fa fa-trash fa-fw"></i>
+									</a>
+								</td>
+
 								</tr>
 							<?php
 							}
-						?>	
-						</table>
+							?>	
+								</table>
 						<?php
-					}
-					else {
-						echo 'Nessun mittente/destinatario associato.<br>';
-					}
-					echo '<br>';
-					?>
-				</div>
+						} else {
+							echo 'Nessun mittente/destinatario associato.<br>';
+						}
+						echo '<br>';
+						?>
+					</div>
 
-				<div class="col-sm-6">
-					<h3><b><small><i class="fa fa-square-o"></i></small> Secondo Step: <small>dettagli della lettera <i class="fa fa-file-text-o"></i></b></small></h3>
-					<hr>
-					<form name="modulo" method="post" >
+					<div class="col-sm-6">
+						<h3><b><small><i class="fa fa-square-o"></i></small> 
+							Secondo Step: <small>dettagli della lettera 
+							<i class="fa fa-file-text-o"></i></b></small>
+						</h3>
+						<hr>
+						<form name="modulo" method="post" >
 					
-						<div class="form-group">
-							<label> <span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta</label>
-							<div class="row">
-								<div class="col-sm-11">
-									<select class="form-control" size="1" cols=4 type="text" name="spedita-ricevuta" />
-										<option value="ricevuta" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "ricevuta") {echo "selected";} ?>> Ricevuta</option>
-										<option value="spedita" <?php if( ($errore || $add) && isset($_SESSION['spedita-ricevuta']) && $_SESSION['spedita-ricevuta'] == "spedita") {echo "selected";} ?>> Spedita</option>
-									</select>
-								</div>
-							</div>
-						</div>
+							<div class="form-group">
+								<label> <span class="glyphicon glyphicon-sort"></span> Spedita/Ricevuta</label>
+								<div class="row">
+									<div class="col-sm-11">
+										<select class="form-control" 
+											size="1" 
+											cols=4 
+											type="text" 
+											name="spedita-ricevuta" />
+										<option value="ricevuta" 
+											<?php if( ($errore || $add) 
+												&& isset($_SESSION['spedita-ricevuta']) 
+												&& $_SESSION['spedita-ricevuta'] == "ricevuta") {
+													echo "selected";
+											} ?>> Ricevuta
+										</option>
 
-						<div class="form-group">
-							<label> <span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
-							<div class="row">
-								<div class="col-sm-11">
-									<input required type="text" class="form-control" name="oggetto" <?php if( ($errore || $add) && isset($_SESSION['oggetto']) ) { echo "value=\"".$_SESSION['oggetto']."\"";} ?> >
+										<option value="spedita" 
+											<?php if( ($errore || $add) 
+												&& isset($_SESSION['spedita-ricevuta']) 
+												&& $_SESSION['spedita-ricevuta'] == "spedita") {
+													echo "selected";
+												} ?>> Spedita
+										</option>
+										</select>
+									</div>
 								</div>
 							</div>
-						</div>
+
+							<div class="form-group">
+								<label> <span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:
+								</label>
+								<div class="row">
+									<div class="col-sm-11">
+										<input required type="text" 
+											class="form-control" 
+											name="oggetto" <?php if( ($errore || $add) 
+														&& isset($_SESSION['oggetto']) ) { 
+															echo "value=\"".$_SESSION['oggetto']."\"";
+														} 
+													?> 
+										>
+									</div>
+								</div>
+							</div> 
+			<!--punto finale di indentazione corretta 02-08-2017-->
 					
 						<div class="form-group">
 							<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
