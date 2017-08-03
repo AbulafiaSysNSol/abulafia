@@ -501,11 +501,21 @@ if ($from == 'eliminaallegato') {
 							</div> 
 			<!--punto finale di indentazione corretta 02-08-2017-->
 					
-						<div class="form-group">
+							<div class="form-group">
 							<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
-							<div class="row">
-								<div class="col-sm-11">
-									<input type="text" class="form-control datepickerProt" name="data" <?php if( ($errore || $add) && isset($_SESSION['data']) ) { echo "value=\"".$_SESSION['data']."\"";} else { echo 'value='.date("d/m/Y"); } ?> >
+								<div class="row">
+									<div class="col-sm-11">
+									<input type="text" 
+										class="form-control datepickerProt" 
+										name="data" 
+										<?php if( ($errore || $add) 
+											&& isset($_SESSION['data']) {
+											 echo "value=\"".$_SESSION['data']."\"";
+											} else { 
+												echo 'value='.date("d/m/Y"); 
+											} 
+										?> 
+									>
 								</div>
 							</div>
 						</div>
@@ -516,8 +526,21 @@ if ($from == 'eliminaallegato') {
 								<div class="col-sm-11">
 									<select class="form-control" size=1 cols=4 NAME="posizione">
 										<option selected value=""></option>
-										<option value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected";} ?>> posta ordinaria</option>
-										<option value="raccomandata"<?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "raccomandata") {echo "selected";} ?>> raccomandata</option>
+										<option value="posta ordinaria" 
+											<?php if( ($errore || $add) 
+												&& isset($_SESSION['posizione']) 
+												&& $_SESSION['posizione'] == "posta ordinaria") {
+													echo "selected";
+												} 
+											?>> posta ordinaria
+										</option>
+										<option value="raccomandata"<?php if( ($errore || $add) 
+														&& isset($_SESSION['posizione']) 
+														&& $_SESSION['posizione'] == "raccomandata") {
+															echo "selected";
+														} 
+														?>> raccomandata
+										</option>
 										<option Value="telegramma" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "telegramma") {echo "selected";} ?>> telegramma</option>
 										<option value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected";} ?>> fax</option>
 										<option value="email" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "email") {echo "selected";} ?>> email</option>
@@ -533,17 +556,19 @@ if ($from == 'eliminaallegato') {
 								<div class="col-sm-11">
 									<label> <i class="fa fa-archive"></i> Titolazione:</label>
 									<?php
-										$risultati=mysql_query("select distinct * from titolario");
+									$risultati=mysql_query("select distinct * 
+									from titolario");
 									?>
 									<select class="form-control" size=1 cols=4 NAME="riferimento">
 										<option value="">nessuna titolazione
 										<?php
 										while ($risultati2=mysql_fetch_array($risultati)) {
 											$risultati2 = array_map("stripslashes",$risultati2);
-											if( ($errore || $add) && isset($_SESSION['riferimento']) && $_SESSION['riferimento'] == $risultati2['codice'] ) {
+											if( ($errore || $add) 
+											&& isset($_SESSION['riferimento']) 
+											&& $_SESSION['riferimento'] == $risultati2['codice'] ) {
 												echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
-											}
-											else {
+											} else {
 												echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
 											}
 										}
@@ -582,12 +607,27 @@ if ($from == 'eliminaallegato') {
 							<label> <span class="glyphicon glyphicon-comment"></span> Note:</label>
 							<div class="row">
 								<div class="col-sm-11">
-									<input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
+									<input type="text" 
+									class="form-control" 
+									name="note" <?php if( ($errore || $add) 
+												&& isset($_SESSION['note'])) { 
+													echo "value=\"".$_SESSION['note']."\"";
+												} 
+											?>
+											>
 								</div>
+
 							</div>
 						</div>
 				
-						<button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrazione in corso..." type="button" class="btn btn-success btn-lg" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
+						<button id="buttonl" 
+							data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrazione in corso..." 
+							type="button" 
+							class="btn btn-success btn-lg" 
+							onClick="Controllo()"><span 
+							class="glyphicon glyphicon-plus-sign"></span> 
+							Registra Lettera
+						</button>
 					</form>
 				</div>
 		</div>
