@@ -499,8 +499,6 @@ if ($from == 'eliminaallegato') {
 									</div>
 								</div>
 							</div> 
-			<!--punto finale di indentazione corretta 02-08-2017-->
-					
 							<div class="form-group">
 							<label> <span class="glyphicon glyphicon-calendar"></span> Data della lettera:</label>
 								<div class="row">
@@ -508,8 +506,8 @@ if ($from == 'eliminaallegato') {
 									<input type="text" 
 										class="form-control datepickerProt" 
 										name="data" 
-										<?php if( ($errore || $add) 
-											&& isset($_SESSION['data']) {
+										<?php if (($errore || $add) 
+											&& isset($_SESSION['data'])) {
 											 echo "value=\"".$_SESSION['data']."\"";
 											} else { 
 												echo 'value='.date("d/m/Y"); 
