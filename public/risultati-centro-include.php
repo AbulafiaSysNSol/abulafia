@@ -113,7 +113,7 @@
 
 		if ($filtro == 'anagrafica.tipologia') {
 			if($nomecercato != NULL) { 
-				$count = mysql_query(	"SELECT COUNT(*) 
+				$count = $verificaconnessione->query(	"SELECT COUNT(*) 
 								FROM anagrafica 
 								where (anagrafica.idanagrafica = '$cercato' 
 								or (anagrafica.cognome ='$cognomecercato' 
@@ -121,7 +121,7 @@
 								"); //conteggio per divisione in pagine dei risultati
     			}
 			else {
-				$count = mysql_query(	"SELECT COUNT(*) 
+				$count = $verificaconnessione->query(	"SELECT COUNT(*) 
 								FROM anagrafica 
 								where (anagrafica.idanagrafica = '$cercato' 
 								or anagrafica.nome like '%$cercato%' 
@@ -131,7 +131,7 @@
 		}
 		else {
 			if($nomecercato != NULL) { 
-				$count = mysql_query(	"SELECT COUNT(*) 
+				$count = $verificaconnessione->query(	"SELECT COUNT(*) 
 								FROM anagrafica
 								where ((anagrafica.idanagrafica = '$cercato' 
 								or (anagrafica.nome='$nomecercato' 
@@ -140,7 +140,7 @@
 								");//conteggio per divisione in pagine dei risultati
     			}
 			else {
-				$count = mysql_query(	"SELECT COUNT(*) 
+				$count = $verificaconnessione->query(	"SELECT COUNT(*) 
 								FROM anagrafica
 								where ((anagrafica.idanagrafica = '$cercato' 
 								or anagrafica.nome like '%$cercato%' 
@@ -151,7 +151,7 @@
 		}
 
 		
-		$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
+		$res_count = $count->fetch_row();//conteggio per divisione in pagine dei risultati
 		$tot_records = $res_count[0];//conteggio per divisione in pagine dei risultati
 		$tot_pages = ceil($tot_records / $risultatiperpagina);//conteggio per divisione in pagine dei risultati la frazione arrotondata per eccesso
 		$iniziorisultati = $_GET['iniziorisultati'];
@@ -160,7 +160,7 @@
 
 		if($filtro == 'anagrafica.tipologia') {  //se la ricerca in anagrafica è su 'nessun filtro'	
 			if($nomecercato != NULL) { 
-				$risultati= mysql_query("select distinct * 
+				$risultati= $verificaconnessione->query("select distinct * 
 								FROM anagrafica 
 								where (anagrafica.idanagrafica = '$cercato' 
 								or (anagrafica.nome='$nomecercato' 
@@ -169,7 +169,7 @@
 								");
     			}
 			else {
-				$risultati= mysql_query("select distinct * 
+				$risultati= $verificaconnessione->query("select distinct * 
 								FROM anagrafica 
 								where (anagrafica.idanagrafica = '$cercato' 
 								or anagrafica.nome like '%$cercato%' 
@@ -180,7 +180,7 @@
 		}
 		else { //se la ricerca in anagrafica è impostata con un qualche filtro per tipologia
 			if($nomecercato != NULL) { 
-				$risultati= mysql_query("select distinct * 
+				$risultati= $verificaconnessione->query("select distinct * 
 								FROM anagrafica $joinanagraficagruppo 
 								where ((anagrafica.idanagrafica = '$cercato' 
 								or (anagrafica.nome='$nomecercato' 
@@ -191,7 +191,7 @@
 								");
     			}
 			else {
-				$risultati= mysql_query("select distinct * 
+				$risultati= $verificaconnessione->query("select distinct * 
 								FROM anagrafica
 								where ((anagrafica.idanagrafica = '$cercato' 
 								or anagrafica.nome like '%$cercato%' 
@@ -203,8 +203,8 @@
     			}
 		}
 
-	
-		$num_righe = mysql_num_rows($risultati);
+		
+		$num_righe = $risultati->num_rows;
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'EFFETTUATA RICERCA IN ANAGRAFICA' , 'OK' , 'VALORE CERCATO '.$cercato, $_SESSION['historylog']);
 		if  ($num_righe > 0) {
 			echo "Numero di risultati trovati: <b>$tot_records</b><br>"; 
@@ -273,7 +273,7 @@
 					<td width="150" style="vertical-align: middle" align="center"><b>Opzioni</b></td>
 				</tr>
 				<?php
-				while ($row = mysql_fetch_array($risultati)) {
+				while ($row = $risultati->fetch_array()) {
 					$row = array_map('stripslashes', $row);
 					if ( $contatorelinee % 2 == 1 ) { 
 						$colorelinee = $_SESSION['primocoloretabellarisultati'] ; 
@@ -439,7 +439,7 @@
 		if ($ordinerisultati == 'cron-inverso') { 
 			$_SESSION['ordinerisultati'] = 'order by '.$tabella.'.idlettera desc';
 		}
-		$count = mysql_query(	
+		$count = $verificaconnessione->query(	
 						"SELECT 
 							COUNT(*) 
 						FROM 
@@ -472,7 +472,7 @@
 		$iniziorisultati = $_GET['iniziorisultati'];
 		$contatorelinee = 1 ;// per divisione in due colori diversi in tabella
 		$ordinerisultati=$_SESSION['ordinerisultati'];
-		$risultati = mysql_query("	
+		$risultati = $verificaconnessione->query("	
 							SELECT  DISTINCT 
 								* 
 							FROM 
@@ -596,11 +596,11 @@
 
 					<td style="vertical-align: middle">
 					<?php
-					$mittenti= mysql_query("SELECT distinct * 
+					$mittenti= $verificaconnessione->query("SELECT distinct * 
 								from anagrafica, $joinletteremittenti 
 								where $joinletteremittenti.idlettera = '$value[0]' 
 								and anagrafica.idanagrafica=$joinletteremittenti.idanagrafica");
-					while ($mittenti2=mysql_fetch_array($mittenti)) {
+					while ($mittenti2=$mittenti->fetch_array()) {
 						$mittenti2 = array_map('stripslashes', $mittenti2);
 						$mittenti3=$mittenti2['nome'].' '.$mittenti2['cognome'];	
 						?>	
