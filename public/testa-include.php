@@ -1,8 +1,8 @@
  <?php
-
 	if ($_SESSION['auth']< 1 ) {
 		echo 'Devi prima effettuare il login dalla<br>';
-		?> <a href="../"><?php echo 'pagina principale'; $_SESSION['auth']= 0 ;  ?></a>
+		?> 
+		<a href="../"><?php echo 'pagina principale'; $_SESSION['auth']= 0 ;  ?></a>
 		<?php 
 		exit(); 
 	}
@@ -173,10 +173,6 @@ tinymce.init({
 
 
 <body>
-  
-	<?php
-		$anag = new Anagrafica();
-	?>
 
   <div class="container">
 	 
@@ -217,7 +213,7 @@ tinymce.init({
 					</li>
 					
 					<?php if($_SESSION['mod_anagrafica'] 
-						&& $anag->isAnagrafica($_SESSION['loginid'], $verificaconnessione)) 
+						&& $my_anagrafica->isAnagrafica($_SESSION['loginid'], $verificaconnessione)) 
 						{ ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' 
 										OR $_GET['corpus']=='ricerca-anagrafica') 											{ echo ' active'; }?>">
@@ -236,7 +232,7 @@ tinymce.init({
 						</li>
 					<?php } ?>
 
-					<?php if($_SESSION['mod_protocollo'] && $anag->isProtocollo($_SESSION['loginid'], $verificaconnessione)) { ?>
+					<?php if($_SESSION['mod_protocollo'] && $my_anagrafica->isProtocollo($_SESSION['loginid'], $verificaconnessione)) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -251,7 +247,7 @@ tinymce.init({
 
 
 					<?php
-					if($_SESSION['mod_lettere'] && $anag->isLettere($_SESSION['loginid'], $verificaconnessione)) {
+					if($_SESSION['mod_lettere'] && $my_anagrafica->isLettere($_SESSION['loginid'], $verificaconnessione)) {
 						$query = $verificaconnessione->query("SELECT COUNT(*) 
 											FROM comp_lettera 
 											WHERE (vista = 1 OR vista = 2) 
@@ -296,7 +292,7 @@ tinymce.init({
 						</li>
 					<?php } ?>
 
-					<?php if($_SESSION['mod_magazzino'] && $anag->isMagazzino($_SESSION['loginid'], $verificaconnessione)) { ?>
+					<?php if($_SESSION['mod_magazzino'] && $my_anagrafica->isMagazzino($_SESSION['loginid'], $verificaconnessione)) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'farm-magazzino' OR $_GET['corpus']=='farmacia') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> Magazzino <b class="caret"></b></a>
 							<ul class="dropdown-menu">
