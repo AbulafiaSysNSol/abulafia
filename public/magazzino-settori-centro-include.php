@@ -133,7 +133,7 @@
 
 		<div class="col-sm-12">   
 			<?php
-				$settori = $m->getSettori();
+				$settori = $m->getSettori($verificaconnessione);
 			?>
 			
 				<label><i class="fa fa-cubes"></i> Elenco Settori:</label><br><br>
