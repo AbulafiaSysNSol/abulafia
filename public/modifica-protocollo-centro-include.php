@@ -26,8 +26,14 @@
 		$anno = $_SESSION['annoricercaprotocollo'];
 	}
 	
-	$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
-	$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
+	$risultati=$verificaconnessione->query("SELECT * 
+				from lettere$annoprotocollo 
+				where idlettera='$idlettera'");
+
+	$risultati2=$verificaconnessione->query("select * 
+						from joinletteremittenti$annoprotocollo, 
+						anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' 
+						and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 	
 	//controllo se l'anno del protocollo da modificare è uguale a quello in corso
 	if ($anno != $annoprotocollo) { 
@@ -39,17 +45,23 @@
 	}
 
 	//controllo dell'autorizazione necessaria alla modifica del protocollo
-	$risultati3=mysql_query("select * from joinlettereinserimento$annoprotocollo, users where joinlettereinserimento$annoprotocollo.idlettera='$idlettera' and joinlettereinserimento$annoprotocollo.idinser=users.idanagrafica ");
-	$row3 = mysql_fetch_array($risultati3);
+	$risultati3=$verificaconnessione->query("select * 
+						from joinlettereinserimento$annoprotocollo, 
+						users where joinlettereinserimento$annoprotocollo.idlettera='$idlettera' 
+						and joinlettereinserimento$annoprotocollo.idinser=users.idanagrafica ");
+	$row3 = $risultati3->fetch_array();
 	if (($_SESSION['auth'] <= $row3['auth']) and ($row3['idinser'] !=  $_SESSION['loginid'])) {
 		echo 'Non hai un livello di autorizzazione sufficiente a modificare questo protocollo.';?> 
-		<a href="login0.php?corpus=dettagli-protocollo&from=risultati&id=<?php echo $idlettera;?>"><br><br>Vai alla pagina dei Dettagli del Protocollo N.<?php echo $idlettera;?><br><br></a><?php
+		<a href="login0.php?corpus=dettagli-protocollo
+			&from=risultati&id=<?php echo $idlettera;?>">
+			<br><br>Vai alla pagina dei Dettagli del Protocollo N.
+			<?php echo $idlettera;?><br><br></a><?php
 		include 'sotto-include.php'; //carica il file con il footer.
 		exit();
 	}
 	//fine controllo dell'autorizazione necessaria alla modifica del protocollo
 
-	$row = mysql_fetch_array($risultati);
+	$row = $risultati->fetch_array();
 	$row = array_map('stripslashes', $row);
 	$datalettera = $row['datalettera'] ;
 	list($anno, $mese, $giorno) = explode("-", $datalettera);
@@ -69,16 +81,27 @@
 
 	if ($from =='aggiungi') {
 		$idanagrafica=$_GET['idanagrafica'];
-		$aggiungi=mysql_query("insert into joinletteremittenti$annoprotocollo values('$idlettera', '$idanagrafica')");
+		$aggiungi=$verificaconnessione->query("insert into joinletteremittenti$annoprotocollo 
+					values('$idlettera', '$idanagrafica')");
 		$user = $_SESSION['loginid'];
 		$time = time();
 		$anagrafica = new Anagrafica();
-		$name = $anagrafica->getName($idanagrafica);
+		$name = $anagrafica->getName($idanagrafica, $verificaconnessione);
 		if(!$_SESSION['block']) {
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Aggiunto mittente/destinatario', '$user', '$time', '#DEFEB4', ' ', '$name')");
+			$regmodifica = $verificaconnessione->query("INSERT INTO storico_modifiche 
+									VALUES('', '$idlettera', '$anno',
+							 		'Aggiunto mittente/destinatario', '$user', '$time', 
+									'#DEFEB4', ' ', '$name')");
 		}
-		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
-		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
+		$risultati=$verificaconnessione->query("SELECT * 
+							from lettere$annoprotocollo 
+							where idlettera='$idlettera'");
+
+		$risultati2=$verificaconnessione->query("select * 
+							from joinletteremittenti$annoprotocollo, anagrafica 
+							where joinletteremittenti$annoprotocollo.idlettera='$idlettera' 
+							and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
+
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
 	}
 	
@@ -87,54 +110,78 @@
 		$idlettera=$_GET['id'];
 		
 		//controllo almeno un mittente/destinatario
-		$count=mysql_query("select count(*) from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-		$count = mysql_fetch_row($count);
+		$count=$verificaconnessione->query("select count(*) 
+							from joinletteremittenti$annoprotocollo, anagrafica 
+							where joinletteremittenti$annoprotocollo.idlettera='$idlettera' 
+							and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
+		$count = $count->fetch_row();
 		if($count[0] == 1) {
 			echo '<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Errore:</b> impossibile eliminare l\'unico mittente o destinario delle lettera. Aggiungerne prima un altro.</div>';
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'FAILED' , 'TENTATIVO DI ELIMINARE MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
 		}
 		else {
-			$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
+			$elimina=$verificaconnessione->query("delete from joinletteremittenti$annoprotocollo 
+								where idanagrafica='$idanagrafica' 
+								and idlettera='$idlettera'");
 			$user = $_SESSION['loginid'];
 			$time = time();
 			$anagrafica = new Anagrafica();
-			$name = $anagrafica->getName($idanagrafica);
+			$name = $anagrafica->getName($idanagrafica, $verificaconnessione);
 			if(!$_SESSION['block']) {
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso mittente/destinatario', '$user', '$time', '#FC9E9E', '$name', ' ')");
+				$regmodifica = $verificaconnessione->query("INSERT INTO storico_modifiche 
+										VALUES('', '$idlettera', '$anno', 
+										'Rimosso mittente/destinatario', '$user', 
+										'$time', '#FC9E9E', '$name', ' ')");
 			}
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
 		}
-		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
-		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
+		$risultati=$verificaconnessione->query("SELECT * from lettere$annoprotocollo 
+							where idlettera='$idlettera'");
+		$risultati2=$verificaconnessione->query("select * from joinletteremittenti$annoprotocollo, anagrafica 
+							where joinletteremittenti$annoprotocollo.idlettera='$idlettera' 
+							and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 	}
 	
 	if ($from == 'eliminaallegato') {  
 		$idlettera=$_GET['idlettera'];
 		$anno = $_GET['anno'];
 		$nome = $_GET['nome'];
-		$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=idlettera AND annoprotocollo=$annoprotocollo AND pathfile='$nome'");
+		$deletequery=$verificaconnessione->query("DELETE FROM joinlettereallegati 
+							WHERE idlettera=idlettera 
+							AND annoprotocollo=$annoprotocollo 
+							AND pathfile='$nome'");
 		$user = $_SESSION['loginid'];
 		$time = time();
 		if(!$_SESSION['block']) {
-			$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso allegato', '$user', '$time', '#FC9E9E', '$nome', ' ')");
+			$regmodifica = $verificaconnessione->query("INSERT INTO storico_modifiche 
+									VALUES('', '$idlettera', '$anno', 
+									'Rimosso allegato', '$user', '$time', 
+									'#FC9E9E', '$nome', ' ')");
 		}
-		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
-		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
+
+		$risultati=$verificaconnessione->query("SELECT * from lettere$annoprotocollo 
+							where idlettera='$idlettera'");
+		$risultati2=$verificaconnessione->query("select * from joinletteremittenti$annoprotocollo, anagrafica 
+							where joinletteremittenti$annoprotocollo.idlettera='$idlettera' 
+							and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO ALLEGATO '. $nome , $_SESSION['historylog']);
-		$utentemod =mysql_query("UPDATE joinlettereinserimento$anno SET joinlettereinserimento$anno.idmod='$loginid', joinlettereinserimento$anno.datamod='$date' WHERE joinlettereinserimento$anno.idlettera='$idlettera' LIMIT 1");
+		$utentemod =$verificaconnessione->query("UPDATE joinlettereinserimento$anno 
+							SET joinlettereinserimento$anno.idmod='$loginid', joinlettereinserimento$anno.datamod='$date' 
+							WHERE joinlettereinserimento$anno.idlettera='$idlettera' 
+							LIMIT 1");
 	}
 	
 	if ($from == 'urlpdf') {  
 		$idlettera=$_GET['idlettera'];
-		$risultati=mysql_query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
-		$risultati2=mysql_query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-		$row = mysql_fetch_array($risultati);
+		$risultati=$verificaconnessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
+		$risultati2=$verificaconnessione->query("select * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
+		$row = $risultati->fetch_array();
 		$row = array_map('stripslashes', $row);
 		$datalettera = $row['datalettera'] ;
 		list($anno, $mese, $giorno) = explode("-", $datalettera);
 		$dataregistrazione = $row['dataregistrazione'] ;
 		list($annor, $meser, $giornor) = explode("-", $dataregistrazione);
-		$utentemod =mysql_query("UPDATE joinlettereinserimento$anno SET joinlettereinserimento$anno.idmod='$loginid', joinlettereinserimento$anno.datamod='$date' WHERE joinlettereinserimento$anno.idlettera='$idlettera' LIMIT 1");
+		$utentemod =$verificaconnessione->query("UPDATE joinlettereinserimento$anno SET joinlettereinserimento$anno.idmod='$loginid', joinlettereinserimento$anno.datamod='$date' WHERE joinlettereinserimento$anno.idlettera='$idlettera' LIMIT 1");
 	}
 	
 	if($_SESSION['block']) {
@@ -248,11 +295,11 @@
 		?>
 		
 		<?php
-		$count=mysql_query("select count(*) from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-		$count = mysql_fetch_row($count);
+		$count=$verificaconnessione->query("select count(*) from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
+		$count = $count->fetch_row;
 		if($count[0] > 0) {
 			echo '<b><i class="fa fa-users"></i> Mittenti/Destinatari attuali:</b><br><br>';
-			while ($row2 = mysql_fetch_array($risultati2)) {
+			while ($row2 = $risultati2->fetch_array()) {
 				$row2 = array_map('stripslashes', $row2);
 				echo '<a href="anagrafica-mini.php?id=' . $row2['idanagrafica'].'" class="fancybox" data-fancybox-type="iframe">' . $row2['cognome'] . ' ' . $row2['nome'] ;?></a> - <a href="login0.php?corpus=modifica-protocollo&from=elimina-mittente&id=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $row['urlpdf'];?>">Elimina <span class="glyphicon glyphicon-trash"></span></a><br><?php
 			}
@@ -326,12 +373,12 @@
 			<div class="row">
 			<div class="col-sm-11">
 			<?php
-			$risultati=mysql_query("select distinct * from titolario");
+			$risultati=$verificaconnessione->query("select distinct * from titolario");
 			?>
 			<select class="form-control" name="riferimento">
 			<option value="">nessuna titolazione
 			<?php
-			while ($risultati2=mysql_fetch_array($risultati)) {
+			while ($risultati2=$risultati->fetch_array()) {
 				$risultati2 = array_map ("stripslashes",$risultati2);
 				 if( $row['riferimento'] == $risultati2['codice'] ) {
 					echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
@@ -350,12 +397,12 @@
 			<div class="row">
 			<div class="col-sm-11">
 			<?php
-			$risultati=mysql_query("select distinct * from pratiche");
+			$risultati=$verificaconnessione->query("select distinct * from pratiche");
 			?>
 			<select class="form-control" name="pratica">
 			<option value="">nessuna pratica
 			<?php
-			while ($risultati2=mysql_fetch_array($risultati)) {
+			while ($risultati2=$risultati->fetch_array()) {
 				$risultati2 = array_map ("stripslashes",$risultati2);
 				 if( $row['pratica'] == $risultati2['id'] ) {
 					echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];

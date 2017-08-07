@@ -5,8 +5,8 @@
 		echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; 
 		exit ();
 	}
-	$anag = new Anagrafica();
-	$admin = $anag->isAdmin($_SESSION['loginid']);
+	
+	$admin = $my_anagrafica->isAdmin($_SESSION['loginid'], $verificaconnessione);
 ?>
 <div class="panel panel-default">
 	
@@ -40,8 +40,10 @@
 
 			<?php 
 			//funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
-			$contalettere=mysql_query("select count(*) from lettere$annoprotocollo where lettere$annoprotocollo.datalettera!='0000-00-00'");
-			$res_count=mysql_fetch_row($contalettere);
+			$contalettere=$verificaconnessione->query("select count(*) 
+									from lettere$annoprotocollo 
+									where lettere$annoprotocollo.datalettera!='0000-00-00'");
+			$res_count=$contalettere->fetch_row();
 			$contalettere= $res_count[0] +1 ;
 			//fine funzione per determinare se la tabella "lettere" è vuota. 
 			?>
