@@ -1,6 +1,14 @@
 db-connessione-include.php
-firma.jpg
-firmaprova.jpg
+presidente.jpg
+presidenteprova.jpg
+segreteria.jpg
+segreteriaprova.jpg
+ragioneria.jpg
+ragioneriaprova.jpg
+acquisti.jpg
+acquistiprova.jpg
+personale.jpg
+personaleprova.jpg
 mail-conf-include.php
 /public/lettere*
 public/graphs/*
@@ -13,5 +21,9 @@ public/log/*
 /public/images/footer.jpg
 /public/images/footerlettere.jpg
 /public/images/headerpresidente.jpg
+/public/images/headersegreteria.jpg
+/public/images/headerragioneria.jpg
+/public/images/headerpersonale.jpg
+/public/images/headeracquisti.jpg
 public/images/barcode/*
 !public/images/barcode/.gitkeep

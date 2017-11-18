@@ -19,11 +19,12 @@
 	$allegati = $_POST['allegati'];
 	$oggetto = addslashes($_POST['oggetto']);
 	$testo = addslashes($_POST['message']);
+	$ufficio = addslashes($_POST['ufficio']);
 	$vista = 0;
 	$firmata = 0;
 	$insert = $_SESSION['loginid'];
 	
-	$update = mysql_query(" UPDATE comp_lettera SET data = '$data', oggetto = '$oggetto', testo = '$testo', allegati = '$allegati' WHERE id = $id ");
+	$update = mysql_query(" UPDATE comp_lettera SET data = '$data', oggetto = '$oggetto', testo = '$testo', allegati = '$allegati', ufficio = '$ufficio' WHERE id = $id ");
 	echo mysql_error();
 	
 	if($update) {

@@ -79,12 +79,12 @@ $query = mysql_query("SELECT * FROM comp_lettera WHERE protocollo = 0 ORDER BY i
 									<i class="fa fa-users"></i>
 							</a>
 							<?php }
-							if($risultati2['vista'] != 2 && $_SESSION['auth'] >= 90) { ?>
+							if($risultati2['vista'] != 2 && ($my_anagrafica->isAdmin($_SESSION['loginid']) || $my_anagrafica->canSign($_SESSION['loginid'], $risultati2['ufficio']))) { ?>
 							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Segna come vista" href="vista-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere">
 									<i class="fa fa-eye"></i>
 							</a>
 							<?php }
-							if($risultati2['firmata'] != 1 && $_SESSION['auth'] >= 90 && $l->destinatariOk($risultati2['id'])) { ?>
+							if($risultati2['firmata'] != 1 && ($my_anagrafica->isAdmin($_SESSION['loginid']) || $my_anagrafica->canSign($_SESSION['loginid'], $risultati2['ufficio'])) && $l->destinatariOk($risultati2['id'])) { ?>
 							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Firma" href="firma-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere">
 									<i class="fa fa-pencil"></i>
 							</a>

@@ -22,6 +22,8 @@
 	$_SESSION['my_manuale'] = serialize($my_manuale); //serializzazione per passaggio alle variabili di sessione
 	$my_database = new Database ;//crea un nuovo oggetto
 	$_SESSION['my_database'] = serialize($my_database); //serializzazione per passaggio alle variabili di sessione
+	$my_lettera = new Lettera ;//crea un nuovo oggetto
+	$_SESSION['my_lettera'] = serialize($my_lettera); //serializzazione per passaggio alle variabili di sessione
 
 	$logdirectory="log/";
 	$_SESSION['logdirectory'] = "log/";

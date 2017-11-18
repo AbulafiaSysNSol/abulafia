@@ -1,14 +1,15 @@
 <?php
-//controllo dell'autorizzazione necessaria alla gestione degli utenti di abulafia
-if ($_SESSION['auth'] < 90) { 
-	echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; 
-	exit ();
-}
 
 $l = new Lettera();
-
-$count = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+$user = $_SESSION['loginid'];
+if($my_anagrafica->isAdmin($_SESSION['loginid'])) {
+	$count = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+}
+else {
+	$count = mysql_query("SELECT COUNT(*) FROM comp_lettera, joinpersoneuffici WHERE (vista = 1 OR vista = 2) AND firmata = 0 AND joinpersoneuffici.ufficio = comp_lettera.ufficio AND joinpersoneuffici.utente = $user");
+}
 $num = mysql_fetch_row($count);
+
 if($num[0] == 0) {
 	?>
 	<SCRIPT LANGUAGE="Javascript">
@@ -22,8 +23,12 @@ if($num[0] == 0) {
 	exit();
 }
 
-$query = mysql_query("SELECT * FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
-
+if($my_anagrafica->isAdmin($_SESSION['loginid'])) {
+	$query = mysql_query("SELECT *, comp_lettera.id AS idlettera FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+}
+else {
+	$query = mysql_query("SELECT *, comp_lettera.id AS idlettera FROM comp_lettera, joinpersoneuffici WHERE (vista = 1 OR vista = 2) AND firmata = 0 AND joinpersoneuffici.ufficio = comp_lettera.ufficio AND joinpersoneuffici.utente = $user");
+}
 ?>
 
 <div class="panel panel-default">
@@ -53,7 +58,7 @@ $query = mysql_query("SELECT * FROM comp_lettera WHERE (vista = 1 OR vista = 2) 
 			
 			<?php
 			$contatorelinee = 0;
-			while ($risultati2=mysql_fetch_array($query))	{
+			while ($risultati2=mysql_fetch_array($query)) {
 				$risultati2 = array_map('stripslashes', $risultati2);
 				if ( $contatorelinee % 2 == 1 ) { 
 						$colorelinee = $_SESSION['primocoloretabellarisultati'] ; 
@@ -70,31 +75,31 @@ $query = mysql_query("SELECT * FROM comp_lettera WHERE (vista = 1 OR vista = 2) 
 					<td style="vertical-align: middle" align="center"><?php if($risultati2['firmata'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-times"></i>'; }?></td>
 					<td style="vertical-align: middle" align="center">
 						<div class="btn-group btn-group-sm">
-							<a class="btn btn-info fancybox" data-fancybox-type="iframe" data-toggle="tooltip" data-placement="left" title="Anteprima lettera" href="componilettera.php?id=<?php echo $risultati2['id'] ?>">
+							<a class="btn btn-info fancybox" data-fancybox-type="iframe" data-toggle="tooltip" data-placement="left" title="Anteprima lettera" href="componilettera.php?id=<?php echo $risultati2['idlettera'] ?>">
 									<span class="glyphicon glyphicon-info-sign"></span>
 							</a>
 							<?php if($risultati2['firmata'] == 0) { ?>
-							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica lettera" href="login0.php?corpus=modifica-lettera&idlettera=<?php echo $risultati2['id'] ?>&from=elenco-lettere-firma">
+							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica lettera" href="login0.php?corpus=modifica-lettera&idlettera=<?php echo $risultati2['idlettera'] ?>&from=elenco-lettere-firma">
 									<i class="fa fa-edit"></i>
 							</a>
 							<?php }
 							if($risultati2['firmata'] == 0) { ?>
-							<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Modifica destinatari" href="login0.php?corpus=lettera2&id=<?php echo $risultati2['id'] ?>">
+							<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Modifica destinatari" href="login0.php?corpus=lettera2&id=<?php echo $risultati2['idlettera'] ?>">
 									<i class="fa fa-users"></i>
 							</a>
 							<?php }
 							if($risultati2['vista'] != 2) { ?>
-							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Segna come vista" href="vista-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere-firma">
+							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Segna come vista" href="vista-lettera.php?id=<?php echo $risultati2['idlettera'] ?>&from=elenco-lettere-firma">
 									<i class="fa fa-eye"></i>
 							</a>
 							<?php }
-							if($l->destinatariOk($risultati2['id'])) {
+							if($l->destinatariOk($risultati2['idlettera'])) {
 							 ?>
-							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Firma" href="firma-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere-firma">
+							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Firma" href="firma-lettera.php?id=<?php echo $risultati2['idlettera'] ?>&from=elenco-lettere-firma">
 									<i class="fa fa-pencil"></i>
 							</a>
 							<?php } ?>
-							<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina" onclick="return confirm('Sicuro di voler cancellare la lettera?')" href="elimina-lettera.php?id=<?php echo $risultati2['id'] ?>&from=elenco-lettere-firma">
+							<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina" onclick="return confirm('Sicuro di voler cancellare la lettera?')" href="elimina-lettera.php?id=<?php echo $risultati2['idlettera'] ?>&from=elenco-lettere-firma">
 									<i class="fa fa-trash-o"></i>
 							</a>
 						</div>

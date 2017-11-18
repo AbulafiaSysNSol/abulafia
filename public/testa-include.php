@@ -21,7 +21,8 @@
 	$my_ricerca= unserialize($_SESSION['my_ricerca']);//deserializzazione 
 	$my_manuale= unserialize($_SESSION['my_manuale']);//deserializzazione 
 	$my_tabellahtml= unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
-	$my_database= unserialize($_SESSION['my_database']);//deserializzazione 
+	$my_database= unserialize($_SESSION['my_database']);//deserializzazione
+	$my_lettera= unserialize($_SESSION['my_lettera']);//deserializzazione 
 	$setting=mysql_query("select * from defaultsettings");
 	$setting2=mysql_fetch_array($setting);
 
@@ -237,7 +238,13 @@ tinymce.init({
 
 					<?php
 					if($_SESSION['mod_lettere'] && $anag->isLettere($_SESSION['loginid'])) {
-						$query = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+						$user = $_SESSION['loginid'];
+						if($anag->isAdmin($_SESSION['loginid'])) {
+							$query = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+						}
+						else {
+							$query = mysql_query("SELECT COUNT(*) FROM comp_lettera, joinpersoneuffici WHERE (vista = 1 OR vista = 2) AND firmata = 0 AND joinpersoneuffici.ufficio = comp_lettera.ufficio AND joinpersoneuffici.utente = $user");
+						}
 						$num = mysql_fetch_row($query);
 						$prot = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE firmata = 1 AND protocollo = 0");
 						$protocollare = mysql_fetch_row($prot);

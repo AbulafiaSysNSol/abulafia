@@ -19,7 +19,7 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<h5><i class="fa fa-file-text-o"></i> Testo della lettera:</h5>
-						<textarea id="editor" class="form-control" rows="17" name="message"><?php echo $dettagli['testo']; ?></textarea>
+						<textarea id="editor" class="form-control" rows="20" name="message"><?php echo $dettagli['testo']; ?></textarea>
 					</div>
 				
 					<div class="col-sm-4">
@@ -31,6 +31,22 @@
 						<br>
 						<h5><i class="fa fa-paperclip"></i> Numero allegati:</h5>
 						<input type="text" class="form-control input-sm" name="allegati" value="<?php echo $dettagli['allegati']; ?>">
+						<br>
+						<h5><i class="fa fa-pencil"></i> Firmatario:</h5>
+						<select class="form-control input-sm" name="ufficio">
+							<?php
+								$uffici = $my_lettera->getUffici();
+								foreach($uffici as $uff) {
+									if($uff[0] == $dettagli['ufficio']) { 
+										$selected = ' selected';
+									}
+									else {
+										$selected ='';
+									}
+									echo '<option value='.$uff[0].$selected.'>' . $my_lettera->getDescUfficio($uff[0]) . '</option>';
+								}
+							?>
+						</select>
 						<br><br>
 						<button class="btn btn-success btn-lg" type="submit"><i class="fa fa-save"></i> Salva Cambiamenti <i class="fa fa-arrow-right"></i></button>
 					</div>

@@ -32,12 +32,17 @@
 		$firma = $risultati['firmata'];
 		$protocollo = $risultati['protocollo'];
 		$anno = $risultati['anno'];
+		$ufficio = $risultati['ufficio'];
 		if($protocollo != 0) {
 			$data2 = mysql_query("SELECT dataregistrazione FROM lettere$anno WHERE idlettera = $protocollo");
 			$data3 = mysql_fetch_row($data2);
 			$dataprot = $calendario->dataSlash($data3[0]);
 		}
 	}
+	$firme = mysql_query("SELECT * FROM uffici WHERE id = $ufficio");
+	$firmeresult = mysql_fetch_array($firme);
+	$firmagrafo = $firmeresult['firma'];
+	$firmagrafoprova = $firmeresult['firmaprova'];
 	if (($allegati == '') OR ($allegati == 0)) {
 		$allegati = '/';
 	}
@@ -46,7 +51,7 @@
 	<page backtop="35mm" backbottom="' . $altezza . 'mm" backleft="10mm" backright="10mm">
 		
 		<page_header>
-			<img align="right" src="images/headerpresidente.jpg" width="700">
+			<img align="right" src="images/header'.$firmagrafo.'" width="700">
 		</page_header>
 		
 		<page_footer>
@@ -201,12 +206,12 @@
 			
 					if($firma == 1) {
 						$content = $content.'	<div style="margin-left: 350px;">
-											<img src="../firma.jpg" width="280">
+											<img src="../'.$firmagrafo.'" width="280">
 										</div>';
 					}
 					else {
 						$content = $content.' <div style="margin-left: 350px;">
-											<img src="../firmaprova.jpg" width="280">
+											<img src="../'.$firmagrafoprova.'" width="280">
 										</div>';
 					}
 					$content = $content.'

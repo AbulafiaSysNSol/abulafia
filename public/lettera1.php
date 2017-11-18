@@ -17,11 +17,12 @@
 	$allegati = $_POST['allegati'];
 	$oggetto = addslashes($_POST['oggetto']);
 	$testo = addslashes($_POST['message']);
+	$ufficio = addslashes($_POST['ufficio']);
 	$vista = 0;
 	$firmata = 0;
 	$insert = $_SESSION['loginid'];
 	
-	$insert = mysql_query(" INSERT INTO comp_lettera VALUES ( '', '', '', '$data', '$oggetto', '$testo', '$allegati', '$vista', '$firmata', '$insert') ");
+	$insert = mysql_query(" INSERT INTO comp_lettera VALUES ( '', '', '', '$data', '$oggetto', '$testo', '$allegati', '$vista', '$firmata', '$insert', '$ufficio') ");
 	echo mysql_error();
 	$id=mysql_insert_id();
 	

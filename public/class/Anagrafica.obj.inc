@@ -134,6 +134,15 @@ class Anagrafica {
 			return false;
 	}
 
+	public function canSign($idutente, $idufficio) {
+		$query = mysql_query("SELECT COUNT(*) FROM joinpersoneuffici WHERE utente = $idutente AND ufficio = $idufficio");
+		$abilitazione = mysql_fetch_row($query);
+		if ($abilitazione[0] > 0) 
+			return true;
+		else
+			return false;
+	}
+
 }
 
 ?>

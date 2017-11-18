@@ -8,6 +8,7 @@
 	$allegati = $datilettera[6];
 	$testo = $datilettera[5];
 	$oggetto = $datilettera[4];
+	$ufficio = $datilettera[10];
 	$verificaDest = false;
 	$verificaDestCon = false;
 
@@ -192,10 +193,9 @@
 		<a href="?corpus=modifica-lettera&idlettera=<?php echo $id; ?>&from=lettera2"><button class="btn btn-warning btn-lg" type="button"><i class="fa fa-arrow-left"></i> Torna ai dettagli</button></a>
 		<a class="fancybox" data-fancybox-type="iframe" href="componilettera.php?id=<?php echo $id; ?>"><button class="btn btn-info btn-lg" type="button"><i class="fa fa-file-o"></i> Anteprima Lettera</button></a>
 		<a href="sottoponi-lettera-firma.php?idlettera=<?php echo $id; ?>"><button class="btn btn-success btn-lg" type="button"><i class="fa fa-arrow-right"></i> Manda alla firma</button></a>
-		<?php if( ($_SESSION['auth'] >= 90) && ($verificaDest) ) { ?>
+		<?php if(($my_anagrafica->isAdmin($_SESSION['loginid']) || $my_anagrafica->canSign($_SESSION['loginid'], $ufficio)) && ($verificaDest)) { ?>
 			<a href="firma-lettera.php?id=<?php echo $id; ?>&from=elenco-lettere"><button class="btn btn-danger btn-lg" type="button"><i class="fa fa-pencil"></i> Firma</button></a>
 		<?php } ?>
 		</center>
 	</div>
 </div>
-

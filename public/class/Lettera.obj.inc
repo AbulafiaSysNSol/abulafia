@@ -405,6 +405,21 @@ class Lettera {
 			return false;
 		}
 	}
+
+	public function getUffici() {
+		$query = mysql_query("SELECT id FROM uffici");
+		$uffici = array();
+		while ($uff = mysql_fetch_array($query)) {
+			array_push($uffici, $uff);
+		}
+		return $uffici;
+	}
+
+	public function getDescUfficio ($idufficio) {
+		$desc=mysql_query("select distinct * from uffici WHERE id='$idufficio'");
+		$descrizione=mysql_fetch_row($desc);
+		return stripslashes($descrizione[1]);
+	}
 	
 	public function controllaEsistenzaMittente($idmittente, $arraymittenti) {
 		return array_key_exists ($idmittente,$arraymittenti);
