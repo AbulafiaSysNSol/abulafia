@@ -60,12 +60,12 @@
                             
                             <div style="margin-bottom: 25px" class="input-group <?php if($_GET['err'] == 1) {echo 'has-error';} ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="login-username" type="text" class="form-control" name="userid" value="" placeholder="username or email">                                        
+                                <input id="login-username" type="text" class="form-control" name="userid" value="" placeholder="username" required>                                        
                             </div>
                                     
                             <div style="margin-bottom: 25px" class="input-group <?php if($_GET['err'] == 1) {echo 'has-error';} ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                                <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
                             </div>
                                             
                             <div style="margin-top:10px" class="form-group">
