@@ -26,5 +26,6 @@ public/log/*
 /public/images/headerpersonale.jpg
 /public/images/headeracquisti.jpg
 /public/images/logo-azienda.png
+/public/images/logo-azienda2.jpg
 public/images/barcode/*
 !public/images/barcode/.gitkeep
