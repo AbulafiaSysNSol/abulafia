@@ -190,7 +190,7 @@ tinymce.init({
 				<h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2> 
 			</div>
 			<div class="col-sm-4" align="right">
-				<center><img src="<?php echo $_SESSION['splash']; ?>"></center>
+				<center><img src="images/logo-azienda2.jpg"></center>
 			</div>
 		</div>
 	</div>

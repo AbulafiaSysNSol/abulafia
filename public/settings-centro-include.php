@@ -33,56 +33,8 @@
 		<div class="form-group">
 			<form name="modifica" method="post" >
 				<div class="row">
-					<div class="col-sm-4">
-						<h4><i class="fa fa-image"></i> Logo
-						<br><small> Logo visualizzato in alto a destra.</small></h4>
-						<table border="0">
-							<tr>
-								<?php if($_SESSION['splash'] == "images/splash.jpg") { ?>
-								<td><input type="radio" name="splash" value="images/splash.jpg" checked="checked"></td><td><img src="images/splash.jpg" width="85%"></td>
-								<?php } else{ ?>
-								<td><input type="radio" name="splash" value="images/splash.jpg"></td><td><img src="images/splash.jpg" width="85%"></td>
-								<?php } ?>
-							</tr>
-							<tr>
-								<?php if($_SESSION['splash'] == "images/splash1.jpg") { ?>
-								<td><input type="radio" name="splash" value="images/splash1.jpg" checked="checked"></td><td><img src="images/splash1.jpg" width="85%"></td>
-								<?php } else{ ?>
-								<td><input type="radio" name="splash" value="images/splash1.jpg"></td><td><img src="images/splash1.jpg" width="85%"></td>
-								<?php } ?>
-							</tr>
-							<tr>
-								<?php if($_SESSION['splash'] == "images/splash2.jpg") { ?>
-								<td><input type="radio" name="splash" value="images/splash2.jpg" checked="checked"></td><td><img src="images/splash2.jpg" width="85%"></td>
-								<?php } else{ ?>
-								<td><input type="radio" name="splash" value="images/splash2.jpg"></td><td><img src="images/splash2.jpg" width="85%"></td>
-								<?php } ?>
-							</tr>
-							<tr>
-								<?php if($_SESSION['splash'] == "images/splash3.jpg") { ?>
-								<td><input type="radio" name="splash" value="images/splash3.jpg" checked="checked"></td><td><img src="images/splash3.jpg" width="85%"></td>
-								<?php } else{ ?>
-								<td><input type="radio" name="splash" value="images/splash3.jpg"></td><td><img src="images/splash3.jpg" width="85%"></td>
-								<?php } ?>
-							</tr>
-							<tr>
-								<?php if($_SESSION['splash'] == "images/splash4.jpg") { ?>
-								<td><input type="radio" name="splash" value="images/splash4.jpg" checked="checked"></td><td><img src="images/splash4.jpg" width="85%"></td>
-								<?php } else{ ?>
-								<td><input type="radio" name="splash" value="images/splash4.jpg"></td><td><img src="images/splash4.jpg" width="85%"></td>
-								<?php } ?>
-							</tr>
-							<tr>
-								<?php if($_SESSION['splash'] == "images/splash5.jpg") { ?>
-								<td><input type="radio" name="splash" value="images/splash5.jpg" checked="checked"></td><td><img src="images/splash5.jpg" width="85%"></td>
-								<?php } else{ ?>
-								<td><input type="radio" name="splash" value="images/splash5.jpg"></td><td><img src="images/splash5.jpg" width="85%"></td>
-								<?php } ?>
-							</tr>
-						</table>
-					</div>
-			
-					<div class="col-sm-4">
+					<input type="hidden" name="splash" value="logo-azienda2.jpg">
+					<div class="col-sm-6">
 						<h4><i class="fa fa-tint"></i> Primo colore risultati
 						<br><small> Primo colore di sfondo nei risultati.</small></h4>
 						<table border="0" cellspacing="4">
