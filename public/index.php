@@ -29,6 +29,16 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
     <!-- Add custom CSS here -->
     <link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
+    
+	<!-- Google Adsense -->
+	  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+		  (adsbygoogle = window.adsbygoogle || []).push({
+			google_ad_client: "ca-pub-5144136285411668",
+			enable_page_level_ads: true
+		  });
+		</script>
+	<!-- End Google -->
 
 </head>
 
@@ -42,7 +52,7 @@
     <div class="container">
 
         <div class="row" style="margin-top:70px;">
-
+	
             <div class="col-sm-3">
                 <center><img src="images/logo-home.png" width="95%"></center>
             </div>
@@ -82,6 +92,7 @@
             <div class="col-sm-3">
                 <center><img src="images/logo-azienda.png" width="100%"></center>
             </div>
+	    
         </div>
     </div>
 
@@ -99,6 +110,18 @@
             </center>
         </div>
     </div>
+	
+	<center>
+    	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- Home2 -->
+	<ins class="adsbygoogle"
+	     style="display:inline-block;width:728px;height:90px"
+	     data-ad-client="ca-pub-5144136285411668"
+	     data-ad-slot="7478152501"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+	</center>
 
 </body>
 

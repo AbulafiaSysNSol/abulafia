@@ -47,6 +47,16 @@
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
   <!-- META -->
   
+ <!-- Google Adsense -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-5144136285411668",
+		enable_page_level_ads: true
+	  });
+	</script>
+<!-- End Google -->
+  
   <!-- CSS -->
   <link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
   <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -190,7 +200,15 @@ tinymce.init({
 				<h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2> 
 			</div>
 			<div class="col-sm-4" align="right">
-				<center><img src="images/logo-azienda2.jpg"></center>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- AbuHeader -->
+				<ins class="adsbygoogle"
+				     style="display:inline-block;width:320px;height:100px"
+				     data-ad-client="ca-pub-5144136285411668"
+				     data-ad-slot="5521587909"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
 			</div>
 		</div>
 	</div>
