@@ -29,13 +29,15 @@
 mysql_close ($verificaconnessione);
 ?>
 
+<br>
 <center>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Home2 -->
+<!-- Abulafia Home -->
 <ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
+     style="display:block"
      data-ad-client="ca-pub-5144136285411668"
-     data-ad-slot="7478152501"></ins>
+     data-ad-slot="5171068264"
+     data-ad-format="auto"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
