@@ -35,41 +35,6 @@
 <html>
 <head>
 
-<script>
-function _(el){
-	return document.getElementById(el);
-}
-function uploadFile(){
-	var file = _("uploadedfile").files;
-	// alert(file.name+" | "+file.size+" | "+file.type);
-	var formdata = new FormData();
-	formdata.append("uoloadedfile", file);
-	var ajax = new XMLHttpRequest();
-	ajax.upload.addEventListener("progress", progressHandler, false);
-	ajax.addEventListener("load", completeHandler, false);
-	ajax.addEventListener("error", errorHandler, false);
-	ajax.addEventListener("abort", abortHandler, false);
-	ajax.open("POST", "login0.php?corpus=prot-modifica-file");
-	ajax.send(formdata);
-}
-function progressHandler(event){
-	_("loaded_n_total").innerHTML = "Caricati "+(event.loaded/1000000)+" MB su "+(event.total/1000000)+" MB";
-	var percent = (event.loaded / event.total) * 100;
-	_("progressBar").value = Math.round(percent);
-	_("status").innerHTML = Math.round(percent)+"% caricato... attendi il completamento";
-}
-function completeHandler(event){
-	_("status").innerHTML = event.target.responseText;
-	_("progressBar").value = 0;
-}
-function errorHandler(event){
-	_("status").innerHTML = "Upload Failed";
-}
-function abortHandler(event){
-	_("status").innerHTML = "Upload Aborted";
-}
-</script>
-
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
   (adsbygoogle = window.adsbygoogle || []).push({

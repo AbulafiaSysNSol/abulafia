@@ -238,10 +238,11 @@
 									<label for="exampleInputFile"> <i class="fa fa-upload"></i> Carica allegati:</label>
 									<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true" data-placeholder="nessun file selezionato.">
 									<br>
-									<button id="btn" onclick="uploadFile(); showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
-									<br><br><progress id="progressBar" value="0" max="100" style="width:100%; height:25px; display:none;"></progress>
-									<center><div id="status"></div>
-									<div id="loaded_n_total"></div></center>
+									<button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso...attendere!" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
+									<br><br>
+									<div class="progress" id="progress" style="display: none;">
+									  <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+									</div>
 								</div>
 							</div>
 						</form>
@@ -475,7 +476,7 @@ $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio d
  <!--
 function showbar() {
 	if(document.getElementById("uploadedfile").value != '') {
-		document.getElementById("progressBar").style.display="block";
+		document.getElementById("progress").style.display="block";
 	}
 }
 
