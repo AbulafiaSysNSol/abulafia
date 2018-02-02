@@ -240,6 +240,8 @@
 									<br>
 									<button id="btn" onclick="uploadFile(); showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
 									<br><br><progress id="progressBar" value="0" max="100" style="width:100%; height:25px; display:none;"></progress>
+									<h3 id="status"></h3>
+									<p id="loaded_n_total"></p>
 								</div>
 							</div>
 						</form>
