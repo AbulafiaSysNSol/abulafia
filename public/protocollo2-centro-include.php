@@ -1,9 +1,3 @@
-<style>
-#progress-bar {background-color: #c0c0c0;height:30px;color: #FFFFFF;width:0%;-webkit-transition: width .3s;-moz-transition: width .3s;transition: width .3s;}
-#progress-div {border:#808080 1px solid;padding: 0px 0px;margin:30px 0px;border-radius:4px;text-align:center;display:none;}
-#targetLayer{width:100%;text-align:center;display:none;}
-</style>
-
 <?php
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$from= $_GET['from'];
@@ -244,11 +238,8 @@
 									<label for="exampleInputFile"> <i class="fa fa-upload"></i> Carica allegati:</label>
 									<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true" data-placeholder="nessun file selezionato.">
 									<br>
-									<button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
-									<div id="progress-div">
-										<div id="progress-bar"></div>
-									</div>
-									<div id="targetLayer"></div>
+									<button id="btn" onclick="uploadFile(); showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso..." type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
+									<br><br><progress id="progressBar" value="0" max="100" style="width:100%; height:25px; display:none;"></progress>
 								</div>
 							</div>
 						</form>
@@ -482,8 +473,7 @@ $_SESSION['my_lettera']=serialize($my_lettera);//serializzazione per passaggio d
  <!--
 function showbar() {
 	if(document.getElementById("uploadedfile").value != '') {
-		document.getElementById("progress-div").style.display="block";
-		document.getElementById("uploadedfile").style.display="none";
+		document.getElementById("progressBar").style.display="block";
 	}
 }
 
