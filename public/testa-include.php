@@ -53,10 +53,10 @@ function uploadFile(){
 	ajax.send(formdata);
 }
 function progressHandler(event){
-	_("loaded_n_total").innerHTML = "Uploaded "+event.loaded+" bytes of "+event.total;
+	_("loaded_n_total").innerHTML = "Caricati "+(event.loaded/1000)+" KB si "+(event.total/1000);
 	var percent = (event.loaded / event.total) * 100;
 	_("progressBar").value = Math.round(percent);
-	_("status").innerHTML = Math.round(percent)+"% uploaded... please wait";
+	_("status").innerHTML = Math.round(percent)+"% caricato... attendi il completamento";
 }
 function completeHandler(event){
 	_("status").innerHTML = event.target.responseText;
