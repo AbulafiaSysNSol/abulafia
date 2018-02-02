@@ -40,7 +40,7 @@ function _(el){
 	return document.getElementById(el);
 }
 function uploadFile(){
-	var file = _("uploadedfile").files[];
+	var file = _("uploadedfile").files;
 	// alert(file.name+" | "+file.size+" | "+file.type);
 	var formdata = new FormData();
 	formdata.append("uoloadedfile", file);
@@ -53,6 +53,7 @@ function uploadFile(){
 	ajax.send(formdata);
 }
 function progressHandler(event){
+	_("loaded_n_total").innerHTML = "Caricati "+(event.loaded/1000000)+" MB su "+(event.total/1000000)+" MB";
 	var percent = (event.loaded / event.total) * 100;
 	_("progressBar").value = Math.round(percent);
 	_("status").innerHTML = Math.round(percent)+"% caricato... attendi il completamento";
