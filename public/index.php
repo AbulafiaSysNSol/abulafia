@@ -22,7 +22,7 @@
     <meta name="author" content="Biagio Saitta & Alfio Musmarra">
     <meta name="keywords" content="abulafia, protocollo, informatico, volontari, croce rossa italiana, cri, segreteria">
 
-    <title>Abulafia - Login</title>
+    <title>Abulafia Web - Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -61,7 +61,7 @@
                 <div class="panel panel-<?php if($_GET['err'] == 1) {echo 'danger';} else {echo 'info';} ?>" >
                     
                     <div class="panel-heading">
-                        <div class="panel-title"><center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia - Login <?php if($_GET['err'] == 1) {echo ' - Username o Password Errati';} ?></center></div>
+                        <div class="panel-title"><center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia Web - Login <?php if($_GET['err'] == 1) {echo ' - Username o Password Errati';} ?></center></div>
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
@@ -101,10 +101,8 @@
          <div class="row">
             <center>
                 <div class="col-sm-12">
-                    Abulafia is licensed under a: <a href="license.txt" target="_blank">GNU GPL V.3</a><br>
-                    More info at: <a href="">http://www.abulafiaweb.it</a>
-                    <br>
-                    &copy; 2008 - 2017 <strong>Abulafia Sys'n'Sol</strong>
+                    <h4>More info at: <a href="https://www.abulafiaweb.it">Abulafia Web - Smart Solutions</a></h4>
+                    &copy; 2008 - 2018 <strong>Abulafia Sys'n'Sol</strong>
                     <br><br><br>
                 </div>
             </center>
