@@ -1,3 +1,7 @@
+<?php
+	set_time_limit(0);
+?>
+
 <div class="panel panel-default">
 	
 	<div class="panel-heading">

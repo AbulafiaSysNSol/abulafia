@@ -332,7 +332,6 @@ tinymce.init({
 							<li><a href="login0.php?corpus=settings"><i class="fa fa-cog fa-fw"></i> Impostazioni</a></li>
 							<li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o fa-fw"></i> Impostazioni Server Mail</a></li>
 							<li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart fa-fw"></i> Statistiche</a></li>
-							<li><a href="http://wiki.abulafia.cricatania.it" target="_blank"><i class="fa fa-wikipedia-w fa-fw"></i> Wiki</a></li>
 							<?php 
 								if ($_SESSION['auth'] > 95) {
 									?>
