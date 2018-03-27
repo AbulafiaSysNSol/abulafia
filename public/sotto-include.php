@@ -5,7 +5,7 @@
 		<tr>
 		<td align="left">
 			<a href="https://www.abulafiaweb.it" target="_blank">Abulafia Web <?php echo $_SESSION['version']; ?> - Smart Solutions</a> <br />
-			&copy; 2008 - 2017 <strong>Abulafia Sys'n'Sol</strong>
+			&copy; 2008 - 2018 <strong>Abulafia Sys'n'Sol</strong>
                     </td>
 		
 		<td align="right">
