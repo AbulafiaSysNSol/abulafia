@@ -31,7 +31,7 @@
 		<table width="100%" border="0" style="border:solid 3px; border-color:#C0C0C0; background-repeat:repeat-x; background-position:top" cellspacing="0" background="images/dettagli/sfondo.png">
 			<tr>
 				<td width="170px" height="180px" style="background-repeat:no-repeat; background-position:center; padding:10px 5px 10px 5px" align="center">
-					<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'foto/sagoma.jpg';} ?>" width="145">
+					<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'foto/sagoma.png';} ?>" width="145">
 				</td>
 			
 				<td valign="middle" style="border-left:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">
