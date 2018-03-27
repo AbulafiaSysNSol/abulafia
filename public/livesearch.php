@@ -1,12 +1,10 @@
 <?php
 session_start();
 
-if ($_SESSION['auth']< 1 ) {
-	echo 'Devi prima effettuare il login dalla<br>';
-	?> <a href="../"><?php echo 'pagina principale'; $_SESSION['auth']= 0 ;  ?></a>
-	<?php 
-	exit(); 
-}
+if ($_SESSION['auth'] < 1 ) {
+		header("Location: index.php?s=1");
+		exit(); 
+	}
 
 include '../db-connessione-include.php';
 function __autoload ($class_name) //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati

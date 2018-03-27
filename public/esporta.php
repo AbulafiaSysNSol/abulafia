@@ -1,10 +1,8 @@
 <?php
 	session_start(); //avvio della sessione: va fatto obbigatoriamente all'inizio e carica tutte le variabili di sessione, valide di pagina in pagina sino al logout.
 	
-	if ($_SESSION['auth']< 1 ) {
-		echo 'Devi prima effettuare il login dalla<br>';
-		?> <a href="../"><?php echo 'pagina principale'; $_SESSION['auth']= 0 ;  ?></a>
-		<?php 
+	if ($_SESSION['auth'] < 1 ) {
+		header("Location: index.php?s=1");
 		exit(); 
 	}
 

@@ -2,6 +2,11 @@
 
 	session_start();
 
+	if ($_SESSION['auth'] < 1 ) {
+		header("Location: index.php?s=1");
+		exit(); 
+	}
+	
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 
 	include '../db-connessione-include.php';

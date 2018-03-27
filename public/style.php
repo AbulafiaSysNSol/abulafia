@@ -2,6 +2,11 @@
 header("Content-type: text/css");
 session_start();
 
+if ($_SESSION['auth'] < 1 ) {
+          header("Location: index.php?s=1");
+          exit(); 
+     }
+
 $splash= $_SESSION['splash'];
 ?>
 

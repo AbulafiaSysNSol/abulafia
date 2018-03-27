@@ -9,6 +9,13 @@
 	if(!isset($_GET['err'])) {
 		$_GET['err'] = 0;
 	}
+
+    if(!isset($_GET['s'])) {
+        $s = 0;
+    }
+    else {
+        $s = $_GET['s'];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +60,14 @@
 
         <div class="row" style="margin-top:70px;">
 	
+            <?php
+            if ($s) {
+            ?>
+            <center><div class="alert alert-warning"><b><i class="fa fa-warning"></i> Non hai effettuato l'accesso o la sessione &egrave; scaduta. Effettua nuovamente il login per utilizzare l'applicazione.</b></div></center>
+            <?php
+            }
+            ?>
+
             <div class="col-sm-3">
                 <center><img src="images/logo-home.png" width="95%"></center>
             </div>
