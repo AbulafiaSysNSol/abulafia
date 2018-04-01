@@ -29,10 +29,11 @@
 mysql_close ($verificaconnessione);
 ?>
 
+<!--
 <br>
 <center>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Abulafia Home -->
+Abulafia Home
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-5144136285411668"
@@ -43,3 +44,4 @@ mysql_close ($verificaconnessione);
 </script>
 </center>
 <br><br>
+-->
