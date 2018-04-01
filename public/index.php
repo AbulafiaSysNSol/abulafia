@@ -37,7 +37,7 @@
     <!-- Add custom CSS here -->
     <link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
     
-	<!-- Google Adsense -->
+	<!-- Google Adsense
 	  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<script>
 		  (adsbygoogle = window.adsbygoogle || []).push({
@@ -45,7 +45,7 @@
 			enable_page_level_ads: true
 		  });
 		</script>
-	<!-- End Google -->
+	End Google -->
 
 </head>
 
@@ -124,9 +124,10 @@
         </div>
     </div>
 	
+	<!--
 	<center>
     	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<!-- Home2 -->
+	Home2
 	<ins class="adsbygoogle"
 	     style="display:inline-block;width:728px;height:90px"
 	     data-ad-client="ca-pub-5144136285411668"
@@ -135,7 +136,8 @@
 	(adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
 	</center>
-
+	-->
+	
 </body>
 
 </html>

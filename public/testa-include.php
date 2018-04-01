@@ -193,12 +193,14 @@ tinymce.init({
 			<div class="col-sm-1">
 				<center><img width="60" src="images/abulafia logo-scont.png"></center>
 			</div>
-			<div class="col-sm-7">
+			<div class="col-sm-11">
 				<h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2> 
 			</div>
+			
+			<!--
 			<div class="col-sm-4" align="center" valign="middle">
 				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				<!-- AbuHeader -->
+				 AbuHeader
 				<ins class="adsbygoogle"
 				     style="display:inline-block;width:320px;height:100px"
 				     data-ad-client="ca-pub-5144136285411668"
@@ -207,6 +209,8 @@ tinymce.init({
 				(adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
 			</div>
+			-->
+			
 		</div>
 	</div>
 	
