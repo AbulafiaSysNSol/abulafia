@@ -8,6 +8,13 @@
 	$id = $_GET['id'];
 	$a = new Anagrafica();
 	$c = new Calendario();
+	if ($id != $_SESSION['loginid']) {
+		?>
+		<script language="javascript">
+			window.location="logout.php";
+		</script>
+		<?php
+	}
 ?>
 
 <!-- Modal -->
