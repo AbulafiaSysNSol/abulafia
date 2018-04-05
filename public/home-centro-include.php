@@ -56,6 +56,12 @@
 		<center><h3><div class="alert alert-success"><i class="fa fa-check"></i> Lettera sottoposta alla firma <b>correttamente!</b></div></h3></center>
 		<?php
 	}
+
+	if (isset($_GET['profile']) &&($_GET['profile'] == 'ok')) {
+		?>
+		<center><h4><div class="alert alert-success"><i class="fa fa-check"></i> Profilo aggiornato <b>correttamente!</b> E adesso possibile riprendere l'uso del software.</div></h4></center>
+		<?php
+	}
 	
 	if (isset($_GET['email']) &&($_GET['email'] == 'ok')) {
 		?>
@@ -63,9 +69,18 @@
 		<?php
 	}
 	
-	if (!$e->isSetMail()) {
+
+	/*if (!$e->isSetMail()) {
 		?>
 		<center><h4><div class="alert alert-warning"><i class="fa fa-warning"></i> <b>Attenzione:</b> per poter inviare email bisogna configurare il server mail in <a href="?corpus=server-mail">questa pagina</a>.</div></h4></center>
+		<?php
+	}*/
+
+	if (!$a->profileIsUpdate($_SESSION['loginid'])) {
+		?>
+		<script language="javascript">
+			window.location="login0.php?corpus=modale-profilo&id=<?php echo $_SESSION['loginid'];?>";
+		</script>
 		<?php
 	}
 	

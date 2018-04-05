@@ -71,6 +71,36 @@ class Anagrafica {
 			return $nome[0];
 	}
 
+	public function getNome($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
+		$query = mysql_query("SELECT anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
+		$nome = mysql_fetch_row($query); 
+		return $nome[0];
+	}
+
+	public function getCognome($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
+		$query = mysql_query("SELECT anagrafica.cognome FROM anagrafica WHERE idanagrafica = $id");
+		$nome = mysql_fetch_row($query); 
+		return $nome[0];
+	}
+
+	public function getData($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
+		$query = mysql_query("SELECT anagrafica.nascitadata FROM anagrafica WHERE idanagrafica = $id");
+		$nome = mysql_fetch_row($query); 
+		return $nome[0];
+	}
+
+	public function getCodiceFiscale($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
+		$query = mysql_query("SELECT anagrafica.codicefiscale FROM anagrafica WHERE idanagrafica = $id");
+		$nome = mysql_fetch_row($query); 
+		return $nome[0];
+	}
+
+	public function getEmail($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
+		$query = mysql_query("SELECT users.mainemail FROM users WHERE idanagrafica = $id");
+		$nome = mysql_fetch_row($query); 
+		return $nome[0];
+	}
+
 	public function getFoto($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
 		$query = mysql_query("SELECT anagrafica.urlfoto FROM anagrafica WHERE idanagrafica = $id");
 		$foto = mysql_fetch_row($query);
@@ -141,6 +171,27 @@ class Anagrafica {
 			return true;
 		else
 			return false;
+	}
+
+	public function profileIsUpdate($id) {
+		$query = mysql_query("SELECT updateprofile FROM users WHERE idanagrafica = $id");
+		$profile = mysql_fetch_row($query);
+		if ($profile[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
+	public function updateProfile( $id, $nome, $cognome, $data, $codicefiscale, $email) {
+		$query = mysql_query("UPDATE anagrafica SET nome = '$nome', cognome = '$cognome', nascitadata = '$data', codicefiscale = '$codicefiscale' WHERE anagrafica.idanagrafica = $id");
+		$query2 = mysql_query("UPDATE users SET mainemail = '$email' WHERE users.idanagrafica = $id");
+		$query3 = mysql_query("UPDATE users SET updateprofile = '1' WHERE idanagrafica = $id");
+		if ($query && $query2 && $query3) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

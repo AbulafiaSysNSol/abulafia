@@ -33,6 +33,7 @@
 <html>
 <head>
 
+<!--
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
   (adsbygoogle = window.adsbygoogle || []).push({
@@ -40,6 +41,7 @@
     enable_page_level_ads: true
   });
 </script>
+-->
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />

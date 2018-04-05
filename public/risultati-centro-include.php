@@ -264,12 +264,9 @@
 				<tr>
 					<td style="vertical-align: middle" align="center"><b>Id</b></td>
 					<td style="vertical-align: middle" align="center"><b>Tipo</b></td>
-					<td style="vertical-align: middle" align="center"><b>Cognome</b></td>
+					<td style="vertical-align: middle" align="center"><b>Cognome/Rag. Sociale</b></td>
 					<td style="vertical-align: middle" align="center"><b>Nome</b></td>
-					<td style="vertical-align: middle" align="center"><b>Data di Nascita</b></td>
-					<td style="vertical-align: middle" align="center"><b>Comune</b></td>
-					<td style="vertical-align: middle" align="center"><b>Prov.</b></td>
-					<td style="vertical-align: middle" align="center"><b>Codice Fiscale</b></td>
+					<td style="vertical-align: middle" align="center"><b>Cod. Fiscale/P. Iva</b></td>
 					<td width="150" style="vertical-align: middle" align="center"><b>Opzioni</b></td>
 				</tr>
 				<?php
@@ -284,14 +281,11 @@
 					$contatorelinee = $contatorelinee + 1 ;
 					?>
 					<tr bgcolor=<?php echo $colorelinee; ?>>
-						<td style="vertical-align: middle" align="center"><?php echo $row['idanagrafica'];?></td>
-						<td style="vertical-align: middle" align="center"><?php echo ucwords($row['tipologia']);?></td>
-						<td style="vertical-align: middle" align="center"><?php echo $row['cognome'];?></td>
-						<td style="vertical-align: middle" align="center"><?php echo $row['nome'] ; ?> </td>
-						<td style="vertical-align: middle" align="center"><?php echo $my_calendario->publdataitaliana($row['nascitadata'], '/');?></td>
-						<td style="vertical-align: middle" align="center"><?php echo $row['nascitacomune'];?></td>
-						<td style="vertical-align: middle" align="center"><?php echo $row['nascitaprovincia'];?></td>
-						<td style="vertical-align: middle" align="center"><?php echo $row['codicefiscale'];?></td>
+						<td style="vertical-align: middle" align="left"><?php echo $row['idanagrafica'];?></td>
+						<td style="vertical-align: middle" align="left"><?php echo ucwords($row['tipologia']);?></td>
+						<td style="vertical-align: middle" align="left"><?php echo $row['cognome'];?></td>
+						<td style="vertical-align: middle" align="left"><?php echo $row['nome'] ; ?> </td>
+						<td style="vertical-align: middle" align="left"><?php echo $row['codicefiscale'];?></td>
 						<td nowrap style="vertical-align: middle" align="center">
 							<div class="btn-group btn-group-sm">
 								<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli anagrafica" href="login0.php?corpus=dettagli-anagrafica
@@ -549,9 +543,8 @@
 			<table class="table table-bordered">
 				<tr align = "center">
 					<td style="vertical-align: middle"></td>
-					<td style="vertical-align: middle">Prot.</td>
-					<td style="vertical-align: middle">Data Reg.</td>
-					<td style="vertical-align: middle">Pos.</td>
+					<td style="vertical-align: middle">N.</td>
+					<td style="vertical-align: middle">Data</td>
 					<td style="vertical-align: middle">Oggetto</td>
 					<td style="vertical-align: middle">File</td>
 					<td style="vertical-align: middle">Mitt./Dest.</td>
@@ -569,11 +562,10 @@
 				} //secondo colore
 				$contatorelinee = $contatorelinee + 1 ;
 				?>
-				<tr align = "center" bgcolor=<?php echo $colorelinee; ?> >
-					<td style="vertical-align: middle"><?php if($value[5] == 'spedita') { echo'<h3><i class="fa fa-level-up"></i></h3>'; } else { echo '<h3><i class="fa fa-level-down"></i></h3>'; } ;?></td>
-					<td style="vertical-align: middle"><?php echo $value[0] ;?></td>
+				<tr bgcolor=<?php echo $colorelinee; ?> >
+					<td style="vertical-align: middle"><?php if($value[5] == 'spedita') { echo'<i class="fa fa-arrow-up"></i> '; } else { echo '<i class="fa fa-arrow-down"></i> '; } ?></td>
+					<td style="vertical-align: middle"><?php echo $value[0]; ?></td>
 					<td style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
-					<td style="vertical-align: middle"><?php echo $value[7] ;?></td>
 					<td style="vertical-align: middle"><?php echo $value[1] ;?></td>
 					<td nowrap style="vertical-align: middle"> 
 					
@@ -609,7 +601,7 @@
 					}
 					?>
 					</td>
-					<td nowrap style="vertical-align: middle">
+					<td nowrap style="vertical-align: middle; text-align: center;">
 						<div class="btn-group btn-group-sm">
 							<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
 							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
