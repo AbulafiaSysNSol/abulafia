@@ -50,28 +50,33 @@
 					?>
 
 					<div class="col-sm-1">
-						<label>Anagrafica:</label><br>
-						<center><input type="checkbox" name="anagrafica" value="1" <?php if($row3['anagrafica'] == 1) echo 'checked'; ?>/></center>
+						<center><label>Anagrafica:</label><br>
+						<input type="checkbox" name="anagrafica" value="1" <?php if($row3['anagrafica'] == 1) echo 'checked'; ?>/></center>
 					</div>
 
 					<div class="col-sm-1">
-						<label>Protocollo:</label><br>
-						<center><input type="checkbox" name="protocollo" value="1" <?php if($row3['protocollo'] == 1) echo 'checked'; ?>/></center>
+						<center><label>Protocollo:</label><br>
+						<input type="checkbox" name="protocollo" value="1" <?php if($row3['protocollo'] == 1) echo 'checked'; ?>/></center>
 					</div>
 
 					<div class="col-sm-1">
-						<label>Lettere:</label><br>
-						<center><input type="checkbox" name="lettere" value="1" <?php if($row3['lettere'] == 1) echo 'checked'; ?>/></center>
+						<center><label>Lettere:</label><br>
+						<input type="checkbox" name="lettere" value="1" <?php if($row3['lettere'] == 1) echo 'checked'; ?>/></center>
 					</div>
 
 					<div class="col-sm-1">
-						<label>Magazzino:</label><br>
-						<center><input type="checkbox" name="magazzino" value="1" <?php if($row3['magazzino'] == 1) echo 'checked'; ?>/></center>
+						<center><label>Magazzino:</label><br>
+						<input type="checkbox" name="magazzino" value="1" <?php if($row3['magazzino'] == 1) echo 'checked'; ?>/></center>
 					</div>
 
 					<div class="col-sm-1">
-						<label>Contabilit&agrave:</label><br>
-						<center><input type="checkbox" name="contabilita" value="1" <?php if($row3['contabilita'] == 1) echo 'checked'; ?>/></center>
+						<center><label>Contabilit&agrave:</label><br>
+						<input type="checkbox" name="contabilita" value="1" <?php if($row3['contabilita'] == 1) echo 'checked'; ?>/></center>
+					</div>
+
+					<div class="col-sm-1">
+						<center><label>Check:</label><br>
+						<input type="checkbox" name="checkprofile" value="1" <?php if($row3['updateprofile'] == 1) echo 'checked'; ?>/></center>
 					</div>
 
 				</div>
@@ -79,6 +84,11 @@
 				<br>
 
 				<div class="row">
+					<div class="col-sm-3">
+						<label>Email:</label>
+						<input class="form-control input-sm" type="email" name="email" value="<?php echo $row3['mainemail']; ?>"/>
+					</div>
+
 					<div class="col-sm-3">
 						<label>Password:</label>
 						<input class="form-control input-sm" type="password" name="nuovapassword1" />

@@ -5,6 +5,7 @@
 	$nuovapassword3 =MD5($nuovapassword1);
 	$authlevel=$_POST['authlevel1'];
 	$nomeutente=$_POST['nomeutente'];
+	$email=$_POST['email'];
 	
 	if(isset($_POST['admin'])) {
 		$admin = $_POST['admin'];
@@ -48,6 +49,13 @@
 		$contabilita = 0;
 	}
 
+	if(isset($_POST['checkprofile'])) {
+		$check = $_POST['checkprofile'];
+	}
+	else {
+		$check = 0;
+	}
+
 	if ($nuovapassword1 != $nuovapassword2) { 
 		echo 'Errore: le due password nuove non coincidono'; 
 		$errorecambiopassword= 1; 
@@ -57,7 +65,7 @@
 		$cambiopassword=mysql_query("update users set users.password='$nuovapassword3' where users.idanagrafica='$id' limit 1");
 	}
 
-	$update=mysql_query("update users set users.loginname='$nomeutente', users.auth='$authlevel', users.admin='$admin', users.anagrafica = '$anagrafica', users.protocollo = '$protocollo', users.lettere = '$lettere', users.magazzino = '$magazzino', users.contabilita = '$contabilita' where users.idanagrafica='$id' limit 1");
+	$update=mysql_query("update users set users.loginname='$nomeutente', users.mainemail = '$email', users.auth='$authlevel', users.admin='$admin', users.anagrafica = '$anagrafica', users.protocollo = '$protocollo', users.lettere = '$lettere', users.magazzino = '$magazzino', users.contabilita = '$contabilita', users.updateprofile = '$check' where users.idanagrafica='$id' limit 1");
 
 ?>
 
