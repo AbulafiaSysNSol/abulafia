@@ -204,12 +204,12 @@
 			
 					if($firma == 1) {
 						$content = $content.'	<div style="margin-left: 350px;">
-											<img src="../'.$firmagrafo.'" width="280">
+											<img src="../'. $_SESSION['signaturepath'] . '/' . $firmagrafo .'" width="280">
 										</div>';
 					}
 					else {
 						$content = $content.' <div style="margin-left: 350px;">
-											<img src="../'.$firmagrafoprova.'" width="280">
+											<img src="../' . $firmagrafoprova.'" width="280">
 										</div>';
 					}
 					$content = $content.'

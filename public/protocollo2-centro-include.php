@@ -2,6 +2,7 @@
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	$from= $_GET['from'];
 	$add = false;
+	$sel = 0;
 	$my_anagrafica= new Anagrafica();//crea un nuovo oggetto anagrafica
 	
 	/*if (isset($_session['dbname'])) { 
@@ -368,14 +369,13 @@
 							<div class="row">
 								<div class="col-sm-11">
 									<select class="form-control" size=1 cols=4 NAME="posizione">
-										<option selected value=""></option>
-										<option value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected";} ?>> posta ordinaria</option>
-										<option value="raccomandata"<?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "raccomandata") {echo "selected";} ?>> raccomandata</option>
-										<option Value="telegramma" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "telegramma") {echo "selected";} ?>> telegramma</option>
-										<option value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected";} ?>> fax</option>
-										<option value="email" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "email") {echo "selected";} ?>> email</option>
-										<option value="consegna a mano" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "consegna a mano") {echo "selected";} ?>> consegna a mano</option>
-										<option value="PEC" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "PEC") {echo "selected";} ?>> PEC</option>
+										<option value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected"; $sel=1;} ?>> Posta Prdinaria</option>
+										<option value="raccomandata"<?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "raccomandata") {echo "selected"; $sel=1;} ?>> Raccomandata</option>
+										<option Value="telegramma" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "telegramma") {echo "selected"; $sel=1;} ?>> Telegramma</option>
+										<option value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected"; $sel=1;} ?>> Fax</option>
+										<option value="email" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "email") {echo "selected"; $sel=1;} if(!$sel) {echo 'selected';} ?>> Email</option>
+										<option value="consegna a mano" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "consegna a mano") {echo "selected"; $sel=1;} ?>> Consegna a Mano</option>
+										<option value="PEC" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "PEC") {echo "selected"; $sel=1;} ?>> PEC</option>
 									</select>
 								</div>
 							</div>

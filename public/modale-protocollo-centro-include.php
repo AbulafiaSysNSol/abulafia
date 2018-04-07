@@ -30,7 +30,7 @@
 									<OPTION value="raccomandata"> Raccomandata
 									<OPTION Value="telegramma"> Telegramma
 									<OPTION value="fax"> Fax
-									<OPTION value="email"> Email
+									<OPTION value="email" selected> Email
 									<OPTION value="consegna a mano"> Consegna a Mano
 									<OPTION value="PEC"> PEC
 									</select>
@@ -94,3 +94,9 @@
 		</div>
 	</form>
 <!--End Modal-->
+
+<script type="text/javascript">
+    $('#myModal').on('hidden.bs.modal', function (e) {
+  		window.location="?corpus=elenco-lettere";
+	})
+</script>
