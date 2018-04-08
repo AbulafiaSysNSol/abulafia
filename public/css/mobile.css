@@ -1,0 +1,32 @@
+@media (min-width: 641px) {
+
+	.container {
+		margin-top: 70px;
+	}
+
+	.logomobile {
+		display: none;
+	}
+
+	.logodesktop {
+		display: block;
+	}
+
+}
+
+@media (max-width: 640px) {
+	
+	.container {
+		margin-top: 20px;
+	}
+
+	.logomobile {
+		display: block;
+		display: inline;
+	}
+
+	.logodesktop {
+		display: none;
+	}
+
+}

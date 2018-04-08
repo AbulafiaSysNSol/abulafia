@@ -33,6 +33,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/mobile.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
     <!-- Add custom CSS here -->
     <link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
@@ -58,7 +59,7 @@
 
     <div class="container">
 
-        <div class="row" style="margin-top:70px;">
+        <div class="row">
 	
             <?php
             if ($s) {
@@ -69,14 +70,20 @@
             ?>
 
             <div class="col-sm-3">
-                <center><img src="images/logo-home.png" width="95%"></center>
+                <center><div class="logodesktop"><img src="images/logo-home.png" width="95%"></div></center>
             </div>
 
-            <div id="loginbox" class="col-sm-6">                    
+            <div id="loginbox" class="col-sm-6">   
+                <center>
+                <div class="logomobile"><img src="images/logo-home.png" width="10%"></div>
+                <div class="logomobile"><img src="images/logo-azienda.png" width="12%"></div>          
+                </center>
                 <div class="panel panel-<?php if($_GET['err'] == 1) {echo 'danger';} else {echo 'info';} ?>" >
-                    
+
                     <div class="panel-heading">
-                        <div class="panel-title"><center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia Web - Login <?php if($_GET['err'] == 1) {echo ' - Username o Password Errati';} ?></center></div>
+                        <div class="panel-title">
+                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia Web - Login <?php if($_GET['err'] == 1) {echo ' - Username o Password Errati';} ?></center>
+                        </div>
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
@@ -105,18 +112,18 @@
         	</div>
 
             <div class="col-sm-3">
-                <center><img src="images/logo-azienda.png" width="100%"></center>
+                <center><div class="logodesktop"><img src="images/logo-azienda.png" width="100%"></div></center>
             </div>
 	    
         </div>
     </div>
 
-    <div class="container">
+    <div class="container2">
         <hr>
          <div class="row">
             <center>
                 <div class="col-sm-12">
-                    <h4>More info at: <a href="https://www.abulafiaweb.it">Abulafia Web - Smart Solutions</a></h4>
+                    <h4><a href="https://www.abulafiaweb.it">Abulafia Web - Smart Solutions</a></h4>
                     &copy; 2008 - 2018 <strong>Abulafia Sys'n'Sol</strong>
                     <br><br><br>
                 </div>
