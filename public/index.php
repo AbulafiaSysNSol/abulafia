@@ -75,8 +75,8 @@
 
             <div id="loginbox" class="col-sm-6">   
                 <center>
-                <div class="logomobile"><img src="images/logo-home.png" width="10%"></div>
-                <div class="logomobile"><img src="images/logo-azienda.png" width="12%"></div>          
+                <div class="logomobile"><img src="images/logo-home.png" width="44%"></div>
+                <div class="logomobile"><img src="images/logo-azienda.png" width="48%"></div>          
                 </center>
                 <div class="panel panel-<?php if($_GET['err'] == 1) {echo 'danger';} else {echo 'info';} ?>" >
 
