@@ -369,7 +369,7 @@
 							<div class="row">
 								<div class="col-sm-11">
 									<select class="form-control" size=1 cols=4 NAME="posizione">
-										<option value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected"; $sel=1;} ?>> Posta Prdinaria</option>
+										<option value="posta ordinaria" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "posta ordinaria") {echo "selected"; $sel=1;} ?>> Posta Ordinaria</option>
 										<option value="raccomandata"<?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "raccomandata") {echo "selected"; $sel=1;} ?>> Raccomandata</option>
 										<option Value="telegramma" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "telegramma") {echo "selected"; $sel=1;} ?>> Telegramma</option>
 										<option value="fax" <?php if( ($errore || $add) && isset($_SESSION['posizione']) && $_SESSION['posizione'] == "fax") {echo "selected"; $sel=1;} ?>> Fax</option>
