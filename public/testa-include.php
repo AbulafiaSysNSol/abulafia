@@ -75,6 +75,21 @@
   <script type="text/javascript" src="js/bootstrap-filestyle.min.js"> </script>
   <!-- JS -->
 
+  <!-- FULLCALENDAR -->
+  <link rel='stylesheet' href='lib/fullcalendar/fullcalendar.css' />
+  <script src='lib/fullcalendar/lib/jquery.min.js'></script>
+  <script src='lib/fullcalendar/lib/moment.min.js'></script>
+  <script src='lib/fullcalendar/fullcalendar.js'></script>
+  <script src='lib/fullcalendar/locale/It.js'></script>
+  <!-- FULLCALENDAR -->
+
+  <script type="text/javascript">
+  	$(function() {
+	  	$('#calendar').fullCalendar({
+ 	 })
+	});
+  </script>
+
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea#editor",
