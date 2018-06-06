@@ -118,6 +118,9 @@
 							<td><label>Protocollo </label></td><td><input type="checkbox" name="protocollo" <?php if($_SESSION['mod_protocollo']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
 						</tr>
 						<tr>
+							<td><label>Documenti </label></td><td><input type="checkbox" name="documenti" <?php if($_SESSION['mod_documenti']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
+						</tr>
+						<tr>
 							<td><label>Lettere </label></td><td><input type="checkbox" name="lettere" <?php if($_SESSION['mod_lettere']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
 						</tr>
 						<tr>

@@ -39,6 +39,13 @@
 		$protocollo = 0;
 	}
 
+	if(isset($_POST['documenti'])) {
+		$documenti = 1;
+	}
+	else {
+		$documenti = 0;
+	}
+
 	if(isset($_POST['lettere'])) {
 		$lettere = 1;
 	}
@@ -80,7 +87,7 @@
 		}
 	}
 
-	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio', defaultsettings.anagrafica = '$anagrafica', defaultsettings.protocollo = '$protocollo', defaultsettings.lettere = '$lettere', defaultsettings.magazzino = '$magazzino', defaultsettings.contabilita = '$contabilita'");
+	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio', defaultsettings.anagrafica = '$anagrafica', defaultsettings.protocollo = '$protocollo', defaultsettings.documenti = '$documenti', defaultsettings.lettere = '$lettere', defaultsettings.magazzino = '$magazzino', defaultsettings.contabilita = '$contabilita'");
 	$inserimento2=mysql_query("update mailsettings set mailsettings.headermail = '$headermail', mailsettings.footermail = '$footermail'");
 
 	if (!$inserimento && !$inserimento2) {
@@ -112,6 +119,7 @@
 		$_SESSION['inizio'] = $inizio;
 		$_SESSION['mod_anagrafica'] = $anagrafica;
 		$_SESSION['mod_protocollo'] = $protocollo;
+		$_SESSION['mod_documenti'] = $documenti;
 		$_SESSION['mod_lettere'] = $lettere;
 		$_SESSION['mod_magazzino'] = $magazzino;
 		$_SESSION['mod_contabilita'] = $contabilita;

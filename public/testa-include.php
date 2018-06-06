@@ -250,9 +250,9 @@ tinymce.init({
 					
 					<?php if($_SESSION['mod_anagrafica'] && $anag->isAnagrafica($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> Anagrafica <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-address-book-o fa-fw"></i> Anagrafica <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="login0.php?corpus=anagrafica"><i class="fa fa-plus fa-fw"></i> Inserisci nuova anagrafica</a></li>
+								<li><a href="login0.php?corpus=anagrafica"><i class="fa fa-user-plus fa-fw"></i> Inserisci nuova anagrafica</a></li>
 								<li><a href="login0.php?corpus=ricerca-anagrafica"><i class="fa fa-search fa-fw"></i></span> Ricerca in anagrafica</a></li>
 							</ul>
 						</li>
@@ -271,6 +271,16 @@ tinymce.init({
 						</li>
 					<?php } ?>
 
+					<?php if($_SESSION['mod_documenti'] && $anag->isDocumenti($_SESSION['loginid'])) { ?>
+						<li class="dropdown <?php if($_GET['corpus'] == 'documenti' OR $_GET['corpus']=='documenti-nuovo') { echo ' active'; }?>">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-folder-o fa-fw"></i> Documenti <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="login0.php?corpus=documenti-nuovo"><i class="fa fa-upload fa-fw"></i> Carica documento</a></li>
+								<li><a href="login0.php?corpus=documenti-elenco"><i class="fa fa-search fa-fw"></i></span> Elenco documenti</a></li>
+								<li><a href="login0.php?corpus=documenti-categorie"><i class="fa fa-th-large fa-fw"></i></span> Gestisci categorie</a></li>
+							</ul>
+						</li>
+					<?php } ?>
 
 					<?php
 					if($_SESSION['mod_lettere'] && $anag->isLettere($_SESSION['loginid'])) {

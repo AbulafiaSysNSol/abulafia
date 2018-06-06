@@ -14,7 +14,7 @@
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-			<h3 class="panel-title"><strong><span class="glyphicon glyphicon-plus"></span> Inserimento di un nuovo soggetto in anagrafica</strong></h3>
+			<h3 class="panel-title"><strong><i class="fa fa-user-plus"></i> Inserimento di un nuovo soggetto in anagrafica</strong></h3>
 		</div>
 		
 		<div class="panel-body">
@@ -165,7 +165,8 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Codice Fiscale:</label>
+							<label id="lblcod" class="col-sm-3 control-label">Codice Fiscale:</label>
+							<label id="lbliva" style="display: none;" class="col-sm-3 control-label">Partita Iva:</label>
 							<div class="row">
 								<div class="col-sm-6">
 									<input type="text" class="form-control input-sm" name="codicefiscale" disabled>
@@ -314,6 +315,8 @@
 	if (type == "persona") {
 		document.getElementById("lblcog").style.display="table";
 		document.getElementById("lblden").style.display="none";
+		document.getElementById("lblcod").style.display="table";
+		document.getElementById("lbliva").style.display="none";
 	  	document.modulo.cognome.disabled = false;
        	document.modulo.nome.disabled = false;
 	  	document.modulo.datanascita.disabled = false;
@@ -337,6 +340,8 @@
 	if (type == "carica") {
 		document.getElementById("lblcog").style.display="none";
 		document.getElementById("lblden").style.display="table";
+		document.getElementById("lblcod").style.display="table";
+		document.getElementById("lbliva").style.display="none";
 	  	document.modulo.cognome.disabled = false;
 	  	document.modulo.nome.disabled = true;
 	  	document.modulo.datanascita.disabled = true;
@@ -360,6 +365,8 @@
 	if (type == "ente") {
 		document.getElementById("lblcog").style.display="none";
 		document.getElementById("lblden").style.display="table";
+		document.getElementById("lblcod").style.display="none";
+		document.getElementById("lbliva").style.display="table";
 	  	document.modulo.cognome.disabled = false;	
 	  	document.modulo.nome.disabled = true;
 	  	document.modulo.datanascita.disabled = true;
@@ -383,6 +390,8 @@
 	if (type == "fornitore") {
 		document.getElementById("lblcog").style.display="none";
 		document.getElementById("lblden").style.display="table";
+		document.getElementById("lblcod").style.display="none";
+		document.getElementById("lbliva").style.display="table";
 	  	document.modulo.cognome.disabled = false;	
 	  	document.modulo.nome.disabled = true;
 	  	document.modulo.datanascita.disabled = true;

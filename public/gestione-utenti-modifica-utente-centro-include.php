@@ -20,9 +20,30 @@
 						<label>Username:</label>
 						<input class="form-control input-sm" type="text" name="nomeutente"  value="<?php echo $row3['loginname'];?>"/>
 					</div>
-				
+
+					<div class="col-sm-3">
+						<label>Email:</label>
+						<input class="form-control input-sm" type="email" name="email" value="<?php echo $row3['mainemail']; ?>"/>
+					</div>
+
+					<div class="col-sm-3">
+						<label>Password:</label>
+						<input class="form-control input-sm" type="password" name="nuovapassword1" />
+					</div>
+
+					<div class="col-sm-3">
+						<label>Ripeti password:</label>
+						<input class="form-control input-sm" type="password" name="nuovapassword2" />
+					</div>					
+
+				</div>
+
+				<br><br>
+
+				<div class="row">
+					
 					<div class="col-sm-1">
-						<label>Auth:</label>
+						<center><label>Auth:</label>
 						<select class="form-control input-sm" type="text" name="authlevel1" />
 							<OPTION selected value="<?php echo $row3['auth'];?>"> <?php echo $row3['auth'];?>
 							<?php
@@ -34,7 +55,7 @@
 								<?php 
 							} 
 							?>
-						</select>
+						</select></center>
 					</div>
 					
 					<?php
@@ -42,8 +63,8 @@
 					if ($anag->isAdmin($_SESSION['loginid'])) {
 					?>
 					<div class="col-sm-1">
-						<label>Admin:</label><br>
-						<center><input type="checkbox" name="admin" value="1" <?php if($row3['admin'] == 1) echo 'checked'; ?>/></center>
+						<center><label>Admin:</label><br>
+						<input type="checkbox" name="admin" value="1" <?php if($row3['admin'] == 1) echo 'checked'; ?>/></center>
 					</div>
 					<?php
 					}
@@ -57,6 +78,11 @@
 					<div class="col-sm-1">
 						<center><label>Protocollo:</label><br>
 						<input type="checkbox" name="protocollo" value="1" <?php if($row3['protocollo'] == 1) echo 'checked'; ?>/></center>
+					</div>
+
+					<div class="col-sm-1">
+						<center><label>Documenti:</label><br>
+						<input type="checkbox" name="documenti" value="1" <?php if($row3['documenti'] == 1) echo 'checked'; ?>/></center>
 					</div>
 
 					<div class="col-sm-1">
@@ -81,26 +107,7 @@
 
 				</div>
 
-				<br>
-
-				<div class="row">
-					<div class="col-sm-3">
-						<label>Email:</label>
-						<input class="form-control input-sm" type="email" name="email" value="<?php echo $row3['mainemail']; ?>"/>
-					</div>
-
-					<div class="col-sm-3">
-						<label>Password:</label>
-						<input class="form-control input-sm" type="password" name="nuovapassword1" />
-					</div>
-
-					<div class="col-sm-3">
-						<label>Ripeti password:</label>
-						<input class="form-control input-sm" type="password" name="nuovapassword2" />
-					</div>
-				</div>
-
-				<br>
+				<br><br>
 				<button class="btn btn-success" onClick="Controllo()"><i class="fa fa-edit"></i> Modifica</button>
 			
 			</div>

@@ -41,7 +41,7 @@
 		?>
 		
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-sm-9">
 				<p><b><i class="fa fa-reorder"></i> Elenco utenti attuali:</b>
 				<div class="table-responsive">
 					<table class="table">
@@ -54,9 +54,11 @@
 							<td align="center"><b>Admin</b></td>
 							<td align="center"><b>Angrafica</b></td>
 							<td align="center"><b>Protocollo</b></td>
+							<td align="center"><b>Documenti</b></td>
 							<td align="center"><b>Lettere</b></td>
 							<td align="center"><b>Magazzino</b></td>
 							<td align="center"><b>Contabilit&agrave</b></td>
+							<td align="center"><b>Profile</b></td>
 							<td align="center"><b>Opzioni</b></td>
 						</tr>
 						<?php
@@ -69,13 +71,15 @@
 								<td align="center"><?php if($risultati2['admin'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['anagrafica'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['protocollo'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['documenti'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['lettere'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['magazzino'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['contabilita'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['updateprofile'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
 								<td align="center">
 									<div class="btn-group btn-group-xs">
 										<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><a class="btn btn-warning" href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
-										<a class="btn btn-danger" onclick="return confirm('Sicuro di voler cancellare l\'utente')" href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-trash"></span></a><?php } ?>
+										<a class="btn btn-danger" onclick="return confirm('Sicuro di voler cancellare l\'utente')" href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>"><i class="fa fa-user-times"></i></a><?php } ?>
 									</div>
 								</td>								
 							</tr>
@@ -87,7 +91,7 @@
 				</div>
 			</div>
 		
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<p><b><i class="fa fa-user-plus"></i> Aggiungi Utente:</b>
 					<form>
 						<input class="form-control" placeholder="digita il cognome o parte di esso..." type="text" id="txt1" onkeyup="showResult(this.value)" />

@@ -28,6 +28,13 @@
 		$protocollo = 0;
 	}
 
+	if(isset($_POST['documenti'])) {
+		$documenti = $_POST['documenti'];
+	}
+	else {
+		$documenti = 0;
+	}
+
 	if(isset($_POST['lettere'])) {
 		$lettere = $_POST['lettere'];
 	}
@@ -65,7 +72,7 @@
 		$cambiopassword=mysql_query("update users set users.password='$nuovapassword3' where users.idanagrafica='$id' limit 1");
 	}
 
-	$update=mysql_query("update users set users.loginname='$nomeutente', users.mainemail = '$email', users.auth='$authlevel', users.admin='$admin', users.anagrafica = '$anagrafica', users.protocollo = '$protocollo', users.lettere = '$lettere', users.magazzino = '$magazzino', users.contabilita = '$contabilita', users.updateprofile = '$check' where users.idanagrafica='$id' limit 1");
+	$update=mysql_query("update users set users.loginname='$nomeutente', users.mainemail = '$email', users.auth='$authlevel', users.admin='$admin', users.anagrafica = '$anagrafica', users.protocollo = '$protocollo', users.documenti = '$documenti', users.lettere = '$lettere', users.magazzino = '$magazzino', users.contabilita = '$contabilita', users.updateprofile = '$check' where users.idanagrafica='$id' limit 1");
 
 ?>
 

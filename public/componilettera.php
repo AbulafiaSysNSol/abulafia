@@ -200,7 +200,7 @@
 				</tr>
 			</table>
 			<br>
-			<span style="line-height: 1.5">'.$testo.'</span>';
+			<span style="line-height: 1.5">'.$testo.'</span><br>';
 			
 					if($firma == 1) {
 						$content = $content.'	<div style="margin-left: 350px;">

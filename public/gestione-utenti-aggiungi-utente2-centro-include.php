@@ -5,7 +5,7 @@
 	
 	$nomenuovoutente = strtolower($nome.'.'.$cognome);
 	$passwordnuovoutente = md5($nomenuovoutente);
-	$nuovoutente = mysql_query("INSERT INTO users VALUES('$id',0,'$nomenuovoutente', '$passwordnuovoutente', '', 0, 0, 0, 0, 0, 0, 0)");
+	$nuovoutente = mysql_query("INSERT INTO users VALUES('$id',0,'$nomenuovoutente', '$passwordnuovoutente', '', 0, 0, 0, 0, 0, 0, 0, 0)");
 	$setting = mysql_query("INSERT INTO usersettings VALUES('$id', 30, 'images/splash.jpg', '#DEFEB4', '#FFFFCC', '100%', '', '')");
 ?>
 

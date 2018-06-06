@@ -137,6 +137,15 @@ class Anagrafica {
 			return false;
 	}
 
+	public function isDocumenti($id) {
+		$query = mysql_query("SELECT documenti FROM users WHERE idanagrafica = $id");
+		$documenti = mysql_fetch_row($query);
+		if ($documenti[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
 	public function isLettere($id) {
 		$query = mysql_query("SELECT lettere FROM users WHERE idanagrafica = $id");
 		$lettere = mysql_fetch_row($query);

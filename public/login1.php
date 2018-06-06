@@ -120,6 +120,7 @@
 	$_SESSION['mod_lettere'] = $settings4['lettere'];
 	$_SESSION['mod_magazzino'] = $settings4['magazzino'];
 	$_SESSION['mod_contabilita'] = $settings4['contabilita'];
+	$_SESSION['mod_documenti'] = $settings4['documenti'];
 	$_SESSION['signaturepath'] = $settings4['signaturepath'];
 	
 	//caricamento settaggi email
