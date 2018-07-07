@@ -5,6 +5,8 @@
 	$lettera = new Lettera();
 	$e = new Mail();
 	$a = new Anagrafica();
+	$anno = $_SESSION['annoprotocollo'];
+-	$annoprotocollo = $_SESSION['annoprotocollo'];
 		
 	if (isset($_GET['firma']) &&($_GET['firma'] == 'ok')) {
 		?>
