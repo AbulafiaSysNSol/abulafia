@@ -6,7 +6,7 @@
 	$e = new Mail();
 	$a = new Anagrafica();
 	$anno = $_SESSION['annoprotocollo'];
--	$annoprotocollo = $_SESSION['annoprotocollo'];
+	$annoprotocollo = $_SESSION['annoprotocollo'];
 		
 	if (isset($_GET['firma']) &&($_GET['firma'] == 'ok')) {
 		?>
@@ -26,12 +26,6 @@
 		<?php
 	}
 
-	/*if (!$e->isSetMail()) {
-		?>
-		<center><h4><div class="alert alert-warning"><i class="fa fa-warning"></i> <b>Attenzione:</b> per poter inviare email bisogna configurare il server mail in <a href="?corpus=server-mail">questa pagina</a>.</div></h4></center>
-		<?php
-	}*/
-
 	if (!$a->profileIsUpdate($_SESSION['loginid'])) {
 		?>
 		<script language="javascript">
@@ -42,13 +36,41 @@
 	
 	if (isset($_GET['aggiornamento']) && ($_GET['aggiornamento'] == 'ok')) {
 		?>
-			<div class="alert alert-info">
-			<center><h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema - Ver. 11.5</b></h3></center>
-			<br><h4><b>Modifiche introdotte con l'aggiornamento:</b></h4>
-			Upload Multipli:  &egrave; adesso possibile caricare contemporaneamente pi&ugrave; file alla volta durante la registrazione di un protocollo, basta selezionarne pi&ugrave; di uno dopo aver cliccato sul pulsante "scegli file";
-			<br><br>
-			<small>Se notate anomalie o malfunzionamenti comunicateceli mediante la <a href="login0.php?corpus=segnala-bug">pagina di segnalazione errori.</a></small>
+		<div class="row">
+			
+			<div class="col-sm-3">
+				<div class="alert alert-info">
+				<center><h3><b><i class="fa fa-refresh"></i> Aggiornamento di Sistema Versione 11.8</b></h3>
+				<br><h4><b>Modifiche introdotte con l'aggiornamento:</b></h4>
+				- Modificata la grafica dell'home page;<br>
+				- Migliorata la visualizzazione in versione mobile;<br>
+				<br>
+				<small>Se notate anomalie o malfunzionamenti comunicateceli mediante la <a href="login0.php?corpus=segnala-bug">pagina di segnalazione errori.</a></small>
+				</center></div>
 			</div>
+
+			<div class="col-sm-9">
+				<div class="alert alert-warning">
+				<center><h3><b><i class="fa fa-exclamation-triangle"></i> Comunicazione Importante</b></h3>
+				<br><h4><b>Abulafia diventa Abulafia Web!</b></h4></center>
+				<div style="text-align: justify;">Gentile Utente,<br>
+				come avrai notato il progetto Abulafia sta subendo alcuni cambiamenti;
+				stiamo apportando modifiche alla struttura per renderla pi&ugrave; performante ed efficiente, rimanendo al passo
+				con i tempi e con le nuove tecnologie.
+				Al momento per te cambia solo il link d'accesso al software.<br>
+				Per maggiori informazioni puoi contattarci all'indirizzo email <b>info@abulafiaweb.it</b> o visitare
+				il nostro <b><a href="http://abulafiaweb.it" target="_blank">sito web</a></b>.
+				<br>
+				Verrai informato di futuri cambiamenti che necessiteranno di una tua azione.<br><br>
+				Il nuovo link per accedere al software per la tua associazione &egrave;<br><br>
+				<center><h4><b><?php echo $_SESSION['paginaprincipale']; ?></h4></b></center>
+				<small>*Tutti gli altri indirizzi verranno a breve dismessi, quindi ti preghiamo di aggiornare i tuoi
+					segnalibri/preferiti usando il nuovo link.</small>
+				</div>
+				</div>
+			</div>
+
+		</div>
 		<?php
 	}
 	?>
@@ -63,16 +85,15 @@
 
 			<div class="panel-body">
 				<?php
-				echo '<a href="?corpus=modifica-anagrafica&from=home&id=' . $_SESSION['loginid'] . '"><center><img class="img-circle" width="90%" src="' . $a->getFoto($_SESSION['loginid']) .'"></center></a>';
-				echo '<br>ID: <b>' . $_SESSION['loginid'] . '</b>';
-				echo '<br><br>Nome: <b>' . $a->getNome($_SESSION['loginid']) . '</b>';
-				echo '<br><br>Cognome: <b>' . $a->getCognome($_SESSION['loginid']) . '</b>';
-				echo '<br><br>C.F.: <b>' . $a->getCodiceFiscale($_SESSION['loginid']) . '</b>';
+				echo '<br><a href="?corpus=modifica-anagrafica&from=home&id=' . $_SESSION['loginid'] . '"><center><img class="img-circle" width="65%" src="' . $a->getFoto($_SESSION['loginid']) .'"></center></a>';
+				echo '<br><br><div style="line-height: 2;">Nome: <b>' . $a->getNome($_SESSION['loginid']) . '</b></div>';
+				echo '<div style="line-height: 2;">Cognome: <b>' . $a->getCognome($_SESSION['loginid']) . '</b></div>';
+				echo '<div style="line-height: 2;">C.F.: <b>' . $a->getCodiceFiscale($_SESSION['loginid']) . '</b></div>';
 				?>
 				<hr>
-				<a href="?corpus=modifica-anagrafica&from=home&id=<?php echo $_SESSION['loginid']?>"><i class="fa fa-edit fa-fw"></i> Modifica Profilo</a>
-				<br><br><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><i class="fa fa-key fa-fw"></i> Gestione Credenziali</a>
-				<br><br><a href="login0.php?corpus=settings"><i class="fa fa-cog fa-fw"></i> Impostazioni Utente</a>
+				<div style="line-height: 1.8;"><a href="?corpus=modifica-anagrafica&from=home&id=<?php echo $_SESSION['loginid']?>"><i class="fa fa-edit fa-fw"></i> Modifica Profilo</a></div>
+				<div style="line-height: 1.8;"><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><i class="fa fa-key fa-fw"></i> Gestione Credenziali</a></div>
+				<div style="line-height: 1.8;"><a href="login0.php?corpus=settings"><i class="fa fa-cog fa-fw"></i> Impostazioni Utente</a></div>
 			</div>
 		</div>
 	</div>
@@ -94,7 +115,7 @@
 		
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title"><strong><i class="fa fa-calendar-check-o"></i> Azioni Richieste:</strong></h3>
+				<h3 class="panel-title"><strong><i class="fa fa-calendar-check-o"></i> Avvisi/Reminder:</strong></h3>
 			</div>
 					
 			<div class="panel-body">		
@@ -109,6 +130,10 @@
 
 				if($todo == 0) {
 					echo '<center><div class="alert alert-success"><b><h4><i class="fa fa-check"></i> Ben Fatto!</b></h4>Nessuna azione richiede la tua attenzione.</center>';
+				}
+
+				if (!$e->isSetMail()) {
+					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-exclamation-triangle"></i> Invio Email</b></h4>per poter inviare email bisogna configurare il server mail in <a href="?corpus=server-mail">questa pagina</a>."</div></center>';
 				}
 
 				?>
