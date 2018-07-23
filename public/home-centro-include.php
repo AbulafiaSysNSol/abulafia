@@ -145,7 +145,40 @@
 	</div>
 </div>
 
+<!-- blocco ultimi protocolli registrati -->
 <?php 
+if($a->isProtocollo($_SESSION['loginid'])) { ?>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><strong><i class="fa fa-list-ul"></i> Ultimi protocolli registrati:</strong></h3>
+		</div>
+				
+		<div class="panel-body">
+			<?php
+				$risultati = $lettera->ultimeLettere(7, $anno);
+			?>
+			<table class="table table-striped">
+				<?php
+				if($risultati) {
+					echo "<tr><td></td><td><b>NUM.</b></td><td><b>DATA</b></td><td><b>OGGETTO</b></td><td></td></tr>";
+					foreach ($risultati as $val) {
+						if($val[3]=='spedita') {
+							$icon = '<i class="fa fa-arrow-up"></i>';
+						}
+						else {
+							$icon = '<i class="fa fa-arrow-down"></i>';
+						}
+						echo "<tr><td>".$icon."</td><td>".$val[0]."</td><td>".$data->dataSlash($val[1])."</td><td>".$val[2]."</td>
+							<td width='55'><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">Vai <i class=\"fa fa-share\"></i></td></tr>";
+					}
+				}
+				?>
+			</table>
+		</div>
+	</div>
+	<?php
+}
+
 if($a->isAdmin($_SESSION['loginid'])) { ?>
 	<div class="row">
 		<div class="col-sm-12">
