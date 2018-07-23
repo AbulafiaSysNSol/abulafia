@@ -133,7 +133,7 @@
 				}
 
 				if (!$e->isSetMail()) {
-					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-exclamation-triangle"></i> Invio Email</b></h4>per poter inviare email bisogna configurare il server mail in <a href="?corpus=server-mail">questa pagina</a>."</div></center>';
+					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-exclamation-triangle"></i> Invio Email</b></h4>per poter inviare email bisogna configurare il server mail in <a href="?corpus=server-mail">questa pagina</a>.</div></center>';
 				}
 
 				?>

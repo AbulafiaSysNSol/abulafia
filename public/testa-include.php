@@ -79,7 +79,7 @@
   <link rel='stylesheet' href='lib/fullcalendar/fullcalendar.css' />
   <script src='lib/fullcalendar/lib/moment.min.js'></script>
   <script src='lib/fullcalendar/fullcalendar.js'></script>
-  <script src='lib/fullcalendar/locale/It.js'></script>
+  <script src='lib/fullcalendar/locale/it.js'></script>
   <!-- FULLCALENDAR -->
 
   <script type="text/javascript">
