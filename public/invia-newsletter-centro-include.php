@@ -35,7 +35,7 @@
 					
 					<div class="form-group">
 						<h4><i class="fa fa-file-text-o"></i> Messaggio:</h4>
-						<textarea id="editorMail" class="form-control" rows="7" name="messaggio" placeholder="aggiungi un messaggio...">Si trasmette nota pari ad oggetto.<br><br>Cordiali Saluti.</textarea>
+						<textarea id="editorMail" class="form-control" rows="7" name="messaggio" placeholder="aggiungi un messaggio...">Si trasmette in allegato nota pari oggetto.<br><br>Cordiali Saluti.</textarea>
 					</div>
 					
 					<div class="form-group">
