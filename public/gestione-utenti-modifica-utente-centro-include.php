@@ -1,4 +1,11 @@
 <?php
+	
+	//controllo dell'autorizzazione necessaria alla gestione degli utenti di abulafia
+	if ($_SESSION['auth'] < 99) { 
+		echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; 
+		exit ();
+	}
+
 	$id= $_GET['id'];
 	$risultati=mysql_query("select * from anagrafica where idanagrafica='$id'");
 	$risultati3=mysql_query("select * from users where idanagrafica='$id'");
