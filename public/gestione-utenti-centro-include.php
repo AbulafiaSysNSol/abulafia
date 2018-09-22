@@ -68,14 +68,14 @@
 							<tr>
 								<td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo ucwords($risultati2['cognome'].' '.$risultati2['nome']);?></a></td>
 								<td align="center"><?php echo $risultati2['auth'];?></td>
-								<td align="center"><?php if($risultati2['admin'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
-								<td align="center"><?php if($risultati2['anagrafica'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
-								<td align="center"><?php if($risultati2['protocollo'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
-								<td align="center"><?php if($risultati2['documenti'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
-								<td align="center"><?php if($risultati2['lettere'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
-								<td align="center"><?php if($risultati2['magazzino'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
-								<td align="center"><?php if($risultati2['contabilita'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
-								<td align="center"><?php if($risultati2['updateprofile'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-close"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['admin'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['anagrafica'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['protocollo'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['documenti'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['lettere'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['magazzino'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['contabilita'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['updateprofile'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center">
 									<div class="btn-group btn-group-xs">
 										<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><a class="btn btn-warning" href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-pencil"></span></a>

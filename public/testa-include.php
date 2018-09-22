@@ -293,6 +293,7 @@ tinymce.init({
 						$num = mysql_fetch_row($query);
 						$prot = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE firmata = 1 AND protocollo = 0");
 						$protocollare = mysql_fetch_row($prot);
+						$_SESSION['daprotocollare'] = $protocollare[0];
 						?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'lettera' OR $_GET['corpus']=='lettera2' OR $_GET['corpus']=='elenco-lettere' OR $_GET['corpus']=='elenco-lettere-firma') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -318,6 +319,7 @@ tinymce.init({
 								<li><a href="login0.php?corpus=elenco-lettere"><i class="fa fa-wrench fa-fw"></i> Lettere in Lavorazione <?php if($protocollare[0] > 0) { echo '<span class="badge alert-success">'. $protocollare[0] .' da protocollare!</span>'; } ?></a></li>
 								<li><a href="login0.php?corpus=archivio-lettere"><i class="fa fa-archive fa-fw"></i> Lettere Archiviate</a></li>
 								<?php 
+									$_SESSION['dafirmare'] = $num[0]; 
 									if(($num[0] > 0) && ($_SESSION['auth']>=90)) {
 										echo '<li class="divider"></li>';
 										echo '<li><a href="login0.php?corpus=elenco-lettere-firma"><i class="fa fa-pencil fa-fw"></i> Lettere da Firmare <span class="badge alert-success">' . $num[0] . '</span></a></li>';

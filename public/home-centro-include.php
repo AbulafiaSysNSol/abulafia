@@ -7,6 +7,8 @@
 	$a = new Anagrafica();
 	$anno = $_SESSION['annoprotocollo'];
 	$annoprotocollo = $_SESSION['annoprotocollo'];
+	$lettereinlavorazione = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE protocollo = 0");
+	$numerolettere=mysql_fetch_row($lettereinlavorazione);
 		
 	if (isset($_GET['firma']) &&($_GET['firma'] == 'ok')) {
 		?>
@@ -128,12 +130,39 @@
 					$todo = 1;
 				}
 
+				if($numerolettere[0] > 0) {
+					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-wrench"></i> In Lavorazione:</b></h4>';
+					if($numerolettere[0] == 1) {echo 'C\'&egrave; ';} else {echo 'Ci sono ';} 
+					echo '<h2><b>' . $numerolettere[0] . '</b></h2>';
+					if($numerolettere[0] == 1) {echo 'lettera ';} else {echo 'lettere ';}
+					echo '<a href="?corpus=elenco-lettere">in lavorazione</a>.</div></center>';
+					$todo = 1;
+				}
+
+				if($_SESSION['dafirmare'] > 0) {
+					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-pencil"></i> Da Firmare:</b></h4>';
+					if($_SESSION['dafirmare'] == 1) {echo 'C\'&egrave; ';} else {echo 'Ci sono ';} 
+					echo '<h2><b>' . $_SESSION['dafirmare'] . '</b></h2>';
+					if($_SESSION['dafirmare'] == 1) {echo 'lettera ';} else {echo 'lettere ';}
+					echo '<a href="?corpus=elenco-lettere-firma">da firmare</a>.</div></center>';
+					$todo = 1;
+				}
+
+				if($_SESSION['daprotocollare'] > 0) {
+					echo '<center><div class="alert alert-warning"><b><h4><i class="fa fa-book"></i> Da Protocollare:</b></h4>';
+					if($_SESSION['daprotocollare'] == 1) {echo 'C\'&egrave; ';} else {echo 'Ci sono ';} 
+					echo '<h2><b>' . $_SESSION['daprotocollare'] . '</b></h2>';
+					if($_SESSION['daprotocollare'] == 1) {echo 'lettera ';} else {echo 'lettere ';}
+					echo '<a href="?corpus=elenco-lettere">da protocollare</a>.</div></center>';
+					$todo = 1;
+				}
+
 				if($todo == 0) {
 					echo '<center><div class="alert alert-success"><b><h4><i class="fa fa-check"></i> Ben Fatto!</b></h4>Nessuna azione richiede la tua attenzione.</center>';
 				}
 
 				if (!$e->isSetMail()) {
-					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-exclamation-triangle"></i> Invio Email</b></h4>per poter inviare email bisogna configurare il server mail in <a href="?corpus=server-mail">questa pagina</a>.</div></center>';
+					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-envelope"></i> Invio Email</b></h4>per poter inviare email bisogna configurare le impostazioni in <a href="?corpus=server-mail">questa pagina</a>.</div></center>';
 				}
 
 				?>
