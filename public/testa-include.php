@@ -356,12 +356,11 @@ tinymce.init({
 						
 						<ul class="dropdown-menu">
 							<li role="presentation" class="dropdown-header">OPZIONI</li>
-							<li><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><i class="fa fa-edit fa-fw"></i> Cambia Password</a></li>
+							<li><a href="login0.php?corpus=settings"><i class="fa fa-cog fa-fw"></i> Impostazioni Utente</a></li>
+							<li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o fa-fw"></i> Impostazioni Email</a></li>
+							<li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart fa-fw"></i> Statistiche</a></li>
 							<li><a href="login0.php?corpus=segnala-bug"><i class="fa fa-warning fa-fw"></i> Segnala un Errore</a></li>
 							<li><a href="login0.php?corpus=feedback"><i class="fa fa-thumbs-o-up fa-fw"></i> Invia Feedback</a></li>
-							<li><a href="login0.php?corpus=settings"><i class="fa fa-cog fa-fw"></i> Impostazioni</a></li>
-							<li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o fa-fw"></i> Impostazioni Server Mail</a></li>
-							<li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart fa-fw"></i> Statistiche</a></li>
 							<?php 
 								if ($_SESSION['auth'] > 95) {
 									?>

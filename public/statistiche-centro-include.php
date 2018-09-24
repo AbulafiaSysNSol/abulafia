@@ -33,46 +33,83 @@
 			
 	<div class="panel-body">
 		<div class="row">
-			<div class="col-sm-5">
-				<i class="fa fa-calendar"></i>
-				<?php 
-					echo $_SESSION['nomeapplicativo'] . ' e\' in uso da <b>'; 
-					if( (int)$anniusoapplicazione > 0) { 
-						echo (int)$anniusoapplicazione . ' anni e ' .(int)$giorniusoapplicazione.' giorni</b>;'; 
-					} 
-					else { 
-						echo (int)$giorniusoapplicazione.' giorni</b>;'; 
-					} 
-				?>
-				<br><br>
-				<i class="fa fa-book"></i> Sono state registrate <b><?php echo $numprot; ?></b> lettere, di cui:
-				<div class="row">
-					<div class="col-md-6 col-md-offset-1">
-						<ul>
-						<?php
-						foreach($numanni as $anno => $numerolettere ) {
-							echo '<li><b>' . $numerolettere . '</b> nel ' . $anno . ';</li>';
-						}
-						?>
-						</ul>
-					</div>
+			<center>
+			<div class="col-sm-3">
+				<div class="alert alert-info">
+					<h2><i class="fa fa-hourglass-half fa-2x"></i></h2>
+					<?php 
+						echo '<br>' . $_SESSION['nomeapplicativo'] . '<br>e\' in uso da:<h3><b>'; 
+						if( (int)$anniusoapplicazione > 0) { 
+							echo (int)$anniusoapplicazione . ' anni e ' .(int)$giorniusoapplicazione.' giorni</b></h3>'; 
+						} 
+						else { 
+							echo (int)$giorniusoapplicazione.' giorni</b></h3>;'; 
+						} 
+					?>
 				</div>
-				<i class="fa fa-file-text-o"></i> Sono state scritte <b><?php echo $numlettere[0]; ?></b> lettere;
-				<br><br>
-				<i class="fa fa-paperclip"></i> Sono stati caricati <b><?php echo $numallegati[0]; ?></b> allegati;
-				<br><br>
-				<i class="fa fa-group"></i> Sono presenti <b><?php echo $numanagrafiche[0]; ?></b> anagrafiche;
-				<br><br>
-				<i class="fa fa-male"></i> Sono presenti <b><?php echo $numutenti[0]; ?></b> utenti;
-				<br><br>
-				<i class="fa fa-sign-in"></i> Sono stati eseguiti <b><?php echo $numaccessi; ?></b> accessi;
-				<br><br>
-				<i class="fa fa-envelope-o"></i> Sono state inviate <b><?php echo $numemail[0]; ?></b> email;
 			</div>
-			
-			<div class="col-sm-7">
-				<center><img src="images/stats.jpg"></center>
+
+			<div class="col-sm-3">
+				<div class="alert alert-warning">
+					<h2><i class="fa fa-book fa-2x"></i></h2>
+					<br>Numero di protocolli registrati nel sistema: 
+					<h3><b><?php echo $numprot; ?></b></h3>
+				</div>
 			</div>
+
+			<div class="col-sm-3">
+				<div class="alert alert-info">
+					<h2><i class="fa fa-file-text-o fa-2x"></i></h2>
+					<br>Numero di lettere scritte dal sistema: 
+					<h3><b><?php echo $numlettere[0]; ?></b></h3>
+				</div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="alert alert-warning">
+					<h2><i class="fa fa-paperclip fa-2x"></i></h2>
+					<br>File allegati ai protocolli caricati nel sistema: 
+					<h3><b><?php echo $numallegati[0]; ?></b></h3>
+				</div>
+			</div>
+			</center>
+		</div>
+
+		<div class="row">
+			<center>
+
+			<div class="col-sm-3">
+				<div class="alert alert-warning">
+					<h2><i class="fa fa-id-card fa-2x"></i></h2>
+					<br>Anagrafiche registrate nel sistema: 
+					<h3><b><?php echo $numanagrafiche[0]; ?></b></h3>
+				</div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="alert alert-info">
+					<h2><i class="fa fa-users fa-2x"></i></h2>
+					<br>Utenti abilitati all'utilizzo del software: 
+					<h3><b><?php echo $numutenti[0] - 1; ?></b></h3>
+				</div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="alert alert-warning">
+					<h2><i class="fa fa-sign-in fa-2x"></i></h2>
+					<br>Numero di accessi eseguiti nel sistema: 
+					<h3><b><?php echo $numaccessi; ?></b></h3>
+				</div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="alert alert-info">
+					<h2><i class="fa fa-envelope fa-2x"></i></h2>
+					<br>Numero di email inviate dal sistema: 
+					<h3><b><?php echo $numemail[0]; ?></b></h3>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>
