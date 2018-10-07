@@ -34,11 +34,11 @@
 	$destinatari = explode(',' , $destinatario);
 	$oggetto = stripslashes($_POST['oggetto']);
 	$messaggio = stripslashes($_POST['messaggio']);
-	
+
 	include "../mail-conf-include.php";
 	
 	$mail->setFrom ($_SESSION['usernamemail'], $_SESSION['denominazione']);
-	$mail->addReplyTo($_SESSION['replyto']);
+	$mail->addReplyTo ($_SESSION['replyto']);
 
 	//inserisco gli allegati
 	$urlfile = $my_lettera->cercaAllegati($idlettera, $annoricercaprotocollo);
