@@ -15,7 +15,7 @@
 				<label><i class="fa fa-at"></i> Indirizzo Email:</label>
 				<div class="row">
 					<div class="col-sm-4">
-						<input class="form-control input-sm" type="text" value="<?php echo $imp[0]; ?>" name="username" />
+						<input class="form-control input-sm" type="text" value="<?php echo $imp[0]; ?>" name="username" required>
 					</div>
 				</div>
 			  </div>
@@ -24,16 +24,25 @@
 				<label><i class="fa fa-key"></i> Password:</label>
 				<div class="row">
 					<div class="col-sm-4">
-						<input class="form-control input-sm" type="password" value="<?php echo base64_decode($imp[1]); ?>" name="password" />
+						<input class="form-control input-sm" type="password" value="<?php echo base64_decode($imp[1]); ?>" name="password" required>
 					</div>
 				</div>
 			  </div>
 			  
 			  <div class="form-group">
+				<label><i class="fa fa-at"></i> Reply To (facoltativo):</label>
+				<div class="row">
+					<div class="col-sm-4">
+						<input class="form-control input-sm" type="text" value="<?php echo $imp[5]; ?>" name="replyto" />
+					</div>
+				</div>
+			  </div>
+
+			  <div class="form-group">
 				<label><i class="fa fa-cog"></i> Server SMTP:</label>
 				<div class="row">
 					<div class="col-sm-4">
-						<input class="form-control input-sm" type="text" value="<?php echo $imp[2]; ?>" name="smtp" />
+						<input class="form-control input-sm" type="text" value="<?php echo $imp[2]; ?>" name="smtp" required>
 					</div>
 				</div>
 			  </div>
@@ -42,7 +51,7 @@
 				<label><i class="fa fa-exchange"></i> Porta:</label>
 				<div class="row">
 					<div class="col-sm-2">
-						<input class="form-control input-sm" type="text" value="<?php echo $imp[3]; ?>" name="porta" />
+						<input class="form-control input-sm" type="text" value="<?php echo $imp[3]; ?>" name="porta" required>
 					</div>
 				</div>
 			  </div>
@@ -51,7 +60,7 @@
 				<label><i class="fa fa-envelope"></i> Protocollo:</label>
 				<div class="row">
 					<div class="col-sm-2">
-						<input class="form-control input-sm" type="text" value="<?php echo $imp[4]; ?>" name="protocollo" />
+						<input class="form-control input-sm" type="text" value="<?php echo $imp[4]; ?>" name="protocollo" required>
 					</div>
 				</div>
 			  </div>

@@ -129,6 +129,12 @@
 	//assegnazione settaggi email
 	$_SESSION['usernamemail'] = $settings6['username'];
 	$_SESSION['passwordmail'] = base64_decode($settings6['password']);
+	if(isset($settings6['replyto'])) {
+		$_SESSION['replyto'] = $settings6['replyto'];	
+	}
+	else {
+		$_SESSION['replyto'] = $settings6['username'];
+	}
 	$_SESSION['smtp'] = $settings6['smtp'];
 	$_SESSION['porta'] = $settings6['porta'];
 	$_SESSION['protocolloemail'] = $settings6['protocollo'];

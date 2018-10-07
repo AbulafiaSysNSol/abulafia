@@ -6,8 +6,9 @@
 	$smtp=$_POST['smtp'];
 	$porta=$_POST['porta'];
 	$protocollo=$_POST['protocollo'];
+	$replyto=$_POST['replyto'];
 
-	$res = $e->updateSetting($username, $password, $smtp, $porta, $protocollo);
+	$res = $e->updateSetting($username, $password, $smtp, $porta, $protocollo, $replyto);
 	
 	if(!$res) {
 		echo 'ERRORE NELLA MODIFICA:' . mysql_error();

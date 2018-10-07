@@ -19,8 +19,8 @@ Class Mail {
 		}
 	}
 
-	public function updateSetting( $username, $password, $smtp, $porta, $protocollo) {
-		$query = mysql_query("UPDATE mailsettings SET username = '$username', password = '$password', smtp = '$smtp', porta = '$porta', protocollo = '$protocollo'");
+	public function updateSetting( $username, $password, $smtp, $porta, $protocollo, $replyto) {
+		$query = mysql_query("UPDATE mailsettings SET username = '$username', password = '$password', smtp = '$smtp', porta = '$porta', protocollo = '$protocollo', replyto = '$replyto'");
 		return $query;
 	}
 
