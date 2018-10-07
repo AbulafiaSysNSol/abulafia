@@ -19,6 +19,7 @@
 		$_SESSION['smtp'] = $smtp;
 		$_SESSION['porta'] = $porta;
 		$_SESSION['protocolloemail'] = $protocollo;
+		$_SESSION['replyto'] = $replyto;
 ?>
 
 <SCRIPT LANGUAGE="Javascript">
