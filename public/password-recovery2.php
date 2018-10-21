@@ -44,10 +44,10 @@
 		$insert = mysql_query("INSERT INTO passwordrecovery VALUES ( '', '$id', '$token', '$data')");
 
 		$oggetto = "Link Reimposta Password";
-		$messaggio = 	'Buongiorno<br><br>di seguito il link per resettare la tua password di accesso ad Abulafia Web.<br>
-						se non sei stato tu a fare richiesta di reset password ti preghiamo di ignorare questo messaggio
+		$messaggio = 	'<style ="text-align: justify;">Buongiorno,<br><br>di seguito il link per resettare la tua password di accesso ad Abulafia Web.<br><br>
+						Se non sei stato tu a fare questa richiesta di reset, ti preghiamo di ignorare questo messaggio
 						e contattare gli amministratori del sistema.<br><br>
-						Per resettare la tua password <a href="<?php echo $linkreset; ?">clicca qui</a>
+						Per resettare la tua password <a href="<?php echo $linkreset; ?>">clicca qui</a>.
 						<br><br>Il link sar&agrave; attivo per 24 ore.
 						<br><br>Il Team di Abulafia';
 
