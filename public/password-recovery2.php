@@ -48,7 +48,7 @@
 		$idutente2 = mysql_fetch_row($idutente);
 		$id = $idutente2[0];
 		$token = random_string(30);
-		$linkreset = $url . "/password-recovery3.php?token=" . $token;
+		$linkreset = $url . "/public/password-recovery3.php?token=" . $token;
 		$insert = mysql_query("INSERT INTO passwordrecovery VALUES ( '', '$id', '$token', '$data')");
 
 		$oggetto = "Link Reimposta Password";
