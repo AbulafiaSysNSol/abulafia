@@ -10,19 +10,6 @@
 		$_GET['err'] = 0;
 	}
 
-    if(!isset($_GET['s'])) {
-        $s = 0;
-    }
-    else {
-        $s = $_GET['s'];
-    }
-
-    if(!isset($_GET['recovery'])) {
-        $recovery = 0;
-    }
-    else {
-        $recovery = $_GET['recovery'];
-    }
 ?>
 
 <!DOCTYPE html>
@@ -36,13 +23,12 @@
     <meta name="author" content="Biagio Saitta & Alfio Musmarra">
     <meta name="keywords" content="abulafia web, smart solutions, protocollo informatico, gestione documentale, gestione magazzino">
 
-    <title>Abulafia Web - Login</title>
+    <title>Abulafia Web - Recupera Password</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/mobile.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
-    <!-- Add custom CSS here -->
     <link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
 
 </head>
@@ -57,20 +43,6 @@
     <div class="container">
 
         <div class="row">
-	
-            <?php
-            if ($s) {
-                ?>
-                <center><div class="alert alert-warning"><b><i class="fa fa-warning"></i> Non hai effettuato l'accesso o la sessione &egrave; scaduta. Effettua nuovamente il login per utilizzare l'applicazione.</b></div></center>
-                <?php
-            }
-
-            if ($recovery) {
-                ?>
-                <center><div class="alert alert-warning"><b><i class="fa fa-check"></i> Ti abbiamo inviato un'email con un link per resettare la password. Ricordati di controllare anche la posta indesiderata.</b></div></center>
-                <?php
-            }
-            ?>
 
             <div class="col-sm-3">
                 <center><div class="logodesktop"><img src="images/logo-home.png" width="95%"></div></center>
@@ -81,32 +53,34 @@
                 <div class="logomobile"><img src="images/logo-home.png" width="44%"></div>
                 <div class="logomobile"><img src="images/logo-azienda.png" width="48%"></div>          
                 </center>
-                <div class="panel panel-<?php if($_GET['err'] == 1) {echo 'danger';} else {echo 'info';} ?>" >
+                <div class="panel panel-<?php if($_GET['err'] == 1) {echo 'danger';} else {echo 'success';} ?>" >
 
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia Web - Login <?php if($_GET['err'] == 1) {echo ' - Username o Password Errati';} ?></center>
+                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia Web - Recupera Password<br><?php if($_GET['err'] == 1) {echo 'Utente non trovato, controlla i dati inseriti!';} ?></center>
                         </div>
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
                             
-                        <form id="loginform" class="form-horizontal" action="login1.php" method="post" role="form">
+                        <form id="recoveryform" class="form-horizontal" action="password-recovery2.php" method="post" role="form">
                             
                             <div style="margin-bottom: 25px" class="input-group <?php if($_GET['err'] == 1) {echo 'has-error';} ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="login-username" type="text" class="form-control" name="userid" value="" placeholder="username" required>                                        
+                                <input id="codicefiscale" type="text" minlength="16" maxlength="16" class="form-control" name="codicefiscale" value="" placeholder="inserisci il codice fiscale" required>                                        
                             </div>
                                     
                             <div style="margin-bottom: 25px" class="input-group <?php if($_GET['err'] == 1) {echo 'has-error';} ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                <input id="email" type="email" class="form-control" name="email" placeholder="inserisci l'indirizzo email" required>
                             </div>
                                             
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
-                                    <center><button type="submit" class="btn btn-info btn-lg"><i class="fa fa-sign-in"></i> Login</button>
-                                    <br><br><a href="password-recovery.php">Hai dimenticato la password?</a></center>
+                                    <center>
+                                        <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Convalida Dati</button>
+                                         <br><br><a href="index.php"><i class="fa fa-arrow-left"></i> Torna al Login</a>
+                                    </center>
                                 </div>
                             </div>
                             
