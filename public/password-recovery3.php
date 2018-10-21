@@ -1,6 +1,9 @@
 <?php
 
     session_start();
+
+    include '../db-connessione-include.php';
+    include 'maledetti-apici-centro-include.php';
     
     if (isset($_SESSION['auth']) && $_SESSION['auth'] > 1 ) {
         header("Location: login0.php?corpus=home");
@@ -9,6 +12,23 @@
 	if(!isset($_GET['err'])) {
 		$_GET['err'] = 0;
 	}
+
+    $token = $_GET['token'];
+    $data = time();
+
+    $recovery = mysql_query("SELECT * FROM passwordrecovery WHERE token = '$token' ");
+    $recovery2 = mysql_fetch_array($recovery);
+    $idutente = $recovery2['utente'];
+    $datains = $recovery2['timestamp'];
+
+    if(($data - $datains) > 86400) {
+        ?>
+        <script>
+            window.location="index.php?expire=1";
+        </script>
+        <?php
+        exit();
+    }
 
 ?>
 
@@ -53,33 +73,34 @@
                 <div class="logomobile"><img src="images/logo-home.png" width="44%"></div>
                 <div class="logomobile"><img src="images/logo-azienda.png" width="48%"></div>          
                 </center>
-                <div class="panel panel-<?php if($_GET['err'] == 1) {echo 'danger';} else {echo 'warning';} ?>" >
+                <div class="panel panel-<?php if($_GET['err'] == 1) {echo 'danger';} else {echo 'success';} ?>" >
 
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia Web - Recupera Password<br><?php if($_GET['err'] == 1) {echo 'Utente non trovato, controlla i dati inseriti!';} ?></center>
+                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia Web - Modifica Password<br></center>
                         </div>
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
                             
-                        <form id="recoveryform" class="form-horizontal" action="password-recovery2.php" method="post" role="form">
+                        <form name="changepass" class="form-horizontal" method="post" role="form">
+
+                            <input type="hidden" name="idutente" value="<?php echo $idutente; ?>">
                             
                             <div style="margin-bottom: 25px" class="input-group <?php if($_GET['err'] == 1) {echo 'has-error';} ?>">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="codicefiscale" type="text" minlength="16" maxlength="16" class="form-control" name="codicefiscale" value="" placeholder="inserisci il codice fiscale" required>                                        
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input id="pass1" type="password" minlength="6" class="form-control" name="pass1" value="" placeholder="inserisci la nuova password" required>
                             </div>
                                     
                             <div style="margin-bottom: 25px" class="input-group <?php if($_GET['err'] == 1) {echo 'has-error';} ?>">
-                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                <input id="email" type="email" class="form-control" name="email" placeholder="inserisci l'indirizzo email" required>
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input id="pass2" type="password" minlength="6" class="form-control" name="pass2" placeholder="inserisci nuovamente la password" required>
                             </div>
                                             
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
                                     <center>
-                                        <button type="submit" class="btn btn-warning btn-lg"><i class="fa fa-check"></i> Convalida Dati</button>
-                                         <br><br><a href="index.php"><i class="fa fa-arrow-left"></i> Torna al Login</a>
+                                        <button type="button" onClick="Controllo();" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Modifica Password</button>
                                     </center>
                                 </div>
                             </div>
@@ -111,3 +132,25 @@
 </body>
 
 </html>
+
+<script>
+ function Controllo() 
+  {
+    var pass1 = document.changepass.pass1.value;
+    var pass2 = document.changepass.pass2.value;
+ 
+    if (pass1 != pass2) {
+        alert("Attenzione: le due password non coincidono");
+        document.changepass.pass1.focus();
+        return false;
+    }
+    else if((pass1 == "") || (pass1 == "undefined") || (pass1.length < 6)) {
+        alert("Attenzione: inserire almeno 6 caratteri");
+        document.changepass.pass1.focus();
+    }
+    else {
+        document.changepass.action = "password-recovery4.php";
+        document.changepass.submit();
+      }
+  }
+</script> 

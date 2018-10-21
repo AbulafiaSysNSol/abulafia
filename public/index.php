@@ -23,6 +23,20 @@
     else {
         $recovery = $_GET['recovery'];
     }
+
+    if(!isset($_GET['expire'])) {
+        $expire = 0;
+    }
+    else {
+        $expire = $_GET['expire'];
+    }
+
+    if(isset($_GET['change'])) {
+        $change = $_GET['change'];
+    }
+    else {
+        $change = "";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +81,25 @@
 
             if ($recovery) {
                 ?>
-                <center><div class="alert alert-warning"><b><i class="fa fa-check"></i> Ti abbiamo inviato un'email con un link per resettare la password. Ricordati di controllare anche la posta indesiderata.</b></div></center>
+                <center><div class="alert alert-info"><b><i class="fa fa-check"></i> Ti abbiamo inviato un'email con un link per resettare la password. Ricordati di controllare anche la posta indesiderata.</b></div></center>
+                <?php
+            }
+
+            if ($expire) {
+                ?>
+                <center><div class="alert alert-danger"><b><i class="fa fa-warning"></i> Il link per resettare la password &egrave; scaduto. Esegui nuovamente la procedura per il ripristino della password.</b></div></center>
+                <?php
+            }
+
+            if ($change == "error") {
+                ?>
+                <center><div class="alert alert-danger"><b><i class="fa fa-warning"></i> Si &egrave; verificato un problema con il cambio password. Esegui nuovamente la procedura per il ripristino della password.</b></div></center>
+                <?php
+            }
+
+            if ($change == "ok") {
+                ?>
+                <center><div class="alert alert-success"><b><i class="fa fa-check"></i> Cambio password andato a buon fine. Effettua l'accesso con la nuova password.</b></div></center>
                 <?php
             }
             ?>
@@ -122,7 +154,7 @@
         </div>
     </div>
 
-    <div class="container2">
+    <div class="container">
          <div class="row">
             <center>
                 <div class="col-sm-12">
