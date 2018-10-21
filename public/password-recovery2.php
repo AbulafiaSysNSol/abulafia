@@ -24,6 +24,10 @@
 	include '../db-connessione-include.php'; //connessione al db-server
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 
+	$settings3=mysql_query("select distinct * from defaultsettings");
+	$settings4=mysql_fetch_array($settings3);
+	$url = $settings4['paginaprincipale'];
+
 	$utente = mysql_query("SELECT COUNT(*) FROM users, anagrafica WHERE users.mainemail='$email' and anagrafica.codicefiscale='$cf'"); //controllo della correttezza di email e codicefiscale
 	$utente2 = mysql_fetch_array($utente);
 
@@ -40,14 +44,14 @@
 		$idutente2 = mysql_fetch_row($idutente);
 		$id = $idutente2[0];
 		$token = random_string(30);
-		$linkreset = "?token=" . $token;
+		$linkreset = $url . "/password-recovery3?token=" . $token;
 		$insert = mysql_query("INSERT INTO passwordrecovery VALUES ( '', '$id', '$token', '$data')");
 
 		$oggetto = "Link Reimposta Password";
 		$messaggio = 	'Buongiorno,<br><br>di seguito il link per resettare la tua password di accesso ad Abulafia Web.<br><br>
 						Se non sei stato tu a fare questa richiesta di reset, ti preghiamo di ignorare questo messaggio
 						e contattare gli amministratori del sistema.<br><br>
-						Per resettare la tua password <a href="<?php echo $linkreset; ?>">clicca qui</a>.
+						Per resettare la tua password <a href="' . $linkreset .'" target="_blank">clicca qui</a>.
 						<br><br>Il link sar&agrave; attivo per 24 ore.
 						<br><br>Il Team di Abulafia';
 
