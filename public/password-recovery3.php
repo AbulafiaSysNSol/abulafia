@@ -115,10 +115,8 @@
             </div>
 	    
         </div>
-    </div>
-
-    <div class="container2">
-         <div class="row">
+   
+       <div class="row">
             <center>
                 <div class="col-sm-12">
                     <h4><a href="https://www.abulafiaweb.it">Abulafia Web - Smart Solutions</a></h4>
@@ -127,6 +125,7 @@
                 </div>
             </center>
         </div>
+    
     </div>
 	
 </body>

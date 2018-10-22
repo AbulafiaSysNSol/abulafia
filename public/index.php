@@ -152,9 +152,8 @@
             </div>
 	    
         </div>
-    </div>
+    
 
-    <div class="container">
          <div class="row">
             <center>
                 <div class="col-sm-12">
@@ -164,8 +163,9 @@
                 </div>
             </center>
         </div>
-    </div>
 	
+    </div>
+
 </body>
 
 </html>
