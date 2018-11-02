@@ -37,7 +37,7 @@
 							<label class="col-sm-4 control-label">Nome:</label>
 							<div class="row">
 								<div class="col-sm-5">
-									<input type="text" class="form-control input-sm" name="nome" value="<?php echo $a->getNome($id); ?>" required>
+									<input type="text" class="form-control input-sm" name="nome" value="<?php echo stripslashes($a->getNome($id)); ?>" required>
 								</div>
 							</div>
 						</div>
@@ -46,7 +46,7 @@
 							<label class="col-sm-4 control-label">Cognome:</label>
 							<div class="row">
 								<div class="col-sm-5">
-									<input type="text" class="form-control input-sm" name="cognome" value="<?php echo $a->getCognome($id); ?>" required>
+									<input type="text" class="form-control input-sm" name="cognome" value="<?php echo stripslashes($a->getCognome($id)); ?>" required>
 								</div>
 							</div>
 						</div>
