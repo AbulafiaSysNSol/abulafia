@@ -20,8 +20,8 @@
 
 	while($row = mysql_fetch_array($sql)) {
 		echo "<br>";?>
-		<a href="login0.php?corpus=gestione-utenti-aggiungi-utente2&id=<?php echo $row['idanagrafica'];?>&cognome=<?php echo $row['cognome'];?>&nome=<?php echo $row['nome'];?>">
-		<?php echo $row['cognome'].' '.$row['nome'];?></a>
+		<a href="login0.php?corpus=gestione-utenti-aggiungi-utente2&id=<?php echo $row['idanagrafica'];?>&cognome=<?php echo str_replace("\'", "",$row['cognome']);?>&nome=<?php echo str_replace("\'","",$row['nome']);?>">
+		<?php echo stripslashes($row['cognome'].' '.$row['nome']);?></a>
 		<?php echo "<br>";
 	}
 
