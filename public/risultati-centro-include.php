@@ -4,6 +4,7 @@
 	$risultatiperpagina = $_SESSION['risultatiperpagina']; //acquisisce la variabile di sessione che stabilisce quanti risultati vengono mostrati in ogni pagina
 	$currentpage = $_GET['currentpage'];
 	$my_calendario = new Calendario();
+	$a = new Anagrafica();
 
 	// se non settate da una form di invio, le seguenti variabili prendono valore da GET o da SESSION
 	if (!isset($_POST['cercato'])) {
@@ -294,12 +295,18 @@
 													&id=<?php echo $row['idanagrafica'];?>">
 													<span class="glyphicon glyphicon-info-sign"></span>
 								</a>
-								<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica anagrafica" 	href="login0.php?corpus=modifica-anagrafica
-													&from=risultati
-													&tabella=anagrafica
-													&id=<?php echo $row['idanagrafica'];?>">
-													<span class="glyphicon glyphicon-pencil"></span>
-								</a>
+								<?php 
+								if (!$a->isUser($row['idanagrafica'])) {
+									?>
+									<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica anagrafica" 	href="login0.php?corpus=modifica-anagrafica
+														&from=risultati
+														&tabella=anagrafica
+														&id=<?php echo $row['idanagrafica'];?>">
+														<span class="glyphicon glyphicon-pencil"></span>
+									</a>
+									<?php
+								}
+								?>
 								<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Visualizza corrispondenza anagrafica" 	href="login0.php?corpus=corrispondenza-anagrafica
 													&currentpage=1&iniziorisultati=0
 													&id=<?php echo $row['idanagrafica'];?>">

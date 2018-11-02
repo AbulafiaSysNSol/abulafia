@@ -164,10 +164,28 @@ class Anagrafica {
 			return false;
 	}
 
+	public function isAmbulatorio($id) {
+		$query = mysql_query("SELECT ambulatorio FROM users WHERE idanagrafica = $id");
+		$ambulatorio = mysql_fetch_row($query);
+		if ($ambulatorio[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
 	public function isContabilita($id) {
 		$query = mysql_query("SELECT contabilita FROM users WHERE idanagrafica = $id");
 		$contabilita = mysql_fetch_row($query);
 		if ($contabilita[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
+	public function isUser($id) {
+		$query = mysql_query("SELECT COUNT(*) FROM users WHERE idanagrafica = $id");
+		$utenti = mysql_fetch_row($query);
+		if ($utenti[0] == 1) 
 			return true;
 		else
 			return false;
@@ -191,7 +209,7 @@ class Anagrafica {
 			return false;
 	}
 
-	public function updateProfile( $id, $nome, $cognome, $data, $codicefiscale, $email) {
+	public function updateProfile($id, $nome, $cognome, $data, $codicefiscale, $email) {
 		$query = mysql_query("UPDATE anagrafica SET nome = '$nome', cognome = '$cognome', nascitadata = '$data', codicefiscale = '$codicefiscale' WHERE anagrafica.idanagrafica = $id");
 		$query2 = mysql_query("UPDATE users SET mainemail = '$email' WHERE users.idanagrafica = $id");
 		$query3 = mysql_query("UPDATE users SET updateprofile = '1' WHERE idanagrafica = $id");
@@ -201,6 +219,27 @@ class Anagrafica {
 		else {
 			return false;
 		}
+	}
+
+	public function insertAssistito($nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $residenzacitta, $residenzavia, $residentenumero, $documento, $documentonumero) { 
+			$query = mysql_query("INSERT INTO cert_assistito VALUES ('', '$nome', '$cognome', '$codicefiscale', '$cittanascita', '$datanascita', '$residenzacitta', '$residenzavia', '$residentenumero', '$documento', '$documentonumero')");
+			return $query;
+	}
+
+	public function editAssistito($id, $nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $residenzacitta, $residenzavia, $residentenumero, $documento, $documentonumero) { 
+			$query = mysql_query("UPDATE cert_assistito SET nome = '$nome', cognome = '$cognome', codicefiscale = '$codicefiscale', luogonascita = '$cittanascita', datanascita = '$datanascita', residenzacitta = '$residenzacitta', residenzavia = '$residenzavia', residenzanumero = '$residentenumero', documento = '$documento', documentonumero = '$documentonumero' WHERE id = '$id'");
+			return $query;
+	}
+
+	public function deleteAssistito($id) { 
+			$query = mysql_query("DELETE FROM cert_assistito WHERE id = '$id'");
+			return $query;
+	}
+
+	public function infoAssistito($id) {
+		$query = mysql_query("SELECT * FROM cert_assistito WHERE id = $id");
+		$res = mysql_fetch_array($query);
+		return $res;
 	}
 
 }

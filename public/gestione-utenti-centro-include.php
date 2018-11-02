@@ -35,13 +35,13 @@
 		<?php
 		if (isset($_GET['mod']) &&($_GET['mod'] == 'ok')) {
 			?>
-			<div class="alert alert-success"><i class="fa fa-check"></i> Dati utente modificati <b>correttamente!</b></div>
+			<center><div class="alert alert-success"><i class="fa fa-check"></i> Dati utente modificati <b>correttamente!</b></div></center>
 			<?php
 		}
 		?>
 		
 		<div class="row">
-			<div class="col-sm-9">
+			<div class="col-sm-12">
 				<p><b><i class="fa fa-reorder"></i> Elenco utenti attuali:</b>
 				<div class="table-responsive">
 					<table class="table">
@@ -57,6 +57,7 @@
 							<td align="center"><b>Documenti</b></td>
 							<td align="center"><b>Lettere</b></td>
 							<td align="center"><b>Magazzino</b></td>
+							<td align="center"><b>Ambulatorio</b></td>
 							<td align="center"><b>Contabilit&agrave</b></td>
 							<td align="center"><b>Profile</b></td>
 							<td align="center"><b>Opzioni</b></td>
@@ -74,6 +75,7 @@
 								<td align="center"><?php if($risultati2['documenti'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['lettere'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['magazzino'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<td align="center"><?php if($risultati2['ambulatorio'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['contabilita'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['updateprofile'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center">
@@ -91,7 +93,7 @@
 				</div>
 			</div>
 		
-			<div class="col-sm-3">
+			<div class="col-sm-12">
 				<p><b><i class="fa fa-user-plus"></i> Aggiungi Utente:</b>
 					<form>
 						<input class="form-control" placeholder="digita il cognome o parte di esso..." type="text" id="txt1" onkeyup="showResult(this.value)" />

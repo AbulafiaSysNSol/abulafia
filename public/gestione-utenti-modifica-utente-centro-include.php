@@ -103,6 +103,11 @@
 					</div>
 
 					<div class="col-sm-1">
+						<center><label>Ambulatorio:</label><br>
+						<input type="checkbox" name="ambulatorio" value="1" <?php if($row3['ambulatorio'] == 1) echo 'checked'; ?>/></center>
+					</div>
+
+					<div class="col-sm-1">
 						<center><label>Contabilit&agrave:</label><br>
 						<input type="checkbox" name="contabilita" value="1" <?php if($row3['contabilita'] == 1) echo 'checked'; ?>/></center>
 					</div>

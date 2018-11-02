@@ -127,6 +127,9 @@
 							<td><label>Magazzino </label></td><td><input type="checkbox" name="magazzino" <?php if($_SESSION['mod_magazzino']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
 						</tr>
 						<tr>
+							<td><label>Ambulatorio </label></td><td><input type="checkbox" name="ambulatorio" <?php if($_SESSION['mod_ambulatorio']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
+						</tr>
+						<tr>
 							<td><label>Contabilità </label></td><td><input type="checkbox" name="contabilita" <?php if($_SESSION['mod_contabilita']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
 						</tr>
 					</table>					

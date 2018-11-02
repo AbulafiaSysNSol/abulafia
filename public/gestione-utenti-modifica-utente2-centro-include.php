@@ -49,6 +49,13 @@
 		$magazzino = 0;
 	}
 
+	if(isset($_POST['ambulatorio'])) {
+		$ambulatorio = $_POST['ambulatorio'];
+	}
+	else {
+		$ambulatorio = 0;
+	}
+
 	if(isset($_POST['contabilita'])) {
 		$contabilita = $_POST['contabilita'];
 	}
@@ -72,7 +79,7 @@
 		$cambiopassword=mysql_query("update users set users.password='$nuovapassword3' where users.idanagrafica='$id' limit 1");
 	}
 
-	$update=mysql_query("update users set users.loginname='$nomeutente', users.mainemail = '$email', users.auth='$authlevel', users.admin='$admin', users.anagrafica = '$anagrafica', users.protocollo = '$protocollo', users.documenti = '$documenti', users.lettere = '$lettere', users.magazzino = '$magazzino', users.contabilita = '$contabilita', users.updateprofile = '$check' where users.idanagrafica='$id' limit 1");
+	$update=mysql_query("update users set users.loginname='$nomeutente', users.mainemail = '$email', users.auth='$authlevel', users.admin='$admin', users.anagrafica = '$anagrafica', users.protocollo = '$protocollo', users.documenti = '$documenti', users.lettere = '$lettere', users.magazzino = '$magazzino', users.ambulatorio = '$ambulatorio', users.contabilita = '$contabilita', users.updateprofile = '$check' where users.idanagrafica='$id' limit 1");
 
 	if(!$update) {
 		echo mysql_error();

@@ -33,21 +33,11 @@
 <html>
 <head>
 
-<!--
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-5144136285411668",
-    enable_page_level_ads: true
-  });
-</script>
--->
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <title><?php echo $_SESSION['nomeapplicativo'] . ' ' . $_SESSION['version'];?></title>
-<meta name="keywords" content="abulafia, protocollo, informatico, volontari, croce rossa italiana, cri, segreteria" />
-<meta name="description" content="Abulafia - Protocollo Informatico dei Volontari C.R.I." />
+<meta name="keywords" content="abulafia, protocollo, informatico, gestione documentale, gestione magazzino" />
+<meta name="description" content="Abulafia Web - Protocollo Informatico - Gestione Documentale - Gestione Magazzino" />
 <meta name="author" content="Biagio Saitta & Alfio Musmarra" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="stylesheet" type="text/css" href="style.php"/>
@@ -345,13 +335,23 @@ tinymce.init({
 							</ul>
 						</li>
 					<?php } ?>
+
+					<?php if($_SESSION['mod_ambulatorio'] && $anag->isAmbulatorio($_SESSION['loginid'])) { ?>
+						<li class="dropdown <?php if($_GET['corpus'] == 'cert' OR $_GET['corpus']=='cert-anag') { echo ' active'; }?>">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-medkit"></i> Ambulatorio <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="?corpus=cert-add-anag"><i class="fa fa-user-plus fa-fw"></i> Inserisci Assistito</a></li>
+								<li><a href="?corpus=cert-search-anag"><i class="fa fa-search fa-fw"></i> Ricerca Assistito</a></li>
+							</ul>
+						</li>
+					<?php } ?>
 					
 				</ul>
 		   
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Logged as <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b>
+							<i class="fa fa-user"></i> <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b>
 						</a>
 						
 						<ul class="dropdown-menu">

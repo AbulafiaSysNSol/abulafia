@@ -1,4 +1,7 @@
 <?php
+
+	$a = new Anagrafica();
+
 	if( isset($_GET['from']) && $_GET['from'] == 'insert') {
 		if($_GET['exist'] == "true") {
 			?>
@@ -234,7 +237,13 @@
 			</div>
 			
 			<div class="panel-body">
-				<p><a href="login0.php?corpus=modifica-anagrafica&amp;from=risultati&amp;id=<?php echo $id;?>"><i class="fa fa-edit fa-fw"></i> Modifica questa anagrafica</a></p>
+				<?php 
+				if (!$a->isUser($row['idanagrafica'])) {
+				?>
+					<p><a href="login0.php?corpus=modifica-anagrafica&amp;from=risultati&amp;id=<?php echo $id;?>"><i class="fa fa-edit fa-fw"></i> Modifica questa anagrafica</a></p>
+					<?php
+				}
+				?>				
 				<p><a href="login0.php?corpus=corrispondenza-anagrafica&currentpage=1&iniziorisultati=0&id=<?php echo $id;?>"><i class="fa fa-exchange fa-fw"></i> Visualizza corrispondenza</a></p>
 			</div>
 		  
