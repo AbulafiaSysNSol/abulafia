@@ -8,6 +8,7 @@
 	}
 
 	include '../db-connessione-include.php';
+	include 'maledetti-apici-centro-include.php';
 	include 'class/Anagrafica.obj.inc';
 	include 'class/Calendario.obj.inc';
 	$a = new Anagrafica();

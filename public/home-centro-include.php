@@ -130,7 +130,7 @@
 					$todo = 1;
 				}
 
-				if($numerolettere[0] > 0) {
+				if(($a->isLettere($_SESSION['loginid'])) && ($numerolettere[0] > 0)) {
 					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-wrench"></i> In Lavorazione:</b></h4>';
 					if($numerolettere[0] == 1) {echo 'C\'&egrave; ';} else {echo 'Ci sono ';} 
 					echo '<h2><b>' . $numerolettere[0] . '</b></h2>';
@@ -139,7 +139,7 @@
 					$todo = 1;
 				}
 
-				if($_SESSION['dafirmare'] > 0) {
+				if(($a->isLettere($_SESSION['loginid'])) && ($_SESSION['dafirmare'] > 0)) {
 					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-pencil"></i> Da Firmare:</b></h4>';
 					if($_SESSION['dafirmare'] == 1) {echo 'C\'&egrave; ';} else {echo 'Ci sono ';} 
 					echo '<h2><b>' . $_SESSION['dafirmare'] . '</b></h2>';
@@ -148,7 +148,7 @@
 					$todo = 1;
 				}
 
-				if($_SESSION['daprotocollare'] > 0) {
+				if(($a->isLettere($_SESSION['loginid'])) && ($_SESSION['daprotocollare'] > 0)) {
 					echo '<center><div class="alert alert-warning"><b><h4><i class="fa fa-book"></i> Da Protocollare:</b></h4>';
 					if($_SESSION['daprotocollare'] == 1) {echo 'C\'&egrave; ';} else {echo 'Ci sono ';} 
 					echo '<h2><b>' . $_SESSION['daprotocollare'] . '</b></h2>';
