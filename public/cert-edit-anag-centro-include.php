@@ -53,13 +53,21 @@
 				<div class="row">
 					
 					<label class="col-sm-2 control-label">Nato a:</label>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<input type="text" value="<?php echo $info['luogonascita']; ?>" class="form-control input-sm" name="cittanascita" required>
 					</div>
 
 					<label class="col-sm-1 control-label">il:</label>
 					<div class="col-sm-2">
 						<input type="text" value="<?php echo $c->dataSlash($info['datanascita']); ?>" class="form-control input-sm datepickerAnag" name="datanascita" required>
+					</div>
+
+					<label class="col-sm-2 control-label">Cittadinanza:</label>
+					<div class="col-sm-2">
+						<select class="form-control input-sm" name="cittadinanza">
+							<option value="it" <?php if($info['cittadinanza'] == 'it') echo 'selected'; ?> > Italiana</option>
+							<OPTION value="ee" <?php if($info['cittadinanza'] == 'ee') echo 'selected'; ?> > Estera</option>
+						</select>
 					</div>
 				
 				</div>

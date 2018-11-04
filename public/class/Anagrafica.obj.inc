@@ -221,13 +221,13 @@ class Anagrafica {
 		}
 	}
 
-	public function insertAssistito($nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $residenzacitta, $residenzavia, $residentenumero, $documento, $documentonumero) { 
-			$query = mysql_query("INSERT INTO cert_assistito VALUES ('', '$nome', '$cognome', '$codicefiscale', '$cittanascita', '$datanascita', '$residenzacitta', '$residenzavia', '$residentenumero', '$documento', '$documentonumero')");
+	public function insertAssistito($nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $cittadinanza, $residenzacitta, $residenzavia, $residentenumero, $documento, $documentonumero) { 
+			$query = mysql_query("INSERT INTO cert_assistito VALUES ('', '$nome', '$cognome', '$codicefiscale', '$cittanascita', '$datanascita', '$cittadinanza', '$residenzacitta', '$residenzavia', '$residentenumero', '$documento', '$documentonumero')");
 			return $query;
 	}
 
-	public function editAssistito($id, $nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $residenzacitta, $residenzavia, $residentenumero, $documento, $documentonumero) { 
-			$query = mysql_query("UPDATE cert_assistito SET nome = '$nome', cognome = '$cognome', codicefiscale = '$codicefiscale', luogonascita = '$cittanascita', datanascita = '$datanascita', residenzacitta = '$residenzacitta', residenzavia = '$residenzavia', residenzanumero = '$residentenumero', documento = '$documento', documentonumero = '$documentonumero' WHERE id = '$id'");
+	public function editAssistito($id, $nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $cittadinanza, $residenzacitta, $residenzavia, $residentenumero, $documento, $documentonumero) { 
+			$query = mysql_query("UPDATE cert_assistito SET nome = '$nome', cognome = '$cognome', codicefiscale = '$codicefiscale', luogonascita = '$cittanascita', datanascita = '$datanascita', cittadinanza = '$cittadinanza', residenzacitta = '$residenzacitta', residenzavia = '$residenzavia', residenzanumero = '$residentenumero', documento = '$documento', documentonumero = '$documentonumero' WHERE id = '$id'");
 			return $query;
 	}
 

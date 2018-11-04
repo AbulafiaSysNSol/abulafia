@@ -78,6 +78,12 @@ public $ggmmaaaa;
 		return $datadb;
 	}
 
+	public function oraOM($data) {
+		$date = explode(":",$data);
+		$ora = $date[0].":".$date[2];
+		return $ora;
+	}
+
 
 	}//chiusura classe
 ?>

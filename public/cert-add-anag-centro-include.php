@@ -46,13 +46,21 @@
 				<div class="row">
 					
 					<label class="col-sm-2 control-label">Nato a:</label>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<input type="text" class="form-control input-sm" name="cittanascita" required>
 					</div>
 
 					<label class="col-sm-1 control-label">il:</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control input-sm datepickerAnag" name="datanascita" required>
+					</div>
+
+					<label class="col-sm-2 control-label">Cittadinanza:</label>
+					<div class="col-sm-2">
+						<select class="form-control input-sm" name="cittadinanza">
+							<option selected value="it"> Italiana</option>
+							<OPTION value="ee"> Estera</option>
+						</select>
 					</div>
 				
 				</div>
@@ -85,9 +93,9 @@
 					<label class="col-sm-2 control-label">Documento:</label>
 					<div class="col-sm-3">
 						<select class="form-control input-sm" name="documento">
-							<option selected value="cartaidentita"> Carta d'identi&agrave;</option>
-							<OPTION value="patente"> Patente di guida</option>
-							<OPTION value="passaporto"> Passaporto</option>
+							<option selected value="Carta Identit&agrave;"> Carta d'identi&agrave;</option>
+							<OPTION value="Patente"> Patente di guida</option>
+							<OPTION value="Passaporto"> Passaporto</option>
 						</select>
 					</div>
 

@@ -24,13 +24,14 @@
 	$codicefiscale = $_POST['codicefiscale'];
 	$cittanascita = $_POST['cittanascita'];
 	$datanascita = $c->dataDB($_POST['datanascita']);
+	$cittadinanza = $_POST['cittadinanza'];
 	$residenzacitta = $_POST['residenzacitta'];
 	$residenzavia = $_POST['residenzavia'];
 	$residenzanumero = $_POST['residenzanumero'];
 	$documento = $_POST['documento'];
 	$documentonumero = $_POST['documentonumero'];
 
-	$result = $a->editAssistito($id, $nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $residenzacitta, $residenzavia, $residenzanumero, $documento, $documentonumero);
+	$result = $a->editAssistito($id, $nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $cittadinanza, $residenzacitta, $residenzavia, $residenzanumero, $documento, $documentonumero);
 
 	if($result) {
 		?>

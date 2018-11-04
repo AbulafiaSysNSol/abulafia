@@ -24,7 +24,7 @@
 	$setting=mysql_query("select * from defaultsettings");
 	$setting2=mysql_fetch_array($setting);
 
-	$_SESSIONs['paginaprincipale'] = $setting2['paginaprincipale'];
+	$_SESSION['paginaprincipale'] = $setting2['paginaprincipale'];
 
 ?>
 
@@ -205,15 +205,7 @@ tinymce.init({
 			
 			<!--
 			<div class="col-sm-4" align="center" valign="middle">
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-				 AbuHeader
-				<ins class="adsbygoogle"
-				     style="display:inline-block;width:320px;height:100px"
-				     data-ad-client="ca-pub-5144136285411668"
-				     data-ad-slot="5521587909"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
+
 			</div>
 			-->
 			

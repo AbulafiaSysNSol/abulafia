@@ -86,3 +86,9 @@
 		</div>
 	</form>
 <!--End Modal-->
+
+<script type="text/javascript">
+    $('#myModal').on('hidden.bs.modal', function (e) {
+  		window.location="?corpus=magazzino-prodotti";
+	})
+</script>

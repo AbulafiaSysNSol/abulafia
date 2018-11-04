@@ -7,9 +7,9 @@
 	<div class="panel-body">
 		
 		<?php
-			if (isset($_GET['richiesta']) &&($_GET['richiesta'] == 'ok')) {
+			if (isset($_GET['inserimento']) &&($_GET['inserimento'] == 'ok')) {
 			?>
-				<center><div class="alert alert-success"><i class="fa fa-check"></i> Certificato richiesto <b>correttamente!</b></div></center>
+				<center><div class="alert alert-success"><i class="fa fa-check"></i> Visita inserita <b>correttamente!</b></div></center>
 			<?php
 			}
 		?>

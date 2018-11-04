@@ -13,6 +13,7 @@
 		require_once "class/" . $class_name.".obj.inc";
 	}
 
+	$a = new Anagrafica();
 	$c = new Calendario();
 	
 	$ogg = $_GET['q'];
@@ -57,15 +58,17 @@
 					<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Assistito" href="login0.php?corpus=cert-edit-anag&id=<?php echo $risultati2['id']; ?>">
 							<i class="fa fa-edit fa-fw"></i>
 					</a>
-					<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Aggiungi Accesso" href="login0.php?corpus=cert-new-access&id=<?php echo $risultati2['id']; ?>">
-							<i class="fa fa-plus-circle fa-fw"></i>
+					<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Aggiungi Visita" href="login0.php?corpus=cert-modale-add-access&id=<?php echo $risultati2['id']; ?>" data-toggle="modal" data-target="#myModal">
+							<i class="fa fa-medkit fa-fw"></i>
 					</a>
-					<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Emetti Certificato" href="login0.php?corpus=cert-new-certificato&id=<?php echo $risultati2['id']; ?>">
-							<i class="fa fa-edit fa-fw"></i>
-					</a>
-					<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina Assistito" onclick="return confirm('Sicuro di voler cancellare la persona?')" href="cert-delete-anag.php?id=<?php echo $risultati2['id']; ?>">
+					<?php if($a->isAdmin($_SESSION['loginid'])) {
+						?>
+						<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina Assistito" onclick="return confirm('Sicuro di voler cancellare la persona?')" href="cert-delete-anag.php?id=<?php echo $risultati2['id']; ?>">
 							<i class="fa fa-trash-o fa-fw"></i>
-					</a>
+						</a>
+						<?php
+					}
+					?>
 				</div>
 			</td>
 		</tr>
