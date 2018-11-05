@@ -29,3 +29,4 @@ public/log/*
 /public/images/logo-azienda2.jpg
 public/images/barcode/*
 !public/images/barcode/.gitkeep
+/public/images/intestazione_certificato.png
