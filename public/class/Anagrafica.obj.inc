@@ -242,6 +242,13 @@ class Anagrafica {
 		return $res;
 	}
 
+	public function getNomeAssistito($id) {
+		$query = mysql_query("SELECT nome, cognome FROM cert_assistito WHERE id = $id");
+		$res = mysql_fetch_row($query);
+		$nome = $res[0] . ' ' . $res[1];
+		return $nome;
+	}
+
 }
 
 ?>

@@ -100,9 +100,10 @@
 					<label class="col-sm-2 control-label">Documento:</label>
 					<div class="col-sm-3">
 						<select class="form-control input-sm" name="documento">
-							<option value="cartaidentita" <?php if($info['documento'] == 'cartaidentita') echo 'selected'; ?> > Carta d'identi&agrave;</option>
-							<OPTION value="patente" <?php if($info['documento'] == 'patente') echo 'selected'; ?> > Patente di guida</option>
-							<OPTION value="passaporto" <?php if($info['documento'] == 'passaporto') echo 'selected'; ?> > Passaporto</option>
+							<option value="Carta Identit&agrave;" <?php if($info['documento'] == 'Carta Identità') echo 'selected'; ?> > Carta d'identit&agrave;</option>
+							<OPTION value="Patente" <?php if($info['documento'] == 'Patente') echo 'selected'; ?> > Patente di guida</option>
+							<OPTION value="Passaporto" <?php if($info['documento'] == 'Passaporto') echo 'selected'; ?> > Passaporto</option>
+							<OPTION value="Tesserino Aeroportuale" <?php if($info['documento'] == 'Tesserino Aeroportuale') echo 'selected'; ?> > Tesserino Aeroportuale</option>
 						</select>
 					</div>
 

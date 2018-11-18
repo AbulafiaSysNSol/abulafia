@@ -9,6 +9,16 @@
 		</div>
 		<?php
 	}
+
+	if( isset($_GET['insert']) && $_GET['insert'] == "error") {
+		?>
+		<div class="row">
+			<div class="col-sm-12">
+				<center><div class="alert alert-danger"><i class="fa fa-alert"></i> <b>Attenzione:</b> si &egrave; verificato un errore nell'inserimento. Verifica che il paziente non sia gi&agrave; registrato.</div></center>
+			</div>
+		</div>
+		<?php
+	}
 ?>
 
 <div class="panel panel-default">
@@ -96,6 +106,7 @@
 							<option selected value="Carta Identit&agrave;"> Carta d'identi&agrave;</option>
 							<OPTION value="Patente"> Patente di guida</option>
 							<OPTION value="Passaporto"> Passaporto</option>
+							<OPTION value="Tesserino Aeroportuale"> Tesserino Aeroportuale</option>	
 						</select>
 					</div>
 

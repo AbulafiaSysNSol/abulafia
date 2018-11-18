@@ -334,6 +334,8 @@ tinymce.init({
 							<ul class="dropdown-menu">
 								<li><a href="?corpus=cert-add-anag"><i class="fa fa-user-plus fa-fw"></i> Inserisci Assistito</a></li>
 								<li><a href="?corpus=cert-search-anag"><i class="fa fa-search fa-fw"></i> Ricerca Assistito</a></li>
+								<li><a href="?corpus=cert-search-visit"><i class="fa fa-list fa-fw"></i> Elenco Prestazioni</a></li>
+								<li><a href="?corpus=cert-new-report"><i class="fa fa-file-pdf-o fa-fw"></i> Genera Report</a></li>
 							</ul>
 						</li>
 					<?php } ?>

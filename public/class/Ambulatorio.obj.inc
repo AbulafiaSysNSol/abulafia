@@ -28,6 +28,54 @@ class Ambulatorio {
 		return $res;
 	}
 
+	public function contaPrestazioni($inizio, $fine) {
+		$query = mysql_query("SELECT COUNT(*) FROM cert_accesso WHERE cert_accesso.data BETWEEN '$inizio' AND '$fine'");
+		$res = mysql_fetch_row($query);
+		return $res[0];
+	}
+
+	public function contaPrestazioni118($inizio, $fine) {
+		$query = mysql_query("SELECT COUNT(*) FROM cert_accesso WHERE intervento = 1 AND data BETWEEN '$inizio' AND '$fine'");
+		$res = mysql_fetch_row($query);
+		return $res[0];
+	}
+
+	public function contaPrestazioniFarmaci($inizio, $fine) {
+		$query = mysql_query("SELECT COUNT(*) FROM cert_accesso WHERE terapia != '' AND data BETWEEN '$inizio' AND '$fine'");
+		$res = mysql_fetch_row($query);
+		return $res[0];
+	}
+
+	public function contaPrestazioniDip($inizio, $fine) {
+		$query = mysql_query("SELECT COUNT(*) FROM cert_accesso, cert_assistito WHERE cert_accesso.anagrafica = cert_assistito.id AND cert_accesso.dipendente = 1 AND data BETWEEN '$inizio' AND '$fine'");
+		$res = mysql_fetch_row($query);
+		return $res[0];
+	}
+
+	public function contaPrestazioniIT($inizio, $fine) {
+		$query = mysql_query("SELECT COUNT(*) FROM cert_accesso, cert_assistito WHERE cert_accesso.anagrafica = cert_assistito.id AND cert_assistito.cittadinanza = 'it' AND data BETWEEN '$inizio' AND '$fine'");
+		$res = mysql_fetch_row($query);
+		return $res[0];
+	}
+
+	public function contaPrestazioniDipIT($inizio, $fine) {
+		$query = mysql_query("SELECT COUNT(*) FROM cert_accesso, cert_assistito WHERE cert_accesso.anagrafica = cert_assistito.id AND cert_assistito.cittadinanza = 'it' AND cert_accesso.dipendente = 1 AND data BETWEEN '$inizio' AND '$fine'");
+		$res = mysql_fetch_row($query);
+		return $res[0];
+	}
+
+	public function contaPrestazioniEE($inizio, $fine) {
+		$query = mysql_query("SELECT COUNT(*) FROM cert_accesso, cert_assistito WHERE cert_accesso.anagrafica = cert_assistito.id AND cert_assistito.cittadinanza = 'ee' AND data BETWEEN '$inizio' AND '$fine'");
+		$res = mysql_fetch_row($query);
+		return $res[0];
+	}
+
+	public function contaPrestazioniDipEE($inizio, $fine) {
+		$query = mysql_query("SELECT COUNT(*) FROM cert_accesso, cert_assistito WHERE cert_accesso.anagrafica = cert_assistito.id AND cert_assistito.cittadinanza = 'ee' AND cert_accesso.dipendente = 1 AND data BETWEEN '$inizio' AND '$fine'");
+		$res = mysql_fetch_row($query);
+		return $res[0];
+	}
+
 }
 
 ?>

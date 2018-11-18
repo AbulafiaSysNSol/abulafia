@@ -45,14 +45,14 @@
 			$contatorelinee = $contatorelinee + 1 ;
 		?>
 		<tr bgcolor=<?php echo $colorelinee; ?>>
-			<td style="vertical-align: middle"><?php echo $risultati2['nome'];?></td>
-			<td style="vertical-align: middle"><?php echo $risultati2['cognome'];?></td>
-			<td style="vertical-align: middle"><?php echo $risultati2['codicefiscale'];?></td>
-			<td style="vertical-align: middle"><?php echo $risultati2['luogonascita'];?></td>
+			<td style="vertical-align: middle"><?php echo ucwords($risultati2['nome']);?></td>
+			<td style="vertical-align: middle"><?php echo ucwords($risultati2['cognome']);?></td>
+			<td style="vertical-align: middle"><?php echo strtoupper($risultati2['codicefiscale']);?></td>
+			<td style="vertical-align: middle"><?php echo ucwords($risultati2['luogonascita']);?></td>
 			<td style="vertical-align: middle"><?php echo $c->dataSlash($risultati2['datanascita']);?></td>
 			<td style="vertical-align: middle" align="center">
 				<div class="btn-group btn-group-sm">
-					<a class="fancybox btn btn-info" data-fancybox-type="iframe" data-toggle="tooltip" data-placement="left" title="Info Assistito" href="cert-info-anag.php?id=<?php echo $risultati2['id']; ?>">
+					<a class="btn btn-info btn" data-toggle="tooltip" data-placement="left" title="Info Assistito" href="login0.php?corpus=cert-info-anag&id=<?php echo $risultati2['id']; ?> " data-toggle="modal" data-target="#myModal">
 							<i class="fa fa-info-circle fa-fw"></i>
 					</a>
 					<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Assistito" href="login0.php?corpus=cert-edit-anag&id=<?php echo $risultati2['id']; ?>">

@@ -40,5 +40,12 @@
 		</script>
 		<?php
 	}
+	else {
+		?>
+		<script>
+			window.location="login0.php?corpus=cert-add-anag&insert=error";
+		</script>
+		<?php	
+	}
 
 ?>
