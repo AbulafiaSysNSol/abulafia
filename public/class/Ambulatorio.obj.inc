@@ -16,8 +16,23 @@ class Ambulatorio {
 		return $accessi;
 	}
 
+	public function getCertificati($idanagrafica) {
+		$query = mysql_query("SELECT * FROM cert_certificati WHERE anagrafica = '$idanagrafica' ORDER BY id DESC");
+		$certificati = array();
+		while ($res = mysql_fetch_array($query)) {
+			array_push($certificati,$res);
+		}
+		return $certificati;
+	}
+
 	public function countAccessi($idanagrafica) {
 		$query = mysql_query("SELECT COUNT(*) FROM cert_accesso WHERE anagrafica = '$idanagrafica'");
+		$res = mysql_fetch_row($query);
+		return $res[0];
+	}
+
+	public function countCertificati($idanagrafica) {
+		$query = mysql_query("SELECT COUNT(*) FROM cert_certificati WHERE anagrafica = '$idanagrafica'");
 		$res = mysql_fetch_row($query);
 		return $res[0];
 	}

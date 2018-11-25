@@ -115,9 +115,9 @@
 					</div>
 			
 					<div class="modal-footer">
-						<a href="?corpus=cert-search-anag"><button type="button" class="btn btn-danger"><i class="fa fa-fw fa-times"></i> Chiudi</button></a>
-						<button type="submit" class="btn btn-info"><i class="fa fa-fw fa-file-text-o"></i> Anteprima Certificato</button></a>
-						<button type="submit" class="btn btn-success"><i class="fa fa-fw fa-save"></i> Salva Certificato</button>
+						<a href="?corpus=cert-search-anag" type="button" class="btn btn-danger"><i class="fa fa-fw fa-times"></i> Chiudi</a>
+						<button name="anteprima" type="submit" class="btn btn-info"><i class="fa fa-fw fa-file-text-o"></i> Anteprima Certificato</button>
+						<button name="salva" type="submit" class="btn btn-success"><i class="fa fa-fw fa-save"></i> Salva Certificato</button>
 					</div>
 				</div>
 			</div>

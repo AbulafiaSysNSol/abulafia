@@ -65,7 +65,7 @@
 						<input type="text" class="form-control input-sm datepickerAnag" name="datanascita" required>
 					</div>
 
-					<label class="col-sm-2 control-label">Cittadinanza:</label>
+					<label class="col-sm-2 control-label">Nazionalit&agrave;:</label>
 					<div class="col-sm-2">
 						<select class="form-control input-sm" name="cittadinanza">
 							<option selected value="it"> Italiana</option>

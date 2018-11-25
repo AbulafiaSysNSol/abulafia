@@ -22,7 +22,16 @@
 	$a = new Anagrafica();	
 	$paziente = $a->infoAssistito($idanagrafica);
 
+	$idmedico = $_SESSION['loginid'];
+
 	$c = new Calendario();
+
+	if(isset($_POST['anteprima'])) {
+		$from = "anteprima";
+	}
+	if(isset($_POST['salva'])) {
+		$from = "salva";
+	}
 
 	$tipo = $_POST['tipocertificato'];
 	if(isset($_POST['incanamnesi'])) {
@@ -81,6 +90,8 @@
 
 	if($tipo == 'generico') {
 
+		$tipologia = "Certificato Generico";
+
 		$pdf->Image("images/intestazione_certificato.png",23,11,33);
 		$pdf->Cell(60,40,'',1,0,'C',false);
 		$pdf->SetFont('Arial','B',16);
@@ -97,6 +108,9 @@
 	}
 
 	if($tipo == 'ps') {
+
+		$tipologia = "Invio al PS";
+
 		$pdf->Image("images/intestazione_certificato.png",23,11,33);
 		$pdf->Cell(60,40,'',1,0,'C',false);
 		$pdf->SetFont('Arial','B',16);
@@ -148,10 +162,24 @@
 		$pdf->Write('','Si autorizza al trattamento dei dati personali.');
 	}
 
-	$pdf->Ln(10);
+	$pdf->Ln(8);
 	$pdf->SetFont('Arial','B',11);
-	$pdf->SetX(130);
-	$pdf->Write('','Il Medico di Guardia');
+
+	if($from == 'salva') {	
+		$pdf->Cell(170,6,'F.to il Medico di Guardia',0,1,'R',false);
+		$pdf->Cell(170,6,$a->getNome($_SESSION['loginid']) . ' ' . $a->getCognome($_SESSION['loginid']),0,1,'R',false);
+	}
+	else {
+		$pdf->Cell(170,7,'il Medico di Guardia',0,1,'R',false);
+	}
+
+	if($from == 'salva') {
+		$file = 'certificato_'.time().'.pdf';
+		$date = date("Y-m-d", time());
+		$insert = mysql_query("INSERT INTO cert_certificati VALUES ('', '$idanagrafica', '$idmedico', '', '$date', '$tipologia', '$file')");
+		$pdf->Output('certificati/'.$file,'F');
+		header("Location: login0.php?corpus=cert-info-anag&id=".$idanagrafica);
+	}
 
 	$pdf->Output('Certificato_'.time().'.pdf','I');
 	exit();

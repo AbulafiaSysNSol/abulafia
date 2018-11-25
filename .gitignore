@@ -29,4 +29,6 @@ public/log/*
 /public/images/logo-azienda2.jpg
 public/images/barcode/*
 !public/images/barcode/.gitkeep
+public/certificati/*
+!public/certificati/.gitkeep
 /public/images/intestazione_certificato.png

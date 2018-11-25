@@ -62,7 +62,7 @@
 						<input type="text" value="<?php echo $c->dataSlash($info['datanascita']); ?>" class="form-control input-sm datepickerAnag" name="datanascita" required>
 					</div>
 
-					<label class="col-sm-2 control-label">Cittadinanza:</label>
+					<label class="col-sm-2 control-label">Nazionalit&agrave;</label>
 					<div class="col-sm-2">
 						<select class="form-control input-sm" name="cittadinanza">
 							<option value="it" <?php if($info['cittadinanza'] == 'it') echo 'selected'; ?> > Italiana</option>

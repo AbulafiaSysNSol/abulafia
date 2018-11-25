@@ -56,7 +56,7 @@
 					        </div>
 
 					        <div class="col-sm-4">
-					           	Cittadinanza:<br>
+					           	Nazionalit&agrave;:<br>
 					           	<label>
 					      		<?php 
 					           		if($info['cittadinanza'] == "it") { echo 'Italiana'; }
@@ -109,9 +109,9 @@
 										<tr>
 											<td><b>Data</b></td>
 											<td><b>Ora</b></td>
-											<td><b>Anamnesi</b></td>
 											<td><b>Diagnosi</b></td>
 											<td><b>Terapia</b></td>
+											<td><b>Note</b></td>
 											<td align="center"><b>Opzioni</b></td>
 										</tr>
 										<?php
@@ -120,12 +120,11 @@
 											echo '<tr>';
 											echo '<td>' . $c->dataSlash($val['data']) . '</td>';
 											echo '<td>' . $c->oraOM($val['ora']) . '</td>';
-											echo '<td>' . $val['anamnesi'] . '</td>';
 											echo '<td>' . $val['diagnosi'] . '</td>';
 											echo '<td>' . $val['terapia'] . '</td>';
+											echo '<td>' . $val['note'] . '</td>';
 											?> <td align="center">
-													<a class="btn btn-primary btn-xs btn-info" href="login0.php?corpus=cert-genera-certificato&idanagrafica=<?php echo $id; ?>&idvisita=<?php echo $val['id']; ?>" data-toggle="modal">
-													<i class="fa fa-file-pdf-o fa-fw"></i> Certificato</a>
+													<a class="btn btn-primary btn-xs btn-info" href="login0.php?corpus=cert-genera-certificato&idanagrafica=<?php echo $id; ?>&idvisita=<?php echo $val['id']; ?>" data-toggle="modal">Crea Certificato</a>
 												</td> <?php
 											echo '</tr>'; 
 										}
@@ -138,10 +137,57 @@
 						?>
 					</div>
 				</div>
-			</div>
 
-			<div class="modal-footer">
-				<a href="?corpus=cert-search-anag"><button type="button" class="btn btn-danger"><i class="fa fa-times"></i> Chiudi</button></a>
+				<div class="panel panel-default">
+							
+					<div class="panel-heading">
+						<h3 class="panel-title"><strong><i class="fa fa-file-pdf-o fa-fw"></i> Certificati</strong></h3>
+					</div>
+							
+					<div class="panel-body">
+						<?php 
+						if($amb->countCertificati($id) == 0) {
+							?>	
+							<div>
+								<center><div class="alert alert-warning"><i class="fa fa-info-circle"></i> Nessun certificato registrato per l'anagrafica selezionata.</div></center>
+							</div>
+							<?php
+						}
+						else {
+							?>
+							<div class="row">
+								<div class="col-sm-12">
+				                    <table class="table table-condensed">
+										<tr>
+											<td><b>Numero</b></td>
+											<td><b>Data</b></td>
+											<td><b>Tipologia</b></td>
+											<td><b>Medico</b></td>
+											<td align="center"><b>Opzioni</b></td>
+										</tr>
+										<?php
+										$certificato = $amb->getCertificati($id);
+										foreach ($certificato as $val) {
+											echo '<tr>';
+											echo '<td>' . $val['id'] . '</td>';
+											echo '<td>' . $c->dataSlash($val['data']) . '</td>';
+											echo '<td>' . $val['tipo'] . '</td>';
+											echo '<td>' . $a->getNome($val['medico']) . ' ' . $a->getCognome($val['medico']) . '</td>';
+											?> <td align="center">
+													<a class="btn btn-primary btn-xs btn-danger fancybox" data-fancybox-type="iframe" href="certificati/<?php echo $val['file']; ?>">Visualizza</a>
+												</td> <?php
+											echo '</tr>'; 
+										}
+										?>
+									</table>
+								</div>
+							</div>
+							<?php
+						}
+						?>
+					</div>
+				</div>
+
 			</div>
 
 		</div>
