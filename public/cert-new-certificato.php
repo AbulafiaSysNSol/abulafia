@@ -60,6 +60,21 @@
 	}
 	$testo = $_POST['testocertificato'];
 
+	if($from == "salva") {
+		$anno = $_SESSION['annoprotocollo'];
+		$date = date("Y-m-d", time());
+		if($tipo == 'generico') {
+			$oggetto = "Certificato medico generico di accesso al PSSA Aeroporto Bellini di Catania rilasciato per il paziente " . ucwords($paziente['nome']) .' ' . ucwords($paziente['cognome']);
+		}
+		else if($tipo == 'ps') {
+			$oggetto = "Certificato medico di invio al Pronto Soccorso dopo accesso al PSSA Aeroporto Bellini di Catania rilasciato per il paziente " . ucwords($paziente['nome']) .' ' . ucwords($paziente['cognome']);
+		}
+		$newprot = mysql_query("INSERT INTO lettere$anno VALUES ('', '$oggetto', '$date', '$date', '', 'ricevuta', '', '', '', '')");
+		$idprotocollo = mysql_insert_id();
+		$insmittente = mysql_query("INSERT INTO joinletteremittenti$anno VALUES ('$idprotocollo', '$idmedico')");
+		$insins = mysql_query("INSERT INTO joinlettereinserimento$anno VALUES ('$idprotocollo', '$idmedico', '','$date')");
+	}
+
 	$finale = 'Documento generato digitalmente da Abulafia Web Ver.' . $_SESSION['version'].'. - https://www.abulafiaweb.it - info@abulafiaweb.it';
 	
 	require('lib/fpdf/fpdf.php');
@@ -174,10 +189,16 @@
 	}
 
 	if($from == 'salva') {
+		if (!is_dir("lettere$anno/".$idprotocollo)) { 
+			mkdir("lettere$anno/".$idprotocollo, 0777, true);
+		}
 		$file = 'certificato_'.time().'.pdf';
 		$date = date("Y-m-d", time());
 		$insert = mysql_query("INSERT INTO cert_certificati VALUES ('', '$idanagrafica', '$idmedico', '', '$date', '$tipologia', '$file')");
 		$pdf->Output('certificati/'.$file,'F');
+		$name = time().'.pdf';
+		$pdf->Output('lettere'.$anno.'/'.$idprotocollo.'/'.$name,'F');
+		$insert = mysql_query("INSERT INTO joinlettereallegati VALUES ('$idprotocollo', '$anno', '$name')");
 		header("Location: login0.php?corpus=cert-info-anag&id=".$idanagrafica);
 	}
 
