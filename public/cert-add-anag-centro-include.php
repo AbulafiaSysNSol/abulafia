@@ -46,7 +46,7 @@
 
 					<label class="col-sm-2 control-label">Codice Fiscale:</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control input-sm" name="codicefiscale" required>
+						<input type="text" class="form-control input-sm" minlength="16" maxlength="16" name="codicefiscale" required>
 					</div>
 				
 				</div>

@@ -64,15 +64,28 @@
 		$anno = $_SESSION['annoprotocollo'];
 		$date = date("Y-m-d", time());
 		if($tipo == 'generico') {
-			$oggetto = "Certificato medico generico di accesso al PSSA Aeroporto Bellini di Catania rilasciato per il paziente " . ucwords($paziente['nome']) .' ' . ucwords($paziente['cognome']);
+			$oggetto = "Certificato Medico generico di accesso al PSSA Aeroporto Bellini di Catania rilasciato per il Paziente " . ucwords($paziente['nome']) .' ' . ucwords($paziente['cognome']);
 		}
 		else if($tipo == 'ps') {
-			$oggetto = "Certificato medico di invio al Pronto Soccorso dopo accesso al PSSA Aeroporto Bellini di Catania rilasciato per il paziente " . ucwords($paziente['nome']) .' ' . ucwords($paziente['cognome']);
+			$oggetto = "Certificato Medico di invio al Pronto Soccorso dopo accesso al PSSA Aeroporto Bellini di Catania - Paziente " . ucwords($paziente['nome']) .' ' . ucwords($paziente['cognome']);
 		}
-		$newprot = mysql_query("INSERT INTO lettere$anno VALUES ('', '$oggetto', '$date', '$date', '', 'ricevuta', '', '', '', '')");
+		$newprot = mysql_query("INSERT INTO lettere$anno VALUES ('', '$oggetto', '$date', '$date', '', 'ricevuta', 'email', '', '', '')");
 		$idprotocollo = mysql_insert_id();
 		$insmittente = mysql_query("INSERT INTO joinletteremittenti$anno VALUES ('$idprotocollo', '$idmedico')");
 		$insins = mysql_query("INSERT INTO joinlettereinserimento$anno VALUES ('$idprotocollo', '$idmedico', '','$date')");
+		include('lib/qrcode/qrlib.php');
+		//creazione qr code
+			
+		if (!is_dir('lettere'.$anno.'/qrcode/')) {
+			$creadir = mkdir('lettere'.$anno.'/qrcode/', 0777, true);
+			if (!$creadir) die ("Impossibile creare la directory: qrcode/");
+		}
+			
+		$pathqrcode = 'lettere'.$anno.'/qrcode/'.$idprotocollo.$anno.'.png';
+		$param = 'Protocollo n° '.$idprotocollo.' del '.$dataregistrazione;
+		$codeText = $param; 
+		$debugLog = ob_get_contents(); 
+		QRcode::png($codeText, $pathqrcode);
 	}
 
 	$finale = 'Documento generato digitalmente da Abulafia Web Ver.' . $_SESSION['version'].'. - https://www.abulafiaweb.it - info@abulafiaweb.it';
@@ -117,9 +130,14 @@
 
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial','',11);
-		$pdf->Cell(40,10,'Data: ' . date("d/m/Y", time()),0,0,'L',false);
-		$pdf->Cell(50,10,'Rif. Visita: ' . $visita['id'],0,0,'L',false);
-		$pdf->Cell(90,10,'Medico: ' . $a->getNome($_SESSION['loginid']) . ' ' . $a->getCognome($_SESSION['loginid']),0,1,'L',false);
+		if($from == "salva") {
+			$pdf->Cell(80,10,'Protocollo n: ' . $idprotocollo . ' del ' . $c->dataSlash($date),0,0,'L',false);
+		}
+		else {
+			$pdf->Cell(80,10,'Protocollo n: _______ del ____________',0,0,'L',false);
+		}
+		$pdf->Cell(50,10,'Rif. Visita n. ' . $visita['id'] . ' del ' . $c->dataSlash($visita['data']),0,0,'L',false);
+		$pdf->Ln(10);
 	}
 
 	if($tipo == 'ps') {
@@ -194,7 +212,7 @@
 		}
 		$file = 'certificato_'.time().'.pdf';
 		$date = date("Y-m-d", time());
-		$insert = mysql_query("INSERT INTO cert_certificati VALUES ('', '$idanagrafica', '$idmedico', '', '$date', '$tipologia', '$file')");
+		$insert = mysql_query("INSERT INTO cert_certificati VALUES ('', '$idanagrafica', '$idmedico', '$idprotocollo', '$date', '$tipologia', '$file')");
 		$pdf->Output('certificati/'.$file,'F');
 		$name = time().'.pdf';
 		$pdf->Output('lettere'.$anno.'/'.$idprotocollo.'/'.$name,'F');

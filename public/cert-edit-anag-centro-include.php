@@ -43,7 +43,7 @@
 
 					<label class="col-sm-2 control-label">Codice Fiscale:</label>
 					<div class="col-sm-2">
-						<input type="text" value="<?php echo $info['codicefiscale']; ?>" class="form-control input-sm" name="codicefiscale" required>
+						<input type="text" value="<?php echo $info['codicefiscale']; ?>" minlength="16" maxlength="16" class="form-control input-sm" name="codicefiscale" required>
 					</div>
 				
 				</div>

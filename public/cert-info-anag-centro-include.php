@@ -169,7 +169,7 @@
 										$certificato = $amb->getCertificati($id);
 										foreach ($certificato as $val) {
 											echo '<tr>';
-											echo '<td>' . $val['id'] . '</td>';
+											echo '<td>' . $val['numero'] . '</td>';
 											echo '<td>' . $c->dataSlash($val['data']) . '</td>';
 											echo '<td>' . $val['tipo'] . '</td>';
 											echo '<td>' . $a->getNome($val['medico']) . ' ' . $a->getCognome($val['medico']) . '</td>';

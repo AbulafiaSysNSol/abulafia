@@ -32,7 +32,7 @@
 	$documentonumero = $_POST['documentonumero'];
 
 	$result = $a->insertAssistito($nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $cittadinanza, $residenzacitta, $residenzavia, $residenzanumero, $documento, $documentonumero);
-
+	
 	if($result) {
 		?>
 		<script>

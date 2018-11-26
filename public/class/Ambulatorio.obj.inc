@@ -17,7 +17,7 @@ class Ambulatorio {
 	}
 
 	public function getCertificati($idanagrafica) {
-		$query = mysql_query("SELECT * FROM cert_certificati WHERE anagrafica = '$idanagrafica' ORDER BY id DESC");
+		$query = mysql_query("SELECT * FROM cert_certificati WHERE anagrafica = '$idanagrafica' ORDER BY numero DESC");
 		$certificati = array();
 		while ($res = mysql_fetch_array($query)) {
 			array_push($certificati,$res);
