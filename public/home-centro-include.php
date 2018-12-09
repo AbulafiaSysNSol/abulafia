@@ -3,6 +3,7 @@
 	$_SESSION['block'] = false;
 	$data = new Calendario();
 	$lettera = new Lettera();
+	$amb = new Ambulatorio();
 	$e = new Mail();
 	$a = new Anagrafica();
 	$anno = $_SESSION['annoprotocollo'];
@@ -154,6 +155,16 @@
 					echo '<h2><b>' . $_SESSION['daprotocollare'] . '</b></h2>';
 					if($_SESSION['daprotocollare'] == 1) {echo 'lettera ';} else {echo 'lettere ';}
 					echo '<a href="?corpus=elenco-lettere">da protocollare</a>.</div></center>';
+					$todo = 1;
+				}
+
+				if(($a->isAmbulatorio($_SESSION['loginid'])) && ($amb->countRichieste() > 0)) {
+					$certificati = $amb->countRichieste();
+					echo '<center><div class="alert alert-warning"><b><h4><i class="fa fa-medkit"></i> Certificati Medici:</b></h4>';
+					if($certificati == 1) {echo 'C\'&egrave; ';} else {echo 'Ci sono ';} 
+					echo '<h2><b>' . $certificati . '</b></h2>';
+					if($certificati == 1) {echo 'certificato ';} else {echo 'certificati ';}
+					echo '<a href="?corpus=cert-list-richieste">da emettere</a>.</div></center>';
 					$todo = 1;
 				}
 

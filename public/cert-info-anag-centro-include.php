@@ -124,8 +124,10 @@
 											echo '<td>' . $val['terapia'] . '</td>';
 											echo '<td>' . $val['note'] . '</td>';
 											?> <td align="center">
-													<a class="btn btn-primary btn-xs btn-info" href="login0.php?corpus=cert-genera-certificato&idanagrafica=<?php echo $id; ?>&idvisita=<?php echo $val['id']; ?>" data-toggle="modal">Crea Certificato</a>
-												</td> <?php
+													<a class="btn btn-primary btn-xs btn-info" href="login0.php?corpus=cert-genera-certificato&idanagrafica=<?php echo $id; ?>&idvisita=<?php echo $val['id']; ?>" data-toggle="modal">Crea Cert.</a>
+													<a class="btn btn-primary btn-xs btn-success" href="login0.php?corpus=cert-genera-richiesta&idanagrafica=<?php echo $id; ?>&idvisita=<?php echo $val['id']; ?>" data-toggle="modal">Richiedi Cert.</a>
+												</td>
+												 <?php
 											echo '</tr>'; 
 										}
 										?>

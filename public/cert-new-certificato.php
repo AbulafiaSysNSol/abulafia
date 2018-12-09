@@ -33,6 +33,13 @@
 		$from = "salva";
 	}
 
+	if(isset($_POST['richiesta'])) {
+		$richiesta = $_POST['richiesta'];
+	}
+	else {
+		$richiesta = "null";
+	}
+
 	$tipo = $_POST['tipocertificato'];
 	if(isset($_POST['incanamnesi'])) {
 		$anamnesi = 1;	
@@ -82,7 +89,7 @@
 		}
 			
 		$pathqrcode = 'lettere'.$anno.'/qrcode/'.$idprotocollo.$anno.'.png';
-		$param = 'Protocollo n° '.$idprotocollo.' del '.$dataregistrazione;
+		$param = 'Protocollo n° '.$idprotocollo.' del '.$date;
 		$codeText = $param; 
 		$debugLog = ob_get_contents(); 
 		QRcode::png($codeText, $pathqrcode);
@@ -131,10 +138,10 @@
 		$pdf->Ln(5);
 		$pdf->SetFont('Arial','',11);
 		if($from == "salva") {
-			$pdf->Cell(80,10,'Protocollo n: ' . $idprotocollo . ' del ' . $c->dataSlash($date),0,0,'L',false);
+			$pdf->Cell(80,10,'Protocollo n. ' . $idprotocollo . ' del ' . $c->dataSlash($date),0,0,'L',false);
 		}
 		else {
-			$pdf->Cell(80,10,'Protocollo n: _______ del ____________',0,0,'L',false);
+			$pdf->Cell(80,10,'Protocollo n. _______ del ____________',0,0,'L',false);
 		}
 		$pdf->Cell(50,10,'Rif. Visita n. ' . $visita['id'] . ' del ' . $c->dataSlash($visita['data']),0,0,'L',false);
 		$pdf->Ln(10);
@@ -216,7 +223,11 @@
 		$pdf->Output('certificati/'.$file,'F');
 		$name = time().'.pdf';
 		$pdf->Output('lettere'.$anno.'/'.$idprotocollo.'/'.$name,'F');
-		$insert = mysql_query("INSERT INTO joinlettereallegati VALUES ('$idprotocollo', '$anno', '$name')");
+		$insert2 = mysql_query("INSERT INTO joinlettereallegati VALUES ('$idprotocollo', '$anno', '$name')");
+		if($richiesta != "null") {
+			$anno = date("Y", time());
+			$update = mysql_query("UPDATE cert_richieste SET stato = 1, protocollo = '$idprotocollo', anno = '$anno' WHERE id = '$richiesta'");
+		}
 		header("Location: login0.php?corpus=cert-info-anag&id=".$idanagrafica);
 	}
 

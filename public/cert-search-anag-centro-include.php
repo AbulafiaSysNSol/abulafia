@@ -12,12 +12,16 @@
 				<center><div class="alert alert-success"><i class="fa fa-check"></i> Visita inserita <b>correttamente!</b></div></center>
 			<?php
 			}
-		?>
 
-		<?php
 			if (isset($_GET['delete']) &&($_GET['delete'] == 'ok')) {
 			?>
 				<center><div class="alert alert-success"><i class="fa fa-trash"></i> Anagrafica eliminata <b>correttamente!</b></div></center>
+			<?php
+			}
+
+			if (isset($_GET['richiesta']) &&($_GET['richiesta'] == 'ok')) {
+			?>
+				<center><div class="alert alert-success"><i class="fa fa-check"></i> Richiesta di certificato medico inoltrata <b>correttamente!</b></div></center>
 			<?php
 			}
 		?>

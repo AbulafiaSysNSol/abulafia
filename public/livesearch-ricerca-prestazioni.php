@@ -51,20 +51,28 @@
 			<td style="vertical-align: middle"><?php echo ucwords($a->getNomeAssistito($risultati2['anagrafica']));?></td>
 			<td style="vertical-align: middle"><?php echo $risultati2['diagnosi'];?></td>
 			<td style="vertical-align: middle" align="center">
-				<div class="btn-group btn-group-sm">
+				<div class="btn-group btn-group-xs">
+					
+					<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Info Prestazione" href="?corpus=cert-genera-richiesta&idanagrafica=<?php echo $risultati2['anagrafica']; ?>&idvisita=<?php echo $risultati2['id']; ?>" data-toggle="modal" data-target="#myModal">
+							Richiedi Certificato <i class="fa fa-arrow-right fa-fw"></i>
+					</a>
+					<!--
 					<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Info Prestazione" href="#" data-toggle="modal" data-target="#myModal">
 							<i class="fa fa-info-circle fa-fw"></i>
 					</a>
+
 					<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Prestazione" href="#">
 							<i class="fa fa-edit fa-fw"></i>
 					</a>
-					<?php if($a->isAdmin($_SESSION['loginid'])) {
+					-->
+					<?php //if($a->isAdmin($_SESSION['loginid'])) {
 						?>
-						<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina Prestazione" onclick="return confirm('Sicuro di voler cancellare la prestazione?')" href="#">
+					<!--	<a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina Prestazione" onclick="return confirm('Sicuro di voler cancellare la prestazione?')" href="#">
 							<i class="fa fa-trash-o fa-fw"></i>
 						</a>
+					-->
 						<?php
-					}
+					//}
 					?>
 				</div>
 			</td>
