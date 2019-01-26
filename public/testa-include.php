@@ -35,8 +35,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-<title><?php echo $_SESSION['nomeapplicativo'] . ' ' . $_SESSION['version'];?></title>
-<meta name="keywords" content="abulafia, protocollo, informatico, gestione documentale, gestione magazzino" />
+<title><?php echo 'Abulafia Web ' . $_SESSION['version'];?></title>
+<meta name="keywords" content="abulafia web, protocollo informatico, gestione documentale, gestione magazzino" />
 <meta name="description" content="Abulafia Web - Protocollo Informatico - Gestione Documentale - Gestione Magazzino" />
 <meta name="author" content="Biagio Saitta & Alfio Musmarra" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
