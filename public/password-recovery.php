@@ -45,7 +45,7 @@
         <div class="row">
 
             <div class="col-sm-3">
-                <center><div class="logodesktop"><img src="images/logo-home.png" width="95%"></div></center>
+                <center><div class="logodesktop"><img src="images/logo-home.png" width="270"></div></center>
             </div>
 
             <div id="loginbox" class="col-sm-6">   
@@ -57,7 +57,7 @@
 
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia Web - Recupera Password<br><?php if($_GET['err'] == 1) {echo 'Utente non trovato, controlla i dati inseriti!';} ?></center>
+                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?>Recupera Password<br><?php if($_GET['err'] == 1) {echo 'Utente non trovato, controlla i dati inseriti!';} ?></center>
                         </div>
                     </div>     
 
@@ -98,8 +98,8 @@
         <div class="row">
             <center>
                 <div class="col-sm-12">
-                    <h4><a href="https://www.abulafiaweb.it">Abulafia Web - Smart Solutions</a></h4>
-                    &copy; 2008 - 2018 <strong>Abulafia Sys'n'Sol</strong>
+                    <div><h4><a href="https://www.abulafiaweb.it">Abulafia Web - Smart Solutions</a></h4></div>
+                    <div><small>&copy; 2008 - <?php echo date("Y"); ?> <strong>Abulafia Sys'n'Sol</strong><small></div>
                     <br><br><br>
                 </div>
             </center>

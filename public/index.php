@@ -105,7 +105,7 @@
             ?>
 
             <div class="col-sm-3">
-                <center><div class="logodesktop"><img src="images/logo-home.png" width="95%"></div></center>
+                <center><div class="logodesktop"><img src="images/logo-home.png" width="270"></div></center>
             </div>
 
             <div id="loginbox" class="col-sm-6">   
@@ -113,11 +113,11 @@
                 <div class="logomobile"><img src="images/logo-home.png" width="44%"></div>
                 <div class="logomobile"><img src="images/logo-azienda.png" width="48%"></div>          
                 </center>
-                <div class="panel panel-<?php if($_GET['err'] == 1) {echo 'danger';} else {echo 'info';} ?>" >
+                <div class="panel panel-<?php if($_GET['err'] == 1) {echo 'danger';} else {echo 'success';} ?>" >
 
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Abulafia Web - Login <?php if($_GET['err'] == 1) {echo ' - Username o Password Errati';} ?></center>
+                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?>Login <?php if($_GET['err'] == 1) {echo ' - Username o Password Errati';} ?></center>
                         </div>
                     </div>     
 
@@ -137,8 +137,12 @@
                                             
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
-                                    <center><button type="submit" class="btn btn-info btn-lg"><i class="fa fa-sign-in"></i> Login</button>
-                                    <br><br><a href="password-recovery.php">Hai dimenticato la password?</a></center>
+                                    <center>
+                                    <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-sign-in"></i> Login</button>
+                                    <br><br>
+                                    <a href="password-recovery.php"><i class="fa fa-fw fa-envelope-o"></i> Recupera Password</a>
+                                     - <a href="https://abulafiaweb.freshdesk.com/support/tickets/new" target="_blank"><i class="fa fa-fw fa-support"></i> Contatta il Supporto</a>
+                                    </center>
                                 </div>
                             </div>
                             
@@ -156,8 +160,8 @@
         <div class="row">
             <center>
                 <div class="col-sm-12">
-                    <h4><a href="https://www.abulafiaweb.it">Abulafia Web - Smart Solutions</a></h4>
-                    &copy; 2008 - 2018 <strong>Abulafia Sys'n'Sol</strong>
+                    <div><h4><a href="https://www.abulafiaweb.it">Abulafia Web - Smart Solutions</a></h4></div>
+                    <div><small>&copy; 2008 - <?php echo date("Y"); ?> <strong>Abulafia Sys'n'Sol</strong><small></div>
                     <br><br><br>
                 </div>
             </center>

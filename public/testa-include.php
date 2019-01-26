@@ -195,19 +195,23 @@ tinymce.init({
   <div class="container">
 	 
 	 <div class="page-header">
-		<div class="row">
-			<div class="col-sm-1">
-				<center><img width="60" src="images/abulafia logo-scont.png"></center>
-			</div>
-			<div class="col-sm-11">
-				<h2><?php echo $_SESSION['nomeapplicativo'] .' ' . $_SESSION['version'] . ' <br><small>'. $_SESSION['headerdescription'];?></small></h2> 
+		<div class="row" valign="middle">
+
+			<div class="col-sm-3" style="padding-top: 5px;">
+				<center><a href="?corpus=home"><img src="images/logo-strech.png" width="330"></a></center>
 			</div>
 			
-			<!--
-			<div class="col-sm-4" align="center" valign="middle">
-
+			<div class="col-sm-7" style="padding-top: 20px; padding-bottom: 10px;">
+				<center>
+					<h2><?php echo $_SESSION['nomeapplicativo']; ?></h2> 
+					<h3><?php echo $_SESSION['headerdescription']; ?></h3> 
+				</center>
 			</div>
-			-->
+
+			<div class="col-sm-2" align="right">
+				<center><a href="https://www.abulafiaweb.it" target="_blank"><img width="110" src="images/abulafia-logo-scont.png"></a>
+				<br><small>Ver. <?php echo $_SESSION['version']; ?></small></center>
+			</div>
 			
 		</div>
 	</div>
@@ -355,6 +359,7 @@ tinymce.init({
 							<li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o fa-fw"></i> Impostazioni Email</a></li>
 							<li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart fa-fw"></i> Statistiche</a></li>
 							<li><a href="https://www.abulafiaweb.it/#contact-section" target="_blank"><i class="fa fa-comment-o fa-fw"></i> Contattaci</a></li>
+							<li><a href="https://abulafiaweb.freshdesk.com" target="_blank"><i class="fa fa-support fa-fw"></i> Portale Helpdesk</a></li>
 							<?php 
 								if ($_SESSION['auth'] > 95) {
 									?>
