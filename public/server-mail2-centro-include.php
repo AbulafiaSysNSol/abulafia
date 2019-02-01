@@ -7,8 +7,10 @@
 	$porta=$_POST['porta'];
 	$protocollo=$_POST['protocollo'];
 	$replyto=$_POST['replyto'];
+	$headermail = strip_tags($_POST['headermail']);
+	$footermail = strip_tags($_POST['footermail']);
 
-	$res = $e->updateSetting($username, $password, $smtp, $porta, $protocollo, $replyto);
+	$res = $e->updateSetting($username, $password, $smtp, $porta, $protocollo, $replyto, $headermail, $footermail);
 	
 	if(!$res) {
 		echo 'ERRORE NELLA MODIFICA:' . mysql_error();
@@ -20,6 +22,8 @@
 		$_SESSION['porta'] = $porta;
 		$_SESSION['protocolloemail'] = $protocollo;
 		$_SESSION['replyto'] = $replyto;
+		$_SESSION['headermail'] = $headermail; 
+		$_SESSION['footermail'] = $footermail;
 ?>
 
 <SCRIPT LANGUAGE="Javascript">

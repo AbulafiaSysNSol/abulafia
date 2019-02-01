@@ -117,7 +117,7 @@
 
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?>Login <?php if($_GET['err'] == 1) {echo ' - Username o Password Errati';} ?></center>
+                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i> ';} ?>Login <?php if($_GET['err'] == 1) {echo ' - Username o Password Errati';} ?></center>
                         </div>
                     </div>     
 

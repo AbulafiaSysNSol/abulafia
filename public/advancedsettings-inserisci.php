@@ -75,10 +75,6 @@
 		$contabilita = 0;
 	}
 
-	//passaggio variabili mail
-	$headermail = $_POST['headermail'];
-	$footermail = $_POST['footermail'];
-
 	//eventuale settaggio del primo numero del nuovo protocollo
 	if(isset($_POST['primoprotocollo'])) {
 		$primoprotocollo= $_POST['primoprotocollo'];
@@ -90,15 +86,14 @@
 		$queryprimoprotocollo = mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $primoprotocollo ");
 		if (!$queryprimoprotocollo) { 
 			echo 'Variazione del primo numero del protocollo NON RIUSCITA<br>'; 
-			echo mysql_error(); 
+			echo mysql_error(); exit();
 			exit();
 		}
 	}
 
 	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio', defaultsettings.anagrafica = '$anagrafica', defaultsettings.protocollo = '$protocollo', defaultsettings.documenti = '$documenti', defaultsettings.lettere = '$lettere', defaultsettings.magazzino = '$magazzino', defaultsettings.ambulatorio = '$ambulatorio', defaultsettings.contabilita = '$contabilita'");
-	$inserimento2=mysql_query("update mailsettings set mailsettings.headermail = '$headermail', mailsettings.footermail = '$footermail'");
 
-	if (!$inserimento && !$inserimento2) {
+	if (!$inserimento) {
 		?>
 		<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -118,9 +113,7 @@
 		$_SESSION['paginaprincipale']= $paginaprincipale; 
 		$_SESSION['protocollomaxfilesize']= $protocollomaxfilesize; 
 		$_SESSION['fotomaxfilesize']= $fotomaxfilesize; 
-		$_SESSION['headerdescription']= $headerdescription; 
-		$_SESSION['headermail'] = $headermail; 
-		$_SESSION['footermail'] = $footermail;
+		$_SESSION['headerdescription']= $headerdescription;
 		$_SESSION['sede'] = $sede;
 		$_SESSION['denominazione'] = $denominazione;
 		$_SESSION['vertice'] = $vertice;

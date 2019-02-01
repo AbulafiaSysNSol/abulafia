@@ -361,19 +361,21 @@ tinymce.init({
 							<li><a href="https://www.abulafiaweb.it/#contact-section" target="_blank"><i class="fa fa-comment-o fa-fw"></i> Contattaci</a></li>
 							<li><a href="https://abulafiaweb.freshdesk.com" target="_blank"><i class="fa fa-support fa-fw"></i> Portale Helpdesk</a></li>
 							<?php 
-								if ($_SESSION['auth'] > 95) {
+								if ($_SESSION['auth'] >= 90) {
 									?>
 									<li class="divider"></li>
 									<li role="presentation" class="dropdown-header">ADVANCED</li>
-									<li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users fa-fw"></i> Gestione degli Utenti</a></li>
-									<li><a href="login0.php?corpus=advancedsettings"><i class="fa fa-cogs fa-fw"></i> Advanced Settings</a></li>
+									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users fa-fw"></i> Gestione degli Utenti</a></li> <?php } ?>
+									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><li><a href="login0.php?corpus=advancedsettings"><i class="fa fa-cogs fa-fw"></i> Advanced Settings</a></li> <?php } ?>
 									<li><a href="login0.php?corpus=diagnostica"><i class="fa fa-wrench fa-fw"></i> Diagnostica</a></li>
-									<li class="divider"></li>
-									<li role="presentation" class="dropdown-header">LOG</li>
-									<li><a href="login0.php?corpus=access-log"><i class="fa fa-key fa-fw"></i> Visualizza il log degli accessi</a></li>
-									<li><a href="login0.php?corpus=log-mail"><i class="fa fa-envelope-o fa-fw"></i> Visualizza il log delle mail</a></li>
-									<li><a href="login0.php?corpus=history"><i class="fa fa-clock-o fa-fw"></i> Visualizza il log delle azioni</a></li>
-									<?php
+									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?>
+										<li class="divider"></li>
+										<li role="presentation" class="dropdown-header">LOG</li>
+										<li><a href="login0.php?corpus=access-log"><i class="fa fa-key fa-fw"></i> Visualizza il log degli accessi</a></li>
+										<li><a href="login0.php?corpus=log-mail"><i class="fa fa-envelope-o fa-fw"></i> Visualizza il log delle mail</a></li>
+										<li><a href="login0.php?corpus=history"><i class="fa fa-clock-o fa-fw"></i> Visualizza il log delle azioni</a></li>
+										<?php
+									}
 								}
 							?>
 							<li class="divider"></li>

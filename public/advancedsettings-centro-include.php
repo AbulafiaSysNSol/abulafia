@@ -60,7 +60,7 @@
 					<label>Numero Versione</label>
 					<input class="form-control" type="text" name="version"  value="<?php echo $_SESSION['version'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
-					<label>Denominazione Comitato</label>
+					<label>Denominazione</label>
 					<input class="form-control" type="text" name="denominazione"  value="<?php echo stripslashes($_SESSION['denominazione']);?>"/>
 					<br>
 					<label>Sede (Citt&agrave;)</label>
@@ -99,45 +99,50 @@
 				</div>
 
 				<div class="col-sm-4">
+
 					<center><h3><i class="fa fa-envelope-o"></i> Email:</h3><br></center>
 					<label>Email</label>
 					<input class="form-control" type="text" name="email"  value="<?php echo $_SESSION['email'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
-					<label>Header Mail-Protocollo</label>
-					<input class="form-control" size="50" type="text" name="headermail"  value="<?php echo stripslashes($_SESSION['headermail']);?>"/>
-					<br>
-					<label>Footer Mail-Protocollo</label>
-					<input class="form-control" size="50" type="text" name="footermail"  value="<?php echo stripslashes($_SESSION['footermail']);?>"/>
+
 					<br>
 					<center><h3><i class="fa fa-server"></i> Moduli:</h3><br></center>
 					<table class="table table-hover">
 						<tr>
-							<td><label>Anagrafica </label></td><td><input type="checkbox" name="anagrafica" <?php if($_SESSION['mod_anagrafica']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
+							<td><label>Anagrafica </label></td><td><input type="checkbox" name="anagrafica" <?php if($_SESSION['mod_anagrafica']) echo 'checked'; ?>
+							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
 						</tr>
 						<tr>
-							<td><label>Protocollo </label></td><td><input type="checkbox" name="protocollo" <?php if($_SESSION['mod_protocollo']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
+							<td><label>Protocollo </label></td><td><input type="checkbox" name="protocollo" <?php if($_SESSION['mod_protocollo']) echo 'checked'; ?> 
+							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
 						</tr>
 						<tr>
-							<td><label>Documenti </label></td><td><input type="checkbox" name="documenti" <?php if($_SESSION['mod_documenti']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
+							<td><label>Documenti </label></td><td><input type="checkbox" name="documenti" <?php if($_SESSION['mod_documenti']) echo 'checked'; ?> 
+							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
 						</tr>
 						<tr>
-							<td><label>Lettere </label></td><td><input type="checkbox" name="lettere" <?php if($_SESSION['mod_lettere']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
+							<td><label>Lettere </label></td><td><input type="checkbox" name="lettere" <?php if($_SESSION['mod_lettere']) echo 'checked'; ?>
+							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
 						</tr>
 						<tr>
-							<td><label>Magazzino </label></td><td><input type="checkbox" name="magazzino" <?php if($_SESSION['mod_magazzino']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
+							<td><label>Magazzino </label></td><td><input type="checkbox" name="magazzino" <?php if($_SESSION['mod_magazzino']) echo 'checked'; ?>
+							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
 						</tr>
 						<tr>
-							<td><label>Ambulatorio </label></td><td><input type="checkbox" name="ambulatorio" <?php if($_SESSION['mod_ambulatorio']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
+							<td><label>Ambulatorio </label></td><td><input type="checkbox" name="ambulatorio" <?php if($_SESSION['mod_ambulatorio']) echo 'checked'; ?>
+							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
 						</tr>
 						<tr>
-							<td><label>Contabilità </label></td><td><input type="checkbox" name="contabilita" <?php if($_SESSION['mod_contabilita']) echo 'checked'; ?> <?php if(!$admin) echo 'disabled'; ?> ></td>
+							<td><label>Contabilità </label></td><td><input type="checkbox" name="contabilita" <?php if($_SESSION['mod_contabilita']) echo 'checked'; ?>
+							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
 						</tr>
-					</table>					
+					</table>				
 				</div>
 
 			</div>
+
 			<br>
-			<button class="btn btn-info btn-lg" onClick="Controllo()" /><i class="fa fa-floppy-o"></i> Salva Impostazioni</button>
+			<center><button class="btn btn-info btn-lg" onClick="Controllo()" /><i class="fa fa-floppy-o"></i> Salva Impostazioni</button></center>
 			</form>
 		</div>
 </div>
@@ -156,8 +161,6 @@
 	var protocollomaxfilesize = document.modifica.protocollomaxfilesize.value;
 	var annoprotocollo = document.modifica.annoprotocollo.value;
 	var fotomaxfilesize = document.modifica.fotomaxfilesize.value;
-	var headermail = document.modifica.headermail.value;
-	var footermail = document.modifica.footermail.value;
 	
 	if ((version == "") || (version == "undefined")) 
 	{
@@ -217,4 +220,4 @@
       }
   }
  //-->
-</script> 
+</script>

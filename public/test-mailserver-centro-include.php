@@ -12,7 +12,7 @@
 	}
 	else {
 		?>
-		<div class="alert alert-danger"><b><i class="fa fa-warning"></i> ERRORE:</b> impossibile collegarsi al server mail. Controllare i parametri nel file mail-conf.php. </div>
+		<div class="alert alert-danger"><b><i class="fa fa-warning"></i> ERRORE:</b> Impossibile collegarsi al server mail.<br><br>Controllare i parametri nelle <a href="?corpus=server-mail">impostazioni email</a>. </div>
 		<?php
 	}
 ?>

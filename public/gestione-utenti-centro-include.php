@@ -51,7 +51,7 @@
 						<tr>
 							<td><b>Utente</b></td>
 							<td align="center"><b>Auth</b></td>
-							<td align="center"><b>Admin</b></td>
+							<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><td align="center"><b>Admin</b></td><?php } ?>
 							<td align="center"><b>Angrafica</b></td>
 							<td align="center"><b>Protocollo</b></td>
 							<td align="center"><b>Documenti</b></td>
@@ -60,16 +60,18 @@
 							<td align="center"><b>Ambulatorio</b></td>
 							<td align="center"><b>Contabilit&agrave</b></td>
 							<td align="center"><b>Profile</b></td>
-							<td align="center"><b>Opzioni</b></td>
+							<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><td align="center"><b>Opzioni</b></td><?php } ?>
 						</tr>
 						<?php
-						while ($risultati2=mysql_fetch_array($risultati))	{
+						while ($risultati2=mysql_fetch_array($risultati)) {
 							$risultati2 = array_map('stripslashes', $risultati2);
 							?>
 							<tr>
 								<td><a href="login0.php?corpus=dettagli-anagrafica&id=<?php echo $risultati2['idanagrafica'];?>"><?php echo ucwords($risultati2['cognome'].' '.$risultati2['nome']);?></a></td>
 								<td align="center"><?php echo $risultati2['auth'];?></td>
-								<td align="center"><?php if($risultati2['admin'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<?php if($anag->isAdmin($_SESSION['loginid'])) { ?>
+									<td align="center"><?php if($risultati2['admin'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<?php } ?>
 								<td align="center"><?php if($risultati2['anagrafica'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['protocollo'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['documenti'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
@@ -78,12 +80,14 @@
 								<td align="center"><?php if($risultati2['ambulatorio'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['contabilita'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
 								<td align="center"><?php if($risultati2['updateprofile'] == 1) { echo '<i class="fa fa-check text-success"></i>'; } else { echo '<i class="fa fa-close text-danger"></i>'; }?></td>
+								<?php if($anag->isAdmin($_SESSION['loginid'])) { ?>
 								<td align="center">
 									<div class="btn-group btn-group-xs">
-										<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><a class="btn btn-warning" href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
-										<a class="btn btn-danger" onclick="return confirm('Sicuro di voler cancellare l\'utente')" href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>"><i class="fa fa-user-times"></i></a><?php } ?>
+										<a class="btn btn-warning" href="login0.php?corpus=gestione-utenti-modifica-utente&id=<?php echo $risultati2['idanagrafica'];?>"><span class="glyphicon glyphicon-pencil"></span></a>
+										<a class="btn btn-danger" onclick="return confirm('Sicuro di voler cancellare l\'utente')" href="login0.php?corpus=gestione-utenti-elimina-utente&id=<?php echo $risultati2['idanagrafica'];?>"><i class="fa fa-user-times"></i></a>
 									</div>
-								</td>								
+								</td>
+								<?php } ?>								
 							</tr>
 							<?php
 						} 

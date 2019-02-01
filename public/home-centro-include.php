@@ -25,7 +25,7 @@
 	
 	if (isset($_GET['email']) &&($_GET['email'] == 'ok')) {
 		?>
-		<center><h4><div class="alert alert-info"><i class="fa fa-check"></i> Impostazioni server mail salvate <b>correttamente!</b></div></h4></center>
+		<center><h4><div class="alert alert-info"><i class="fa fa-check"></i> Impostazioni email salvate <b>correttamente!</b></div></h4></center>
 		<?php
 	}
 
@@ -115,7 +115,7 @@
 	</div>
 
 	<div class="col-sm-3">
-		
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title"><strong><i class="fa fa-calendar-check-o"></i> Avvisi/Reminder:</strong></h3>
@@ -178,6 +178,34 @@
 
 				?>
 			</div>
+		</div>
+
+		<div class="panel panel-default">
+		
+			<div class="panel-heading">
+				<h3 class="panel-title"><strong><i class="fa fa-hdd-o"></i> Quota su Disco:</strong></h3>
+			</div>
+			
+			<div class="panel-body">
+				<?php
+				$file = new File();
+				$dim =  round($file->sizeDirectory("../public/") / (1024*1024), 2) ;
+				$max = $_SESSION['quota'];
+				$percentuale = ( $dim / $max ) * 100;
+				if($percentuale <=50)
+					$class = "progress-bar-success";
+				else if($percentuale <=80)
+					$class = "progress-bar-warning";
+				else
+					$class = "progress-bar-danger";
+				?>
+				<div class="progress">
+					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
+					</div>
+				</div>
+				<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,3).'%)'; ?></center>
+			</div>
+		
 		</div>
 
 		<!-- blocco destro -->
