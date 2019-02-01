@@ -183,7 +183,7 @@
 		<div class="panel panel-default">
 		
 			<div class="panel-heading">
-				<h3 class="panel-title"><strong><i class="fa fa-hdd-o"></i> Quota su Disco:</strong></h3>
+				<h3 class="panel-title"><strong><i class="fa fa-hdd-o"></i> Spazio Archiviazione:</strong></h3>
 			</div>
 			
 			<div class="panel-body">
@@ -203,7 +203,7 @@
 					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
 					</div>
 				</div>
-				<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,3).'%)'; ?></center>
+				<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,2).'%)'; ?></center>
 			</div>
 		
 		</div>

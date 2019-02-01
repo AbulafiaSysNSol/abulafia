@@ -7,8 +7,8 @@
 	$porta=$_POST['porta'];
 	$protocollo=$_POST['protocollo'];
 	$replyto=$_POST['replyto'];
-	$headermail = strip_tags($_POST['headermail']);
-	$footermail = strip_tags($_POST['footermail']);
+	$headermail = $_POST['headermail'];
+	$footermail = $_POST['footermail'];
 
 	$res = $e->updateSetting($username, $password, $smtp, $porta, $protocollo, $replyto, $headermail, $footermail);
 	
