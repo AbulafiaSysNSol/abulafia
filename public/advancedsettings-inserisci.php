@@ -24,6 +24,7 @@
 	$denominazione = $_POST['denominazione'];
 	$vertice = $_POST['vertice'];
 	$inizio = $_POST['inizio'];
+	$quota = $_POST['quota'];
 	
 	if(isset($_POST['anagrafica'])) {
 		$anagrafica = 1;
@@ -91,7 +92,7 @@
 		}
 	}
 
-	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio', defaultsettings.anagrafica = '$anagrafica', defaultsettings.protocollo = '$protocollo', defaultsettings.documenti = '$documenti', defaultsettings.lettere = '$lettere', defaultsettings.magazzino = '$magazzino', defaultsettings.ambulatorio = '$ambulatorio', defaultsettings.contabilita = '$contabilita'");
+	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio', quota = '$quota', defaultsettings.anagrafica = '$anagrafica', defaultsettings.protocollo = '$protocollo', defaultsettings.documenti = '$documenti', defaultsettings.lettere = '$lettere', defaultsettings.magazzino = '$magazzino', defaultsettings.ambulatorio = '$ambulatorio', defaultsettings.contabilita = '$contabilita'");
 
 	if (!$inserimento) {
 		?>
@@ -118,6 +119,7 @@
 		$_SESSION['denominazione'] = $denominazione;
 		$_SESSION['vertice'] = $vertice;
 		$_SESSION['inizio'] = $inizio;
+		$_SESSION['quota'] = $quota;
 		$_SESSION['mod_anagrafica'] = $anagrafica;
 		$_SESSION['mod_protocollo'] = $protocollo;
 		$_SESSION['mod_documenti'] = $documenti;

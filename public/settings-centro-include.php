@@ -33,36 +33,35 @@
 		<div class="form-group">
 			<form name="modifica" method="post" >
 				<div class="row">
-					<input type="hidden" name="splash" value="logo-azienda2.jpg">
-					<div class="col-sm-6">
-						<h4><i class="fa fa-tint"></i> Primo colore risultati
+					<div class="col-sm-4">
+						<h4><i class="fa fa-tint"></i> Primo Colore Risultati
 						<br><small> Primo colore di sfondo nei risultati.</small></h4>
-						<table border="0" cellspacing="4">
-							<tr height="30" valign="middle">
+						<table border="0" style="border-collapse:separate; border-spacing:5px 10px;">
+							<tr height="50">
 								<?php if($_SESSION['primocoloretabellarisultati'] == "#FFFFCC") { ?>
 								<td><input type="radio" name="color1" value="#FFFFCC" checked="checked"></td><td width="100" bgcolor="#FFFFCC"></td>
 								<?php } else{ ?>
 								<td><input type="radio" name="color1" value="#FFFFCC"></td><td width="100" bgcolor="#FFFFCC"></td>
 								<?php } ?>
 						
-								<?php if($_SESSION['primocoloretabellarisultati'] == "#F4A460") { ?>
-								<td><input type="radio" name="color1" value="#F4A460" checked="checked"></td><td width="100" bgcolor="#F4A460"></td>
+								<?php if($_SESSION['primocoloretabellarisultati'] == "#d8e2f8") { ?>
+								<td><input type="radio" name="color1" value="#d8e2f8" checked="checked"></td><td width="100" bgcolor="#d8e2f8"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color1" value="#F4A460"></td><td width="100" bgcolor="#F4A460"></td>
+								<td><input type="radio" name="color1" value="#d8e2f8"></td><td width="100" bgcolor="#d8e2f8"></td>
 								<?php } ?>
 								
-								<?php if($_SESSION['primocoloretabellarisultati'] == "#F0E68C") { ?>
-								<td><input type="radio" name="color1" value="#F0E68C" checked="checked"></td><td width="100" bgcolor="#F0E68C"></td>
+								<?php if($_SESSION['primocoloretabellarisultati'] == "#dbf9d6") { ?>
+								<td><input type="radio" name="color1" value="#dbf9d6" checked="checked"></td><td width="100" bgcolor="#dbf9d6"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color1" value="#F0E68C"></td><td width="100" bgcolor="#F0E68C"></td>
+								<td><input type="radio" name="color1" value="#dbf9d6"></td><td width="100" bgcolor="#dbf9d6"></td>
 								<?php } ?>
 						
 							</tr>
-							<tr height="30" valign="middle">
-								<?php if($_SESSION['primocoloretabellarisultati'] == "#B0E0E6") { ?>
-								<td><input type="radio" name="color1" value="#B0E0E6" checked="checked"></td><td width="100" bgcolor="#B0E0E6"></td>
+							<tr height="50">
+								<?php if($_SESSION['primocoloretabellarisultati'] == "#fde6c8") { ?>
+								<td><input type="radio" name="color1" value="#fde6c8" checked="checked"></td><td width="100" bgcolor="#fde6c8"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color1" value="#B0E0E6"></td><td width="100" bgcolor="#B0E0E6"></td>
+								<td><input type="radio" name="color1" value="#fde6c8"></td><td width="100" bgcolor="#fde6c8"></td>
 								<?php } ?>
 								
 								<?php if($_SESSION['primocoloretabellarisultati'] == "#DEFEB4") { ?>
@@ -71,61 +70,62 @@
 								<td><input type="radio" name="color1" value="#DEFEB4"></td><td width="100" bgcolor="#DEFEB4"></td>
 								<?php } ?>
 								
-								<?php if($_SESSION['primocoloretabellarisultati'] == "#FFC0CB") { ?>
-								<td><input type="radio" name="color1" value="#FFC0CB" checked="checked"></td><td width="100" bgcolor="#FFC0CB"></td>
+								<?php if($_SESSION['primocoloretabellarisultati'] == "#fbe0f4") { ?>
+								<td><input type="radio" name="color1" value="#fbe0f4" checked="checked"></td><td width="100" bgcolor="#fbe0f4"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color1" value="#FFC0CB"></td><td width="100" bgcolor="#FFC0CB"></td>
+								<td><input type="radio" name="color1" value="#fbe0f4"></td><td width="100" bgcolor="#fbe0f4"></td>
 								<?php } ?>
 							</tr>
-							<tr height="30" valign="middle">
-								<?php if($_SESSION['primocoloretabellarisultati'] == "#9ACD32") { ?>
-								<td><input type="radio" name="color1" value="#9ACD32" checked="checked"></td><td width="100" bgcolor="#9ACD32"></td>
+							<tr height="50">
+								<?php if($_SESSION['primocoloretabellarisultati'] == "#efeeee") { ?>
+								<td><input type="radio" name="color1" value="#efeeee" checked="checked"></td><td width="100" bgcolor="#efeeee"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color1" value="#9ACD32"></td><td width="100" bgcolor="#9ACD32"></td>
+								<td><input type="radio" name="color1" value="#efeeee"></td><td width="100" bgcolor="#efeeee"></td>
 								<?php } ?>
 								
-								<?php if($_SESSION['primocoloretabellarisultati'] == "#9999FF") { ?>
-								<td><input type="radio" name="color1" value="#9999FF" checked="checked"></td><td width="100" bgcolor="#9999FF"></td>
+								<?php if($_SESSION['primocoloretabellarisultati'] == "#d9d8d8") { ?>
+								<td><input type="radio" name="color1" value="#d9d8d8" checked="checked"></td><td width="100" bgcolor="#d9d8d8"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color1" value="#9999FF"></td><td width="100" bgcolor="#9999FF"></td>
+								<td><input type="radio" name="color1" value="#d9d8d8"></td><td width="100" bgcolor="#d9d8d8"></td>
 								<?php } ?>
 								
-								<?php if($_SESSION['primocoloretabellarisultati'] == "#DEB887") { ?>
-								<td><input type="radio" name="color1" value="#DEB887" checked="checked"></td><td width="100" bgcolor="#DEB887"></td>
+								<?php if($_SESSION['primocoloretabellarisultati'] == "#ffffff") { ?>
+								<td><input type="radio" name="color1" value="#ffffff" checked="checked"></td><td width="100" bgcolor="#ffffff"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color1" value="#DEB887"></td><td width="100" bgcolor="#DEB887"></td>
+								<td><input type="radio" name="color1" value="#ffffff"></td><td width="100" bgcolor="#ffffff"></td>
 								<?php } ?>
 							</tr>
 						</table>
-						<br>
-						<h4><i class="fa fa-tint"></i> Secondo colore risultati
+					</div>
+					<div class="col-sm-4">
+						<h4><i class="fa fa-tint"></i> Secondo Colore Risultati
 						<br><small> Secondo colore di sfondo nei risultati.</small></h4>
-						<table border="0" cellspacing="4">
-							<tr height="30" valign="middle">
+						<table border="0" style="border-collapse:separate; border-spacing:5px 10px;">
+							<tr height="50" valign="middle">
 								<?php if($_SESSION['secondocoloretabellarisultati'] == "#FFFFCC") { ?>
 								<td><input type="radio" name="color2" value="#FFFFCC" checked="checked"></td><td width="100" bgcolor="#FFFFCC"></td>
 								<?php } else{ ?>
 								<td><input type="radio" name="color2" value="#FFFFCC"></td><td width="100" bgcolor="#FFFFCC"></td>
 								<?php } ?>
 								
-								<?php if($_SESSION['secondocoloretabellarisultati'] == "#F4A460") { ?>
-								<td><input type="radio" name="color2" value="#F4A460" checked="checked"></td><td width="100" bgcolor="#F4A460"></td>
+								<?php if($_SESSION['secondocoloretabellarisultati'] == "#d8e2f8") { ?>
+								<td><input type="radio" name="color2" value="#d8e2f8" checked="checked"></td><td width="100" bgcolor="#d8e2f8"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color2" value="#F4A460"></td><td width="100" bgcolor="#F4A460"></td>
+								<td><input type="radio" name="color2" value="#d8e2f8"></td><td width="100" bgcolor="#d8e2f8"></td>
 								<?php } ?>
 								
-								<?php if($_SESSION['secondocoloretabellarisultati'] == "#F0E68C") { ?>
-								<td><input type="radio" name="color2" value="#F0E68C" checked="checked"></td><td width="100" bgcolor="#F0E68C"></td>
+								<?php if($_SESSION['secondocoloretabellarisultati'] == "#dbf9d6") { ?>
+								<td><input type="radio" name="color2" value="#dbf9d6" checked="checked"></td><td width="100" bgcolor="#dbf9d6"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color2" value="#F0E68C"></td><td width="100" bgcolor="#F0E68C"></td>
+								<td><input type="radio" name="color2" value="#dbf9d6"></td><td width="100" bgcolor="#dbf9d6"></td>
 								<?php } ?>
 								
 							</tr>
-							<tr height="30" valign="middle">
-								<?php if($_SESSION['secondocoloretabellarisultati'] == "#B0E0E6") { ?>
-								<td><input type="radio" name="color2" value="#B0E0E6" checked="checked"></td><td width="100" bgcolor="#B0E0E6"></td>
+							<tr height="50" valign="middle">
+								<?php if($_SESSION['secondocoloretabellarisultati'] == "#fde6c8") { ?>
+								<td><input type="radio" name="color2" value="#fde6c8" checked="checked"></td><td width="100" bgcolor="#fde6c8"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color2" value="#B0E0E6"></td><td width="100" bgcolor="#B0E0E6"></td>
+								<td><input type="radio" name="color2" value="#fde6c8"></td><td width="100" bgcolor="#fde6c8"></td>
 								<?php } ?>
 								
 								<?php if($_SESSION['secondocoloretabellarisultati'] == "#DEFEB4") { ?>
@@ -134,30 +134,30 @@
 								<td><input type="radio" name="color2" value="#DEFEB4"></td><td width="100" bgcolor="#DEFEB4"></td>
 								<?php } ?>
 								
-								<?php if($_SESSION['secondocoloretabellarisultati'] == "#FFC0CB") { ?>
-								<td><input type="radio" name="color2" value="#FFC0CB" checked="checked"></td><td width="100" bgcolor="#FFC0CB"></td>
+								<?php if($_SESSION['secondocoloretabellarisultati'] == "#fbe0f4") { ?>
+								<td><input type="radio" name="color2" value="#fbe0f4" checked="checked"></td><td width="100" bgcolor="#fbe0f4"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color2" value="#FFC0CB"></td><td width="100" bgcolor="#FFC0CB"></td>
+								<td><input type="radio" name="color2" value="#fbe0f4"></td><td width="100" bgcolor="#fbe0f4"></td>
 								<?php } ?>
 								
 							</tr>
-							<tr height="30" valign="middle">
-								<?php if($_SESSION['secondocoloretabellarisultati'] == "#9ACD32") { ?>
-								<td><input type="radio" name="color2" value="#9ACD32" checked="checked"></td><td width="100" bgcolor="#9ACD32"></td>
+							<tr height="50" valign="middle">
+								<?php if($_SESSION['secondocoloretabellarisultati'] == "#efeeee") { ?>
+								<td><input type="radio" name="color2" value="#efeeee" checked="checked"></td><td width="100" bgcolor="#efeeee"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color2" value="#9ACD32"></td><td width="100" bgcolor="#9ACD32"></td>
+								<td><input type="radio" name="color2" value="#efeeee"></td><td width="100" bgcolor="#efeeee"></td>
 								<?php } ?>
 								
-								<?php if($_SESSION['secondocoloretabellarisultati'] == "#9999FF") { ?>
-								<td><input type="radio" name="color2" value="#9999FF" checked="checked"></td><td width="100" bgcolor="#9999FF"></td>
+								<?php if($_SESSION['secondocoloretabellarisultati'] == "#d9d8d8") { ?>
+								<td><input type="radio" name="color2" value="#d9d8d8" checked="checked"></td><td width="100" bgcolor="#d9d8d8"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color2" value="#9999FF"></td><td width="100" bgcolor="#9999FF"></td>
+								<td><input type="radio" name="color2" value="#d9d8d8"></td><td width="100" bgcolor="#d9d8d8"></td>
 								<?php } ?>
 								
-								<?php if($_SESSION['secondocoloretabellarisultati'] == "#DEB887") { ?>
-								<td><input type="radio" name="color2" value="#DEB887" checked="checked"></td><td width="100" bgcolor="#DEB887"></td>
+								<?php if($_SESSION['secondocoloretabellarisultati'] == "#ffffff") { ?>
+								<td><input type="radio" name="color2" value="#ffffff" checked="checked"></td><td width="100" bgcolor="#ffffff"></td>
 								<?php } else{ ?>
-								<td><input type="radio" name="color2" value="#DEB887"></td><td width="100" bgcolor="#DEB887"></td>
+								<td><input type="radio" name="color2" value="#ffffff"></td><td width="100" bgcolor="#ffffff"></td>
 								<?php } ?>
 								
 							</tr>
@@ -165,14 +165,14 @@
 					</div>
 				
 					<div class="col-sm-4">
-						<h4><i class="fa fa-list-ol"></i> Numero di risultati per pagina
+						<h4><i class="fa fa-list-ol"></i> Numero di Risultati per Pagina
 						<br><small> N. di record visualizzati nella ricerca.</small></h4>
-						<input class="form-control"size="3" type="text" name="risultatiperpagina"  value="<?php echo $_SESSION['risultatiperpagina'];?>"/>
+						<input class="form-control" size="3" type="text" name="risultatiperpagina" value="<?php echo $_SESSION['risultatiperpagina'];?>"/>
 						
-						<?php if($_SESSION['auth'] > 98) { ?>
+						<?php if($_SESSION['auth'] >= 95) { ?>
 							<br>
 							<h4>
-								<i class="fa fa-exclamation-circle"></i> Attiva/Disattiva notifiche protocollo
+								<i class="fa fa-exclamation-circle"></i> Attiva/Disattiva Notifiche Protocollo
 								<br><small> Notifiche via email.</small>
 							</h4>
 							<div class="row">

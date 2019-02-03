@@ -28,7 +28,7 @@
 <div class="panel panel-default">
 	
 	<div class="panel-heading">
-		<h3 class="panel-title"><strong><i class="fa fa-bar-chart"></i> Un po' di numeri di <?php echo $_SESSION['nomeapplicativo'];?></strong></h3>
+		<h3 class="panel-title"><strong><i class="fa fa-bar-chart"></i> Un po' di numeri di <?php echo $_SESSION['nomeapplicativo'] . ' - ' . $_SESSION['headerdescription'];?></strong></h3>
 	</div>
 			
 	<div class="panel-body">
@@ -38,7 +38,7 @@
 				<div class="alert alert-info">
 					<h2><i class="fa fa-hourglass-half fa-2x"></i></h2>
 					<?php 
-						echo '<br>' . $_SESSION['nomeapplicativo'] . '<br>e\' in uso da:<h3><b>'; 
+						echo '<br>Abulafia Web<br>e\' in uso da:<h3><b>'; 
 						if( (int)$anniusoapplicazione > 0) { 
 							echo (int)$anniusoapplicazione . ' anni e ' .(int)$giorniusoapplicazione.' giorni</b></h3>'; 
 						} 

@@ -101,11 +101,15 @@
 				<div class="col-sm-4">
 
 					<center><h3><i class="fa fa-envelope-o"></i> Email:</h3><br></center>
-					<label>Email</label>
+					<label>Email:</label>
 					<input class="form-control" type="text" name="email"  value="<?php echo $_SESSION['email'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 
+					<center><h3><i class="fa fa-hdd-o"></i> Spazio Archiviazione:</h3><br></center>
+					<label>Quota su Disco Disponibile (MB):</label>
+					<input class="form-control" type="text" name="quota"  value="<?php echo $_SESSION['quota'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
+
 					<center><h3><i class="fa fa-server"></i> Moduli:</h3><br></center>
 					<table class="table table-hover">
 						<tr>

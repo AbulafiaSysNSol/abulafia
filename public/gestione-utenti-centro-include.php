@@ -27,7 +27,7 @@
 <div class="panel panel-default">
 	
 	<div class="panel-heading">
-		<h3 class="panel-title"><strong><i class="fa fa-group"></i> Gestione Utenti di <?php echo $_SESSION['nomeapplicativo'];?></strong></h3>
+		<h3 class="panel-title"><strong><i class="fa fa-group"></i> Gestione Utenti di <?php echo $_SESSION['nomeapplicativo'] . ' - ' . $_SESSION['headerdescription'];?></strong></h3>
 	</div>
 			
 	<div class="panel-body">
