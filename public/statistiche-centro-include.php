@@ -196,14 +196,12 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<label><i class="fa fa-bar-chart fa-fw"></i> Grafico delle tipologie di anagrafica:</label><br><br>
-				<center><img src="graphs/anagrafica.png"></center>
+				<center><img src="graphs/anagrafica.png" width="100%"></center><br>
 			</div>
-
 			<div class="col-sm-6">
 				<label><i class="fa fa-pie-chart fa-fw"></i> Grafico degli utenti che hanno effettuato registrazioni nel protocollo:</label><br><br>
-				<center><img src="graphs/homegraph.png"></center>
+				<center><img src="graphs/homegraph.png" width="100%"></center><br>
 			</div>
 		</div>
-
 	</div>
 </div>
