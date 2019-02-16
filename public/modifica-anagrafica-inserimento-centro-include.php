@@ -91,6 +91,13 @@
 	else {
 		$codice_fiscale = '';
 	}
+
+	if(isset($_POST['fuoriuso'])) {
+		$fuoriuso = 1;
+	}
+	else {
+		$fuoriuso = 0;
+	}
 	
 	if($datanascita != '') {
 		$nascitadata = explode('/',$datanascita);
@@ -102,9 +109,6 @@
 	
 	$id =$_GET['id'];
 	$anagraficatipologia= $_POST['anagraficatipologia'];
-	//fine passaggio dati
-
-	//controllo esistenza
 
 	$query = mysql_query("
 		UPDATE anagrafica 
@@ -122,7 +126,8 @@
 		anagrafica.grupposanguigno='$gruppo_sanguigno', 
 		anagrafica.codicefiscale='$codice_fiscale', 
 		anagrafica.residenzacap='$residenza_cap', 
-		anagrafica.tipologia='$anagraficatipologia' 
+		anagrafica.tipologia='$anagraficatipologia',
+		anagrafica.fuoriuso='$fuoriuso' 
 		WHERE anagrafica.idanagrafica='$id' 
 		" );
 		
@@ -136,14 +141,6 @@
 	}
 ?>
 
-<!--reindirizzamento alla pagina dove vengono mostrati i dati-->
-
-<SCRIPT LANGUAGE="Javascript">
-browser= navigator.appName;
-	if (browser == "Netscape")
-		window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>&from=modifica"; 
-	else window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>&from=modifica"
-</SCRIPT>
-
-
-
+<script LANGUAGE="Javascript">
+	window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>&from=modifica"; 
+</script>

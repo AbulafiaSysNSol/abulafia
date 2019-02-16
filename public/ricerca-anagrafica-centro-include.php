@@ -19,23 +19,25 @@
 					
 					<div class="row">
 						<div class="col-sm-12">
-							<h4><i class="fa fa-pencil"></i> Inserisci il valore da cercare (è possibile effettuare una ricerca esatta per cognome e nome esempio Saitta+Biagio):</h4>
+							<h4><i class="fa fa-pencil"></i> Inserisci il valore da cercare:</h4>
+								<small>(è possibile effettuare una ricerca esatta per cognome e nome digitando Cognome+Nome)</small>
+						</div>
+						
+						<div class="col-sm-6">
+							<br><input class="form-control input-sm" placeholder="lasciare vuoto per mostrare tutte le anagrafiche..." type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
+							<input type="hidden" name="tabella" value="anagrafica">
 						</div>
 					</div>
 					
+					<br>
+
 					<div class="row">
-						<div class="col-sm-6">
-							<input class="form-control input-sm" placeholder="lasciare vuoto per mostrare tutte le anagrafiche..." type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
-							<input type="hidden" name="tabella" value="anagrafica">
-						</div>
-					
 						<div class="col-sm-12">
-							<br><h4><b><i class="fa fa-filter"></i> Filtri aggiuntivi:</b></h4>
+							<h4><i class="fa fa-filter"></i> Filtri aggiuntivi:</h4>
 						</div>
-						
+	
 						<div id="anag" class="col-sm-3">
-						
-							<label>Tipologia:</label>
+							<label><i class="fa fa-info-circle"></i> Tipologia:</label>
 							<SELECT class="form-control input-sm" NAME="anagraficatipologia">
 								<OPTION value="anagrafica.tipologia" onclick="document.search.cercato.focus()" selected> Nessun filtro</OPTION>
 								<OPTION value="persona" onclick="document.search.cercato.focus()"> Persone fisiche</OPTION>
@@ -53,7 +55,7 @@
 								<OPTION value="cron-inverso" onclick="document.search.cercato.focus()"> Cronologico Inverso</OPTION>
 							</SELECT>
 						</div>
-						
+
 					</div>
 					
 					<div class="row">
