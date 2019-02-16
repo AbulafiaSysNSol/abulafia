@@ -12,3 +12,15 @@ body, html {
   padding-left: 20px;
   padding-top: 20px;
 }
+
+@media (max-width: 640px) {
+	
+	.smartphone {
+		text-align: center;
+	}
+
+	li { 
+		list-style-position: inside;
+	}
+
+}

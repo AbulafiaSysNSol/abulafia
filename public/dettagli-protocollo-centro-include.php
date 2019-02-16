@@ -26,19 +26,21 @@
 	}
 ?>
 
-<hr>
-	<center>
-		<h2>
-			<i class="fa fa-book"></i> Protocollo N. <b><?php echo $dettagli['idlettera']; ?></b> del <b><?php echo $calendario->dataSlash($dettagli['dataregistrazione']); ?></b>
-		</h2>
-		<h4>
-			"<?php echo $dettagli['oggetto']; ?>"
-		</h4>
-	</center>
-<hr>
+<div class="panel panel-default">		
+		
+	<div class="panel-body">
 
+			<center>
+				<h2>
+					<i class="fa fa-book"></i> Protocollo N. <b><?php echo $dettagli['idlettera']; ?></b> del <b><?php echo $calendario->dataSlash($dettagli['dataregistrazione']); ?></b>
+				</h2>
+				<h4>
+					"<?php echo $dettagli['oggetto']; ?>"
+				</h4>
+			</center>
+		<hr>
 
-		<div class="row">
+		<div class="row smartphone">
 			<div class="col-sm-3">
 				<h3><i class="fa fa-info"></i> Dettagli Protocollo</h3><br>
 				<div class="row">
@@ -55,8 +57,9 @@
 						?>	
 					</div>
 				</div>
+				<br>
 			</div>
-			
+
 			<div class="col-sm-3">
 				<h3><i class="fa fa-users"></i> <?php if($dettagli['speditaricevuta'] == 'spedita') { echo 'Destinatari'; } else { echo 'Mittenti';} ?></h3><br>
 				<div class="row">
@@ -74,6 +77,7 @@
 						</ul>
 					</div>
 				</div>
+				<br>
 			</div>
 			
 			<div class="col-sm-3">
@@ -106,6 +110,7 @@
 						<?php
 					}
 				?>
+				<br><br>
 			</div>
 			
 			<div class="col-sm-3">
@@ -120,7 +125,7 @@
 		
 		<br>
 		
-		<div class="row">
+		<div class="row smartphone">
 			<div class="col-md-4">
 				<h3><i class="fa fa-user"></i> Inserimento effettuato da:</h3><br>
 				<div class="row">
@@ -144,8 +149,9 @@
 				<?php
 				}
 				?>
+				<br>
 			</div>
-			
+
 			<div class="col-md-5">
 				<h3><i class="fa fa-paper-plane-o"></i> Protocollo inoltrato a:</h3><br>
 				<div class="row">
@@ -166,6 +172,7 @@
 						</ul>
 					</div>
 				</div>
+				<br>
 			</div>
 			
 			<div class="col-sm-3">
@@ -195,9 +202,11 @@
 			echo mysql_error();
 			?>
 			<br>
-			<h3><span class="glyphicon glyphicon-time"></span> Storico delle modifiche:</h3><br>
-			<div class="row">
+			<div class="row smartphone">
 				<div class="col-sm-12">
+
+					<h3><span class="glyphicon glyphicon-time"></span> Storico delle modifiche:</h3><br>
+			
 					<table class="table table-bordered">
 						<tr>
 							<td style="vertical-align: middle" align="center" >Data</td>
@@ -225,3 +234,5 @@
 			<?php
 		}
 		?>
+	</div>
+</div>
