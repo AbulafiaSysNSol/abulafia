@@ -75,31 +75,31 @@
             <?php
             if ($s) {
                 ?>
-                <center><div class="alert alert-warning"><b><i class="fa fa-warning"></i> Non hai effettuato l'accesso o la sessione &egrave; scaduta. Effettua nuovamente il login per utilizzare l'applicazione.</b></div></center>
+                <div class="col-sm-12"><center><div class="alert alert-warning"><b><i class="fa fa-warning"></i> Non hai effettuato l'accesso o la sessione &egrave; scaduta. Effettua nuovamente il login per utilizzare l'applicazione.</b></div></center></div>
                 <?php
             }
 
             if ($recovery) {
                 ?>
-                <center><div class="alert alert-info"><b><i class="fa fa-check"></i> Ti abbiamo inviato un'email con un link per resettare la password. Ricordati di controllare anche la posta indesiderata.</b></div></center>
+                <div class="col-sm-12"><center><div class="alert alert-info"><b><i class="fa fa-check"></i> Ti abbiamo inviato un'email con un link per resettare la password. Ricordati di controllare anche la posta indesiderata.</b></div></center></div>
                 <?php
             }
 
             if ($expire) {
                 ?>
-                <center><div class="alert alert-danger"><b><i class="fa fa-warning"></i> Il link per resettare la password &egrave; scaduto. Esegui nuovamente la procedura per il ripristino della password.</b></div></center>
+                <div class="col-sm-12"><center><div class="alert alert-danger"><b><i class="fa fa-warning"></i> Il link per resettare la password &egrave; scaduto. Esegui nuovamente la procedura per il ripristino della password.</b></div></center></div>
                 <?php
             }
 
             if ($change == "error") {
                 ?>
-                <center><div class="alert alert-danger"><b><i class="fa fa-warning"></i> Si &egrave; verificato un problema con il cambio password. Esegui nuovamente la procedura per il ripristino della password.</b></div></center>
+                <div class="col-sm-12"><center><div class="alert alert-danger"><b><i class="fa fa-warning"></i> Si &egrave; verificato un problema con il cambio password. Esegui nuovamente la procedura per il ripristino della password.</b></div></center></div>
                 <?php
             }
 
             if ($change == "ok") {
                 ?>
-                <center><div class="alert alert-success"><b><i class="fa fa-check"></i> Cambio password andato a buon fine. Effettua l'accesso con la nuova password.</b></div></center>
+                <div class="col-sm-12"><center><div class="alert alert-success"><b><i class="fa fa-check"></i> Cambio password andato a buon fine. Effettua l'accesso con la nuova password.</b></div></center></div>
                 <?php
             }
             ?>

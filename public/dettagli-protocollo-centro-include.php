@@ -93,7 +93,7 @@
 							echo '<ul>';
 							foreach ($urlfile as $valore) {
 								$download = $my_file->downloadlink($valore[2], $dettagli['idlettera'], $anno, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-								echo '<li>' . $download . ' - <a class="fancybox" data-fancybox-type="iframe" href="lettere'.$anno.'/'.$dettagli['idlettera'].'/'.$valore[2].'"> <i class="fa fa-eye"></i></a></li>';
+								echo '<li>' . $download . ' <a class="btn btn-xs btn-success" title="Visualizza File" class="fancybox" data-fancybox-type="iframe" href="lettere'.$anno.'/'.$dettagli['idlettera'].'/'.$valore[2].'"> <i class="fa fa-file-text-o fa-fw"></i></a></li>';
 							}
 							echo '</ul>';
 						}
@@ -179,17 +179,17 @@
 				<h3><i class="fa fa-cog"></i> Opzioni</h3><br>
 				<div class="row">
 					<div class="col-md-11 col-md-offset-1">
-						<ul>
-							<li><a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno; ?>"> <span class="glyphicon glyphicon-edit"></span> Modifica questo Protocollo</a></li>
+						
+							<a href="login0.php?corpus=modifica-protocollo&from=risultati&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno; ?>"> <i class="fa fa-edit fa-fw"></i> Modifica questo Protocollo</a><br>
 							<?php if($file) { ?>
-								<li><a href="login0.php?corpus=invia-newsletter&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-envelope"></span> Invia tramite Email</a></li>
-								<li><a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-pencil"></span> Aggiungi inoltro email</a></li>
+								<a href="login0.php?corpus=invia-newsletter&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <i class="fa fa-envelope-o fa-fw"></i> Invia tramite Email</a><br>
+								<a href="login0.php?corpus=aggiungi-inoltro&id=<?php echo $_GET['id'];?>&anno=<?php echo $anno;?>"> <i class="fa fa-pencil fa-fw"></i> Aggiungi inoltro email</a><br>
 							<?php
 								}
-								if($dettagli['speditaricevuta'] == 'ricevuta') { ?><li><a href="stampa-protocollo.php?id=<?php echo $id; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print"></i> Stampa ricevuta Protocollo</a></li><?php } ?>
-							<li><a class="iframe" data-fancybox-type="iframe" href="stampa-barcode.php?id=<?php echo $id;?>&anno=<?php echo $anno;?>"> <span class="glyphicon glyphicon-barcode"></span> Stampa etichetta barcode</a></li>
-							<li><a href="login0.php?corpus=protocollo2&from=crea"><span class="glyphicon glyphicon-plus-sign"></span> Registra nuovo Protocollo</a></li>
-						</ul>
+								if($dettagli['speditaricevuta'] == 'ricevuta') { ?><a href="stampa-protocollo.php?id=<?php echo $id; ?>&anno=<?php echo $anno; ?>" target="_blank"><i class="fa fa-print fa-fw"></i> Stampa ricevuta Protocollo</a><br><?php } ?>
+							<a class="iframe" data-fancybox-type="iframe" href="stampa-barcode.php?id=<?php echo $id;?>&anno=<?php echo $anno;?>"> <i class="fa fa-barcode fa-fw"></i> Stampa etichetta barcode</a><br>
+							<a href="login0.php?corpus=protocollo2&from=crea"><i class="fa fa-plus-circle fa-fw"></i> Registra nuovo Protocollo</a><br>
+						
 					</div>
 				</div>
 			</div>

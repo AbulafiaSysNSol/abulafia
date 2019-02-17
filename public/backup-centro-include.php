@@ -14,7 +14,7 @@
 				<center>
 				
 				<div class="col-sm-12">
-					<i class="fa fa-fw fa-download"></i> Seleziona Anno per il Download:<br><br>
+					<h4>Seleziona Anno per il Download degli Allegati:</h4><br>
 					<form class="form-inline" role="form" method="post" action="backup2.php">
 				
 						<i class="fa fa-fw fa-calendar"></i> Anno Protocollo:
@@ -34,7 +34,7 @@
 						?>
 						</select>
 						<br><br>
-						<button id="buttondownload" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Preparazione al download in corso<br>non chiudere questa finestra" class="btn btn-danger" type="submit"><i class="fa fa-fw fa-arrow-down"></i> Download</button>
+						<button id="buttondownload" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Preparazione al download in corso<br>non chiudere questa finestra" class="btn btn-success" type="submit"><i class="fa fa-fw fa-download"></i> Download</button>
 					
 					</form>
 				</div>
