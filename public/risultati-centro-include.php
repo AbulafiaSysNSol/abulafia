@@ -589,7 +589,7 @@
 						foreach ($urlfile as $valore) {
 							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '5'); //richiamo del metodo "downloadlink" dell'oggetto file
 							$file = true;
-							echo $download .' <a class="btn btn-xs btn-success fancybox" title="Visualizza File" data-fancybox-type="iframe" href="lettere'.$annoricercaprotocollo.'/'.$value[0].'/'.$valore[2].'"><i class="fa fa-file-text-o fa-fw"></i></a><br>';
+							echo $download;
 						}
 					}
 					else {
@@ -616,8 +616,8 @@
 					</td>
 					<td style="vertical-align: middle; text-align: center;">
 						<div class="btn-group-vertical btn-group-sm">
-							<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli Protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-info-circle fa-fw"></i> Dettagli Protocollo</a>
-							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-pencil fa-fw"></i> Modifica Protocollo</a>
+							<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli Protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-info-circle fa-fw"></i> Dettagli</a>
+							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-edit fa-fw"></i> Modifica</a>
 						</div>
 					</td>		
 				</tr>
