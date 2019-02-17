@@ -143,7 +143,7 @@
 				<div class="alert alert-info">
 					<h2><i class="fa fa-file-text-o"></i></h2>
 					Numero di lettere scritte dal sistema: 
-					<h3><b><?php echo $numlettere[0]; ?></b></h3>
+					<h4><b><?php echo $numlettere[0]; ?></b></h4>
 				</div>
 			</div>
 
@@ -151,7 +151,7 @@
 				<div class="alert alert-warning">
 					<h2><i class="fa fa-paperclip"></i></h2>
 					File allegati ai protocolli caricati nel sistema: 
-					<h3><b><?php echo $numallegati[0]; ?></b></h3>
+					<h4><b><?php echo $numallegati[0]; ?></b></h4>
 				</div>
 			</div>
 			</center>

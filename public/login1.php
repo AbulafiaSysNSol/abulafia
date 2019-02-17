@@ -158,10 +158,6 @@
 	$my_log -> publscrivilog($userid, 'login', 'ok', $client, $logfile );
 ?>
 
-<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
-		window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>&aggiornamento=null";
-	else 
-		window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>&aggiornamento=null";
-</SCRIPT>
+<script language="Javascript">
+	window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>&aggiornamento=null";
+</script>
