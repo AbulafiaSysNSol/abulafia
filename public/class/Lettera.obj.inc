@@ -305,6 +305,7 @@ class Lettera {
 		<form name="cercato" onSubmit="return false">
 			<div class="form-group">
 				<label> <span class="glyphicon glyphicon-search"></span> Ricerca mittente o destinatario:</label>
+				<small>per una ricerca esatta utilizzare cognome*nome;</small>
 				<div class="row">
 					<div class="col-xs-11">
 						<input placeholder="digita il COGNOME o la RAGIONE SOCIALE" type="text" name="valore" class="form-control" onkeyup="showResult(this.value,'<?php echo $tipologia;?>',<?php echo $idlettera;?>)">

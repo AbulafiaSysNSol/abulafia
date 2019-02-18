@@ -228,16 +228,19 @@ if($a->isProtocollo($_SESSION['loginid'])) { ?>
 			<table class="table table-striped">
 				<?php
 				if($risultati) {
-					echo "<tr><td></td><td><b>NUM.</b></td><td><b>DATA</b></td><td><b>OGGETTO</b></td><td></td></tr>";
+					echo "<tr><td><b>N.</b></td><td><b>DATA</b></td><td><b>OGGETTO</b></td></tr>";
 					foreach ($risultati as $val) {
 						if($val[3]=='spedita') {
-							$icon = '<i class="fa fa-arrow-up"></i>';
+							$icon = '<i class="fa fa-arrow-up fa-fw"></i> ';
 						}
 						else {
-							$icon = '<i class="fa fa-arrow-down"></i>';
+							$icon = '<i class="fa fa-arrow-down fa-fw"></i> ';
 						}
-						echo "<tr><td>".$icon."</td><td>".$val[0]."</td><td>".$data->dataSlash($val[1])."</td><td>".$val[2]."</td>
-							<td width='55'><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">Vai <i class=\"fa fa-share\"></i></td></tr>";
+						echo "	<tr>
+								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".$icon.$val[0]."</a></td>
+								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".$data->dataSlash($val[1])."</a></td>
+								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".$val[2]."</a></td>
+								</tr>";
 					}
 				}
 				?>
