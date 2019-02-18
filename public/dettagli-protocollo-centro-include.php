@@ -93,7 +93,7 @@
 							echo '<ul>';
 							foreach ($urlfile as $valore) {
 								$download = $my_file->downloadlink($valore[2], $dettagli['idlettera'], $anno, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-								echo '<li>' . $download . ' <a class="btn btn-xs btn-success" title="Visualizza File" class="fancybox" data-fancybox-type="iframe" href="lettere'.$anno.'/'.$dettagli['idlettera'].'/'.$valore[2].'"> <i class="fa fa-file-text-o fa-fw"></i></a></li>';
+								echo '<li>' . $download . '</li>';
 							}
 							echo '</ul>';
 						}
