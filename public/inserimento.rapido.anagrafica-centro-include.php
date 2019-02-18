@@ -12,7 +12,7 @@
 							INSERT INTO 
 								anagrafica 
 							VALUES 
-								('','$nome','$cognome','','','','','','','','','','','','','','$anagraficatipologia') 
+								('','$nome','$cognome','','','','','','','','','','','','','','$anagraficatipologia', '0') 
 						");
 	if(!$inserimento) {
 		?>

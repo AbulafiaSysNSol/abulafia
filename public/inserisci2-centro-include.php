@@ -131,7 +131,7 @@
 
 	if($res_count[0] < 1) {
 		$inserimento = mysql_query("INSERT INTO anagrafica VALUES ('','$nome','$cognome','$residenza_stato','$residenza_provincia','$residenza_comune','$residenza_via','$residenza_civico','$residenza_cap',
-		'$nascita_data','$nascita_stato','$nascita_provincia','$nascita_comune','$url_foto','$gruppo_sanguigno','$codice_fiscale','$anagraficatipologia') " );
+		'$nascita_data','$nascita_stato','$nascita_provincia','$nascita_comune','$url_foto','$gruppo_sanguigno','$codice_fiscale','$anagraficatipologia', '0') " );
 		echo  mysql_error();
 		$lastid=mysql_insert_id();
 		$old_compl_url='foto/'.$url_foto;
