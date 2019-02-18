@@ -82,7 +82,7 @@
 			return $query;
 		}
 
-		public function newRigaDocumento($documento, $prodotto, $quantita, $note, $tipologia, $magazzino) {
+		public function newRigaDocumento($documento, $prodotto, $quantita, $note, $tipologia, $magazzino) { //<man>Inserisce una nuova riga nel documento</man>
 			$query = mysql_query("INSERT INTO joindocumentiprodotti VALUES ('', '$documento', '$prodotto', '$quantita', '$note') ");
 			if ($tipologia == 'carico') {
 				$this->sumGiacenza($prodotto, $magazzino, $quantita);
@@ -99,14 +99,9 @@
 			return $res;
 		}
 
-		public function eliminaRigaDocumento($idriga, $magazzino, $tipodocumento) {
+		public function eliminaRigaDocumento($idriga, $magazzino) { //<man>Inserisce una nuova riga nel documento</man>
 			$info = $this->getInfoRigaById($idriga);
-			if($tipodocumento == 'carico') {
-				$this->subGiacenza($info[2], $magazzino, $info[3]);
-			}
-			else {
-				$this->sumGiacenza($info[2], $magazzino, $info[3]);	
-			}
+			$this->subGiacenza($info[2], $magazzino, $info[3]);
 			$query = mysql_query("DELETE FROM joindocumentiprodotti WHERE id = '$idriga'");
 			return $query;
 		}

@@ -50,7 +50,7 @@
 <div class="panel panel-default">
 	
 	<div class="panel-heading">
-		<h3 class="panel-title"><strong><i class="fa fa-edit fa-fw"></i> Modifica Anagrafica:</strong></h3>
+		<h3 class="panel-title"><strong>Modifica soggetto:</strong></h3>
 	</div>
 
 	<div class="panel-body">
@@ -67,256 +67,252 @@
 			}
 		?>
 	
-		<div class="row">
-			<div class="col-sm-3">
-				<div class="alert alert-info">
-					<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br><br>
-					<img class="img-circle" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'] . "\" width=\"100%\"";} else {echo 'foto/sagoma.png';}?>">
-					<br><br>
-					<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
-						<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
-						<label><span class="glyphicon glyphicon-camera"></span> Modifica foto:</label>
-						<input required name="uploadedfile" type="file" />
-						<br><center><button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-upload"></span> Upload</button></center>
-					</form>
+		<div class="alert alert-info">
+			<div class="row">
+				<div class="col-sm-3">
+					<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br>
+					<img src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'] . "\" width=\"100%\"";} else {echo 'foto/sagoma.png';}?>">
 				</div>
-			</div>
-
-			<div class="col-sm-9">
-				<div class="alert alert-success">
-					<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br><br>
-					<table class="table">
-					<?php
-						while ($row2 = mysql_fetch_array($risultati2)) {
-						echo '<tr>';
-						echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-xs" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
-						<?php
-						echo '</tr>';
-						}
-					?>
-					</table>
-				</div>
-			</div>
 				
-			<div class="col-sm-9">
-				<div class="alert alert-warning">
-					<form class="form-inline" role="form" action="login0.php?corpus=modifica-anagrafica&from=numero-modifica&id=<?php echo $id;?>" method="post" >
-						<label><span class="glyphicon glyphicon-plus-sign"></span> Aggiungi Recapito:</label><br><br>	
-						<label>Tipo:</label>
-						<div class="form-group">
-						<SELECT class="form-control" NAME="tipo">
-							<OPTION value="phone">Telefono
-							<OPTION value="mobile">Cellullare
-							<OPTION Value="fax">Fax
-							<OPTION Value="envelope-o">E-Mail
-							<OPTION Value="facebook">Facebook
-							<OPTION Value="twitter">Twitter
-							<OPTION value="linkedin"> Linkedin
-						</select>
-						</div>
-							
-						<label>Numero/Descrizione:</label>
-							<div class="form-group">
-								<input required size="30" class="form-control" type="text" name="numero">
-							</div>
-							
-						<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Aggiungi</button>
-					</form>
+				<div class="col-sm-9">
+				<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
+					<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
+					<label><span class="glyphicon glyphicon-camera"></span> Modifica foto:</label>
+					<br><br>
+					<input required name="uploadedfile" type="file" />
+					<br><br>
+					<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-upload"></span> Upload</button>
+				</form>
 				</div>
 			</div>
 		</div>
 
 		<body onLoad="Change()">
 
+		<div class="alert alert-warning">
+			<div class="row">
+				<div class="col-sm-4">
+				<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br><br>
+				<table class="table">
+				<?php
+				while ($row2 = mysql_fetch_array($risultati2)) {
+					echo '<tr>';
+					echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-sm" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
+					<?php
+					echo '</tr>';
+				}
+				?>
+				</table>
+				</div>
+				
+				<div class="col-sm-8">
+					<form class="form-inline" role="form" action="login0.php?corpus=modifica-anagrafica&from=numero-modifica&id=<?php echo $id;?>" method="post" >
+						<label><span class="glyphicon glyphicon-plus-sign"></span> Aggiungi Recapito:</label><br><br>
+								
+							<label>Tipo:</label>
+							<div class="form-group">
+							<SELECT class="form-control" NAME="tipo">
+								<OPTION value="phone">Telefono
+								<OPTION value="mobile">Cellullare
+								<OPTION Value="fax">Fax
+								<OPTION Value="envelope-o">E-Mail
+								<OPTION Value="facebook">Facebook
+								<OPTION Value="twitter">Twitter
+								<OPTION value="linkedin"> Linkedin
+							</select>
+							</div>
+							
+							<label>Numero/Descrizione:</label>
+							<div class="form-group">
+								<input required size="30" class="form-control" type="text" name="numero">
+							</div>
+							
+							<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-plus"></span> Aggiungi</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
 		<form class="form-horizontal" role="form" name="modulo" method="post">
 		
 			<label>Tipologia:</label>
 			<div class="row">
-				<div class="col-sm-3">
-					<SELECT class="form-control input-sm" NAME="anagraficatipologia" onChange="Change()">
-					<?php 
-					if( $row['tipologia'] == 'persona') { 
-						?>
-						<OPTION value="persona" selected >Persona Fisica </OPTION>
-						<?php 
-					} 
-					else { 
-						?>
-						<OPTION value="persona">Persona Fisica</OPTION>
-						<?php 
-					} 
-					 
-					if( $row['tipologia'] == 'carica') { 
-						?>
-						<OPTION value="carica" selected >Carica Elettiva o Incarico</OPTION>
-						<?php 
-					} 
-					else { 
-						?>
-						<OPTION value="carica">Carica Elettiva o Incarico</OPTION>
-						<?php 
-					} 
-					
-					if( $row['tipologia'] == 'ente') { 
-						?>
-						<OPTION Value="ente" selected >Ente</OPTION>
-						<?php 
-					} 
-					else { 
-						?>
-						<OPTION value="ente">Ente</OPTION>
-						<?php 
-					}
-
-					if( $row['tipologia'] == 'fornitore') { 
-						?>
-						<OPTION Value="fornitore" selected >Fornitore</OPTION>
-						<?php 
-					} 
-					else { 
-						?>
-						<OPTION value="fornitore">Fornitore</OPTION>
-						<?php 
-					}
+			<div class="col-sm-3">
+			<SELECT class="form-control input-sm" NAME="anagraficatipologia" onChange="Change()">
+				<?php 
+				if( $row['tipologia'] == 'persona') { 
 					?>
-					</select>
-				</div>
-			</div>
+					<OPTION value="persona" selected >Persona Fisica </OPTION>
+					<?php 
+				} 
+				else { 
+					?>
+					<OPTION value="persona">Persona Fisica</OPTION>
+					<?php 
+				} 
+				 
+				if( $row['tipologia'] == 'carica') { 
+					?>
+					<OPTION value="carica" selected >Carica Elettiva o Incarico</OPTION>
+					<?php 
+				} 
+				else { 
+					?>
+					<OPTION value="carica">Carica Elettiva o Incarico</OPTION>
+					<?php 
+				} 
+				
+				if( $row['tipologia'] == 'ente') { 
+					?>
+					<OPTION Value="ente" selected >Ente</OPTION>
+					<?php 
+				} 
+				else { 
+					?>
+					<OPTION value="ente">Ente</OPTION>
+					<?php 
+				}
+
+				if( $row['tipologia'] == 'fornitore') { 
+					?>
+					<OPTION Value="fornitore" selected >Fornitore</OPTION>
+					<?php 
+				} 
+				else { 
+					?>
+					<OPTION value="fornitore">Fornitore</OPTION>
+					<?php 
+				}
+				?>
+			</select>
+			</div></div>
 			
 			<br>
-
-			<div class="row" style="padding: 7px;">
-				<label id="lblcog" class="col-sm-2 control-label">Cognome:</label> 
-				<label id="lblden" style="display: none;" class="col-sm-2 control-label">Denominazione:</label>
-				<div class="col-sm-4">
-					<input class="form-control input-sm" type="text" name="cognome" value="<?php echo $row['cognome'];?>" />
-				</div>
-			</div>
+			<div class="form-group">
+			<label id="lblcog" class="col-sm-2 control-label">Cognome:</label> 
+			<label id="lblden" style="display: none;" class="col-sm-2 control-label">Denominazione:</label>
+			<div class="row">
+			<div class="col-sm-4">
+			<input class="form-control input-sm" type="text" name="cognome" value="<?php echo $row['cognome'];?>" />
+			</div></div></div>
 			
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Nome:</label>
+			<div class="row">
+			<div class="col-sm-4">
+			<input class="form-control input-sm" type="text" name="nome" value="<?php echo $row['nome'];?>"/>
+			</div></div></div>
 			
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Nome:</label>
-				<div class="col-sm-4">
-					<input class="form-control input-sm" type="text" name="nome" value="<?php echo $row['nome'];?>"/>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Nato il:</label>
+			<div class="row">
+			<div class="col-sm-2">
+			<?php
+				$nascita = explode('-',$row['nascitadata']);
+				$data = $nascita[2]."/".$nascita[1]."/".$nascita[0];
+				if($data == '00/00/0000') {
+					$data = '';
+				}
+			?>
+			<input type="text" class="form-control input-sm datepickerAnag" name="datanascita" value="<?php echo $data; ?>">
+			</div></div></div>
 			
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Nato il:</label>
-				<div class="col-sm-2">
-					<?php
-						$nascita = explode('-',$row['nascitadata']);
-						$data = $nascita[2]."/".$nascita[1]."/".$nascita[0];
-						if($data == '00/00/0000') {
-							$data = '';
-						}
-					?>
-					<input type="text" class="form-control input-sm datepickerAnag" name="datanascita" value="<?php echo $data; ?>">
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Comune:</label>
+			<div class="row">
+			<div class="col-sm-4">
+			<input class="form-control input-sm" type="text" name="nascitacomune"  value="<?php echo $row['nascitacomune'];?>"/>
+			</div></div></div>
 			
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Comune:</label>
-				<div class="col-sm-4">
-					<input class="form-control input-sm" type="text" name="nascitacomune"  value="<?php echo $row['nascitacomune'];?>"/>
-				</div>
-			</div>
-			
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Provincia:</label>
-				<div class="col-sm-1">
-					<input class="form-control input-sm" type="text" name="nascitaprovincia"  value="<?php echo $row['nascitaprovincia'];?>"/>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Provincia:</label>
+			<div class="row">
+			<div class="col-sm-1">
+			<input class="form-control input-sm" type="text" name="nascitaprovincia"  value="<?php echo $row['nascitaprovincia'];?>"/>
+			</div></div></div>
 				
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Stato:</label>
-				<div class="col-sm-3">
-					<input class="form-control input-sm" type="text" name="nascitastato"  value="<?php echo $row['nascitastato'];?>"/>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Stato:</label>
+			<div class="row">
+			<div class="col-sm-3">
+			<input class="form-control input-sm" type="text" name="nascitastato"  value="<?php echo $row['nascitastato'];?>"/>
+			</div></div></div>
 			
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Residente in via:</label>
-				<div class="col-sm-5">
-					<input class="form-control input-sm" type="text" name="residenzavia"  value="<?php echo $row['residenzavia'];?>"/>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Residente in via:</label>
+			<div class="row">
+			<div class="col-sm-5">
+			<input class="form-control input-sm" type="text" name="residenzavia"  value="<?php echo $row['residenzavia'];?>"/>
+			</div></div></div>
 			
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Numero:</label>
-				<div class="col-sm-1">
-					<input class="form-control input-sm" type="text" name="residenzacivico"  value="<?php echo $row['residenzacivico'];?>"/>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Numero:</label>
+			<div class="row">
+			<div class="col-sm-1">
+			<input class="form-control input-sm" type="text" name="residenzacivico"  value="<?php echo $row['residenzacivico'];?>"/>
+			</div></div></div>
 			
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Comune di:</label>
-				<div class="col-sm-4">
-					<input class="form-control input-sm" type="text" name="residenzacomune"  value="<?php echo $row['residenzacitta'];?>"/>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Comune di:</label>
+			<div class="row">
+			<div class="col-sm-4">
+			<input class="form-control input-sm" type="text" name="residenzacomune"  value="<?php echo $row['residenzacitta'];?>"/>
+			</div></div></div>
 
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Provincia:</label>
-				<div class="col-sm-1">
-					<input class="form-control input-sm" type="text" name="residenzaprovincia"  value="<?php echo $row['residenzaprovincia'];?>"/>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Provincia:</label>
+			<div class="row">
+			<div class="col-sm-1">
+			<input class="form-control input-sm" type="text" name="residenzaprovincia"  value="<?php echo $row['residenzaprovincia'];?>"/>
+			</div></div></div>
 
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">CAP:</label>
-				<div class="col-sm-2">
-					<input class="form-control input-sm" type="text" name="residenzacap"  value="<?php echo $row['residenzacap'];?>"/>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">CAP:</label>
+			<div class="row">
+			<div class="col-sm-2">
+			<input class="form-control input-sm" type="text" name="residenzacap"  value="<?php echo $row['residenzacap'];?>"/>
+			</div></div></div>
 		
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Stato di residenza:</label>
-				<div class="col-sm-4">
-					<input class="form-control input-sm" type="text" name="residenzastato"  value="<?php echo $row['residenzastato'];?>"/>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Stato di residenza:</label>
+			<div class="row">
+			<div class="col-sm-4">
+			<input class="form-control input-sm" type="text" name="residenzastato"  value="<?php echo $row['residenzastato'];?>"/>
+			</div></div></div>
 
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Gruppo Sanguigno:</label>
-				<div class="col-sm-2">
-					<select class="form-control input-sm" NAME="grupposanguigno" >
-						<option selected="value="<?php echo $row['grupposanguigno'];?>""> <?php echo $row['grupposanguigno'];?> </option>
-						<option value="0rh+"> 0rh+ </option>
-						<option value="0rh-"> 0rh- </option>
-						<option Value="Arh+"> Arh+ </option>
-						<option value="Arh-"> Arh- </option>
-						<option value="Brh+"> Brh+ </option>
-						<option value="Brh-"> Brh- </option>
-						<option Value="ABrh+"> ABrh+ </option>
-						<option value="ABrh-"> ABrh- </option>
-					</select>
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Gruppo Sanguigno:</label>
+			<div class="row">
+			<div class="col-sm-2">
+			<SELECT class="form-control input-sm" NAME="grupposanguigno" >
+				<OPTION selected="value="<?php echo $row['grupposanguigno'];?>""> <?php echo $row['grupposanguigno'];?>
+				<OPTION value="0rh+"> 0rh+
+				<OPTION value="0rh-"> 0rh-
+				<OPTION Value="Arh+"> Arh+
+				<OPTION value="Arh-"> Arh-
+				<OPTION value="Brh+"> Brh+
+				<OPTION value="Brh-"> Brh-
+				<OPTION Value="ABrh+"> ABrh+
+				<OPTION value="ABrh-"> ABrh-
+			</select>
+			</div></div></div>
 			
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Codice Fiscale:</label>
-				<div class="col-sm-4">
-					<input class="form-control input-sm" type="text" name="codicefiscale" value="<?php echo $row['codicefiscale'];?>" />
-				</div>
-			</div>
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Codice Fiscale:</label>
+			<div class="row">
+			<div class="col-sm-4">
+			<input class="form-control input-sm" type="text" name="codicefiscale" value="<?php echo $row['codicefiscale'];?>" />
+			</div></div></div>
 
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Fuori Uso:</label>
-				<div class="col-sm-2" style="padding-top: 7px;">
-					<input type="checkbox" name="fuoriuso" <?php if($row['fuoriuso'] == 1) echo 'checked'; ?> />
-				</div>
-			</div>
-			
 			</body>
 
 			<br>
 			<div class="col-sm-offset-2">
-				<button class="btn btn-warning btn-lg" onClick="Controllo()"><span class="glyphicon glyphicon-edit"></span> Modifica Anagrafica</button>
+			<button class="btn btn-warning btn-lg" onClick="Controllo()"><span class="glyphicon glyphicon-edit"></span> Modifica Anagrafica</button>
 			</div>
 		</form>
 	</div>
+  
 </div>
 
 <script language="javascript">

@@ -197,19 +197,19 @@ tinymce.init({
 	 <div class="page-header">
 		<div class="row" valign="middle">
 
-			<div class="col-sm-3" style="padding-top: 15px;">
-				<center><a href="?corpus=home"><img src="images/logo-strech.png" width="100%"></a></center>
+			<div class="col-sm-3" style="padding-top: 5px;">
+				<center><a href="?corpus=home"><img src="images/logo-strech.png" width="330"></a></center>
 			</div>
 			
-			<div class="col-sm-7" style="padding-top: 20px; padding-bottom: 30px;">
+			<div class="col-sm-7" style="padding-top: 20px; padding-bottom: 10px;">
 				<center>
 					<h2><?php echo $_SESSION['nomeapplicativo']; ?></h2> 
 					<h3><?php echo $_SESSION['headerdescription']; ?></h3> 
 				</center>
 			</div>
 
-			<div class="col-sm-2" align="right" style="padding-top: 10px;">
-				<center><a href="https://www.abulafiaweb.it" target="_blank"><img width="100" src="images/abulafia-logo-scont.png"></a>
+			<div class="col-sm-2" align="right">
+				<center><a href="https://www.abulafiaweb.it" target="_blank"><img width="110" src="images/abulafia-logo-scont.png"></a>
 				<br><small>Ver. <?php echo $_SESSION['version']; ?></small></center>
 			</div>
 			
@@ -367,7 +367,6 @@ tinymce.init({
 									<li role="presentation" class="dropdown-header">ADVANCED</li>
 									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users fa-fw"></i> Gestione degli Utenti</a></li> <?php } ?>
 									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><li><a href="login0.php?corpus=advancedsettings"><i class="fa fa-cogs fa-fw"></i> Advanced Settings</a></li> <?php } ?>
-									<li><a href="login0.php?corpus=backup"><i class="fa fa-cloud-download fa-fw"></i> Backup</a></li>
 									<li><a href="login0.php?corpus=diagnostica"><i class="fa fa-wrench fa-fw"></i> Diagnostica</a></li>
 									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?>
 										<li class="divider"></li>

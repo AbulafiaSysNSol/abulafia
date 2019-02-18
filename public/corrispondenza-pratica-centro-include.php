@@ -118,6 +118,7 @@
 		
 		<table class="table table-bordered">
 			<tr align = "center">
+				<td style="vertical-align: middle"></td>
 				<td style="vertical-align: middle">N. Prot.</td>
 				<td style="vertical-align: middle">Data Reg.</td>
 				<td style="vertical-align: middle">Pos.</td>
@@ -137,17 +138,10 @@
 				$colorelinee = $_SESSION['secondocoloretabellarisultati']; 
 			} //secondo colore
 			$contatorelinee = $contatorelinee + 1 ;
-
-			if($value[5] == 'spedita') { 
-				$icon = '<i class="fa fa-arrow-up fa-fw"></i> '; 
-			} 
-			else { 
-				$icon = '<i class="fa fa-arrow-down fa-fw"></i> '; 
-			}
-
 			?>
 			<tr align = "center" bgcolor=<?php echo $colorelinee; ?> >
-				<td style="vertical-align: middle"><?php echo $icon . ' ' . $value[0] ;?></td>
+				<td style="vertical-align: middle"><?php if($value[5] == 'spedita') { echo'<h3><i class="fa fa-level-up"></i></h3>'; } else { echo '<h3><i class="fa fa-level-down"></i></h3>'; } ;?></td>
+				<td style="vertical-align: middle"><?php echo $value[0] ;?></td>
 				<td style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
 				<td style="vertical-align: middle"><?php echo $value[7] ;?></td>
 				<td style="vertical-align: middle"><?php echo $value[1] ;?></td>
@@ -160,7 +154,7 @@
 					foreach ($urlfile as $valore) {
 						$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '14'); //richiamo del metodo "downloadlink" dell'oggetto file
 						$file = true;
-						echo $download;
+						echo $download.' - <a class="fancybox" data-fancybox-type="iframe" href="lettere'.$annoricercaprotocollo.'/'.$value[0].'/'.$valore[2].'"><i class="fa fa-eye"></i></a><br>';
 					}
 				}
 				else {
@@ -187,9 +181,20 @@
 				</td>
 
 				<td nowrap style="vertical-align: middle">
-					<div class="btn-group-vertical btn-group-sm">
-						<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-info-circle fa-fw"></i> Dettagli</span></a>
-						<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-edit fa-fw"></i> Modifica</a>
+					<div class="btn-group btn-group-sm">
+						<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-info-sign"></span></a>
+						<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><span class="glyphicon glyphicon-pencil"></span></a>
+						<?php
+						if($file) {
+							?>
+							<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Invia tramite email" href="login0.php?corpus=invia-newsletter&id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><span class="glyphicon glyphicon-envelope"></span></a>
+							<!-- <a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Imprimi qrcode sugli allegati" href="barcode-centro-include.php?id=<?php //echo $value[0];?>&anno=<?php //echo $annoricercaprotocollo;?>" target="_BLANK"><span class="glyphicon glyphicon-qrcode"></span></a> -->
+							<?php
+						}
+						?>
+						<a class="btn btn-primary iframe" data-fancybox-type="iframe" href="inoltro-email.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"><i class="fa fa-paper-plane"></i></a>
+						<?php if($value[5] == 'ricevuta') { ?><a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Stampa ricevuta" href="stampa-protocollo.php?id=<?php echo $value[0]; ?>&anno=<?php echo $annoricercaprotocollo; ?>" target="_blank"><i class="fa fa-print"></i></a> <?php } ?>
+						<a class="btn btn-info iframe" data-toggle="tooltip" data-placement="left" title="Stampa etichetta barcode" data-fancybox-type="iframe" href="stampa-barcode.php?id=<?php echo $value[0];?>&anno=<?php echo $annoricercaprotocollo;?>"> <span class="glyphicon glyphicon-barcode"></span></a>
 					</div>
 				</td>		
 			</tr>

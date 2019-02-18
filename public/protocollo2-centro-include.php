@@ -171,8 +171,8 @@
 	
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<center><h5><i class="fa fa-warning fa-fw"></i> Il numero di protocollo verrà assegnato dopo aver concluso l'inserimento dei dati.</h5> 
-				<h5><i class="fa fa-info-circle fa-fw"></i> Identificativo Provvisorio Protocollo: <strong><?php echo $my_lettera->idtemporaneo;?>.</strong></h5></center>
+				<i class="fa fa-warning"></i> Il numero di protocollo verrà assegnato dopo aver concluso l'inserimento dei dati. 
+				<i class="fa fa-info-circle"></i> Identificativo Provvisorio Protocollo: <strong><?php echo $my_lettera->idtemporaneo;?></strong>
 				<?php if($errore) { 
 					echo " - <b><i class=\"fa fa-warning\"></i> ATTENZIONE:</b> Bisogna inserire almeno un mittente o un destinatario.";
 				} ?>
@@ -237,7 +237,6 @@
 								<div class="col-sm-11">
 									<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />			
 									<label for="exampleInputFile"> <i class="fa fa-upload"></i> Carica allegati:</label>
-									<small>&egrave; possibile scegliere pi&ugrave; file alla volta;</small>
 									<input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true" data-placeholder="nessun file selezionato.">
 									<br>
 									<button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso...attendere!" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>

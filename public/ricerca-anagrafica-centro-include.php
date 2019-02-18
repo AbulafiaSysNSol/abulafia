@@ -19,25 +19,23 @@
 					
 					<div class="row">
 						<div class="col-sm-12">
-							<h4><i class="fa fa-pencil"></i> Inserisci il valore da cercare:</h4>
-								<small>&egrave; possibile effettuare una ricerca esatta per cognome e nome digitando Cognome+Nome</small>
-						</div>
-						
-						<div class="col-sm-6">
-							<br><input class="form-control input-sm" placeholder="lasciare vuoto per mostrare tutte le anagrafiche o digitare il cognome o la ragione sociale" type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
-							<input type="hidden" name="tabella" value="anagrafica">
+							<h4><i class="fa fa-pencil"></i> Inserisci il valore da cercare (è possibile effettuare una ricerca esatta per cognome e nome esempio Saitta+Biagio):</h4>
 						</div>
 					</div>
 					
-					<br>
-
 					<div class="row">
-						<div class="col-sm-12">
-							<h4><i class="fa fa-filter"></i> Filtri aggiuntivi:</h4><br>
+						<div class="col-sm-6">
+							<input class="form-control input-sm" placeholder="lasciare vuoto per mostrare tutte le anagrafiche..." type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
+							<input type="hidden" name="tabella" value="anagrafica">
 						</div>
-	
-						<div id="anag" class="col-sm-4">
-							<label><i class="fa fa-info-circle"></i> Tipologia:</label>
+					
+						<div class="col-sm-12">
+							<br><h4><b><i class="fa fa-filter"></i> Filtri aggiuntivi:</b></h4>
+						</div>
+						
+						<div id="anag" class="col-sm-3">
+						
+							<label>Tipologia:</label>
 							<SELECT class="form-control input-sm" NAME="anagraficatipologia">
 								<OPTION value="anagrafica.tipologia" onclick="document.search.cercato.focus()" selected> Nessun filtro</OPTION>
 								<OPTION value="persona" onclick="document.search.cercato.focus()"> Persone fisiche</OPTION>
@@ -46,8 +44,8 @@
 								<OPTION value="fornitore" onclick="document.search.cercato.focus()"> Fornitore</OPTION>
 							</SELECT>
 						</div>
-						<br>
-						<div class="col-sm-4">
+							
+						<div class="col-sm-3">
 							<label><i class="fa fa-sort-alpha-asc"></i> Elenca in ordine:</label>
 							<SELECT class="form-control input-sm" NAME="group1">
 								<OPTION value="alfabetico" onclick="document.search.cercato.focus()" selected> Alfabetico</OPTION>
@@ -55,13 +53,14 @@
 								<OPTION value="cron-inverso" onclick="document.search.cercato.focus()"> Cronologico Inverso</OPTION>
 							</SELECT>
 						</div>
-
+						
 					</div>
 					
 					<div class="row">
 						<div class="col-sm-3">
-							<br><br><button  id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ricerca in corso..." class="btn btn-success btn-lg btn-block" type="button" onClick="autorized(<?php echo $level ?>)"><span class="glyphicon glyphicon-search"></span> Cerca Anagrafica</button>
+							<br><br><button  id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ricerca in corso..." class="btn btn-success btn-lg btn-block" type="button" onClick="autorized(<?php echo $level ?>)"><span class="glyphicon glyphicon-search"></span> Cerca</button>
 						</div>
+						
 					</div>
 					
 				</form>	

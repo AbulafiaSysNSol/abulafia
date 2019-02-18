@@ -64,7 +64,7 @@ $id = $_GET['id'];
 					echo '<tr>';
 					echo '<td>' . $risultati2['categoria'] . '</td>
 					<td>
-					<div class="btn-group btn-group-xs">
+					<div class="btn-group btn-group-sm">
 						<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Visualizza documenti per questa categoria" href=""><i class="fa fa-bars"></i> Documenti</button></a>
 						<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica categoria" href="?corpus=documenti-categorie-modifica&id=' . $risultati2['id'] . '"><span class="glyphicon glyphicon-pencil"></span> Modifica</button></a> 
 						<a class="btn btn-danger"data-toggle="tooltip" data-placement="left" title="Elimina categoria" onClick="return confirm(\'Vuoi veramente cancellare questa categoria?\');" href="?corpus=documenti-categorie-elimina&id='. $risultati2['id'] . '"><span class="glyphicon glyphicon-trash"></span> Elimina</button></a>

@@ -31,7 +31,7 @@
 	
 	//echo '<br>Se <b><i>"' . $q . '"</i></b> non è presente nell\'elenco sottostante <a href="#" data-toggle="modal" data-target="#myModal">vai all\'inserimento rapido <span class="glyphicon glyphicon-share-alt"></span></a><br>';
 	
-	$sql=mysql_query("SELECT * FROM anagrafica $where $filtro limit 15");
+	$sql=mysql_query("SELECT * FROM anagrafica $where $filtro limit 5");
 	while($row = mysql_fetch_array($sql)) {
 	$row = array_map('stripslashes', $row);
 		?>
