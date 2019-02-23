@@ -11,8 +11,10 @@ if ($_SESSION['auth'] < 1 ) {
 include '../db-connessione-include.php';
 
 $anno = $_POST['anno'];
+$inizio = $_POST['inizio'];
+$fine = $_POST['fine'];
 
-$zip_name = "Allegati_Protocollo_Anno_".$anno.".zip";
+$zip_name = "Allegati_Protocollo_Anno_".$anno."_dal_".$inizio."_al_".$fine.".zip";
 
 $zip = new ZipArchive();
 
@@ -39,19 +41,17 @@ while(!empty($dirStack)){
 
     $dir_folder = dir($currentDir); 
     while( false !== ($node = $dir_folder->read()) ){ 
-
-        if( ($node == '..') || ($node == '.') || ($node == 'temp') || ($node == 'qrcode') ){ 
-            continue; 
-        } 
-
-        if(is_dir($currentDir . $node)){ 
-            array_push($dirStack, $currentDir . $node . '/'); 
-        } 
-
-        if(is_file($currentDir . $node)){ 
-            $filesToAdd[] = $node; 
-        } 
-
+        if( ($node >= $inizio) && ($node <= $fine) ) {
+            if( ($node == '..') || ($node == '.') || ($node == 'temp') || ($node == 'qrcode') ){ 
+                continue; 
+            } 
+            if(is_dir($currentDir . $node)){ 
+                array_push($dirStack, $currentDir . $node . '/'); 
+            } 
+            if(is_file($currentDir . $node)){ 
+                $filesToAdd[] = $node; 
+            }
+        }
     } 
 
     $localDir = $currentDir; 
