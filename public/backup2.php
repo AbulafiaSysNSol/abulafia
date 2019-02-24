@@ -4,9 +4,9 @@ session_start();
 set_time_limit(0);
 
 if ($_SESSION['auth'] < 1 ) {
-		header("Location: index.php?s=1");
-		exit(); 
-	}
+	header("Location: index.php?s=1");
+	exit(); 
+}
 
 include '../db-connessione-include.php';
 
@@ -41,18 +41,16 @@ while(!empty($dirStack)){
 
     $dir_folder = dir($currentDir); 
     while( false !== ($node = $dir_folder->read()) ){ 
-        if( ($node >= $inizio) && ($node <= $fine) ) {
-            if( ($node == '..') || ($node == '.') || ($node == 'temp') || ($node == 'qrcode') ){ 
-                continue; 
-            } 
-            if(is_dir($currentDir . $node)){ 
-                array_push($dirStack, $currentDir . $node . '/'); 
-            } 
-            if(is_file($currentDir . $node)){ 
-                $filesToAdd[] = $node; 
-            }
+        if( ($node == '..') || ($node == '.') || ($node == 'temp') || ($node == 'qrcode') ){ 
+            continue; 
+        } 
+        if(is_dir($currentDir . $node) && ($node >= $inizio) && ($node <= $fine) ){ 
+            array_push($dirStack, $currentDir . $node . '/'); 
+        } 
+        if(is_file($currentDir . $node)){ 
+            $filesToAdd[] = $node; 
         }
-    } 
+   } 
 
     $localDir = $currentDir; 
     $zip->addEmptyDir($localDir); 

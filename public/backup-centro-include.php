@@ -55,7 +55,7 @@
 		var $btn = $(this);
 		var inizio = document.download.inizio.value;
 		var fine = document.download.fine.value;
-		if (inizio == '' || fine == '' || (fine - inizio) > 200) {
+		if (inizio == '' || fine == '' || (fine - inizio) > 200 || fine < inizio) {
 	        return false;
 		}
 		else {
@@ -79,6 +79,11 @@
 		}
 		if ((fine - inizio) > 200) {
 	           alert("Seleziona un'intervallo di max 200 allegati");
+	           document.download.inizio.focus();
+	           return false;
+	    }
+	    if (inizio > fine) {
+	           alert("Controlla i valori inseriti");
 	           document.download.inizio.focus();
 	           return false;
 	    }
