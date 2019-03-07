@@ -17,10 +17,17 @@
 	$nome = $_POST['nome'];
 	$cognome = $_POST['cognome'];
 	$data = $c->dataDB($_POST['data']);
+	$luogonascita = $_POST['luogonascita'];
 	$codicefiscale = $_POST['codicefiscale'];
 	$email = $_POST['email'];
+	if(isset($_POST['terminiecondizioni'])) {
+		$terminiecondizioni = 1;
+	}
+	else {
+		$terminiecondizioni = 0;
+	}
 	
-	$res = $a -> updateProfile($id, $nome, $cognome, $data, $codicefiscale, $email); 
+	$res = $a -> updateProfile($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni); 
 	
 	if($res) {
 		header("Location: login0.php?corpus=home&profile=ok");

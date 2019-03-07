@@ -61,6 +61,15 @@
 						</div>
 
 						<div class="form-group">
+							<label class="col-sm-4 control-label">Luogo di Nascita:</label>
+							<div class="row">
+								<div class="col-sm-5">
+									<input type="text" class="form-control input-sm" name="luogonascita" value="<?php echo stripslashes($a->getLuogoNascita($id)); ?>" required>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
 							<label class="col-sm-4 control-label">Cod. Fiscale:</label>
 							<div class="row">
 								<div class="col-sm-5">
@@ -74,6 +83,15 @@
 							<div class="row">
 								<div class="col-sm-5">
 									<input type="email" class="form-control input-sm" name="email" value="<?php echo $a->getEmail($id); ?>" required>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-5 control-label">Accettazione<br><a class="fancybox" data-fancybox-type="iframe" href="terminiecondizioni.php">Termini e Condizioni d'uso</a>:</label>
+							<div class="row">
+								<div class="col-sm-3">
+									<input type="checkbox" class=" input-sm" name="terminiecondizioni" required>
 								</div>
 							</div>
 						</div>
