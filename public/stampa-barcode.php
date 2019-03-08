@@ -13,16 +13,18 @@
 	$id = $_GET['id'];
 	$anno = $_GET['anno'];
 	
-	barcode($id, $anno, 45, "code128");
+	barcode($id, $anno, 40, "code128");
 	$image = "images/barcode/".$id.".".$anno.".png";
-	$header = "CRI - ".$_SESSION['denominazione'];
-	$footer = "Protocollo n. ".$id."/".$anno;
+	$header = $_SESSION['denominazione'];
+	$footer = "Prot. N. ".$id."-".$anno;
 	
-	$content = '<div align="center">'.$header.'<br><img src="'.$image.'"><br>'.$footer.'</div>';
-	$html2pdf = new HTML2PDF('L',array(33,75),'it');
+	$content = '<div style="text-align: center; vertical-align: middle; font-size: 16px; margin-top: 5px; margin-bottom: 10px;">'.$header.'</div>
+				<div align="center"><img width="" src="'.$image.'"></div>
+				<div style="text-align: center; vertical-align: middle; font-size: 16px; margin-top: 10px;">'.$footer.'</div>';
+	$html2pdf = new HTML2PDF('L', array(40,85), 'it');
 	$html2pdf->setDefaultFont("times");
 	$html2pdf->WriteHTML($content);
 	ob_end_clean();
-	$html2pdf->Output('barcode.pdf', 'I');
+	$html2pdf->Output('barcode'.$id.'-'.$anno.'.pdf', 'I');
 	
 ?>
