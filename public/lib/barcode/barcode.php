@@ -9,10 +9,10 @@
  *	  <img src="/barcode.php?text=testing" alt="testing" />
  */
 
-	function barcode($prot, $anno, $size, $code_type) {
+	function barcode($prot, $anno, $data, $size, $code_type) {
 	
 		// Get pararameters that are passed in through $_GET or set to the default value
-		$text = "Prot. ".$prot."/".$anno;
+		$text = "Prot. n. ".$prot." del ".$data;
 		$orientation = (isset($_GET["orientation"])?$_GET["orientation"]:"horizontal");
 		$code_string = "";
 

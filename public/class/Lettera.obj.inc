@@ -45,6 +45,11 @@ class Lettera {
 		$this -> leggilettera ($id, $anno); 
 		return $this->arraylettera1;
 	}
+
+	public function getDataProtocollo($id, $anno) {
+		$this->leggilettera($id, $anno);
+		return $this->arraylettera1['id'];
+	}
 	
 	public function getMittenti( $id, $anno) {
 		$this -> leggilettera ($id, $anno); 
