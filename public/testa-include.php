@@ -367,6 +367,7 @@ tinymce.init({
 									<li role="presentation" class="dropdown-header">ADVANCED</li>
 									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><li><a href="login0.php?corpus=gestione-utenti"><i class="fa fa-users fa-fw"></i> Gestione degli Utenti</a></li> <?php } ?>
 									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><li><a href="login0.php?corpus=advancedsettings"><i class="fa fa-cogs fa-fw"></i> Advanced Settings</a></li> <?php } ?>
+									<li><a href="login0.php?corpus=loghi"><i class="fa fa-picture-o fa-fw"></i> Logo e Intestazione</a></li>
 									<li><a href="login0.php?corpus=backup"><i class="fa fa-cloud-download fa-fw"></i> Backup</a></li>
 									<li><a href="login0.php?corpus=diagnostica"><i class="fa fa-wrench fa-fw"></i> Diagnostica</a></li>
 									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?>

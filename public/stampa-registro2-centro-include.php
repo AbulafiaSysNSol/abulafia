@@ -14,20 +14,25 @@ require('lib/fpdf/fpdf.php');
 		function Header()
 		{
 		    // Logo
-		    $this->Image('images/intestazione.jpg',5,-6,209.97);
+		    $this->Image('images/intestazione.jpg',0,0,209.97);
 		    // Line break
-		    $this->Ln(30);
+		    $this->Ln(35);
 		}
 
 		// Page footer
 		function Footer()
 		{
 		    // Logo
-		    $this->Image('images/footer.jpg',5,278,209.97);
+		    //$this->Image('images/footer.jpg',5,278,209.97);
 		    // Position at 1.5 cm from bottom
 		    $this->SetY(-15);
 		    // Page number
-		    $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'C');
+		    $this->SetFont('Arial','',9);
+		    $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'R');
+		    $this->SetY(-9);
+			$this->SetX(9);
+			$this->SetFont('Arial','I',8);
+			$this->Write('','Documento generato digitalmente da Abulafia Web Ver.' . $_SESSION['version'].'. - https://www.abulafiaweb.it - info@abulafiaweb.it');
 		}
 	}
 	$from = $_GET['search'];
@@ -184,8 +189,8 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 $pdf->SetTitle('registroprotocollo');
-$pdf->Text(10,45,$intestazione);
-$pdf->Ln(10);
+$pdf->Text(10,55,$intestazione);
+$pdf->Ln(20);
 while($query2 = mysql_fetch_array($query)) {
 	$query2 = array_map('stripslashes', $query2);
 	if ( $contatorelinee % 2 == 1 ) { 
@@ -239,8 +244,8 @@ while($query2 = mysql_fetch_array($query)) {
 	$pdf->Ln(5);
 	$contatorelinee = $contatorelinee + 1;
 }
-$pdf->Ln(15);
-$pdf->Write('',$finale);
+//$pdf->Ln(15);
+//$pdf->Write('',$finale);
 $pdf->Output('registroprotocollo'.$now.'.pdf','I');
 exit();
 ?>
