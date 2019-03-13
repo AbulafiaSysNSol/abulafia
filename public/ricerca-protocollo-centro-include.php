@@ -1,15 +1,18 @@
-<body onload="setFocus()">
+<body onload="document.search.cercato.focus();">  <!--setta il focus nella form di ricerca al caricamento della pagina-->
 <?php
-	$_SESSION['block'] = false;
+	$_SESSION['block'] = false; 
 	$level = $_SESSION['auth'];
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO RICERCA' , 'OK' , $_SESSION['ip'], $_SESSION['historylog']);
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO RICERCA' , 
+				'OK' , $_SESSION['ip'], $_SESSION['historylog']);
 	$lett = new Lettera();
 ?>
 
 <div class="panel panel-default">
 	
 		<div class="panel-heading">
-			<h3 class="panel-title"><strong><span class="glyphicon glyphicon-search"></span> Ricerca PROTOCOLLO</strong></h3>
+			<h3 class="panel-title">
+			<strong><span class="glyphicon glyphicon-search"></span> Ricerca PROTOCOLLO</strong>
+			</h3>
 		</div>
 		
 		<div class="panel-body">
@@ -19,12 +22,28 @@
 					
 					<div class="row">
 						<div class="col-sm-4">
-							<h4><b><i class="fa fa-navicon"></i> Criteri di ricerca:</b></h4><br>
-							<label><i class="fa fa-pencil"></i> Inserisci il valore da cercare:</label>
-							<input class="form-control input-sm" placeholder="lasciare vuoto per una ricerca di tutte le parole..." type="text" name="cercato" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;"/>
+							<h4>
+							<b><i class="fa fa-navicon"></i> Criteri di ricerca:</b>
+							</h4>
+							<br>
+							<label><i class="fa fa-pencil"></i> 
+							Inserisci il valore da cercare:
+							</label>
+							<input class="form-control input-sm" 
+								placeholder="lascia vuoto per una ricerca di tutte le parole..." 
+								type="text" 
+								name="cercato" 
+								onkeydown="if(event.keyCode==13) goAndSearch();" 
+
 							<input type="hidden" name="tabella" value="lettere">
 							<br><br>
-							<button  id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ricerca in corso..." class="btn btn-success btn-block" type="button" onClick="autorized(<?php echo $level ?>)"><span class="glyphicon glyphicon-search"></span> Cerca</button>
+							<button  id="buttonl" 
+								data-loading-text="<i class='fa fa-spinner fa-spin'></i> Ricerca in corso..." 
+								class="btn btn-success btn-block" 
+								type="button" onClick="goAndSearch()">
+							<span class="glyphicon glyphicon-search"></span> 
+							Cerca
+							</button>
 						</div>
 					
 						<div class="col-sm-3">
@@ -32,12 +51,13 @@
 							
 							<div id="prot" class="col-sm-12">
 								<label><i class="fa fa-book"></i> Anno Protocollo:</label>
-								<SELECT class="form-control input-sm" name="annoricercaprotocollo" >
+								<SELECT class="form-control input-sm" 
+									name="annoricercaprotocollo" >
 									<?php
-										$esistenzatabella1=mysql_query("show tables like 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
+										$esistenzatabella1=$verificaconnessione->query("show tables like 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
 										$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
 										$my_calendario-> publadesso(); //acquisizione dell'anno attuale per indicare l'anno selezionato di default
-										while ($esistenzatabella11 = mysql_fetch_array($esistenzatabella1, MYSQL_NUM))
+										while ($esistenzatabella11 = $esistenzatabella1->fetch_array())
 										{
 										if ('lettere'.$my_calendario->anno== $esistenzatabella11[0]) { $selected='selected'; }
 										else { $selected ='';}
@@ -76,9 +96,9 @@
 							<SELECT class="form-control input-sm" NAME="posizione">
 								<OPTION value="" onclick="document.search.cercato.focus()">tutte</OPTION>
 								<?php
-									$posizioni = $lett->getPosizioni();
+									$posizioni = $lett->getPosizioni($verificaconnessione);
 									foreach($posizioni as $pos) {
-										echo '<option value ='.$pos[0].'>' . $pos[0] . ' - ' . $lett->getDescPosizione($pos[0]) . '</option>';
+										echo '<option value ='.$pos[0].'>' . $pos[0] . ' - ' . $lett->getDescPosizione($pos[0], $verificaconnessione) . '</option>';
 									}
 								?>
 							</SELECT>
@@ -100,9 +120,9 @@
 							<SELECT class="form-control input-sm" NAME="pratica">
 								<OPTION value="" onclick="document.search.cercato.focus()">tutte</OPTION>
 								<?php
-									$pratiche = $lett->getPratiche();
+									$pratiche = $lett->getPratiche($verificaconnessione);
 									foreach($pratiche as $prat) {
-										echo '<option value='.$prat[0].'>' . $lett->getDescPratica($prat[0]) . '</option>';
+										echo '<option value='.$prat[0].'>' . $lett->getDescPratica($prat[0], $verificaconnessione) . '</option>';
 									}
 								?>
 							</SELECT>
@@ -114,24 +134,27 @@
 			</div>			
 		</div>
 </div>        
-
-<script>
-	$("#buttonl").click(function() {
-		var $btn = $(this);
-		$btn.button('loading');
-	});
-</script>
-
 <script type="text/javascript" language="javascript">
-function autorized(livello) {
-           document.search.action = "login0.php?corpus=risultati&iniziorisultati=0&currentpage=1";
-           document.search.submit();
-  }
-var formInUse = false;
-function setFocus() {
-	if(!formInUse) {
-		document.search.cercato.focus();
-	}
+alert("Hello! I am an alert box!!");
+document.search.cercato.focus(); /* riporta il focus sempre all'input box chiamato "cercato*/
+
+/* non capisco a che serve questo codice, proposto per l'eliminazione - alfio agosto 2017
+
+	$("#buttonl").click(function() {		var $btn = $(this);
+		$btn.button('loading');
+	}); 
+*/
+
+
+function goAndSearch() {
+	alert("Hello! I am an alert box!!");
+	window.location.href = 'login0.php?corpus=rrisultati&iniziorisultati=0&currentpage=1';
+         /*  document.search.action = "login0.php?corpus=risultati&iniziorisultati=0&currentpage=1";
+           document.search.submit();  vecchio codice*/
 }
+
+
+
+
 </script>
 </body>

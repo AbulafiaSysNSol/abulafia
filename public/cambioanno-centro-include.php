@@ -24,13 +24,14 @@
 			}
 			
 			$tabella1='lettere'.$my_calendario->anno;
-			$esistenzatabella1=mysql_query("show tables like '$tabella1'");
-			$esistenzatabella11 = mysql_fetch_array($esistenzatabella1, MYSQL_NUM);
+			$esistenzatabella1=$verificaconnessione->query("show tables like '$tabella1'");
+			$esistenzatabella11 = $esistenzatabella1->fetch_array($esistenzatabella1[0]);
+echo $esistenzatabella1[0].'222';
 			if ($esistenzatabella11[0]==$tabella1) {
 				echo '<i class="fa fa-info-circle"></i> La tabella '.$tabella1.' era gia\' presente<br>';
 			}
 			else { 
-				$creatabella=mysql_query("
+				$creatabella=$verificaconnessione->query("
 				CREATE TABLE IF NOT EXISTS `$tabella1` (
 				`idlettera` int(11) NOT NULL auto_increment,
 				`oggetto` text collate utf8_roman_ci NOT NULL,
@@ -47,7 +48,7 @@
 				 "); 
 				if ($creatabella) {
 					echo '<i class="fa fa-check"></i> Tabella '.$tabella1.' creata correttamente<br>'; 
-					$queryprimoprotocollo = mysql_query("ALTER TABLE $tabella1 AUTO_INCREMENT = 1");
+					$queryprimoprotocollo = $verificaconnessione->query("ALTER TABLE $tabella1 AUTO_INCREMENT = 1");
 					if (!$queryprimoprotocollo) { 
 						echo 'Settaggio del primo numero del protocollo NON RIUSCITO<br>'; 
 						echo mysql_error(); 
@@ -63,7 +64,7 @@
 			}
 								
 			$tabella2='joinletteremittenti'.$my_calendario->anno;
-			$esistenzatabella2=mysql_query("show tables like '$tabella2'");
+			$esistenzatabella2=$verificaconnessione->query("show tables like '$tabella2'");
 			$esistenzatabella21 = mysql_fetch_array($esistenzatabella2, MYSQL_NUM);
 			if ($esistenzatabella21[0]==$tabella2) {
 				echo '<i class="fa fa-info-circle"></i> La tabella '.$tabella2.' era gia\' presente<br>';
