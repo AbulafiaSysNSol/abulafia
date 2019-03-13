@@ -25,8 +25,8 @@
 			
 			$tabella1='lettere'.$my_calendario->anno;
 			$esistenzatabella1=$verificaconnessione->query("show tables like '$tabella1'");
-			$esistenzatabella11 = $esistenzatabella1->fetch_array($esistenzatabella1[0]);
-echo $esistenzatabella1[0].'222';
+			$esistenzatabella11 = mysqli_fetch_array($esistenzatabella1);
+
 			if ($esistenzatabella11[0]==$tabella1) {
 				echo '<i class="fa fa-info-circle"></i> La tabella '.$tabella1.' era gia\' presente<br>';
 			}
@@ -65,12 +65,12 @@ echo $esistenzatabella1[0].'222';
 								
 			$tabella2='joinletteremittenti'.$my_calendario->anno;
 			$esistenzatabella2=$verificaconnessione->query("show tables like '$tabella2'");
-			$esistenzatabella21 = mysql_fetch_array($esistenzatabella2, MYSQL_NUM);
+			$esistenzatabella21 = mysqli_fetch_array($esistenzatabella2);
 			if ($esistenzatabella21[0]==$tabella2) {
 				echo '<i class="fa fa-info-circle"></i> La tabella '.$tabella2.' era gia\' presente<br>';
 			}
 			else {
-				$creatabella2=mysql_query("
+				$creatabella2=$verificaconnessione->query("
 				CREATE TABLE IF NOT EXISTS `$tabella2` (
 				`idlettera` text collate utf8_roman_ci NOT NULL,
 				`idanagrafica` text collate utf8_roman_ci NOT NULL
@@ -85,13 +85,13 @@ echo $esistenzatabella1[0].'222';
 			}
 		
 			$tabella3='joinlettereinserimento'.$my_calendario->anno;
-			$esistenzatabella3=mysql_query("show tables like '$tabella3'");
-			$esistenzatabella31 = mysql_fetch_array($esistenzatabella3, MYSQL_NUM);
+			$esistenzatabella3=$verificaconnessione->query("show tables like '$tabella3'");
+			$esistenzatabella31 = mysqli_fetch_array($esistenzatabella3);
 			if ($esistenzatabella31[0]==$tabella3) {
 				echo '<i class="fa fa-info-circle"></i> La tabella '.$tabella3.' era gia\' presente<br>';
 			}
 			else {
-				$creatabella3=mysql_query("
+				$creatabella3=$verificaconnessione->query("
 				CREATE TABLE IF NOT EXISTS `$tabella3` (
 				 `idlettera` int(11) NOT NULL,
 				 `idinser` int(11) NOT NULL,
@@ -107,7 +107,7 @@ echo $esistenzatabella1[0].'222';
 				}
 			}
 
-			$aggiornaannodb=mysql_query("update defaultsettings set annoprotocollo='$my_calendario->anno'");
+			$aggiornaannodb=$verificaconnessione->query("update defaultsettings set annoprotocollo='$my_calendario->anno'");
 			if (!$aggiornaannodb) { 
 				die ('<i class="fa fa-times"></i> Impossibile aggiornare l\'anno del registro protocollo virtuale');
 			}
