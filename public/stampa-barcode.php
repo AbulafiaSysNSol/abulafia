@@ -27,10 +27,10 @@
 
 	$data = $p->getDettagli($id,$anno);
 
-	barcode($id, $anno, $c->dataSlash($data[2]), 45, "code128");
+	barcode($id, $anno, $c->dataSlash($data[3]), 45, "code128");
 	$image = "images/barcode/".$id.".".$anno.".png";
 	$header = $_SESSION['denominazione'];
-	$footer = "Prot. ".$text." N° ".$id." del ".$c->dataSlash($data[2]);
+	$footer = "Prot. ".$text." N° ".$id." del ".$c->dataSlash($data[3]);
 	
 	$content = '<div style="text-align: center; vertical-align: middle; font-size: 16px; margin-top: 5px; margin-bottom: 10px;">'.$header.'</div>
 				<div align="center"><img width="" src="'.$image.'"></div>
