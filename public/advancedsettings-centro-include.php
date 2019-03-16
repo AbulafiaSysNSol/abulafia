@@ -36,9 +36,7 @@
 				</div>
 				<?php
 				}
-			?>
 
-			<?php 
 			//funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
 			$contalettere=$verificaconnessione->query("select count(*) 
 									from lettere$annoprotocollo 
