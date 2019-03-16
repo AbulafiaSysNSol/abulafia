@@ -101,6 +101,7 @@
 				</div>
 
 				<div class="col-sm-4">
+
 					<center><h3><i class="fa fa-envelope-o"></i> Email:</h3><br></center>
 					<label>Email</label>
 					<input class="form-control" type="text" name="email"  value="<?php echo $_SESSION['email'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
@@ -132,6 +133,7 @@
 				</div>
 
 			</div>
+
 			<br>
 			<button class="btn btn-info btn-lg" onClick="Controllo()" /><i class="fa fa-floppy-o"></i> Salva Impostazioni</button>
 			</form>
