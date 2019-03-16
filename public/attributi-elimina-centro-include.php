@@ -1,7 +1,7 @@
 <?php
 
 $id = $_GET['id'];
-$cancellazione=mysql_query("delete from attributi where id='$id' limit 1");
+$cancellazione=$verificaconnessione->query("delete from attributi where id='$id' limit 1");
 if ($cancellazione) {
 	$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATO ATTRIBUTO '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
 	?>
