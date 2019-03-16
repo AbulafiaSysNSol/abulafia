@@ -2,12 +2,9 @@
 class PDObj
 	{
         
-        public function avviaConnessione($dbname, $host, $dbusername, $dbpassword)
+        public function avviaConnessione($dbname, $dbhost, $dbusername, $dbpassword)
 		{
-	            $connessione = new PDO("mysql:dbname=$this->dbname;
-						host=$this->host", 
-						$this->dbusername, 
-						$this->dbpassword);
+	            $connessione = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbusername, $dbpassword);
 	            return $connessione;
 	        }
 
