@@ -56,9 +56,34 @@
 	include '../db-connessione-include.php'; //connessione al db-server
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 
-	$login=mysql_query("SELECT count(*) from users where loginname='$userid' and password='$password'"); //controllo della correttezza di username e password
-	$login2 = mysql_fetch_array($login);
-	if ($login2[0] < 1 ) {
+
+//controllo login con PDO
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT count(*) 
+						from users 
+						where loginname=:userid 
+						and password=:password '); 
+		$query->bindParam(':userid', $userid);
+		$query->bindParam(':password', $password);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$risultati = $query->fetchAll();
+
+//controllo della presenza di almeno un utente con user e passord indicati nella form di login
+		
+	
+
+	if ($risultati[0][0] < 1 ) {
 		$my_log -> publscrivilog($userid, 'login', 'denied', $client , $logfile);
 		$_SESSION['auth']= 0 ;
 		?>
@@ -72,19 +97,89 @@
 	}
 	
 	//inizio settaggio delle variabili di sessione
-	$logindata=mysql_query("select * from users where loginname='$userid'");
+/*deprecato	$logindata=mysql_query("select * from users where loginname='$userid'");
 	$logindata2=mysql_fetch_array($logindata);
+*/
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT * 
+						from users 
+						where loginname=:userid 
+						'); 
+		$query->bindParam(':userid', $userid);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+	
+	$logindata= $query->fetchAll();
+	$logindata2=$logindata[0];
 	$idperricerca=$logindata2['idanagrafica']; //setta l'id dell'user che ha effettuato il login
-	$logindata3=mysql_query("select * from anagrafica where idanagrafica='$idperricerca'");
+
+/*deprecato	$logindata3=mysql_query("select * from anagrafica where idanagrafica='$idperricerca'");
 	$logindata4=mysql_fetch_array($logindata3); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
+
+*/
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT * 
+						from anagrafica 
+						where idanagrafica=:idperricerca 
+						'); 
+		$query->bindParam(':idperricerca', $idperricerca);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$logindata3 = $query->fetchAll();
+	$logindata4=$logindata3[0];
+
+
+
 	$_SESSION['loginurlfoto']= $logindata4['urlfoto']; //seleziona l'url della foto dell'user che ha fatto login
 	$_SESSION['auth']= $logindata2['auth']; //livello di autorizzazione dell'utente, prelevato dal db
 	$_SESSION['loginname'] = $logindata2['loginname']; //nome utente prelevato dalla tabella users
 	$_SESSION['loginid']=$logindata2['idanagrafica']; //id prelevato dalla tabella users, identica a quella dell'anagrafica
 
 	//caricamento dei settaggi personalizzati
-	$settings=mysql_query("SELECT * FROM usersettings WHERE idanagrafica='$idperricerca'");
+
+
+/*deprecato	$settings=mysql_query("SELECT * FROM usersettings WHERE idanagrafica='$idperricerca'");
 	$settings2=mysql_fetch_array($settings);
+*/
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT *
+						from usersettings
+						where idanagrafica=:idperricerca
+						'); 
+		$query->bindParam(':idperricerca', $idperricerca);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$settings = $query->fetchAll();
+	$settings2=$settings[0];
+
 	//assegnazione settaggi personali
 	$_SESSION['risultatiperpagina'] = $settings2['risultatiperpagina'];
 	$_SESSION['primocoloretabellarisultati'] = $settings2['primocoloretabellarisultati'];//primo colore delle righe che si alternano della tabella dei risultati della ricerca
@@ -95,8 +190,29 @@
 	$_SESSION['notificamod'] = $settings2['notificamod'];
 	
 	//caricamento dei settaggi del software
-	$settings3=mysql_query("select distinct * from defaultsettings");
+
+/*deprecato	$settings3=mysql_query("select distinct * from defaultsettings");
 	$settings4=mysql_fetch_array($settings3);
+*/
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT distinct *
+						from defaultsettings
+						'); 
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$settings3 = $query->fetchAll();
+	$settings4=$settings3[0];
+
 	//assegnazione settaggi del software
 	$_SESSION['keywords'] = $settings4['keywords'];
 	$_SESSION['description'] = $settings4['description'];
@@ -125,8 +241,30 @@
 	$_SESSION['signaturepath'] = $settings4['signaturepath'];
 	
 	//caricamento settaggi email
-	$settings5=mysql_query("select distinct * from mailsettings");
+
+/*deprecato	$settings5=mysql_query("select distinct * from mailsettings");
 	$settings6=mysql_fetch_array($settings5);
+
+*/
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT *
+						from mailsettings
+						'); 
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$settings5 = $query->fetchAll();
+	$settings6=$settings5[0];
+
 	//assegnazione settaggi email
 	$_SESSION['usernamemail'] = $settings6['username'];
 	$_SESSION['passwordmail'] = base64_decode($settings6['password']);
