@@ -21,8 +21,27 @@
 	$my_tabellahtml= unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
 	$my_database= unserialize($_SESSION['my_database']);//deserializzazione
 	$my_lettera= unserialize($_SESSION['my_lettera']);//deserializzazione 
-	$setting=mysql_query("select * from defaultsettings");
+/*deprecato	$setting=mysql_query("select * from defaultsettings");
 	$setting2=mysql_fetch_array($setting);
+*/
+
+try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT * 
+						from defaultsettings 
+						'); 
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+	
+	$setting= $query->fetchAll();
+	$setting2=$setting[0];
 
 	$_SESSION['paginaprincipale'] = $setting2['paginaprincipale'];
 
@@ -270,15 +289,80 @@ tinymce.init({
 					<?php
 					if($_SESSION['mod_lettere'] && $anag->isLettere($_SESSION['loginid'])) {
 						$user = $_SESSION['loginid'];
-						if($anag->isAdmin($_SESSION['loginid'])) {
-							$query = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
-						}
+						if($anag->isAdmin($_SESSION['loginid'])) 
+							{
+							/*deprecato $query = mysql_query("SELECT COUNT(*) 
+											FROM comp_lettera 
+											WHERE (vista = 1 OR vista = 2) 
+											AND firmata = 0");*/
+								try 
+								{
+   								$connessione->beginTransaction();
+								$query = $connessione->prepare('SELECT COUNT(*) 
+												FROM comp_lettera 
+											WHERE (vista = 1 OR vista = 2) 
+											AND firmata = 0');
+								$query->execute();
+								$connessione->commit();
+								} 
+		
+								//gestione dell'eventuale errore della connessione
+								catch (PDOException $errorePDO) { 
+    								echo "Errore: " . $errorePDO->getMessage();
+								}
+	
+							}
 						else {
-							$query = mysql_query("SELECT COUNT(*) FROM comp_lettera, joinpersoneuffici WHERE (vista = 1 OR vista = 2) AND firmata = 0 AND joinpersoneuffici.ufficio = comp_lettera.ufficio AND joinpersoneuffici.utente = $user");
-						}
-						$num = mysql_fetch_row($query);
-						$prot = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE firmata = 1 AND protocollo = 0");
-						$protocollare = mysql_fetch_row($prot);
+							/*deprecato $query = mysql_query("SELECT COUNT(*) 
+										FROM comp_lettera, joinpersoneuffici 
+										WHERE (vista = 1 OR vista = 2) 
+										AND firmata = 0 
+										AND joinpersoneuffici.ufficio = comp_lettera.ufficio 
+										AND joinpersoneuffici.utente = $user");*/
+								try 
+								{
+   								$connessione->beginTransaction();
+								$query = $connessione->prepare('SELECT count(*) 
+												FROM comp_lettera, joinpersoneuffici 
+												WHERE (vista = 1 OR vista = 2) 
+												AND firmata = 0 
+												AND joinpersoneuffici.ufficio = comp_lettera.ufficio 
+												AND joinpersoneuffici.utente = $user'); 
+								$query->bindParam(':user', $user);
+								$query->execute();
+								$connessione->commit();
+								} 
+		
+								//gestione dell'eventuale errore della connessione
+								catch (PDOException $errorePDO) { 
+    								echo "Errore: " . $errorePDO->getMessage();
+								}
+							}
+						//deprecato $num = mysql_fetch_row($query);
+						$risultati = $query->fetchAll();
+						$num=$risultati[0];
+						/*deprecato $prot = mysql_query("SELECT COUNT(*) 
+									FROM comp_lettera 
+									WHERE firmata = 1 
+									AND protocollo = 0");
+						$protocollare = mysql_fetch_row($prot);*/
+						try 
+								{
+   								$connessione->beginTransaction();
+								$query = $connessione->prepare('SELECT count(*) 
+												FROM comp_lettera, joinpersoneuffici 
+												WHERE firmata = 1 
+												AND protocollo = 0');
+								$query->execute();
+								$connessione->commit();
+								} 
+		
+								//gestione dell'eventuale errore della connessione
+								catch (PDOException $errorePDO) { 
+    								echo "Errore: " . $errorePDO->getMessage();
+								}						
+						$risultati = $query->fetchAll();
+						$protocollare = $risultati [0];
 						$_SESSION['daprotocollare'] = $protocollare[0];
 						?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'lettera' OR $_GET['corpus']=='lettera2' OR $_GET['corpus']=='elenco-lettere' OR $_GET['corpus']=='elenco-lettere-firma') { echo ' active'; }?>">

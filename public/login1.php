@@ -180,6 +180,7 @@
 	$settings = $query->fetchAll();
 	$settings2=$settings[0];
 
+
 	//assegnazione settaggi personali
 	$_SESSION['risultatiperpagina'] = $settings2['risultatiperpagina'];
 	$_SESSION['primocoloretabellarisultati'] = $settings2['primocoloretabellarisultati'];//primo colore delle righe che si alternano della tabella dei risultati della ricerca
@@ -294,7 +295,11 @@
 
 	//log degli accessi con esito positivo
 	$my_log -> publscrivilog($userid, 'login', 'ok', $client, $logfile );
+
+$connessione=null; //chiudo la connessione distruggendo l'oggetto PDO istanziato
 ?>
+
+
 
 <script language="Javascript">
 	window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>&aggiornamento=null";
