@@ -2,27 +2,31 @@
 
 class Anagrafica {
 
+	public function __construct($connessione) {
+    	$this->connessione = $connessione;
+    }
+
 	var $contacomponenti;
 
-	function publcontaanagrafica ($tipologia) { //<man> Restituisce il numero di anagrafiche presenti nel database, passando come argomento la tipologia (es. persona, carica etc...)</man>
-		$contacomponenti2= mysql_query("select count(*) from anagrafica where tipologia='$tipologia'"); //query per contare le anagrafiche per tipologia
-		$contacomponenti1= mysql_fetch_row($contacomponenti2);
+	function publcontaanagrafica ($tipologia) { 
+		$contacomponenti2= $this->connessione->query("SELECT COUNT(*) FROM anagrafica WHERE tipologia='$tipologia'");
+		$contacomponenti1= $contacomponenti2->fetch();
 		$this->contacomponenti= $contacomponenti1[0];
 	}
 
-	function publcognomidiffusi () { //<man> Restituisce un array di cognomi in ordine di diffusione</man>
-		$this->contacognomi2= mysql_query("
-								select cognome,
-								count(*) as conteggio
-								from anagrafica 
-								where tipologia='persona' 
-								group by cognome
-								order by conteggio desc"); //query per contare i cognomi per diffusione
+	function publcognomidiffusi () {
+		$this->contacognomi2= $this->connessione->query("
+								SELECT cognome,
+								COUNT(*) AS conteggio
+								FROM anagrafica 
+								WHERE tipologia='persona' 
+								GROUP BY cognome
+								ORDER BY conteggio DESC"); //query per contare i cognomi per diffusione
 	}
 
 	function publnomidiffusi () { //<man> Restituisce un array di nomi in ordine di diffusione</man>
-		$this->contanomi2= mysql_query("
-								select nome,
+		$this->contanomi2= $this->connessione->query("
+								SELECT nome,
 								count(*) as conteggio
 								from anagrafica 
 								where tipologia='persona' 
@@ -32,7 +36,7 @@ class Anagrafica {
 	
 	public function getNotificationsIns() {
 		$mailaddress = array();
-		$query = mysql_query(" 	SELECT jointelefonipersone.numero 
+		$query = $this->connessione->query("SELECT jointelefonipersone.numero 
 							FROM jointelefonipersone, usersettings, users 
 							WHERE jointelefonipersone.idanagrafica = usersettings.idanagrafica 
 							AND usersettings.idanagrafica = users.idanagrafica 
@@ -40,7 +44,7 @@ class Anagrafica {
 							AND usersettings.notificains = 1
 							AND jointelefonipersone.tipo = 'envelope-o'
 						");
-		while ($mail = mysql_fetch_array($query)) {
+		while ($mail = $query->fetch()) {
 			array_push($mailaddress, $mail);
 		}
 		return $mailaddress;	
@@ -48,7 +52,7 @@ class Anagrafica {
 	
 	public function getNotificationsMod() {
 		$mailaddress = array();
-		$query = mysql_query(" 	SELECT jointelefonipersone.numero 
+		$query = $this->connessione->query(" 	SELECT jointelefonipersone.numero 
 							FROM jointelefonipersone, usersettings, users 
 							WHERE jointelefonipersone.idanagrafica = usersettings.idanagrafica 
 							AND usersettings.idanagrafica = users.idanagrafica 
@@ -56,15 +60,15 @@ class Anagrafica {
 							AND usersettings.notificamod = 1
 							AND jointelefonipersone.tipo = 'envelope-o'
 						");
-		while ($mail = mysql_fetch_array($query)) {
+		while ($mail = $query->fetch()) {
 			array_push($mailaddress, $mail);
 		}
 		return $mailaddress;	
 	}
 	
 	public function getName($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$query = mysql_query("SELECT anagrafica.cognome, anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
-		$nome = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT anagrafica.cognome, anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
+		$nome = $query->fetch();
 		if($nome[1]) 
 			return $nome[0] . ' ' . $nome[1];
 		else 
@@ -72,44 +76,44 @@ class Anagrafica {
 	}
 
 	public function getNome($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$query = mysql_query("SELECT anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
-		$nome = mysql_fetch_row($query); 
+		$query = $this->connessione->query("SELECT anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
+		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getCognome($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$query = mysql_query("SELECT anagrafica.cognome FROM anagrafica WHERE idanagrafica = $id");
-		$nome = mysql_fetch_row($query); 
+		$query = $this->connessione->query("SELECT anagrafica.cognome FROM anagrafica WHERE idanagrafica = $id");
+		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getData($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$query = mysql_query("SELECT anagrafica.nascitadata FROM anagrafica WHERE idanagrafica = $id");
-		$nome = mysql_fetch_row($query); 
+		$query = $this->connessione->query("SELECT anagrafica.nascitadata FROM anagrafica WHERE idanagrafica = $id");
+		$nome = $query->fetch();
 		return $nome[0];
 	}
 
 	public function getLuogoNascita($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$query = mysql_query("SELECT anagrafica.nascitacomune FROM anagrafica WHERE idanagrafica = $id");
-		$nome = mysql_fetch_row($query); 
+		$query = $this->connessione->query("SELECT anagrafica.nascitacomune FROM anagrafica WHERE idanagrafica = $id");
+		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getCodiceFiscale($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$query = mysql_query("SELECT anagrafica.codicefiscale FROM anagrafica WHERE idanagrafica = $id");
-		$nome = mysql_fetch_row($query); 
+		$query = $this->connessione->query("SELECT anagrafica.codicefiscale FROM anagrafica WHERE idanagrafica = $id");
+		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getEmail($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$query = mysql_query("SELECT users.mainemail FROM users WHERE idanagrafica = $id");
-		$nome = mysql_fetch_row($query); 
+		$query = $this->connessione->query("SELECT users.mainemail FROM users WHERE idanagrafica = $id");
+		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getFoto($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$query = mysql_query("SELECT anagrafica.urlfoto FROM anagrafica WHERE idanagrafica = $id");
-		$foto = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT anagrafica.urlfoto FROM anagrafica WHERE idanagrafica = $id");
+		$foto = $query->fetch();
 		if($foto[0]) 
 			return 'foto/' . $foto[0];
 		else 
@@ -117,17 +121,17 @@ class Anagrafica {
 	}
 	
 	public function isAdmin($id) {
-		$query = mysql_query("SELECT admin FROM users WHERE idanagrafica = $id");
-		$admin = mysql_fetch_row($query);
-		if ($admin[0] == 1) 
+		$query = $this->connessione->query("SELECT admin FROM users WHERE idanagrafica = $id");
+		$admin = $query->fetch();
+		if ($admin[0] == 1)
 			return true;
 		else
 			return false;
 	}
 
 	public function isAnagrafica($id) {
-		$query = mysql_query("SELECT anagrafica FROM users WHERE idanagrafica = $id");
-		$anagrafica = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT anagrafica FROM users WHERE idanagrafica = $id");
+		$anagrafica = $query->fetch();
 		if ($anagrafica[0] == 1) 
 			return true;
 		else
@@ -135,8 +139,8 @@ class Anagrafica {
 	}
 
 	public function isProtocollo($id) {
-		$query = mysql_query("SELECT protocollo FROM users WHERE idanagrafica = $id");
-		$protocollo = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT protocollo FROM users WHERE idanagrafica = $id");
+		$protocollo = $query->fetch();
 		if ($protocollo[0] == 1) 
 			return true;
 		else
@@ -144,8 +148,8 @@ class Anagrafica {
 	}
 
 	public function isDocumenti($id) {
-		$query = mysql_query("SELECT documenti FROM users WHERE idanagrafica = $id");
-		$documenti = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT documenti FROM users WHERE idanagrafica = $id");
+		$documenti = $query->fetch();
 		if ($documenti[0] == 1) 
 			return true;
 		else
@@ -153,8 +157,8 @@ class Anagrafica {
 	}
 
 	public function isLettere($id) {
-		$query = mysql_query("SELECT lettere FROM users WHERE idanagrafica = $id");
-		$lettere = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT lettere FROM users WHERE idanagrafica = $id");
+		$lettere = $query->fetch();
 		if ($lettere[0] == 1) 
 			return true;
 		else
@@ -162,8 +166,8 @@ class Anagrafica {
 	}
 
 	public function isMagazzino($id) {
-		$query = mysql_query("SELECT magazzino FROM users WHERE idanagrafica = $id");
-		$magazzino = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT magazzino FROM users WHERE idanagrafica = $id");
+		$magazzino = $query->fetch();
 		if ($magazzino[0] == 1) 
 			return true;
 		else
@@ -171,8 +175,8 @@ class Anagrafica {
 	}
 
 	public function isAmbulatorio($id) {
-		$query = mysql_query("SELECT ambulatorio FROM users WHERE idanagrafica = $id");
-		$ambulatorio = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT ambulatorio FROM users WHERE idanagrafica = $id");
+		$ambulatorio = $query->fetch();
 		if ($ambulatorio[0] == 1) 
 			return true;
 		else
@@ -180,8 +184,8 @@ class Anagrafica {
 	}
 
 	public function isContabilita($id) {
-		$query = mysql_query("SELECT contabilita FROM users WHERE idanagrafica = $id");
-		$contabilita = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT contabilita FROM users WHERE idanagrafica = $id");
+		$contabilita = $query->fetch();
 		if ($contabilita[0] == 1) 
 			return true;
 		else
@@ -189,8 +193,8 @@ class Anagrafica {
 	}
 
 	public function isUser($id) {
-		$query = mysql_query("SELECT COUNT(*) FROM users WHERE idanagrafica = $id");
-		$utenti = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT COUNT(*) FROM users WHERE idanagrafica = $id");
+		$utenti = $query->fetch();
 		if ($utenti[0] == 1) 
 			return true;
 		else
@@ -198,8 +202,8 @@ class Anagrafica {
 	}
 
 	public function canSign($idutente, $idufficio) {
-		$query = mysql_query("SELECT COUNT(*) FROM joinpersoneuffici WHERE utente = $idutente AND ufficio = $idufficio");
-		$abilitazione = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT COUNT(*) FROM joinpersoneuffici WHERE utente = $idutente AND ufficio = $idufficio");
+		$abilitazione = $query->fetch();
 		if ($abilitazione[0] > 0) 
 			return true;
 		else
@@ -207,8 +211,8 @@ class Anagrafica {
 	}
 
 	public function profileIsUpdate($id) {
-		$query = mysql_query("SELECT updateprofile FROM users WHERE idanagrafica = $id");
-		$profile = mysql_fetch_row($query);
+		$query = $this->connessione->query("SELECT updateprofile FROM users WHERE idanagrafica = $id");
+		$profile = $query->fetch();
 		if ($profile[0] == 1) 
 			return true;
 		else

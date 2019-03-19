@@ -2,6 +2,10 @@
 
 class Ambulatorio {
 
+	public function __construct($connessione) {
+    	$this->connessione = $connessione;
+    }
+
 	public function insertAccess($idanagrafica, $idmedico, $data, $ora, $dipendente, $anamnesi, $diagnosi, $terapia, $note, $intervento) { 
 			try {
    				$connessione->beginTransaction();

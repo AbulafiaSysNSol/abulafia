@@ -208,7 +208,7 @@ tinymce.init({
 <body>
   
 	<?php
-		$anag = new Anagrafica();
+		$anag = new Anagrafica($connessione);
 	?>
 
   <div class="container">
