@@ -25,20 +25,17 @@
 	$setting2=mysql_fetch_array($setting);
 */
 
-try 
-		{
+	try {
    		$connessione->beginTransaction();
-		$query = $connessione->prepare('SELECT * 
-						from defaultsettings 
-						'); 
+		$query = $connessione->prepare('SELECT * FROM defaultsettings'); 
 		$query->execute();
 		$connessione->commit();
-		} 
+	} 
 		
-		//gestione dell'eventuale errore della connessione
-		catch (PDOException $errorePDO) { 
-    		echo "Errore: " . $errorePDO->getMessage();
-		}
+	//gestione dell'eventuale errore della connessione
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+	}
 	
 	$setting= $query->fetchAll();
 	$setting2=$setting[0];
@@ -475,6 +472,6 @@ tinymce.init({
 	
 <?php
 	if ($_GET['corpus'] != 'cambioanno') { 
-		$my_registroprotocollo->publcontrolloanno (); //controllo della corrispondenza fra l'anno corrente e l'anno in uso dal db
+		$my_registroprotocollo->publcontrolloanno(); //controllo della corrispondenza fra l'anno corrente e l'anno in uso dal db
 	}
 ?>
