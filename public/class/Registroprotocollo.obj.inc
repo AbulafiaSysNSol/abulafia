@@ -1,17 +1,15 @@
 <?php 
 
-class Registroprotocollo { //apertura classe
+require_once('../db-connessione-include.php');
 
-	private function connessione() {
-		include '../db-connessione-include.php';
-		$this->conn = $connessione;
-	}
+class Registroprotocollo { //apertura classe
 
 	var $annodb; 
 	
 	public function getAnni() {
+		global $connessione;
 		$anni = array();
-		$tablettere = $this->conn->query("show tables like 'lettere%'");
+		$tablettere = $connessione->query("show tables like 'lettere%'");
 		while ($tablettere2 = $tablettere->fetch()) {
 			$anno = explode("lettere", $tablettere2[0]);
 			array_push($anni, $anno[1]);
@@ -20,12 +18,14 @@ class Registroprotocollo { //apertura classe
 	}
 
 	private function selezionaanno () { // modulo per la selezione dell'anno di uso del registro protocollo
-		$query = $this->conn->query("SELECT annoprotocollo FROM defaultsettings");
+		global $connessione;
+		$query = $connessione->query("SELECT annoprotocollo FROM defaultsettings");
 		$query2 = $query->fetch();
 		$this->annodb = $query2[0];
 	}
 
 	private function controlloanno() { //controllo fra l'anno corrente e l'anno del sistema
+		global $connessione;
 		$this->selezionaanno();
 		$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
 		$my_calendario-> publadesso();

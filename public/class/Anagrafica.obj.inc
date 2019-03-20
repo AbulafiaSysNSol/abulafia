@@ -1,24 +1,21 @@
 <?php 
 
-class Anagrafica {
+require_once('../db-connessione-include.php');
 
-	private function connessione() {
-		include '../db-connessione-include.php';
-		$this->conn = $connessione;
-	}
+class Anagrafica {
 
 	var $contacomponenti;
 
 	function publcontaanagrafica ($tipologia) { 
-		$this->connessione();
-		$contacomponenti2= $this->conn->query("SELECT COUNT(*) FROM anagrafica WHERE tipologia='$tipologia'");
+		global $connessione;
+		$contacomponenti2= $connessione->query("SELECT COUNT(*) FROM anagrafica WHERE tipologia='$tipologia'");
 		$contacomponenti1= $contacomponenti2->fetch();
 		$this->contacomponenti= $contacomponenti1[0];
 	}
 
 	function publcognomidiffusi () {
-		$this->connessione();
-		$this->contacognomi2= $this->conn->query("
+		global $connessione;
+		$this->contacognomi2= $connessione->query("
 								SELECT cognome,
 								COUNT(*) AS conteggio
 								FROM anagrafica 
@@ -28,8 +25,8 @@ class Anagrafica {
 	}
 
 	function publnomidiffusi () { //<man> Restituisce un array di nomi in ordine di diffusione</man>
-		$this->connessione();
-		$this->contanomi2= $this->conn->query("
+		global $connessione;
+		$this->contanomi2= $connessione->query("
 								SELECT nome,
 								count(*) as conteggio
 								from anagrafica 
@@ -39,9 +36,9 @@ class Anagrafica {
 	}
 	
 	public function getNotificationsIns() {
-		$this->connessione();
+		global $connessione;
 		$mailaddress = array();
-		$query = $this->conn->query("SELECT jointelefonipersone.numero 
+		$query = $connessione->query("SELECT jointelefonipersone.numero 
 							FROM jointelefonipersone, usersettings, users 
 							WHERE jointelefonipersone.idanagrafica = usersettings.idanagrafica 
 							AND usersettings.idanagrafica = users.idanagrafica 
@@ -56,9 +53,9 @@ class Anagrafica {
 	}
 	
 	public function getNotificationsMod() {
-		$this->connessione();
+		global $connessione;
 		$mailaddress = array();
-		$query = $this->conn->query(" 	SELECT jointelefonipersone.numero 
+		$query = $connessione->query(" 	SELECT jointelefonipersone.numero 
 							FROM jointelefonipersone, usersettings, users 
 							WHERE jointelefonipersone.idanagrafica = usersettings.idanagrafica 
 							AND usersettings.idanagrafica = users.idanagrafica 
@@ -73,8 +70,8 @@ class Anagrafica {
 	}
 	
 	public function getName($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$this->connessione();
-		$query = $this->conn->query("SELECT anagrafica.cognome, anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT anagrafica.cognome, anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
 		$nome = $query->fetch();
 		if($nome[1]) 
 			return $nome[0] . ' ' . $nome[1];
@@ -83,49 +80,50 @@ class Anagrafica {
 	}
 
 	public function getNome($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$this->connessione();
-		$query = $this->conn->query("SELECT anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT anagrafica.nome FROM anagrafica WHERE idanagrafica = $id");
 		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getCognome($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$this->connessione();
-		$query = $this->conn->query("SELECT anagrafica.cognome FROM anagrafica WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT anagrafica.cognome FROM anagrafica WHERE idanagrafica = $id");
 		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getData($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$this->connessione();
-		$query = $this->conn->query("SELECT anagrafica.nascitadata FROM anagrafica WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT anagrafica.nascitadata FROM anagrafica WHERE idanagrafica = $id");
 		$nome = $query->fetch();
 		return $nome[0];
 	}
 
 	public function getLuogoNascita($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$query = $this->conn->query("SELECT anagrafica.nascitacomune FROM anagrafica WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT anagrafica.nascitacomune FROM anagrafica WHERE idanagrafica = $id");
 		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getCodiceFiscale($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$this->connessione();
-		$query = $this->conn->query("SELECT anagrafica.codicefiscale FROM anagrafica WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT anagrafica.codicefiscale FROM anagrafica WHERE idanagrafica = $id");
 		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getEmail($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$this->connessione();
-		$query = $this->conn->query("SELECT users.mainemail FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT users.mainemail FROM users WHERE idanagrafica = $id");
 		$nome = $query->fetch(); 
 		return $nome[0];
 	}
 
 	public function getFoto($id) { //<man> Restituisce il nome e cognome di un anagrafica </man>
-		$this->connessione();
-		$query = $this->conn->query("SELECT anagrafica.urlfoto FROM anagrafica WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT anagrafica.urlfoto FROM anagrafica WHERE idanagrafica = $id");
 		$foto = $query->fetch();
 		if($foto[0]) 
 			return 'foto/' . $foto[0];
@@ -134,8 +132,8 @@ class Anagrafica {
 	}
 	
 	public function isAdmin($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT admin FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT admin FROM users WHERE idanagrafica = $id");
 		$admin = $query->fetch();
 		if ($admin[0] == 1)
 			return true;
@@ -144,8 +142,8 @@ class Anagrafica {
 	}
 
 	public function isAnagrafica($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT anagrafica FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT anagrafica FROM users WHERE idanagrafica = $id");
 		$anagrafica = $query->fetch();
 		if ($anagrafica[0] == 1) 
 			return true;
@@ -154,8 +152,8 @@ class Anagrafica {
 	}
 
 	public function isProtocollo($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT protocollo FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT protocollo FROM users WHERE idanagrafica = $id");
 		$protocollo = $query->fetch();
 		if ($protocollo[0] == 1) 
 			return true;
@@ -164,8 +162,8 @@ class Anagrafica {
 	}
 
 	public function isDocumenti($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT documenti FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT documenti FROM users WHERE idanagrafica = $id");
 		$documenti = $query->fetch();
 		if ($documenti[0] == 1) 
 			return true;
@@ -174,8 +172,8 @@ class Anagrafica {
 	}
 
 	public function isLettere($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT lettere FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT lettere FROM users WHERE idanagrafica = $id");
 		$lettere = $query->fetch();
 		if ($lettere[0] == 1) 
 			return true;
@@ -184,8 +182,8 @@ class Anagrafica {
 	}
 
 	public function isMagazzino($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT magazzino FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT magazzino FROM users WHERE idanagrafica = $id");
 		$magazzino = $query->fetch();
 		if ($magazzino[0] == 1) 
 			return true;
@@ -194,8 +192,8 @@ class Anagrafica {
 	}
 
 	public function isAmbulatorio($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT ambulatorio FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT ambulatorio FROM users WHERE idanagrafica = $id");
 		$ambulatorio = $query->fetch();
 		if ($ambulatorio[0] == 1) 
 			return true;
@@ -204,8 +202,8 @@ class Anagrafica {
 	}
 
 	public function isContabilita($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT contabilita FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT contabilita FROM users WHERE idanagrafica = $id");
 		$contabilita = $query->fetch();
 		if ($contabilita[0] == 1) 
 			return true;
@@ -214,8 +212,8 @@ class Anagrafica {
 	}
 
 	public function isUser($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT COUNT(*) FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT COUNT(*) FROM users WHERE idanagrafica = $id");
 		$utenti = $query->fetch();
 		if ($utenti[0] == 1) 
 			return true;
@@ -224,8 +222,8 @@ class Anagrafica {
 	}
 
 	public function canSign($idutente, $idufficio) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT COUNT(*) FROM joinpersoneuffici WHERE utente = $idutente AND ufficio = $idufficio");
+		global $connessione;
+		$query = $connessione->query("SELECT COUNT(*) FROM joinpersoneuffici WHERE utente = $idutente AND ufficio = $idufficio");
 		$abilitazione = $query->fetch();
 		if ($abilitazione[0] > 0) 
 			return true;
@@ -234,8 +232,8 @@ class Anagrafica {
 	}
 
 	public function profileIsUpdate($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT updateprofile FROM users WHERE idanagrafica = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT updateprofile FROM users WHERE idanagrafica = $id");
 		$profile = $query->fetch();
 		if ($profile[0] == 1) 
 			return true;
@@ -244,7 +242,7 @@ class Anagrafica {
 	}
 
 	public function updateProfile($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni) {
-		$this->connessione();
+		global $connessione;
 		try {
    			$conn->beginTransaction();
 			$query = $conn->prepare("UPDATE anagrafica SET nome = :nome, cognome = :cognome, nascitadata = :data, nascitacomune = :luogonascita, codicefiscale = :codicefiscale WHERE anagrafica.idanagrafica = :id"); 
@@ -300,7 +298,8 @@ class Anagrafica {
 	}
 
 	public function insertAssistito($nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $cittadinanza, $residenzacitta, $residenzavia, $residentenumero, $documento, $documentonumero) { 
-		$this->connessione();
+		
+		global $connessione;
 		
 		try {
    			$conn->beginTransaction();
@@ -328,7 +327,8 @@ class Anagrafica {
 	}
 
 	public function editAssistito($id, $nome, $cognome, $codicefiscale, $cittanascita, $datanascita, $cittadinanza, $residenzacitta, $residenzavia, $residentenumero, $documento, $documentonumero) { 
-		$this->connessione();
+		
+		global $connessione;
 		
 		try {
    			$conn->beginTransaction();
@@ -358,7 +358,7 @@ class Anagrafica {
 	}
 
 	public function deleteAssistito($id) { 
-		$this->connessione();
+		global $connessione;
 		
 		try {
    			$conn->beginTransaction();
@@ -376,15 +376,15 @@ class Anagrafica {
 	}
 
 	public function infoAssistito($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT * FROM cert_assistito WHERE id = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT * FROM cert_assistito WHERE id = $id");
 		$res = $query->fetch();;
 		return $res;
 	}
 
 	public function getNomeAssistito($id) {
-		$this->connessione();
-		$query = $this->conn->query("SELECT nome, cognome FROM cert_assistito WHERE id = $id");
+		global $connessione;
+		$query = $connessione->query("SELECT nome, cognome FROM cert_assistito WHERE id = $id");
 		$res = $query->fetch();
 		$nome = $res[0] . ' ' . $res[1];
 		return $nome;
