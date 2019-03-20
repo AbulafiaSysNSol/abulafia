@@ -9,23 +9,23 @@
 	include '../db-connessione-include.php'; //connessione al db-server
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 	
-	$my_calendario= new Calendario;//crea un nuovo oggetto
+	$my_calendario= new Calendario();//crea un nuovo oggetto
 	$_SESSION['my_calendario']= serialize($my_calendario); //serializzazione per passaggio alle variabili di sessione
 	$my_log = new Log(); //crea un nuovo oggetto 'log'
 	$_SESSION['my_log']= serialize($my_log); //serializzazione per passaggio alle variabili di sessione
-	$my_registroprotocollo = new Registroprotocollo ;//crea un nuovo oggetto
+	$my_registroprotocollo = new Registroprotocollo() ;//crea un nuovo oggetto
 	$_SESSION['my_registroprotocollo'] = serialize($my_registroprotocollo); //serializzazione per passaggio alle variabili di sessione
 	$my_anagrafica = new Anagrafica() ;//crea un nuovo oggetto
 	$_SESSION['my_anagrafica'] = serialize($my_anagrafica); //serializzazione per passaggio alle variabili di sessione
-	$my_ricerca = new Ricerca ;//crea un nuovo oggetto
+	$my_ricerca = new Ricerca() ;//crea un nuovo oggetto
 	$_SESSION['my_ricerca'] = serialize($my_ricerca); //serializzazione per passaggio alle variabili di sessione
-	$my_tabellahtml = new Tabellahtml ;//crea un nuovo oggetto
+	$my_tabellahtml = new Tabellahtml() ;//crea un nuovo oggetto
 	$_SESSION['my_tabellahtml'] = serialize($my_tabellahtml); //serializzazione per passaggio alle variabili di sessione
-	$my_manuale = new Manuale ;//crea un nuovo oggetto
+	$my_manuale = new Manuale() ;//crea un nuovo oggetto
 	$_SESSION['my_manuale'] = serialize($my_manuale); //serializzazione per passaggio alle variabili di sessione
-	$my_database = new Database ;//crea un nuovo oggetto
+	$my_database = new Database() ;//crea un nuovo oggetto
 	$_SESSION['my_database'] = serialize($my_database); //serializzazione per passaggio alle variabili di sessione
-	$my_lettera = new Lettera ;//crea un nuovo oggetto
+	$my_lettera = new Lettera() ;//crea un nuovo oggetto
 	$_SESSION['my_lettera'] = serialize($my_lettera); //serializzazione per passaggio alle variabili di sessione
 
 	$logdirectory="log/";

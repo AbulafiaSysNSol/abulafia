@@ -2,10 +2,10 @@
 
 class Registroprotocollo { //apertura classe
 
-	public function __construct() {
-    	include '../db-connessione-include.php';
-    	$this->conn = $connessione;
-    }
+	private function connessione() {
+		include '../db-connessione-include.php';
+		$this->conn = $connessione;
+	}
 
 	var $annodb; 
 	

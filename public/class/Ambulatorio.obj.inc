@@ -2,10 +2,10 @@
 
 class Ambulatorio {
 
-	public function __construct() {
-    	include '../db-connessione-include.php';
-    	$this->conn = $connessione;
-    }
+	private function connessione() {
+		include '../db-connessione-include.php';
+		$this->conn = $connessione;
+	}
 
 	public function insertAccess($idanagrafica, $idmedico, $data, $ora, $dipendente, $anamnesi, $diagnosi, $terapia, $note, $intervento) { 
 			try {
