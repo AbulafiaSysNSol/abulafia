@@ -78,7 +78,7 @@ class Log {
 				echo '<br>'. $ciclo.') '.$riga.'<br>';
 			}
 			else { 
-				$numerorighe = $numerorighe +1; }
+				$numerorighe = $numerorighe +1; 
 			}
 		}
 	}
