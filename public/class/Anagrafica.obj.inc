@@ -241,11 +241,12 @@ class Anagrafica {
 			return false;
 	}
 
-	public function updateProfile($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni) {
+	public function a ($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni) {
 		global $connessione;
+		$this->conn=$connessione;
 		try {
-   			$conn->beginTransaction();
-			$query = $conn->prepare("UPDATE anagrafica SET nome = :nome, cognome = :cognome, nascitadata = :data, nascitacomune = :luogonascita, codicefiscale = :codicefiscale WHERE anagrafica.idanagrafica = :id"); 
+   			$this->conn->beginTransaction();
+			$query = $this->conn->prepare("UPDATE anagrafica SET nome = :nome, cognome = :cognome, nascitadata = :data, nascitacomune = :luogonascita, codicefiscale = :codicefiscale WHERE anagrafica.idanagrafica = :id"); 
 			$query->bindParam(':nome', $nome);
 			$query->bindParam(':cognome', $cognome);
 			$query->bindParam(':data', $data);
@@ -253,7 +254,7 @@ class Anagrafica {
 			$query->bindParam(':codicefiscale', $codicefiscale);
 			$query->bindParam(':id', $id);
 			$query->execute();
-			$conn->commit();
+			$this->conn->commit();
 			$q1 = true;
 		}	 
 		catch (PDOException $errorePDO) { 
@@ -262,13 +263,13 @@ class Anagrafica {
 		}
 
 		try {
-   			$conn->beginTransaction();
-			$query = $conn->prepare("UPDATE users SET mainemail = :email, terminiecondizioni = :terminiecondizioni WHERE users.idanagrafica = :id"); 
+   			$this->conn->beginTransaction();
+			$query = $$this->conn->prepare("UPDATE users SET mainemail = :email, terminiecondizioni = :terminiecondizioni WHERE users.idanagrafica = :id"); 
 			$query->bindParam(':email', $email);
 			$query->bindParam(':terminiecondizioni', $terminiecondizioni);
 			$query->bindParam(':id', $id);
 			$query->execute();
-			$conn->commit();
+			$$this->conn->commit();
 			$q2 = true;
 		}	 
 		catch (PDOException $errorePDO) { 
@@ -277,11 +278,11 @@ class Anagrafica {
 		}
 
 		try {
-   			$conn->beginTransaction();
-			$query = $conn->prepare("UPDATE users SET updateprofile = '1' WHERE idanagrafica = :id"); 
+   			$this->conn->beginTransaction();
+			$query = $this->conn->prepare("UPDATE users SET updateprofile = '1' WHERE idanagrafica = :id"); 
 			$query->bindParam(':id', $id);
 			$query->execute();
-			$conn->commit();
+			$this->conn->commit();
 			$q3 = true;
 		}	 
 		catch (PDOException $errorePDO) { 

@@ -8,8 +8,28 @@
 	$a = new Anagrafica();
 	$anno = $_SESSION['annoprotocollo'];
 	$annoprotocollo = $_SESSION['annoprotocollo'];
-	$lettereinlavorazione = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE protocollo = 0");
-	$numerolettere=mysql_fetch_row($lettereinlavorazione);
+/*deprecato	$lettereinlavorazione = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE protocollo = 0");
+	$numerolettere=mysql_fetch_row($lettereinlavorazione); */
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT count(*) 
+						from comp_lettere 
+						where protocollo=0
+						'); 
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$risultati = $query->fetchAll();
+	$numerolettere=$risultati[0];
+
+
 		
 	if (isset($_GET['firma']) &&($_GET['firma'] == 'ok')) {
 		?>

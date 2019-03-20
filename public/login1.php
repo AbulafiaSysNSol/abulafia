@@ -262,7 +262,7 @@
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
 		}
-
+	
 	$settings5 = $query->fetchAll();
 	$settings6=$settings5[0];
 
