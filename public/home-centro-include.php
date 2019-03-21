@@ -14,7 +14,7 @@
 		{
    		$connessione->beginTransaction();
 		$query = $connessione->prepare('SELECT count(*) 
-						from comp_lettere 
+						from comp_lettera 
 						where protocollo=0
 						'); 
 		$query->execute();
