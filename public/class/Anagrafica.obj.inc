@@ -264,12 +264,12 @@ class Anagrafica {
 
 		try {
    			$this->conn->beginTransaction();
-			$query = $$this->conn->prepare("UPDATE users SET mainemail = :email, terminiecondizioni = :terminiecondizioni WHERE users.idanagrafica = :id"); 
+			$query = $this->conn->prepare("UPDATE users SET mainemail = :email, terminiecondizioni = :terminiecondizioni WHERE users.idanagrafica = :id"); 
 			$query->bindParam(':email', $email);
 			$query->bindParam(':terminiecondizioni', $terminiecondizioni);
 			$query->bindParam(':id', $id);
 			$query->execute();
-			$$this->conn->commit();
+			$this->conn->commit();
 			$q2 = true;
 		}	 
 		catch (PDOException $errorePDO) { 

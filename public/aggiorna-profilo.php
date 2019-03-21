@@ -27,7 +27,7 @@
 		$terminiecondizioni = 0;
 	}
 	
-	$res = $a -> updateProfile($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni); 
+	$res = $a->a($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni); 
 	
 	if($res) {
 		header("Location: login0.php?corpus=home&profile=ok");
