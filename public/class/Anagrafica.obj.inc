@@ -8,14 +8,14 @@ class Anagrafica {
 
 	function publcontaanagrafica ($tipologia) { 
 		global $connessione;
-		$contacomponenti2= $connessione->query("SELECT COUNT(*) FROM anagrafica WHERE tipologia='$tipologia'");
-		$contacomponenti1= $contacomponenti2->fetch();
-		$this->contacomponenti= $contacomponenti1[0];
+		$contacomponenti2 = $connessione->query("SELECT COUNT(*) FROM anagrafica WHERE tipologia='$tipologia'");
+		$contacomponenti1 = $contacomponenti2->fetch();
+		$this->contacomponenti = $contacomponenti1[0];
 	}
 
 	function publcognomidiffusi () {
 		global $connessione;
-		$this->contacognomi2= $connessione->query("
+		$this->contacognomi2 = $connessione->query("
 								SELECT cognome,
 								COUNT(*) AS conteggio
 								FROM anagrafica 
@@ -26,7 +26,7 @@ class Anagrafica {
 
 	function publnomidiffusi () { //<man> Restituisce un array di nomi in ordine di diffusione</man>
 		global $connessione;
-		$this->contanomi2= $connessione->query("
+		$this->contanomi2 = $connessione->query("
 								SELECT nome,
 								count(*) as conteggio
 								from anagrafica 
@@ -243,10 +243,9 @@ class Anagrafica {
 
 	public function a ($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni) {
 		global $connessione;
-		$this->conn=$connessione;
 		try {
-   			$this->conn->beginTransaction();
-			$query = $this->conn->prepare("UPDATE anagrafica SET nome = :nome, cognome = :cognome, nascitadata = :data, nascitacomune = :luogonascita, codicefiscale = :codicefiscale WHERE anagrafica.idanagrafica = :id"); 
+   			$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE anagrafica SET nome = :nome, cognome = :cognome, nascitadata = :data, nascitacomune = :luogonascita, codicefiscale = :codicefiscale WHERE anagrafica.idanagrafica = :id"); 
 			$query->bindParam(':nome', $nome);
 			$query->bindParam(':cognome', $cognome);
 			$query->bindParam(':data', $data);
@@ -254,7 +253,7 @@ class Anagrafica {
 			$query->bindParam(':codicefiscale', $codicefiscale);
 			$query->bindParam(':id', $id);
 			$query->execute();
-			$this->conn->commit();
+			$connessione->commit();
 			$q1 = true;
 		}	 
 		catch (PDOException $errorePDO) { 
@@ -263,13 +262,13 @@ class Anagrafica {
 		}
 
 		try {
-   			$this->conn->beginTransaction();
-			$query = $$this->conn->prepare("UPDATE users SET mainemail = :email, terminiecondizioni = :terminiecondizioni WHERE users.idanagrafica = :id"); 
+   			$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE users SET mainemail = :email, terminiecondizioni = :terminiecondizioni WHERE users.idanagrafica = :id"); 
 			$query->bindParam(':email', $email);
 			$query->bindParam(':terminiecondizioni', $terminiecondizioni);
 			$query->bindParam(':id', $id);
 			$query->execute();
-			$$this->conn->commit();
+			$connessione->commit();
 			$q2 = true;
 		}	 
 		catch (PDOException $errorePDO) { 
@@ -278,11 +277,11 @@ class Anagrafica {
 		}
 
 		try {
-   			$this->conn->beginTransaction();
-			$query = $this->conn->prepare("UPDATE users SET updateprofile = '1' WHERE idanagrafica = :id"); 
+   			$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE users SET updateprofile = '1' WHERE idanagrafica = :id"); 
 			$query->bindParam(':id', $id);
 			$query->execute();
-			$this->conn->commit();
+			$connessione->commit();
 			$q3 = true;
 		}	 
 		catch (PDOException $errorePDO) { 
@@ -303,8 +302,8 @@ class Anagrafica {
 		global $connessione;
 		
 		try {
-   			$conn->beginTransaction();
-			$query = $conn->prepare("INSERT INTO cert_assistito VALUES ('', :nome, :cognome, :codicefiscale, :cittanascita, :datanascita, :cittadinanza, :residenzacitta, :residenzavia, :residentenumero, :documento, :documentonumero)"); 
+   			$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO cert_assistito VALUES ('', :nome, :cognome, :codicefiscale, :cittanascita, :datanascita, :cittadinanza, :residenzacitta, :residenzavia, :residentenumero, :documento, :documentonumero)"); 
 			$query->bindParam(':nome', $nome);
 			$query->bindParam(':cognome', $cognome);
 			$query->bindParam(':codicefiscale', $codicefiscale);
@@ -317,7 +316,7 @@ class Anagrafica {
 			$query->bindParam(':documento', $documento);
 			$query->bindParam(':documentonumero', $documentonumero);
 			$query->execute();
-			$conn->commit();
+			$connessione->commit();
 			$q3 = true;
 		}	 
 		catch (PDOException $errorePDO) { 
@@ -332,8 +331,8 @@ class Anagrafica {
 		global $connessione;
 		
 		try {
-   			$conn->beginTransaction();
-			$query = $conn->prepare("UPDATE cert_assistito SET nome = :nome, cognome = :cognome, codicefiscale = :codicefiscale, luogonascita = :cittanascita, datanascita = :datanascita, cittadinanza = :cittadinanza, residenzacitta = :residenzacitta, residenzavia = :residenzavia, residenzanumero = :residentenumero, documento = :documento, documentonumero = :documentonumero WHERE id = :id"); 
+   			$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE cert_assistito SET nome = :nome, cognome = :cognome, codicefiscale = :codicefiscale, luogonascita = :cittanascita, datanascita = :datanascita, cittadinanza = :cittadinanza, residenzacitta = :residenzacitta, residenzavia = :residenzavia, residenzanumero = :residentenumero, documento = :documento, documentonumero = :documentonumero WHERE id = :id"); 
 			$query->bindParam(':nome', $nome);
 			$query->bindParam(':cognome', $cognome);
 			$query->bindParam(':codicefiscale', $codicefiscale);
@@ -347,7 +346,7 @@ class Anagrafica {
 			$query->bindParam(':documentonumero', $documentonumero);
 			$query->bindParam(':id', $id);
 			$query->execute();
-			$conn->commit();
+			$connessione->commit();
 			$q3 = true;
 		}	 
 		catch (PDOException $errorePDO) { 
@@ -362,11 +361,11 @@ class Anagrafica {
 		global $connessione;
 		
 		try {
-   			$conn->beginTransaction();
-			$query = $conn->prepare("DELETE FROM cert_assistito WHERE id = :id"); 
+   			$connessione->beginTransaction();
+			$query = $connessione->prepare("DELETE FROM cert_assistito WHERE id = :id"); 
 			$query->bindParam(':id', $id);
 			$query->execute();
-			$conn->commit();
+			$connessione->commit();
 			$q = true;
 		}	 
 		catch (PDOException $errorePDO) { 
