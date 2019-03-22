@@ -8,8 +8,8 @@
 	$a = new Anagrafica();
 	$anno = $_SESSION['annoprotocollo'];
 	$annoprotocollo = $_SESSION['annoprotocollo'];
-/*deprecato	$lettereinlavorazione = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE protocollo = 0");
-	$numerolettere=mysql_fetch_row($lettereinlavorazione); */
+/*deprecato	$lettereinlavorazione = mysq*l_query("SELECT COUNT(*) FROM comp_lettera WHERE protocollo = 0");
+	$numerolettere=mysq*l_fetch_row($lettereinlavorazione); */
 	try 
 		{
    		$connessione->beginTransaction();

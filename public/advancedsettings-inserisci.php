@@ -80,19 +80,139 @@
 	if(isset($_POST['primoprotocollo'])) {
 		$primoprotocollo= $_POST['primoprotocollo'];
 	}
-	$contalettere=mysql_query("select count(*) from lettere$annoprotocollo");
-	$res_count=mysql_fetch_row($contalettere);
+/*deprecato	$contalettere=mysq*l_query("select count(*) from lettere$annoprotocollo");
+	$res_count=mysq*l_fetch_row($contalettere);*/
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT count(*) 
+						from lettere$annoprotocollo 
+						'); 
+		$query->bindParam(':annoprotocollo', $annoprotocollo);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$risultati = $query->fetchAll();
+	$res_count=$risultati[0];
 	$contalettere= $res_count[0] +1 ;
+
+
 	if ($contalettere == 1) { 
-		$queryprimoprotocollo = mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $primoprotocollo ");
+/*deprecato		$queryprimoprotocollo = mysq*l_query("ALTER TABLE lettere$annoprotocollo 
+							AUTO_INCREMENT = $primoprotocollo ");
 		if (!$queryprimoprotocollo) { 
 			echo 'Variazione del primo numero del protocollo NON RIUSCITA<br>'; 
-			echo mysql_error(); exit();
+			echo mysq*l_error(); exit();
 			exit();
+		}*/
+		
+		try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('ALTER TABLE lettere$annoprotocollo 
+						AUTO_INCREMENT = $primoprotocollo 
+						'); 
+		$query->bindParam(':annoprotocollo', $annoprotocollo);
+		$query->bindParam(':primoprotocollo', $primoprotocollo);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		exit();
 		}
+
+
 	}
 
-	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio', quota = '$quota', defaultsettings.anagrafica = '$anagrafica', defaultsettings.protocollo = '$protocollo', defaultsettings.documenti = '$documenti', defaultsettings.lettere = '$lettere', defaultsettings.magazzino = '$magazzino', defaultsettings.ambulatorio = '$ambulatorio', defaultsettings.contabilita = '$contabilita'");
+/*deprecato	$inserimento=mysq*l_query("update defaultsettings 
+				set defaultsettings.version = $version, 
+				defaultsettings.email = '$email', 
+				defaultsettings.nomeapplicativo='$nomeapplicativo', 
+				defaultsettings.paginaprincipale = '$paginaprincipale' , 
+				defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , 
+				defaultsettings.fotomaxfilesize = '$fotomaxfilesize',  
+				defaultsettings.annoprotocollo = '$annoprotocollo', 
+				defaultsettings.headerdescription = '$headerdescription', 
+				defaultsettings.sede = '$sede', 
+				defaultsettings.denominazione = '$denominazione', 
+				defaultsettings.vertice = '$vertice', 
+				defaultsettings.inizio = '$inizio', quota = '$quota', 
+				defaultsettings.anagrafica = '$anagrafica', 
+				defaultsettings.protocollo = '$protocollo', 
+				defaultsettings.documenti = '$documenti', 
+				defaultsettings.lettere = '$lettere', 
+				defaultsettings.magazzino = '$magazzino', 
+				defaultsettings.ambulatorio = '$ambulatorio', 
+				defaultsettings.contabilita = '$contabilita'");*/
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare("update defaultsettings 
+				set defaultsettings.version = $version, 
+				defaultsettings.email = '$email', 
+				defaultsettings.nomeapplicativo='$nomeapplicativo', 
+				defaultsettings.paginaprincipale = '$paginaprincipale' , 
+				defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , 
+				defaultsettings.fotomaxfilesize = '$fotomaxfilesize',  
+				defaultsettings.annoprotocollo = '$annoprotocollo', 
+				defaultsettings.headerdescription = '$headerdescription', 
+				defaultsettings.sede = '$sede', 
+				defaultsettings.denominazione = '$denominazione', 
+				defaultsettings.vertice = '$vertice', 
+				defaultsettings.inizio = '$inizio', 
+				quota = '$quota', 
+				defaultsettings.anagrafica = '$anagrafica', 
+				defaultsettings.protocollo = '$protocollo', 
+				defaultsettings.documenti = '$documenti', 
+				defaultsettings.lettere = '$lettere', 
+				defaultsettings.magazzino = '$magazzino', 
+				defaultsettings.ambulatorio = '$ambulatorio', 
+				defaultsettings.contabilita = '$contabilita'");
+
+		$query->bindParam(':version', $version);
+		$query->bindParam(':email', $email);
+		$query->bindParam(':nomeapplicativo', $nomeapplicativo);
+		$query->bindParam(':paginaprincipale', $paginaprincipale);
+		$query->bindParam(':protocollomaxfilesize', $protocollomaxfilesize);
+		$query->bindParam(':fotomaxfilesize', $fotomaxfilesize);
+		$query->bindParam(':annoprotocollo', $annoprotocollo);
+		$query->bindParam(':headerdescription', $headerdescription);
+		$query->bindParam(':sede', $sede);
+		$query->bindParam(':denominazione', $denominazione);
+		$query->bindParam(':vertice', $vertice);
+		$query->bindParam(':inizio', $inizio);
+		$query->bindParam(':quota', $quota);
+		$query->bindParam(':anagrafica', $anagrafica);
+		$query->bindParam(':protocollo', $protocollo);
+		$query->bindParam(':documenti', $documenti);
+		$query->bindParam(':lettere', $lettere);
+		$query->bindParam(':magazzino', $magazzino);
+		$query->bindParam(':ambulatorio', $ambulatorio);
+		$query->bindParam(':contabilita', $contabilita);
+
+
+
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+	
+	$logindata= $query->fetchAll();
 
 	if (!$inserimento) {
 		?>
