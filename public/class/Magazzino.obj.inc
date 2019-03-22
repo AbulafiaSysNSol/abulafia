@@ -1,120 +1,258 @@
-<?php 
+<?php
+
+require_once('../db-connessione-include.php');
+
 	class Magazzino{
 	
 		public function insertSettore($descrizione, $owner) { //<man>Inserisce un nuovo settore nel DB passando la descrizione e l'id di chi lo inserisce</man>
-			$query = mysql_query("INSERT INTO settori (id, descrizione, owner) VALUES ('', '$descrizione', '$owner')");
-			return $query;
+			global $connessione;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("INSERT INTO settori (id, descrizione, owner) VALUES (null, :descrizione, :owner)"); 
+				$query->bindParam(':descrizione', $descrizione);
+				$query->bindParam(':owner', $owner);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$q = false;
+			}
+			return $q;
 		}
 		
 		public function getSettoreById($id) { //<man>Restituisce la descrizione del settore pasando l'id</man>
-			$query = mysql_query("SELECT * FROM settori WHERE id = '$id'");
-			$res = mysql_fetch_row($query);
+			global $connessione;
+			$query = $connessione->query("SELECT * FROM settori WHERE id = '$id'");
+			$res = $query->fetch();
 			return $res[1];
 		}
 
 		public function getDepositoById($id) {
-			$query = mysql_query("SELECT * FROM joinprodottimagazzini WHERE id = '$id'");
-			$res = mysql_fetch_array($query);
+			global $connessione;
+			$query = $connessione->query("SELECT * FROM joinprodottimagazzini WHERE id = '$id'");
+			$res = $query->fetch();
 			return $res;
 		}
 
 		public function modificaDeposito($id, $settore, $scortaminima, $riordino, $confezionamento) {
-			$query = mysql_query("UPDATE joinprodottimagazzini SET settore = '$settore', scortaminima = '$scortaminima', puntoriordino = '$riordino', confezionamento = '$confezionamento' WHERE id = '$id'");
-			return $query;
+			global $connessione;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("UPDATE joinprodottimagazzini SET settore = :settore, scortaminima = :scortaminima, puntoriordino = :riordino, confezionamento = :confezionamento WHERE id = :id"); 
+				$query->bindParam(':settore', $settore);
+				$query->bindParam(':scortaminima', $scortaminima);
+				$query->bindParam(':riordino', $riordino);
+				$query->bindParam(':confezionamento', $confezionamento);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$q = false;
+			}
+			return $q;
 		}
 		
 		public function getSettori() { //<man>Restituisce un array contente tutti i settori registrati nel DB</man>
-			$query = mysql_query("SELECT * FROM settori");
+			global $connessione;
+			$query = $connessione->query("SELECT * FROM settori");
 			$settori = array();
-			while ($res = mysql_fetch_array($query)) {
+			while ($res = $query->fetch()) {
 				array_push($settori,$res);
 			}
 			return $settori;
 		}
 		
 		public function delSettore($id) { //<man>Elimina un settore passando l'id</man>
-			$query = mysql_query("DELETE FROM settori WHERE id = '$id'");
-			return $query;
+			global $connessione;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("DELETE FROM settori WHERE id = :id"); 
+				$query->bindParam(':id', $id);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$q = false;
+			}
+			return $q;
 		}
 		
 		public function updateSettore($id, $descrizione) { //<man>Aggiorna la descrizione di un settore passando l'id</man>
-			$query = mysql_query("UPDATE settori SET descrizione = '$descrizione' WHERE id = '$id'");
-			return $query;
+			global $connessione;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("UPDATE settori SET descrizione = :descrizione WHERE id = :id"); 
+				$query->bindParam(':descrizione', $descrizione);
+				$query->bindParam(':id', $id);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$q = false;
+			}
+			return $q;
 		}
 
 		public function newDocument($datadocumento, $magazzino, $riferimento, $causale, $datariferimento, $note, $tipologia) { //<man>Inserisce un nuovo documento</man>
-			$query = mysql_query("INSERT INTO documenti_magazzino VALUES ('', '$datadocumento', '$magazzino', '$riferimento', '$causale', '$datariferimento', '$note', '$tipologia') ");                     
-			return $query;
+			global $connessione;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("INSERT INTO documenti_magazzino VALUES (null, :datadocumento, :magazzino, :riferimento, :causale, datariferimento, :note, :tipologia) "); 
+				$query->bindParam(':datadocumento', $datadocumento);
+				$query->bindParam(':magazzino', $magazzino);
+				$query->bindParam(':riferimento', $causale);
+				$query->bindParam(':datariferimento', $datariferimento);
+				$query->bindParam(':note', $note);
+				$query->bindParam(':tipologia', $tipologia);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$q = false;
+			}
+			return $q;
 		}
 
 		public function getDocument($limit) {
-			$query = mysql_query("SELECT * FROM documenti_magazzino ORDER BY id DESC LIMIT $limit");
+			global $connessione;
+			$query = $connessione->query("SELECT * FROM documenti_magazzino ORDER BY id DESC LIMIT $limit");
 			$documenti = array();
-			while ($res = mysql_fetch_array($query)) {
+			while ($res = $query->fetch()) {
 				array_push($documenti,$res);
 			}
 			return $documenti;
 		}
 
 		public function getDocumentById($id) {
-			$query = mysql_query("SELECT * FROM documenti_magazzino WHERE id = '$id'");
-			$res = mysql_fetch_row($query);
+			global $connessione;
+			$query = $connessione->query("SELECT * FROM documenti_magazzino WHERE id = '$id'");
+			$res = $query->fetch();
 			return $res;
 		}
 
 		public function getGiacenza($prodotto,$magazzino) { //<man>Restituisce la descrizione del settore pasando l'id</man>
-			$query = mysql_query("SELECT giacenza FROM joinprodottimagazzini WHERE codicemagazzino = '$magazzino' AND idprodotto = '$prodotto'");
-			$res = mysql_fetch_row($query);
+			global $connessione;
+			$query = $connessione->query("SELECT giacenza FROM joinprodottimagazzini WHERE codicemagazzino = '$magazzino' AND idprodotto = '$prodotto'");
+			$res = $query->feth();
 			return $res[0];
 		}
 
 		public function sumGiacenza($prodotto,$magazzino,$val) {
+			global $connessione;
 			$gnow = $this->getGiacenza($prodotto,$magazzino);
 			$newg = $gnow + $val;
-			$query = mysql_query("UPDATE joinprodottimagazzini SET giacenza = '$newg' WHERE codicemagazzino = '$magazzino' AND idprodotto = '$prodotto'");
-			return $query;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("UPDATE joinprodottimagazzini SET giacenza = :newg WHERE codicemagazzino = :magazzino AND idprodotto = :prodotto"); 
+				$query->bindParam(':newg', $newg);
+				$query->bindParam(':magazzino', $magazzino);
+				$query->bindParam(':idprodotto', $idprodotto);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$q = false;
+			}
+			return $q;
 		}
 
 		public function subGiacenza($prodotto,$magazzino,$val) {
+			global $connessione;
 			$gnow = $this->getGiacenza($prodotto,$magazzino);
 			$newg = $gnow - $val;
-			$query = mysql_query("UPDATE joinprodottimagazzini SET giacenza = '$newg' WHERE codicemagazzino = '$magazzino' AND idprodotto = '$prodotto'");
-			return $query;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("UPDATE joinprodottimagazzini SET giacenza = :newg WHERE codicemagazzino = :magazzino AND idprodotto = :prodotto"); 
+				$query->bindParam(':newg', $newg);
+				$query->bindParam(':magazzino', $magazzino);
+				$query->bindParam(':idprodotto', $idprodotto);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$q = false;
+			}
+			return $q;
 		}
 
 		public function newRigaDocumento($documento, $prodotto, $quantita, $note, $tipologia, $magazzino) {
-			$query = mysql_query("INSERT INTO joindocumentiprodotti VALUES ('', '$documento', '$prodotto', '$quantita', '$note') ");
-			if ($tipologia == 'carico') {
-				$this->sumGiacenza($prodotto, $magazzino, $quantita);
-			} 
-			else {
-				$this->subGiacenza($prodotto, $magazzino, $quantita);	
+			global $connessione;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("INSERT INTO joindocumentiprodotti VALUES (null, :documento, :prodotto, :quantita, :note) "); 
+				$query->bindParam(':documento', $documento);
+				$query->bindParam(':prodotto', $prodotto);
+				$query->bindParam(':quantita', $quantita);
+				$query->bindParam(':note', $note);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+				if ($tipologia == 'carico') {
+					$this->sumGiacenza($prodotto, $magazzino, $quantita);
+				} 
+				else {
+					$this->subGiacenza($prodotto, $magazzino, $quantita);	
+				}
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$q = false;
 			}                    
-			return $query;
+			return $q;
 		}
 
 		public function getInfoRigaById($id) {
-			$query = mysql_query("SELECT * FROM joindocumentiprodotti WHERE id = '$id'");
-			$res = mysql_fetch_row($query);
+			global $connessione;
+			$query = $connessione->query("SELECT * FROM joindocumentiprodotti WHERE id = '$id'");
+			$res = $query->fetch();
 			return $res;
 		}
 
 		public function eliminaRigaDocumento($idriga, $magazzino, $tipodocumento) {
-			$info = $this->getInfoRigaById($idriga);
-			if($tipodocumento == 'carico') {
-				$this->subGiacenza($info[2], $magazzino, $info[3]);
+			global $connessione;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("DELETE FROM joindocumentiprodotti WHERE id = :idriga"); 
+				$query->bindParam(':idriga', $idriga);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+		
+				$info = $this->getInfoRigaById($idriga);
+				if($tipodocumento == 'carico') {
+					$this->subGiacenza($info[2], $magazzino, $info[3]);
+				}
+				else {
+					$this->sumGiacenza($info[2], $magazzino, $info[3]);	
+				}
+				
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$q = false;
 			}
-			else {
-				$this->sumGiacenza($info[2], $magazzino, $info[3]);	
-			}
-			$query = mysql_query("DELETE FROM joindocumentiprodotti WHERE id = '$idriga'");
-			return $query;
+			return $q;
 		}
 
 		public function righeDocumento($id) {
-			$query = mysql_query("SELECT * FROM joindocumentiprodotti, anagrafica_prodotto, documenti_magazzino WHERE joindocumentiprodotti.prodotto = anagrafica_prodotto.codice AND joindocumentiprodotti.documento = documenti_magazzino.id AND documenti_magazzino.id = '$id' ORDER BY joindocumentiprodotti.id DESC");
+			global $connessione;
+			$query = $connessione->query("SELECT * FROM joindocumentiprodotti, anagrafica_prodotto, documenti_magazzino WHERE joindocumentiprodotti.prodotto = anagrafica_prodotto.codice AND joindocumentiprodotti.documento = documenti_magazzino.id AND documenti_magazzino.id = '$id' ORDER BY joindocumentiprodotti.id DESC");
 			$righe = array();
-			while ($res = mysql_fetch_array($query)) {
+			while ($res = $query->fetch()) {
 				array_push($righe,$res);
 			}
 			return $righe;
