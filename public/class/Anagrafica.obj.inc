@@ -241,7 +241,7 @@ class Anagrafica {
 			return false;
 	}
 
-	public function a ($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni) {
+	public function updateprofile($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni) {
 		global $connessione;
 		try {
    			$connessione->beginTransaction();
