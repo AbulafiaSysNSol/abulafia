@@ -21,8 +21,8 @@
 	$my_tabellahtml= unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
 	$my_database= unserialize($_SESSION['my_database']);//deserializzazione
 	$my_lettera= unserialize($_SESSION['my_lettera']);//deserializzazione 
-/*deprecato	$setting=mysql_query("select * from defaultsettings");
-	$setting2=mysql_fetch_array($setting);
+/*deprecato	$setting=mysq<l_query("select * from defaultsettings");
+	$setting2=mysq<l_fetch_array($setting);
 */
 
 	try {
@@ -288,7 +288,7 @@ tinymce.init({
 						$user = $_SESSION['loginid'];
 						if($anag->isAdmin($_SESSION['loginid'])) 
 							{
-							/*deprecato $query = mysql_query("SELECT COUNT(*) 
+							/*deprecato $query = mysq<l_query("SELECT COUNT(*) 
 											FROM comp_lettera 
 											WHERE (vista = 1 OR vista = 2) 
 											AND firmata = 0");*/
@@ -310,7 +310,7 @@ tinymce.init({
 	
 							}
 						else {
-							/*deprecato $query = mysql_query("SELECT COUNT(*) 
+							/*deprecato $query = mysq<l_query("SELECT COUNT(*) 
 										FROM comp_lettera, joinpersoneuffici 
 										WHERE (vista = 1 OR vista = 2) 
 										AND firmata = 0 
@@ -335,14 +335,14 @@ tinymce.init({
     								echo "Errore: " . $errorePDO->getMessage();
 								}
 							}
-						//deprecato $num = mysql_fetch_row($query);
+						//deprecato $num = mysq>l_fetch_row($query);
 						$risultati = $query->fetchAll();
 						$num=$risultati[0];
-						/*deprecato $prot = mysql_query("SELECT COUNT(*) 
+						/*deprecato $prot = mysq<l_query("SELECT COUNT(*) 
 									FROM comp_lettera 
 									WHERE firmata = 1 
 									AND protocollo = 0");
-						$protocollare = mysql_fetch_row($prot);*/
+						$protocollare = mysq<l_fetch_row($prot);*/
 						try 
 								{
    								$connessione->beginTransaction();

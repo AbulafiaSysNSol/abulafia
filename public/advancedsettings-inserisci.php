@@ -80,7 +80,7 @@
 	if(isset($_POST['primoprotocollo'])) {
 		$primoprotocollo= $_POST['primoprotocollo'];
 	}
-/*deprecato	$contalettere=mysq*l_query("select count(*) from lettere$annoprotocollo");
+/*deprecato	$contalettere=mysq<l_query("select count(*) from lettere$annoprotocollo");
 	$res_count=mysq*l_fetch_row($contalettere);*/
 
 	try 
@@ -105,7 +105,7 @@
 
 
 	if ($contalettere == 1) { 
-/*deprecato		$queryprimoprotocollo = mysq*l_query("ALTER TABLE lettere$annoprotocollo 
+/*deprecato		$queryprimoprotocollo = mysq<l_query("ALTER TABLE lettere$annoprotocollo 
 							AUTO_INCREMENT = $primoprotocollo ");
 		if (!$queryprimoprotocollo) { 
 			echo 'Variazione del primo numero del protocollo NON RIUSCITA<br>'; 
@@ -134,7 +134,7 @@
 
 	}
 
-/*deprecato	$inserimento=mysq*l_query("update defaultsettings 
+/*deprecato	$inserimento=mysq<l_query("update defaultsettings 
 				set defaultsettings.version = $version, 
 				defaultsettings.email = '$email', 
 				defaultsettings.nomeapplicativo='$nomeapplicativo', 
@@ -159,26 +159,26 @@
 		{
    		$connessione->beginTransaction();
 		$query = $connessione->prepare("update defaultsettings 
-				set defaultsettings.version = $version, 
-				defaultsettings.email = '$email', 
-				defaultsettings.nomeapplicativo='$nomeapplicativo', 
-				defaultsettings.paginaprincipale = '$paginaprincipale' , 
-				defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , 
-				defaultsettings.fotomaxfilesize = '$fotomaxfilesize',  
-				defaultsettings.annoprotocollo = '$annoprotocollo', 
-				defaultsettings.headerdescription = '$headerdescription', 
-				defaultsettings.sede = '$sede', 
-				defaultsettings.denominazione = '$denominazione', 
-				defaultsettings.vertice = '$vertice', 
-				defaultsettings.inizio = '$inizio', 
-				quota = '$quota', 
-				defaultsettings.anagrafica = '$anagrafica', 
-				defaultsettings.protocollo = '$protocollo', 
-				defaultsettings.documenti = '$documenti', 
-				defaultsettings.lettere = '$lettere', 
-				defaultsettings.magazzino = '$magazzino', 
-				defaultsettings.ambulatorio = '$ambulatorio', 
-				defaultsettings.contabilita = '$contabilita'");
+				set defaultsettings.version = :version, 
+				defaultsettings.email = :email, 
+				defaultsettings.nomeapplicativo=:nomeapplicativo, 
+				defaultsettings.paginaprincipale = :paginaprincipale , 
+				defaultsettings.protocollomaxfilesize = :protocollomaxfilesize , 
+				defaultsettings.fotomaxfilesize = :fotomaxfilesize,  
+				defaultsettings.annoprotocollo = :annoprotocollo, 
+				defaultsettings.headerdescription = :headerdescription, 
+				defaultsettings.sede = :sede, 
+				defaultsettings.denominazione = :denominazione, 
+				defaultsettings.vertice = :vertice, 
+				defaultsettings.inizio = :inizio, 
+				quota = :quota, 
+				defaultsettings.anagrafica = :anagrafica, 
+				defaultsettings.protocollo = :protocollo, 
+				defaultsettings.documenti = :documenti, 
+				defaultsettings.lettere = :lettere, 
+				defaultsettings.magazzino = :magazzino, 
+				defaultsettings.ambulatorio = :ambulatorio, 
+				defaultsettings.contabilita = :contabilita");
 
 		$query->bindParam(':version', $version);
 		$query->bindParam(':email', $email);
