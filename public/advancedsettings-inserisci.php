@@ -210,24 +210,10 @@
 		//gestione dell'eventuale errore della connessione
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+		exit;
 		}
-	
-	$logindata= $query->fetchAll();
 
-	if (!$inserimento) {
-		?>
-		<SCRIPT LANGUAGE="Javascript">
-			browser= navigator.appName;
-			if (browser == "Netscape")
-				window.location="login0.php?corpus=advancedsettings&update=error"; 
-			else 
-				window.location="login0.php?corpus=advancedsettings&update=error";
-		</SCRIPT> 
-		<?php
-		echo mysql_error();
-		exit();
-	}
-	else { 
+ 
 		$_SESSION['version'] = $version; 
 		$_SESSION['email'] = $email; 
 		$_SESSION['nomeapplicativo'] = $nomeapplicativo; 
@@ -247,13 +233,11 @@
 		$_SESSION['mod_magazzino'] = $magazzino;
 		$_SESSION['mod_ambulatorio'] = $ambulatorio;
 		$_SESSION['mod_contabilita'] = $contabilita;
-	}
+
 ?>
 
 <SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
+
 		window.location="login0.php?corpus=advancedsettings&update=success"; 
-	else 
-		window.location="login0.php?corpus=advancedsettings&update=success";
+
 </SCRIPT>
