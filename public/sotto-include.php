@@ -27,5 +27,5 @@
 </html>
 
 <?php
-mysql_close ($verificaconnessione);
+	$connessione = null;
 ?>

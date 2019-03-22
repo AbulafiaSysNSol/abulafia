@@ -359,7 +359,6 @@ class Anagrafica {
 
 	public function deleteAssistito($id) { 
 		global $connessione;
-		
 		try {
    			$connessione->beginTransaction();
 			$query = $connessione->prepare("DELETE FROM cert_assistito WHERE id = :id"); 

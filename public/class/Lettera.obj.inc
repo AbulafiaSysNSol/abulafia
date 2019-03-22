@@ -1,5 +1,9 @@
 <?php 
+
+require_once('../db-connessione-include.php');
+
 class Lettera {
+
 	private $mittentidestinatari='';
 	private $speditaricevuta='';
 	private $oggetto='';
@@ -20,21 +24,18 @@ class Lettera {
 	public  $arrayallegati=array();
 
 	private function leggilettera ($idlettera, $annoricercaprotocollo) { //<man>legge i dati dettagliati di una lettera in protocollo, indicandone id e anno di registrazione</man>
-		
-		$tabella= 'lettere'.$annoricercaprotocollo;
-		$joinletteremittenti= 'joinletteremittenti'.$annoricercaprotocollo;
-		$joinlettereinserimento='joinlettereinserimento'.$annoricercaprotocollo;
-		$risultati=mysql_query("select distinct * from $tabella where ($tabella.idlettera='$idlettera') ");
-		echo mysql_error();
-		$this->arraylettera = mysql_fetch_array($risultati);
+		global $connessione;
+		$tabella = 'lettere'.$annoricercaprotocollo;
+		$joinletteremittenti = 'joinletteremittenti'.$annoricercaprotocollo;
+		$joinlettereinserimento ='joinlettereinserimento'.$annoricercaprotocollo;
+		$risultati = $connessione->query("SELECT DISTINCT * FROM $tabella WHERE ($tabella.idlettera ='$idlettera')");
+		$this->arraylettera = $risultati->fetch();
 		$this->arraylettera = array_map('stripslashes', $this->arraylettera);
-		$letteramittenti=mysql_query("select * from $joinletteremittenti, anagrafica where $joinletteremittenti.idlettera='$idlettera' and $joinletteremittenti.idanagrafica=anagrafica.idanagrafica ");
-		$risultati3=mysql_query("select * from $joinlettereinserimento, anagrafica where idlettera='$idlettera' and $joinlettereinserimento.idinser=anagrafica.idanagrafica");
-		echo mysql_error();
-		$arrayinserimento = mysql_fetch_array($risultati3);
-		$risultati4=mysql_query("select * from $joinlettereinserimento, anagrafica where idlettera='$idlettera' and $joinlettereinserimento.idmod=anagrafica.idanagrafica");
-		echo mysql_error();
-		$arraymodifica = mysql_fetch_array($risultati4);
+		$letteramittenti = $connessione->query("SELECT * FROM $joinletteremittenti, anagrafica WHERE $joinletteremittenti.idlettera='$idlettera' AND $joinletteremittenti.idanagrafica=anagrafica.idanagrafica ");
+		$risultati3 = $connessione->query("SELECT * FROM $joinlettereinserimento, anagrafica WHERE idlettera='$idlettera' AND $joinlettereinserimento.idinser=anagrafica.idanagrafica");
+		$arrayinserimento = $risultati3->fetch();
+		$risultati4 = $connessione->query("SELECT * FROM $joinlettereinserimento, anagrafica WHERE idlettera='$idlettera' AND $joinlettereinserimento.idmod=anagrafica.idanagrafica");
+		$arraymodifica = $risultati4->fetch();
 		$this->arraylettera1 = $this->arraylettera;
 		$this->arrayletteramittenti = $letteramittenti;
 		$this->arrayinserimento1 = $arrayinserimento;
@@ -47,79 +48,88 @@ class Lettera {
 	}
 	
 	public function getMittenti( $id, $anno) {
-		$this -> leggilettera ($id, $anno); 
+		global $connessione;
+		$this->leggilettera ($id, $anno); 
 		$arraymitt = array();
-		while ($mitt = mysql_fetch_array($this->arrayletteramittenti)) {
+		while ($mitt = $this->arrayletteramittenti->fetch()) {
 			array_push($arraymitt, $mitt);
 		}
 		return $arraymitt;
 	}
 	
 	public function getIns( $id, $anno) {
-		$this -> leggilettera ($id, $anno); 
+		$this->leggilettera ($id, $anno); 
 		return $this->arrayinserimento1;
 	}
 	
 	public function getLastMod( $id, $anno) {
-		$this -> leggilettera ($id, $anno); 
+		$this->leggilettera ($id, $anno); 
 		return $this->arraymodifica1;
 	}
 	
 	public function getDescPratica ($idpratica) {
-		$desc=mysql_query("select distinct * from pratiche WHERE id='$idpratica'");
-		$descrizione=mysql_fetch_row($desc);
+		global $connessione;
+		$desc = $connessione->query("SELECT DISTINCT * FROM pratiche WHERE id='$idpratica'");
+		$descrizione = $desc->fetch();
 		return stripslashes($descrizione[1]);
 	}
 	
 	public function getPratiche() {
-		$query = mysql_query("SELECT id FROM pratiche");
+		global $connessione;
+		$query = $connessione->query("SELECT id FROM pratiche");
 		$pratiche = array();
-		while ($prat = mysql_fetch_array($query)) {
+		while ($prat = $query->fetch()) {
 			array_push($pratiche, $prat);
 		}
 		return $pratiche;
 	}
 	
 	public function getDescPosizione ($codice) {
-		$pos=mysql_query("select distinct * from titolario WHERE codice='$codice'");
-		$posizione=mysql_fetch_row($pos);
+		global $connessione;
+		$pos = $connessione->query("SELECT DISTINCT * FROM titolario WHERE codice='$codice'");
+		$posizione = $pos->fetch();
 		return stripslashes($posizione[2]);
 	}
 	
 	public function getPosizioni() {
-		$query = mysql_query("SELECT codice FROM titolario");
+		global $connessione;
+		$query = $connessione->query("SELECT codice FROM titolario");
 		$posizioni = array();
-		while ($pos = mysql_fetch_array($query)) {
+		while ($pos = $query->fetch()) {
 			array_push($posizioni, $pos);
 		}
 		return $posizioni;
 	}
 	
 	public function getMailSend($id, $anno) {
+		global $connessione;
 		$arraysend = array();
-		$email=mysql_query("select * from mailsend, anagrafica WHERE mailsend.idlettera = '$id' AND mailsend.annolettera = '$anno' AND mailsend.user = anagrafica.idanagrafica");
-		while ($send = mysql_fetch_array($email)) {
+		$email = $connessione->query("SELECT * FROM mailsend, anagrafica WHERE mailsend.idlettera = '$id' AND mailsend.annolettera = '$anno' AND mailsend.user = anagrafica.idanagrafica");
+		while ($send = $email->fetch()) {
 			array_push($arraysend, $send);
 		}
 		return $arraysend;
 	}
 
 	public function contaMittenti($id, $anno) {
-		$query=mysql_query("SELECT COUNT(joinletteremittenti$anno.idanagrafica) FROM joinletteremittenti$anno WHERE joinletteremittenti$anno.idlettera = '$id'");
-		$num = mysql_fetch_row($query);
+		global $connessione;
+		$query = $connessione->query("SELECT COUNT(joinletteremittenti$anno.idanagrafica) FROM joinletteremittenti$anno WHERE joinletteremittenti$anno.idlettera = '$id'");
+		$num = $query->fetch();
 		return $num[0];
 	}
 	
 	public function contaAllegati($id, $anno) {
-		$query=mysql_query("SELECT COUNT(*) FROM joinlettereallegati WHERE idlettera = '$id' AND annoprotocollo='$anno'");
-		$num = mysql_fetch_row($query);
+		global $connessione;
+		$query = $connessione->query("SELECT COUNT(*) FROM joinlettereallegati WHERE idlettera = '$id' AND annoprotocollo='$anno'");
+		$num = $query->fetch();
 		return $num[0];
 	}
 	
 	public function getAttributi() {
-		$query = mysql_query("SELECT attributo FROM attributi");
+		global $connessione;
+		$query = $connessione->query("SELECT attributo FROM attributi");
 		$attributi = array();
-		while ($attr = mysql_fetch_array($query)) {
+		while ($attr = $query->fetch()) {
 			array_push($attributi, $attr);
 		}
 		return $attributi;
@@ -192,7 +202,7 @@ class Lettera {
 		}
 		
 		if($this->arraylettera1['riferimento']) {
-		?>
+			?>
 			<br>
 			Posizione: 
 			<strong>
@@ -200,7 +210,7 @@ class Lettera {
 					echo $this->arraylettera1['riferimento'];
 				?>
 			</strong>
-		<?php
+			<?php
 		}
 		
 		$idpratica = $this->arraylettera1['pratica'];
@@ -335,31 +345,45 @@ class Lettera {
 	}//fine metodo
 
 	public function publinseriscimittente ($idlettera, $idanagrafica, $annoprotocollo) { //<man>Inserisce in ajax i risultati della ricerca in anagrafica per  il mittente/destinatario di una lettera, passando l'id della lettera, l'id dell'anagrafica e l'anno di registrazione</man>
-		$inserisci=mysql_query("insert into joinletteremittenti$annoprotocollo values('$idlettera', '$idanagrafica')");
+		global $connessione;
+		try {
+   			$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT into joinletteremittenti$annoprotocollo values(:idlettera, :idanagrafica)"); 
+			$query->bindParam(':idlettera', $idlettera);
+			$query->bindParam(':idanagrafica', $idanagrafica);
+			$query->execute();
+			$connessione->commit();
+			$q = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+    		$q = false;
+		}
 	}//fine metodo
 	
 
 	public function cercaAllegati ($idlettera, $annoprotocollo) {//<man>ricerca i path dei file allegati alla lettera passata come parametro</man>	 
+		global $connessione;
 		$this->urlfile=array();
-		$this->patharray = mysql_query("select 
-					distinct * 
-					from 
+		$this->patharray = $connessione->query("SELECT DISTINCT * 
+					FROM
 					joinlettereallegati 
-					where
+					WHERE
 					idlettera=$idlettera
-					and
+					AND
 					annoprotocollo=$annoprotocollo
 					");
-		while ($this->patharray2=mysql_fetch_row($this->patharray)) {
+		while ($this->patharray2 = $this->patharray->fetch()) {
 			array_push($this->urlfile, $this->patharray2);
 		}
 		return $this->urlfile;
 	}//fine metodo
 	
 	public function ultimeLettere($numerolettere, $anno) {
+		global $connessione;
 		$res = array();
-		$query = mysql_query("SELECT idlettera, dataregistrazione, oggetto, speditaricevuta FROM lettere$anno WHERE datalettera != '0000-00-00' ORDER BY idlettera desc LIMIT $numerolettere ");
-		while ($risultati  = mysql_fetch_array($query)) {
+		$query = $connessione->query("SELECT idlettera, dataregistrazione, oggetto, speditaricevuta FROM lettere$anno WHERE datalettera != '0000-00-00' ORDER BY idlettera desc LIMIT $numerolettere ");
+		while ($risultati  = $query->fetch()) {
 			$risultati = array_map('stripslashes', $risultati);
 			array_push ($res, $risultati);
 		}
@@ -367,14 +391,16 @@ class Lettera {
 	}
 	
 	public function ultimoId($anno) {
-		$query = mysql_query("SELECT idlettera FROM lettere$anno ORDER BY idlettera desc LIMIT 1");
-		$risultati = mysql_fetch_row($query);
+		global $connessione;
+		$query = $connessione->query("SELECT idlettera FROM lettere$anno ORDER BY idlettera desc LIMIT 1");
+		$risultati = $query->fetch();
 		return $risultati[0];
 	}
 
 	public function isSpedita($id, $anno) {
-		$query = mysql_query("SELECT speditaricevuta FROM lettere$anno WHERE idlettera='$id' ");
-		$risultati = mysql_fetch_row($query);
+		global $connessione;
+		$query = $connessione->query("SELECT speditaricevuta FROM lettere$anno WHERE idlettera='$id' ");
+		$risultati = $query->fetch();
 		if($risultati[0] == 'spedita') {
 			return true;
 		}
@@ -384,8 +410,9 @@ class Lettera {
 	}
 
 	public function destinatariOk($id) {
-		$query = mysql_query("SELECT COUNT(id) FROM comp_destinatari WHERE idlettera='$id' ");
-		$risultati = mysql_fetch_row($query);
+		global $connessione;
+		$query = $connessione->query("SELECT COUNT(id) FROM comp_destinatari WHERE idlettera='$id' ");
+		$risultati = $query->fetch();
 		if($risultati[0] > 0) {
 			return true;
 		}
@@ -395,11 +422,36 @@ class Lettera {
 	}
 
 	public function duplicaLettera($id) {
+		global $connessione;
 		$idins = $_SESSION['loginid'];
-		$query = mysql_query("INSERT INTO comp_lettera (protocollo, anno, data, oggetto, testo, allegati, vista, firmata, idins) SELECT 0, 0, data, oggetto, testo, allegati, 0, 0, $idins FROM comp_lettera WHERE id = '$id' ");
-		$idlettera = mysql_insert_id();
-		$query1 = mysql_query("INSERT INTO comp_destinatari (idlettera, idanagrafica, conoscenza, attributo, riga1, riga2) SELECT $idlettera, idanagrafica, conoscenza, attributo, riga1, riga2 FROM comp_destinatari WHERE idlettera = '$id' ");
-		if($query && $query1) {
+		try {
+   			$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO comp_lettera (protocollo, anno, data, oggetto, testo, allegati, vista, firmata, idins) SELECT 0, 0, data, oggetto, testo, allegati, 0, 0, :idins FROM comp_lettera WHERE id = :id"); 
+			$query->bindParam(':idins', $idins);
+			$query->bindParam(':id', $id);
+			$query->execute();
+			$connessione->commit();
+			$q1 = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+    		$q1 = false;
+		}
+		$idlettera = $connessione->lastInsertId();
+		try {
+   			$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO comp_destinatari (idlettera, idanagrafica, conoscenza, attributo, riga1, riga2) SELECT :idlettera, idanagrafica, conoscenza, attributo, riga1, riga2 FROM comp_destinatari WHERE idlettera = :id"); 
+			$query->bindParam(':idlettera', $idlettera);
+			$query->bindParam(':id', $id);
+			$query->execute();
+			$connessione->commit();
+			$q2 = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+    		$q2 = false;
+		}
+		if($q1 && $q2) {
 			return true;
 		}
 		else {
@@ -408,28 +460,27 @@ class Lettera {
 	}
 
 	public function getUffici() {
-		$query = mysql_query("SELECT id FROM uffici");
+		global $connessione;
+		$query = $connessione->query("SELECT id FROM uffici");
 		$uffici = array();
-		while ($uff = mysql_fetch_array($query)) {
+		while ($uff = $query->fetch()) {
 			array_push($uffici, $uff);
 		}
 		return $uffici;
 	}
 
 	public function getDescUfficio ($idufficio) {
-		$desc=mysql_query("select distinct * from uffici WHERE id='$idufficio'");
-		$descrizione=mysql_fetch_row($desc);
+		global $connessione;
+		$desc = $connessione->queryy("SELECT DISTINCT * FROM uffici WHERE id='$idufficio'");
+		$descrizione = $desc->fetch();
 		return stripslashes($descrizione[1]);
 	}
 	
 	public function controllaEsistenzaMittente($idmittente, $arraymittenti) {
+		global $connessione;
 		return array_key_exists ($idmittente,$arraymittenti);
 	}
-	
 
 }//chiusura della classe
 
 ?>
-
-
-
