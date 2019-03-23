@@ -31,8 +31,8 @@
 	$loginid=$_SESSION['loginid'];
 	
 	//ACQUISISCO I DATI GIA' REGISTRATI DELLA LETTERA
-	$query = mysql_query("SELECT * FROM comp_lettera WHERE id = $id");
-	$dati = mysql_fetch_array($query);
+	$query = $connessione->query("SELECT * FROM comp_lettera WHERE id = $id");
+	$dati = $query->fetch();
 	$oggetto= strip_tags(addslashes($dati['oggetto']));
 	$datalettera = $dati['data'];
 	$speditaricevuta = 'spedita';
@@ -49,43 +49,61 @@
 	//FINE ACQUISIZIONE DATI
 	
 	//SCRIVO I DETTAGLI DELLA LETTERA NEL DB
-	$inserimento = mysql_query("insert 
-				into lettere$annoprotocollo
-				values
-				('', 
-				'$oggetto',
-				'$datalettera',
-				'$dataregistrazione',
-				'',
-				'$speditaricevuta', 
-				'$posizione', 
-				'$riferimento', 
-				'$pratica', 
-				'$note')
-				");
-		
-	$ultimoid = mysql_insert_id();
+	try {
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare("INSERT INTO lettere$annoprotocollo VALUES (null, :$oggetto, :datalettera, :dataregistrazione, null, :speditaricevuta, :posizione, :riferimento, :pratica, :note) "); 
+		$query->bindParam(':oggetto', $oggetto);
+		$query->bindParam(':datalettera', $datalettera);
+		$query->bindParam(':dataregistrazione', $dataregistrazione);
+		$query->bindParam(':speditaricevuta', $speditaricevuta);
+		$query->bindParam(':posizione', $posizione);
+		$query->bindParam(':riferimento', $riferimento);
+		$query->bindParam(':pratica', $pratica);
+		$query->bindParam(':note', $note);
+		$query->execute();
+		$connessione->commit();
+		$inserimento = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+    	$connessione->rollBack();
+    	$inserimento = false;
+	}
+	$ultimoid = $connessione->lastInsertId();
 	
 	//AGGIORNO LA LETTERA
-	$update = mysql_query("UPDATE comp_lettera SET protocollo = $ultimoid, anno = $annoprotocollo WHERE id = $id");
+	try {
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare("UPDATE comp_lettera SET protocollo = :ultimoid, anno = :annoprotocollo WHERE id = :id"); 
+		$query->bindParam(':ultimoid', $ultimoid);
+		$query->bindParam(':annoprotocollo', $annoprotocollo);
+		$query->bindParam(':id', $id);
+		$connessione->commit();
+	}	 
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+    	$connessione->rollBack();
+	}
 		
 	//SCRIVO L'UTENTE CHE HA FATTO L'INSERIMENTO
-	$utentemod =mysql_query("	INSERT INTO 
-							joinlettereinserimento$annoprotocollo 
-						VALUES ( 
-							'$ultimoid',
-							'$loginid',
-							'',
-							'$dataregistrazione'
-						)
-					");
+	try {
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare("INSERT INTO joinlettereinserimento$annoprotocollo VALUES(:ultimoid, :loginid, null, :dataregistrazione)"); 
+		$query->bindParam(':ultimoid', $ultimoid);
+		$query->bindParam(':loginid', $loginid);
+		$query->bindParam(':dataregistrazione', $dataregistrazione);
+		$connessione->commit();
+	}	 
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+    	$connessione->rollBack();
+	}
 		
 	//SCRIVO I MITTENTI/DESTINATARI NEL DB
-	$destinatari = mysql_query("SELECT * FROM comp_destinatari WHERE idlettera = $id");
-	while($dest = mysql_fetch_array($destinatari)) {
+	$destinatari = $connessione->query("SELECT * FROM comp_destinatari WHERE idlettera = $id");
+	while($dest = $destinatari->fetch()) {
 		$idanagrafica = $dest['idanagrafica']; 
-		$inserimento1= mysql_query("INSERT INTO joinletteremittenti$annoprotocollo VALUES ('$ultimoid', '$idanagrafica')");
-		echo  mysql_error();
+		$inserimento1= $connessione->query("INSERT INTO joinletteremittenti$annoprotocollo VALUES ('$ultimoid', '$idanagrafica')");
 	}
 		
 	//CREO IL QRCODE NELLA DIRECTORY LETTEREANNO/QRCODE
@@ -107,12 +125,7 @@
 	//SE L'INSERIMENTO NON VA A BUON FINE SCRIVO NEL LOG L'ERRORE
 	if ( (!$inserimento || !$inserimento1) ) { 
 		echo "Inserimento non riuscito" ; 
-		$my_log -> publscrivilog( 	$_SESSION['loginname'], 
-							'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 
-							'FAILED' , 
-							'' , 
-							$_SESSION['historylog']
-						);
+		$my_log -> publscrivilog($_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 'FAILED' , '' , $_SESSION['historylog']);
 	}
 		
 	//SE L'INSERIMENTO VA A BUON FINE SCRIVO NEL LOG E SE SONO ATTIVE LE NOTIFICHE MANDO EMAIL

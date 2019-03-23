@@ -102,60 +102,78 @@
 	if($from != 'modifica') {
 	
 		//SCRIVO I DETTAGLI DELLA LETTERA NEL DB
-		$inserimento = mysql_query("insert 
-					into lettere$annoprotocollo
-					values
-					('', 
-					'$oggetto',
-					'$datalettera',
-					'$dataregistrazione',
-					'',
-					'$speditaricevuta', 
-					'$posizione', 
-					'$riferimento', 
-					'$pratica', 
-					'$note')
-					");
-		
-		$ultimoid = mysql_insert_id();
+		try {
+	   		$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO lettere$annoprotocollo VALUES (null, :oggetto, :datalettera, :dataregistrazione, null, :speditaricevuta, :posizione, :riferimento, :pratica, :note)"); 
+			$query->bindParam(':oggetto', $oggetto);
+			$query->bindParam(':datalettera', $datalettera);
+			$query->bindParam(':dataregistrazione', $dataregistrazione);
+			$query->bindParam(':speditaricevuta', $speditaricevuta);
+			$query->bindParam(':posizione', $posizione);
+			$query->bindParam(':riferimento', $riferimento);
+			$query->bindParam(':pratica', $pratica);
+			$query->bindParam(':note', $note);
+			$query->execute();
+			$connessione->commit();
+			$inserimento = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+	    	echo "Errore: " . $errorePDO->getMessage();
+	    	$connessione->rollBack();
+	    	$inserimento = false;
+		}
+		$ultimoid = $connessione->lastInsertId();
 		
 		//SCRIVO L'UTENTE CHE HA FATTO L'INSERIMENTO
-		$utentemod =mysql_query("	INSERT INTO 
-								joinlettereinserimento$annoprotocollo 
-							VALUES ( 
-								'$ultimoid',
-								'$loginid',
-								'',
-								'$dataregistrazione'
-							)
-						");
+		try {
+	   		$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO joinlettereinserimento$annoprotocollo VALUES(:ultimoid, :loginid, null, :dataregistrazione)"); 
+			$query->bindParam(':ultimoid', $ultimoid);
+			$query->bindParam(':loginid', $loginid);
+			$query->bindParam(':dataregistrazione', $dataregistrazione);
+			$connessione->commit();
+		}	 
+		catch (PDOException $errorePDO) { 
+	    	echo "Errore: " . $errorePDO->getMessage();
+	    	$connessione->rollBack();
+		}
 		
 		//SCRIVO I MITTENTI/DESTINATARI NEL DB
 		foreach ($my_lettera->arraymittenti as $key => $value) { //inserisce i dati dei mittenti nel db
-			$inserimento1= mysql_query("insert
-						into joinletteremittenti$annoprotocollo
-						values
-						('$ultimoid',
-						'$key'
-						)");
-			echo  mysql_error();
+			try {
+		   		$connessione->beginTransaction();
+				$query = $connessione->prepare("INSERT INTO joinletteremittenti$annoprotocollo VALUES (:ultimoid, :key)"); 
+				$query->bindParam(':ultimoid', $ultimoid);
+				$query->bindParam(':key', $key);
+				$connessione->commit();
+				$inserimento1 = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+		    	echo "Errore: " . $errorePDO->getMessage();
+		    	$connessione->rollBack();
+		    	$inserimento1 = false;
+			}
 		}
 		
 		//SCRIVO GLI ALLEGATI NEL DB
 		foreach ($my_lettera->arrayallegati as $key => $value) { //inserisce i dati degli allegati nel db e provvede a spostare i file dalla dir temp
-			$inserimento2= mysql_query("insert
-						into joinlettereallegati
-						values
-						(
-						'$ultimoid',
-						'$annoprotocollo',
-						'$key')
-						");
-			echo  mysql_error();
-			if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, 
-									//la crea per ospitare gli allegati
-									mkdir("lettere$annoprotocollo/".$ultimoid, 0777, true);
-									}
+			try {
+		   		$connessione->beginTransaction();
+				$query = $connessione->prepare("INSERT INTO joinlettereallegati VALUES (:ultimoid, :annoprotocollo, :key)"); 
+				$query->bindParam(':ultimoid', $ultimoid);
+				$query->bindParam(':annoprotocollo', $annoprotocollo);
+				$query->bindParam(':key', $key);
+				$connessione->commit();
+				$inserimento2 = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+		    	echo "Errore: " . $errorePDO->getMessage();
+		    	$connessione->rollBack();
+		    	$inserimento2 = false;
+			}
+			if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
+				mkdir("lettere$annoprotocollo/".$ultimoid, 0777, true);
+			}
 			rename($value, "lettere$annoprotocollo".'/'.$ultimoid.'/'.$key);
 		}
 		
@@ -237,75 +255,103 @@
 		if(!$_SESSION['block']) {
 			if($dettagli['speditaricevuta'] != $speditaricevuta) {
 				$old = $dettagli['speditaricevuta'];
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato spedita/ricevuta', '$user', '$time', '#FFFFCC', '$old', '$speditaricevuta')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato spedita/ricevuta', '$user', '$time', '#FFFFCC', '$old', '$speditaricevuta')");
 				$change = true;
 			}
 			if($dettagli['oggetto'] != $oggetto) {
 				$old = $dettagli['oggetto'];
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato oggetto', '$user', '$time', '#FFFFCC', '$old', '$oggetto')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato oggetto', '$user', '$time', '#FFFFCC', '$old', '$oggetto')");
 				$change = true;
 			}
 			if($dettagli['datalettera'] != $datalettera) {
 				$old = $calendario->dataSlash($dettagli['datalettera']);
 				$new = $calendario->dataSlash($datalettera);
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata data', '$user', '$time', '#FFFFCC', '$old', '$new')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata data', '$user', '$time', '#FFFFCC', '$old', '$new')");
 				$change = true;
 			}
 			if($dettagli['posizione'] != $posizione) {
 				$old = $dettagli['posizione'];
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato mezzo di trasmissione', '$user', '$time', '#FFFFCC', '$old', '$posizione')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato mezzo di trasmissione', '$user', '$time', '#FFFFCC', '$old', '$posizione')");
 				$change = true;
 			}
 			if($dettagli['riferimento'] != $riferimento) {
 				$old = $dettagli['riferimento'] . ' - ' . $lettera->getDescPosizione($dettagli['riferimento']);
 				$now = $riferimento . ' - ' . $lettera->getDescPosizione($riferimento);
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata posizione', '$user', '$time', '#FFFFCC', '$old', '$now')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata posizione', '$user', '$time', '#FFFFCC', '$old', '$now')");
 				$change = true;
 			}
 			if($dettagli['pratica'] != $pratica) {
 				$old = $lettera->getDescPratica($dettagli['pratica']);
 				$now = $lettera->getDescPratica($pratica);
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata pratica', '$user', '$time', '#FFFFCC', '$old', '$now')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata pratica', '$user', '$time', '#FFFFCC', '$old', '$now')");
 				$change = true;
 			}
 			if($dettagli['note'] != $note) {
 				$old = $dettagli['note'];
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata nota', '$user', '$time', '#FFFFCC', '$old', '$note')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata nota', '$user', '$time', '#FFFFCC', '$old', '$note')");
 				$change = true;
 			}
-			/*if(!$change) {
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Nessuna modifica apportata', '$user', '$time', '#FFFFFF', '', '')");
-			}*/
 		}
 		
-		$modifica = mysql_query("	UPDATE 
-								lettere$annoprotocollo 
-							SET 
-								speditaricevuta = '$speditaricevuta', 
-								oggetto = '$oggetto',
-								datalettera = '$datalettera',
-								posizione = '$posizione',
-								riferimento = '$riferimento',
-								pratica = '$pratica',
-								note = '$note'
-							WHERE 
-								lettere$annoprotocollo.idlettera='$idlettera' 
-							LIMIT 1
-						");
-		echo mysql_error();
+		try {
+			$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE 
+												lettere$annoprotocollo 
+											SET 
+												speditaricevuta = :speditaricevuta, 
+												oggetto = :oggetto,
+												datalettera = :datalettera,
+												posizione = :posizione,
+												riferimento = :riferimento,
+												pratica = :pratica,
+												note = :note
+											WHERE 
+												lettere$annoprotocollo.idlettera=:idlettera 
+											LIMIT 1
+											"); 
+			$query->bindParam(':speditaricevuta', $speditaricevuta);
+			$query->bindParam(':oggetto', $oggetto);
+			$query->bindParam(':datalettera', $datalettera);
+			$query->bindParam(':posizione', $posizione);
+			$query->bindParam(':riferimento', $riferimento);
+			$query->bindParam(':pratica', $pratica);
+			$query->bindParam(':note', $note);
+			$query->bindParam(':idlettera', $idlettera);
+			$connessione->commit();
+			$modifica = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		   	$modifica = false;
+		}
 		
 		$date=strftime("%Y-%m-%d");
+
 		//AGGIORNO L'UTENTE CHE HA FATTO LA MODIFICA
 		if(!$_SESSION['block']) {
-			$utentemod =mysql_query("	UPDATE 
-									joinlettereinserimento$annoprotocollo 
-								SET 
-									joinlettereinserimento$annoprotocollo.idmod='$loginid', 
-									joinlettereinserimento$annoprotocollo.datamod='$date' 
-								WHERE 
-									joinlettereinserimento$annoprotocollo.idlettera='$idlettera' 
-								LIMIT 1
-							");
+			try {
+				$connessione->beginTransaction();
+				$query = $connessione->prepare("UPDATE 
+													joinlettereinserimento$annoprotocollo 
+												SET 
+													joinlettereinserimento$annoprotocollo.idmod='$loginid', 
+													joinlettereinserimento$annoprotocollo.datamod='$date' 
+												WHERE 
+													joinlettereinserimento$annoprotocollo.idlettera='$idlettera' 
+												LIMIT 1
+												"); 
+				$query->bindParam(':loginid', $loginid);
+				$query->bindParam(':date', $date);
+				$query->bindParam(':idlettera', $idlettera);
+				$connessione->commit();
+				$utentemod = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+			   	echo "Errore: " . $errorePDO->getMessage();
+			   	$connessione->rollBack();
+			   	$utentemod = false;
+			}
 		}
 		
 		//SE LA MODIFICA NON E' ANDATA A BUON FINE SCRIVO L'ERRORE NEL LOG
@@ -368,10 +414,6 @@
 	unset($_SESSION['note']);
 ?>
 
-<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
-		window.location="login0.php?corpus=protocollo4&from=<?php echo $from ?>&id=<?php echo $ultimoid ?>&anno=<?php echo $annoprotocollo ?>"; 
-	else 
-		window.location="login0.php?corpus=protocollo4&from=<?php echo $from ?>&id=<?php echo $ultimoid ?>&anno=<?php echo $annoprotocollo ?>"; 
-</SCRIPT>
+<script language="javascript">
+	window.location="login0.php?corpus=protocollo4&from=<?php echo $from ?>&id=<?php echo $ultimoid ?>&anno=<?php echo $annoprotocollo ?>"; 
+</script>

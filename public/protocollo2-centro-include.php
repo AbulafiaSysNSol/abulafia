@@ -5,10 +5,6 @@
 	$sel = 0;
 	$my_anagrafica= new Anagrafica();//crea un nuovo oggetto anagrafica
 	
-	/*if (isset($_session['dbname'])) { 
-		$dbname=$_session['dbname']; 
-	}*/
-	
 	if (isset($_GET['idanagrafica'])) { 
 		$idanagrafica=$_GET['idanagrafica']; 
 	}
@@ -53,7 +49,6 @@
 	}
 
 	if ($from == 'aggiungi') {
-			
 		if ($my_lettera->controllaEsistenzaMittente($idlettera, $my_lettera->arraymittenti)==false) {
 			$my_lettera->arraymittenti[$idanagrafica]=$my_anagrafica->getName($idanagrafica);
 		}
@@ -61,33 +56,14 @@
 			echo 'Mittente o Destinatario già inserito'; 
 		}
 		$add = true;
-			/*$my_log -> publscrivilog( $_SESSION['loginname'], 
-						'AGGIUNTO MITTENTE PROTOCOLLO '
-						.$idlettera , 
-						'OK' , 
-						'ID MITTENTE AGGIUNTO '
-						. $idanagrafica, 
-						$_SESSION['historylog']);*/
 	}
 
 	if ($from == 'elimina-mittente') {
-	
 		unset($my_lettera->arraymittenti[$idanagrafica]);
-		
-		/*$elimina=mysql_query("delete from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
-	
-		$my_log -> publscrivilog( $_SESSION['loginname'], 
-					'ELIMINATO MITTENTE PROTOCOLLO '
-					.$idlettera , 
-					'OK' , 
-					'ID MITTENTE ELIMINATO '
-					.$idanagrafica, 
-					$_SESSION['historylog']);*/
 	}
 	
 	if ($from == 'urlpdf') {  
 		/*$idlettera=$_GET['idlettera'];*/
-		
 	}
 	
 	if ($from == 'eliminaallegato') {  
@@ -102,16 +78,6 @@
 				}
 			}
 		}
-		/*
-		$idlettera=$_GET['idlettera'];
-		$anno = $_GET['anno'];
-		$delete = $my_file->cancellaAllegato($idlettera, $anno, $nome);
-				if (!$delete) {
-					echo "Si è verificato un problema con la cancellazione di un allegato.";
-				}
-		$deletequery=mysql_query("DELETE FROM joinlettereallegati WHERE idlettera=$idlettera AND annoprotocollo=$annoprotocollo AND pathfile='$nome'");
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATO ALLEGATO PROTOCOLLO '.$idlettera , 'OK' , 'ALLEGATO ELIMINATO '. $nome, $_SESSION['historylog']);
-		*/
 	}
 
 ?>
@@ -387,12 +353,12 @@
 								<div class="col-sm-11">
 									<label> <i class="fa fa-archive"></i> Titolazione:</label>
 									<?php
-										$risultati=mysql_query("select distinct * from titolario");
+										$risultati = $connessione->query("SELECT DISTINCT * FROM titolario");
 									?>
 									<select class="form-control" size=1 cols=4 NAME="riferimento">
 										<option value="">nessuna titolazione
 										<?php
-										while ($risultati2=mysql_fetch_array($risultati)) {
+										while ($risultati2 = $risultati->fetch()) {
 											$risultati2 = array_map("stripslashes",$risultati2);
 											if( ($errore || $add) && isset($_SESSION['riferimento']) && $_SESSION['riferimento'] == $risultati2['codice'] ) {
 												echo '<option selected value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
@@ -412,12 +378,12 @@
 								<div class="col-sm-11">
 									<label> <i class="fa fa-tag"></i> Pratica:</label>
 									<?php
-										$risultati=mysql_query("select distinct * from pratiche");
+										$risultati = $connessione->query("SELECT DISTINCT * FROM pratiche");
 									?>
 									<select class="form-control" size=1 cols=4 NAME="pratica">
 										<option value="">nessuna pratica
 										<?php
-										while ($risultati2=mysql_fetch_array($risultati)) {
+										while ($risultati2 = $risultati->fetch())) {
 											$risultati2 = array_map("stripslashes",$risultati2);
 											if( ($errore || $add) && isset($_SESSION['pratica']) && $_SESSION['pratica'] == $risultati2['id'] ) {
 												echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
