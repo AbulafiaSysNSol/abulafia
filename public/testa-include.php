@@ -13,14 +13,14 @@
 	}
 	
 	$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
-	$my_anagrafica= unserialize($_SESSION['my_anagrafica']);//deserializzazione 
-	$my_log= unserialize($_SESSION['my_log']);//deserializzazione 
-	$my_registroprotocollo= unserialize($_SESSION['my_registroprotocollo']);//deserializzazione 
-	$my_ricerca= unserialize($_SESSION['my_ricerca']);//deserializzazione 
-	$my_manuale= unserialize($_SESSION['my_manuale']);//deserializzazione 
-	$my_tabellahtml= unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
-	$my_database= unserialize($_SESSION['my_database']);//deserializzazione
-	$my_lettera= unserialize($_SESSION['my_lettera']);//deserializzazione 
+	$my_anagrafica = unserialize($_SESSION['my_anagrafica']);//deserializzazione 
+	$my_log = unserialize($_SESSION['my_log']);//deserializzazione 
+	$my_registroprotocollo = unserialize($_SESSION['my_registroprotocollo']);//deserializzazione 
+	$my_ricerca = unserialize($_SESSION['my_ricerca']);//deserializzazione 
+	$my_manuale = unserialize($_SESSION['my_manuale']);//deserializzazione 
+	$my_tabellahtml = unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
+	$my_database = unserialize($_SESSION['my_database']);//deserializzazione
+	$my_lettera = unserialize($_SESSION['my_lettera']);//deserializzazione 
 /*deprecato	$setting=mysq<l_query("select * from defaultsettings");
 	$setting2=mysq<l_fetch_array($setting);
 */

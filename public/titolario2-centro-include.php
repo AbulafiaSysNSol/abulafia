@@ -1,48 +1,58 @@
 <?php 
+
 $owner=$_SESSION['loginid'];
 $codice=$_POST['codice'];
 $descrizione=$_POST['descrizione'];
 
 if (($codice == "") OR ($descrizione =="")) { 
-?>
-	<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
-	window.location="login0.php?corpus=titolario&add=no"; else window.location="login0.php?corpus=titolario&add=no"
-	</SCRIPT>
-<?php 
-exit();
-}
-$my_database=unserialize($_SESSION['my_database']);
-if ($my_database->controllaEsistenza($codice, 'titolario', 'codice') == True)
-	{
 	?>
-	<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
-	window.location="login0.php?corpus=titolario&add=duplicato"; else window.location="login0.php?corpus=titolario&add=duplicato"
-	</SCRIPT>
+	<script language="javascript">
+		window.location="login0.php?corpus=titolario&add=no"
+	</script>
 	<?php 
 	exit();
-	}
+}
 
-$inserimento=mysql_query("insert into titolario values('', '$codice', '$descrizione', '$owner')");
-if($inserimento) {
-?>
-<SCRIPT LANGUAGE="Javascript">
-browser= navigator.appName;
-if (browser == "Netscape")
-window.location="login0.php?corpus=titolario&add=ok"; else window.location="login0.php?corpus=titolario&add=ok"
-</SCRIPT>
-<?php
+$my_database=unserialize($_SESSION['my_database']);
+
+if ($my_database->controllaEsistenza($codice, 'titolario', 'codice') == True) {
+	?>
+	<script language="javascript">
+		window.location="login0.php?corpus=titolario&add=duplicato";
+	</script>
+	<?php 
+	exit();
+}
+
+try {
+   	$connessione->beginTransaction();
+	$query = $connessione->prepare("INSERT INTO titolario VALUES(null, :codice, :descrizione, :owner)"); 
+	$query->bindParam(':codice', $codice);
+	$query->bindParam(':descrizione', $descrizione);
+	$query->bindParam(':owner', $owner);
+	$query->execute();
+	$connessione->commit();
+	$ins = true;
+}	 
+catch (PDOException $errorePDO) { 
+   	echo "Errore: " . $errorePDO->getMessage();
+   	$connessione->rollBack();
+   	$ins = false;
+}
+
+if($ins) {
+	?>
+	<script language="javascript">
+		window.location="login0.php?corpus=titolario&add=ok";
+	</script>
+	<?php
 }
 else {
-?>
-	<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
-	window.location="login0.php?corpus=titolario&add=no"; else window.location="login0.php?corpus=titolario&add=no"
-	</SCRIPT>
-<?php 
+	?>
+	<script language="javascript">
+		window.location="login0.php?corpus=titolario&add=no";
+	</script>
+	<?php 
 }
+
 ?>

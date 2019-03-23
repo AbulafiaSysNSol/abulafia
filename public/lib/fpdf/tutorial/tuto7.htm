@@ -2,73 +2,63 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Aggiunta di nuovi fonts e supporto codifica</title>
+<title>Aggiunta di nuovi font e supporto codifica</title>
 <link type="text/css" rel="stylesheet" href="../fpdf.css">
-<style type="text/css">
-table {border-collapse:collapse; border-style:solid; border-width:2px; border-color:#A0A0A0 #000000 #000000 #A0A0A0}
-table {margin:1.4em 0 1.4em 1em}
-th {background-color:#E0EBFF; color:#900000; text-align:left}
-th, td {border:1px solid #808080; padding:2px 10px}
-tr.alt0 {background-color:#FFFFEE}
-tr.alt1 {background-color:#FFFFE0}
-</style>
 </head>
 <body>
-<h1>Aggiunta di nuovi fonts e supporto codifica</h1>
-This tutorial explains how to use TrueType, OpenType and Type1 fonts so that you are not limited to
-the standard fonts any more. The other benefit is that you can choose the font encoding, which allows
-you to use other languages than the Western ones (the standard fonts having too few available characters).
+<h1>Aggiunta di nuovi font e supporto codifica</h1>
+Questo tutorial spiega come usare i font TrueType, OpenType e Type1 in modo da non essere più limitati ai
+font standard predefiniti. L'altro beneficio è che si può scegliere una codifica del testo, permettendo
+di utilizzare altre lingue oltre a quelle occidentali (i font standard supportano solo cp1252, anche noto come windows-1252).
 <br>
 <br>
-Remark: for OpenType, only the format based on TrueType is supported (not the one based on Type1).
+Per OpenType, è supportato solo il formato basato su TrueType (non quello basato su Type1).<br>
+Per Type1, c'è bisogno del corrispondente file AFM (di solito è fornito insieme al font).
 <br>
 <br>
-There are two ways to use a new font: embedding it in the PDF or not. When a font is not
-embedded, it is searched in the system. The advantage is that the PDF file is lighter; on the other
-hand, if it's not available, a substitution font is used. So it's preferable to ensure that the
-needed font is installed on the client systems. If the file is to be viewed by a large audience,
-it's highly recommended to embed.
-<br>
-<br>
-Adding a new font requires two steps:
+Aggiungere un nuovo font richiede due passi:
 <ul>
-<li>Generation of the font definition file</li>
-<li>Declaration of the font in the script</li>
+<li>Generazione di un file di definizione</li>
+<li>Dichiarazione di un font nello script</li>
 </ul>
-For Type1, you need the corresponding AFM file. It's usually provided with the font.
 
-<h2>Generation of the font definition file</h2>
-The first step consists in generating a PHP file containing all the information needed by FPDF;
-in addition, the font file is compressed. To do this, a helper script is provided in the makefont
-directory of the package: makefont.php. It contains the following function:
+<h2>Generatore di un file di definizione</h2>
+Il primo passo consiste nel generare un file PHP contenente tutte le informazioni che necessita FPDF;
+in aggiunta, il file del font è compresso. Per farlo, uno script di aiuto è fornito nella cartella makefont
+del pacchetto: makefont.php. Contiene le seguenti funzioni:
 <br>
 <br>
-<code>MakeFont(<b>string</b> fontfile, [, <b>string</b> enc [, <b>boolean</b> embed]])</code>
+<code>MakeFont(<b>string</b> fontfile [, <b>string</b> enc [, <b>boolean</b> embed [, <b>boolean</b> subset]]])</code>
 <dl class="param" style="margin-bottom:2em">
 <dt><code>fontfile</code></dt>
 <dd>
-<p>Path to the .ttf, .otf or .pfb file.</p>
+<p>Percorso del file .ttf, .otf or .pfb.</p>
 </dd>
 <dt><code>enc</code></dt>
 <dd>
-<p>Name of the encoding to use. Default value: <code>cp1252</code>.</p>
+<p>Nome della codifica in uso. Predefinito: <code>cp1252</code>.</p>
 </dd>
 <dt><code>embed</code></dt>
 <dd>
-<p>Whether to embed the font or not. Default value: <code>true</code>.</p>
+<p>Se incorporare il font o meno. Predefinito: <code>true</code>.</p>
 </dd>
+<dt><code>subset</code></dt>
+<dd>
+<p>Se inserire il sottoinsieme del font o meno. Predefinito: <code>true</code>.</p>
+</dd>
+
 </dl>
-The first parameter is the name of the font file. The extension must be either .ttf, .otf or .pfb and
-determines the font type. If your Type1 font is in ASCII format (.pfa), you can convert it to binary
-(.pfb) with the help of <a href="http://www.lcdf.org/~eddietwo/type/#t1utils" target="_blank">t1utils</a>.
+Il primo parametro è il nome del file del font. L'estensione può essere sia .ttf, .otf o .pfb e
+determina il tipo di font. Se si utilizza il font Type1 con il formato è ASCII (.pfa), puoi convertirlo in binario
+(.pfb) con l'aiuto di <a href="http://www.lcdf.org/~eddietwo/type/#t1utils" target="_blank">t1utils</a>.
 <br>
 <br>
-For Type1 fonts, the corresponding .afm file must be present in the same directory.
+Per i font Type1, il file .afm corrispondente deve essere presente nella stessa cartella.
 <br>
 <br>
-The encoding defines the association between a code (from 0 to 255) and a character. The first 128 are
-always the same and correspond to ASCII; the following are variable. Encodings are stored in .map
-files. The available ones are:
+La codifica definisce l'associazione fra un codice (da 0 a 255) ed il carattere. I primi 128 sono
+sempre gli stessi corrispondenti all'ASCII; i successivi sono disponibili. Le codifiche sono salvate in file .map.
+Quelle disponibili sono:
 <ul>
 <li>cp1250 (Central Europe)</li>
 <li>cp1251 (Cyrillic)</li>
@@ -77,10 +67,12 @@ files. The available ones are:
 <li>cp1254 (Turkish)</li>
 <li>cp1255 (Hebrew)</li>
 <li>cp1257 (Baltic)</li>
+
 <li>cp1258 (Vietnamese)</li>
 <li>cp874 (Thai)</li>
 <li>ISO-8859-1 (Western Europe)</li>
 <li>ISO-8859-2 (Central Europe)</li>
+
 <li>ISO-8859-4 (Baltic)</li>
 <li>ISO-8859-5 (Cyrillic)</li>
 <li>ISO-8859-7 (Greek)</li>
@@ -89,61 +81,77 @@ files. The available ones are:
 <li>ISO-8859-15 (Western Europe)</li>
 <li>ISO-8859-16 (Central Europe)</li>
 <li>KOI8-R (Russian)</li>
+
 <li>KOI8-U (Ukrainian)</li>
 </ul>
-Of course, the font must contain the characters corresponding to the chosen encoding.
+Ovviamente il font deve contenere i caratteri corrispondenti alla codifica selezionata.
+<br>
+
+<br>
+Il terzo parametro indica se il font debba essere incorporato nel PDF o meno. Quando un font non è
+incorporato, sarà cercato nel sistema. Il vantaggio è che il file PDF è più leggero; se però
+il font non fosse disponibile, sarà utilizzato un font sostitutivo. Occorre verificare che
+il font richiesto sia installato sui sistemi dei destinatari. L'incorporazione è l'opzione raccomandata per garantire
+la portabilità.
 <br>
 <br>
-Remark: the standard fonts use cp1252.
+
+L'ultimo parametro indica se utilizzare un sottoinsieme o meno, il chè significa che solo
+i caratteri della codifica seelezionata saranno mantenuti nel font incorporato. Come risultato,
+la dimensione del PDF può essere ridotta di molto, specialmente se il font originale era pesante.
 <br>
 <br>
-After you have called the function (create a new file for this and include makefont.php), a .php file
-is created, with the same name as the font file. You may rename it if you wish. If the case of embedding,
-the font file is compressed and gives a second file with .z as extension (except if the compression
-function is not available, it requires Zlib). You may rename it too, but in this case you have to change
-the variable <code>$file</code> in the .php file accordingly.
+Dopo aver chiamato la funzione (per fare questo crea un nuovo file e includi makefont.php), sarà creato un file .php,
+con lo stesso nome del file del font. Puoi rinominarlo se lo desideri. Per incorporarlo,
+il file del font è compresso e si ottiene un secondo file con estensione .z (tranne se la funzione per la compressione
+non sia disponibile, dato che richiede Zlib). Puoi rinominare anche quest'ultimo, ma in questo caso occorre cambiare
+la variabile <code>$file</code> del file .php di conseguenza.
 <br>
 <br>
-Example:
+Esempio:
 <div class="source">
 <pre><code>&lt;?php
 <span class="kw">require(</span><span class="str">'makefont/makefont.php'</span><span class="kw">);
 
-</span>MakeFont<span class="kw">(</span><span class="str">'c:\\Windows\\Fonts\\comic.ttf'</span><span class="kw">,</span><span class="str">'cp1252'</span><span class="kw">);
+</span>MakeFont<span class="kw">(</span><span class="str">'C:\\Windows\\Fonts\\comic.ttf'</span><span class="kw">,</span><span class="str">'cp1252'</span><span class="kw">);
 </span>?&gt;</code></pre>
 </div>
-which gives the files comic.php and comic.z.
-<br>
-<br>
-Then copy the generated files to the font directory. If the font file could not be compressed, copy
-it directly instead of the .z version.
-<br>
-<br>
-Another way to call MakeFont() is through the command line:
-<br>
-<br>
-<kbd>php makefont\makefont.php c:\Windows\Fonts\comic.ttf cp1252</kbd>
-<br>
-<br>
-Finally, for TrueType and OpenType fonts, you can also generate the files
-<a href="http://www.fpdf.org/makefont/">online</a> instead of doing it manually.
 
-<h2>Declaration of the font in the script</h2>
-The second step is simple. You just need to call the <a href='../doc/addfont.htm'>AddFont()</a> method:
+che genera i file comic.php e comic.z.
+<br>
+<br>
+Copiare i file generati nella cartella font. Se il font non può essere compresso, copialo
+direttamente al posto della versione .z.
+<br>
+<br>
+In altro modo è utilizzare MakeFont() da linea di comando:
+
+<br>
+<br>
+<kbd>php makefont\makefont.php C:\Windows\Fonts\comic.ttf cp1252</kbd>
+<br>
+
+<br>
+Concludendo, per i font TrueType e OpenType fonts, puoi anche generare i file
+<a href="http://www.fpdf.org/makefont/">online</a> invece che farlo manualmente.
+
+
+<h2>Dichiarazione dei font nello script</h2>
+Il secondo file è semplice. C'è solo bisogno di chiamare il metodo <a href='../doc/addfont.htm'>AddFont()</a>:
 <div class="source">
 <pre><code>$pdf<span class="kw">-&gt;</span>AddFont<span class="kw">(</span><span class="str">'Comic'</span><span class="kw">,</span><span class="str">''</span><span class="kw">,</span><span class="str">'comic.php'</span><span class="kw">);
 </span></code></pre>
 </div>
-And the font is now available (in regular and underlined styles), usable like the others. If we
-had worked with Comic Sans MS Bold (comicbd.ttf), we would have written:
+Il font sarà ora disponibile (in forma di stili regolare e sottolineato), utilizzabile come gli altri. Se abbiamo
+lavorato con Comic Sans MS Bold (comicbd.ttf), dovremmo avere scritto:
 <div class="source">
 <pre><code>$pdf<span class="kw">-&gt;</span>AddFont<span class="kw">(</span><span class="str">'Comic'</span><span class="kw">,</span><span class="str">'B'</span><span class="kw">,</span><span class="str">'comicbd.php'</span><span class="kw">);
 </span></code></pre>
 </div>
 
-<h2>Example</h2>
-Let's now see a complete example. We will use the font <a href="http://www.abstractfonts.com/font/52" target="_blank">Calligrapher</a>.
-The first step is the generation of the font files:
+<h2>Esempio</h2>
+Ora proviamo un esempio completo. Sarà usato il font <a href="http://www.abstractfonts.com/font/52" target="_blank">Calligrapher</a>.
+Il primo passo è la generazione dei file del font:
 <div class="source">
 <pre><code>&lt;?php
 <span class="kw">require(</span><span class="str">'makefont/makefont.php'</span><span class="kw">);
@@ -151,7 +159,7 @@ The first step is the generation of the font files:
 </span>MakeFont<span class="kw">(</span><span class="str">'calligra.ttf'</span><span class="kw">,</span><span class="str">'cp1252'</span><span class="kw">);
 </span>?&gt;</code></pre>
 </div>
-The script gives the following report:
+Lo script scaturirà alcuni avvisi:
 <br>
 <br>
 <b>Warning:</b> character Euro is missing<br>
@@ -159,21 +167,24 @@ The script gives the following report:
 Font file compressed: calligra.z<br>
 Font definition file generated: calligra.php<br>
 <br>
-The euro character is not present in the font (it's too old). Another character is missing too.
+Il carattere dell'euro non è presete nel font (è troppo vecchio). Ne manca anche un altro.
 <br>
 <br>
-Alternatively we could have used the command line:
+
+Alternativamente possiamo usare la linea di comando:
 <br>
 <br>
 <kbd>php makefont\makefont.php calligra.ttf cp1252</kbd>
+
 <br>
 <br>
-or used the online generator.
+o utilizzando il generatore online.
 <br>
 <br>
-We can now copy the two generated files to the font directory and write the script:
+Ora è possibile copiare i due file generati nella cartella font e scrivere lo script:
 <div class="source">
 <pre><code>&lt;?php
+
 <span class="kw">require(</span><span class="str">'fpdf.php'</span><span class="kw">);
 
 </span>$pdf <span class="kw">= new </span>FPDF<span class="kw">();
@@ -185,57 +196,5 @@ We can now copy the two generated files to the font directory and write the scri
 </span>?&gt;</code></pre>
 </div>
 <p class='demo'><a href='tuto7.php' target='_blank' class='demo'>[Demo]</a></p>
-
-<h2>About the euro symbol</h2>
-The euro character is not present in all encodings, and is not always placed at the same position:
-<table>
-<tr><th>Encoding</th><th>Position</th></tr>
-<tr class="alt0"><td>cp1250</td><td>128</td></tr>
-<tr class="alt1"><td>cp1251</td><td>136</td></tr>
-<tr class="alt0"><td>cp1252</td><td>128</td></tr>
-<tr class="alt1"><td>cp1253</td><td>128</td></tr>
-<tr class="alt0"><td>cp1254</td><td>128</td></tr>
-<tr class="alt1"><td>cp1255</td><td>128</td></tr>
-<tr class="alt0"><td>cp1257</td><td>128</td></tr>
-<tr class="alt1"><td>cp1258</td><td>128</td></tr>
-<tr class="alt0"><td>cp874</td><td>128</td></tr>
-<tr class="alt1"><td>ISO-8859-1</td><td>N/A</td></tr>
-<tr class="alt0"><td>ISO-8859-2</td><td>N/A</td></tr>
-<tr class="alt1"><td>ISO-8859-4</td><td>N/A</td></tr>
-<tr class="alt0"><td>ISO-8859-5</td><td>N/A</td></tr>
-<tr class="alt1"><td>ISO-8859-7</td><td>N/A</td></tr>
-<tr class="alt0"><td>ISO-8859-9</td><td>N/A</td></tr>
-<tr class="alt1"><td>ISO-8859-11</td><td>N/A</td></tr>
-<tr class="alt0"><td>ISO-8859-15</td><td>164</td></tr>
-<tr class="alt1"><td>ISO-8859-16</td><td>164</td></tr>
-<tr class="alt0"><td>KOI8-R</td><td>N/A</td></tr>
-<tr class="alt1"><td>KOI8-U</td><td>N/A</td></tr>
-</table>
-ISO-8859-1 is widespread but does not include the euro sign. If you need it, the simplest thing
-to do is to use cp1252 or ISO-8859-15 instead, which are nearly identical but contain the precious
-symbol.
-
-<h2>Reducing the size of TrueType fonts</h2>
-Font files are often quite voluminous; this is due to the fact that they contain the characters
-corresponding to many encodings. Zlib compression reduces them but they remain fairly big. A
-technique exists to reduce them further. It consists in converting the font to the Type1 format
-with <a href="http://ttf2pt1.sourceforge.net" target="_blank">ttf2pt1</a> (the Windows binary is
-available <a href="http://www.fpdf.org/fr/dl.php?id=22">here</a>) while specifying the encoding
-you are interested in; all other characters will be discarded.
-<br>
-For example, the arial.ttf font that ships with Windows Vista weights 748 KB (it contains 3381 characters).
-After compression it drops to 411. Let's convert it to Type1 by keeping only cp1250 characters:
-<br>
-<br>
-<kbd>ttf2pt1 -b -L cp1250.map c:\Windows\Fonts\arial.ttf arial</kbd>
-<br>
-<br>
-The .map files are located in the makefont directory of the package. The command produces
-arial.pfb and arial.afm. The arial.pfb file weights only 57 KB, and 53 after compression.
-<br>
-<br>
-It's possible to go even further. If you are interested only by a subset of the encoding (you
-probably don't need all 217 characters), you can open the .map file and remove the lines you are
-not interested in. This will reduce the file size accordingly.
 </body>
 </html>

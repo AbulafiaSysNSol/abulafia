@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Intestazione, piè di pagina, cambio pagina e immagini</h1>
-Here's a two page example with header, footer and logo:
+Ecco un esempio di due pagine con intestazione, piè di pagina, e logo:
 <div class="source">
 <pre><code>&lt;?php
 <span class="kw">require(</span><span class="str">'fpdf.php'</span><span class="kw">);
@@ -52,29 +52,29 @@ for(</span>$i<span class="kw">=</span>1<span class="kw">;</span>$i<span class="k
 </span>?&gt;</code></pre>
 </div>
 <p class='demo'><a href='tuto2.php' target='_blank' class='demo'>[Demo]</a></p>
-This example makes use of the <a href='../doc/header.htm'>Header()</a> and <a href='../doc/footer.htm'>Footer()</a> methods to process page headers and
-footers. They are called automatically. They already exist in the FPDF class but do nothing,
-therefore we have to extend the class and override them.
+Questo esempio fa uso dei metodi <a href='../doc/header.htm'>Header()</a> e <a href='../doc/footer.htm'>Footer()</a> per processare le intestazioni e
+i piè di pagina. Sono richiamati automaticamente. Esistono già nella classe FPDF ma non fanno nulla,
+quindi dobbiamo estendere la classe e fare un override di questi metodi.
 <br>
 <br>
-The logo is printed with the <a href='../doc/image.htm'>Image()</a> method by specifying its upper-left corner and
-its width. The height is calculated automatically to respect the image proportions.
+Il logo è stampato con il metodo <a href='../doc/image.htm'>Image()</a> specificando il suo angolo in alto a sinistra e
+la sua larghezza. L'altezza è calcolata automaticamente per rispettare le proporzioni dell'immagine.
 <br>
 <br>
-To print the page number, a null value is passed as the cell width. It means that the cell
-should extend up to the right margin of the page; this is handy to center text. The current page
-number is returned by the <a href='../doc/pageno.htm'>PageNo()</a> method; as for the total number of pages, it's obtained
-via the special value <code>{nb}</code> which is substituted when the document is finished
-(provided you first called <a href='../doc/aliasnbpages.htm'>AliasNbPages()</a>).
+Per stampare il numero della pagina, un valore null è passato alla larghezza della cella. Significa che la cella
+dovrebbe estendersi fino al margine destro della pagina; questo è comodo per centrare il testo. Il numero della pagina
+corrente è ritornato dal metodo <a href='../doc/pageno.htm'>PageNo()</a>; ed il numero totale delle pagine è ottenibile
+attraverso il codice speciale <code>{nb}</code> che è sostituito nel testo quando il documento è concluso
+(a condizione di chiamare prima <a href='../doc/aliasnbpages.htm'>AliasNbPages()</a>).
 <br>
-Note the use of the <a href='../doc/sety.htm'>SetY()</a> method which allows to set position at an absolute location in
-the page, starting from the top or the bottom.
+Nota che l'uso del metodo <a href='../doc/sety.htm'>SetY()</a> che permette di posizionarsi ad una posizione assoluta nella
+pagina, parte dall'inizio o dal fondo della pagina.
 <br>
 <br>
-Another interesting feature is used here: the automatic page breaking. As soon as a cell would
-cross a limit in the page (at 2 centimeters from the bottom by default), a break is issued
-and the font restored. Although the header and footer select their own font (Arial), the body
-continues with Times. This mechanism of automatic restoration also applies to colors and line
-width. The limit which triggers page breaks can be set with <a href='../doc/setautopagebreak.htm'>SetAutoPageBreak()</a>.
+Qui si utilizza un'altra caratteristica interessante: l'interruzione di pagina automatica. Non appena la cella sorpassa
+un limite nella pagina (di predefinito sono 2 centimetri dal fondo), si lancia l'interruzione
+e il font è ripristinato. Sebbene l'intestazione ed il piè di pagina abbiano il loro font (Arial), il corpo
+continua con Times. Questo meccanismo di ripristino automatico si applica anche ai colori e alla larghezza della
+linea. Il limite a cui si evoca l'interruzione di pagina può essere impostato con <a href='../doc/setautopagebreak.htm'>SetAutoPageBreak()</a>.
 </body>
 </html>

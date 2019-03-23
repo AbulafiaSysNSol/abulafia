@@ -1,4 +1,5 @@
 <?php
+error_reporting(~E_WARNING);
 session_start();
 function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
 	require_once "class/" . $class_name.".obj.inc";
@@ -8,33 +9,33 @@ $lettera = new Lettera();
 include '../db-connessione-include.php';
 include 'maledetti-apici-centro-include.php';
 require('lib/fpdf/fpdf.php');
-	class PDF extends FPDF
-	{
-		// Page header
-		function Header()
-		{
-		    // Logo
-		    $this->Image('images/intestazione.jpg',0,0,209.97);
-		    // Line break
-		    $this->Ln(35);
-		}
-
-		// Page footer
-		function Footer()
-		{
-		    // Logo
-		    //$this->Image('images/footer.jpg',5,278,209.97);
-		    // Position at 1.5 cm from bottom
-		    $this->SetY(-15);
-		    // Page number
-		    $this->SetFont('Arial','',9);
-		    $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'R');
-		    $this->SetY(-9);
-			$this->SetX(9);
-			$this->SetFont('Arial','I',8);
-			$this->Write('','Documento generato digitalmente da Abulafia Web Ver.' . $_SESSION['version'].'. - https://www.abulafiaweb.it - info@abulafiaweb.it');
-		}
+	
+class PDF extends FPDF {
+	
+	// Page header
+	function Header() {
+		// Logo
+		$this->Image('images/intestazione.jpg',0,0,209.97);
+		// Line break
+		$this->Ln(35);
 	}
+
+	// Page footer
+	function Footer() {
+	    // Logo
+	    //$this->Image('images/footer.jpg',5,278,209.97);
+	    // Position at 1.5 cm from bottom
+	    $this->SetY(-15);
+	    // Page number
+	    $this->SetFont('Arial','',9);
+	    $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'R');
+	    $this->SetY(-9);
+		$this->SetX(9);
+		$this->SetFont('Arial','I',8);
+		$this->Write('','Documento generato digitalmente da Abulafia Web Ver.' . $_SESSION['version'].'. - https://www.abulafiaweb.it - info@abulafiaweb.it');
+	}
+}
+	
 	$from = $_GET['search'];
 	if($from == "num") {
 		$inizio = $_POST['numeroinizio'];
@@ -42,8 +43,8 @@ require('lib/fpdf/fpdf.php');
 		$anno = $_POST['annoprotocollo'];
 		$annoricerca = $anno;
 		$intestazione = 'Registro di protocollo '. $anno . ' dal numero '. $inizio .' al numero '. $fine.':';
-		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine'"); 
-		$numerorisultati = mysql_fetch_row($query);
+		$query = $connessione->query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine'"); 
+		$numerorisultati = $query->fetch();
 		if($numerorisultati[0] < 1) {
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 			?>
@@ -56,7 +57,7 @@ require('lib/fpdf/fpdf.php');
 			exit();
 		}
 		else {
-			$query = mysql_query("SELECT * FROM lettere$anno WHERE lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine' ORDER BY lettere$anno.idlettera"); 
+			$query = $connessione->query("SELECT * FROM lettere$anno WHERE lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine' ORDER BY lettere$anno.idlettera"); 
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 		}
 	}
@@ -109,8 +110,8 @@ require('lib/fpdf/fpdf.php');
 		$intestazione = 'Registro di protocollo ' . $anno . ' dal '. $inizio .' al '. $fine.':';
 		$inizio = $annoi.'-'.$mesei.'-'.$giornoi;
 		$fine = $annof.'-'.$mesef.'-'.$giornof;
-		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
-		$numerorisultati = mysql_fetch_row($query);
+		$query = $connessione->query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
+		$numerorisultati = $query->fetch();
 		if($numerorisultati[0] < 1) {
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 			?>
@@ -123,7 +124,7 @@ require('lib/fpdf/fpdf.php');
 			exit();
 		}
 		else {
-			$query = mysql_query("SELECT * FROM lettere$anno WHERE lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
+			$query = $connessione->query("SELECT * FROM lettere$anno WHERE lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 		}	
 	}
@@ -163,8 +164,8 @@ require('lib/fpdf/fpdf.php');
 		$intestazione = 'Registro di protocollo giornaliero del ' . $inizio . ':';
 		$inizio = $annoi.'-'.$mesei.'-'.$giornoi;
 		$fine = $annof.'-'.$mesef.'-'.$giornof;
-		$query = mysql_query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
-		$numerorisultati = mysql_fetch_row($query);
+		$query = $connessione->query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
+		$numerorisultati = $query->fetch();
 		if($numerorisultati[0] < 1) {
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DEL ' . $inizio , $_SESSION['historylog']);
 			?>
@@ -177,10 +178,11 @@ require('lib/fpdf/fpdf.php');
 			exit();
 		}
 		else {
-			$query = mysql_query("SELECT * FROM lettere$anno WHERE lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
+			$query = $connessione->query("SELECT * FROM lettere$anno WHERE lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
 		}	
 	}
+
 $now = date("d".'.'."m".'.'."Y");
 $finale = 'Documento generato digitalmente da Abulafia ' . $_SESSION['version'].', il ' . date("d".'/'."m".'/'."Y");
 $contatorelinee = 1;
@@ -189,9 +191,10 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 $pdf->SetTitle('registroprotocollo');
-$pdf->Text(10,55,$intestazione);
+$pdf->Text(10,57,$intestazione);
 $pdf->Ln(20);
-while($query2 = mysql_fetch_array($query)) {
+
+while($query2 = $query->fetch()) {
 	$query2 = array_map('stripslashes', $query2);
 	if ( $contatorelinee % 2 == 1 ) { 
 		$r = 255; $g = 253; $b = 170; 
@@ -209,7 +212,7 @@ while($query2 = mysql_fetch_array($query)) {
 	$pdf->Cell(43,7,'Mezzo di Trasmissione',1,0,'C',true);
 	$pdf->Cell(25,7,'Posizione',1,0,'C',true);
 	$pdf->Cell(25,7,'Numero All.',1,1,'C',true);
-	
+
 	//campi
 	$pdf->Cell(22,7,$query2['idlettera'],1,0,'C',true);
 	list($anno, $mese, $giorno) = explode("-", $query2['dataregistrazione']);
@@ -225,11 +228,16 @@ while($query2 = mysql_fetch_array($query)) {
 	
 	//campi dimensione variabile
 	$pdf->MultiCell(0,7,'Oggetto: ' . $query2['oggetto'],1,1,'L',true);
-	if($query2['speditaricevuta'] == 'ricevuta') { $sd = 'Mittenti'; } else { $sd = 'Destinatari'; }
-	$destinatari = mysql_query("Select * From anagrafica, joinletteremittenti$annoricerca Where anagrafica.idanagrafica=joinletteremittenti$annoricerca.idanagrafica AND joinletteremittenti$annoricerca.idlettera=$query2[0]");
-	echo mysql_error();
-	$d='';
-	while ( $dest = mysql_fetch_array($destinatari)) {
+	if($query2['speditaricevuta'] == 'ricevuta') { 
+		$sd = 'Mittenti'; 
+	} 
+	else { 
+		$sd = 'Destinatari'; 
+	}
+	$destinatari = $connessione->query("SELECT * FROM anagrafica, joinletteremittenti$annoricerca WHERE anagrafica.idanagrafica = joinletteremittenti$annoricerca.idanagrafica AND joinletteremittenti$annoricerca.idlettera = '$query2[0]' ");
+	$d = '';
+
+	while ($dest = $destinatari->fetch()) {
 		$dest = array_map('stripslashes', $dest);
 		$d = $d.' '.$dest['cognome'];
 		if($dest['nome'] != '') { 
@@ -246,6 +254,6 @@ while($query2 = mysql_fetch_array($query)) {
 }
 //$pdf->Ln(15);
 //$pdf->Write('',$finale);
-$pdf->Output('registroprotocollo'.$now.'.pdf','I');
+$pdf->Output('I','registroprotocollo'.$now.'.pdf');
 exit();
 ?>

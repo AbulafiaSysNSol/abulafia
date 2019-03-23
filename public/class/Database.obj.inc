@@ -41,7 +41,6 @@ class Database {
     public function arrayfromquery($ricerca) {
     	global $connessione;
         $this->resultarray = array();
-        $connessione->query($ricerca);
         while ($this->righe = $ricerca->fetch()) {
 	        array_push($this->resultarray, $this->righe);
         }
@@ -49,7 +48,7 @@ class Database {
                 
     public function controllaEsistenza($valore, $tabella, $colonna) {//<man> controlla se un valore è già presente in una colonna di una tabella del db</man>
     	global $connessione;
-		$this->ricerca=$connessione->query("SELECT DISTINCT * FROM $tabella WHERE $colonna = '$valore'");
+		$this->ricerca = $connessione->query("SELECT DISTINCT * FROM $tabella WHERE $colonna = '$valore'");
 		$this->arrayfromquery($this->ricerca);
 		if (count($this->resultarray) > 0) { 
 			$this->occorrenza= True ; 
