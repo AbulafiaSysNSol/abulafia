@@ -357,6 +357,7 @@ class Lettera {
 		}	 
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+    		$connessione->rollBack();
     		$q = false;
 		}
 	}//fine metodo
@@ -435,6 +436,7 @@ class Lettera {
 		}	 
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+    		$connessione->rollBack();
     		$q1 = false;
 		}
 		$idlettera = $connessione->lastInsertId();
@@ -449,6 +451,7 @@ class Lettera {
 		}	 
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+    		$connessione->rollBack();
     		$q2 = false;
 		}
 		if($q1 && $q2) {

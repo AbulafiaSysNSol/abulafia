@@ -258,6 +258,7 @@ class Anagrafica {
 		}	 
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+    		$connessione->rollBack();
 			$q1 = false;
 		}
 
@@ -273,6 +274,7 @@ class Anagrafica {
 		}	 
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+    		$connessione->rollBack();
     		$q2 = false;
 		}
 
@@ -286,6 +288,7 @@ class Anagrafica {
 		}	 
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+    		$connessione->rollBack();
     		$q3 = false;
 		}
 
@@ -321,6 +324,7 @@ class Anagrafica {
 		}	 
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+    		$connessione->rollBack();
     		$q3 = false;
 		}		
 		return $q3;
@@ -351,6 +355,7 @@ class Anagrafica {
 		}	 
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+    		$connessione->rollBack();
     		$q3 = false;
 		}		
 
@@ -369,6 +374,7 @@ class Anagrafica {
 		}	 
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+    		$connessione->rollBack();
     		$q = false;
 		}
 		return $q;

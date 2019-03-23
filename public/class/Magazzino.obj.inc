@@ -17,6 +17,7 @@ require_once('../db-connessione-include.php');
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+	    		$connessione->rollBack();
 				$q = false;
 			}
 			return $q;
@@ -51,6 +52,7 @@ require_once('../db-connessione-include.php');
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}
 			return $q;
@@ -78,6 +80,7 @@ require_once('../db-connessione-include.php');
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}
 			return $q;
@@ -96,6 +99,7 @@ require_once('../db-connessione-include.php');
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}
 			return $q;
@@ -118,6 +122,7 @@ require_once('../db-connessione-include.php');
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}
 			return $q;
@@ -163,6 +168,7 @@ require_once('../db-connessione-include.php');
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}
 			return $q;
@@ -184,6 +190,7 @@ require_once('../db-connessione-include.php');
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}
 			return $q;
@@ -210,6 +217,7 @@ require_once('../db-connessione-include.php');
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}                    
 			return $q;
@@ -243,6 +251,7 @@ require_once('../db-connessione-include.php');
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}
 			return $q;

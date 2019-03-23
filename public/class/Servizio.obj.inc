@@ -23,6 +23,7 @@
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}
 			return $q;
@@ -47,6 +48,7 @@
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
 				$q = false;
 			}
 			return $q;

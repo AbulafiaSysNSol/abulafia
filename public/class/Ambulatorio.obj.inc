@@ -24,6 +24,7 @@ class Ambulatorio {
 			}	 
 			catch (PDOException $errorePDO) { 
     			echo "Errore: " . $errorePDO->getMessage();
+    			$connessione->rollBack();
 			}
 			$query2 = $query->fetchAll();
 			return $query2;

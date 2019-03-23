@@ -35,7 +35,7 @@ class Database {
 		
 	public function disconnessione() {
 		global $connessione;
-		$connessione->close();
+		$connessione = null;
 	}
 
     public function arrayfromquery($ricerca) {
