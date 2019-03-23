@@ -26,13 +26,13 @@
 				</tr>
 
 			<?php
-				$risultati= mysql_query("select * from lettere$anno WHERE lettere$anno.speditaricevuta='ricevuta'");
+				$risultati= $connessione->query("SELECT * FROM lettere$anno WHERE lettere$anno.speditaricevuta='ricevuta'");
 
 				if (!$risultati) {
 					echo 'Nessun risultato dalla query';
 				}
 
-				while ($row = mysql_fetch_array($risultati)) {
+				while ($row = $risultati->fetch()) {
 					$nummitt = $lettera->contaMittenti($row['idlettera'], $anno);
 					if($nummitt > 1) {
 						?>
