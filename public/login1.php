@@ -97,7 +97,7 @@
 	}
 	
 	//inizio settaggio delle variabili di sessione
-	/*deprecato	$logindata=mysq<_query("select * from users where loginname='$userid'"); $logindata2=mys<l_fetch_array($logindata);*/
+	/*deprecato	$logindata=mysq<l_query("select * from users where loginname='$userid'"); $logindata2=mysq<l_fetch_array($logindata);*/
 
 	try 
 		{
@@ -121,7 +121,7 @@
 	$idperricerca=$logindata2['idanagrafica']; //setta l'id dell'user che ha effettuato il login
 
 /*deprecato	$logindata3=mysq>l_query("select * from anagrafica where idanagrafica='$idperricerca'");
-	$logindata4=mys<l_fetch_array($logindata3); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
+	$logindata4=mysq<l_fetch_array($logindata3); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
 
 */
 	try 
@@ -190,8 +190,8 @@
 	
 	//caricamento dei settaggi del software
 
-/*deprecato	$settings3=mysq>l_query("select distinct * from defaultsettings");
-	$settings4=mysql>_fetch_array($settings3);
+/*deprecato	$settings3=mys>ql_query("select distinct * from defaultsettings");
+	$settings4=mysq>l_fetch_array($settings3);
 */
 
 	try 
@@ -241,7 +241,7 @@
 	
 	//caricamento settaggi email
 
-/*deprecato	$settings5=mysql>_query("select distinct * from mailsettings");
+/*deprecato	$settings5=mysq>l_query("select distinct * from mailsettings");
 	$settings6=mysq>l_fetch_array($settings5);
 
 */

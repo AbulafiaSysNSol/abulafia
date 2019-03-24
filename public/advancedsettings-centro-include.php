@@ -40,8 +40,33 @@
 
 			<?php 
 			//funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
-			$contalettere=mysql_query("select count(*) from lettere$annoprotocollo where lettere$annoprotocollo.datalettera!='0000-00-00'");
-			$res_count=mysql_fetch_row($contalettere);
+/*deprecato			$contalettere=mysq>l_query("select count(*) from lettere$annoprotocollo where lettere$annoprotocollo.datalettera!='0000-00-00'");
+			$res_count=mysq>l_fetch_row($contalettere);*/
+			
+			try 
+				{
+   				$connessione->beginTransaction();
+				$lettereannoprotocollo="lettere".$annoprotocollo;
+				$datalettera=$annoprotocollo."datalettera";
+				$query = $connessione->prepare('SELECT count(*) 
+								from :lettereannoprotocollo
+								where :datalettera!='0000-00-00'
+								'); 
+				$query->bindParam(':lettereannoprotocollo',$lettereannoprotocollo;
+				$query->bindParam(':datalettera', $datalettera);
+				$query->execute();
+				$connessione->commit();
+				} 
+		
+				//gestione dell'eventuale errore della connessione
+				catch (PDOException $errorePDO) { 
+    				echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
+				}
+
+			$risultati = $query->fetchAll();
+			$res_count=$risultati[0];
+			
 			$contalettere= $res_count[0] +1 ;
 			//fine funzione per determinare se la tabella "lettere" è vuota. 
 			?>

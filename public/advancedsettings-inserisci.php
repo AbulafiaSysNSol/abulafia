@@ -128,6 +128,7 @@
 		//gestione dell'eventuale errore della connessione
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+		$connessione->rollBack();
 		exit();
 		}
 
@@ -210,6 +211,7 @@
 		//gestione dell'eventuale errore della connessione
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
+		$connessione->rollBack();
 		exit;
 		}
 
