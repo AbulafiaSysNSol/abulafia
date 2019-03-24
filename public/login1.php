@@ -121,7 +121,7 @@
 	$idperricerca=$logindata2['idanagrafica']; //setta l'id dell'user che ha effettuato il login
 
 /*deprecato	$logindata3=mysql_query("select * from anagrafica where idanagrafica='$idperricerca'");
-	$logindata4=mysql_fetch_array($logindata3); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
+	$logindata4=mys<l_fetch_array($logindata3); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
 
 */
 	try 
