@@ -34,13 +34,29 @@ $lettera_data = $lettera_data_anno . '-' . $lettera_data_mese . '-' . $lettera_d
 
 //controllo esistenza
 
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta =:speditaricevuta, lettere$annoprotocollo.oggetto = :oggetto, lettere$annoprotocollo.datalettera = :lettera_data, lettere$annoprotocollo.posizione = :posizione, lettere$annoprotocollo.riferimento= :riferimento, lettere$annoprotocollo.pratica = :pratica, lettere$annoprotocollo.note = :note WHERE lettere$annoprotocollo.idlettera = :idlettera"); 
+		$query->bindParam(':speditaricevuta', $speditaricevuta);
+		$query->bindParam(':oggetto', $oggetto);
+		$query->bindParam(':lettera_data', $lettera_data);
+		$query->bindParam(':posizione', $posizione);
+		$query->bindParam(':riferimento', $riferimento);
+		$query->bindParam(':pratica', $pratica);
+		$query->bindParam(':note', $note);
+		$query->bindParam(':idlettera', $idlettera);
+		$query->execute();
+		$connessione->commit();
+		$inserimento = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$inserimento = false;
+	}
 
-
-
-$inserimento = mysql_query("UPDATE lettere$annoprotocollo set lettere$annoprotocollo.speditaricevuta ='$speditaricevuta', lettere$annoprotocollo.oggetto ='$oggetto', lettere$annoprotocollo.datalettera='$lettera_data', lettere$annoprotocollo.posizione='$posizione', lettere$annoprotocollo.riferimento='$riferimento', lettere$annoprotocollo.pratica='$pratica', lettere$annoprotocollo.note='$note' WHERE lettere$annoprotocollo.idlettera='$idlettera'     " );
-echo  mysql_error();
 if (!$inserimento) { echo "Inserimento non riuscito" ; }
-$ultimoid = mysql_insert_id();
+$ultimoid = $connessione->lastInsertId();
 ?>
 
 
@@ -69,4 +85,3 @@ $ultimoid = mysql_insert_id();
 			<!-- post end -->
 
 		</div>
-

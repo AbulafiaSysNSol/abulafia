@@ -25,7 +25,7 @@
 		header("Location: login0.php?corpus=magazzino-documenti-carico-scarico-prodotti&id=$id&tipologia=$tipologia");
 	}
 	else {
-		echo 'Errore nella registrazione dei dati<br><br>' . mysql_error();
+		echo 'Errore nella registrazione dei dati';
 	}
 
 ?>

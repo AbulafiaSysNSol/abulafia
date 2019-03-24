@@ -1,8 +1,8 @@
 <?php
 	$id = $_GET['idlettera'];
 	$from = $_GET['from'];
-	$dett = mysql_query("SELECT * FROM comp_lettera WHERE id = $id");
-	$dettagli = mysql_fetch_array($dett);
+	$dett = $connessione->query("SELECT * FROM comp_lettera WHERE id = $id");
+	$dettagli = $dett->fetch();
 	$calendario = new Calendario();
 ?>
 

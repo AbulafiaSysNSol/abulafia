@@ -97,9 +97,7 @@
 	}
 	
 	//inizio settaggio delle variabili di sessione
-/*deprecato	$logindata=mysql_query("select * from users where loginname='$userid'");
-	$logindata2=mysql_fetch_array($logindata);
-*/
+	/*deprecato	$logindata=mysq<_query("select * from users where loginname='$userid'"); $logindata2=mys<l_fetch_array($logindata);*/
 
 	try 
 		{

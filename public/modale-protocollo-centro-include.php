@@ -43,12 +43,12 @@
 							<div class="col-sm-8">
 							<label> <i class="fa fa-archive"></i> Titolazione:</label>
 							<?php
-							$risultati=mysql_query("select distinct * from titolario");
+							$risultati = $connessione->query("SELECT distinct * from titolario");
 							?>
 							<select class="form-control" size=1 cols=4 NAME="riferimento">
 							<option value="">nessuna titolazione
 							<?php
-							while ($risultati2=mysql_fetch_array($risultati))
+							while ($risultati2 = $risultati->fetch())
 							{
 								$risultati2 = array_map("stripslashes",$risultati2);
 								echo '<option value="' . $risultati2['codice'] . '">' . $risultati2['codice'] . ' - ' . $risultati2['descrizione'];
@@ -64,12 +64,12 @@
 							<div class="col-sm-8">
 							<label> <i class="fa fa-tag"></i> Pratica:</label>
 							<?php
-							$risultati=mysql_query("select distinct * from pratiche");
+							$risultati = $connessione->query("SELECT distinct * from pratiche");
 							?>
 							<select class="form-control" size=1 cols=4 NAME="pratica">
 							<option value="">nessuna pratica
 							<?php
-							while ($risultati2=mysql_fetch_array($risultati))
+							while ($risultati2 = $risultati->fetch())
 							{
 								$risultati2 = array_map("stripslashes",$risultati2);
 								echo '<option value="' . $risultati2['id'] . '">' .  $risultati2['descrizione'];

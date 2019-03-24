@@ -16,8 +16,8 @@
     $token = $_GET['token'];
     $data = time();
 
-    $recovery = mysql_query("SELECT * FROM passwordrecovery WHERE token = '$token' ");
-    $recovery2 = mysql_fetch_array($recovery);
+    $recovery = $connessione->query("SELECT * FROM passwordrecovery WHERE token = '$token' ");
+    $recovery2 = $recovery->fetch();
     $idutente = $recovery2['utente'];
     $datains = $recovery2['timestamp'];
 

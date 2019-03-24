@@ -21,7 +21,7 @@
 	$note=$_POST['note'];
 
 	$ins = $m->newDocument($datadocumento, $magazzino, $riferimento, $causale, $datariferimento, $note, $tipologia);
-	$id = mysql_insert_id();
+	$id = $connessione->lastInsertId();
 
 	if($ins) {
 		header("Location: login0.php?corpus=magazzino-documenti-carico-scarico-prodotti&id=$id&tipologia=$tipologia");

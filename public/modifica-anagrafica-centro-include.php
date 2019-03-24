@@ -29,18 +29,18 @@
 	//fine del passaggio dei dati dalla pagina precedente
 
 	if ($from == 'foto-modifica') {
-		$inserisci= mysql_query("UPDATE anagrafica SET urlfoto = '$urlfoto' where idanagrafica = '$id' " );
+		$inserisci= $connessione->query("UPDATE anagrafica SET urlfoto = '$urlfoto' where idanagrafica = '$id' " );
 	}
 	if ($from == 'numero-modifica') {
-		$inserisci= mysql_query("insert into jointelefonipersone values('$id', '$numero', '$tipo' )");
+		$inserisci= $connessione->query("INSERT INTO jointelefonipersone values('$id', '$numero', '$tipo' )");
 	}
 	if ($from == 'elimina-numero-modifica') {
-		$elimina= mysql_query("DELETE FROM jointelefonipersone WHERE numero = '$numero2' and tipo = '$tipo2' and idanagrafica='$id'");
+		$elimina= $connessione->query("DELETE FROM jointelefonipersone WHERE numero = '$numero2' and tipo = '$tipo2' and idanagrafica='$id'");
 	}
 	
-	$risultati= mysql_query ("select distinct * from anagrafica where anagrafica.idanagrafica ='$id'");
-	$risultati2= mysql_query ("select * from jointelefonipersone where jointelefonipersone.idanagrafica='$id' order by jointelefonipersone.tipo");
-	$row = mysql_fetch_array($risultati);
+	$risultati= $connessione->query("SELECT DISTINCT * from anagrafica where anagrafica.idanagrafica ='$id'");
+	$risultati2= $connessione->query("SELECT * from jointelefonipersone where jointelefonipersone.idanagrafica='$id' order by jointelefonipersone.tipo");
+	$row = $risultati->fetch();
 	$row = array_map ("stripslashes",$row);
 	$data = $row['nascitadata'] ;
 	list($anno, $mese, $giorno) = explode("-", $data);
@@ -87,7 +87,7 @@
 					<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br><br>
 					<table class="table">
 					<?php
-						while ($row2 = mysql_fetch_array($risultati2)) {
+						while ($row2 = $risultati2->fetch()) {
 						echo '<tr>';
 						echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-xs" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
 						<?php
