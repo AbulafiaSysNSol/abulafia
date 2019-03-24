@@ -214,18 +214,27 @@
 		</form>
 		
 		<?php
-			$urlfile= $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
+			$urlfile = $my_lettera->cercaAllegati($idlettera, $annoprotocollo);
 			if ($urlfile) {
-				foreach ($urlfile as $valore) {
-					$download = $my_file->downloadlink($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-					echo "<br><i class=\"fa fa-file-o\"></i> <b>File associato: </b>" . $download;?> - <a href="login0.php?corpus=modifica-protocollo
-																			&from=eliminaallegato
-																			&idlettera=<?php echo $idlettera;?>
-																			&anno=<?php echo $annoprotocollo;?>
-																			&nome=<?php echo $valore[2];?>"></span> 
-																			Elimina <span class="glyphicon glyphicon-trash"></a>
+				?>
+				<br><i class="fa fa-fw fa-paperclip"></i> <b>File associati:</b><br><br>
+				<table class="table table-hover">
+					<?php
+					foreach ($urlfile as $valore) {
+						$download = $my_file->downloadlink($valore[2], $idlettera, $annoprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
+						echo "<tr><td>" . $download; ?></td>
+						<td><a class="btn btn-xs btn-danger" href="login0.php?corpus=modifica-protocollo
+							&from=eliminaallegato
+							&idlettera=<?php echo $idlettera;?>
+							&anno=<?php echo $annoprotocollo;?>
+							&nome=<?php echo $valore[2];?>"> 
+							<i class="fa fa-trash fa-fw"></i>
+						</a></td></tr>
+					<?php
+					}
+					?>
+				</table>
 				<?php
-				}
 			}
 			else {
 				echo "<br>Nessun file associato.";
@@ -251,7 +260,7 @@
 		$count = $connessione->query("SELECT count(*) from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$count = $count->fetch();
 		if($count[0] > 0) {
-			echo '<b><i class="fa fa-users"></i> Mittenti/Destinatari attuali:</b><br><br>';
+			echo '<br><b><i class="fa fa-users"></i> Mittenti/Destinatari attuali:</b><br><br>';
 			while ($row2 = $risultati2->fetch()) {
 				$row2 = array_map('stripslashes', $row2);
 				echo '<a href="anagrafica-mini.php?id=' . $row2['idanagrafica'].'" class="fancybox" data-fancybox-type="iframe">' . $row2['cognome'] . ' ' . $row2['nome'] ;?></a> - <a href="login0.php?corpus=modifica-protocollo&from=elimina-mittente&id=<?php echo $idlettera;?>&idanagrafica=<?php echo $row2['idanagrafica'];?>&urlpdf=<?php echo $row['urlpdf'];?>">Elimina <span class="glyphicon glyphicon-trash"></span></a><br><?php
