@@ -120,7 +120,7 @@
 	$logindata2=$logindata[0];
 	$idperricerca=$logindata2['idanagrafica']; //setta l'id dell'user che ha effettuato il login
 
-/*deprecato	$logindata3=mysql_query("select * from anagrafica where idanagrafica='$idperricerca'");
+/*deprecato	$logindata3=mysq>l_query("select * from anagrafica where idanagrafica='$idperricerca'");
 	$logindata4=mys<l_fetch_array($logindata3); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
 
 */
@@ -154,8 +154,8 @@
 	//caricamento dei settaggi personalizzati
 
 
-/*deprecato	$settings=mysql_query("SELECT * FROM usersettings WHERE idanagrafica='$idperricerca'");
-	$settings2=mysql_fetch_array($settings);
+/*deprecato	$settings=mysq>l_query("SELECT * FROM usersettings WHERE idanagrafica='$idperricerca'");
+	$settings2=mysq>l_fetch_array($settings);
 */
 
 	try 
@@ -190,8 +190,8 @@
 	
 	//caricamento dei settaggi del software
 
-/*deprecato	$settings3=mysql_query("select distinct * from defaultsettings");
-	$settings4=mysql_fetch_array($settings3);
+/*deprecato	$settings3=mysq>l_query("select distinct * from defaultsettings");
+	$settings4=mysql>_fetch_array($settings3);
 */
 
 	try 
@@ -241,8 +241,8 @@
 	
 	//caricamento settaggi email
 
-/*deprecato	$settings5=mysql_query("select distinct * from mailsettings");
-	$settings6=mysql_fetch_array($settings5);
+/*deprecato	$settings5=mysql>_query("select distinct * from mailsettings");
+	$settings6=mysq>l_fetch_array($settings5);
 
 */
 
