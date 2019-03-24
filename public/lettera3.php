@@ -22,8 +22,24 @@
 	$firmata = 0;
 	$insert = $_SESSION['loginid'];
 	
-	$update = mysql_query(" UPDATE comp_lettera SET data = '$data', oggetto = '$oggetto', testo = '$testo', allegati = '$allegati', ufficio = '$ufficio' WHERE id = $id ");
-	echo mysql_error();
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("UPDATE comp_lettera SET data = :data, oggetto = :oggetto, testo = :testo, allegati = :allegati, ufficio = :ufficio WHERE id = :id"); 
+		$query->bindParam(':data', $data);
+		$query->bindParam(':oggetto', $oggetto);
+		$query->bindParam(':testo', $testo);
+		$query->bindParam(':allegati', $allegati);
+		$query->bindParam(':ufficio', $ufficio);
+		$query->bindParam(':id', $id);
+		$query->execute();
+		$connessione->commit();
+		$update = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$update = false;
+	}	
 	
 	if($update) {
 		header("Location: login0.php?corpus=".$from."&id=" . $id);

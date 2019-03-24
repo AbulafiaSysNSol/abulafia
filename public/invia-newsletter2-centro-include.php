@@ -8,12 +8,12 @@
 	require('lib/phpmailer/PHPMailerAutoload.php');
 	$mail = new PHPMailer();
 
-	$idlettera= $_GET['id'];
-	$annoricercaprotocollo=$_GET['anno'];
-	$tabella= 'lettere'.$annoricercaprotocollo;
-	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
-	$setting=mysql_query("select * from mailsettings");
-	$setting2=mysql_fetch_array($setting);
+	$idlettera = $_GET['id'];
+	$annoricercaprotocollo = $_GET['anno'];
+	$tabella = 'lettere'.$annoricercaprotocollo;
+	$data = strftime("%d-%m-%Y /") . ' ' . date("g:i a");
+	$setting = $connessione->query("SELECT * FROM mailsettings");
+	$setting2 = $setting->fetch();
 	$intestazione = $_POST['intestazione'];
 	$firma = $_POST['firma'];
 	if ($intestazione != 'intestazione') {
@@ -75,8 +75,24 @@
 		$data = date("Y-m-d");
 		$erroreallegati = 0;
 		foreach ($destinatari as $valore) {
-			$insert = mysql_query("INSERT INTO mailsend VALUES ( '', '$userid', '$valore', '$data', '$idlettera', '$annoricercaprotocollo')");
-			echo mysql_error();
+
+			try {
+			   	$connessione->beginTransaction();
+				$query = $connessione->prepare("INSERT INTO mailsend VALUES ('', :userid, :valore, :data, :idlettera, :annoricercaprotocollo) "); 
+				$query->bindParam(':userid', $userid);
+				$query->bindParam(':valore', $valore);
+				$query->bindParam(':date', $data);
+				$query->bindParam(':idlettera', $idlettera);
+				$query->bindParam(':annoricercaprotocollo', $annoricercaprotocollo);
+				$query->execute();
+				$connessione->commit();
+				$insert = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+			   	echo "Errore: " . $errorePDO->getMessage();
+			   	$connessione->rollBack();
+			 	$insert = false;
+			}	
 			$erroreallegati = 1;
 		}
 		?>

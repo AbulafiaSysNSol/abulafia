@@ -20,9 +20,27 @@
 	$firmata = 0;
 	$insert = $_SESSION['loginid'];
 	
-	$insert = mysql_query(" INSERT INTO comp_lettera VALUES ( '', '', '', '$data', '$oggetto', '$testo', '$allegati', '$vista', '$firmata', '$insert', '$ufficio') ");
-	echo mysql_error();
-	$id=mysql_insert_id();
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("INSERT INTO comp_lettera VALUES ( '', '', '', :data, :oggetto, :testo, :allegati, :vista, :firmata, :insert, :ufficio)"); 
+		$query->bindParam(':data', $data);
+		$query->bindParam(':oggetto', $oggetto);
+		$query->bindParam(':testo', $testo);
+		$query->bindParam(':allegati', $allegati);
+		$query->bindParam(':vista', $vista);
+		$query->bindParam(':firmata', $firmata);
+		$query->bindParam(':insert', $insert);
+		$query->bindParam(':ufficio', $ufficio);
+		$query->execute();
+		$connessione->commit();
+		$insert = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$insert = false;
+	}	
+	$id = $connessione->lastInsertId();
 	
 	if($insert) {
 		header("Location: login0.php?corpus=lettera2&id=" . $id);

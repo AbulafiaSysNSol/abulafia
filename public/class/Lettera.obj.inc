@@ -214,8 +214,8 @@ class Lettera {
 		}
 		
 		$idpratica = $this->arraylettera1['pratica'];
-		$risultati=mysql_query("select distinct * from pratiche WHERE id='$idpratica'");
-		$risultati2=mysql_fetch_row($risultati);
+		$risultati = $connessione->query("SELECT DISTINCT * FROM pratiche WHERE id='$idpratica'");
+		$risultati2 = $risultati->fetch();
 		if($risultati2[1]) {
 		?>
 			<br>
@@ -245,7 +245,7 @@ class Lettera {
 		Mittenti/Destinatari: 
 		<b>
 			<?php
-				while ($row2 = mysql_fetch_array($this->arrayletteramittenti)) {
+				while ($row2 = $this->arrayletteramittenti->fetch()) {
 					$row2 = array_map('stripslashes', $row2);
 					?>
 					<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $row2['idanagrafica'];?>">

@@ -2,8 +2,8 @@
 	$calendario = new Calendario();
 	$lett = new Lettera();
 	$id = $_GET['id'];
-	$lettera = mysql_query(" SELECT * FROM comp_lettera WHERE id = $id ");
-	$datilettera = mysql_fetch_row($lettera);
+	$lettera = $connessione->query(" SELECT * FROM comp_lettera WHERE id = $id ");
+	$datilettera = $lettera->fetch();
 	$data = $datilettera[3];
 	$allegati = $datilettera[6];
 	$testo = $datilettera[5];
@@ -31,7 +31,7 @@
 				<br><h5><i class="fa fa-users"></i> Destinatari attuali:</h5>
 				
 				<?php
-					$query = mysql_query(	"SELECT anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, comp_destinatari.conoscenza, comp_destinatari.attributo, comp_destinatari.id, comp_destinatari.riga1, comp_destinatari.riga2
+					$query = $connessione->query("SELECT anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, comp_destinatari.conoscenza, comp_destinatari.attributo, comp_destinatari.id, comp_destinatari.riga1, comp_destinatari.riga2
 									FROM anagrafica, comp_destinatari
 									WHERE anagrafica.idanagrafica = comp_destinatari.idanagrafica
 									AND comp_destinatari.idlettera = '$id'
@@ -39,7 +39,7 @@
 					echo '<table class="table table-bordered">';
 					$contatorelinee=0;
 					$i=0;
-					while ($dest = mysql_fetch_array($query)) {
+					while ($dest = $query->fetch()) {
 						$riga = 'riga'.$i;
 						if ( $contatorelinee % 2 == 1 ) { 
 							$colorelinee = $_SESSION['primocoloretabellarisultati'] ; 
@@ -117,14 +117,14 @@
 				<br><h5><i class="fa fa-users"></i> Destinatari per conoscenza attuali:</h5>
 				
 				<?php
-					$query = mysql_query(	"SELECT anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, comp_destinatari.conoscenza, comp_destinatari.attributo, comp_destinatari.id, comp_destinatari.riga1, comp_destinatari.riga2
+					$query = $connessione->query(	"SELECT anagrafica.idanagrafica, anagrafica.cognome, anagrafica.nome, comp_destinatari.conoscenza, comp_destinatari.attributo, comp_destinatari.id, comp_destinatari.riga1, comp_destinatari.riga2
 									FROM anagrafica, comp_destinatari
 									WHERE anagrafica.idanagrafica = comp_destinatari.idanagrafica
 									AND comp_destinatari.idlettera = '$id'
 									AND comp_destinatari.conoscenza = 1");
 					echo '<table class="table table-bordered">';
 					$contatorelinee=1;
-					while ($dest = mysql_fetch_array($query)) {
+					while ($dest = $query->fetch()) {
 						$riga = 'riga'.$i;
 						if ( $contatorelinee % 2 == 1 ) { 
 							$colorelinee = $_SESSION['primocoloretabellarisultati'] ; 

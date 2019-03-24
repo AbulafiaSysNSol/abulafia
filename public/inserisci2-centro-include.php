@@ -126,59 +126,122 @@
 	//fine passaggio dati
 
 	//controllo esistenza
-	$controlloesistenza = mysql_query("SELECT COUNT(*) from anagrafica where cognome='$cognome' and nome ='$nome' and nascitadata='$nascita_data' ");
-	$res_count = mysql_fetch_row($controlloesistenza);
+	$controlloesistenza = $connessione->query("SELECT COUNT(*) from anagrafica where cognome='$cognome' and nome ='$nome' and nascitadata='$nascita_data' ");
+	$res_count = $controlloesistenza->fetch();
 
 	if($res_count[0] < 1) {
-		$inserimento = mysql_query("INSERT INTO anagrafica VALUES ('','$nome','$cognome','$residenza_stato','$residenza_provincia','$residenza_comune','$residenza_via','$residenza_civico','$residenza_cap',
-		'$nascita_data','$nascita_stato','$nascita_provincia','$nascita_comune','$url_foto','$gruppo_sanguigno','$codice_fiscale','$anagraficatipologia', '0') " );
-		echo  mysql_error();
-		$lastid=mysql_insert_id();
-		$old_compl_url='foto/'.$url_foto;
-		$new_compl_url='foto/'.$lastid.$url_foto;
+
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO anagrafica VALUES (null, :nome, :cognome, :residenza_stato, :residenza_provincia, :residenza_comune, :residenza_via, :residenza_civico, :residenza_cap, :nascita_data, :nascita_stato, :nascita_provincia, :nascita_comune, :url_foto, :gruppo_sanguigno, :codice_fiscale, :anagraficatipologia, '0')"); 
+			$query->bindParam(':cognome', $cognome);
+			$query->bindParam(':nome', $nome);
+			$query->bindParam(':nascita_data', $nascita_data);
+			$query->bindParam(':nascita_comune', $nascita_comune);
+			$query->bindParam(':nascita_provincia', $nascita_provincia);
+			$query->bindParam(':nascita_stato', $nascita_stato);
+			$query->bindParam(':residenza_via', $residenza_via);
+			$query->bindParam(':residenza_civico', $residenza_civico);
+			$query->bindParam(':residenza_comune', $residenza_comune);
+			$query->bindParam(':residenza_provincia', $residenza_provincia);
+			$query->bindParam(':residenza_stato', $residenza_stato);
+			$query->bindParam(':gruppo_sanguigno', $gruppo_sanguigno);
+			$query->bindParam(':codice_fiscale', $codice_fiscale);
+			$query->bindParam(':residenza_cap', $residenza_cap);
+			$query->bindParam(':anagraficatipologia', $anagraficatipologia);
+			$query->bindParam(':urlfoto', $urlfoto);
+			$query->execute();
+			$connessione->commit();
+			$inserimento = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$inserimento = false;
+		}		
+		$lastid = $connessione->lastInsertId();
+		$old_compl_url = 'foto/'.$url_foto;
+		$new_compl_url = 'foto/'.$lastid.$url_foto;
 		@rename ("$old_compl_url", "$new_compl_url");
 		if($url_foto != '') {
-			$newname=$lastid.$url_foto;
+			$newname = $lastid.$url_foto;
 		}
 		else {
 			$newname = '';
 		}
-		$inserimento3=mysql_query("update anagrafica set anagrafica.urlfoto='$newname' where anagrafica.idanagrafica='$lastid'");
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE anagrafica SET anagrafica.urlfoto = :newname where anagrafica.idanagrafica = :lastid"); 
+			$query->bindParam(':newname', $newname);
+			$query->bindParam(':lastid', $lastid);
+			$query->execute();
+			$connessione->commit();
+			$inserimento3 = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$inserimento3 = false;
+		}	
 		if (!$inserimento3) { 
 			echo "<br>Inserimento foto non riuscito"; 
 		}
 		if (!$inserimento) { 
 			echo "<br>Inserimento non riuscito" ; 
 		}
-		$ultimoid = mysql_insert_id();
+		$ultimoid = $connessione->lastInsertId();
 		
 		//inserimento di un recapito associato all'anagrafica solo se il recapito non è vuoto
 		if (($telefono != '' ) and ($lastid != '' )) {
-			$inserimento2 = mysql_query("INSERT INTO jointelefonipersone VALUES ('$lastid','$telefono','$tipo') " );
+			try {
+			   	$connessione->beginTransaction();
+				$query = $connessione->prepare("INSERT INTO jointelefonipersone VALUES (:lastid, :telefono, :tipo)"); 
+				$query->bindParam(':lastid', $lastid);
+				$query->bindParam(':telefono', $telefono);
+				$query->bindParam(':tipo', $tipo);
+				$query->execute();
+				$connessione->commit();
+				$inserimento2 = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+			   	echo "Errore: " . $errorePDO->getMessage();
+			   	$connessione->rollBack();
+			 	$inserimento2 = false;
+			}	
 			if (!$inserimento2) { 
 				echo "<br>Inserimento recapito non riuscito" ; 
 			}
 		}
 		if (($telefono2 != '' ) and ($lastid != '' )) {
-			$inserimento2 = mysql_query("INSERT INTO jointelefonipersone VALUES ('$lastid','$telefono2','$tipo2') " );
+			try {
+			   	$connessione->beginTransaction();
+				$query = $connessione->prepare("INSERT INTO jointelefonipersone VALUES (:lastid, :telefono', :tipo2)"); 
+				$query->bindParam(':lastid', $lastid);
+				$query->bindParam(':telefono', $telefono);
+				$query->bindParam(':tipo2', $tipo2);
+				$query->execute();
+				$connessione->commit();
+				$inserimento2 = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+			   	echo "Errore: " . $errorePDO->getMessage();
+			   	$connessione->rollBack();
+			 	$inserimento2 = false;
+			}	
 			if (!$inserimento2) { 
 				echo "<br>Inserimento secondo recapito non riuscito"; 
 			}
 		}
 		?>
 		<SCRIPT LANGUAGE="Javascript">
-		browser= navigator.appName;
-		if (browser == "Netscape")
-		window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=false&id=<?php echo $lastid;?>"; else window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=false&id=<?php echo $lastid;?>";
+			window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=false&id=<?php echo $lastid;?>";
 		</SCRIPT>
 		<?php
 	}
 	else {
 		?>
 		<SCRIPT LANGUAGE="Javascript">
-		browser= navigator.appName;
-		if (browser == "Netscape")
-		window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=true"; else window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=true";
+			window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=true";
 		</SCRIPT>
 		<?php
 	}
