@@ -46,6 +46,7 @@ require_once('../db-connessione-include.php');
 				$query->bindParam(':scortaminima', $scortaminima);
 				$query->bindParam(':riordino', $riordino);
 				$query->bindParam(':confezionamento', $confezionamento);
+				$query->bindParam(':id', $id);
 				$query->execute();
 				$connessione->commit();
 				$q = true;

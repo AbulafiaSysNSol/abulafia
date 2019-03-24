@@ -57,7 +57,7 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Città:</label>
+							<label class="col-sm-3 control-label">Citt&agrave;:</label>
 							<div class="row">
 								<div class="col-sm-6">
 									<input type="text" class="form-control input-sm" name="citta" value="<?php echo $info[0]['citta']; ?>">

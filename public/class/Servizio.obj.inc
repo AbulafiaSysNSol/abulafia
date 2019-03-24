@@ -32,19 +32,20 @@
 		public function modificaServizio($id, $codice, $descrizione, $indirizzo, $citta, $cap, $telefono, $email, $magazzino) {
 			global $connessione;
 			try {
-   			$connessione->beginTransaction();
-			$query = $connessione->prepare("UPDATE servizi SET codice=:codice, descrizione=:descrizione, indirizzo=:indirizzo, citta=:citta, cap=:cap, telefono=:telefono, email=:email, magazzino=:magazzino WHERE codice = :id"); 
-			$query->bindParam(':codice', $codice);
-			$query->bindParam(':descrizione', $descrizione);
-			$query->bindParam(':indirizzo', $indirizzo);
-			$query->bindParam(':citta', $citta);
-			$query->bindParam(':cap', $cap);
-			$query->bindParam(':telefono', $telefono);
-			$query->bindParam(':email', $email);
-			$query->bindParam(':id', $id);
-			$query->execute();
-			$connessione->commit();
-			$q = true;
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("UPDATE servizi SET codice = :codice, descrizione = :descrizione, indirizzo = :indirizzo, citta = :citta, cap = :cap, telefono = :telefono, email = :email, magazzino = :magazzino WHERE codice = :id"); 
+				$query->bindParam(':codice', $codice);
+				$query->bindParam(':descrizione', $descrizione);
+				$query->bindParam(':indirizzo', $indirizzo);
+				$query->bindParam(':citta', $citta);
+				$query->bindParam(':cap', $cap);
+				$query->bindParam(':telefono', $telefono);
+				$query->bindParam(':email', $email);
+				$query->bindParam(':magazzino', $magazzino);
+				$query->bindParam(':id', $id);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
