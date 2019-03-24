@@ -1,5 +1,10 @@
 <?php
 	$annoprotocollo = $_SESSION['annoprotocollo'];
+	if (!is_numeric($annoprotocollo))
+		{
+		echo "Errore nella definizione dell'anno"; 
+		exit; 
+		}
 	//controllo dell'autorizzazione necessaria alla gestione degli utenti di abulafia
 	if ($_SESSION['auth'] < 99) { 
 		echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; 
@@ -24,9 +29,7 @@
 				</div>
 				<?php
 				}
-				?>
-				
-				<?php
+
 				 if( isset($_GET['update']) && $_GET['update'] == "success") {
 				?>
 				<div class="row">
@@ -36,24 +39,19 @@
 				</div>
 				<?php
 				}
-			?>
 
-			<?php 
 			//funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
 /*deprecato			$contalettere=mysq>l_query("select count(*) from lettere$annoprotocollo where lettere$annoprotocollo.datalettera!='0000-00-00'");
 			$res_count=mysq>l_fetch_row($contalettere);*/
-			
+							
 			try 
 				{
    				$connessione->beginTransaction();
 				$lettereannoprotocollo="lettere".$annoprotocollo;
-				$datalettera=$annoprotocollo."datalettera";
-				$query = $connessione->prepare('SELECT count(*) 
-								from :lettereannoprotocollo
-								where :datalettera!='0000-00-00'
-								'); 
-				$query->bindParam(':lettereannoprotocollo',$lettereannoprotocollo;
-				$query->bindParam(':datalettera', $datalettera);
+				$query = $connessione->prepare("SELECT count(*) 
+								from $lettereannoprotocollo
+								where datalettera !='0000-00-00'
+								"); 
 				$query->execute();
 				$connessione->commit();
 				} 

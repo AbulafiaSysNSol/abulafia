@@ -8,6 +8,11 @@
 	}
 	
 	$annoprotocollo = $_SESSION['annoprotocollo'];
+	if (!is_numeric($annoprotocollo))
+		{
+		echo "Errore nella definizione dell'anno"; 
+		exit; 
+		}
 
 	include '../db-connessione-include.php';
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
@@ -77,7 +82,7 @@
 	}
 
 	//eventuale settaggio del primo numero del nuovo protocollo
-	if(isset($_POST['primoprotocollo'])) {
+	if( isset($_POST['primoprotocollo']) and is_numeric($_POST['primoprotocollo']))  {
 		$primoprotocollo= $_POST['primoprotocollo'];
 	}
 /*deprecato	$contalettere=mysq<l_query("select count(*) from lettere$annoprotocollo");
@@ -86,10 +91,10 @@
 	try 
 		{
    		$connessione->beginTransaction();
-		$query = $connessione->prepare('SELECT count(*) 
-						from lettere$annoprotocollo 
-						'); 
-		$query->bindParam(':annoprotocollo', $annoprotocollo);
+		$lettereannoprotocollo="lettere".$annoprotocollo;
+		$query = $connessione->prepare("SELECT count(*) 
+						from $lettereannoprotocollo
+						"); 
 		$query->execute();
 		$connessione->commit();
 		} 
@@ -116,11 +121,10 @@
 		try 
 		{
    		$connessione->beginTransaction();
-		$query = $connessione->prepare('ALTER TABLE lettere$annoprotocollo 
+		$lettereannoprotocollo="lettere".$annoprotocollo;
+		$query = $connessione->prepare("ALTER TABLE $lettereannoprotocollo 
 						AUTO_INCREMENT = $primoprotocollo 
-						'); 
-		$query->bindParam(':annoprotocollo', $annoprotocollo);
-		$query->bindParam(':primoprotocollo', $primoprotocollo);
+						"); 
 		$query->execute();
 		$connessione->commit();
 		} 
