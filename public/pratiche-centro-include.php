@@ -9,49 +9,49 @@
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Nuova pratica aggiunta!</div></div></div>
+	<div class="alert alert-success"><b><i class="fa fa-check fa-fw"></i></b> Nuova pratica aggiunta!</div></div></div>
 	<?php
    }
     if( isset($_GET['add']) && $_GET['add'] == "no") {
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-danger">Si è verificato un errore, controlla di aver inserito tutti i campi oppure riprova più tardi.</div></div></div>
+	<div class="alert alert-danger"><b><i class="fa fa-warning fa-fw"></i></b> Si è verificato un errore, controlla di aver inserito tutti i campi oppure riprova più tardi.</div></div></div>
 	<?php
    }
     if( isset($_GET['add']) && $_GET['add'] == "duplicato") {
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-danger">Impossibile aggiungere: esiste già una pratica con lo stesso nome!</div></div></div>
+	<div class="alert alert-danger"><b><i class="fa fa-warning fa-fw"></i> Impossibile aggiungere:</b> esiste gi&agrave; una pratica con lo stesso nome!</div></div></div>
 	<?php
    }
    if( isset($_GET['mod']) && $_GET['mod'] == "ok") {
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Pratica modificata con successo!</div></div></div>
+	<div class="alert alert-success"><b><i class="fa fa-check fa-fw"></i></b> Pratica modificata con successo!</div></div></div>
 	<?php
    }
    if( isset($_GET['mod']) && $_GET['mod'] == "no") {
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Si è verificato un errore nella modifica della pratica.</div></div></div>
+	<div class="alert alert-success"><b><i class="fa fa-warning fa-fw"></i></b> Si è verificato un errore nella modifica della pratica.</div></div></div>
 	<?php
    }
    if( isset($_GET['canc']) && $_GET['canc'] == "ok") {
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Pratica eliminata con successo!</div></div></div>
+	<div class="alert alert-success"><b><i class="fa fa-check fa-fw"></i></b> Pratica eliminata con successo!</div></div></div>
 	<?php
    }
    if( isset($_GET['canc']) && $_GET['canc'] == "no") {
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Si è verificato un errore nella cancellazione della pratica</div></div></div>
+	<div class="alert alert-success"><i class="fa fa-warning fa-fw"></i></b>  Si è verificato un errore nella cancellazione della pratica</div></div></div>
 	<?php
    }
    ?>
@@ -82,10 +82,14 @@
 
 		<div class="col-sm-12">   
 			<?php
-			$pratiche=mysql_query("select count(*) from pratiche"); //ricerca tutti i valori del titolario
-			if ($pratiche) { $num=mysql_fetch_row($pratiche);} //se ce ne sono, li conta
-			else { $num[0]=0; } //altrimenti azzera il contatore
-			if($num[0]<=0) {
+			$pratiche = $connessione->query("SELECT COUNT(*) FROM pratiche"); //ricerca tutti i valori del titolario
+			if ($pratiche) { 
+				$num = $pratiche->fetch();
+			} //se ce ne sono, li conta
+			else { 
+				$num[0] = 0; 
+			} //altrimenti azzera il contatore
+			if($num[0] <=0 ) {
 				echo '<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Nessuna pratica registrata.</div>';
 			}
 			else {
@@ -93,15 +97,14 @@
 				?>
 				<label><span class="glyphicon glyphicon-list"></span> Elenco pratiche:</label><br><br>
 				<?php
-
-				$risultati=mysql_query("select distinct * from pratiche");
+				$risultati = $connessione->query("SELECT DISTINCT * FROM pratiche");
 				?>
 				<table class="table table-striped table-hover">
 				<tr>
 				<td><b>Id</b></td><td><b>Descrizione</b></td><td><b>Opzioni</b></td>
 				</tr>
 				<?php
-				while ($risultati2=mysql_fetch_array($risultati))	{
+				while ($risultati2 = $risultati->fetch())	{
 					$risultati2 = array_map ("stripslashes",$risultati2);
 					echo '<tr>';
 					echo '<td>' . $risultati2['id'] . '</td><td>' . $risultati2['descrizione'] . '</td>

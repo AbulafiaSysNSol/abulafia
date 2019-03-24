@@ -44,18 +44,47 @@
 		}        
 
 		if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'][$count], $target_path)) { //se lo spostamento del file va a buon fine
-			$target_path2=mysql_real_escape_string($target_path);
+			//verificare funzionamento $target_path2 = mysq<_real_escape_string($target_path);
 			if($from == 'modifica-protocollo') {
 				$file++;
-				$inserisci=mysql_query("insert into joinlettereallegati values($idlettera, $annoprotocollo, '$name')");
+
+				try {
+				   	$connessione->beginTransaction();
+					$query = $connessione->prepare("INSERT INTO joinlettereallegati VALUES(:idlettera, :annoprotocollo, :name)"); 
+					$query->bindParam(':idlettera', $idlettera);
+					$query->bindParam(':annoprotocollo', $annoprotocollo);
+					$query->bindParam(':name', $name);
+					$query->execute();
+					$connessione->commit();
+					$inserisci = true;
+				}	 
+				catch (PDOException $errorePDO) { 
+				   	echo "Errore: " . $errorePDO->getMessage();
+				   	$connessione->rollBack();
+				   	$inserisci = false;
+				}
 				$user = $_SESSION['loginid'];
 				$time = time();
-				$regmodifica = mysql_query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Aggiunto allegato', '$user', '$time', '#DEFEB4', ' ', '$name')");
+				try {
+				   	$connessione->beginTransaction();
+					$query = $connessione->prepare("INSERT INTO storico_modifiche VALUES(null, :idlettera, :annoprotocollo, 'Aggiunto allegato', :user, $time, '#DEFEB4', ' ', :name)"); 
+					$query->bindParam(':idlettera', $idlettera);
+					$query->bindParam(':annoprotocollo', $annoprotocollo);
+					$query->bindParam(':name', $name);
+					$query->execute();
+					$connessione->commit();
+					$regmodifica = true;
+				}	 
+				catch (PDOException $errorePDO) { 
+				   	echo "Errore: " . $errorePDO->getMessage();
+				   	$connessione->rollBack();
+				   	$regmodifica = false;
+				}
 				$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO ALLEGATO '. $name , $_SESSION['historylog']);
 			}
 			else {
 				$file++;
-				$my_lettera->arrayallegati[$name]=$target_path2;
+				$my_lettera->arrayallegati[$name] = $target_path;
 				$_SESSION['my_lettera']=serialize($my_lettera);
 				$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$my_lettera->idtemporaneo , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
 			}
@@ -79,6 +108,7 @@
 		</script>
 		<?php
 	}
+
 	if(($from == 'modifica-protocollo') and ($file != $tot)) {
 		?>
 		<script language="javascript">
@@ -86,6 +116,7 @@
 		</script>
 		<?php
 	}
+
 	if(($from != 'modifica-protocollo') and ($file == $tot)) {
 		?>
 		<script language="javascript">
@@ -93,6 +124,7 @@
 		</script>
 		<?php
 	}
+
 	if(($from != 'modifica-protocollo') and ($file != $tot)) {
 		?>
 		<script language="Javascript">

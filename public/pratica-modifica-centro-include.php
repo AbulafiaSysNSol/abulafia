@@ -15,9 +15,9 @@ $id = $_GET['id'];
 		<div class="col-sm-12">   
 		 
 			 <?php
-				$risultati=mysql_query("select * from pratiche where id='$id'");
-				$risultati2=mysql_fetch_array($risultati);
-				$risultati2=array_map("stripslashes",$risultati2);
+				$risultati = $connessione->query("SELECT * from pratiche where id='$id'");
+				$risultati2 = $risultati->fetch();
+				$risultati2 = array_map("stripslashes",$risultati2);
 			?>
 			<label><span class="glyphicon glyphicon-pencil"></span> Modifica pratica: "<?php echo $risultati2['descrizione']; ?>" --- <a href="login0.php?corpus=pratiche"><b><i class="fa fa-arrow-left"></i> Indietro</b></a></label><br><br>
 			
@@ -43,8 +43,8 @@ $id = $_GET['id'];
 	<div class="row">
 		<div class="col-sm-12">   
 			<?php
-			$pratica=mysql_query("select count(*) from pratiche");
-			$num=mysql_fetch_row($pratica);
+			$pratica = $connessione->query("SELECT count(*) from pratiche");
+			$num = $pratica->fetch();
 			if($num[0]<=0) {
 				echo '<br><label><span class="glyphicon glyphicon-warning-sign"></span> Nessuna pratica registrata.</label>';
 			}
@@ -54,16 +54,16 @@ $id = $_GET['id'];
 			<label><span class="glyphicon glyphicon-list"></span> Elenco pratiche:</label><br><br>
 			<?php
 
-			$risultati=mysql_query("select distinct * from pratiche");
+			$risultati = $connessione->query("SELECT distinct * from pratiche");
 			?>
 			<table class="table table-striped table-hover">
 			<tr>
 			<td><b>Id</b></td><td><b>Descrizione</b></td><td><b>Opzioni</b></td>
 			</tr>
 			<?php
-			while ($risultati2=mysql_fetch_array($risultati))
+			while ($risultati2 = $risultati->fetch())
 			{
-				$risultati2=array_map("stripslashes",$risultati2);
+				$risultati2 = array_map("stripslashes",$risultati2);
 				echo '<tr>';
 				echo '<td>' . $risultati2['id'] . '</td><td>' . $risultati2['descrizione'] . '</td>
 				<td>
