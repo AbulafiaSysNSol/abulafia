@@ -46,7 +46,7 @@
 	if($from != 'modifica') {
 	
 		//SCRIVO I DETTAGLI DELLA LETTERA NEL DB
-		$inserimento = mysql_query("insert 
+/*deprecato		$inserimento = mysql_query("insert 
 					into lettere$annoprotocollo
 					values
 					('', 
@@ -59,12 +59,46 @@
 					'$riferimento', 
 					'$pratica', 
 					'$note')
-					");
+					"); */
+
+		try 
+			{
+   			$connessione->beginTransaction();
+			$lettereannoprotocollo="lettere".$annoprotocollo;
+			$query = $connessione->prepare("INSERT INTO $lettereannoprotocollo
+							VALUES( '', 
+							:oggetto, 
+							:datalettera, 
+							:dataregistrazione, 
+							'',
+							:speditaricevuta, 
+							:posizione, 
+							:riferimento, 
+							:pratica,  
+							:note)"); 
+			$query->bindParam(':oggetto', $oggetto);
+			$query->bindParam(':datalettera', $datalettera);
+			$query->bindParam(':dataregistrazione', $dataregistrazione);
+			$query->bindParam(':speditaricevuta', $speditaricevuta);
+			$query->bindParam(':posizione', $posizione);
+			$query->bindParam(':riferimento', $riferimento);
+			$query->bindParam(':pratica', $pratica);
+			$query->bindParam(':note', $note);
+			$query->execute();
+			$connessione->commit();
+			} 
 		
-		$ultimoid = mysql_insert_id();
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		$connessione->rollback();
+		exit();
+		}
+		
+		$ultimoid = $connessione->lastInsertId();
 		
 		//SCRIVO L'UTENTE CHE HA FATTO L'INSERIMENTO
-		$utentemod =mysql_query("	INSERT INTO 
+/*deprecato		$utentemod =mysql_query("	INSERT INTO 
 								joinlettereinserimento$annoprotocollo 
 							VALUES ( 
 								'$ultimoid',
@@ -72,17 +106,66 @@
 								'',
 								'$dataregistrazione'
 							)
-						");
+						");*/
+
+		try 
+			{
+   			$connessione->beginTransaction();
+			$joinlettereinserimentoannoprotocollo="joinlettereinserimento".$annoprotocollo;
+			$query = $connessione->prepare("INSERT INTO $joinlettereinserimentoannoprotocollo
+							VALUES(
+							:ulltimoid, 
+							:loginid, 
+							'', 
+							:dataregistrazione"); 
+			$query->bindParam(':ulltimoid', $ulltimoid);
+			$query->bindParam(':loginid', $loginid);
+			$query->bindParam(':dataregistrazione', $dataregistrazione);
+			$query->execute();
+			$connessione->commit();
+			} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		$connessione->rollback();
+		exit();
+		}
+
+
+
 		
 		//SCRIVO I MITTENTI/DESTINATARI NEL DB
 		foreach ($my_lettera->arraymittenti as $key => $value) { //inserisce i dati dei mittenti nel db
-			$inserimento1= mysql_query("insert
+/*deprecato			$inserimento1= mysql_query("insert
 						into joinletteremittenti$annoprotocollo
 						values
 						('$ultimoid',
 						'$key'
 						)");
-			echo  mysql_error();
+			echo  mysql_error();*/
+			try 
+			{
+   			$connessione->beginTransaction();
+			$joinlettereinserimentoannoprotocollo="joinlettereinserimento".$annoprotocollo;
+			$query = $connessione->prepare("INSERT INTO $joinlettereinserimentoannoprotocollo
+							VALUES(
+							:ulltimoid, 
+							:key"); 
+			$query->bindParam(':ulltimoid', $ulltimoid);
+			$query->bindParam(':key', $key);
+			$query->execute();
+			$connessione->commit();
+			} 
+		
+			//gestione dell'eventuale errore della connessione
+			catch (PDOException $errorePDO) { 
+    			echo "Errore: " . $errorePDO->getMessage();
+			$connessione->rollback();
+			exit();
+			}
+
+			
 		}
 		
 		//SCRIVO GLI ALLEGATI NEL DB
