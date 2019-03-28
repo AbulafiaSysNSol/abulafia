@@ -114,6 +114,7 @@
 			$query->bindParam(':pratica', $pratica);
 			$query->bindParam(':note', $note);
 			$query->execute();
+			$ultimoid = $connessione->lastInsertId();
 			$connessione->commit();
 			$inserimento = true;
 		}	 
@@ -122,7 +123,6 @@
 	    	$connessione->rollBack();
 	    	$inserimento = false;
 		}
-		$ultimoid = $connessione->lastInsertId();
 		
 		//SCRIVO L'UTENTE CHE HA FATTO L'INSERIMENTO
 		try {

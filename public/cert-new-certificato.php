@@ -83,6 +83,7 @@
 			$query->bindParam(':oggetto', $oggetto);
 			$query->bindParam(':date', $date);
 			$query->execute();
+			$idprotocollo = $connessione->lastInsertId();
 			$connessione->commit();
 			$newprot = true;
 		}	 
@@ -91,7 +92,6 @@
 		   	$connessione->rollBack();
 		 	$newprot = false;
 		}
-		$idprotocollo = $connessione->lastInsertId();
 
 		try {
 		   	$connessione->beginTransaction();

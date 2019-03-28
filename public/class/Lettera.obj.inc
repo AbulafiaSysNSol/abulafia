@@ -431,6 +431,7 @@ class Lettera {
 			$query->bindParam(':idins', $idins);
 			$query->bindParam(':id', $id);
 			$query->execute();
+			$idlettera = $connessione->lastInsertId();
 			$connessione->commit();
 			$q1 = true;
 		}	 
@@ -439,7 +440,7 @@ class Lettera {
     		$connessione->rollBack();
     		$q1 = false;
 		}
-		$idlettera = $connessione->lastInsertId();
+		
 		try {
    			$connessione->beginTransaction();
 			$query = $connessione->prepare("INSERT INTO comp_destinatari (idlettera, idanagrafica, conoscenza, attributo, riga1, riga2) SELECT :idlettera, idanagrafica, conoscenza, attributo, riga1, riga2 FROM comp_destinatari WHERE idlettera = :id"); 
@@ -474,7 +475,7 @@ class Lettera {
 
 	public function getDescUfficio ($idufficio) {
 		global $connessione;
-		$desc = $connessione->queryy("SELECT DISTINCT * FROM uffici WHERE id='$idufficio'");
+		$desc = $connessione->query("SELECT DISTINCT * FROM uffici WHERE id='$idufficio'");
 		$descrizione = $desc->fetch();
 		return stripslashes($descrizione[1]);
 	}

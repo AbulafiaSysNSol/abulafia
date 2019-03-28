@@ -46,6 +46,7 @@ $lettera_data = $lettera_data_anno . '-' . $lettera_data_mese . '-' . $lettera_d
 		$query->bindParam(':note', $note);
 		$query->bindParam(':idlettera', $idlettera);
 		$query->execute();
+		$ultimoid = $connessione->lastInsertId();
 		$connessione->commit();
 		$inserimento = true;
 	}	 
@@ -55,8 +56,9 @@ $lettera_data = $lettera_data_anno . '-' . $lettera_data_mese . '-' . $lettera_d
 	 	$inserimento = false;
 	}
 
-if (!$inserimento) { echo "Inserimento non riuscito" ; }
-$ultimoid = $connessione->lastInsertId();
+	if (!$inserimento) { 
+		echo "Inserimento non riuscito" ; 
+	}
 ?>
 
 

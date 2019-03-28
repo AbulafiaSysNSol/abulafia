@@ -151,6 +151,7 @@
 			$query->bindParam(':anagraficatipologia', $anagraficatipologia);
 			$query->bindParam(':urlfoto', $urlfoto);
 			$query->execute();
+			$lastid = $connessione->lastInsertId();
 			$connessione->commit();
 			$inserimento = true;
 		}	 
@@ -159,7 +160,6 @@
 		   	$connessione->rollBack();
 		 	$inserimento = false;
 		}		
-		$lastid = $connessione->lastInsertId();
 		$old_compl_url = 'foto/'.$url_foto;
 		$new_compl_url = 'foto/'.$lastid.$url_foto;
 		@rename ("$old_compl_url", "$new_compl_url");
@@ -175,6 +175,7 @@
 			$query->bindParam(':newname', $newname);
 			$query->bindParam(':lastid', $lastid);
 			$query->execute();
+			$ultimoid = $connessione->lastInsertId();
 			$connessione->commit();
 			$inserimento3 = true;
 		}	 
@@ -189,7 +190,6 @@
 		if (!$inserimento) { 
 			echo "<br>Inserimento non riuscito" ; 
 		}
-		$ultimoid = $connessione->lastInsertId();
 		
 		//inserimento di un recapito associato all'anagrafica solo se il recapito non è vuoto
 		if (($telefono != '' ) and ($lastid != '' )) {

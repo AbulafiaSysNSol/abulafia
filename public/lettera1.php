@@ -32,6 +32,7 @@
 		$query->bindParam(':insert', $insert);
 		$query->bindParam(':ufficio', $ufficio);
 		$query->execute();
+		$id = $connessione->lastInsertId();
 		$connessione->commit();
 		$insert = true;
 	}	 
@@ -40,7 +41,6 @@
 	   	$connessione->rollBack();
 	 	$insert = false;
 	}	
-	$id = $connessione->lastInsertId();
 	
 	if($insert) {
 		header("Location: login0.php?corpus=lettera2&id=" . $id);

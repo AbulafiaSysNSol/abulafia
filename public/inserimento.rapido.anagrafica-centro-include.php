@@ -20,6 +20,7 @@
 		$query->bindParam(':cognome', $cognome);
 		$query->bindParam(':anagraficatipologia', $anagraficatipologia);
 		$query->execute();
+		$lastid = $connessione->lastInsertId();
 		$connessione->commit();
 		$inserimento = true;
 	}	 
@@ -39,7 +40,7 @@
 		</SCRIPT>
 		<?php
 	}
-	$lastid = $connessione->lastInsertId();
+	
 ?>
 
 	<SCRIPT LANGUAGE="Javascript">
