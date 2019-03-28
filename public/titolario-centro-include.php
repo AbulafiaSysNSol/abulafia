@@ -115,7 +115,7 @@
 						while ($risultati2 = $risultati->fetch())	{
 							$risultati2 = array_map ("stripslashes",$risultati2);
 							echo '<tr>';
-							echo '<td>' . $risultati2['codice'] . '</td><td>' . $risultati2['descrizione'] . '</td>
+							echo '<td>' . $risultati2['codice'] . '</td><td>' . stripslashes($risultati2['descrizione']) . '</td>
 								<td>
 								<div class="btn-group btn-group-sm">
 									<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Visualizza protocolli per questa posizione" href="login0.php?corpus=corrispondenza-titolario&currentpage=1&iniziorisultati=0&id=' . $risultati2['codice'] . '"><i class="fa fa-bars"></i> Protocolli</button></a>

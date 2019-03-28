@@ -292,7 +292,7 @@
 	echo 'Loading, please wait ...<br><br>'; //nel caso che il login sia andato a buon fine
 
 	//log degli accessi con esito positivo
-	$my_log -> publscrivilog($userid, 'login', 'ok', $client, $logfile );
+	$my_log->publscrivilog($userid, 'login', 'ok', $client, $logfile );
 
 $connessione=null; //chiudo la connessione distruggendo l'oggetto PDO istanziato
 ?>

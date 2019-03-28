@@ -52,7 +52,7 @@
 						if ($dettagli['posizione']) { echo '<li>Mezzo di Trasmissione: <b>'. $dettagli['posizione'] . '</b></li>'; }
 						if ($dettagli['riferimento']) { echo '<li>Posizione: <b>'. $dettagli['riferimento'] . ' - ' . $my_lettera->getDescPosizione($dettagli['riferimento']) . '</b></li>'; }
 						if ($dettagli['pratica']) { echo '<li>Pratica: <b>'. $my_lettera->getDescPratica($dettagli['pratica']) . '</b></li>'; }
-						if ($dettagli['note']) { echo '<li>Note: <b>'. $dettagli['note'] . '</b></li>'; }
+						if ($dettagli['note']) { echo '<li>Note: <b>'. stripslashes($dettagli['note']) . '</b></li>'; }
 						echo '</ul>';
 						?>	
 					</div>

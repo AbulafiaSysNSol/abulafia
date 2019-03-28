@@ -81,6 +81,7 @@ class Lettera {
 		while ($prat = $query->fetch()) {
 			array_push($pratiche, $prat);
 		}
+		array_map('stripslashes', $pratiche);
 		return $pratiche;
 	}
 	
@@ -98,6 +99,7 @@ class Lettera {
 		while ($pos = $query->fetch()) {
 			array_push($posizioni, $pos);
 		}
+		array_map('stripslashes', $posizioni);
 		return $posizioni;
 	}
 	
@@ -151,12 +153,11 @@ class Lettera {
 		File associati: <b>
 		<?php
 			$my_file = new File(); 		
-			
 			$urlfile= $this->cercaAllegati($this->arraylettera1['idlettera'], $annoricercaprotocollo);
 			if ($urlfile) {
 				foreach ($urlfile as $valore) {
 					$download = $my_file->downloadlink($valore[2], $this->arraylettera1['idlettera'], $annoricercaprotocollo, '30'); //richiamo del metodo "downloadlink" dell'oggetto file
-					echo $download.";    ";
+					echo $download;
 				}
 			}
 			else {
@@ -236,7 +237,7 @@ class Lettera {
 			Note: 
 			<strong>
 				<?php 
-					 echo $this->arraylettera1['note'];
+					 echo stripslashes($this->arraylettera1['note']);
 				?>
 			</strong> 
 		<?php

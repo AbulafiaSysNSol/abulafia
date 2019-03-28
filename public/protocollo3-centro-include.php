@@ -6,7 +6,7 @@
 		$idlettera = $_GET['idlettera'];
 	}
 	else {
-		$from='';
+		$from = '';
 	}
 
 	if (isset($_SESSION['my_lettera']) && ($from != 'modifica')) {
@@ -22,11 +22,11 @@
 			$_SESSION['note'] = $_POST['note'];
 			
 			//RITORNO ALLA PAGINA DI REGISTRAZIONE SE NON E' STATO INSERITO NEMMENO UN MITTENT O UN DESTISTARIO
-			$_SESSION['my_lettera']=serialize ($my_lettera);
+			$_SESSION['my_lettera'] = serialize ($my_lettera);
 			?>
 		
 			<script language = "javascript">
-				window.location="login0.php?corpus=protocollo2&from=errore";
+				window.location = "login0.php?corpus=protocollo2&from=errore";
 			</script>
 			
 			<?php
@@ -63,17 +63,17 @@
 	
 	//LIBRERIA PER L'INVIO DI EMAIL
 	include('lib/phpmailer/PHPMailerAutoload.php');
-	$date=strftime("%d/%m/%Y");
+	$date = strftime("%d/%m/%Y");
 	$ora = date("g:i a");
 	$datamail = $date . ' alle ' . $ora;
 	
 	//VARIABILI DI SESSIONI
 	$annoprotocollo = $_SESSION['annoprotocollo'];
-	$loginid=$_SESSION['loginid'];
+	$loginid = $_SESSION['loginid'];
 	
 	//ACQUISISCO I DATI DAL FORM
 	$speditaricevuta = $_POST['spedita-ricevuta'];
-	$oggetto= $_POST['oggetto'];
+	$oggetto = $_POST['oggetto'];
 	$datalettera = $calendario->dataDB($_POST['data']);
 	$posizione = $_POST['posizione'];
 	$riferimento = $_POST['riferimento'];
@@ -108,27 +108,30 @@
 			$query->execute();
 			$ultimoid = $connessione->lastInsertId();
 			$connessione->commit();
-			$inserimento = true;
+			$ins1 = true;
 		}	 
 		catch (PDOException $errorePDO) { 
 	    	echo "Errore: " . $errorePDO->getMessage();
 	    	$connessione->rollBack();
-	    	$inserimento = false;
+	    	$ins1 = false;
 	    	exit();
 		}
 		
 		//SCRIVO L'UTENTE CHE HA FATTO L'INSERIMENTO
 		try {
 	   		$connessione->beginTransaction();
-			$query = $connessione->prepare("INSERT INTO joinlettereinserimento$annoprotocollo VALUES(:ultimoid, :loginid, null, :dataregistrazione)"); 
+			$query = $connessione->prepare("INSERT INTO joinlettereinserimento$annoprotocollo VALUES(:ultimoid, :loginid, '', :dataregistrazione)"); 
 			$query->bindParam(':ultimoid', $ultimoid);
 			$query->bindParam(':loginid', $loginid);
 			$query->bindParam(':dataregistrazione', $dataregistrazione);
+			$query->execute();
 			$connessione->commit();
+			$ins2 = true;
 		}	 
 		catch (PDOException $errorePDO) { 
 	    	echo "Errore: " . $errorePDO->getMessage();
 	    	$connessione->rollBack();
+	    	$ins2 = false;
 	    	exit();
 		}
 		
@@ -139,13 +142,14 @@
 				$query = $connessione->prepare("INSERT INTO joinletteremittenti$annoprotocollo VALUES (:ultimoid, :key)"); 
 				$query->bindParam(':ultimoid', $ultimoid);
 				$query->bindParam(':key', $key);
+				$query->execute();
 				$connessione->commit();
-				$inserimento1 = true;
+				$ins3 = true;
 			}	 
 			catch (PDOException $errorePDO) { 
 		    	echo "Errore: " . $errorePDO->getMessage();
 		    	$connessione->rollBack();
-		    	$inserimento1 = false;
+		    	$ins3 = false;
 		    	exit();
 			}
 		}
@@ -158,13 +162,14 @@
 				$query->bindParam(':ultimoid', $ultimoid);
 				$query->bindParam(':annoprotocollo', $annoprotocollo);
 				$query->bindParam(':key', $key);
+				$query->execute();
 				$connessione->commit();
-				$inserimento2 = true;
+				$ins4 = true;
 			}	 
 			catch (PDOException $errorePDO) { 
 		    	echo "Errore: " . $errorePDO->getMessage();
 		    	$connessione->rollBack();
-		    	$inserimento2 = false;
+		    	$ins4 = false;
 		    	exit();
 			}
 			if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
@@ -179,7 +184,7 @@
 		$anno = $annoprotocollo;
 		
 		if (!is_dir('lettere'.$anno.'/qrcode/')) {
-			$creadir=mkdir('lettere'.$anno.'/qrcode/', 0777, true);
+			$creadir = mkdir('lettere'.$anno.'/qrcode/', 0777, true);
 			if (!$creadir) die ("Impossibile creare la directory: qrcode/");
 		}
 		
@@ -190,24 +195,22 @@
 		QRcode::png($codeText, $pathqrcode);
 		
 		//SE L'INSERIMENTO NON VA A BUON FINE SCRIVO NEL LOG L'ERRORE
-		if ( (!$inserimento || !$inserimento1) ) { 
-			echo "Inserimento non riuscito" ; 
-			$my_log -> publscrivilog( 	$_SESSION['loginname'], 
-								'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 
-								'FAILED' , 
-								'' , 
-								$_SESSION['historylog']
-							);
+		if ( (!$ins1 || !$ins2 || !$ins3) ) { 
+			echo "Inserimento non riuscito:<br><br>
+					Dati lettera: ".$ins1."<br>
+					Utente Ins: ".$ins2."<br>
+					Mitt/Dest: ".$ins3."<br>"; 
+			$my_log->publscrivilog($_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 'FAILED' , '' , $_SESSION['historylog']);
+			exit();
 		}
-		
 		//SE L'INSERIMENTO VA A BUON FINE SCRIVO NEL LOG E SE SONO ATTIVE LE NOTIFICHE MANDO EMAIL
 		else { 
 			$indirizzi = $anagrafica->getNotificationsIns();
 			if ($indirizzi) {
 				//invio notifica
 				$mail = new PHPMailer();
-				$mail->From = 'no-reply@cricatania.it';
-				$mail->FromName = 'Abulafia';
+				$mail->From = 'no-reply@abulafiaweb.it';
+				$mail->FromName = 'Abulafia Web Notification';
 				$mail->isHTML(true);
 				include "../mail-conf-include.php";
 				foreach ($indirizzi as $email) {
@@ -222,18 +225,10 @@
 							.'.<br>Non rispondere a questa email.';
 				$esito = $mail->send();
 				//scrittura log mail
-				$my_log -> publscrivilog($_SESSION['loginname'],
-							'send notifications' , 
-							$esito ,
-							'notifica automatica - inserisci lettera', 
-							$_SESSION['maillog']);
+				$my_log -> publscrivilog($_SESSION['loginname'],'send notifications', $esito, 'notifica automatica - inserisci lettera', $_SESSION['maillog']);
 			}
 			//scrittura history log		
-			$my_log -> publscrivilog( $_SESSION['loginname'], 
-						'REGISTRATA LETTERA '. $ultimoid , 
-						'OK' , 
-						'' , 
-						$_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $ultimoid, 'OK', '', $_SESSION['historylog']);
 		}
 	}
 	
@@ -241,7 +236,6 @@
 	
 		$idlettera = $_GET['idlettera'];
 		$change = false;
-		
 		//salvo le modifiche nel DB
 		$lettera = new Lettera();
 		$dettagli = $lettera->getDettagli( $idlettera, $annoprotocollo);
@@ -271,14 +265,14 @@
 				$change = true;
 			}
 			if($dettagli['riferimento'] != $riferimento) {
-				$old = $dettagli['riferimento'] . ' - ' . $lettera->getDescPosizione($dettagli['riferimento']);
-				$now = $riferimento . ' - ' . $lettera->getDescPosizione($riferimento);
+				$old = addslashes($dettagli['riferimento'] . ' - ' . $lettera->getDescPosizione($dettagli['riferimento']));
+				$now = addslashes($riferimento . ' - ' . $lettera->getDescPosizione($riferimento));
 				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata posizione', '$user', '$time', '#FFFFCC', '$old', '$now')");
 				$change = true;
 			}
 			if($dettagli['pratica'] != $pratica) {
-				$old = $lettera->getDescPratica($dettagli['pratica']);
-				$now = $lettera->getDescPratica($pratica);
+				$old = addslashes($lettera->getDescPratica($dettagli['pratica']));
+				$now = addslashes($lettera->getDescPratica($pratica));
 				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata pratica', '$user', '$time', '#FFFFCC', '$old', '$now')");
 				$change = true;
 			}
@@ -313,6 +307,7 @@
 			$query->bindParam(':pratica', $pratica);
 			$query->bindParam(':note', $note);
 			$query->bindParam(':idlettera', $idlettera);
+			$query->execute();
 			$connessione->commit();
 			$modifica = true;
 		}	 
@@ -332,15 +327,16 @@
 				$query = $connessione->prepare("UPDATE 
 													joinlettereinserimento$annoprotocollo 
 												SET 
-													joinlettereinserimento$annoprotocollo.idmod='$loginid', 
-													joinlettereinserimento$annoprotocollo.datamod='$date' 
+													joinlettereinserimento$annoprotocollo.idmod = :loginid, 
+													joinlettereinserimento$annoprotocollo.datamod = :date 
 												WHERE 
-													joinlettereinserimento$annoprotocollo.idlettera='$idlettera' 
+													joinlettereinserimento$annoprotocollo.idlettera = :idlettera 
 												LIMIT 1
 												"); 
 				$query->bindParam(':loginid', $loginid);
 				$query->bindParam(':date', $date);
 				$query->bindParam(':idlettera', $idlettera);
+				$query->execute();
 				$connessione->commit();
 				$utentemod = true;
 			}	 
@@ -368,8 +364,8 @@
 			if ($indirizzi) {
 				//invio notifica
 				$mail = new PHPMailer();
-				$mail->From = 'no-reply@cricatania.it';
-				$mail->FromName = 'Abulafia';
+				$mail->From = 'no-reply@abulafiaweb.it';
+				$mail->FromName = 'Abulafia Web Notification';
 				$mail->isHTML(true);
 				include "../mail-conf-include.php";
 				foreach ($indirizzi as $email) {
@@ -398,7 +394,7 @@
 						'' , 
 						$_SESSION['historylog']);
 			
-			$ultimoid= $idlettera;
+			$ultimoid = $idlettera;
 		}
 	}
 	

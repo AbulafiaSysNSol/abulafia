@@ -19,7 +19,7 @@ $id = $_GET['id'];
 					$risultati2 = $risultati->fetch();
 					$risultati2=array_map("stripslashes",$risultati2);
 				?>
-				<label><span class="glyphicon glyphicon-pencil"></span> Modifica posizione: "<?php echo $risultati2['codice'] . ' - ' . $risultati2['descrizione']; ?>" --- <a href="login0.php?corpus=titolario"><i class="fa fa-arrow-left"></i> <b>Indietro</b></a></label><br><br>
+				<label><span class="glyphicon glyphicon-pencil"></span> Modifica posizione: "<?php echo $risultati2['codice'] . ' - ' . stripslashes($risultati2['descrizione']); ?>" --- <a href="login0.php?corpus=titolario"><i class="fa fa-arrow-left"></i> <b>Indietro</b></a></label><br><br>
 				
 				<form action="login0.php?corpus=titolario-modifica2&id=<?php echo $id ?>" method="post" role="form">
 				<div class="form-group">	
@@ -28,7 +28,7 @@ $id = $_GET['id'];
 							<label>Codice posizione:</label> <input value="<?php echo $risultati2['codice']; ?>" class="form-control" size="10" type="text" name="codice" />
 						</div>
 						<div class="col-sm-6">
-							<label>Descrizione posizione:</label><input value="<?php echo str_replace("\"", '&quot;',$risultati2['descrizione']); ?>" class="form-control" size="40" type="text" name="descrizione" />			
+							<label>Descrizione posizione:</label><input value="<?php echo stripslashes($risultati2['descrizione']); ?>" class="form-control" size="40" type="text" name="descrizione" />			
 						</div>
 						<div class="col-sm-3">
 							<br><button type="submit" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-pencil"></span> Modifica Posizione</button>

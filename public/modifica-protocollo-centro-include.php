@@ -102,7 +102,7 @@
 			if(!$_SESSION['block']) {
 				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso mittente/destinatario', '$user', '$time', '#FC9E9E', '$name', ' ')");
 			}
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
+			$my_log->publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
 		}
 		$risultati = $connessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
@@ -365,7 +365,7 @@
 			<option value="">nessuna pratica
 			<?php
 			while ($risultati2 = $risultati->fetch()) {
-				$risultati2 = array_map ("stripslashes",$risultati2);
+				$risultati2 = array_map("stripslashes",$risultati2);
 				 if( $row['pratica'] == $risultati2['id'] ) {
 					echo '<option selected value="' . $risultati2['id'] . '">' . $risultati2['descrizione'];
 				}
@@ -382,7 +382,7 @@
 			<label><span class="glyphicon glyphicon-comment"></span> Note:</label>
 			<div class="row">
 			<div class="col-sm-11">
-			<input class="form-control" size="40" type="text" name="note" value="<?php echo $row['note']; ?>"/></label>
+			<input class="form-control" size="40" type="text" name="note" value="<?php echo stripslashes($row['note']); ?>"/></label>
 			</div>
 			</div>
 			

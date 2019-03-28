@@ -134,8 +134,8 @@
 		if ($indirizzi) {
 			//invio notifica
 			$mail = new PHPMailer();
-			$mail->From = 'no-reply@cricatania.it';
-			$mail->FromName = 'Abulafia';
+			$mail->From = 'no-reply@abulafiaweb.it';
+			$mail->FromName = 'Abulafia Web Notification';
 			$mail->isHTML(true);
 			include "../mail-conf-include.php";
 			foreach ($indirizzi as $email) {

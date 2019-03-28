@@ -2,7 +2,7 @@
 
 	$id = $_GET['id'];
 	$codice = $_POST['codice'];
-	$descrizione = $_POST['descrizione'];
+	$descrizione = stripslashes($_POST['descrizione']);
 	try {
 	   	$connessione->beginTransaction();
 		$query = $connessione->prepare("UPDATE titolario SET codice = :codice, descrizione = :descrizione WHERE id = :id "); 
