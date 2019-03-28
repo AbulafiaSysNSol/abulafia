@@ -11,7 +11,19 @@
 	$idlettera = $_GET['id'];
 	$from = $_GET['from'];
 	
-	$delete = mysql_query(" DELETE FROM comp_lettera WHERE id = $idlettera "); 
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("DELETE FROM comp_lettera WHERE id = :idlettera"); 
+		$query->bindParam(':id', $id);
+		$query->execute();
+		$connessione->commit();
+		$delete = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$delete = false;
+	}	
 	
 	if($delete) {
 		header("Location: login0.php?corpus=".$from."&delete=ok");

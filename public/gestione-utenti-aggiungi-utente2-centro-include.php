@@ -1,18 +1,42 @@
 <?php 
+
 	$id = $_GET['id'];
 	$nome = str_replace("'","",$_GET['nome']);
-	$cognome = str_replace("'","",$_GET['cognome']);
-	
+	$cognome = str_replace("'","",$_GET['cognome']);	
 	$nomenuovoutente = strtolower($nome.'.'.$cognome);
 	$passwordnuovoutente = md5($nomenuovoutente);
-	$nuovoutente = mysql_query("INSERT INTO users VALUES('$id',0,'$nomenuovoutente', '$passwordnuovoutente', '', 0, 0, 0, 0, 0, 0, 0, 0, 0)");
-	$setting = mysql_query("INSERT INTO usersettings VALUES('$id', 30, 'images/splash.jpg', '#DEFEB4', '#FFFFCC', '100%', '', '')");
+
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("INSERT INTO users VALUES(:id, 0, :nomenuovoutente, :passwordnuovoutente, '', 0, 0, 0, 0, 0, 0, 0, 0, 0)"); 
+		$query->bindParam(':id', $id);
+		$query->bindParam(':nomenuovoutente', $nomenuovoutente);
+		$query->bindParam(':passwordnuovoutente', $passwordnuovoutente);
+		$query->execute();
+		$connessione->commit();
+		$nuovoutente = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$nuovoutente = false;
+	}	
+
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("INSERT INTO usersettings VALUES(:id, 30, '', '#DEFEB4', '#FFFFCC', '100%', '', '')"); 
+		$query->bindParam(':id', $id);
+		$query->execute();
+		$connessione->commit();
+		$setting = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$setting = false;
+	}	
 ?>
 
-<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
-		window.location="login0.php?corpus=gestione-utenti"; 
-	else 
-		window.location="login0.php?corpus=gestione-utenti";
-</SCRIPT>
+<script language = "javascript"> 
+	window.location="login0.php?corpus=gestione-utenti";
+</script>

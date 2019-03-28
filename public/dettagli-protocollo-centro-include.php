@@ -198,8 +198,7 @@
 		<?php
 		if($modifica['idanagrafica'] != 0) {
 			$anagrafica = new Anagrafica();
-			$query = mysql_query("SELECT * FROM storico_modifiche, lettere$anno WHERE storico_modifiche.protocollo ='$id' AND storico_modifiche.anno ='$anno' AND lettere$anno.idlettera = storico_modifiche.protocollo ORDER BY id");
-			echo mysql_error();
+			$query = $connessione->query("SELECT * FROM storico_modifiche, lettere$anno WHERE storico_modifiche.protocollo ='$id' AND storico_modifiche.anno ='$anno' AND lettere$anno.idlettera = storico_modifiche.protocollo ORDER BY id");
 			?>
 			<br>
 			<div class="row smartphone">
@@ -216,7 +215,7 @@
 							<td style="vertical-align: middle" align="center" >Valore attuale</td>
 						</tr>
 						<?php
-							while($mod = mysql_fetch_array($query)) {
+							while($mod = $query->fetch()) {
 								?>
 								<tr bgcolor="<?php echo $mod['color']; ?>">
 									<td style="vertical-align: middle" align="center" ><?php echo date('d/m/Y H:i',$mod['time']); ?></td>

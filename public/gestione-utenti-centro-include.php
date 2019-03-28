@@ -46,7 +46,7 @@
 				<div class="table-responsive">
 					<table class="table">
 						<?php
-						$risultati=mysql_query("select distinct * from users, anagrafica where users.idanagrafica=anagrafica.idanagrafica order by users.auth desc, anagrafica.cognome, anagrafica.nome ");
+						$risultati = $connessione->query("SELECT DISTINCT * FROM users, anagrafica WHERE users.idanagrafica = anagrafica.idanagrafica ORDER BY users.auth DESC, anagrafica.cognome, anagrafica.nome");
 						?>
 						<tr>
 							<td><b>Utente</b></td>
@@ -63,7 +63,7 @@
 							<?php if($anag->isAdmin($_SESSION['loginid'])) { ?><td align="center"><b>Opzioni</b></td><?php } ?>
 						</tr>
 						<?php
-						while ($risultati2=mysql_fetch_array($risultati)) {
+						while ($risultati2 = $risultati->fetch()) {
 							$risultati2 = array_map('stripslashes', $risultati2);
 							?>
 							<tr>
