@@ -20,9 +20,9 @@
 	else {
 		$from = '';
 	}
-	$cerca = mysql_query("SELECT * FROM comp_lettera WHERE id = $id");
+	$cerca = $connessione->query("SELECT * FROM comp_lettera WHERE id = $id");
 
-	while($risultati = mysql_fetch_array($cerca)) {
+	while($risultati = $cerca->fetch()) {
 		$allegati = $risultati['allegati'];
 		$oggetto = stripslashes($risultati['oggetto']);
 		$testo = stripslashes($risultati['testo']);
@@ -32,13 +32,13 @@
 		$anno = $risultati['anno'];
 		$ufficio = $risultati['ufficio'];
 		if($protocollo != 0) {
-			$data2 = mysql_query("SELECT dataregistrazione FROM lettere$anno WHERE idlettera = $protocollo");
-			$data3 = mysql_fetch_row($data2);
+			$data2 = $connessione->query("SELECT dataregistrazione FROM lettere$anno WHERE idlettera = $protocollo");
+			$data3 = $data2->fetch();
 			$dataprot = $calendario->dataSlash($data3[0]);
 		}
 	}
-	$firme = mysql_query("SELECT * FROM uffici WHERE id = $ufficio");
-	$firmeresult = mysql_fetch_array($firme);
+	$firme = $connessione->query("SELECT * FROM uffici WHERE id = $ufficio");
+	$firmeresult = $firme->fetch();
 	$firmagrafo = $firmeresult['firma'];
 	$firmagrafoprova = $firmeresult['firmaprova'];
 	if (($allegati == '') OR ($allegati == 0)) {
@@ -79,12 +79,12 @@
 							
 							$destlettera = '';
 							//destinatari
-							$dest = mysql_query("SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo, comp_destinatari.riga1, comp_destinatari.riga2
+							$dest = $connessione->query("SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo, comp_destinatari.riga1, comp_destinatari.riga2
 											FROM anagrafica, comp_destinatari
 											WHERE comp_destinatari.idlettera = $id
 											AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
-											AND comp_destinatari.conoscenza = 0 ");echo mysql_error();
-							while($destinatari=mysql_fetch_array($dest)) {
+											AND comp_destinatari.conoscenza = 0 ");
+							while($destinatari = $dest->fetch()) {
 								$destinatari = array_map('stripslashes', $destinatari);
 								if($destinatari['attributo'] == 'Al Volontario') {
 									$destlettera = $destlettera. '<tr>	<td width="60"> Al</td>
@@ -125,25 +125,25 @@
 							}
 				
 							//destinatari x conoscenza
-							$dest2 = mysql_query("SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo, comp_destinatari.riga1, comp_destinatari.riga2
+							$dest2 = $connessione->query("SELECT anagrafica.cognome, anagrafica.nome, comp_destinatari.attributo, comp_destinatari.riga1, comp_destinatari.riga2
 											FROM anagrafica, comp_destinatari
 											WHERE comp_destinatari.idlettera = $id
 											AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
 											AND comp_destinatari.conoscenza = 1 ");
 
-							$count = mysql_query("SELECT COUNT(anagrafica.idanagrafica)
+							$count = $connessione->query("SELECT COUNT(anagrafica.idanagrafica)
 											FROM anagrafica, comp_destinatari
 											WHERE comp_destinatari.idlettera = $id
 											AND comp_destinatari.idanagrafica = anagrafica.idanagrafica
 											AND comp_destinatari.conoscenza = 1 ");
-							$num=mysql_fetch_row($count);
+							$num = $count->fetch();
 							if($num[0]>0) {
 								$destlettera = $destlettera. '<tr>	<td width="60">E, p.c.</td>
 															<td width="208"><br><br>
 															</td>
 														<br><br>
 													</tr>';
-								while($destinatari=mysql_fetch_array($dest2)) {
+								while($destinatari = $dest2->fetch()) {
 									$destinatari = array_map('stripslashes', $destinatari);
 									if($destinatari['attributo'] == 'Al Volontario') {
 									$destlettera = $destlettera. '<tr>	<td width="60"> Al</td>
@@ -225,7 +225,21 @@
 			mkdir("lettere$anno/".$protocollo, 0777, true);
 		}
 		$name = time() . '.pdf';
-		$insert = mysql_query("INSERT INTO joinlettereallegati VALUES ('$protocollo', '$anno', '$name')");
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO joinlettereallegati VALUES (:protocollo, :anno, :name)"); 
+			$query->bindParam(':protocollo', $protocollo);
+			$query->bindParam(':anno', $anno);
+			$query->bindParam(':name', $name);
+			$query->execute();
+			$connessione->commit();
+			$insert = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$insert = false;
+		}	
 		$html2pdf->Output('lettere'.$anno.'/'.$protocollo.'/'.$name,'F');
 		header("Location: login0.php?corpus=dettagli-protocollo&id=".$protocollo."&anno=".$anno);
 	}

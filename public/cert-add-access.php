@@ -41,7 +41,7 @@
 	}
 
 	$result = $acc->insertAccess($idanagrafica, $medico, $data, $ora, $dipendente, $anamnesi, $diagnosi, $terapia, $note, $intervento);
-echo mysql_error();
+	
 	if($result) {
 		?>
 		<script>

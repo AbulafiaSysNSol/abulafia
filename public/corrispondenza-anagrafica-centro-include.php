@@ -19,7 +19,7 @@
 	$tabella= 'lettere'.$annoricercaprotocollo;
 	$joinletteremittenti= 'joinletteremittenti'.$annoricercaprotocollo;
 	
-	$count = mysql_query(	
+	$count = $connessione->query(	
 						"SELECT 
 							COUNT(*) 
 						FROM 
@@ -30,12 +30,12 @@
 							$joinletteremittenti.idanagrafica = $idanagrafica"
 						);
 	//conteggio per divisione in pagine dei risultati
-	$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
+	$res_count = $count->fetch();//conteggio per divisione in pagine dei risultati
 	$tot_records = $res_count[0];//conteggio per divisione in pagine dei risultati
 	$tot_pages = ceil($tot_records / $risultatiperpagina);//conteggio per divisione in pagine dei risultati - la frazione arrotondata per eccesso
 	$iniziorisultati = $_GET['iniziorisultati'];
 	$contatorelinee = 1 ;// per divisione in due colori diversi in tabella
-	$risultati = mysql_query("	
+	$risultati = $connessione->query("	
 						SELECT 
 							* 
 						FROM 
@@ -49,7 +49,7 @@
 						LIMIT
 							$iniziorisultati , $risultatiperpagina
 					");
-	$num_righe = mysql_num_rows($risultati);
+	$num_righe = $risultati->rowCount();
 	
 	?>
 	<center>
@@ -58,10 +58,10 @@
 			Anno di ricerca corrispondenza:
 			<SELECT id="annoricerca" class="form-inline input-sm" name="annoricercaprotocollo" onChange="change()">
 			<?php
-				$esistenzatabella1=mysql_query("show tables like 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
+				$esistenzatabella1 = $connessione->query("SHOW TABLES LIKE 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
 				$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
 				$my_calendario-> publadesso(); //acquisizione dell'anno attuale per indicare l'anno selezionato di default
-				while ($esistenzatabella11 = mysql_fetch_array($esistenzatabella1, MYSQL_NUM)) {
+				while ($esistenzatabella11 = $esistenzatabella1->fetch()) {
 					if ('lettere'.$annoricercaprotocollo == $esistenzatabella11[0]) { 
 						$selected='selected'; 
 					}
@@ -132,7 +132,7 @@
 			</tr>
 		<?php
 		
-		while ($value = mysql_fetch_array($risultati)) { //elenco i risultati dell'array
+		while ($value = $risultati->fetch()) { //elenco i risultati dell'array
 			$value = array_map('stripslashes', $value);
 			if ( $contatorelinee % 2 == 1 ) { 
 				$colorelinee = $_SESSION['primocoloretabellarisultati'];

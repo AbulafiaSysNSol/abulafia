@@ -23,12 +23,26 @@
 	$idrichiedente = $_SESSION['loginid'];
 	$data = date("Y-m-d", time());
 
-	$insert = mysql_query("INSERT INTO cert_richieste VALUES ('', '$idanagrafica', '$idvisita', '$tipo', '$data', '$idrichiedente', '0', '0', '0')");
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("INSERT INTO cert_richieste VALUES (null, :idanagrafica, :idvisita, :tipo, :data, :idrichiedente, '0', '0', '0')"); 
+		$query->bindParam(':idanagrafica', $idanagrafica);
+		$query->bindParam(':idvisita', $idvisita);
+		$query->bindParam(':tipo', $tipo);
+		$query->bindParam(':data', $data);
+		$query->bindParam(':idrichiedente', $idrichiedente);
+		$query->execute();
+		$connessione->commit();
+		$insert = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$insert = false;
+	}
 	
 	if($insert) {
 		header("Location: login0.php?corpus=cert-search-anag&richiesta=ok");
 	}
-	else {
-		echo mysql_error();
-	}
+	
 ?>
