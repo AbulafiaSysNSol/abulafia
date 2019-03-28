@@ -134,22 +134,22 @@
 		try {
 		   	$connessione->beginTransaction();
 			$query = $connessione->prepare("INSERT INTO anagrafica VALUES (null, :nome, :cognome, :residenza_stato, :residenza_provincia, :residenza_comune, :residenza_via, :residenza_civico, :residenza_cap, :nascita_data, :nascita_stato, :nascita_provincia, :nascita_comune, :url_foto, :gruppo_sanguigno, :codice_fiscale, :anagraficatipologia, '0')"); 
-			$query->bindParam(':cognome', $cognome);
 			$query->bindParam(':nome', $nome);
-			$query->bindParam(':nascita_data', $nascita_data);
-			$query->bindParam(':nascita_comune', $nascita_comune);
-			$query->bindParam(':nascita_provincia', $nascita_provincia);
-			$query->bindParam(':nascita_stato', $nascita_stato);
+			$query->bindParam(':cognome', $cognome);
+			$query->bindParam(':residenza_stato', $residenza_stato);
+			$query->bindParam(':residenza_provincia', $residenza_provincia);
+			$query->bindParam(':residenza_comune', $residenza_comune);
 			$query->bindParam(':residenza_via', $residenza_via);
 			$query->bindParam(':residenza_civico', $residenza_civico);
-			$query->bindParam(':residenza_comune', $residenza_comune);
-			$query->bindParam(':residenza_provincia', $residenza_provincia);
-			$query->bindParam(':residenza_stato', $residenza_stato);
+			$query->bindParam(':residenza_cap', $residenza_cap);
+			$query->bindParam(':nascita_data', $nascita_data);
+			$query->bindParam(':nascita_stato', $nascita_stato);
+			$query->bindParam(':nascita_provincia', $nascita_provincia);
+			$query->bindParam(':nascita_comune', $nascita_comune);
+			$query->bindParam(':url_foto', $url_foto);
 			$query->bindParam(':gruppo_sanguigno', $gruppo_sanguigno);
 			$query->bindParam(':codice_fiscale', $codice_fiscale);
-			$query->bindParam(':residenza_cap', $residenza_cap);
 			$query->bindParam(':anagraficatipologia', $anagraficatipologia);
-			$query->bindParam(':urlfoto', $urlfoto);
 			$query->execute();
 			$lastid = $connessione->lastInsertId();
 			$connessione->commit();
@@ -159,6 +159,7 @@
 		   	echo "Errore: " . $errorePDO->getMessage();
 		   	$connessione->rollBack();
 		 	$inserimento = false;
+		 	exit();
 		}		
 		$old_compl_url = 'foto/'.$url_foto;
 		$new_compl_url = 'foto/'.$lastid.$url_foto;
@@ -183,6 +184,7 @@
 		   	echo "Errore: " . $errorePDO->getMessage();
 		   	$connessione->rollBack();
 		 	$inserimento3 = false;
+		 	exit();
 		}	
 		if (!$inserimento3) { 
 			echo "<br>Inserimento foto non riuscito"; 
@@ -207,6 +209,7 @@
 			   	echo "Errore: " . $errorePDO->getMessage();
 			   	$connessione->rollBack();
 			 	$inserimento2 = false;
+			 	exit();
 			}	
 			if (!$inserimento2) { 
 				echo "<br>Inserimento recapito non riuscito" ; 
@@ -215,7 +218,7 @@
 		if (($telefono2 != '' ) and ($lastid != '' )) {
 			try {
 			   	$connessione->beginTransaction();
-				$query = $connessione->prepare("INSERT INTO jointelefonipersone VALUES (:lastid, :telefono', :tipo2)"); 
+				$query = $connessione->prepare("INSERT INTO jointelefonipersone VALUES (:lastid, :telefono, :tipo2)"); 
 				$query->bindParam(':lastid', $lastid);
 				$query->bindParam(':telefono', $telefono);
 				$query->bindParam(':tipo2', $tipo2);
@@ -227,22 +230,23 @@
 			   	echo "Errore: " . $errorePDO->getMessage();
 			   	$connessione->rollBack();
 			 	$inserimento2 = false;
+			 	exit();
 			}	
 			if (!$inserimento2) { 
 				echo "<br>Inserimento secondo recapito non riuscito"; 
 			}
 		}
 		?>
-		<SCRIPT LANGUAGE="Javascript">
-			window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=false&id=<?php echo $lastid;?>";
-		</SCRIPT>
+		<script language = "javascript">
+			window.location = "login0.php?corpus=dettagli-anagrafica&from=insert&exist=false&id=<?php echo $lastid;?>";
+		</script>
 		<?php
 	}
 	else {
 		?>
-		<SCRIPT LANGUAGE="Javascript">
-			window.location="login0.php?corpus=dettagli-anagrafica&from=insert&exist=true";
-		</SCRIPT>
+		<script language = "javascript">
+			window.location = "login0.php?corpus=dettagli-anagrafica&from=insert&exist=true";
+		</script>
 		<?php
 	}
 ?>

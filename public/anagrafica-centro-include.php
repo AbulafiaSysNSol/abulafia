@@ -288,13 +288,13 @@
 	//controllo coerenza dati
 	if ((tipo == "") || (tipo == "undefined")) 
 	{
-           alert("Il campo Tipologia è obbligatorio");
+           alert("Il campo Tipologia e' obbligatorio");
            document.modulo.anagraficatipologia.focus();
            return false;
       }
 	else if ((cognome == "") || (cognome == "undefined")) 
 	{
-           alert("Il campo Cognome è obbligatorio");
+           alert("Il campo Cognome e' obbligatorio");
            document.modulo.cognome.focus();
            return false;
       }

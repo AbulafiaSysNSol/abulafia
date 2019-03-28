@@ -8,7 +8,7 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> <b>Errore:</b> il soggetto è già presente in anagrafica, controlla.</div>
+						<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> <b>Errore:</b> il soggetto &egrave; gi&agrave; presente in anagrafica, controlla.</div>
 					</div>
 				</div>
 			</div>
@@ -41,8 +41,8 @@
 	$risultati2 = $connessione->query("SELECT * FROM jointelefonipersone WHERE idanagrafica = '$id'");
 	$countrecapiti = $connessione->query("SELECT COUNT(*) FROM jointelefonipersone WHERE idanagrafica = '$id'");
 	$row = $risultati->fetch();
-	$row = array_map ("stripslashes",$row);
-	$data = $row['nascitadata'] ;
+	$row = array_map ('stripslashes', $row);
+	$data = $row['nascitadata'];
 	list($anno, $mese, $giorno) = explode("-", $data);
 	$datanascita = $giorno .'/'. $mese .'/'. $anno;
 ?>
