@@ -1,10 +1,10 @@
 <?php
+
 	$filtro=$_GET['filtro'];
 	
-	if(isset($_SESSION['message'])) //controlla che sia settata la variabile
-		{ 
+	if(isset($_SESSION['message'])) { //controlla che sia settata la variabile
 		$message= $_SESSION['message'].'<br>';
-		}
+	}
 ?>
 
 <div class="panel panel-default">
@@ -39,28 +39,21 @@
 				</tr>
 
 			<?php
-				$risultati= mysql_query("select * 
-							from anagrafica 
-							order by anagrafica.cognome, anagrafica.nome");
+				$risultati = $connessione->query("SELECT * FROM anagrafica ORDER BY anagrafica.cognome, anagrafica.nome");
 
 				if (!$risultati) {
 					echo 'Nessun risultato dalla query';
 				}
 
-				while ($row = mysql_fetch_array($risultati)) { //inizio ciclo while
-					$cognome= $row['cognome'];
-					$nome= $row['nome'];
-					$id= $row['idanagrafica'];
-					$datagrezza=$row['nascitadata'];
-					$datadinascita= list($anno, $mese, $giorno) = explode("-", $datagrezza);
+				while ($row = $risultati->fetch()) { //inizio ciclo while
+					$cognome = $row['cognome'];
+					$nome = $row['nome'];
+					$id = $row['idanagrafica'];
+					$datagrezza = $row['nascitadata'];
+					$datadinascita = list($anno, $mese, $giorno) = explode("-", $datagrezza);
 					$datadinascita2 = "$giorno-$mese-$anno";
-					$verificaduplicati= mysql_query("select COUNT(*) 
-									from anagrafica 
-									where anagrafica.cognome='$cognome' 
-									and 
-									anagrafica.nome='$nome'");
-					echo mysql_error();
-					$res_count=mysql_fetch_row($verificaduplicati);
+					$verificaduplicati = $connessione->query("SELECT COUNT(*) FROM anagrafica WHERE anagrafica.cognome = '$cognome' AND	anagrafica.nome = '$nome'");
+					$res_count = $verificaduplicati->fetch();
 					
 					if ($res_count[0] > 1) { //caso in cui il gruppo cognome+nome risulti duplicato
 						?>

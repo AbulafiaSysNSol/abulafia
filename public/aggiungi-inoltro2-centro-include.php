@@ -8,10 +8,8 @@
 	$data = $_POST['data'];
 	$datains = $calendario->dataDB($data);
 	$userid = $_SESSION['loginid'];
-/*deprecato	$insert = mysq>l_query("INSERT INTO mailsend VALUES ( '', '$userid', '$email', '$datains', '$idlettera', '$anno')");*/
 
-	try 
-		{
+	try {
    		$connessione->beginTransaction();
 		$query = $connessione->prepare("INSERT INTO mailsend
 						VALUES( '', 
@@ -30,17 +28,14 @@
 		} 
 		
 		//gestione dell'eventuale errore della connessione
-		catch (PDOException $errorePDO) { 
-    		echo "Errore: " . $errorePDO->getMessage();
-		$connessione->rollback();
-		exit();
-		}
-	
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+	$connessione->rollback();
+	exit();
+	}
 
-		?>
-		<SCRIPT LANGUAGE="Javascript">
-		window.location="login0.php?corpus=dettagli-protocollo
-				&id=<?php echo $idlettera;?>
-				&anno=<?php echo $anno;?>
-				&inoltro=ok"; 
-		</SCRIPT>
+?>
+
+<script language = "javascript">
+	window.location="login0.php?corpus=dettagli-protocollo&id=<?php echo $idlettera;?>&anno=<?php echo $anno;?>&inoltro=ok";
+</script>

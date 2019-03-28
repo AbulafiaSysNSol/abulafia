@@ -53,10 +53,10 @@
 
 	<div class="col-sm-6">   
 		<?php
-		$attributo=mysql_query("select count(*) from attributi");
+		$attributo = $connessione->query("SELECT COUNT(*) FROM attributi");
 		
 		if ($attributo) { 
-			$num=mysql_fetch_row($attributo);
+			$num = $attributo->fetch();
 		} //se ce ne sono, li conta
 		else { 
 			$num[0]=0; 
@@ -69,14 +69,14 @@
 			?>
 			<label><span class="glyphicon glyphicon-list"></span> Elenco attributi:</label><br><br>
 			<?php
-			$risultati=mysql_query("select distinct * from attributi");
+			$risultati = $connessione->query("SELECT DISTINCT * FROM attributi");
 			?>
 			<table class="table table-striped table-hover">
 			<tr>
 			<td><b>ID</b></td><td><b>Attributo</b></td><td><b>Opzioni</b></td>
 			</tr>
 			<?php
-			while ($risultati2=mysql_fetch_array($risultati))	{
+			while ($risultati2 = $risultati->fetch())	{
 				$risultati2 = array_map ("stripslashes",$risultati2);
 				echo '<tr>';
 				echo '<td>' . $risultati2['id'] . '</td><td>' . $risultati2['attributo'] . '</td>

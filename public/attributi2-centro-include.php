@@ -1,22 +1,33 @@
 <?php 
-	$attributo=$_POST['descrizione'];
-	$inserimento=mysql_query("insert into attributi values('', '$attributo')");
+
+	$attributo = $_POST['descrizione'];
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("INSERT INTO attributi VALUES(null, :attributo)"); 
+		$query->bindParam(':attributo', $attributo);
+		$query->execute();
+		$connessione->commit();
+		$inserimento = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$inserimento = false;
+	}	
+
 	if($inserimento) {
 		?>
-		<SCRIPT LANGUAGE="Javascript">
-		browser= navigator.appName;
-		if (browser == "Netscape")
-		window.location="login0.php?corpus=attributi&add=ok"; else window.location="login0.php?corpus=attributi&add=ok"
-		</SCRIPT>
+		<script language = "javascript">
+			window.location="login0.php?corpus=attributi&add=ok";
+		</script>
 		<?php
 	}
 	else {
 	?>
-		<SCRIPT LANGUAGE="Javascript">
-		browser= navigator.appName;
-		if (browser == "Netscape")
-		window.location="login0.php?corpus=attributi&add=no"; else window.location="login0.php?corpus=attributi&add=no"
-		</SCRIPT>
+		<script language = "javascript">
+			window.location="login0.php?corpus=attributi&add=no";
+		</script>
 	<?php 
 	}
+
 ?>
