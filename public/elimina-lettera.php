@@ -14,7 +14,7 @@
 	try {
 	   	$connessione->beginTransaction();
 		$query = $connessione->prepare("DELETE FROM comp_lettera WHERE id = :idlettera"); 
-		$query->bindParam(':id', $id);
+		$query->bindParam(':idlettera', $idlettera);
 		$query->execute();
 		$connessione->commit();
 		$delete = true;

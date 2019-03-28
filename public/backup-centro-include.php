@@ -20,12 +20,12 @@
 						<i class="fa fa-fw fa-calendar"></i> Anno Protocollo:
 						<SELECT class="form-control input-sm" name="anno" >
 						<?php
-							$esistenzatabella1=mysql_query("show tables like 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
+							$esistenzatabella1 = $connessione->query("SHOW TABLES LIKE 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
 							$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
 							$my_calendario-> publadesso(); //acquisizione dell'anno attuale per indicare l'anno selezionato di default
-							while ($esistenzatabella11 = mysql_fetch_array($esistenzatabella1, MYSQL_NUM))
+							while ($esistenzatabella11 = $esistenzatabella1->fetch())
 							{
-							if ('lettere'.$my_calendario->anno== $esistenzatabella11[0]) { $selected='selected'; }
+							if ('lettere'.$my_calendario->anno == $esistenzatabella11[0]) { $selected='selected'; }
 							else { $selected ='';}
 							$annoprotocollo= explode("lettere", $esistenzatabella11[0]);
 							?><OPTION value="<?php echo $annoprotocollo[1] ;?>" <?php echo $selected ;?>> <?php echo $annoprotocollo[1];?>

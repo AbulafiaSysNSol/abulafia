@@ -24,13 +24,13 @@
 			}
 			
 			$tabella1='lettere'.$my_calendario->anno;
-			$esistenzatabella1=mysql_query("show tables like '$tabella1'");
-			$esistenzatabella11 = mysql_fetch_array($esistenzatabella1, MYSQL_NUM);
-			if ($esistenzatabella11[0]==$tabella1) {
+			$esistenzatabella1 = $connessione->query("SHOW TABLES LIKE '$tabella1'");
+			$esistenzatabella11 = $esistenzatabella1->fetch();
+			if ($esistenzatabella11[0] == $tabella1) {
 				echo '<i class="fa fa-info-circle"></i> La tabella '.$tabella1.' era gia\' presente<br>';
 			}
 			else { 
-				$creatabella=mysql_query("
+				$creatabella = $connessione->query("
 				CREATE TABLE IF NOT EXISTS `$tabella1` (
 				`idlettera` int(11) NOT NULL auto_increment,
 				`oggetto` text collate utf8_roman_ci NOT NULL,
@@ -47,10 +47,9 @@
 				 "); 
 				if ($creatabella) {
 					echo '<i class="fa fa-check"></i> Tabella '.$tabella1.' creata correttamente<br>'; 
-					$queryprimoprotocollo = mysql_query("ALTER TABLE $tabella1 AUTO_INCREMENT = 1");
+					$queryprimoprotocollo = $connessione->query("ALTER TABLE $tabella1 AUTO_INCREMENT = 1");
 					if (!$queryprimoprotocollo) { 
 						echo 'Settaggio del primo numero del protocollo NON RIUSCITO<br>'; 
-						echo mysql_error(); 
 						exit();
 					}		
 					else { 
@@ -62,14 +61,14 @@
 				}
 			}
 								
-			$tabella2='joinletteremittenti'.$my_calendario->anno;
-			$esistenzatabella2=mysql_query("show tables like '$tabella2'");
-			$esistenzatabella21 = mysql_fetch_array($esistenzatabella2, MYSQL_NUM);
-			if ($esistenzatabella21[0]==$tabella2) {
+			$tabella2 = 'joinletteremittenti'.$my_calendario->anno;
+			$esistenzatabella2 = $connessione->query("SHOW TABLES LIKE '$tabella2'");
+			$esistenzatabella21 = $esistenzatabella2->fetch();
+			if ($esistenzatabella21[0] == $tabella2) {
 				echo '<i class="fa fa-info-circle"></i> La tabella '.$tabella2.' era gia\' presente<br>';
 			}
 			else {
-				$creatabella2=mysql_query("
+				$creatabella2 = $connessione->query("
 				CREATE TABLE IF NOT EXISTS `$tabella2` (
 				`idlettera` text collate utf8_roman_ci NOT NULL,
 				`idanagrafica` text collate utf8_roman_ci NOT NULL
@@ -84,13 +83,13 @@
 			}
 		
 			$tabella3='joinlettereinserimento'.$my_calendario->anno;
-			$esistenzatabella3=mysql_query("show tables like '$tabella3'");
-			$esistenzatabella31 = mysql_fetch_array($esistenzatabella3, MYSQL_NUM);
-			if ($esistenzatabella31[0]==$tabella3) {
+			$esistenzatabella3 = $connessione->query("SHOW TABLES LIKE '$tabella3'");
+			$esistenzatabella31 = $esistenzatabella3->fetch();
+			if ($esistenzatabella31[0] == $tabella3) {
 				echo '<i class="fa fa-info-circle"></i> La tabella '.$tabella3.' era gia\' presente<br>';
 			}
 			else {
-				$creatabella3=mysql_query("
+				$creatabella3 = $connessione->query("
 				CREATE TABLE IF NOT EXISTS `$tabella3` (
 				 `idlettera` int(11) NOT NULL,
 				 `idinser` int(11) NOT NULL,
@@ -106,7 +105,19 @@
 				}
 			}
 
-			$aggiornaannodb=mysql_query("update defaultsettings set annoprotocollo='$my_calendario->anno'");
+			try {
+			   	$connessione->beginTransaction();
+				$query = $connessione->prepare("UPDATE defaultsettings SET annoprotocollo = '$my_calendario->anno'"); 
+				$query->execute();
+				$connessione->commit();
+				$aggiornaannodb = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+			   	echo "Errore: " . $errorePDO->getMessage();
+			   	$connessione->rollBack();
+			 	$aggiornaannodb = false;
+			}	
+
 			if (!$aggiornaannodb) { 
 				die ('<i class="fa fa-times"></i> Impossibile aggiornare l\'anno del registro protocollo virtuale');
 			}
