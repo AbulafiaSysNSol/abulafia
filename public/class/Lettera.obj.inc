@@ -136,6 +136,7 @@ class Lettera {
 	}
 
 	public function publdisplaylettera ($idlettera, $annoricercaprotocollo) { //<man>Stampa i dettagli di una lettera, passando come parametri id e anno di registrazione</man>
+		global $connessione;
 		$this -> leggilettera ($idlettera, $annoricercaprotocollo); 
 		?>
 		

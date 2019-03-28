@@ -25,13 +25,9 @@
 			$_SESSION['my_lettera']=serialize ($my_lettera);
 			?>
 		
-			<SCRIPT LANGUAGE="Javascript">
-				browser= navigator.appName;
-				if (browser == "Netscape")
-					window.location="login0.php?corpus=protocollo2&from=errore"; 
-				else 
-					window.location="login0.php?corpus=protocollo2&from=errore";
-			</SCRIPT>
+			<script language = "javascript">
+				window.location="login0.php?corpus=protocollo2&from=errore";
+			</script>
 			
 			<?php
 			exit();
@@ -53,13 +49,9 @@
 			$_SESSION['note'] = $_POST['note'];
 			*/
 			?>
-			<SCRIPT LANGUAGE="Javascript">
-				browser= navigator.appName;
-				if (browser == "Netscape")
-					window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>"; 
-				else 
-					window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>";
-			</SCRIPT>
+			<script language = "javascript"> 
+				window.location="login0.php?corpus=modifica-protocollo&from=errore&tabella=protocollo&id=<?php echo $idlettera;?>";
+			</script>
 			<?php
 			exit();
 		}
@@ -104,7 +96,7 @@
 		//SCRIVO I DETTAGLI DELLA LETTERA NEL DB
 		try {
 	   		$connessione->beginTransaction();
-			$query = $connessione->prepare("INSERT INTO lettere$annoprotocollo VALUES (null, :oggetto, :datalettera, :dataregistrazione, null, :speditaricevuta, :posizione, :riferimento, :pratica, :note)"); 
+			$query = $connessione->prepare("INSERT INTO lettere$annoprotocollo VALUES (null, :oggetto, :datalettera, :dataregistrazione, '', :speditaricevuta, :posizione, :riferimento, :pratica, :note)"); 
 			$query->bindParam(':oggetto', $oggetto);
 			$query->bindParam(':datalettera', $datalettera);
 			$query->bindParam(':dataregistrazione', $dataregistrazione);
@@ -122,6 +114,7 @@
 	    	echo "Errore: " . $errorePDO->getMessage();
 	    	$connessione->rollBack();
 	    	$inserimento = false;
+	    	exit();
 		}
 		
 		//SCRIVO L'UTENTE CHE HA FATTO L'INSERIMENTO
@@ -136,6 +129,7 @@
 		catch (PDOException $errorePDO) { 
 	    	echo "Errore: " . $errorePDO->getMessage();
 	    	$connessione->rollBack();
+	    	exit();
 		}
 		
 		//SCRIVO I MITTENTI/DESTINATARI NEL DB
@@ -152,6 +146,7 @@
 		    	echo "Errore: " . $errorePDO->getMessage();
 		    	$connessione->rollBack();
 		    	$inserimento1 = false;
+		    	exit();
 			}
 		}
 		
@@ -170,6 +165,7 @@
 		    	echo "Errore: " . $errorePDO->getMessage();
 		    	$connessione->rollBack();
 		    	$inserimento2 = false;
+		    	exit();
 			}
 			if (!is_dir("lettere$annoprotocollo/".$ultimoid)) { //se non esiste una directory con il l'id della lettera, la crea per ospitare gli allegati
 				mkdir("lettere$annoprotocollo/".$ultimoid, 0777, true);
@@ -324,6 +320,7 @@
 		   	echo "Errore: " . $errorePDO->getMessage();
 		   	$connessione->rollBack();
 		   	$modifica = false;
+		   	exit();
 		}
 		
 		$date=strftime("%Y-%m-%d");
@@ -351,6 +348,7 @@
 			   	echo "Errore: " . $errorePDO->getMessage();
 			   	$connessione->rollBack();
 			   	$utentemod = false;
+			   	exit();
 			}
 		}
 		
