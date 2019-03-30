@@ -1,14 +1,14 @@
 <?php
 
 	$id = $_GET['id'];
-	$p = new Prodotto();
-	$del = $p->eliminaProdotto($id);
+	$s = new Servizio();
+	$del = $s->eliminaServizio($id);
 	
 	if ($del) {
 		$my_log -> publscrivilog($_SESSION['loginname'], 'ELIMINATO PRODOTTO '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
 		?>
 		<script language = "javascript">
-			window.location="login0.php?corpus=magazzino-prodotti&canc=ok";
+			window.location="login0.php?corpus=magazzino-servizi&canc=ok";
 		</script>
 		<?php
 	}
@@ -16,7 +16,7 @@
 		$my_log -> publscrivilog($_SESSION['loginname'], 'TENTATIVO DI ELIMINARE PRODOTTO '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['historylog']);
 		?>
 		<script language = "javascript">
-			window.location="login0.php?corpus=magazzino-prodotti&canc=no";
+			window.location="login0.php?corpus=magazzino-servizi&canc=no";
 		</script>
 		<?php
 	}

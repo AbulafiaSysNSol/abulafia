@@ -66,7 +66,7 @@
 								<i class="fa fa-pencil"></i> Modifica
 							</a>
 							<?php if($admin) { ?>
-								<a class="btn btn-danger" href="">
+								<a class="btn btn-danger" onClick="return confirm('Vuoi veramente cancellare questo servizio?');" href="?corpus=magazzino-elimina-servizio&id=<?php echo $val['codice']; ?>">
 									<i class="fa fa-trash"></i> Elimina
 								</a>
 							<?php } ?>

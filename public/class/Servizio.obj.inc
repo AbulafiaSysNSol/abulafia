@@ -55,6 +55,24 @@
 			return $q;
 		}
 
+		public function eliminaServizio($id) {
+			global $connessione;
+			try {
+	   			$connessione->beginTransaction();
+				$query = $connessione->prepare("DELETE FROM servizi WHERE codice = :id"); 
+				$query->bindParam(':id', $id);
+				$query->execute();
+				$connessione->commit();
+				$q = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+	    		echo "Errore: " . $errorePDO->getMessage();
+				$connessione->rollBack();
+				$q = false;
+			}
+			return $q;
+		}
+
 		public function getServizioById($id) { //<man>Restituisce la descrizione del settore pasando l'id</man>
 			global $connessione;
 			$query = $connessione->query("SELECT * FROM servizi WHERE codice = '$id'");
