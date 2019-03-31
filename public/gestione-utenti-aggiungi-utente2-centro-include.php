@@ -8,7 +8,7 @@
 
 	try {
 	   	$connessione->beginTransaction();
-		$query = $connessione->prepare("INSERT INTO users VALUES(:id, 0, :nomenuovoutente, :passwordnuovoutente, '', 0, 0, 0, 0, 0, 0, 0, 0, 0)"); 
+		$query = $connessione->prepare("INSERT INTO users VALUES(:id, 0, :nomenuovoutente, :passwordnuovoutente, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)"); 
 		$query->bindParam(':id', $id);
 		$query->bindParam(':nomenuovoutente', $nomenuovoutente);
 		$query->bindParam(':passwordnuovoutente', $passwordnuovoutente);
@@ -20,6 +20,7 @@
 	   	echo "Errore: " . $errorePDO->getMessage();
 	   	$connessione->rollBack();
 	 	$nuovoutente = false;
+	 	exit();
 	}	
 
 	try {
@@ -34,6 +35,7 @@
 	   	echo "Errore: " . $errorePDO->getMessage();
 	   	$connessione->rollBack();
 	 	$setting = false;
+	 	exit();
 	}	
 ?>
 

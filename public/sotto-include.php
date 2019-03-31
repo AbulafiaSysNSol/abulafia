@@ -9,7 +9,6 @@
                     </td>
 		
 		<td align="right">
-			<a href="?corpus=home">Home</a> &middot;
 			<a href="https://www.abulafiaweb.it/#contact-section" target="_blank">Contattaci</a> &middot;
 			<a href="https://abulafiaweb.freshdesk.com" target="_blank">Supporto</a> &middot;
 			<a href="?corpus=terminiecondizioni">Condizioni d'uso</a>

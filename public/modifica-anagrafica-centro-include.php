@@ -71,7 +71,7 @@
 			<div class="col-sm-3">
 				<div class="alert alert-info">
 					<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br><br>
-					<img class="img-circle" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'] . "\" width=\"100%\"";} else {echo 'foto/sagoma.png';}?>">
+					<center><img class="img-circle" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'] . "\" width=\"75%\"";} else {echo 'foto/sagoma.png';}?>"></center>
 					<br><br>
 					<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
 						<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
@@ -79,22 +79,6 @@
 						<input required name="uploadedfile" type="file" />
 						<br><center><button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-upload"></span> Upload</button></center>
 					</form>
-				</div>
-			</div>
-
-			<div class="col-sm-9">
-				<div class="alert alert-success">
-					<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br><br>
-					<table class="table">
-					<?php
-						while ($row2 = $risultati2->fetch()) {
-						echo '<tr>';
-						echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-xs" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
-						<?php
-						echo '</tr>';
-						}
-					?>
-					</table>
 				</div>
 			</div>
 				
@@ -124,6 +108,23 @@
 					</form>
 				</div>
 			</div>
+
+			<div class="col-sm-9">
+				<div class="alert alert-success">
+					<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br><br>
+					<table class="table">
+					<?php
+						while ($row2 = $risultati2->fetch()) {
+						echo '<tr>';
+						echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-xs" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
+						<?php
+						echo '</tr>';
+						}
+					?>
+					</table>
+				</div>
+			</div>
+
 		</div>
 
 		<body onLoad="Change()">
