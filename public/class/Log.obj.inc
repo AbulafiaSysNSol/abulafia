@@ -20,38 +20,49 @@ class Log {
 		return $num;
 	}
 
-	private function scrivilog ($username, $operazione, $esito, $client, $logfile) {
-		if(!is_dir($_SESSION['logdirectory'])) { //se la directory non esiste, la crea
+	public function publscrivilog ($username, $operazione, $esito, $client, $logfile) // <man>Scrive nel log $logfile le informazioni elencate; $client descrive le info dell'utente (ip, sistema operativo...)</man>
+		{
+		if(!is_dir($_SESSION['logdirectory'])) //se la directory non esiste, la crea
+			{ 
 			
 			$creadir=mkdir($_SESSION['logdirectory'], 0777, true);
 			
-			if (!$creadir) {
+			if (!$creadir) 
+				{
 				die ("Impossibile creare la directory: log/");
+				}
 			}
 		
-			if(file_exists($_SESSION['logdirectory'].$logfile)==false) { //se il file non esiste, lo crea
-				$filehandle=fopen($_SESSION['logdirectory'].$logfile, 'w');
-				fclose($filehandle);
+		if(file_exists($_SESSION['logdirectory'].$logfile)==false) //se il file non esiste, lo crea
+			{ 
+			$filehandle=fopen($_SESSION['logdirectory'].$logfile, 'w');
+			fclose($filehandle);
 			}
 
-			$accesslog=fopen($_SESSION['logdirectory'].$logfile,"a"); //apertura del file di log
+		$accesslog=fopen($_SESSION['logdirectory'].$logfile,"a"); //apertura del file di log
 			
-			if (!$accesslog) { 
-				die ("Impossibile scrivere nel file di log: $logfile ");
+		if (!$accesslog) 
+			{ 
+			die ("Impossibile aprire il file di log: $logfile ");
 			}
 
-			$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
-			$my_calendario->publggmmaaaa('/'); //acquisisco la data dall'oggetto Calendario
-			$my_calendario->publhhmmss(':'); //acquisisco l'orario dall'oggetto Calendario
-			$logline='Date: '.$my_calendario->ggmmaaaa.' - Hour: '.$my_calendario->hhmmss.' - Username: '.$username.' - Request: '.$operazione.' - Answer: '.$esito.' - Details: '.$client."\n"; //compongo la riga di log
-			fwrite($accesslog, "$logline"); //scrivo il log
-			fclose($accesslog); //chiudo il file
+		$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
+		$my_calendario->publggmmaaaa('/'); //acquisisco la data dall'oggetto Calendario
+		$my_calendario->publhhmmss(':'); //acquisisco l'orario dall'oggetto Calendario
+		$logline='Date: '.$my_calendario->ggmmaaaa.' - Hour: ' //compongo la riga di log
+					.$my_calendario->hhmmss
+					.' - Username: '.$username
+					.' - Request: '.$operazione
+					.' - Answer: '.$esito
+					.' - Details: '.$client."\n";
+		$this->write=fwrite($accesslog, "$logline"); //scrivo il log
+		fclose($accesslog); //chiudo il file
+		if (!$this->write) 
+			{ 
+			die ("Impossibile scrivere nel file di log: $logfile ");
+			}
 		}
-	}
 
-	public function publscrivilog ($username, $operazione, $esito, $client, $logfile) { // <man>Scrive nel log $logfile le informazioni elencate; $client descrive le info dell'utente (ip, sistema operativo...)</man>
-		$this->scrivilog($username, $operazione, $esito, $client, $logfile);
-	}
 
 
 	private function leggilog ($partenza, $numerorighe, $filtro, $logfile) {
