@@ -40,8 +40,6 @@
 	$my_lettera = new Lettera() ;//crea un nuovo oggetto
 	$_SESSION['my_lettera'] = serialize($my_lettera); //serializzazione per passaggio alle variabili di sessione
 	
-	
-echo "stop".$userid;exit;
 
 
 	if ($usermd == $password) {
