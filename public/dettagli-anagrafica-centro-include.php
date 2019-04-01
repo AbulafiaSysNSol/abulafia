@@ -63,7 +63,7 @@
 					
 						<td valign="middle" style="border-left:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">
 							<?php 
-							
+								
 							if ($row['tipologia']=='persona') {
 								?>
 								<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">Cognome: </font>
@@ -198,33 +198,12 @@
 						<?php
 					}
 					
-					$cr = $countrecapiti->fetch();
-					if ($cr[0] > 0) {
-						?>
-						<tr>
-							<td width="" style="border-top:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">  
-								<font style="font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" size="+1">Recapiti: </font>
-							</td>
-							
-							<td colspan="2" width="" style="border-top:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">
-								<strong><font style="font-family:'Arial', cursive" size="+1">
-								<?php
-								while ($row2 = $risultati2->fetch()) {
-									if ($row2['numero'] != '') {
-										echo '<i class="fa fa-'.$row2['tipo'].' fa-fw"></i> '; echo strtolower($row2['numero']);
-									}
-									?>
-									<br> 
-									<?php
-								}
-								?>
-								</font></strong>
-							</td>
-						</tr>
-						<?php
-					}
+					
 					?>
 				</table>
+
+				
+
 			</div>
 		</div>
 	</div>
@@ -250,3 +229,96 @@
 		</div>
 	</div>
 </div>
+
+				 
+                  	<div class="row">
+                  		<div class="col-sm-9">
+                      	<div class="panel panel-default">
+                      		<div class="panel-heading">
+                      			<h3 class="panel-title"><strong><i class="fa fa-address-card-o"></i> Dettagli Anagrafica:</strong></h3>
+                      		</div>
+                       			
+                       		<div class="panel-body">
+                      			<div class="col-sm-3">
+                       				<br><img class="img-circle" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'foto/sagoma.png';} ?>" width="150">             
+                      			</div>
+                      
+                      			<div class="col-sm-9">
+                          			<div class="container">
+                            			<h3>
+                            				<?php echo '<i class="fa fa-user fa-fw"></i> ' . ucwords(strtolower($row['cognome'])) . ' ' . ucwords(strtolower($row['nome'])); ?><?php if($row['codicefiscale'] != '') { echo ' ('.strtoupper($row['codicefiscale']).')'; } ?>		
+                            			</h3>
+                            			<?php
+                            			if ($datanascita != '' AND $datanascita != '00/00/0000' AND $datanascita != '01/01/1901') 
+										{
+                            				echo '<br><i class="fa fa-birthday-cake fa-fw"></i> '.$datanascita.' ';
+                            			}
+                            			if ($row['nascitacomune'] != '')
+                            			{
+                            				echo ucwords(strtolower($row['nascitacomune'])); 
+										}
+										if ($row['nascitaprovincia'] !='') 
+										{ 
+											echo ' (' . strtoupper($row['nascitaprovincia']) . ')'; 
+										} 
+										if ($row['nascitastato'] !='') 
+										{ 
+											echo ' - ' . ucwords(strtolower($row['nascitastato']));
+										}
+										?>
+                         			</div>
+                           			<hr>
+                           			<div class="container">
+
+	                           			<?php 
+	                           			if ($row['residenzavia'] != '')
+										{
+		                           			echo '<i class="fa fa-map-marker fa-fw"></i> ' . ucwords(strtolower($row['residenzavia'])); 
+											if ($row['residenzacivico']!='') 
+											{ 
+												echo ', ' . $row['residenzacivico'];
+											}
+											echo '<br>';
+										}
+										if($row['residenzacap'] != '') 
+										{
+									 		echo '<i class="fa fa-fw"></i> ' . $row['residenzacap']. ' - ';
+									 	} 
+										if($row['residenzacitta'] != '')
+										{
+											echo ucwords(strtolower($row['residenzacitta'])); 
+											if ($row['residenzaprovincia']!='') 
+											{
+												echo ' ('. strtoupper($row['residenzaprovincia']) . ')';
+											}
+										} 
+										?>
+									</div>
+                           			<hr>
+                           			<?php
+                           			$cr = $countrecapiti->fetch();
+									if ($cr[0] > 0) 
+									{
+										?>
+	                          			<div class="container">
+	                          				<?php
+											while ($row2 = $risultati2->fetch()) 
+											{
+												if ($row2['numero'] != '') 
+												{
+													echo '<p><i class="fa fa-'.$row2['tipo'].' fa-fw"></i> ';
+													echo strtolower($row2['numero']);
+													echo '</p>';
+												}
+											}
+											?>
+	                          			</div>
+	                          			<?php
+	                          		}
+	                          		?>
+                      			</div>
+                			</div>
+            			</div>
+            		</div>
+            		</div>
+           

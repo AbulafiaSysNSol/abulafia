@@ -256,7 +256,7 @@
 						<label>Associa una foto:</label>
 						<form role="form" enctype="multipart/form-data" action="login0.php?corpus=upload-foto" method="POST">
 							<center>
-							<img src="foto/<?php if($urlfoto) {echo $urlfoto . "\" width=\"100%\""; $foto=1;} else {echo 'sagoma.png';}?>">
+							<img class="img-circle" src="foto/<?php if($urlfoto) {echo $urlfoto . "\" width=\"100%\""; $foto=1;} else {echo 'sagoma.png';}?>">
 							<?php
 								if($foto) {
 									?>

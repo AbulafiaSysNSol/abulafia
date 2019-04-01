@@ -9,7 +9,6 @@ segreteria.jpg
 ragioneria.jpg
 acquisti.jpg
 personale.jpg
-mail-conf-include.php
 /public/lettere*
 public/graphs/*
 !public/graphs/.gitkeep

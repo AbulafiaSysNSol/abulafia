@@ -206,7 +206,7 @@
 
 	
 		$num_righe = $risultati->rowCount();
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'EFFETTUATA RICERCA IN ANAGRAFICA' , 'OK' , 'VALORE CERCATO '.$cercato, $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'EFFETTUATA RICERCA IN ANAGRAFICA' , 'OK' , 'VALORE CERCATO '.$cercato, $_SESSION['logfile'], 'page request');
 		if  ($num_righe > 0) {
 			echo "Numero di risultati trovati: <b>$tot_records</b><br>"; 
 			?>
