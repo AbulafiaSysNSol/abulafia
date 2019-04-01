@@ -6,11 +6,24 @@
 		require_once "class/" . $class_name.".obj.inc";
 	}
 
-	include '../db-connessione-include.php'; //connessione al db-server
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
-	
 	$my_calendario= new Calendario();//crea un nuovo oggetto
 	$_SESSION['my_calendario']= serialize($my_calendario); //serializzazione per passaggio alle variabili di sessione
+	$logdirectory="log/";
+	$_SESSION['logdirectory'] = "log/";
+	//logfile unificato $errorlog='error.log';
+	$logfile='general.log';
+	$maillog='mail.log';
+	//logfile unificato $historylog = 'history.log';
+	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
+	$userid = addslashes($_POST['userid']); // nome utente inserito nella form della pagina iniziale
+	$usermd = md5($userid);
+	$password = md5($_POST['password']); // password inserita nella form della pagina iniziale
+
+	include '../db-connessione-include.php'; //connessione al db-server
+	
+	
+
 	$my_log = new Log(); //crea un nuovo oggetto 'log'
 	$_SESSION['my_log']= serialize($my_log); //serializzazione per passaggio alle variabili di sessione
 	$my_registroprotocollo = new Registroprotocollo() ;//crea un nuovo oggetto
@@ -28,16 +41,7 @@
 	$my_lettera = new Lettera() ;//crea un nuovo oggetto
 	$_SESSION['my_lettera'] = serialize($my_lettera); //serializzazione per passaggio alle variabili di sessione
 
-	$logdirectory="log/";
-	$_SESSION['logdirectory'] = "log/";
-	$errorlog='error.log';
-	$logfile='access.log';
-	$maillog='mail.log';
-	$historylog = 'history.log';
-	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
-	$userid = addslashes($_POST['userid']); // nome utente inserito nella form della pagina iniziale
-	$usermd = md5($userid);
-	$password = md5($_POST['password']); // password inserita nella form della pagina iniziale
+
 
 	if ($usermd == $password) {
 		$pass = 1;
@@ -84,7 +88,7 @@
 	
 
 	if ($risultati[0][0] < 1 ) {
-		$my_log -> publscrivilog($userid, 'login', 'denied', $client , $logfile);
+		$my_log -> publscrivilog($userid, 'login', 'denied', $client , $logfile,'access');
 		$_SESSION['auth']= 0 ;
 		?>
 		<SCRIPT LANGUAGE="Javascript">
@@ -120,10 +124,7 @@
 	$logindata2=$logindata[0];
 	$idperricerca=$logindata2['idanagrafica']; //setta l'id dell'user che ha effettuato il login
 
-/*deprecato	$logindata3=mysq>l_query("select * from anagrafica where idanagrafica='$idperricerca'");
-	$logindata4=mysq<l_fetch_array($logindata3); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
 
-*/
 	try 
 		{
    		$connessione->beginTransaction();
@@ -153,10 +154,6 @@
 
 	//caricamento dei settaggi personalizzati
 
-
-/*deprecato	$settings=mysq>l_query("SELECT * FROM usersettings WHERE idanagrafica='$idperricerca'");
-	$settings2=mysq>l_fetch_array($settings);
-*/
 
 	try 
 		{
@@ -190,9 +187,6 @@
 	
 	//caricamento dei settaggi del software
 
-/*deprecato	$settings3=mys>ql_query("select distinct * from defaultsettings");
-	$settings4=mysq>l_fetch_array($settings3);
-*/
 
 	try 
 		{
@@ -241,10 +235,6 @@
 	
 	//caricamento settaggi email
 
-/*deprecato	$settings5=mysq>l_query("select distinct * from mailsettings");
-	$settings6=mysq>l_fetch_array($settings5);
-
-*/
 
 	try 
 		{
@@ -282,8 +272,8 @@
 	//file di log
 	$_SESSION['logfile'] = $logfile;
 	$_SESSION['maillog'] = $maillog;
-	$_SESSION['historylog'] = $historylog;
-	$_SESSION['errorlog'] = $errorlog;
+	//logfile unificato $_SESSION['historylog'] = $historylog;
+	//logfile unificato $_SESSION['errorlog'] = $errorlog;
 	$_SESSION['logdirectory'] = $logdirectory;
 
 	$_SESSION['block'] = false;
@@ -292,7 +282,7 @@
 	echo 'Loading, please wait ...<br><br>'; //nel caso che il login sia andato a buon fine
 
 	//log degli accessi con esito positivo
-	$my_log->publscrivilog($userid, 'login', 'ok', $client, $logfile );
+	$my_log->publscrivilog($userid, 'login', 'ok', $client, $logfile, 'access' );
 
 $connessione=null; //chiudo la connessione distruggendo l'oggetto PDO istanziato
 ?>
