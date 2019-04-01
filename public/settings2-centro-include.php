@@ -16,7 +16,6 @@
 		$query->bindParam(':color2', $color2);
 		$query->bindParam(':ins', $ins);
 		$query->bindParam(':mod', $mod);
-		$query->bindParam(':id', $id);
 		$query->execute();
 		$connessione->commit();
 		$up = true;
@@ -25,7 +24,6 @@
     	echo "Errore: " . $errorePDO->getMessage();
     	$connessione->rollBack();
     	$up = false;
-    	exit();
 	}
 	
 	if (!$up) {
