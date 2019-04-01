@@ -31,7 +31,7 @@
 		?>
 
 		<div class="form-group">
-			<form name="modifica" method="post" >
+			<form name="modifica" method="post" onSubmit="return false;">
 				<div class="row">
 					<div class="col-sm-4">
 						<h4><i class="fa fa-tint"></i> Primo Colore Risultati
@@ -167,7 +167,7 @@
 					<div class="col-sm-4">
 						<h4><i class="fa fa-list-ol"></i> Numero di Risultati per Pagina
 						<br><small> N. di record visualizzati nella ricerca.</small></h4>
-						<input class="form-control" size="3" type="text" name="risultatiperpagina" value="<?php echo $_SESSION['risultatiperpagina'];?>"/>
+						<input class="form-control" size="3" type="text" name="risultatiperpagina" value="<?php echo $_SESSION['risultatiperpagina'];?>" required>
 						
 						<?php if($_SESSION['auth'] >= 95) { ?>
 							<br>
@@ -199,7 +199,7 @@
 				
 				</div>
 				<br>
-				<center><button class="btn btn-success btn-lg" onClick="Controllo()"><i class="fa fa-save"></i> SALVA IMPOSTAZIONI</button></center>
+				<center><button class="btn btn-primary btn-lg" onClick="Controllo()"><i class="fa fa-save"></i> Salva Impostazioni</button></center>
 			</form>
 		</div>
 	</div>
@@ -207,74 +207,60 @@
 
 
 <script language="javascript">
- <!--
-  function Controllo() 
-  {
-	//acquisisco il valore delle variabili
-	
-	var risultatiperpagina = document.modifica.risultatiperpagina.value;
-	
-	var colore1 = document.modifica.color1;
-	for(var i=0; i<colore1.length; i++) 
-	{
-		if(colore1[i].checked) 
-		{
-			var colors1 = colore1[i].value;
-			break;
-		}
-	}
-	
-	var colore2 = document.modifica.color2;
-	for(var i=0; i<colore2.length; i++) 
-	{
-		if(colore2[i].checked) 
-		{
-			var colors2 = colore2[i].value;
-			break;
-		}
-	}
 
-	if ((risultatiperpagina == "") || (risultatiperpagina == "undefined")) 
-	{
-           alert("Il campo Risultati per Pagina è obbligatorio");
-           document.modifica.risultatiperpagina.focus();
-           return false;
-      }
-
-	else if ((risultatiperpagina < 3) || (risultatiperpagina > 100)) 
-	{
-           alert("Il campo Risultati per Pagina deve essere compreso fra 3 e 100");
-           document.modifica.risultatiperpagina.focus();
-           return false;
-        }
-	else if (isNaN(risultatiperpagina))
-	{
-           alert("Il campo Risultati per Pagina deve essere un numero");
-           document.modifica.risultatiperpagina.focus();
-           return false;
-        }
-	
-	//mando i dati alla pagina
-	else 
-	{	
-		if(colors1 != colors2)
+	function Controllo() 
+  	{
+			
+		var risultatiperpagina = document.modifica.risultatiperpagina.value;
+		
+		var colore1 = document.modifica.color1;
+		for(var i=0; i<colore1.length; i++) 
 		{
-			document.modifica.action = "login0.php?corpus=settings2&id=<?php echo $_SESSION['loginid'];?>";
-			document.modifica.submit();
+			if(colore1[i].checked) 
+			{
+				var colors1 = colore1[i].value;
+				break;
+			}
 		}
-		else
+		
+		var colore2 = document.modifica.color2;
+		for(var i=0; i<colore2.length; i++) 
 		{
-			if(confirm('Attenzione hai scelto due colori uguali, la leggibilità dei risultati potrebbe essere poco chiara.\nContinuare?'))
+			if(colore2[i].checked) 
+			{
+				var colors2 = colore2[i].value;
+				break;
+			}
+		}
+		
+		if ((risultatiperpagina < 10) || (risultatiperpagina > 400)) 
+		{
+	    	alert("Il campo Risultati per Pagina deve essere compreso fra 10 e 400");
+	        document.modifica.risultatiperpagina.focus();
+	        return false;
+	    }
+		
+		else if (isNaN(risultatiperpagina))
+		{
+	        alert("Il campo Risultati per Pagina deve essere un numero");
+	        document.modifica.risultatiperpagina.focus();
+	        return false;
+	    }	
+
+		else if(colors1 == colors2)
+		{
+			if(confirm('Attenzione hai scelto due colori uguali, la leggibilita\' dei risultati potrebbe essere poco chiara.\nContinuare?'))
 			{
 				document.modifica.action = "login0.php?corpus=settings2&id=<?php echo $_SESSION['loginid'];?>";
 				document.modifica.submit();
 			}
-			else
-			{
-				return false;
-			}
 		}
-      }
-  }
- //-->
+
+		else
+		{
+			document.modifica.action = "login0.php?corpus=settings2&id=<?php echo $_SESSION['loginid'];?>";
+			document.modifica.submit();
+		}
+	}
+ 
 </script> 
