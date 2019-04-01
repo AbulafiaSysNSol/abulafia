@@ -7,7 +7,7 @@
 		$urlfoto = ''; 
 	}
 	$my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO ANAGRAFICA' , 'OK' , $_SESSION['ip'], $_SESSION['historylog']);
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO ANAGRAFICA' , 'OK' , $_SESSION['ip'], $_SESSION['logfile'],'page request');
 	$foto=0;
 ?>
 

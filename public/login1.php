@@ -76,7 +76,7 @@
 		$connessione->commit();
 		} 
 		
-		//gestione dell'eventuale errore della connessione
+		//gestione dell'eventuale errore della query
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
 		}
@@ -115,7 +115,7 @@
 		$connessione->commit();
 		} 
 		
-		//gestione dell'eventuale errore della connessione
+		//gestione dell'eventuale errore della query
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
 		}
@@ -137,7 +137,7 @@
 		$connessione->commit();
 		} 
 		
-		//gestione dell'eventuale errore della connessione
+		//gestione dell'eventuale errore della query
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
 		}
@@ -167,7 +167,7 @@
 		$connessione->commit();
 		} 
 		
-		//gestione dell'eventuale errore della connessione
+		//gestione dell'eventuale errore della query
 		catch (PDOException $errorePDO) { 
     		echo "Errore: " . $errorePDO->getMessage();
 		}

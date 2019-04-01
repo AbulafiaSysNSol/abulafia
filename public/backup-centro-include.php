@@ -1,5 +1,5 @@
 <?php
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO BACKUP' , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO BACKUP' , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'],'page request');
 ?>
 
 <div class="panel panel-default">

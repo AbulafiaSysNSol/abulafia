@@ -17,7 +17,7 @@
 	 	$update = false;
 	}
 	if ($update) {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATO ATTRIBUTO '. $id , 'OK' , 'NUOVO VALORE '. $attributo , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATO ATTRIBUTO '. $id , 'OK' , 'NUOVO VALORE '. $attributo , $_SESSION['logfile']'attributi');
 		?>
 		<script language = "javascript">
 			window.location = "login0.php?corpus=attributi&mod=ok";
@@ -25,7 +25,7 @@
 		<?php
 	}
 	else {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA MODIFICA ATTRIBUTO '. $id , 'FAILED' , 'VALORE '. $attributo , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA MODIFICA ATTRIBUTO '. $id , 'FAILED' , 'VALORE '. $attributo , $_SESSION['logfile']'attributi');
 		?>
 		<script language = "javascript">
 			window.location="login0.php?corpus=attributi&mod=no";
