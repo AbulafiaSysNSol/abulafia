@@ -2,27 +2,15 @@
 
 	session_start(); //avvio della sessione per caricare le variabili
 
-
 	function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
 		require_once "class/" . $class_name.".obj.inc";
 	}
-	
-	$logdirectory="log/";
-	$_SESSION['logdirectory'] = "log/";
-	$errorlog='error.log';
-	$logfile='access.log';
-	$maillog='mail.log';
-	$historylog = 'history.log';
-	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
-	$userid = addslashes($_POST['userid']); // nome utente inserito nella form della pagina iniziale
-	$usermd = md5($userid);
-	$password = md5($_POST['password']); // password inserita nella form della pagina iniziale
 
-	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 	include '../db-connessione-include.php'; //connessione al db-server
-
+	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
+	
 	$my_calendario= new Calendario();//crea un nuovo oggetto
-	$_SESSION['my_calendario']= serialize($my_calendario); //serializzazione per passaggio alle variabili di sessione	
+	$_SESSION['my_calendario']= serialize($my_calendario); //serializzazione per passaggio alle variabili di sessione
 	$my_log = new Log(); //crea un nuovo oggetto 'log'
 	$_SESSION['my_log']= serialize($my_log); //serializzazione per passaggio alle variabili di sessione
 	$my_registroprotocollo = new Registroprotocollo() ;//crea un nuovo oggetto
@@ -39,8 +27,17 @@
 	$_SESSION['my_database'] = serialize($my_database); //serializzazione per passaggio alle variabili di sessione
 	$my_lettera = new Lettera() ;//crea un nuovo oggetto
 	$_SESSION['my_lettera'] = serialize($my_lettera); //serializzazione per passaggio alle variabili di sessione
-	
 
+	$logdirectory="log/";
+	$_SESSION['logdirectory'] = "log/";
+	$errorlog='error.log';
+	$logfile='access.log';
+	$maillog='mail.log';
+	$historylog = 'history.log';
+	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
+	$userid = addslashes($_POST['userid']); // nome utente inserito nella form della pagina iniziale
+	$usermd = md5($userid);
+	$password = md5($_POST['password']); // password inserita nella form della pagina iniziale
 
 	if ($usermd == $password) {
 		$pass = 1;
