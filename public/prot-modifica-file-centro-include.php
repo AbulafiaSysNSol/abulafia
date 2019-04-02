@@ -80,21 +80,31 @@
 				   	$connessione->rollBack();
 				   	$regmodifica = false;
 				}
-				$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO ALLEGATO '. $name , $_SESSION['historylog']);
+				$my_log -> publscrivilog( $_SESSION['loginname'], 
+											'MODIFICA PROTOCOLLO '. $idlettera , 
+											'OK' , 
+											'AGGIUNTO ALLEGATO '. $name , 
+											$_SESSION['logname'], 
+											'protocollo');
 			}
 			else {
 				$file++;
 				$my_lettera->arrayallegati[$name] = $target_path;
 				$_SESSION['my_lettera']=serialize($my_lettera);
-				$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTO ALLEGATO PROTOCOLLO '.$my_lettera->idtemporaneo , 'OK' , 'ALLEGATO '.$name , $_SESSION['historylog']);
+				$my_log -> publscrivilog( $_SESSION['loginname'], 
+										'AGGIUNTO ALLEGATO PROTOCOLLO '.$my_lettera->idtemporaneo , 
+										'OK' , 
+										'ALLEGATO '.$name ,
+										$_SESSION['logname'], 
+										'protocollo');
 			}
 		} 
 		else { //se lo spostamento non va a buon fine
 			if($from == 'modifica-protocollo') {
-				$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI MODIFICA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
+				$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI MODIFICA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['logname'], 'protocollo');
 			}
 			else {
-				$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI AGGIUNTA ALLEGATO PROTOCOLLO '. $my_lettera->idtemporaneo , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['historylog']);
+				$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI AGGIUNTA ALLEGATO PROTOCOLLO '. $my_lettera->idtemporaneo , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['logname'], 'protocollo');
 				$_SESSION['my_lettera']=serialize($my_lettera);
 			}
 		}

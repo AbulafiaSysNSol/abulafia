@@ -79,7 +79,7 @@
 		}
 		$risultati = $connessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['logname'], 'protocollo']);
 	}
 	
 	if ($from == 'elimina-mittente') {  
@@ -91,7 +91,7 @@
 		$count = $count->fetch();
 		if($count[0] == 1) {
 			echo '<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Errore:</b> impossibile eliminare l\'unico mittente o destinario delle lettera. Aggiungerne prima un altro.</div>';
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'FAILED' , 'TENTATIVO DI ELIMINARE MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'FAILED' , 'TENTATIVO DI ELIMINARE MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['logname'], 'protocollo');
 		}
 		else {
 			$elimina = $connessione->query("DELETE from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
@@ -102,7 +102,7 @@
 			if(!$_SESSION['block']) {
 				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso mittente/destinatario', '$user', '$time', '#FC9E9E', '$name', ' ')");
 			}
-			$my_log->publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['historylog']);
+			$my_log->publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['logname'], 'protocollo');
 		}
 		$risultati = $connessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
@@ -120,7 +120,7 @@
 		}
 		$risultati = $connessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO ALLEGATO '. $nome , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO ALLEGATO '. $nome , $_SESSION['logname'], 'protocollo');
 		$utentemod = $connessione->query("UPDATE joinlettereinserimento$anno SET joinlettereinserimento$anno.idmod='$loginid', joinlettereinserimento$anno.datamod='$date' WHERE joinlettereinserimento$anno.idlettera='$idlettera' LIMIT 1");
 	}
 	
