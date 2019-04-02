@@ -200,7 +200,7 @@
 					Dati lettera: ".$ins1."<br>
 					Utente Ins: ".$ins2."<br>
 					Mitt/Dest: ".$ins3."<br>"; 
-			$my_log->publscrivilog($_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 'FAILED' , '' , $_SESSION['historylog']);
+			$my_log->publscrivilog($_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 'FAILED' , '' , $_SESSION['logname'], 'protocollo');
 			exit();
 		}
 		//SE L'INSERIMENTO VA A BUON FINE SCRIVO NEL LOG E SE SONO ATTIVE LE NOTIFICHE MANDO EMAIL
@@ -225,10 +225,10 @@
 							.'.<br>Non rispondere a questa email.';
 				$esito = $mail->send();
 				//scrittura log mail
-				$my_log -> publscrivilog($_SESSION['loginname'],'send notifications', $esito, 'notifica automatica - inserisci lettera', $_SESSION['maillog']);
+				$my_log -> publscrivilog($_SESSION['loginname'],'send notifications', $esito, 'notifica automatica - inserisci lettera', $_SESSION['logname'], 'mail');
 			}
 			//scrittura history log		
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $ultimoid, 'OK', '', $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'REGISTRATA LETTERA '. $ultimoid, 'OK', '', $_SESSION['logname'], 'protocollo');
 		}
 	}
 	
@@ -355,7 +355,8 @@
 						'TENTATA MODIFICA LETTERA '. $idlettera , 
 						'FAILED' , 
 						'' , 
-						$_SESSION['historylog']);
+						$_SESSION['logname'], 
+						'protocollo');
 		}
 		
 		//SE LA MODIFICA E' ANDATA A BUON FINE SCRIVO NEL LOG E SE LE NOTIFICHE SONO ATTIVE MANDO L'EMAIL
@@ -383,7 +384,8 @@
 				$my_log -> publscrivilog($_SESSION['loginname'],
 							'send notifications' , 
 							$esito ,'notifica automatica - modifica lettera', 
-							$_SESSION['maillog']);
+							$_SESSION['logname'], 
+							'mail');
 			}
 			
 			//scrittura history log
@@ -392,7 +394,8 @@
 						$idlettera , 
 						'OK' , 
 						'' , 
-						$_SESSION['historylog']);
+						$_SESSION['logname'], 
+						'protocollo');
 			
 			$ultimoid = $idlettera;
 		}

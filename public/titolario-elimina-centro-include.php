@@ -16,7 +16,7 @@
 	}
 	
 	if ($canc) {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATA POSIZIONE '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATA POSIZIONE '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['logname'], 'protocollo');
 		?>
 		<script language="javascript">
 			window.location="login0.php?corpus=titolario&canc=ok";
@@ -24,7 +24,7 @@
 		<?php
 	}
 	else {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI ELIMINARE POSIZIONE '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI ELIMINARE POSIZIONE '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['logname'], 'protocollo');
 		?>
 		<script language="javascript">
 			window.location="login0.php?corpus=titolario&canc=no";

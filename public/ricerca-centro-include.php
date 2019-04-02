@@ -2,7 +2,7 @@
 <?php
 	$_SESSION['block'] = false;
 	$level = $_SESSION['auth'];
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO RICERCA' , 'OK' , $_SESSION['ip'], $_SESSION['historylog']);
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO RICERCA' , 'OK' , $_SESSION['ip'], $_SESSION['logname'], 'page request');
 	$lett = new Lettera();
 ?>
 

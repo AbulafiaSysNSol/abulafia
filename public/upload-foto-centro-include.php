@@ -10,7 +10,7 @@
 	$urlfoto=  $id.'--'.basename( $_FILES['uploadedfile']['name']); //creazione del nuovo nome del file uploadato usando l'id, un separatore e il nome originale
 
 	if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path)) {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTA FOTO ANAGRAFICA '. $id , 'OK' , 'NOME FILE '. $urlfoto , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTA FOTO ANAGRAFICA '. $id , 'OK' , 'NOME FILE '. $urlfoto , $_SESSION['logname'], 'anagrafica');
 		?>
 		<SCRIPT LANGUAGE="Javascript">
 		browser= navigator.appName;
@@ -20,7 +20,7 @@
 		<?php
 	} 
 	else {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTA FOTO ANAGRAFICA '. $id , 'FAILED' , 'NOME FILE '. $urlfoto , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'AGGIUNTA FOTO ANAGRAFICA '. $id , 'FAILED' , 'NOME FILE '. $urlfoto ,$_SESSION['logname'], 'anagrafica');
 		?>
 		<SCRIPT LANGUAGE="Javascript">
 		browser= navigator.appName;

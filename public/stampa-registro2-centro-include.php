@@ -46,7 +46,7 @@ class PDF extends FPDF {
 		$query = $connessione->query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine'"); 
 		$numerorisultati = $query->fetch();
 		if($numerorisultati[0] < 1) {
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['logname'], 'protocollo');
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -58,7 +58,7 @@ class PDF extends FPDF {
 		}
 		else {
 			$query = $connessione->query("SELECT * FROM lettere$anno WHERE lettere$anno.idlettera >= '$inizio' AND lettere$anno.idlettera <= '$fine' ORDER BY lettere$anno.idlettera"); 
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['logname'], 'protocollo');
 		}
 	}
 	
@@ -113,7 +113,7 @@ class PDF extends FPDF {
 		$query = $connessione->query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
 		$numerorisultati = $query->fetch();
 		if($numerorisultati[0] < 1) {
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DAL ' . $inizio . ' AL ' . $fine . ' ANNO ' . $anno , $_SESSION['logname'], 'protocollo');
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -125,7 +125,7 @@ class PDF extends FPDF {
 		}
 		else {
 			$query = $connessione->query("SELECT * FROM lettere$anno WHERE lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['logname'], 'protocollo');
 		}	
 	}
 	
@@ -167,7 +167,7 @@ class PDF extends FPDF {
 		$query = $connessione->query("SELECT COUNT(*) FROM lettere$anno, anagrafica, joinletteremittenti$anno WHERE anagrafica.idanagrafica = joinletteremittenti$anno.idanagrafica AND lettere$anno.idlettera = joinletteremittenti$anno.idlettera AND lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine'"); 
 		$numerorisultati = $query->fetch();
 		if($numerorisultati[0] < 1) {
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DEL ' . $inizio , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO STAMPA REGISTRO' , 'FAILED: NESSUN VALORE TROVATO' , 'DEL ' . $inizio , $_SESSION['logname'], 'protocollo');
 			?>
 			<SCRIPT LANGUAGE="Javascript">
 			browser= navigator.appName;
@@ -179,7 +179,7 @@ class PDF extends FPDF {
 		}
 		else {
 			$query = $connessione->query("SELECT * FROM lettere$anno WHERE lettere$anno.dataregistrazione BETWEEN '$inizio' AND '$fine' ORDER BY lettere$anno.idlettera"); 
-			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['historylog']);
+			$my_log -> publscrivilog( $_SESSION['loginname'], 'STAMPATO REGISTRO' , 'OK' , 'DAL ' . $inizio . 'AL ' . $fine . ' ANNO ' . $anno , $_SESSION['logname'], 'protocollo');
 		}	
 	}
 
