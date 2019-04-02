@@ -17,7 +17,7 @@
 	}	
 	
 	if ($cancellazione) {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATA CATEGORIA '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATA CATEGORIA '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['logname'], 'categorie');
 		?>
 		<script language="javascript">
 			window.location="?corpus=documenti-categorie&canc=ok";
@@ -25,7 +25,7 @@
 		<?php
 	}
 	else {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI ELIMINARE POSIZIONE '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['historylog']);
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI ELIMINARE POSIZIONE '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['logname'], 'categorie');
 		?>
 		<script language="javascript">
 			window.location="?corpus=documenti-categorie&canc=no";

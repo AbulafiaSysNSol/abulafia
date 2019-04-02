@@ -6,7 +6,7 @@
 		<div class="panel-body">
 			<p>
 			<?php 
-				$my_log->publleggilog('0', '50', ' ', $_SESSION['historylog']);//legge dal log delle email inviate
+				$my_log->publleggilog('0', '50', ' ', $_SESSION['page request']);//legge dal log
 			?>
 			</p>
 			<br><b><a href="download.php?lud=history.log&est=log"><i class="fa fa-download"></i> Scarica il log di tutte le azioni</a></b>
