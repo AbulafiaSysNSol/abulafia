@@ -5,19 +5,34 @@
 	$infodocumento = $m->getDocumentById($iddocumento);
 	$del = $m->eliminaRigaDocumento($idriga, $infodocumento[2], $infodocumento[7]);
 	
-	if ($del) {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATA RIGA DOCUMENTO '. $iddocumento , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
+	if ($del) 
+	{
+		$my_log -> publscrivilog( $_SESSION['loginname'], 
+								'ELIMINATA RIGA DOCUMENTO '. $iddocumento , 
+								'OK' , 
+								$_SESSION['ip'] , 
+								$_SESSION['logname'], 
+								'magazzino');
 		?>
 		<script language="javascript">
-			window.location="login0.php?corpus=magazzino-documenti-carico-scarico-prodotti&id=<?php echo $iddocumento; ?>&tipologia=<?php echo $infodocumento[7]; ?>"; 
+			window.location="login0.php?corpus=magazzino-documenti-carico-scarico-prodotti
+							&id=<?php echo $iddocumento; ?>
+							&tipologia=<?php echo $infodocumento[7]; ?>"; 
 		</script>
 		<?php
 	}
-	else {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI ELIMINARE RIGA DOCUMENTO '. $iddocumento , 'FAILED' , $_SESSION['ip'] , $_SESSION['historylog']);
+	else 
+	{
+		$my_log -> publscrivilog( $_SESSION['loginname'], 
+									'TENTATIVO DI ELIMINARE RIGA DOCUMENTO '. $iddocumento , 
+								'FAILED' , $_SESSION['ip'] , 
+								$_SESSION['logname'], 
+								'magazzino');
 		?>
 		<script language="javascript">
-			window.location="login0.php?corpus=magazzino-documenti-carico-scarico-prodotti&id=<?php echo $iddocumento; ?>&tipologia=<?php echo $infodocumento[7]; ?>"; 
+			window.location="login0.php?corpus=magazzino-documenti-carico-scarico-prodotti
+							&id=<?php echo $iddocumento; ?>
+							&tipologia=<?php echo $infodocumento[7]; ?>"; 
 		</script>
 		<?php
 	}	

@@ -6,7 +6,7 @@
 		<div class="panel-body">
 			<p>
 			<?php 
-				$my_log->publleggilog('0', '20', ' ', $_SESSION['maillog']);//legge dal log delle email inviate
+				$my_log->publleggilog('0', '20', ' ', 'mail']);//legge dal log delle email inviate
 			?>
 			</p>
 			<br><b><a href="download.php?lud=mail.log&est=log"><i class="fa fa-download"></i> Scarica il log delle mail</a></b>
