@@ -1,6 +1,7 @@
 <?php
 
 	$id = $_GET['id'];
+
 	
 	try {
 	   	$connessione->beginTransaction();
@@ -25,7 +26,7 @@
 		<?php
 	}
 	else {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI ELIMINARE POSIZIONE '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['logname'], 'categorie');
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI ELIMINARE POSIZIONE '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['logfile'], 'categorie');
 		?>
 		<script language="javascript">
 			window.location="?corpus=documenti-categorie&canc=no";
