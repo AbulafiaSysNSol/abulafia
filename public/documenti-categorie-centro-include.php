@@ -16,14 +16,14 @@
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-danger">Si è verificato un errore, controlla di aver inserito tutti i campi oppure riprova più tardi.</div></div></div>
+	<div class="alert alert-danger">Si &egrave; verificato un errore, controlla di aver inserito tutti i campi oppure riprova più tardi.</div></div></div>
 	<?php
    }
     if( isset($_GET['add']) && $_GET['add'] == "duplicato") {
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-danger">Impossibile aggiungere: esiste già una categoria con lo stesso nome!</div></div></div>
+	<div class="alert alert-danger">Impossibile aggiungere: esiste gi&agrave; una categoria con lo stesso nome!</div></div></div>
 	<?php
    }
    if( isset($_GET['mod']) && $_GET['mod'] == "ok") {
