@@ -122,5 +122,5 @@
 		<?php
 	}
 	
-	$my_log -> publscrivilog($_SESSION['loginname'],'mail' , $esito , 'oggetto '.$oggetto.' - prot '.$idlettera.' - destinatari:'.str_replace(',',', ',$destinatario), $_SESSION['logname'], 'mail');
+	$my_log -> publscrivilog($_SESSION['loginname'],'mail' , $esito , 'oggetto '.$oggetto.' - prot '.$idlettera.' - destinatari:'.str_replace(',',', ',$destinatario), $_SESSION['logfile'], 'mail');
 ?>

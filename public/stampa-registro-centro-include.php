@@ -1,5 +1,5 @@
 <?php
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO STAMPA REGISTRO' , 'OK' , $_SESSION['ip'] , $_SESSION['logname'], 'page request');
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO STAMPA REGISTRO' , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'], 'page request');
 ?>
 
 <div class="panel panel-default">

@@ -125,7 +125,7 @@
 	//SE L'INSERIMENTO NON VA A BUON FINE SCRIVO NEL LOG L'ERRORE
 	if ( (!$inserimento || !$inserimento1) ) { 
 		echo "Inserimento non riuscito" ; 
-		$my_log -> publscrivilog($_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 'FAILED' , '' , $_SESSION['logname'], 'protocollo');
+		$my_log -> publscrivilog($_SESSION['loginname'], 'TENTATA REGISTRAZIONE LETTERA '. $ultimoid, 'FAILED' , '' , $_SESSION['logfile'], 'protocollo');
 	}
 		
 	//SE L'INSERIMENTO VA A BUON FINE SCRIVO NEL LOG E SE SONO ATTIVE LE NOTIFICHE MANDO EMAIL
@@ -154,14 +154,14 @@
 						'send notifications' , 
 						$esito ,
 						'notifica automatica - inserisci lettera', 
-						$_SESSION['logname'], 'mail');
+						$_SESSION['logfile'], 'mail');
 		}
 		//scrittura history log		
 		$my_log -> publscrivilog( $_SESSION['loginname'], 
 					'REGISTRATA LETTERA '. $ultimoid , 
 					'OK' , 
 					'' , 
-					$_SESSION['logname'], 
+					$_SESSION['logfile'], 
 					'protocollo');
 	}
 	

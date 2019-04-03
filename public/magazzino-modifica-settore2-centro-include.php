@@ -6,7 +6,7 @@
 	$update = $m->updateSettore($id, $descrizione);
 	
 	if ($update) {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATO SETTORE '. $id, 'OK', 'NUOVO VALORE '. $descrizione, $_SESSION['logname'], 'magazzino');
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATO SETTORE '. $id, 'OK', 'NUOVO VALORE '. $descrizione, $_SESSION['logfile'], 'magazzino');
 		?>
 		<SCRIPT LANGUAGE="Javascript">
 		browser= navigator.appName;
@@ -18,7 +18,7 @@
 		<?php
 	}
 	else {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA MODIFICA SETTORE '. $id, 'FAILED', 'VALORE '. $descrizione, $_SESSION['logname'], 'magazzino');
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA MODIFICA SETTORE '. $id, 'FAILED', 'VALORE '. $descrizione, $_SESSION['logfile'], 'magazzino');
 		?>
 		<SCRIPT LANGUAGE="Javascript">
 		browser= navigator.appName;

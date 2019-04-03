@@ -84,7 +84,7 @@
 											'MODIFICA PROTOCOLLO '. $idlettera , 
 											'OK' , 
 											'AGGIUNTO ALLEGATO '. $name , 
-											$_SESSION['logname'], 
+											$_SESSION['logfile'], 
 											'protocollo');
 			}
 			else {
@@ -95,16 +95,16 @@
 										'AGGIUNTO ALLEGATO PROTOCOLLO '.$my_lettera->idtemporaneo , 
 										'OK' , 
 										'ALLEGATO '.$name ,
-										$_SESSION['logname'], 
+										$_SESSION['logfile'], 
 										'protocollo');
 			}
 		} 
 		else { //se lo spostamento non va a buon fine
 			if($from == 'modifica-protocollo') {
-				$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI MODIFICA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['logname'], 'protocollo');
+				$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI MODIFICA ALLEGATO PROTOCOLLO '. $idlettera , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['logfile'], 'protocollo');
 			}
 			else {
-				$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI AGGIUNTA ALLEGATO PROTOCOLLO '. $my_lettera->idtemporaneo , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['logname'], 'protocollo');
+				$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI AGGIUNTA ALLEGATO PROTOCOLLO '. $my_lettera->idtemporaneo , 'FAILED' , 'AGGIUNTA ALLEGATO '. $name , $_SESSION['logfile'], 'protocollo');
 				$_SESSION['my_lettera']=serialize($my_lettera);
 			}
 		}

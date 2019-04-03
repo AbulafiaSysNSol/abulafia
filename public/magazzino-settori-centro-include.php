@@ -116,5 +116,5 @@
 </div>
 <?php 
 	$_SESSION['my_database']=serialize($my_database);
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO SETTORI' , 'OK' , $_SESSION['ip'] , $_SESSION['logname'], 'magazzino');
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO SETTORI' , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'], 'magazzino');
 ?>

@@ -4,7 +4,7 @@
 	$del = $m->delSettore($id);
 	
 	if ($del) {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATA SETTORE '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['logname'], 'magazzino');
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATA SETTORE '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'], 'magazzino');
 		?>
 		<SCRIPT LANGUAGE="Javascript">
 		browser= navigator.appName;
@@ -16,7 +16,7 @@
 		<?php
 	}
 	else {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI ELIMINARE SETTORE '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['logname'], 'magazzino');
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATIVO DI ELIMINARE SETTORE '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['logfile'], 'magazzino');
 		?>
 		<SCRIPT LANGUAGE="Javascript">
 		browser= navigator.appName;

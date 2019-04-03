@@ -28,7 +28,7 @@
 		$filename = $lud;
 	}
 	
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'DOWNLOAD ALLEGATO '. $lud , 'OK' , $_SESSION['ip'] , $_SESSION['logname'], 'download');
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'DOWNLOAD ALLEGATO '. $lud , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'], 'download');
       
 	/* otteniamo alcune info sul file */    
 	$info = pathinfo( $path );    

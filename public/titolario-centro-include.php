@@ -137,5 +137,5 @@
 
 <?php 
 	$_SESSION['my_database']=serialize($my_database);
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO TITOLARIO' , 'OK' , $_SESSION['ip'] , $_SESSION['logname'], 'page request');
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO TITOLARIO' , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'], 'page request');
 ?>

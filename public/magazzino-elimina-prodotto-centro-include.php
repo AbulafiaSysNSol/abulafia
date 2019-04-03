@@ -5,7 +5,7 @@
 	$del = $p->eliminaProdotto($id);
 	
 	if ($del) {
-		$my_log -> publscrivilog($_SESSION['loginname'], 'ELIMINATO PRODOTTO '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['logname'], 'magazzino');
+		$my_log -> publscrivilog($_SESSION['loginname'], 'ELIMINATO PRODOTTO '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'], 'magazzino');
 		?>
 		<script language = "javascript">
 			window.location="login0.php?corpus=magazzino-prodotti&canc=ok";
@@ -13,7 +13,7 @@
 		<?php
 	}
 	else {
-		$my_log -> publscrivilog($_SESSION['loginname'], 'TENTATIVO DI ELIMINARE PRODOTTO '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['logname'], 'magazzino');
+		$my_log -> publscrivilog($_SESSION['loginname'], 'TENTATIVO DI ELIMINARE PRODOTTO '. $id , 'FAILED' , $_SESSION['ip'] , $_SESSION['logfile'], 'magazzino');
 		?>
 		<script language = "javascript">
 			window.location="login0.php?corpus=magazzino-prodotti&canc=no";

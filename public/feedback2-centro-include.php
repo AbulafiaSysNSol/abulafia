@@ -28,6 +28,6 @@ $messaggio = $_POST['feedback'];
 	}
 
 
-$my_log -> publscrivilog($_SESSION['loginname'], 'send feedback' , $esito , $messaggio, $_SESSION['logname'], 'mail');
+$my_log -> publscrivilog($_SESSION['loginname'], 'send feedback' , $esito , $messaggio, $_SESSION['logfile'], 'mail');
 
 ?>

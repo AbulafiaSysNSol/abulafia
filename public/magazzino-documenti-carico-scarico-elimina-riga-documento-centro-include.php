@@ -11,7 +11,7 @@
 								'ELIMINATA RIGA DOCUMENTO '. $iddocumento , 
 								'OK' , 
 								$_SESSION['ip'] , 
-								$_SESSION['logname'], 
+								$_SESSION['logfile'], 
 								'magazzino');
 		?>
 		<script language="javascript">
@@ -26,7 +26,7 @@
 		$my_log -> publscrivilog( $_SESSION['loginname'], 
 									'TENTATIVO DI ELIMINARE RIGA DOCUMENTO '. $iddocumento , 
 								'FAILED' , $_SESSION['ip'] , 
-								$_SESSION['logname'], 
+								$_SESSION['logfile'], 
 								'magazzino');
 		?>
 		<script language="javascript">

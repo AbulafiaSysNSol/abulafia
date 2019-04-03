@@ -18,7 +18,7 @@
 	}	
 	
 	if ($cancellazione) {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATA CATEGORIA '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['logname'], 'categorie');
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'ELIMINATA CATEGORIA '. $id , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'], 'categorie');
 		?>
 		<script language="javascript">
 			window.location="?corpus=documenti-categorie&canc=ok";

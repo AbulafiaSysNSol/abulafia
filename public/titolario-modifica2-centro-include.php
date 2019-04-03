@@ -20,7 +20,7 @@
 	}
 
 	if ($up) {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA POSIZIONE '. $id , 'OK' , 'NUOVO VALORE '. $codice . ' ' . $descrizione , $_SESSION['logname'], 'protocollo');
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICATA POSIZIONE '. $id , 'OK' , 'NUOVO VALORE '. $codice . ' ' . $descrizione , $_SESSION['logfile'], 'protocollo');
 		?>
 		<script language="javascript">
 			window.location="login0.php?corpus=titolario&mod=ok";
@@ -28,7 +28,7 @@
 		<?php
 	}
 	else {
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA MODIFICA POSIZIONE '. $id , 'FAILED' , 'VALORE '. $codice . ' ' . $descrizione , $_SESSION['logname'], 'protocollo');
+		$my_log -> publscrivilog( $_SESSION['loginname'], 'TENTATA MODIFICA POSIZIONE '. $id , 'FAILED' , 'VALORE '. $codice . ' ' . $descrizione , $_SESSION['logfile'], 'protocollo');
 		?>
 		<script language="javascript">
 			window.location="login0.php?corpus=titolario&mod=no";
