@@ -7,6 +7,7 @@
 		exit(); 
 	}
 
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	$idlettera = $_GET['id'];
 	$from = $_GET['from'];

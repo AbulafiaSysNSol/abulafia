@@ -9,6 +9,7 @@
 	$password = md5($_POST['pass1']); // nome utente inserito nella form della pagina iniziale
 	$idutente = $_POST['idutente']; // password inserita nella form della pagina iniziale
 	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 

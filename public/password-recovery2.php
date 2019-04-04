@@ -25,6 +25,7 @@
 	$cf = $_POST['codicefiscale']; // nome utente inserito nella form della pagina iniziale
 	$email = $_POST['email']; // password inserita nella form della pagina iniziale
 	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 

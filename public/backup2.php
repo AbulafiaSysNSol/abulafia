@@ -8,6 +8,7 @@
     	exit(); 
     }
 
+    include 'class/Log.obj.inc';
     include '../db-connessione-include.php';
 
     $anno = $_POST['anno'];

@@ -18,6 +18,7 @@
 		exit(); 
 	}
 	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	require_once "class/Lettera.obj.inc";
 	require_once "class/Calendario.obj.inc";
