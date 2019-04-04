@@ -30,7 +30,8 @@
 	$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 	
 	//controllo se l'anno del protocollo da modificare è uguale a quello in corso
-	if ($anno != $annoprotocollo) { 
+	if ($anno != $annoprotocollo) 
+	{ 
 		?>
 		<h4><div align="center" class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <b>Attenzione:</b> non puoi modificare una registrazione di un protocollo in archivio.</div></h4>
 		<?php
@@ -41,7 +42,8 @@
 	//controllo dell'autorizazione necessaria alla modifica del protocollo
 	$risultati3 = $connessione->query("SELECT * from joinlettereinserimento$annoprotocollo, users where joinlettereinserimento$annoprotocollo.idlettera='$idlettera' and joinlettereinserimento$annoprotocollo.idinser = users.idanagrafica ");
 	$row3 = $risultati3->fetch();
-	if (($_SESSION['auth'] <= $row3['auth']) and ($row3['idinser'] !=  $_SESSION['loginid'])) {
+	if (($_SESSION['auth'] <= $row3['auth']) and ($row3['idinser'] !=  $_SESSION['loginid'])) 
+	{
 		echo 'Non hai un livello di autorizzazione sufficiente a modificare questo protocollo.';?> 
 		<a href="login0.php?corpus=dettagli-protocollo&from=risultati&id=<?php echo $idlettera;?>"><br><br>Vai alla pagina dei Dettagli del Protocollo N.<?php echo $idlettera;?><br><br></a><?php
 		include 'sotto-include.php'; //carica il file con il footer.
@@ -56,50 +58,59 @@
 	$dataregistrazione = $row['dataregistrazione'] ;
 	list($annor, $meser, $giornor) = explode("-", $dataregistrazione);
 
-	if($from == "errore") {
+	if($from == "errore") 
+	{
 		$errore = true;
 	}
-	else {
+	else 
+	{
 		$errore = false;
 	}
 	
-	if($from == "correggi") {
+	if($from == "correggi") 
+	{
 		$_SESSION['block'] = false;
 	}
 
-	if ($from =='aggiungi') {
+	if ($from =='aggiungi') 
+	{
 		$idanagrafica=$_GET['idanagrafica'];
 		$aggiungi = $connessione->query("INSERT INTO joinletteremittenti$annoprotocollo values('$idlettera', '$idanagrafica')");
 		$user = $_SESSION['loginid'];
 		$time = time();
 		$anagrafica = new Anagrafica();
 		$name = $anagrafica->getName($idanagrafica);
-		if(!$_SESSION['block']) {
+		if(!$_SESSION['block']) 
+		{
 			$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Aggiunto mittente/destinatario', '$user', '$time', '#DEFEB4', ' ', '$name')");
 		}
 		$risultati = $connessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
-		$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['logfile'], 'protocollo']);
+		$my_log->publscrivilog( $_SESSION['loginname'], 'GO TO MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'AGGIUNTO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['logfile'], 'protocollo');
 	}
 	
-	if ($from == 'elimina-mittente') {  
+	if ($from == 'elimina-mittente') 
+	{  
 		$idanagrafica=$_GET['idanagrafica'];
 		$idlettera=$_GET['id'];
 		
 		//controllo almeno un mittente/destinatario
 		$count = $connessione->query("SELECT count(*) from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 		$count = $count->fetch();
-		if($count[0] == 1) {
+		if($count[0] == 1) 
+		{
 			echo '<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Errore:</b> impossibile eliminare l\'unico mittente o destinario delle lettera. Aggiungerne prima un altro.</div>';
 			$my_log -> publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'FAILED' , 'TENTATIVO DI ELIMINARE MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['logfile'], 'protocollo');
 		}
-		else {
+		else 
+		{
 			$elimina = $connessione->query("DELETE from joinletteremittenti$annoprotocollo where idanagrafica='$idanagrafica' and idlettera='$idlettera'");
 			$user = $_SESSION['loginid'];
 			$time = time();
 			$anagrafica = new Anagrafica();
 			$name = $anagrafica->getName($idanagrafica);
-			if(!$_SESSION['block']) {
+			if(!$_SESSION['block']) 
+			{
 				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso mittente/destinatario', '$user', '$time', '#FC9E9E', '$name', ' ')");
 			}
 			$my_log->publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['logfile'], 'protocollo');
@@ -108,14 +119,16 @@
 		$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
 	}
 	
-	if ($from == 'eliminaallegato') {  
+	if ($from == 'eliminaallegato') 
+	{  
 		$idlettera=$_GET['idlettera'];
 		$anno = $_GET['anno'];
 		$nome = $_GET['nome'];
 		$deletequery=$connessione->query("DELETE FROM joinlettereallegati WHERE idlettera=idlettera AND annoprotocollo=$annoprotocollo AND pathfile='$nome'");
 		$user = $_SESSION['loginid'];
 		$time = time();
-		if(!$_SESSION['block']) {
+		if(!$_SESSION['block']) 
+		{
 			$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso allegato', '$user', '$time', '#FC9E9E', '$nome', ' ')");
 		}
 		$risultati = $connessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
@@ -124,7 +137,8 @@
 		$utentemod = $connessione->query("UPDATE joinlettereinserimento$anno SET joinlettereinserimento$anno.idmod='$loginid', joinlettereinserimento$anno.datamod='$date' WHERE joinlettereinserimento$anno.idlettera='$idlettera' LIMIT 1");
 	}
 	
-	if ($from == 'urlpdf') {  
+	if ($from == 'urlpdf') 
+	{  
 		$idlettera=$_GET['idlettera'];
 		$risultati = $connessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
