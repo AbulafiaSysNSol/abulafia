@@ -322,24 +322,24 @@ tinymce.init({
 							}
 						}
 						$risultati = $query->fetchAll();
-						$num=$risultati[0];
-						try {
+						$num = $risultati[0];
+						try 
+						{
    							$connessione->beginTransaction();
 							$query = $connessione->prepare('SELECT count(*) 
-											FROM comp_lettera, joinpersoneuffici 
-											WHERE firmata = 1 
-												AND protocollo = 0');
+															FROM comp_lettera, joinpersoneuffici 
+															WHERE firmata = 1 
+															AND protocollo = 0');
 							$query->execute();
 							$connessione->commit();
 						} 
-		
-						//gestione dell'eventuale errore della connessione
-						catch (PDOException $errorePDO) { 
+						catch (PDOException $errorePDO) 
+						{ 
     						echo "Errore: " . $errorePDO->getMessage();
 						}						
 						
 						$risultati = $query->fetchAll();
-						$protocollare = $risultati [0];
+						$protocollare = $risultati[0];
 						$_SESSION['daprotocollare'] = $protocollare[0];
 						?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'lettera' OR $_GET['corpus']=='lettera2' OR $_GET['corpus']=='elenco-lettere' OR $_GET['corpus']=='elenco-lettere-firma') { echo ' active'; }?>">
