@@ -44,7 +44,7 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Unità di Misura:</label>
+							<label class="col-sm-3 control-label">Unit&agrave; di Misura:</label>
 							<div class="row">
 								<div class="col-sm-2">
 									<select class="form-control input-sm"  size=1 cols=4 NAME="unitadimisura">

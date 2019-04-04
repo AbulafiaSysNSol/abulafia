@@ -6,7 +6,8 @@
 		header("Location: index.php?s=1");
 		exit(); 
 	}
-
+	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'lib/barcode/barcode.php';
 	require('class/Lettera.obj.inc');

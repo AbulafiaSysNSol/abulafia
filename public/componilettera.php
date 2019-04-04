@@ -6,6 +6,7 @@
 		exit(); 
 	}
 
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	include "class/Calendario.obj.inc";
 	$immagine = "images/footerlettere.jpg";

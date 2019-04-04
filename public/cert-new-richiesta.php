@@ -11,6 +11,7 @@
 		require_once "class/" . $class_name.".obj.inc";
 	}
 	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'maledetti-apici-centro-include.php';
 

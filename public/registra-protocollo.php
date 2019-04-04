@@ -7,6 +7,7 @@
 		exit(); 
 	}
 	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	
 	$id = $_GET['id'];
@@ -14,7 +15,6 @@
 
 	//CREAZIONE NUOVI OGGETTI
 	include('class/Anagrafica.obj.inc');
-	include('class/Log.obj.inc');
 	include('class/Calendario.obj.inc');
 	$anagrafica = new Anagrafica();
 	$calendario = new Calendario();

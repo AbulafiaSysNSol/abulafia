@@ -1,7 +1,8 @@
 <?php
 
     session_start();
-
+    
+    include 'class/Log.obj.inc';
     include '../db-connessione-include.php';
     include 'maledetti-apici-centro-include.php';
     

@@ -6,7 +6,8 @@
 		header("Location: index.php?s=1");
 		exit(); 
 	}
-
+	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	$idlettera = $_GET['id'];
 	$from = $_GET['from'];
