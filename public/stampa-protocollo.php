@@ -48,7 +48,7 @@
 	$pdf = new PDF('P','mm', 'A4');
 	$pdf->AddPage();
 	$pdf->SetTitle('ricevutaprotocollo');
-	$pdf->Ln(14);
+	$pdf->Ln(16);
 	$pdf->SetFont('Arial','',12);
 	$pathqrcode = 'lettere'.$anno.'/qrcode/'.$id.$anno.'.png';
 	$pdf->Image($pathqrcode, 7, 56);
@@ -57,7 +57,7 @@
 	$pdf->Ln(7);
 	$pdf->SetX(33);
 	$pdf->Write('','del ' . $calendario->dataSlash($dettagli['dataregistrazione']) );
-	$pdf->Ln(13);
+	$pdf->Ln(18);
 	$pdf->Write('6','Mittente: ' . $mittente[0]['cognome'] . ' ' . $mittente[0]['nome']);
 	$pdf->Ln(10);
 	$pdf->Write('6','Oggetto: ' . $dettagli['oggetto']);
