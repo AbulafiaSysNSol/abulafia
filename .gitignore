@@ -10,8 +10,6 @@ ragioneria.jpg
 acquisti.jpg
 personale.jpg
 /public/lettere*
-public/graphs/*
-!public/graphs/.gitkeep
 public/log/*
 !public/log/.gitkeep
 /public/foto/*
