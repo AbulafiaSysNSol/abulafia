@@ -28,19 +28,19 @@
 	}
 	//fine del passaggio dei dati dalla pagina precedente
 
-	if ($from == 'foto-modifica') {
-		$inserisci= mysql_query("UPDATE anagrafica SET urlfoto = '$urlfoto' where idanagrafica = '$id' " );
+	if (($from == 'foto-modifica') && (isset($urlfoto))) {
+		$inserisci= $connessione->query("UPDATE anagrafica SET urlfoto = '$urlfoto' where idanagrafica = '$id' " );
 	}
 	if ($from == 'numero-modifica') {
-		$inserisci= mysql_query("insert into jointelefonipersone values('$id', '$numero', '$tipo' )");
+		$inserisci= $connessione->query("INSERT INTO jointelefonipersone values('$id', '$numero', '$tipo' )");
 	}
 	if ($from == 'elimina-numero-modifica') {
-		$elimina= mysql_query("DELETE FROM jointelefonipersone WHERE numero = '$numero2' and tipo = '$tipo2' and idanagrafica='$id'");
+		$elimina= $connessione->query("DELETE FROM jointelefonipersone WHERE numero = '$numero2' and tipo = '$tipo2' and idanagrafica='$id'");
 	}
 	
-	$risultati= mysql_query ("select distinct * from anagrafica where anagrafica.idanagrafica ='$id'");
-	$risultati2= mysql_query ("select * from jointelefonipersone where jointelefonipersone.idanagrafica='$id' order by jointelefonipersone.tipo");
-	$row = mysql_fetch_array($risultati);
+	$risultati= $connessione->query("SELECT DISTINCT * from anagrafica where anagrafica.idanagrafica ='$id'");
+	$risultati2= $connessione->query("SELECT * from jointelefonipersone where jointelefonipersone.idanagrafica='$id' order by jointelefonipersone.tipo");
+	$row = $risultati->fetch();
 	$row = array_map ("stripslashes",$row);
 	$data = $row['nascitadata'] ;
 	list($anno, $mese, $giorno) = explode("-", $data);
@@ -60,7 +60,17 @@
 			?>
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="alert alert-danger">C'e' stato un errore nel caricamento della foto, controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+					<div class="alert alert-danger"><b><i class="fa fa-warning fa-fw"></i> Errore:</b> si &egrave; verificato un problema nel caricamento della foto, controlla la dimensione massima, riprova o contatta il <a href="https://abulafiaweb.freshdesk.com" target="_blank">supporto</a>.</div>
+				</div>
+			</div>
+			<?php
+			}
+
+			if( isset($_GET['upfoto']) && $_GET['upfoto'] == "errest") {
+			?>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="alert alert-danger"><b><i class="fa fa-warning fa-fw"></i> Errore:</b> il formato della foto deve essere <b>JPG</b> o <b>PNG</b>.</div>
 				</div>
 			</div>
 			<?php
@@ -71,7 +81,7 @@
 			<div class="col-sm-3">
 				<div class="alert alert-info">
 					<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br><br>
-					<img class="img-circle" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'] . "\" width=\"100%\"";} else {echo 'foto/sagoma.png';}?>">
+					<center><img class="img-circle" width="70%" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'foto/sagoma.png';}?>"></center>
 					<br><br>
 					<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
 						<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
@@ -79,22 +89,6 @@
 						<input required name="uploadedfile" type="file" />
 						<br><center><button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-upload"></span> Upload</button></center>
 					</form>
-				</div>
-			</div>
-
-			<div class="col-sm-9">
-				<div class="alert alert-success">
-					<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br><br>
-					<table class="table">
-					<?php
-						while ($row2 = mysql_fetch_array($risultati2)) {
-						echo '<tr>';
-						echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-xs" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
-						<?php
-						echo '</tr>';
-						}
-					?>
-					</table>
 				</div>
 			</div>
 				
@@ -124,6 +118,23 @@
 					</form>
 				</div>
 			</div>
+
+			<div class="col-sm-9">
+				<div class="alert alert-success">
+					<label><span class="glyphicon glyphicon-earphone"></span> Recapiti attuali:</label><br><br>
+					<table class="table">
+					<?php
+						while ($row2 = $risultati2->fetch()) {
+						echo '<tr>';
+						echo '<td><i class="fa fa-'.$row2['tipo'].'"></i></td><td>'.$row2['numero'];?></td><td><a href="login0.php?corpus=modifica-anagrafica&from=elimina-numero-modifica&id=<?php echo $id;?>&numero=<?php echo $row2['numero'];?>&tipo=<?php echo $row2['tipo'];?>"><button class="btn btn-danger btn-xs" type="button"><span class="glyphicon glyphicon-trash"></span></button></a></td>
+						<?php
+						echo '</tr>';
+						}
+					?>
+					</table>
+				</div>
+			</div>
+
 		</div>
 
 		<body onLoad="Change()">

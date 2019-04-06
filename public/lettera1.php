@@ -6,6 +6,7 @@
 		exit(); 
 	}
 
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	include 'class/Calendario.obj.inc';
 	
@@ -20,9 +21,27 @@
 	$firmata = 0;
 	$insert = $_SESSION['loginid'];
 	
-	$insert = mysql_query(" INSERT INTO comp_lettera VALUES ( '', '', '', '$data', '$oggetto', '$testo', '$allegati', '$vista', '$firmata', '$insert', '$ufficio') ");
-	echo mysql_error();
-	$id=mysql_insert_id();
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("INSERT INTO comp_lettera VALUES ( '', '', '', :data, :oggetto, :testo, :allegati, :vista, :firmata, :insert, :ufficio)"); 
+		$query->bindParam(':data', $data);
+		$query->bindParam(':oggetto', $oggetto);
+		$query->bindParam(':testo', $testo);
+		$query->bindParam(':allegati', $allegati);
+		$query->bindParam(':vista', $vista);
+		$query->bindParam(':firmata', $firmata);
+		$query->bindParam(':insert', $insert);
+		$query->bindParam(':ufficio', $ufficio);
+		$query->execute();
+		$id = $connessione->lastInsertId();
+		$connessione->commit();
+		$insert = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$insert = false;
+	}	
 	
 	if($insert) {
 		header("Location: login0.php?corpus=lettera2&id=" . $id);

@@ -6,7 +6,8 @@
 		header("Location: index.php?s=1");
 		exit(); 
 	}
-
+	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'class/Servizio.obj.inc';
 	$p = new Servizio();
@@ -20,12 +21,12 @@
 	$email = $_POST['email'];
 	$magazzino = $_POST['magazzino'];
 	
-	$res = $p -> modificaServizio($id, $codice, $descrizione, $indirizzo, $citta, $cap,$telefono, $email, $magazzino); 
+	$res = $p->modificaServizio($id, $codice, $descrizione, $indirizzo, $citta, $cap,$telefono, $email, $magazzino); 
 	
 	if($res) {
 		header("Location: login0.php?corpus=magazzino-modifica-servizio&edit=ok&id=".$codice);
 	}
 	else {
-		echo 'Errore nella registrazione dei dati';
+		echo '<br><br>Errore nella registrazione dei dati: <br>';
 	}
 ?>

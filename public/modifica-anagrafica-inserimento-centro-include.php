@@ -110,30 +110,56 @@
 	$id =$_GET['id'];
 	$anagraficatipologia= $_POST['anagraficatipologia'];
 
-	$query = mysql_query("
-		UPDATE anagrafica 
-		set anagrafica.cognome ='$cognome', 
-		anagrafica.nome ='$nome', 
-		anagrafica.nascitadata='$nascita_data', 
-		anagrafica.nascitacomune='$nascita_comune', 
-		anagrafica.nascitaprovincia='$nascita_provincia', 
-		anagrafica.nascitastato='$nascita_stato', 
-		anagrafica.residenzavia='$residenza_via', 
-		anagrafica.residenzacivico='$residenza_civico', 
-		anagrafica.residenzacitta='$residenza_comune', 
-		anagrafica.residenzaprovincia='$residenza_provincia', 
-		anagrafica.residenzastato='$residenza_stato', 
-		anagrafica.grupposanguigno='$gruppo_sanguigno', 
-		anagrafica.codicefiscale='$codice_fiscale', 
-		anagrafica.residenzacap='$residenza_cap', 
-		anagrafica.tipologia='$anagraficatipologia',
-		anagrafica.fuoriuso='$fuoriuso' 
-		WHERE anagrafica.idanagrafica='$id' 
-		" );
-		
-	echo  mysql_error();
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("
+										UPDATE anagrafica 
+										set anagrafica.cognome =:cognome, 
+										anagrafica.nome =:nome, 
+										anagrafica.nascitadata=:nascita_data, 
+										anagrafica.nascitacomune=:nascita_comune, 
+										anagrafica.nascitaprovincia=:nascita_provincia, 
+										anagrafica.nascitastato=:nascita_stato, 
+										anagrafica.residenzavia=:residenza_via, 
+										anagrafica.residenzacivico=:residenza_civico, 
+										anagrafica.residenzacitta=:residenza_comune, 
+										anagrafica.residenzaprovincia=:residenza_provincia, 
+										anagrafica.residenzastato=:residenza_stato, 
+										anagrafica.grupposanguigno=:gruppo_sanguigno, 
+										anagrafica.codicefiscale=:codice_fiscale, 
+										anagrafica.residenzacap=:residenza_cap, 
+										anagrafica.tipologia=:anagraficatipologia,
+										anagrafica.fuoriuso=:fuoriuso 
+										WHERE anagrafica.idanagrafica=:id 
+										"); 
+		$query->bindParam(':cognome', $cognome);
+		$query->bindParam(':nome', $nome);
+		$query->bindParam(':nascita_data', $nascita_data);
+		$query->bindParam(':nascita_comune', $nascita_comune);
+		$query->bindParam(':nascita_provincia', $nascita_provincia);
+		$query->bindParam(':nascita_stato', $nascita_stato);
+		$query->bindParam(':residenza_via', $residenza_via);
+		$query->bindParam(':residenza_civico', $residenza_civico);
+		$query->bindParam(':residenza_comune', $residenza_comune);
+		$query->bindParam(':residenza_provincia', $residenza_provincia);
+		$query->bindParam(':residenza_stato', $residenza_stato);
+		$query->bindParam(':gruppo_sanguigno', $gruppo_sanguigno);
+		$query->bindParam(':codice_fiscale', $codice_fiscale);
+		$query->bindParam(':residenza_cap', $residenza_cap);
+		$query->bindParam(':anagraficatipologia', $anagraficatipologia);
+		$query->bindParam(':fuoriuso', $fuoriuso);
+		$query->bindParam(':id', $id);
+		$query->execute();
+		$connessione->commit();
+		$q = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$q = false;
+	}		
 	
-	if (!$query) { 
+	if (!$q) { 
 		$inserimento='false'; 
 	}
 	else { 

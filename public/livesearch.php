@@ -17,12 +17,12 @@ $scelta=$_GET['scelta'];
 
 if($scelta == 'carica')
 {
-	$my_ricerca= new Ricerca;
+	$my_ricerca = new Ricerca;
 	$my_ricerca->publricercaespolosa($q, 'cognome');
-	$where= $my_ricerca->where;
-	$sql=mysql_query("SELECT * FROM anagrafica $where and tipologia='carica' limit 5");
+	$where = $my_ricerca->where;
+	$sql = $connessione->query("SELECT * FROM anagrafica $where and tipologia='carica' limit 5");
 
-	while($row = mysql_fetch_array($sql))
+	while($row = $sql->fetch())
 	  {
 	echo "<br>";?>
 	<a href="login0.php?corpus=curriculum-aggiungi-carica&id=<?php echo $id;?>&idcarica=<?php echo $row['idanagrafica'];?>&test=ok<?php echo $q;?>">
@@ -37,10 +37,10 @@ if($scelta == 'titolostudio')
 {
 	$my_ricerca= new Ricerca;
 	$my_ricerca->publricercaespolosa($q, 'titolo');
-	$where= $my_ricerca->where;
-	$sql=mysql_query("SELECT * FROM titoli $where and tipologiatitolo='titolo di studio' limit 5");
+	$where = $my_ricerca->where;
+	$sql = $connessione->query("SELECT * FROM titoli $where and tipologiatitolo='titolo di studio' limit 5");
 
-	while($row = mysql_fetch_array($sql))
+	while($row = $sql->fetch())
 	  {
 	echo "<br>";?>
 	<a href="login0.php?corpus=curriculum-aggiungi-titolo&id=<?php echo $id;?>&idtitolo=<?php echo $row['idtitoli'];?>&test=ok<?php echo $q;?>">
@@ -53,12 +53,12 @@ if($scelta == 'titolostudio')
 
 if($scelta == 'titolocri')
 {
-	$my_ricerca= new Ricerca;
+	$my_ricerca = new Ricerca;
 	$my_ricerca->publricercaespolosa($q, 'titolo');
-	$where= $my_ricerca->where;
-	$sql=mysql_query("SELECT * FROM titoli $where and tipologiatitolo='titolo cri' limit 5");
+	$where = $my_ricerca->where;
+	$sql = $connessione->query("SELECT * FROM titoli $where and tipologiatitolo='titolo cri' limit 5");
 
-	while($row = mysql_fetch_array($sql))
+	while($row = $sql->fetch())
 	  {
 	echo "<br>";?>
 	<a href="login0.php?corpus=curriculum-aggiungi-titolo&id=<?php echo $id;?>&idtitolo=<?php echo $row['idtitoli'];?>&test=ok<?php echo $q;?>">
@@ -71,12 +71,12 @@ if($scelta == 'titolocri')
 
 if($scelta == 'competenza')
 {
-	$my_ricerca= new Ricerca;
+	$my_ricerca = new Ricerca;
 	$my_ricerca->publricercaespolosa($q, 'titolo');
-	$where= $my_ricerca->where;
-	$sql=mysql_query("SELECT * FROM titoli $where and tipologiatitolo='competenza' limit 5");
+	$where = $my_ricerca->where;
+	$sql = $connessione->query("SELECT * FROM titoli $where and tipologiatitolo='competenza' limit 5");
 
-	while($row = mysql_fetch_array($sql))
+	while($row = $sql->fetch())
 	  {
 	echo "<br>";?>
 	<a href="login0.php?corpus=curriculum-aggiungi-titolo&id=<?php echo $id;?>&idtitolo=<?php echo $row['idtitoli'];?>&test=ok<?php echo $q;?>">
@@ -89,12 +89,12 @@ if($scelta == 'competenza')
 
 if($scelta == 'patente')
 {
-	$my_ricerca= new Ricerca;
+	$my_ricerca = new Ricerca;
 	$my_ricerca->publricercaespolosa($q, 'titolo');
-	$where= $my_ricerca->where;
-	$sql=mysql_query("SELECT * FROM titoli $where and (tipologiatitolo='patente civile' or tipologiatitolo='patente cri') limit 5");
+	$where = $my_ricerca->where;
+	$sql = $connessione->query("SELECT * FROM titoli $where and (tipologiatitolo='patente civile' or tipologiatitolo='patente cri') limit 5");
 
-	while($row = mysql_fetch_array($sql))
+	while($row = $sql->fetch())
 	  {
 	echo "<br>";?>
 	<a href="login0.php?corpus=curriculum-aggiungi-titolo&id=<?php echo $id;?>&idtitolo=<?php echo $row['idtitoli'];?>&test=ok<?php echo $q;?>">
@@ -105,6 +105,6 @@ if($scelta == 'patente')
 
 }
 
-mysql_close ($verificaconnessione);
+$connessione = null;
 
 ?>

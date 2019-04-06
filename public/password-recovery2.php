@@ -25,15 +25,16 @@
 	$cf = $_POST['codicefiscale']; // nome utente inserito nella form della pagina iniziale
 	$email = $_POST['email']; // password inserita nella form della pagina iniziale
 	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 
-	$settings3=mysql_query("select distinct * from defaultsettings");
-	$settings4=mysql_fetch_array($settings3);
+	$settings3 = $connessione->query("SELECT distinct * from defaultsettings");
+	$settings4 = $settings3->fetch();
 	$url = $settings4['paginaprincipale'];
 
-	$utente = mysql_query("SELECT COUNT(*) FROM users, anagrafica WHERE users.mainemail='$email' and anagrafica.codicefiscale='$cf'"); //controllo della correttezza di email e codicefiscale
-	$utente2 = mysql_fetch_array($utente);
+	$utente = $connessione->query("SELECT COUNT(*) FROM users, anagrafica WHERE users.mainemail='$email' and anagrafica.codicefiscale='$cf'"); //controllo della correttezza di email e codicefiscale
+	$utente2 = $utente->fetch();
 
 	if ($utente2[0] < 1 ) {
 		?>
@@ -44,13 +45,28 @@
 	}
 	else {
 		$data = time();
-		$idutente = mysql_query("SELECT users.idanagrafica FROM users WHERE users.mainemail='$email'");
-		$idutente2 = mysql_fetch_row($idutente);
+		$idutente = $connessione->query("SELECT users.idanagrafica FROM users WHERE users.mainemail='$email'");
+		$idutente2 = $idutente->fetch();
 		$id = $idutente2[0];
 		$token = random_string(30);
 		$linkreset = $url . "/public/password-recovery3.php?token=" . $token;
-		$insert = mysql_query("INSERT INTO passwordrecovery VALUES ( '', '$id', '$token', '$data')");
-
+		
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO passwordrecovery VALUES ( null, :id, :token, :data)"); 
+			$query->bindParam(':id', $id);
+			$query->bindParam(':token', $token);
+			$query->bindParam(':data', $data);
+			$query->execute();
+			$connessione->commit();
+			$insert = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$insert = false;
+		}	
+		
 		$oggetto = "Link Reimposta Password";
 		$messaggio = 	'Buongiorno,<br><br>di seguito il link per resettare la tua password di accesso ad Abulafia Web.<br><br>
 						Se non sei stato tu a fare questa richiesta di reset, ti preghiamo di ignorare questo messaggio
@@ -59,8 +75,8 @@
 						<br><br>Il link sar&agrave; attivo per 24 ore.
 						<br><br>Il Team di Abulafia';
 
-		$mail->setFrom ("info@abulafiaweb.it", "Abulafia Web");
-		$mail->addReplyTo ("info@abulafiaweb.it");
+		$mail->setFrom ("supporto@abulafiaweb.it", "Abulafia Web");
+		$mail->addReplyTo ("supporto@abulafiaweb.it");
 		$mail->addAddress($email);
 		
 		$mail->isHTML(true);   
@@ -79,4 +95,3 @@
 	}
 
 ?>
-

@@ -9,13 +9,39 @@
 	$password = md5($_POST['pass1']); // nome utente inserito nella form della pagina iniziale
 	$idutente = $_POST['idutente']; // password inserita nella form della pagina iniziale
 	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 
-	$pass = mysql_query("UPDATE users SET password = '$password' WHERE idanagrafica = '$idutente'");
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("UPDATE users SET password = :password WHERE idanagrafica = :idutente"); 
+		$query->bindParam(':password', $password);
+		$query->bindParam(':idutente', $idutente);
+		$query->execute();
+		$connessione->commit();
+		$pass = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$pass = false;
+	}
 	
 	if($pass) {
-		$delete = mysql_query("DELETE FROM passwordrecovery WHERE utente = '$idutente'")
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("DELETE FROM passwordrecovery WHERE utente = :idutente"); 
+			$query->bindParam(':idutente', $idutente);
+			$query->execute();
+			$connessione->commit();
+			$pass = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$pass = false;
+		}	
 		?>
 		<script>
 			window.location="index.php?change=ok";

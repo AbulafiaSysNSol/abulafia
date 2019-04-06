@@ -1,27 +1,22 @@
 <?php
-Class Tabellahtml
 
+Class Tabellahtml {
 
+	public $border;
+	public $cellpadding;
+	public $cellspacing;
+	public $width;
+	public $intestazione=array();
+	public $cellaint;
+	public $rows=array();
+	public $contarighetabella;
+	public $cellarows=array();
+	public $cellarows2;
+	public $keycellarows2;
+	public $ultimariga=array();
+	public $cellaultimariga;
 
-	{
-
-public $border;
-public $cellpadding;
-public $cellspacing;
-public $width;
-public $intestazione=array();
-public $cellaint;
-public $rows=array();
-public $contarighetabella;
-public $cellarows=array();
-public $cellarows2;
-public $keycellarows2;
-public $ultimariga=array();
-public $cellaultimariga;
-
-
-	function publapritabella () //<man> apre una tabella html</man>
-		{
+	public function publapritabella() { //<man> apre una tabella html</man>
 		?>
 		<table 
 		border="<?php echo $this->border; ?>" 
@@ -29,78 +24,53 @@ public $cellaultimariga;
 		cellspacing="<?php echo $this->cellspacing; ?>" 
 		width="<?php echo $this->width; ?>"
 
-
 		<?php
-		}
+	}
 		
-	function publintestazionetabella () //<man> passa la prima riga della tabella </man>
-		{
+	public function publintestazionetabella() { //<man> passa la prima riga della tabella </man>
 		?>
 		<tr>
 		<?
-		foreach ($this->intestazione as $this->cellaint)
-			{
+		foreach ($this->intestazione as $this->cellaint) {
 			echo $this->cellaint;
-			}
+		}
 		?>
 		</tr>
 		<?
-		}
+	}
 	
-	
-	function publrighetabella () //<man> passa le righe della tabella </man>
-		{
-		
-		foreach ($this->rows as $this->cellarows )
-			{
+	public function publrighetabella() { //<man> passa le righe della tabella </man>
+		foreach ($this->rows as $this->cellarows) {
 			?>
 			<tr>
 			<?
-			
-			foreach ($this->cellarows as $this->keycellarows2=>$this->cellarows2)
-				{
+			foreach ($this->cellarows as $this->keycellarows2=>$this->cellarows2) {
 				echo $this->cellarows2;
-				} //fine secondo foreach
+			} //fine secondo foreach
 			?>
 			</tr>
 			<?	
-			}//fine primo foreach
-			
-
-	
-		
-		}//fine metodo
-		
-		
-				
-	function publultimarigatabella () //<man> passa l'ultima riga della tabella </man>
-		{
+		}//fine primo foreach
+	}//fine metodo
+					
+	public function publultimarigatabella() { //<man> passa l'ultima riga della tabella </man>
 		?>
 		<tr>
 		<?
-		foreach ($this->ultimariga as $this->cellaultimariga)
-			{
+		foreach ($this->ultimariga as $this->cellaultimariga) {
 			echo $this->cellaultimariga;
-			}
+		}
 		?>
 		</tr>
 		<?
-		}//fine metodo
+	}//fine metodo	
 		
-		
-	function publchiuditabella () //<man> chiude una tabella html aperta</man>
-		{
+	public function publchiuditabella() { //<man> chiude una tabella html aperta</man>
 		?>
 		</table>
 		<?php
-		}
+	}
 		
-		
+}//fine classe
 
-    
-    
-    
-		
-	
-	}//fine classe
 ?>

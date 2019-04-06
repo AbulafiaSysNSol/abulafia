@@ -9,6 +9,16 @@
 			
 			<div class="panel-body">
 
+				<?php
+				if( isset($_GET['canc']) && $_GET['canc'] == "ok") {
+					?>
+					<div class="row">
+					<div class="col-sm-12">
+					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Servizio eliminato con successo!</div></div></div>
+					<?php
+				}
+				?>
+
 				<div align="left">
 					<a href="?corpus=magazzino-aggiungi-servizio"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi Servizio</button></a><br><br>
 				</div>

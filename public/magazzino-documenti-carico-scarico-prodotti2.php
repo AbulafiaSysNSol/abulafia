@@ -6,7 +6,8 @@
 		header("Location: index.php?s=1");
 		exit(); 
 	}
-
+	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'class/Magazzino.obj.inc';
 	include 'class/Calendario.obj.inc';
@@ -14,10 +15,10 @@
 	$id = $_GET['id'];
 	$tipologia = $_GET['tipologia'];
 	$magazzino = $_GET['magazzino'];
-	$prodotto=$_POST['prodotto'];
-	$descrizione=$_POST['descrizione'];
-	$quantita=$_POST['quantita'];
-	$nota=$_POST['nota'];
+	$prodotto = $_POST['prodotto'];
+	$descrizione = $_POST['descrizione'];
+	$quantita = $_POST['quantita'];
+	$nota = $_POST['nota'];
 
 	$ins = $m->newRigaDocumento($id, $prodotto, $quantita, $nota, $tipologia, $magazzino);
 
@@ -25,7 +26,7 @@
 		header("Location: login0.php?corpus=magazzino-documenti-carico-scarico-prodotti&id=$id&tipologia=$tipologia");
 	}
 	else {
-		echo 'Errore nella registrazione dei dati<br><br>' . mysql_error();
+		echo 'Errore nella registrazione dei dati';
 	}
 
 ?>

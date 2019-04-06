@@ -8,17 +8,31 @@
 	$ins = $_POST['ins'];
 	$mod = $_POST['mod'];
 
-	$update=mysql_query("UPDATE usersettings SET risultatiperpagina='$risultati_per_pagina', primocoloretabellarisultati='$color1', secondocoloretabellarisultati='$color2', notificains = '$ins', notificamod = '$mod' WHERE idanagrafica='$id'");
-
-	if (!$update) {
+	try {
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare("UPDATE usersettings SET risultatiperpagina = :risultati_per_pagina, primocoloretabellarisultati = :color1, secondocoloretabellarisultati = :color2, notificains = :ins, notificamod = :mod WHERE idanagrafica = :id"); 
+		$query->bindParam(':risultati_per_pagina', $risultati_per_pagina);
+		$query->bindParam(':color1', $color1);
+		$query->bindParam(':color2', $color2);
+		$query->bindParam(':ins', $ins);
+		$query->bindParam(':mod', $mod);
+		$query->bindParam(':id', $id);
+		$query->execute();
+		$connessione->commit();
+		$up = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+    	$connessione->rollBack();
+    	$up = false;
+    	exit();
+	}
+	
+	if (!$up) {
 		?>
-		<SCRIPT LANGUAGE="Javascript">
-			browser= navigator.appName;
-			if (browser == "Netscape")
-				window.location="login0.php?corpus=settings&update=error"; 
-			else 
-				window.location="login0.php?corpus=settings&update=error"
-		</SCRIPT>
+		<script language="javascript">
+			window.location="login0.php?corpus=settings&update=error";
+		</script>
 		<?php
 	}
 	else {
@@ -30,10 +44,6 @@
 	}
 ?>
 
-<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
-		window.location="login0.php?corpus=settings&update=success"; 
-	else 
-		window.location="login0.php?corpus=settings&update=success"
-</SCRIPT>
+<script language="javascript"> 
+		window.location="login0.php?corpus=settings&update=success";
+</script>

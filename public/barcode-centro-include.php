@@ -34,8 +34,8 @@
 	$id = $_GET['id'];
 	$anno = $_GET['anno'];
 	$tabella = 'lettere'.$anno;
-	$data2 = mysql_query("SELECT dataregistrazione FROM $tabella WHERE idlettera = '$id'");
-	$data = mysql_fetch_row($data2);
+	$data2 = $connessione->query("SELECT dataregistrazione FROM $tabella WHERE idlettera = '$id'");
+	$data = $data2->fetch();
 	$date = explode('-', $data[0]);
 	$datareg = $date[2]."/".$date[1]."/".$date[0];
 

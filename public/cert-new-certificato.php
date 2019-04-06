@@ -11,6 +11,7 @@
 		require_once "class/" . $class_name.".obj.inc";
 	}
 	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'maledetti-apici-centro-include.php';
 
@@ -76,10 +77,54 @@
 		else if($tipo == 'ps') {
 			$oggetto = "Certificato Medico di invio al Pronto Soccorso dopo accesso al PSSA Aeroporto Bellini di Catania - Paziente " . ucwords($paziente['nome']) .' ' . ucwords($paziente['cognome']);
 		}
-		$newprot = mysql_query("INSERT INTO lettere$anno VALUES ('', '$oggetto', '$date', '$date', '', 'ricevuta', 'email', '', '', '')");
-		$idprotocollo = mysql_insert_id();
-		$insmittente = mysql_query("INSERT INTO joinletteremittenti$anno VALUES ('$idprotocollo', '$idmedico')");
-		$insins = mysql_query("INSERT INTO joinlettereinserimento$anno VALUES ('$idprotocollo', '$idmedico', '','$date')");
+
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO lettere$anno VALUES (null, :oggetto, :date, :date, '', 'ricevuta', 'email', '', '', '')"); 
+			$query->bindParam(':oggetto', $oggetto);
+			$query->bindParam(':date', $date);
+			$query->execute();
+			$idprotocollo = $connessione->lastInsertId();
+			$connessione->commit();
+			$newprot = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$newprot = false;
+		}
+
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO joinletteremittenti$anno VALUES (:idprotocollo, :idmedico)"); 
+			$query->bindParam(':idprotocollo', $idprotocollo);
+			$query->bindParam(':idmedico', $idmedico);
+			$query->execute();
+			$connessione->commit();
+			$insmittente = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$insmittente = false;
+		}
+
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO joinlettereinserimento$anno VALUES (:idprotocollo, :idmedico, '', :date)"); 
+			$query->bindParam(':idprotocollo', $idprotocollo);
+			$query->bindParam(':idmedico', $idmedico);
+			$query->bindParam(':date', $date);
+			$query->execute();
+			$connessione->commit();
+			$insins = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$insins = false;
+		}
+
 		include('lib/qrcode/qrlib.php');
 		//creazione qr code
 			
@@ -219,14 +264,62 @@
 		}
 		$file = 'certificato_'.time().'.pdf';
 		$date = date("Y-m-d", time());
-		$insert = mysql_query("INSERT INTO cert_certificati VALUES ('', '$idanagrafica', '$idmedico', '$idprotocollo', '$date', '$tipologia', '$file')");
+
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO cert_certificati VALUES (null, :idanagrafica, :idmedico, :idprotocollo, :date, :tipologia, :file)"); 
+			$query->bindParam(':idanagrafica', $idanagrafica);
+			$query->bindParam(':idmedico', $idmedico);
+			$query->bindParam(':idprotocollo', $idprotocollo);
+			$query->bindParam(':date', $date);
+			$query->bindParam(':tipologia', $tipologia);
+			$query->bindParam(':file', $file);
+			$query->execute();
+			$connessione->commit();
+			$insert = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$insert = false;
+		}
 		$pdf->Output('certificati/'.$file,'F');
 		$name = time().'.pdf';
 		$pdf->Output('lettere'.$anno.'/'.$idprotocollo.'/'.$name,'F');
-		$insert2 = mysql_query("INSERT INTO joinlettereallegati VALUES ('$idprotocollo', '$anno', '$name')");
+		
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO joinlettereallegati VALUES (:idprotocollo, :anno, :name)"); 
+			$query->bindParam(':idprotocollo', $idprotocollo);
+			$query->bindParam(':anno', $anno);
+			$query->bindParam(':name', $name);
+			$query->execute();
+			$connessione->commit();
+			$insert = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$insert = false;
+		}
 		if($richiesta != "null") {
 			$anno = date("Y", time());
-			$update = mysql_query("UPDATE cert_richieste SET stato = 1, protocollo = '$idprotocollo', anno = '$anno' WHERE id = '$richiesta'");
+			
+			try {
+			   	$connessione->beginTransaction();
+				$query = $connessione->prepare("UPDATE cert_richieste SET stato = 1, protocollo = :idprotocollo, anno = :anno WHERE id = :richiesta"); 
+				$query->bindParam(':idprotocollo', $idprotocollo);
+				$query->bindParam(':anno', $anno);
+				$query->bindParam(':richiesta', $richiesta);
+				$query->execute();
+				$connessione->commit();
+				$update = true;
+			}	 
+			catch (PDOException $errorePDO) { 
+			   	echo "Errore: " . $errorePDO->getMessage();
+			   	$connessione->rollBack();
+			 	$update = false;
+			}
 		}
 		header("Location: login0.php?corpus=cert-info-anag&id=".$idanagrafica);
 	}

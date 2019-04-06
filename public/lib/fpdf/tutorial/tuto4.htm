@@ -2,25 +2,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Multi-colunne</title>
+<title>Multi-colonne</title>
 <link type="text/css" rel="stylesheet" href="../fpdf.css">
 </head>
 <body>
-<h1>Multi-colunne</h1>
-This example is a variant of the previous one showing how to lay the text across multiple
-columns.
+<h1>Multi-colonne</h1>
+Questo esempio è una variante del precedente e mostra come sia possibile distribuire il testo su più
+colonne.
 <div class="source">
 <pre><code>&lt;?php
 <span class="kw">require(</span><span class="str">'fpdf.php'</span><span class="kw">);
 
 class </span>PDF <span class="kw">extends </span>FPDF
 <span class="kw">{
-</span><span class="cmt">// Current column
-</span><span class="kw">var </span>$col <span class="kw">= </span>0<span class="kw">;
-</span><span class="cmt">// Ordinate of column start
-</span><span class="kw">var </span>$y0<span class="kw">;
+protected </span>$col <span class="kw">= </span>0<span class="kw">; </span><span class="cmt">// Current column
+</span><span class="kw">protected </span>$y0<span class="kw">;      </span><span class="cmt">// Ordinate of column start
 
-function </span>Header<span class="kw">()
+</span><span class="kw">function </span>Header<span class="kw">()
 {
     </span><span class="cmt">// Page header
     </span><span class="kw">global </span>$title<span class="kw">;
@@ -123,12 +121,11 @@ function </span>PrintChapter<span class="kw">(</span>$num<span class="kw">, </sp
 </span>?&gt;</code></pre>
 </div>
 <p class='demo'><a href='tuto4.php' target='_blank' class='demo'>[Demo]</a></p>
-The key method used is <a href='../doc/acceptpagebreak.htm'>AcceptPageBreak()</a>. It allows to accept or not an automatic page
-break. By refusing it and altering the margin and current position, the desired column layout
-is achieved.
+Il metodo principale utilizzato è <a href='../doc/acceptpagebreak.htm'>AcceptPageBreak()</a>. Permette di accettare o no un'interruzione automatica di
+pagina. Rifiutandolo e alterando il margine alla posizione corrrente, si raggiunge il layout desiderato.
 <br>
-For the rest, not many changes; two properties have been added to the class to save the current
-column number and the position where columns begin, and the MultiCell() call specifies a
-6 centimeter width.
+Per il resto non ci sono molti cambiamenti; due proprietà sono state aggiunte alla classe per salvare
+il numero della colonna e la posizione quando inizia la colonna, e la chiamata a <a href='../doc/multicell.htm'>MultiCell()</a> specifica
+una larghezza di 6 centimetri.
 </body>
 </html>

@@ -55,10 +55,10 @@
 			foreach($res as $val) {
 				?>
 				<tr>
-					<td align="center"><?php echo $val['codice']; ?></td>
-					<td><?php echo strtoupper($val['descrizione']); ?></td>
-					<td><?php echo $val['indirizzo']; ?></td>
-					<td align="center"><?php echo $val['citta']; ?></td>
+					<td style="vertical-align: middle" align="center"><?php echo $val['codice']; ?></td>
+					<td style="vertical-align: middle"><?php echo strtoupper($val['descrizione']); ?></td>
+					<td style="vertical-align: middle"><?php echo $val['indirizzo']; ?></td>
+					<td style="vertical-align: middle" align="center"><?php echo $val['citta']; ?></td>
 					<td align="center"><?php echo $val['email']; ?></td>					
 					<td nowrap style="vertical-align: middle" align="center">
 						<div class="btn-group btn-group-sm">
@@ -66,7 +66,7 @@
 								<i class="fa fa-pencil"></i> Modifica
 							</a>
 							<?php if($admin) { ?>
-								<a class="btn btn-danger" href="">
+								<a class="btn btn-danger" onClick="return confirm('Vuoi veramente cancellare questo servizio?');" href="?corpus=magazzino-elimina-servizio&id=<?php echo $val['codice']; ?>">
 									<i class="fa fa-trash"></i> Elimina
 								</a>
 							<?php } ?>
@@ -86,5 +86,5 @@
 		<?php
 	}
 	
-	mysql_close ($verificaconnessione);
+	$connessione = null;
 ?>

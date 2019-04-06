@@ -15,8 +15,8 @@ $risultato = $_GET['inserimento'];
 $id = $_GET['id'];
 if($risultato == "true")
 {
-	$query = mysql_query("SELECT DISTINCT * FROM anagrafica WHERE idanagrafica= '$id' ");
-	$row = mysql_fetch_array($query);
+	$query = $connessione->query("SELECT DISTINCT * FROM anagrafica WHERE idanagrafica= '$id' ");
+	$row = $query->fetch();
 	$datanascita = $row['nascitadata'];
 	$date = explode("-" , $datanascita);
 	$giorno = $date[2];

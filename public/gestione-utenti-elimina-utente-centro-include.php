@@ -1,11 +1,35 @@
 <?php
 
-$id = $_GET['id'];
-$cancellazione=mysql_query("delete from users where idanagrafica='$id' limit 1");
-if (!$cancellazione) {echo 'Impossibile compiere l\'azione richiesta'; echo mysql_error(); exit();}
+	$id = $_GET['id'];
+
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("DELETE FROM users WHERE idanagrafica = :id LIMIT 1"); 
+		$query->bindParam(':id', $id);
+		$query->execute();
+		$connessione->commit();
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	exit();
+	}
+
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("DELETE FROM usersettings WHERE idanagrafica = :id LIMIT 1"); 
+		$query->bindParam(':id', $id);
+		$query->execute();
+		$connessione->commit();
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	exit();
+	}	
+
 ?>
-<SCRIPT LANGUAGE="Javascript">
-browser= navigator.appName;
-if (browser == "Netscape")
-window.location="login0.php?corpus=gestione-utenti"; else window.location="login0.php?corpus=gestione-utenti"
-</SCRIPT>
+
+<script language = "javascript">
+	window.location="login0.php?corpus=gestione-utenti";
+</script>

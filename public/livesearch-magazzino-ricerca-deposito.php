@@ -20,7 +20,7 @@
 		?>
 		<center><div class="alert alert-warning"><b><i class="fa fa-warning"></i></b> Seleziona <b>almeno</b> un magazzino o un prodotto.</div></center>
 		<?php
-		mysql_close ($verificaconnessione);
+		$connessione = null;
 		exit();
 	}
 	$p = new Prodotto();
@@ -97,7 +97,7 @@
 		<?php
 	}
 	
-	mysql_close ($verificaconnessione);
+	$connessione = null;
 ?>
 
 <script type="text/javascript">

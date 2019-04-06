@@ -35,14 +35,14 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-5">
+		<div class="col-sm-6">
 			<h4><i class="fa fa-list"></i> Riepilogo:</h4>
 			<?php 
-				$my_lettera -> publdisplaylettera ($ultimoid, $annoprotocollo); //richiamo del metodo "mostra"
+				$my_lettera->publdisplaylettera ($ultimoid, $annoprotocollo); //richiamo del metodo "mostra"
 			?>
 		</div>
 		
-		<div class="col-sm-5">
+		<div class="col-sm-6">
 			<h4><i class="fa fa-cog"></i> Opzioni:</h4>
 			<p>	<a href="login0.php?corpus=protocollo2
 					&from=crea">

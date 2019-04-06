@@ -1,18 +1,36 @@
 <?php
+
 $annoprotocollo = $_SESSION['annoprotocollo'];
-if (!isset($_POST['cercato'])) {$_POST['cercato'] = $_GET['cercato'] ;} 
-if (!isset($_POST['ordinerisultati'])) {$_POST['ordinerisultati'] = "anagrafica" ;}
-if (!isset($_POST['tabella'])) {$_POST['tabella'] = $_GET['tabella'] ;}
-if (!isset($_GET['iniziorisultati'])) { $_GET['iniziorisultati'] = 0;} 
-if (!isset($_GET['currentpage'])) { $_GET['currentpage'] = 1;} 
+
+if (!isset($_POST['cercato'])) {
+	$_POST['cercato'] = $_GET['cercato'] ;
+} 
+
+if (!isset($_POST['ordinerisultati'])) {
+	$_POST['ordinerisultati'] = "anagrafica" ;
+}
+
+if (!isset($_POST['tabella'])) {
+	$_POST['tabella'] = $_GET['tabella'] ;
+}
+
+if (!isset($_GET['iniziorisultati'])) { 
+	$_GET['iniziorisultati'] = 0;
+} 
+
+if (!isset($_GET['currentpage'])) { 
+	$_GET['currentpage'] = 1;
+} 
+
 $ordinerisultati = $_POST['ordinerisultati'];
 $cercato = $_POST['cercato'];
 $tabella = $_POST['tabella'];
 $idlettera=$_GET['idlettera'];
 $urlpdf=$_GET['urlpdf'];
-$count = mysql_query("SELECT COUNT(*) FROM anagrafica where anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%'");//conteggio per divisione in pagine dei risultati
-//echo mysql_error();
-$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
+
+$count = $connessione->query("SELECT COUNT(*) FROM anagrafica where anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%'");//conteggio per divisione in pagine dei risultati
+
+$res_count = $count->fetch();//conteggio per divisione in pagine dei risultati
 $risultatiperpagina = ($_SESSION['risultatiperpagina']);
 $tot_records = $res_count[0];//conteggio per divisione in pagine dei risultati
 $tot_pages = ceil($tot_records / $_SESSION['risultatiperpagina']);//conteggio per divisione in pagine dei risultati - la frazione arrotondata per eccesso
@@ -20,17 +38,19 @@ $iniziorisultati = $_GET['iniziorisultati'];
 $contatorelinee = 1 ;// per divisione in due colori diversi in tabella
 $currentpage = $_GET['currentpage'];
 
-$risultati= mysql_query("select distinct * from anagrafica where anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%'order by anagrafica.idanagrafica limit $iniziorisultati , $risultatiperpagina " );
-$num_righe = mysql_num_rows($risultati);
+$risultati= $connessione->query("SELECT DISTINCT * FROM anagrafica WHERE anagrafica.nome LIKE '%$cercato%' OR anagrafica.cognome LIKE '%$cercato%' ORDER BY anagrafica.idanagrafica LIMIT $iniziorisultati , $risultatiperpagina " );
+
+$num_righe = $risultati->rowCount();
+
 if  ($num_righe > 0 ) {
-echo " $tot_records occorrenze nel database per: $cercato <br><br>";
+	echo " $tot_records occorrenze nel database per: $cercato <br><br>";
 ?>
 
 <table border="0" cellpadding="1" cellspacing="1" width="100%">
 <tr><b>
 <td>ID</td><td>Cognome</td><td>Nome</td><td>Data di Nascita</td><td>Comune</td><td>Prov.</td><td>Seleziona</td></b></tr>
 <?php
-while ($row = mysql_fetch_array($risultati)) {
+while ($row = $risultati->fetch()) {
 if ( $contatorelinee % 2 == 1 ) { $colorelinee = $_SESSION['primocoloretabellarisultati'] ; } //primo colore
 else { $colorelinee = $_SESSION['secondocoloretabellarisultati'] ; } //secondo colore
 
@@ -88,4 +108,3 @@ echo "Non ci sono risultati "; ?> <a href="login0.php?corpus=ricerca"><br><br>Ef
 }
 
 ?>
-

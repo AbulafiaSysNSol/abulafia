@@ -6,6 +6,7 @@
 		require_once "class/" . $class_name.".obj.inc";
 	}
 
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'maledetti-apici-centro-include.php';
 
@@ -41,7 +42,7 @@
 	}
 
 	$result = $acc->insertAccess($idanagrafica, $medico, $data, $ora, $dipendente, $anamnesi, $diagnosi, $terapia, $note, $intervento);
-echo mysql_error();
+	
 	if($result) {
 		?>
 		<script>

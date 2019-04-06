@@ -38,11 +38,11 @@
 
 			echo '<br>Se <b><i>"' . $q . '"</i></b> non è presente nell\'elenco sottostante <a href="#" data-toggle="modal" data-target="#myModal">vai all\'inserimento rapido <span class="glyphicon glyphicon-share-alt"></span></a><br><br>';
 			
-			$sql=mysql_query("SELECT * FROM anagrafica $where $filtro AND anagrafica.fuoriuso = 0 limit 15");
+			$sql = $connessione->query("SELECT * FROM anagrafica $where $filtro AND anagrafica.fuoriuso = 0 limit 15");
 			?>
 			<table class="table table-condensed">
 			<?php
-			while($row = mysql_fetch_array($sql)) {
+			while($row = $sql->fetch()) {
 				$row = array_map('stripslashes', $row);
 				?>
 					<tr>
@@ -53,11 +53,11 @@
 							<?php echo $row['cognome'].' '.$row['nome'];?>
 							</a>
 						</td>
-						<td style="vertical-align: middle">
-							<a href="anagrafica-mini.php?id=<?php echo $row['idanagrafica']; ?>" class="fancybox btn btn-default" data-fancybox-type="iframe">
+						<td style="vertical-align: middle" nowrap>
+							<a href="anagrafica-mini.php?id=<?php echo $row['idanagrafica']; ?>" class="fancybox btn btn-info btn-sm" data-fancybox-type="iframe">
 								<i class="fa fa-info fa-fw"></i>
 							</a>
-							<a class="btn btn-primary" href="login0.php?corpus=protocollo2&idanagrafica=<?php echo $row['idanagrafica'];?>&idlettera=<?php echo $idlettera;?>&from=aggiungi">
+							<a class="btn btn-success btn-sm" href="login0.php?corpus=protocollo2&idanagrafica=<?php echo $row['idanagrafica'];?>&idlettera=<?php echo $idlettera;?>&from=aggiungi">
 								<i class="fa fa-user-plus fa-fw"></i>
 							</a>
 						</td>
@@ -69,6 +69,6 @@
 		</div>
 	</div>
 	<?php
-	mysql_close ($verificaconnessione);
+	$connessione = null;
 
 ?>

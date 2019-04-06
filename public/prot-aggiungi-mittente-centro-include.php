@@ -10,9 +10,8 @@ $cercato = $_POST['cercato'];
 $tabella = $_POST['tabella'];
 $idlettera=$_GET['idlettera'];
 $urlpdf=$_GET['urlpdf'];
-$count = mysql_query("SELECT COUNT(*) FROM anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%'");//conteggio per divisione in pagine dei risultati
-//echo mysql_error();
-$res_count = mysql_fetch_row($count);//conteggio per divisione in pagine dei risultati
+$count = $connessione->query("SELECT COUNT(*) FROM anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%'");//conteggio per divisione in pagine dei risultati
+$res_count = $count->fetch();//conteggio per divisione in pagine dei risultati
 $tot_records = $res_count[0];//conteggio per divisione in pagine dei risultati
 $tot_pages = ceil($tot_records / $risultatiperpagina);//conteggio per divisione in pagine dei risultati - la frazione arrotondata per eccesso
 $iniziorisultati = $_GET['iniziorisultati'];
@@ -20,8 +19,8 @@ $contatorelinee = 1 ;// per divisione in due colori diversi in tabella
 
 
 
-$risultati= mysql_query("select distinct * from anagrafica where anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%'limit $iniziorisultati , $risultatiperpagina" );
-$num_righe = mysql_num_rows($risultati);
+$risultati= $connessione->query("SELECT distinct * from anagrafica where anagrafica.nome like '%$cercato%' or anagrafica.cognome like '%$cercato%'limit $iniziorisultati , $risultatiperpagina" );
+$num_righe = $risultati->rowCount();
 if  ($num_righe > 0 ) {
 echo " $tot_records occorrenze nel database per: $cercato";
 ?>
@@ -30,7 +29,7 @@ echo " $tot_records occorrenze nel database per: $cercato";
 <tr><b>
 <td><b>ID</td><td><b>Cognome</td><td><b>Nome</td><td><b>Data di Nascita</td><td><b>Comune</td><td><b>Prov.</td><td><b>Codice Fiscale</td></tr>
 <?php
-while ($row = mysql_fetch_array($risultati)) {
+while ($row = $risultati->fetch()) {
 if ( $contatorelinee % 2 == 1 ) { $colorelinee = $_SESSION['primocoloretabellarisultati'] ; } //primo colore
 else { $colorelinee = $_SESSION['secondocoloretabellarisultati'] ; } //secondo colore
 

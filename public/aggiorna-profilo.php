@@ -7,6 +7,7 @@
 		exit(); 
 	}
 
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'maledetti-apici-centro-include.php';
 	include 'class/Anagrafica.obj.inc';
@@ -27,7 +28,7 @@
 		$terminiecondizioni = 0;
 	}
 	
-	$res = $a -> updateProfile($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni); 
+	$res = $a->updateProfile($id, $nome, $cognome, $data, $luogonascita, $codicefiscale, $email, $terminiecondizioni); 
 	
 	if($res) {
 		header("Location: login0.php?corpus=home&profile=ok");

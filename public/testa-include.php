@@ -13,16 +13,32 @@
 	}
 	
 	$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
-	$my_anagrafica= unserialize($_SESSION['my_anagrafica']);//deserializzazione 
-	$my_log= unserialize($_SESSION['my_log']);//deserializzazione 
-	$my_registroprotocollo= unserialize($_SESSION['my_registroprotocollo']);//deserializzazione 
-	$my_ricerca= unserialize($_SESSION['my_ricerca']);//deserializzazione 
-	$my_manuale= unserialize($_SESSION['my_manuale']);//deserializzazione 
-	$my_tabellahtml= unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
-	$my_database= unserialize($_SESSION['my_database']);//deserializzazione
-	$my_lettera= unserialize($_SESSION['my_lettera']);//deserializzazione 
-	$setting=mysql_query("select * from defaultsettings");
-	$setting2=mysql_fetch_array($setting);
+	$my_anagrafica = unserialize($_SESSION['my_anagrafica']);//deserializzazione 
+	$my_log = unserialize($_SESSION['my_log']);//deserializzazione 
+	$my_registroprotocollo = unserialize($_SESSION['my_registroprotocollo']);//deserializzazione 
+	$my_ricerca = unserialize($_SESSION['my_ricerca']);//deserializzazione 
+	$my_manuale = unserialize($_SESSION['my_manuale']);//deserializzazione 
+	$my_tabellahtml = unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
+	$my_database = unserialize($_SESSION['my_database']);//deserializzazione
+	$my_lettera = unserialize($_SESSION['my_lettera']);//deserializzazione 
+/*deprecato	$setting=mysq<l_query("select * from defaultsettings");
+	$setting2=mysq<l_fetch_array($setting);
+*/
+
+	try {
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT * FROM defaultsettings'); 
+		$query->execute();
+		$connessione->commit();
+	} 
+		
+	//gestione dell'eventuale errore della connessione
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+	}
+	
+	$setting= $query->fetchAll();
+	$setting2=$setting[0];
 
 	$_SESSION['paginaprincipale'] = $setting2['paginaprincipale'];
 
@@ -231,7 +247,7 @@ tinymce.init({
 		
 			<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><i class="fa fa-home"></i> Home</a></li>
+					<li <?php if($_GET['corpus'] == 'home') { echo 'class="active"'; }?>><a href="login0.php?corpus=home"><i class="fa fa-dashboard fa-fw"></i> Dash</a></li>
 					
 					<?php if($_SESSION['mod_anagrafica'] && $anag->isAnagrafica($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
@@ -245,7 +261,7 @@ tinymce.init({
 
 					<?php if($_SESSION['mod_protocollo'] && $anag->isProtocollo($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Protocollo <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw"></i> Protocollo <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="login0.php?corpus=protocollo2&from=crea"><i class="fa fa-plus fa-fw"></i></span> Crea nuovo numero progressivo</a></li>
 								<li><a href="login0.php?corpus=ricerca-protocollo"><i class="fa fa-search fa-fw"></i> Ricerca nel protocollo</a></li>
@@ -271,24 +287,69 @@ tinymce.init({
 					if($_SESSION['mod_lettere'] && $anag->isLettere($_SESSION['loginid'])) {
 						$user = $_SESSION['loginid'];
 						if($anag->isAdmin($_SESSION['loginid'])) {
-							$query = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+							try {
+   								$connessione->beginTransaction();
+								$query = $connessione->prepare('SELECT COUNT(*) 
+												FROM comp_lettera 
+											WHERE (vista = 1 OR vista = 2) 
+											AND firmata = 0');
+								$query->execute();
+								$connessione->commit();
+							} 
+		
+							//gestione dell'eventuale errore della connessione
+							catch (PDOException $errorePDO) { 
+    							echo "Errore: " . $errorePDO->getMessage();
+							}
 						}
 						else {
-							$query = mysql_query("SELECT COUNT(*) FROM comp_lettera, joinpersoneuffici WHERE (vista = 1 OR vista = 2) AND firmata = 0 AND joinpersoneuffici.ufficio = comp_lettera.ufficio AND joinpersoneuffici.utente = $user");
+							try {
+   								$connessione->beginTransaction();
+								$query = $connessione->prepare('SELECT count(*) 
+												FROM comp_lettera, joinpersoneuffici 
+												WHERE (vista = 1 OR vista = 2) 
+												AND firmata = 0 
+												AND joinpersoneuffici.ufficio = comp_lettera.ufficio 
+												AND joinpersoneuffici.utente = $user'); 
+								$query->bindParam(':user', $user);
+								$query->execute();
+								$connessione->commit();
+							} 
+		
+							//gestione dell'eventuale errore della connessione
+							catch (PDOException $errorePDO) { 
+    							echo "Errore: " . $errorePDO->getMessage();
+							}
 						}
-						$num = mysql_fetch_row($query);
-						$prot = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE firmata = 1 AND protocollo = 0");
-						$protocollare = mysql_fetch_row($prot);
+						$risultati = $query->fetchAll();
+						$num = $risultati[0];
+						try 
+						{
+   							$connessione->beginTransaction();
+							$query = $connessione->prepare('SELECT count(*) 
+															FROM comp_lettera, joinpersoneuffici 
+															WHERE firmata = 1 
+															AND protocollo = 0');
+							$query->execute();
+							$connessione->commit();
+						} 
+						catch (PDOException $errorePDO) 
+						{ 
+    						echo "Errore: " . $errorePDO->getMessage();
+						}						
+						
+						$risultati = $query->fetchAll();
+						$protocollare = $risultati[0];
 						$_SESSION['daprotocollare'] = $protocollare[0];
 						?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'lettera' OR $_GET['corpus']=='lettera2' OR $_GET['corpus']=='elenco-lettere' OR $_GET['corpus']=='elenco-lettere-firma') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<?php 
 									if($protocollare[0] > 0) {
-										echo '<span class="badge alert-success"><i class="fa fa-exclamation"></i></span>';
+										echo '<span class="badge alert-success"><i class="fa fa-exclamation fa-fw"></i></span>';
 									}
 									else {
-										echo '<i class="fa fa-file-text-o"></i>';
+										echo '<i class="fa fa-file-text-o fa-fw"></i>';
 									}
 								?>
 								 Lettere
@@ -317,7 +378,7 @@ tinymce.init({
 
 					<?php if($_SESSION['mod_magazzino'] && $anag->isMagazzino($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'farm-magazzino' OR $_GET['corpus']=='farmacia') { echo ' active'; }?>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> Magazzino <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes fa-fw"></i> Magazzino <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="?corpus=magazzino-prodotti"><i class="fa fa-asterisk fa-fw"></i> Prodotti</a></li>
 								<li><a href="?corpus=magazzino-servizi"><i class="fa fa-building-o fa-fw"></i> Servizi</a></li>
@@ -334,7 +395,7 @@ tinymce.init({
 
 					<?php if($_SESSION['mod_ambulatorio'] && $anag->isAmbulatorio($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'cert' OR $_GET['corpus']=='cert-anag') { echo ' active'; }?>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-medkit"></i> Ambulatorio <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-medkit fa-fw"></i> Ambulatorio <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="?corpus=cert-add-anag"><i class="fa fa-user-plus fa-fw"></i> Inserisci Assistito</a></li>
 								<li><a href="?corpus=cert-search-anag"><i class="fa fa-search fa-fw"></i> Ricerca Assistito</a></li>
@@ -350,7 +411,7 @@ tinymce.init({
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="fa fa-user"></i> <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b>
+							<i class="fa fa-user fa-fw"></i> <strong><?php echo $_SESSION['loginname'];?></strong> <b class="caret"></b>
 						</a>
 						
 						<ul class="dropdown-menu">
@@ -373,9 +434,10 @@ tinymce.init({
 									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?>
 										<li class="divider"></li>
 										<li role="presentation" class="dropdown-header">LOG</li>
-										<li><a href="login0.php?corpus=access-log"><i class="fa fa-key fa-fw"></i> Visualizza il log degli accessi</a></li>
-										<li><a href="login0.php?corpus=log-mail"><i class="fa fa-envelope-o fa-fw"></i> Visualizza il log delle mail</a></li>
-										<li><a href="login0.php?corpus=history"><i class="fa fa-clock-o fa-fw"></i> Visualizza il log delle azioni</a></li>
+										<li><a href="login0.php?corpus=access-log"><i class="fa fa-sign-in fa-fw"></i> Accessi</a></li>
+										<li><a href="login0.php?corpus=log-mail"><i class="fa fa-paper-plane-o fa-fw"></i> Email</a></li>
+										<li><a href="login0.php?corpus=error-log"><i class="fa fa-exclamation-triangle fa-fw"></i> Errori</a></li>
+										<li><a href="login0.php?corpus=history"><i class="fa fa-clock-o fa-fw"></i> Generale</a></li>
 										<?php
 									}
 								}
@@ -391,6 +453,6 @@ tinymce.init({
 	
 <?php
 	if ($_GET['corpus'] != 'cambioanno') { 
-		$my_registroprotocollo->publcontrolloanno (); //controllo della corrispondenza fra l'anno corrente e l'anno in uso dal db
+		$my_registroprotocollo->publcontrolloanno(); //controllo della corrispondenza fra l'anno corrente e l'anno in uso dal db
 	}
 ?>

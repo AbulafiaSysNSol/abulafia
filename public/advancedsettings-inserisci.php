@@ -8,7 +8,13 @@
 	}
 	
 	$annoprotocollo = $_SESSION['annoprotocollo'];
+	if (!is_numeric($annoprotocollo))
+		{
+		echo "Errore nella definizione dell'anno"; 
+		exit; 
+		}
 
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 
@@ -77,63 +83,118 @@
 	}
 
 	//eventuale settaggio del primo numero del nuovo protocollo
-	if(isset($_POST['primoprotocollo'])) {
+	if( isset($_POST['primoprotocollo']) and is_numeric($_POST['primoprotocollo']))  {
 		$primoprotocollo= $_POST['primoprotocollo'];
 	}
-	$contalettere=mysql_query("select count(*) from lettere$annoprotocollo");
-	$res_count=mysql_fetch_row($contalettere);
+
+	try {
+   		$connessione->beginTransaction();
+		$lettereannoprotocollo="lettere".$annoprotocollo;
+		$query = $connessione->prepare("SELECT count(*) from $lettereannoprotocollo"); 
+		$query->execute();
+		$connessione->commit();
+	} 	
+	//gestione dell'eventuale errore della connessione
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+	}
+
+	$risultati = $query->fetchAll();
+	$res_count=$risultati[0];
 	$contalettere= $res_count[0] +1 ;
+
 	if ($contalettere == 1) { 
-		$queryprimoprotocollo = mysql_query("ALTER TABLE lettere$annoprotocollo AUTO_INCREMENT = $primoprotocollo ");
-		if (!$queryprimoprotocollo) { 
-			echo 'Variazione del primo numero del protocollo NON RIUSCITA<br>'; 
-			echo mysql_error(); exit();
+		try {
+	   		$connessione->beginTransaction();
+			$lettereannoprotocollo="lettere".$annoprotocollo;
+			$query = $connessione->prepare("ALTER TABLE $lettereannoprotocollo AUTO_INCREMENT = $primoprotocollo"); 
+			$query->execute();
+			$connessione->commit();
+		} 
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+			$connessione->rollBack();
 			exit();
 		}
 	}
 
-	$inserimento=mysql_query("update defaultsettings set defaultsettings.version = $version, defaultsettings.email = '$email', defaultsettings.nomeapplicativo='$nomeapplicativo', defaultsettings.paginaprincipale = '$paginaprincipale' , defaultsettings.protocollomaxfilesize = '$protocollomaxfilesize' , defaultsettings.fotomaxfilesize = '$fotomaxfilesize' ,  defaultsettings.annoprotocollo = '$annoprotocollo', defaultsettings.headerdescription = '$headerdescription', defaultsettings.sede = '$sede', defaultsettings.denominazione = '$denominazione', defaultsettings.vertice = '$vertice', defaultsettings.inizio = '$inizio', quota = '$quota', defaultsettings.anagrafica = '$anagrafica', defaultsettings.protocollo = '$protocollo', defaultsettings.documenti = '$documenti', defaultsettings.lettere = '$lettere', defaultsettings.magazzino = '$magazzino', defaultsettings.ambulatorio = '$ambulatorio', defaultsettings.contabilita = '$contabilita'");
+	try {
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare("update defaultsettings 
+				set defaultsettings.version = :version, 
+				defaultsettings.email = :email, 
+				defaultsettings.nomeapplicativo=:nomeapplicativo, 
+				defaultsettings.paginaprincipale = :paginaprincipale , 
+				defaultsettings.protocollomaxfilesize = :protocollomaxfilesize , 
+				defaultsettings.fotomaxfilesize = :fotomaxfilesize,  
+				defaultsettings.annoprotocollo = :annoprotocollo, 
+				defaultsettings.headerdescription = :headerdescription, 
+				defaultsettings.sede = :sede, 
+				defaultsettings.denominazione = :denominazione, 
+				defaultsettings.vertice = :vertice, 
+				defaultsettings.inizio = :inizio, 
+				quota = :quota, 
+				defaultsettings.anagrafica = :anagrafica, 
+				defaultsettings.protocollo = :protocollo, 
+				defaultsettings.documenti = :documenti, 
+				defaultsettings.lettere = :lettere, 
+				defaultsettings.magazzino = :magazzino, 
+				defaultsettings.ambulatorio = :ambulatorio, 
+				defaultsettings.contabilita = :contabilita");
 
-	if (!$inserimento) {
-		?>
-		<SCRIPT LANGUAGE="Javascript">
-			browser= navigator.appName;
-			if (browser == "Netscape")
-				window.location="login0.php?corpus=advancedsettings&update=error"; 
-			else 
-				window.location="login0.php?corpus=advancedsettings&update=error";
-		</SCRIPT> 
-		<?php
-		echo mysql_error();
-		exit();
+		$query->bindParam(':version', $version);
+		$query->bindParam(':email', $email);
+		$query->bindParam(':nomeapplicativo', $nomeapplicativo);
+		$query->bindParam(':paginaprincipale', $paginaprincipale);
+		$query->bindParam(':protocollomaxfilesize', $protocollomaxfilesize);
+		$query->bindParam(':fotomaxfilesize', $fotomaxfilesize);
+		$query->bindParam(':annoprotocollo', $annoprotocollo);
+		$query->bindParam(':headerdescription', $headerdescription);
+		$query->bindParam(':sede', $sede);
+		$query->bindParam(':denominazione', $denominazione);
+		$query->bindParam(':vertice', $vertice);
+		$query->bindParam(':inizio', $inizio);
+		$query->bindParam(':quota', $quota);
+		$query->bindParam(':anagrafica', $anagrafica);
+		$query->bindParam(':protocollo', $protocollo);
+		$query->bindParam(':documenti', $documenti);
+		$query->bindParam(':lettere', $lettere);
+		$query->bindParam(':magazzino', $magazzino);
+		$query->bindParam(':ambulatorio', $ambulatorio);
+		$query->bindParam(':contabilita', $contabilita);
+		$query->execute();
+		$connessione->commit();
+	} 
+	//gestione dell'eventuale errore della connessione
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+		$connessione->rollBack();
+		exit;
 	}
-	else { 
-		$_SESSION['version'] = $version; 
-		$_SESSION['email'] = $email; 
-		$_SESSION['nomeapplicativo'] = $nomeapplicativo; 
-		$_SESSION['paginaprincipale']= $paginaprincipale; 
-		$_SESSION['protocollomaxfilesize']= $protocollomaxfilesize; 
-		$_SESSION['fotomaxfilesize']= $fotomaxfilesize; 
-		$_SESSION['headerdescription']= $headerdescription;
-		$_SESSION['sede'] = $sede;
-		$_SESSION['denominazione'] = $denominazione;
-		$_SESSION['vertice'] = $vertice;
-		$_SESSION['inizio'] = $inizio;
-		$_SESSION['quota'] = $quota;
-		$_SESSION['mod_anagrafica'] = $anagrafica;
-		$_SESSION['mod_protocollo'] = $protocollo;
-		$_SESSION['mod_documenti'] = $documenti;
-		$_SESSION['mod_lettere'] = $lettere;
-		$_SESSION['mod_magazzino'] = $magazzino;
-		$_SESSION['mod_ambulatorio'] = $ambulatorio;
-		$_SESSION['mod_contabilita'] = $contabilita;
-	}
+
+	$_SESSION['version'] = $version; 
+	$_SESSION['email'] = $email; 
+	$_SESSION['nomeapplicativo'] = $nomeapplicativo; 
+	$_SESSION['paginaprincipale']= $paginaprincipale; 
+	$_SESSION['protocollomaxfilesize']= $protocollomaxfilesize; 
+	$_SESSION['fotomaxfilesize']= $fotomaxfilesize; 
+	$_SESSION['headerdescription']= $headerdescription;
+	$_SESSION['sede'] = $sede;
+	$_SESSION['denominazione'] = $denominazione;
+	$_SESSION['vertice'] = $vertice;
+	$_SESSION['inizio'] = $inizio;
+	$_SESSION['quota'] = $quota;
+	$_SESSION['mod_anagrafica'] = $anagrafica;
+	$_SESSION['mod_protocollo'] = $protocollo;
+	$_SESSION['mod_documenti'] = $documenti;
+	$_SESSION['mod_lettere'] = $lettere;
+	$_SESSION['mod_magazzino'] = $magazzino;
+	$_SESSION['mod_ambulatorio'] = $ambulatorio;
+	$_SESSION['mod_contabilita'] = $contabilita;
+
 ?>
 
-<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
-		window.location="login0.php?corpus=advancedsettings&update=success"; 
-	else 
-		window.location="login0.php?corpus=advancedsettings&update=success";
-</SCRIPT>
+<script language = "javascript">
+	window.location="login0.php?corpus=advancedsettings&update=success"; 
+</script>

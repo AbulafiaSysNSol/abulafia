@@ -1,13 +1,11 @@
 <?php 
-class Calendario
-	{ //apertura classe
 
+class Calendario { //apertura classe
 
-public $dataitaliana;
-public $ggmmaaaa;
+	public $dataitaliana;
+	public $ggmmaaaa;
 
-	private function adesso () 
-		{
+	private function adesso () {
 		$this->anno= date("Y");
 		$this->mese= date("m");
 		$this->meseesteso= date("F");
@@ -15,26 +13,15 @@ public $ggmmaaaa;
 		$this->ora= date("H");
 		$this->minuti= date("i");
 		$this->secondi= date("s");
-		}//fine metodo
+	}//fine metodo
 
-
-
-
-
-	function publadesso () // <man>metodo per determinare il riferimento temporale attuale: vengono restituiti anno, mese, meseesteso, giorno, ore, minuti, e secondi </man>
-		{
-		if(function_exists('date_default_timezone_set') AND (!ini_get('date.timezone')))
-			{
-			
+	function publadesso () { // <man>metodo per determinare il riferimento temporale attuale: vengono restituiti anno, mese, meseesteso, giorno, ore, minuti, e secondi </man>
+		if(function_exists('date_default_timezone_set') AND (!ini_get('date.timezone'))) {			
 			date_default_timezone_set('Europe/Rome');
- 
-			}
+		}
 
 		$this->adesso();
-		}//fine metodo
-
-
-
+	}//fine metodo
 
 	public function publdataitaliana ($datainglese,$separatore) { //<man>metodo per stampare all'italiana la data, mettendo nel giusto ordine giorno, mese, anno, e passando come parametri la data inglese e il separatore che si vuole adottare</man>
 		$this->dataesplosa= explode('-',$datainglese);
@@ -51,20 +38,15 @@ public $ggmmaaaa;
 		}
 	}//fine metodo
 		
-
-	function publggmmaaaa ($separatore)//<man> Restituisce la data attuale nel formato numerico GG/MM/AAAA con $separatore come separatore</man>
-		{
+	function publggmmaaaa ($separatore) { //<man> Restituisce la data attuale nel formato numerico GG/MM/AAAA con $separatore come separatore</man>
 		$this->publadesso();
 		$this->ggmmaaaa=$this->giorno.$separatore.$this->mese.$separatore.$this->anno;
-		
-		}//fine metodo
+	}//fine metodo
 
-	function publhhmmss ($separatore)//<man> Restituisce l'orario attuale nel formato numerico hh/mm/ss con $separatore come separatore</man>
-		{
+	function publhhmmss ($separatore) {//<man> Restituisce l'orario attuale nel formato numerico hh/mm/ss con $separatore come separatore</man>
 		$this->publadesso();
 		$this->hhmmss=$this->ora.$separatore.$this->minuti.$separatore.$this->secondi;
-		
-		}//fine metodo
+	}//fine metodo
 		
 	public function dataSlash($data) {
 		$date = explode("-",$data);
@@ -84,9 +66,6 @@ public $ggmmaaaa;
 		return $ora;
 	}
 
+}//chiusura classe
 
-	}//chiusura classe
 ?>
-
-
-

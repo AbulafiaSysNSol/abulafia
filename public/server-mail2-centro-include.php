@@ -13,7 +13,7 @@
 	$res = $e->updateSetting($username, $password, $smtp, $porta, $protocollo, $replyto, $headermail, $footermail);
 	
 	if(!$res) {
-		echo 'ERRORE NELLA MODIFICA:' . mysql_error();
+		echo 'ERRORE NELLA MODIFICA';
 	}
 	else {
 		$_SESSION['usernamemail'] = $username;
@@ -26,15 +26,9 @@
 		$_SESSION['footermail'] = $footermail;
 ?>
 
-<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape") {
-		window.location="login0.php?corpus=home&email=ok";
-	}
-	else {
-		window.location="login0.php?corpus=home&email=ok";
-	}
-</SCRIPT>
+<script language="javascript">
+	window.location="login0.php?corpus=home&email=ok";
+</script>
 
 <?php
 	}

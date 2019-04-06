@@ -8,8 +8,27 @@
 	$a = new Anagrafica();
 	$anno = $_SESSION['annoprotocollo'];
 	$annoprotocollo = $_SESSION['annoprotocollo'];
-	$lettereinlavorazione = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE protocollo = 0");
-	$numerolettere=mysql_fetch_row($lettereinlavorazione);
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT count(*) 
+						from comp_lettera 
+						where protocollo=0
+						'); 
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della query
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$risultati = $query->fetchAll();
+	$numerolettere=$risultati[0];
+
+
 		
 	if (isset($_GET['firma']) &&($_GET['firma'] == 'ok')) {
 		?>
@@ -259,12 +278,12 @@ if($a->isAdmin($_SESSION['loginid'])) { ?>
 				</div>
 						
 				<div class="panel-body">
-					<p><?php $my_log -> publleggilog('1', '5', 'login', $_SESSION['logfile']); //legge dal log degli accessi ?></p>
+					<p><?php $my_log -> publleggilog('0', '5', 'access', $_SESSION['logfile']); //legge dal log degli accessi ?></p>
 				</div>
 			</div>
 		</div>
 	</div>
 	<?php
 }	
-$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO HOME' , 'OK' , $_SESSION['ip'], $_SESSION['historylog']);
+$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO HOME' , 'OK' , $_SESSION['ip'], $_SESSION['logfile'], 'page request');
 ?>

@@ -3,12 +3,12 @@
 $l = new Lettera();
 $user = $_SESSION['loginid'];
 if($my_anagrafica->isAdmin($_SESSION['loginid'])) {
-	$count = mysql_query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+	$count = $connessione->query("SELECT COUNT(*) FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
 }
 else {
-	$count = mysql_query("SELECT COUNT(*) FROM comp_lettera, joinpersoneuffici WHERE (vista = 1 OR vista = 2) AND firmata = 0 AND joinpersoneuffici.ufficio = comp_lettera.ufficio AND joinpersoneuffici.utente = $user");
+	$count = $connessione->query("SELECT COUNT(*) FROM comp_lettera, joinpersoneuffici WHERE (vista = 1 OR vista = 2) AND firmata = 0 AND joinpersoneuffici.ufficio = comp_lettera.ufficio AND joinpersoneuffici.utente = $user");
 }
-$num = mysql_fetch_row($count);
+$num = $count->fetch();
 
 if($num[0] == 0) {
 	?>
@@ -24,10 +24,10 @@ if($num[0] == 0) {
 }
 
 if($my_anagrafica->isAdmin($_SESSION['loginid'])) {
-	$query = mysql_query("SELECT *, comp_lettera.id AS idlettera FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
+	$query = $connessione->query("SELECT *, comp_lettera.id AS idlettera FROM comp_lettera WHERE (vista = 1 OR vista = 2) AND firmata = 0");
 }
 else {
-	$query = mysql_query("SELECT *, comp_lettera.id AS idlettera FROM comp_lettera, joinpersoneuffici WHERE (vista = 1 OR vista = 2) AND firmata = 0 AND joinpersoneuffici.ufficio = comp_lettera.ufficio AND joinpersoneuffici.utente = $user");
+	$query = $connessione->query("SELECT *, comp_lettera.id AS idlettera FROM comp_lettera, joinpersoneuffici WHERE (vista = 1 OR vista = 2) AND firmata = 0 AND joinpersoneuffici.ufficio = comp_lettera.ufficio AND joinpersoneuffici.utente = $user");
 }
 ?>
 
@@ -58,7 +58,7 @@ else {
 			
 			<?php
 			$contatorelinee = 0;
-			while ($risultati2=mysql_fetch_array($query)) {
+			while ($risultati2 = $query->fetch()) {
 				$risultati2 = array_map('stripslashes', $risultati2);
 				if ( $contatorelinee % 2 == 1 ) { 
 						$colorelinee = $_SESSION['primocoloretabellarisultati'] ; 

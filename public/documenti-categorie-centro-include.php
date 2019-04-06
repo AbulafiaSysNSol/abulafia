@@ -16,14 +16,14 @@
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-danger">Si è verificato un errore, controlla di aver inserito tutti i campi oppure riprova più tardi.</div></div></div>
+	<div class="alert alert-danger">Si &egrave; verificato un errore, controlla di aver inserito tutti i campi oppure riprova più tardi.</div></div></div>
 	<?php
    }
     if( isset($_GET['add']) && $_GET['add'] == "duplicato") {
 	?>
 	<div class="row">
 	<div class="col-sm-12">
-	<div class="alert alert-danger">Impossibile aggiungere: esiste già una categoria con lo stesso nome!</div></div></div>
+	<div class="alert alert-danger">Impossibile aggiungere: esiste gi&agrave; una categoria con lo stesso nome!</div></div></div>
 	<?php
    }
    if( isset($_GET['mod']) && $_GET['mod'] == "ok") {
@@ -77,10 +77,14 @@
 
 	<div class="col-sm-12">   
 		<?php
-		$categorie=mysql_query("select count(*) from categorie");
-		if ($categorie) { $num=mysql_fetch_row($categorie);}
-		else { $num[0]=0; }
-		if($num[0]<=0) {
+		$categorie = $connessione->query("SELECT COUNT(*) FROM categorie");
+		if ($categorie) { 
+			$num = $categorie->fetch();
+		}
+		else { 
+			$num[0] = 0; 
+		}
+		if($num[0] <= 0) {
 			echo '<div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Nessuna categoria registrata.</div>';
 		}
 		else {
@@ -89,14 +93,14 @@
 			<br><label><span class="glyphicon glyphicon-list"></span> Elenco Categorie:</label><br><br>
 			<?php
 
-			$risultati=mysql_query("select distinct * from categorie");
+			$risultati = $connessione->query("SELECT DISTINCT * FROM categorie");
 			?>
 			<table class="table table-striped table-hover">
 			<tr>
 			<td><b>Descrizione</b></td><td><b>Opzioni</b></td>
 			</tr>
 			<?php
-			while ($risultati2=mysql_fetch_array($risultati))	{
+			while($risultati2 = $risultati->fetch()) {
 				$risultati2 = array_map ("stripslashes",$risultati2);
 				echo '<tr>';
 				echo '<td>' . $risultati2['categoria'] . '</td>
@@ -120,6 +124,5 @@
 </div>
 <?php 
 	$_SESSION['my_database']=serialize($my_database);
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO CATEGORIE' , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO CATEGORIE' , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'],'page request');
 ?>
-

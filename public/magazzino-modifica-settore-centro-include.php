@@ -63,5 +63,5 @@
 </div>
 <?php 
 	$_SESSION['my_database']=serialize($my_database);
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO MODIFICA SETTORE - ' . $descrizione , 'OK' , $_SESSION['ip'] , $_SESSION['historylog']);
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO MODIFICA SETTORE - ' . $descrizione , 'OK' , $_SESSION['ip'] , $_SESSION['logfile'], 'magazzino');
 ?>

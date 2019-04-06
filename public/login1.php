@@ -5,36 +5,43 @@
 	function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
 		require_once "class/" . $class_name.".obj.inc";
 	}
-	
-	$my_calendario= new Calendario;//crea un nuovo oggetto
-	$_SESSION['my_calendario']= serialize($my_calendario); //serializzazione per passaggio alle variabili di sessione
-	$my_log = new Log(); //crea un nuovo oggetto 'log'
-	$_SESSION['my_log']= serialize($my_log); //serializzazione per passaggio alle variabili di sessione
-	$my_registroprotocollo = new Registroprotocollo ;//crea un nuovo oggetto
-	$_SESSION['my_registroprotocollo'] = serialize($my_registroprotocollo); //serializzazione per passaggio alle variabili di sessione
-	$my_anagrafica = new Anagrafica ;//crea un nuovo oggetto
-	$_SESSION['my_anagrafica'] = serialize($my_anagrafica); //serializzazione per passaggio alle variabili di sessione
-	$my_ricerca = new Ricerca ;//crea un nuovo oggetto
-	$_SESSION['my_ricerca'] = serialize($my_ricerca); //serializzazione per passaggio alle variabili di sessione
-	$my_tabellahtml = new Tabellahtml ;//crea un nuovo oggetto
-	$_SESSION['my_tabellahtml'] = serialize($my_tabellahtml); //serializzazione per passaggio alle variabili di sessione
-	$my_manuale = new Manuale ;//crea un nuovo oggetto
-	$_SESSION['my_manuale'] = serialize($my_manuale); //serializzazione per passaggio alle variabili di sessione
-	$my_database = new Database ;//crea un nuovo oggetto
-	$_SESSION['my_database'] = serialize($my_database); //serializzazione per passaggio alle variabili di sessione
-	$my_lettera = new Lettera ;//crea un nuovo oggetto
-	$_SESSION['my_lettera'] = serialize($my_lettera); //serializzazione per passaggio alle variabili di sessione
 
+	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
+	$my_calendario= new Calendario();//crea un nuovo oggetto
+	$_SESSION['my_calendario']= serialize($my_calendario); //serializzazione per passaggio alle variabili di sessione
 	$logdirectory="log/";
 	$_SESSION['logdirectory'] = "log/";
-	$errorlog='error.log';
-	$logfile='access.log';
+	//logfile unificato $errorlog='error.log';
+	$logfile='general.log';
 	$maillog='mail.log';
-	$historylog = 'history.log';
+	//logfile unificato $historylog = 'history.log';
 	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 	$userid = addslashes($_POST['userid']); // nome utente inserito nella form della pagina iniziale
 	$usermd = md5($userid);
 	$password = md5($_POST['password']); // password inserita nella form della pagina iniziale
+
+	include '../db-connessione-include.php'; //connessione al db-server
+	
+	
+
+	$my_log = new Log(); //crea un nuovo oggetto 'log'
+	$_SESSION['my_log']= serialize($my_log); //serializzazione per passaggio alle variabili di sessione
+	$my_registroprotocollo = new Registroprotocollo() ;//crea un nuovo oggetto
+	$_SESSION['my_registroprotocollo'] = serialize($my_registroprotocollo); //serializzazione per passaggio alle variabili di sessione
+	$my_anagrafica = new Anagrafica() ;//crea un nuovo oggetto
+	$_SESSION['my_anagrafica'] = serialize($my_anagrafica); //serializzazione per passaggio alle variabili di sessione
+	$my_ricerca = new Ricerca() ;//crea un nuovo oggetto
+	$_SESSION['my_ricerca'] = serialize($my_ricerca); //serializzazione per passaggio alle variabili di sessione
+	$my_tabellahtml = new Tabellahtml() ;//crea un nuovo oggetto
+	$_SESSION['my_tabellahtml'] = serialize($my_tabellahtml); //serializzazione per passaggio alle variabili di sessione
+	$my_manuale = new Manuale() ;//crea un nuovo oggetto
+	$_SESSION['my_manuale'] = serialize($my_manuale); //serializzazione per passaggio alle variabili di sessione
+	$my_database = new Database() ;//crea un nuovo oggetto
+	$_SESSION['my_database'] = serialize($my_database); //serializzazione per passaggio alle variabili di sessione
+	$my_lettera = new Lettera() ;//crea un nuovo oggetto
+	$_SESSION['my_lettera'] = serialize($my_lettera); //serializzazione per passaggio alle variabili di sessione
+
+
 
 	if ($usermd == $password) {
 		$pass = 1;
@@ -52,14 +59,36 @@
 		$client = $_SERVER['HTTP_USER_AGENT'];
 	}
 	$client=$ip.' - '.$client;
-	
-	include '../db-connessione-include.php'; //connessione al db-server
-	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
 
-	$login=mysql_query("SELECT count(*) from users where loginname='$userid' and password='$password'"); //controllo della correttezza di username e password
-	$login2 = mysql_fetch_array($login);
-	if ($login2[0] < 1 ) {
-		$my_log -> publscrivilog($userid, 'login', 'denied', $client , $logfile);
+
+//controllo login con PDO
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT count(*) 
+						from users 
+						where loginname=:userid 
+						and password=:password '); 
+		$query->bindParam(':userid', $userid);
+		$query->bindParam(':password', $password);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della query
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$risultati = $query->fetchAll();
+
+//controllo della presenza di almeno un utente con user e passord indicati nella form di login
+		
+	
+
+	if ($risultati[0][0] < 1 ) {
+		$my_log -> publscrivilog($userid, 'login', 'denied', $client , $logfile,'access');
 		$_SESSION['auth']= 0 ;
 		?>
 		<SCRIPT LANGUAGE="Javascript">
@@ -72,19 +101,81 @@
 	}
 	
 	//inizio settaggio delle variabili di sessione
-	$logindata=mysql_query("select * from users where loginname='$userid'");
-	$logindata2=mysql_fetch_array($logindata);
+	/*deprecato	$logindata=mysq<l_query("select * from users where loginname='$userid'"); $logindata2=mysq<l_fetch_array($logindata);*/
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT * 
+						from users 
+						where loginname=:userid 
+						'); 
+		$query->bindParam(':userid', $userid);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della query
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+	
+	$logindata= $query->fetchAll();
+	$logindata2=$logindata[0];
 	$idperricerca=$logindata2['idanagrafica']; //setta l'id dell'user che ha effettuato il login
-	$logindata3=mysql_query("select * from anagrafica where idanagrafica='$idperricerca'");
-	$logindata4=mysql_fetch_array($logindata3); //le ultime due righe estraggono dal db gli altri dati dell'utente che ha fatto login
+
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT * 
+						from anagrafica 
+						where idanagrafica=:idperricerca 
+						'); 
+		$query->bindParam(':idperricerca', $idperricerca);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della query
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$logindata3 = $query->fetchAll();
+	$logindata4=$logindata3[0];
+
+
+
 	$_SESSION['loginurlfoto']= $logindata4['urlfoto']; //seleziona l'url della foto dell'user che ha fatto login
 	$_SESSION['auth']= $logindata2['auth']; //livello di autorizzazione dell'utente, prelevato dal db
 	$_SESSION['loginname'] = $logindata2['loginname']; //nome utente prelevato dalla tabella users
 	$_SESSION['loginid']=$logindata2['idanagrafica']; //id prelevato dalla tabella users, identica a quella dell'anagrafica
 
 	//caricamento dei settaggi personalizzati
-	$settings=mysql_query("SELECT * FROM usersettings WHERE idanagrafica='$idperricerca'");
-	$settings2=mysql_fetch_array($settings);
+
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT *
+						from usersettings
+						where idanagrafica=:idperricerca
+						'); 
+		$query->bindParam(':idperricerca', $idperricerca);
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della query
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$settings = $query->fetchAll();
+	$settings2=$settings[0];
+
+
 	//assegnazione settaggi personali
 	$_SESSION['risultatiperpagina'] = $settings2['risultatiperpagina'];
 	$_SESSION['primocoloretabellarisultati'] = $settings2['primocoloretabellarisultati'];//primo colore delle righe che si alternano della tabella dei risultati della ricerca
@@ -95,8 +186,26 @@
 	$_SESSION['notificamod'] = $settings2['notificamod'];
 	
 	//caricamento dei settaggi del software
-	$settings3=mysql_query("select distinct * from defaultsettings");
-	$settings4=mysql_fetch_array($settings3);
+
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT distinct *
+						from defaultsettings
+						'); 
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+
+	$settings3 = $query->fetchAll();
+	$settings4=$settings3[0];
+
 	//assegnazione settaggi del software
 	$_SESSION['keywords'] = $settings4['keywords'];
 	$_SESSION['description'] = $settings4['description'];
@@ -125,8 +234,26 @@
 	$_SESSION['signaturepath'] = $settings4['signaturepath'];
 	
 	//caricamento settaggi email
-	$settings5=mysql_query("select distinct * from mailsettings");
-	$settings6=mysql_fetch_array($settings5);
+
+
+	try 
+		{
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare('SELECT *
+						from mailsettings
+						'); 
+		$query->execute();
+		$connessione->commit();
+		} 
+		
+		//gestione dell'eventuale errore della connessione
+		catch (PDOException $errorePDO) { 
+    		echo "Errore: " . $errorePDO->getMessage();
+		}
+	
+	$settings5 = $query->fetchAll();
+	$settings6=$settings5[0];
+
 	//assegnazione settaggi email
 	$_SESSION['usernamemail'] = $settings6['username'];
 	$_SESSION['passwordmail'] = base64_decode($settings6['password']);
@@ -145,8 +272,8 @@
 	//file di log
 	$_SESSION['logfile'] = $logfile;
 	$_SESSION['maillog'] = $maillog;
-	$_SESSION['historylog'] = $historylog;
-	$_SESSION['errorlog'] = $errorlog;
+	//logfile unificato $_SESSION['historylog'] = $historylog;
+	//logfile unificato $_SESSION['errorlog'] = $errorlog;
 	$_SESSION['logdirectory'] = $logdirectory;
 
 	$_SESSION['block'] = false;
@@ -155,8 +282,12 @@
 	echo 'Loading, please wait ...<br><br>'; //nel caso che il login sia andato a buon fine
 
 	//log degli accessi con esito positivo
-	$my_log -> publscrivilog($userid, 'login', 'ok', $client, $logfile );
+	$my_log->publscrivilog($userid, 'login', 'ok', $client, $logfile, 'access' );
+
+$connessione=null; //chiudo la connessione distruggendo l'oggetto PDO istanziato
 ?>
+
+
 
 <script language="Javascript">
 	window.location="login0.php?corpus=home&pass=<?php echo $pass; ?>&aggiornamento=null";

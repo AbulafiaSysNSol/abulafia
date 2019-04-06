@@ -8,12 +8,27 @@
 	}
 	$cognome = $_POST['cognome'];
 	$anagraficatipologia = $_POST['anagraficatipologia'];
-	$inserimento = mysql_query	("
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("
 							INSERT INTO 
 								anagrafica 
 							VALUES 
-								('','$nome','$cognome','','','','','','','','','','','','','','$anagraficatipologia', '0') 
-						");
+								('',:nome,:cognome,'','','','','','','','','','','','','',:anagraficatipologia, '0') 
+						"); 
+		$query->bindParam(':nome', $nome);
+		$query->bindParam(':cognome', $cognome);
+		$query->bindParam(':anagraficatipologia', $anagraficatipologia);
+		$query->execute();
+		$lastid = $connessione->lastInsertId();
+		$connessione->commit();
+		$inserimento = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$inserimento = false;
+	}	
 	if(!$inserimento) {
 		?>
 		<SCRIPT LANGUAGE="Javascript">
@@ -25,7 +40,7 @@
 		</SCRIPT>
 		<?php
 	}
-	$lastid=mysql_insert_id();
+	
 ?>
 
 	<SCRIPT LANGUAGE="Javascript">

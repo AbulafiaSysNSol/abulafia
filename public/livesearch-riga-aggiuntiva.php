@@ -6,7 +6,8 @@
 		header("Location: index.php?s=1");
 		exit(); 
 	}
-
+	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 
 	$id = $_GET['id'];
@@ -14,6 +15,6 @@
 	$value = $_GET['value'];
 	$riga = 'riga'.$num;
 	
-	$update = mysql_query(" UPDATE comp_destinatari SET $riga = '$value' WHERE id = $id "); 
+	$update = $connessione->query(" UPDATE comp_destinatari SET $riga = '$value' WHERE id = $id "); 
 
 ?>

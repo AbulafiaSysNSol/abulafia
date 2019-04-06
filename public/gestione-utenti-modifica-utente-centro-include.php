@@ -6,11 +6,11 @@
 		exit ();
 	}
 
-	$id= $_GET['id'];
-	$risultati=mysql_query("select * from anagrafica where idanagrafica='$id'");
-	$risultati3=mysql_query("select * from users where idanagrafica='$id'");
-	$row = mysql_fetch_array($risultati);
-	$row3 = mysql_fetch_array($risultati3);
+	$id = $_GET['id'];
+	$risultati = $connessione->query("SELECT * FROM anagrafica WHERE idanagrafica = '$id'");
+	$risultati3 = $connessione->query("SELECT * FROM users WHERE idanagrafica = '$id'");
+	$row = $risultati->fetch();
+	$row3 = $risultati3->fetch();
 ?>
 
 <div class="panel panel-default">

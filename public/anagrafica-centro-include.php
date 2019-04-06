@@ -7,7 +7,7 @@
 		$urlfoto = ''; 
 	}
 	$my_anagrafica= new Anagrafica(); //crea un nuovo oggetto Anagrafica
-	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO ANAGRAFICA' , 'OK' , $_SESSION['ip'], $_SESSION['historylog']);
+	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO ANAGRAFICA' , 'OK' , $_SESSION['ip'], $_SESSION['logfile'],'page request');
 	$foto=0;
 ?>
 
@@ -256,7 +256,7 @@
 						<label>Associa una foto:</label>
 						<form role="form" enctype="multipart/form-data" action="login0.php?corpus=upload-foto" method="POST">
 							<center>
-							<img src="foto/<?php if($urlfoto) {echo $urlfoto . "\" width=\"100%\""; $foto=1;} else {echo 'sagoma.png';}?>">
+							<img class="img-circle" src="foto/<?php if($urlfoto) {echo $urlfoto . "\" width=\"100%\""; $foto=1;} else {echo 'sagoma.png';}?>">
 							<?php
 								if($foto) {
 									?>
@@ -288,13 +288,13 @@
 	//controllo coerenza dati
 	if ((tipo == "") || (tipo == "undefined")) 
 	{
-           alert("Il campo Tipologia è obbligatorio");
+           alert("Il campo Tipologia e' obbligatorio");
            document.modulo.anagraficatipologia.focus();
            return false;
       }
 	else if ((cognome == "") || (cognome == "undefined")) 
 	{
-           alert("Il campo Cognome è obbligatorio");
+           alert("Il campo Cognome e' obbligatorio");
            document.modulo.cognome.focus();
            return false;
       }

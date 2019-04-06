@@ -19,7 +19,7 @@
 	$ogg = $_GET['q'];
 	$num = $_GET['num'];
 
-	$query = mysql_query("SELECT * FROM cert_assistito WHERE nome LIKE '%$ogg%' OR cognome LIKE '%$ogg%' OR codicefiscale LIKE '%$ogg%' ORDER BY id DESC LIMIT $num");
+	$query = $connessione->query("SELECT * FROM cert_assistito WHERE nome LIKE '%$ogg%' OR cognome LIKE '%$ogg%' OR codicefiscale LIKE '%$ogg%' ORDER BY id DESC LIMIT $num");
 ?>
 	
 <table class="table table-bordered">
@@ -34,7 +34,7 @@
 		
 	<?php
 	$contatorelinee = 0;
-	while ($risultati2=mysql_fetch_array($query))	{
+	while ($risultati2 = $query->fetch())	{
 		$risultati2 = array_map('stripslashes', $risultati2);
 		if ( $contatorelinee % 2 == 1 ) { 
 				$colorelinee = $_SESSION['primocoloretabellarisultati'] ; 

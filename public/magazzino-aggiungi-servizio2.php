@@ -7,6 +7,7 @@
 		exit(); 
 	}
 	
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'class/Servizio.obj.inc';
 	$p = new Servizio();

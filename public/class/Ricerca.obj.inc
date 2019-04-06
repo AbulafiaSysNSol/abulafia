@@ -1,4 +1,5 @@
 <?php 
+
 class Ricerca {
 
 	public $where ='';
@@ -22,4 +23,5 @@ class Ricerca {
 		}
 	}
 }
+
 ?>

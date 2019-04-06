@@ -12,13 +12,14 @@
 		exit(); 
 	}
 
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 		
-	$id= $_GET['id'];
-	$risultati=mysql_query("select * from anagrafica where idanagrafica='$id'");
-	$risultati2=mysql_query("select * from jointelefonipersone where idanagrafica='$id'");
-	$countrecapiti = mysql_query("select count(*) from jointelefonipersone where idanagrafica='$id'");
-	$row = mysql_fetch_array($risultati);
+	$id = $_GET['id'];
+	$risultati = $connessione->query("SELECT * FROM anagrafica WHERE idanagrafica = '$id'");
+	$risultati2 = $connessione->query("SELECT * FROM jointelefonipersone WHERE idanagrafica = '$id'");
+	$countrecapiti = $connessione->query("SELECT COUNT(*) FROM jointelefonipersone WHERE idanagrafica = '$id'");
+	$row = $risultati->fetch();
 	$row = array_map ("stripslashes",$row);
 	$data = $row['nascitadata'] ;
 	list($anno, $mese, $giorno) = explode("-", $data);
@@ -171,7 +172,7 @@
 				<?php
 			}
 			
-			$cr = mysql_fetch_row($countrecapiti);
+			$cr = $countrecapiti->fetch();
 			if ($cr[0] > 0) {
 				?>
 				<tr>
@@ -182,7 +183,7 @@
 					<td colspan="2" width="" style="border-top:solid 3px; border-color:#C0C0C0; padding:10px 5px 10px 5px">
 						<strong><font style="font-family:'Arial', cursive" size="+1">
 						<?php
-						while ($row2 = mysql_fetch_array($risultati2)) {
+						while ($row2 = $risultati2->fetch()) {
 							if ($row2['numero'] != '') {
 								echo '<i class="fa fa-'.$row2['tipo'].'"></i> '; echo strtolower($row2['numero']);
 							}

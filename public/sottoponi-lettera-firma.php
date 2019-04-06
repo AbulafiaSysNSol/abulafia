@@ -7,12 +7,25 @@
 		exit(); 
 	}
 
+	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php'; //connessione al db-server
 	$idlettera = $_GET['idlettera'];
 	
-	$update = mysql_query(" UPDATE comp_lettera SET vista = 1 WHERE id = $idlettera "); 
-	
-	if($update) {
+	try {
+   		$connessione->beginTransaction();
+		$query = $connessione->prepare("UPDATE comp_lettera SET vista = 1 WHERE id = :idlettera"); 
+		$query->bindParam(':idlettera', $idlettera);
+		$query->execute();
+		$connessione->commit();
+		$up = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+    	echo "Errore: " . $errorePDO->getMessage();
+    	$connessione->rollBack();
+    	$up = false;
+	}
+
+	if($up) {
 		header("Location: login0.php?corpus=home&firma=ok");
 	}
 	else {

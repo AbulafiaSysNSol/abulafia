@@ -72,19 +72,52 @@
 
 	if ($nuovapassword1 != $nuovapassword2) { 
 		echo 'Errore: le due password nuove non coincidono'; 
-		$errorecambiopassword= 1; 
+		$errorecambiopassword = 1; 
 	}	
 
-	if (($nuovapassword1 !='') and ($nuovapassword2 !='')) { 
-		$cambiopassword=mysql_query("update users set users.password='$nuovapassword3' where users.idanagrafica='$id' limit 1");
+	if (($nuovapassword1 != '') and ($nuovapassword2 != '')) { 
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE users SET users.password = :nuovapassword3 WHERE users.idanagrafica = :id LIMIT 1"); 
+			$query->bindParam(':nuovapassword3', $nuovapassword3);
+			$query->bindParam(':id', $id);
+			$query->execute();
+			$connessione->commit();
+			$cambiopassword = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$cambiopassword = false;
+		}	
 	}
 
-	$update=mysql_query("update users set users.loginname='$nomeutente', users.mainemail = '$email', users.auth='$authlevel', users.admin='$admin', users.anagrafica = '$anagrafica', users.protocollo = '$protocollo', users.documenti = '$documenti', users.lettere = '$lettere', users.magazzino = '$magazzino', users.ambulatorio = '$ambulatorio', users.contabilita = '$contabilita', users.updateprofile = '$check' where users.idanagrafica='$id' limit 1");
-
-	if(!$update) {
-		echo mysql_error();
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("UPDATE users SET users.loginname = :nomeutente, users.mainemail = :email, users.auth = :authlevel, users.admin = :admin, users.anagrafica = :anagrafica, users.protocollo = :protocollo, users.documenti = :documenti, users.lettere = :lettere, users.magazzino = :magazzino, users.ambulatorio = :ambulatorio, users.contabilita = :contabilita, users.updateprofile = :check WHERE users.idanagrafica = :id LIMIT 1"); 
+		$query->bindParam(':nomeutente', $nomeutente);
+		$query->bindParam(':email', $email);
+		$query->bindParam(':authlevel', $authlevel);
+		$query->bindParam(':admin', $admin);
+		$query->bindParam(':anagrafica', $anagrafica);
+		$query->bindParam(':protocollo', $protocollo);
+		$query->bindParam(':documenti', $documenti);
+		$query->bindParam(':lettere', $lettere);
+		$query->bindParam(':magazzino', $magazzino);
+		$query->bindParam(':ambulatorio', $ambulatorio);
+		$query->bindParam(':contabilita', $contabilita);
+		$query->bindParam(':check', $check);
+		$query->bindParam(':id', $id);
+		$query->execute();
+		$connessione->commit();
+		$update = true;
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	$update = false;
 	}
-	else{
+	if($update) {
 		?>
 		<script language="javascript">
 			window.location="login0.php?corpus=gestione-utenti&mod=ok";

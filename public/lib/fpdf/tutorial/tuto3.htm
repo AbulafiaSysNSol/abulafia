@@ -7,8 +7,8 @@
 </head>
 <body>
 <h1>Ritorno a capo e colori</h1>
-Let's continue with an example which prints justified paragraphs. It also illustrates the use
-of colors.
+Continuiamo con un esempio in cui si stampano paragrafi giustificati. Si illustra anche l'uso
+dei colori.
 <div class="source">
 <pre><code>&lt;?php
 <span class="kw">require(</span><span class="str">'fpdf.php'</span><span class="kw">);
@@ -93,23 +93,23 @@ function </span>PrintChapter<span class="kw">(</span>$num<span class="kw">, </sp
 </span>?&gt;</code></pre>
 </div>
 <p class='demo'><a href='tuto3.php' target='_blank' class='demo'>[Demo]</a></p>
-The <a href='../doc/getstringwidth.htm'>GetStringWidth()</a> method allows to determine the length of a string in the current font,
-which is used here to calculate the position and the width of the frame surrounding the title.
-Then colors are set (via <a href='../doc/setdrawcolor.htm'>SetDrawColor()</a>, <a href='../doc/setfillcolor.htm'>SetFillColor()</a> and <a href='../doc/settextcolor.htm'>SetTextColor()</a>) and the
-thickness of the line is set to 1 mm (instead of 0.2 by default) with <a href='../doc/setlinewidth.htm'>SetLineWidth()</a>. Finally,
-we output the cell (the last parameter <code>true</code> indicates that the background must
-be filled).
+Il metodo <a href='../doc/getstringwidth.htm'>GetStringWidth()</a> permette di determinare la lunghezza di una stringa nel font corrente,
+è qui utilizzata per calcolare la posizione e la larghezza della cornice che circonda il titolo.
+Quando i colori sono impostati (attraverso <a href='../doc/setdrawcolor.htm'>SetDrawColor()</a>, <a href='../doc/setfillcolor.htm'>SetFillColor()</a> e <a href='../doc/settextcolor.htm'>SetTextColor()</a>) e lo
+spessore della linea è impostata ad 1 mm (invece che 0.2 di predefinito) con <a href='../doc/setlinewidth.htm'>SetLineWidth()</a>. Alla fine
+si mostra la cella (l'ultimo parametro a <code>true</code> indica che lo sfondo deve essere riempito).
 <br>
 <br>
-The method used to print the paragraphs is <a href='../doc/multicell.htm'>MultiCell()</a>. Each time a line reaches the
-right extremity of the cell or a carriage return character is met, a line break is issued
-and a new cell automatically created under the current one. Text is justified by default.
+Il metodo utilizzato per stampare i paragrafi è <a href='../doc/multicell.htm'>MultiCell()</a>. Ogni volta che una riga raggiunge
+l'estremità destra della cella, o se si raggiunge un ritorno a capo, si lancia un'interruzione di riga
+e si crea automaticamente una nuova cella creata sotto quella precedente. Il testo è giustificato in maniera
+predefinita.
 <br>
 <br>
-Two document properties are defined: the title (<a href='../doc/settitle.htm'>SetTitle()</a>) and the author (<a href='../doc/setauthor.htm'>SetAuthor()</a>).
-There are several ways to view them in Adobe Reader. The first one is to open the file directly with
-the reader, go to the File menu and choose the Properties option. The second one, also available from
-the plug-in, is to right-click and select Document Properties. The third method is to type the Ctrl+D
-key combination.
+Si definiscono due proprietà del documento: il titolo (<a href='../doc/settitle.htm'>SetTitle()</a>) e l'autore (<a href='../doc/setauthor.htm'>SetAuthor()</a>).
+Ci sono molti modi per mostrarli in un riproduttore di PDF. Il primo modo è aprire direttamente il PDF
+con il lettore PDF e visualizzare le proprietà del documento, spesso attraverso il menù File. A volte si può anche
+fare click con il tasto destro e selezionare Proprietà del documento (o qualcosa del genere). Un altro modo è di premere
+la combinazione Ctrl+D.
 </body>
 </html>
