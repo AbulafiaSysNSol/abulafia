@@ -15,10 +15,10 @@
 	$id = $_GET['id'];
 	$tipologia = $_GET['tipologia'];
 	$magazzino = $_GET['magazzino'];
-	$prodotto=$_POST['prodotto'];
-	$descrizione=$_POST['descrizione'];
-	$quantita=$_POST['quantita'];
-	$nota=$_POST['nota'];
+	$prodotto = $_POST['prodotto'];
+	$descrizione = $_POST['descrizione'];
+	$quantita = $_POST['quantita'];
+	$nota = $_POST['nota'];
 
 	$ins = $m->newRigaDocumento($id, $prodotto, $quantita, $nota, $tipologia, $magazzino);
 

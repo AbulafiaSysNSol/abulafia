@@ -14,20 +14,21 @@
 	$m = new Magazzino();
 	$d = new Calendario();
 	$tipologia = $_GET['tipologia'];
-	$datadocumento=$d->dataDB($_POST['datadocumento']);
-	$magazzino=$_POST['magazzino'];
-	$riferimento=$_POST['riferimento'];
-	$causale=$_POST['causale'];
-	$datariferimento=$d->dataDB($_POST['datariferimento']);
-	$note=$_POST['note'];
+	$datadocumento = $d->dataDB($_POST['datadocumento']);
+	$magazzino = $_POST['magazzino'];
+	$riferimento = $_POST['riferimento'];
+	$causale = $_POST['causale'];
+	$datariferimento = $d->dataDB($_POST['datariferimento']);
+	$note = $_POST['note'];
 
 	$ins = $m->newDocument($datadocumento, $magazzino, $riferimento, $causale, $datariferimento, $note, $tipologia);
-	$id = $connessione->lastInsertId();
 
-	if($ins) {
-		header("Location: login0.php?corpus=magazzino-documenti-carico-scarico-prodotti&id=$id&tipologia=$tipologia");
+	if($ins) 
+	{
+		header("Location: login0.php?corpus=magazzino-documenti-carico-scarico-prodotti&id=$ins&tipologia=$tipologia");
 	}
-	else {
+	else 
+	{
 		echo 'Errore nella registrazione dei dati<br><br>';
 	}
 

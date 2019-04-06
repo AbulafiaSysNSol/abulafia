@@ -110,23 +110,25 @@ require_once('../db-connessione-include.php');
 			global $connessione;
 			try {
 	   			$connessione->beginTransaction();
-				$query = $connessione->prepare("INSERT INTO documenti_magazzino VALUES (null, :datadocumento, :magazzino, :riferimento, :causale, datariferimento, :note, :tipologia) "); 
+				$query = $connessione->prepare("INSERT INTO documenti_magazzino VALUES (null, :datadocumento, :magazzino, :riferimento, :causale, :datariferimento, :note, :tipologia) "); 
 				$query->bindParam(':datadocumento', $datadocumento);
 				$query->bindParam(':magazzino', $magazzino);
-				$query->bindParam(':riferimento', $causale);
+				$query->bindParam(':riferimento', $riferimento);
+				$query->bindParam(':causale', $causale);
 				$query->bindParam(':datariferimento', $datariferimento);
 				$query->bindParam(':note', $note);
 				$query->bindParam(':tipologia', $tipologia);
 				$query->execute();
+				$iddoc = $connessione->lastInsertId();
 				$connessione->commit();
-				$q = true;
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
 				$connessione->rollBack();
-				$q = false;
+				exit();
+				$iddoc = false;
 			}
-			return $q;
+			return $iddoc;
 		}
 
 		public function getDocument($limit) {
@@ -149,7 +151,7 @@ require_once('../db-connessione-include.php');
 		public function getGiacenza($prodotto,$magazzino) { //<man>Restituisce la descrizione del settore pasando l'id</man>
 			global $connessione;
 			$query = $connessione->query("SELECT giacenza FROM joinprodottimagazzini WHERE codicemagazzino = '$magazzino' AND idprodotto = '$prodotto'");
-			$res = $query->feth();
+			$res = $query->fetch();
 			return $res[0];
 		}
 
@@ -157,17 +159,19 @@ require_once('../db-connessione-include.php');
 			global $connessione;
 			$gnow = $this->getGiacenza($prodotto,$magazzino);
 			$newg = $gnow + $val;
-			try {
+			try 
+			{
 	   			$connessione->beginTransaction();
 				$query = $connessione->prepare("UPDATE joinprodottimagazzini SET giacenza = :newg WHERE codicemagazzino = :magazzino AND idprodotto = :prodotto"); 
 				$query->bindParam(':newg', $newg);
 				$query->bindParam(':magazzino', $magazzino);
-				$query->bindParam(':idprodotto', $idprodotto);
+				$query->bindParam(':prodotto', $prodotto);
 				$query->execute();
 				$connessione->commit();
 				$q = true;
 			}	 
-			catch (PDOException $errorePDO) { 
+			catch (PDOException $errorePDO) 
+			{ 
 	    		echo "Errore: " . $errorePDO->getMessage();
 				$connessione->rollBack();
 				$q = false;
@@ -184,7 +188,7 @@ require_once('../db-connessione-include.php');
 				$query = $connessione->prepare("UPDATE joinprodottimagazzini SET giacenza = :newg WHERE codicemagazzino = :magazzino AND idprodotto = :prodotto"); 
 				$query->bindParam(':newg', $newg);
 				$query->bindParam(':magazzino', $magazzino);
-				$query->bindParam(':idprodotto', $idprodotto);
+				$query->bindParam(':prodotto', $prodotto);
 				$query->execute();
 				$connessione->commit();
 				$q = true;
@@ -199,7 +203,8 @@ require_once('../db-connessione-include.php');
 
 		public function newRigaDocumento($documento, $prodotto, $quantita, $note, $tipologia, $magazzino) {
 			global $connessione;
-			try {
+			try 
+			{
 	   			$connessione->beginTransaction();
 				$query = $connessione->prepare("INSERT INTO joindocumentiprodotti VALUES (null, :documento, :prodotto, :quantita, :note) "); 
 				$query->bindParam(':documento', $documento);
@@ -209,16 +214,19 @@ require_once('../db-connessione-include.php');
 				$query->execute();
 				$connessione->commit();
 				$q = true;
-				if ($tipologia == 'carico') {
+				if ($tipologia == 'carico') 
+				{
 					$this->sumGiacenza($prodotto, $magazzino, $quantita);
 				} 
-				else {
+				else 
+				{
 					$this->subGiacenza($prodotto, $magazzino, $quantita);	
 				}
 			}	 
 			catch (PDOException $errorePDO) { 
 	    		echo "Errore: " . $errorePDO->getMessage();
 				$connessione->rollBack();
+				exit();
 				$q = false;
 			}                    
 			return $q;
@@ -233,26 +241,30 @@ require_once('../db-connessione-include.php');
 
 		public function eliminaRigaDocumento($idriga, $magazzino, $tipodocumento) {
 			global $connessione;
-			try {
+			try 
+			{
+				$info = $this->getInfoRigaById($idriga);
+				if($tipodocumento == 'carico') 
+				{
+					$this->subGiacenza($info[2], $magazzino, $info[3]);
+				}
+				else 
+				{
+					$this->sumGiacenza($info[2], $magazzino, $info[3]);	
+				}
+
 	   			$connessione->beginTransaction();
 				$query = $connessione->prepare("DELETE FROM joindocumentiprodotti WHERE id = :idriga"); 
 				$query->bindParam(':idriga', $idriga);
 				$query->execute();
 				$connessione->commit();
-				$q = true;
-		
-				$info = $this->getInfoRigaById($idriga);
-				if($tipodocumento == 'carico') {
-					$this->subGiacenza($info[2], $magazzino, $info[3]);
-				}
-				else {
-					$this->sumGiacenza($info[2], $magazzino, $info[3]);	
-				}
-				
+				$q = true;	
 			}	 
-			catch (PDOException $errorePDO) { 
+			catch (PDOException $errorePDO) 
+			{ 
 	    		echo "Errore: " . $errorePDO->getMessage();
 				$connessione->rollBack();
+				exit();
 				$q = false;
 			}
 			return $q;
