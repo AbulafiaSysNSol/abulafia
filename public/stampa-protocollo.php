@@ -49,13 +49,13 @@
 	$pdf->AddPage();
 	$pdf->SetTitle('ricevutaprotocollo');
 	$pdf->Ln(14);
-	$pdf->SetFont('Arial','',15);
+	$pdf->SetFont('Arial','',12);
 	$pathqrcode = 'lettere'.$anno.'/qrcode/'.$id.$anno.'.png';
-	$pdf->Image($pathqrcode, 7, 48);
+	$pdf->Image($pathqrcode, 7, 56);
 	$pdf->SetX(33);
 	$pdf->Write('','Protocollo N. ' . $dettagli['idlettera'] );
 	$pdf->Ln(7);
-	$pdf->SetX(38);
+	$pdf->SetX(33);
 	$pdf->Write('','del ' . $calendario->dataSlash($dettagli['dataregistrazione']) );
 	$pdf->Ln(13);
 	$pdf->Write('6','Mittente: ' . $mittente[0]['cognome'] . ' ' . $mittente[0]['nome']);
