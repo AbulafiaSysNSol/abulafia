@@ -434,10 +434,10 @@ tinymce.init({
 									<?php if($anag->isAdmin($_SESSION['loginid'])) { ?>
 										<li class="divider"></li>
 										<li role="presentation" class="dropdown-header">LOG</li>
-										<li><a href="login0.php?corpus=access-log"><i class="fa fa-key fa-fw"></i> Visualizza il log degli accessi</a></li>
-										<li><a href="login0.php?corpus=log-mail"><i class="fa fa-envelope-o fa-fw"></i> Visualizza il log delle mail</a></li>
-										<li><a href="login0.php?corpus=error-log"><i class="fa fa-exclamation-triangle"></i> Visualizza il log degli errori</a></li>
-										<li><a href="login0.php?corpus=history"><i class="fa fa-clock-o fa-fw"></i> Visualizza il log delle azioni</a></li>
+										<li><a href="login0.php?corpus=access-log"><i class="fa fa-sign-in fa-fw"></i> Accessi</a></li>
+										<li><a href="login0.php?corpus=log-mail"><i class="fa fa-paper-plane-o fa-fw"></i> Email</a></li>
+										<li><a href="login0.php?corpus=error-log"><i class="fa fa-exclamation-triangle fa-fw"></i> Errori</a></li>
+										<li><a href="login0.php?corpus=history"><i class="fa fa-clock-o fa-fw"></i> Generale</a></li>
 										<?php
 									}
 								}

@@ -1,15 +1,16 @@
 <?php 
 
-class Log {
-
+class Log 
+{
 	
-	public function contaLog($logfile) {
+	public function contaLog($logfile) 
+	{
 		$num = count(file($_SESSION['logdirectory'].'/'.$logfile));
 		return $num;
-		}
+	}
 
 	public function publscrivilog ($username, $operazione, $esito, $client, $logfile, $tag) // <man>Scrive nel log $logfile le informazioni elencate; $client descrive le info dell'utente (ip, sistema operativo...)</man>
-		{
+	{
 		if(!is_dir($_SESSION['logdirectory'])) //se la directory non esiste, la crea
 			{ 
 			
@@ -46,15 +47,13 @@ class Log {
 		$this->write=fwrite($accesslog, "$logline"); //scrivo il log
 		fclose($accesslog); //chiudo il file
 		if (!$this->write) 
-			{ 
+		{ 
 			die ("Impossibile scrivere nel file di log: $logfile ");
-			}
 		}
-
-
+	}
 
 	public function publleggilog ($partenza, $numerorighe, $filtro, $logfile) //<man>Legge dal file $logfile dalla riga $partenza per un certo $numerorighe numero di righe, filtrando solo quelle dove compare $filtro</man>
-		{
+	{
 		if (!is_dir($_SESSION['logdirectory'])) //se la directory non esiste, la crea
 			{ 
 				$creadir=mkdir($_SESSION['logdirectory'], 0777, true);	
@@ -70,24 +69,24 @@ class Log {
 				fclose($filehandle);
 			}
 		
-		$accessloglines= (file($_SESSION['logdirectory'].$logfile));
-		$accessloglinesnumber= count($accessloglines);
-		$ciclo=0;
+		$accessloglines = (file($_SESSION['logdirectory'].$logfile));
+		$accessloglinesnumber = count($accessloglines);
+		$ciclo = 0;
 		
 		while (($ciclo < $numerorighe) and ( $accessloglinesnumber-($ciclo+$partenza) > 0)) 
-			{
-				$ciclo= $ciclo+1;
-				$riga= $accessloglines[$accessloglinesnumber-($ciclo+$partenza)];
-				if (strpos($riga, $filtro,0) > 0) 
-					{ 
-						echo '<br>'. $ciclo.') '.$riga.'<br>';
-					}
-				else 
-					{ 
-						$numerorighe = $numerorighe +1; 
-					}
+		{
+			$ciclo = $ciclo + 1;
+			$riga = $accessloglines[$accessloglinesnumber-($ciclo+$partenza)];
+			if (strpos($riga, $filtro, 0) > 0) 
+				{ 
+					echo '<br>'. $ciclo.') '.$riga.'<br>';
 				}
+			else 
+			{ 
+				$numerorighe = $numerorighe +1; 
 			}
 		}
+	}
+}
 
 ?>
