@@ -28,7 +28,7 @@
 	}
 	//fine del passaggio dei dati dalla pagina precedente
 
-	if ($from == 'foto-modifica') {
+	if (($from == 'foto-modifica') && (isset($urlfoto))) {
 		$inserisci= $connessione->query("UPDATE anagrafica SET urlfoto = '$urlfoto' where idanagrafica = '$id' " );
 	}
 	if ($from == 'numero-modifica') {
@@ -60,7 +60,17 @@
 			?>
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="alert alert-danger">C'e' stato un errore nel caricamento della foto, controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+					<div class="alert alert-danger"><b><i class="fa fa-warning fa-fw"></i> Errore:</b> si &egrave; verificato un problema nel caricamento della foto, controlla la dimensione massima, riprova o contatta il <a href="https://abulafiaweb.freshdesk.com" target="_blank">supporto</a>.</div>
+				</div>
+			</div>
+			<?php
+			}
+
+			if( isset($_GET['upfoto']) && $_GET['upfoto'] == "errest") {
+			?>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="alert alert-danger"><b><i class="fa fa-warning fa-fw"></i> Errore:</b> il formato della foto deve essere <b>JPG</b> o <b>PNG</b>.</div>
 				</div>
 			</div>
 			<?php
@@ -71,7 +81,7 @@
 			<div class="col-sm-3">
 				<div class="alert alert-info">
 					<label><span class="glyphicon glyphicon-picture"></span> Foto attuale:</label><br><br>
-					<center><img class="img-circle" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'] . "\" width=\"75%\"";} else {echo 'foto/sagoma.png';}?>"></center>
+					<center><img class="img-circle" width="70%" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'foto/sagoma.png';}?>"></center>
 					<br><br>
 					<form enctype="multipart/form-data" action="login0.php?corpus=modifica-foto&id=<?php echo $id;?>" method="POST">
 						<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />
