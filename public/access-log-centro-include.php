@@ -7,6 +7,7 @@
 			<p>
 			<?php 
 				$my_log->publleggilog('0', '20', 'access', $_SESSION['logfile']); //legge dal log degli accessi
+			?>
 			</p>
 			<br><b><a href="download.php?lud=access.log&est=log"><i class="fa fa-download"></i> Scarica il log degli accessi</a></b>
 
