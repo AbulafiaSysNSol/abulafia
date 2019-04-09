@@ -215,12 +215,12 @@
 				foreach ($indirizzi as $email) {
 					$mail->addAddress($email[0]);
 				}
-				$mail->Subject = 'Notifica registrazione nuova lettera in ' . $_SESSION['nomeapplicativo'];
-				$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione della lettera n. <b>' . $idlettera . 
-							'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
+				$mail->Subject = 'Notifica registrazione nuova lettera in Abulafia Web ' . $_SESSION['nomeapplicativo'];
+				$mail->Body    = 'Con la presente si notifica l\'avvenuta registrazione della lettera n. <b>' . $id . 
+							'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br><br>
 							Inserimento effettuato da <b>' . $_SESSION['loginname'] 
 							. '</b> il giorno ' . $datamail . '.<br><br>
-							Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] 
+							Messaggio automatico inviato da Abulafia Web ' . $_SESSION['nomeapplicativo'] 
 							.'.<br>Non rispondere a questa email.';
 				$esito = $mail->send();
 				//scrittura log mail
@@ -370,12 +370,12 @@
 				foreach ($indirizzi as $email) {
 					$mail->addAddress($email[0]);
 				}
-				$mail->Subject = 'Notifica modifica lettera in ' . $_SESSION['nomeapplicativo'];
+				$mail->Subject = 'Notifica modifica lettera in Abulafia Web ' . $_SESSION['nomeapplicativo'];
 				$mail->Body    = 'Con la presente si notifica la modifica della lettera n. <b>' . $idlettera . 
-							'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br>
+							'</b> avente come oggetto: <b>"'. $oggetto . '"</b>.<br><br>
 							Modifica effettuata da <b>' . $_SESSION['loginname'] 
 							. '</b> il giorno ' . $datamail . '<br><br>
-							Messaggio automatico inviato da ' . $_SESSION['nomeapplicativo'] 
+							Messaggio automatico inviato da Abulafia Web ' . $_SESSION['nomeapplicativo'] 
 							.'.<br>Non rispondere a questa email.';
 				$esito = $mail->send();
 				//scrittura log mail
