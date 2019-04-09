@@ -212,7 +212,6 @@
 				$mail->From = 'no-reply@abulafiaweb.it';
 				$mail->FromName = 'Abulafia Web Notification';
 				$mail->isHTML(true);
-				include "../mail-conf-include.php";
 				foreach ($indirizzi as $email) {
 					$mail->addAddress($email[0]);
 				}
@@ -368,7 +367,6 @@
 				$mail->From = 'no-reply@abulafiaweb.it';
 				$mail->FromName = 'Abulafia Web Notification';
 				$mail->isHTML(true);
-				include "../mail-conf-include.php";
 				foreach ($indirizzi as $email) {
 					$mail->addAddress($email[0]);
 				}

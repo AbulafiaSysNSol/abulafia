@@ -140,7 +140,7 @@
 				<center><h5><i class="fa fa-warning fa-fw"></i> Il numero di protocollo verr&agrave; assegnato dopo aver concluso l'inserimento dei dati.</h5> 
 				<h5><i class="fa fa-info-circle fa-fw"></i> Identificativo Provvisorio Protocollo: <strong><?php echo $my_lettera->idtemporaneo;?>.</strong></h5></center>
 				<?php if($errore) { 
-					echo " - <b><i class=\"fa fa-warning\"></i> ATTENZIONE:</b> Bisogna inserire almeno un mittente o un destinatario.";
+					echo "<center><b><i class=\"fa fa-warning\"></i> ATTENZIONE:</b> Bisogna inserire almeno un mittente o un destinatario.</center>";
 				} ?>
 			</h3>
 		</div>

@@ -20,11 +20,60 @@
 		<div class="panel-body">
 
 			<div class="row">
-				<div class="col-sm-6">
-					<form class="form-horizontal" role="form" name="modulo" method="post" >
+
+				<div class="col-sm-4">
+					<?php
+					if( isset($_GET['upfoto']) && $_GET['upfoto'] == "error") {
+					?>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="alert alert-danger"><b><i class="fa fa-warning"></i></b> C'e' stato un errore nel caricamento della foto, controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
+						</div>
+					</div>
+					<?php
+					}
+					?>
+					
+					<?php
+					 if( isset($_GET['upfoto']) && $_GET['upfoto'] == "success") {
+					?>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="alert alert-success"><i class="fa fa-check"></i> Foto inserita <b>correttamente!</b></div>
+						</div>
+					</div>
+					<?php
+					}
+					?>
+					
+					<div class="alert alert-info form-group">
+						<label>Associa una foto:</label>
+						<form role="form" enctype="multipart/form-data" action="login0.php?corpus=upload-foto" method="POST">
+							<center>
+							<img class="img-circle" width="70%" src="foto/<?php if($urlfoto) {echo $urlfoto; $foto=1;} else {echo 'sagoma.png';}?>">
+							<?php
+								if($foto) {
+									?>
+									<br><br><a href="?corpus=anagrafica" class="btn btn-danger btn-block"><i class="fa fa-times"></i> Rimuovi Foto</button></a>
+									<?php
+								}
+							?>
+							<br><br>
+							<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />			
+							<input required name="uploadedfile" type="file" id="exampleInputFile">
+							<br>
+							<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i> Salva</button>
+							</center>
+						</form>
+						<br><center><small>N.B. carica la foto prima di inserire i dati restanti, per non perdere le modifiche non salvate.</small></center>
+					</div>
+				</div>
+
+				<div class="col-sm-7 col-sm-offset-1">
+					<form role="form" name="modulo" method="post" >
 
 						<div class="form-group">
-							<label class="col-sm-2 control-label">Tipologia:</label>
+							<label class="col-sm-3 control-label">Tipologia:</label>
 							<div class="row">
 								<div class="col-sm-6">
 									<select class="form-control input-sm" NAME="anagraficatipologia" onChange="Change()">
@@ -190,7 +239,7 @@
 									</select>
 								</div>
 
-								<div class="col-sm-5">
+								<div class="col-sm-4">
 									<input type="text" class="form-control input-sm" name="numero" disabled>
 								</div>
 							</div>
@@ -212,66 +261,19 @@
 									</select>
 								</div>
 
-								<div class="col-sm-5">
+								<div class="col-sm-4">
 									<input type="text" class="form-control input-sm" name="numero2" disabled>
 								</div>
 							</div>
 						</div>
 						<br>
 						<div class="row">
-							<div class="col-sm-2 col-sm-offset-3">
-								<button class="btn btn-primary btn-lg" onClick="Controllo()"><i class="fa fa-check"></i> Inserisci</button>
+							<div class="col-sm-3 col-sm-offset-4">
+								<button class="btn btn-primary btn-lg" onClick="Controllo()"><i class="fa fa-user-plus fa-fw"></i> Inserisci Anagrafica</button>
 							</div>
 						</div>
 					
 					</form>
-				</div>
-
-				<div class="col-sm-5">
-					<?php
-					if( isset($_GET['upfoto']) && $_GET['upfoto'] == "error") {
-					?>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="alert alert-danger">C'e' stato un errore nel caricamento della foto, controlla la dimensione massima, riprova in seguito o contatta l'amministratore del server.</div>
-						</div>
-					</div>
-					<?php
-					}
-					?>
-					
-					<?php
-					 if( isset($_GET['upfoto']) && $_GET['upfoto'] == "success") {
-					?>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="alert alert-success"><i class="fa fa-check"></i> Foto inserita correttamente</div>
-						</div>
-					</div>
-					<?php
-					}
-					?>
-					
-					<div class="alert alert-info form-group">
-						<label>Associa una foto:</label>
-						<form role="form" enctype="multipart/form-data" action="login0.php?corpus=upload-foto" method="POST">
-							<center>
-							<img class="img-circle" src="foto/<?php if($urlfoto) {echo $urlfoto . "\" width=\"100%\""; $foto=1;} else {echo 'sagoma.png';}?>">
-							<?php
-								if($foto) {
-									?>
-									<br><br><a href="?corpus=anagrafica" class="btn btn-danger btn-block"><i class="fa fa-times"></i> Rimuovi Foto</button></a>
-									<?php
-								}
-							?>
-							<br><br>
-							<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['fotomaxfilesize'];?>" />			
-							<input required name="uploadedfile" type="file" id="exampleInputFile">
-							<br>
-							<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i> Salva</button>
-							</center>
-						</form>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -434,4 +436,4 @@
 	}
   }
  //-->
-</script> 
+</script>
