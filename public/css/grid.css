@@ -23,4 +23,8 @@ body, html {
 		list-style-position: inside;
 	}
 
+	.logodesktop {
+		display: none;
+	}
+
 }

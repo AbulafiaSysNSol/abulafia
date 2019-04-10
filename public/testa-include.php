@@ -224,7 +224,7 @@ tinymce.init({
 				</center>
 			</div>
 
-			<div class="col-sm-2" align="right" style="padding-top: 10px;">
+			<div class="col-sm-2 logodesktop" align="right" style="padding-top: 10px;">
 				<center><a href="https://www.abulafiaweb.it" target="_blank"><img width="100" src="images/abulafia-logo-scont.png"></a>
 				<br><small>Ver. <?php echo $_SESSION['version']; ?></small></center>
 			</div>

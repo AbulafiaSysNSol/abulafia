@@ -199,16 +199,10 @@
 		?>
 		
 		<div class="row">
-			<div class="col-sm-6">
-				<h3><b><small><i class="fa fa-square-o"></i></small> Primo Step: <small><b>modifica</b> allegati <i class="fa fa-folder-open-o"></i> e mittenti/destinatari <i class="fa fa-group"></i> </b></small></h3>
-			</div>
-			<div class="col-sm-6">
-				<h3><b><small><i class="fa fa-square-o"></i></small> Secondo Step: <small><b>modifica</b> dettagli della lettera <i class="fa fa-file-text-o"></i></b></small></h3>
-			</div>
-		</div>
-		
-		<div class="row">
 		<div class="col-sm-6">
+
+		<h3><b><small><i class="fa fa-square-o"></i></small> Primo Step: <small><b>modifica</b> allegati <i class="fa fa-folder-open-o"></i> e mittenti/destinatari <i class="fa fa-group"></i> </b></small></h3>
+
 		<hr>
 		
 		<form id="uploadForm" enctype="multipart/form-data" action="login0.php?from=modifica-protocollo&corpus=prot-modifica-file&idlettera=<?php echo $idlettera;?>" method="POST">
@@ -283,11 +277,15 @@
 		else {
 			echo 'Nessun mittente/destinatario associato.<br>';
 		}
+		echo '<br>';
 		$urlpdf=$row['urlpdf'];
 		?>
 		
 		</div>
 		<div class="col-sm-6">
+
+		<h3><b><small><i class="fa fa-square-o"></i></small> Secondo Step: <small><b>modifica</b> dettagli della lettera <i class="fa fa-file-text-o"></i></b></small></h3>
+
 		<hr>
 		
 		<form class="form-group" action="login0.php?corpus=protocollo3&from=modifica&idlettera=<?php echo $idlettera;?>" method="post" >

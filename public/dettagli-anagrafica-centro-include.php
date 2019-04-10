@@ -57,10 +57,12 @@
                        			
       		<div class="panel-body">
             	<div class="col-sm-3">
+            		<center>
                     <br><img class="img-circle" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'foto/sagoma.png';} ?>" width="150">             
+                	</center><br>
                 </div>
                       
-                <div class="col-sm-9">
+                <div class="col-sm-9 smartphone">
                     <div class="container">
 	                    <h3>
 	                    	<?php echo '<i class="fa fa-user fa-fw"></i> ' . ucwords(strtolower($row['cognome'])) . ' ' . ucwords(strtolower($row['nome'])); ?><?php if($row['codicefiscale'] != '') { echo ' ('.strtoupper($row['codicefiscale']).')'; } ?>		
@@ -123,9 +125,8 @@
 							{
 								if ($row2['numero'] != '') 
 								{
-									echo '<p><i class="fa fa-'.$row2['tipo'].' fa-fw"></i> ';
+									echo '<i class="fa fa-'.$row2['tipo'].' fa-fw"></i> ';
 									echo strtolower($row2['numero']);
-									echo '</p>';
 								}
 							}
 							?>
