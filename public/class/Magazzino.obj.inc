@@ -141,6 +141,47 @@ require_once('../db-connessione-include.php');
 			return $documenti;
 		}
 
+		public function getDocumentFilter($doc, $mag, $causale, $num) {
+			global $connessione;
+			$where = '';
+			$w = 0;
+			if ($doc != '')
+			{
+				$where = 'WHERE id = ' . $doc;
+				$w = 1;
+			}
+			if ($mag != '')
+			{
+				if($w == 0)
+				{
+					$where = "WHERE magazzino = '" . $mag . "'";
+					$w = 1; 
+				}
+				else 
+				{
+					$where = $where . " AND magazzino = '" . $mag . "'";
+				}
+			}
+			if ($causale != '')
+			{
+				if($w == 0)
+				{
+					$where = "WHERE causale = '" . $causale . "'";
+					$w = 1; 
+				}
+				else 
+				{
+					$where = $where . " AND causale = '" . $causale . "'";
+				}
+			}
+			$query = $connessione->query("SELECT * FROM documenti_magazzino $where ORDER BY id DESC LIMIT $num");
+			$documenti = array();
+			while ($res = $query->fetch()) {
+				array_push($documenti,$res);
+			}
+			return $documenti;
+		}
+
 		public function getDocumentById($id) {
 			global $connessione;
 			$query = $connessione->query("SELECT * FROM documenti_magazzino WHERE id = '$id'");

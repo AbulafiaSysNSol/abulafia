@@ -23,7 +23,7 @@
 	$res = $p -> inserisciServizio($codice, $descrizione, $indirizzo, $citta, $cap,$telefono, $email, $magazzino); 
 	
 	if($res) {
-		header("Location: login0.php?corpus=magazzino-aggiungi-servizio&insert=ok");
+		header("Location: login0.php?corpus=magazzino-servizi&insert=ok");
 	}
 	else {
 		echo 'Errore nella registrazione dei dati';

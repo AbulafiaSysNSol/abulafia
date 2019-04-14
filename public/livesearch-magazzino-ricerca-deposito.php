@@ -13,10 +13,10 @@
 		require_once "class/" . $class_name.".obj.inc";
 	}
 	
-	$q=$_GET['q'];
-	$z=$_GET['z'];
+	$q = $_GET['q'];
+	$z = $_GET['z'];
 
-	if ($q=='' && $z=='') {
+	if (($q == '') && ($z == '')) {
 		?>
 		<center><div class="alert alert-warning"><b><i class="fa fa-warning"></i></b> Seleziona <b>almeno</b> un magazzino o un prodotto.</div></center>
 		<?php

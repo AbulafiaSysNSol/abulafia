@@ -10,11 +10,23 @@
 			<div class="panel-body">
 
 				<?php
-				if( isset($_GET['canc']) && $_GET['canc'] == "ok") {
+				if( isset($_GET['canc']) && $_GET['canc'] == "ok")
+				{
 					?>
 					<div class="row">
 					<div class="col-sm-12">
 					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> Servizio eliminato con successo!</div></div></div>
+					<?php
+				}
+				
+				if( isset($_GET['insert']) && $_GET['insert'] == "ok") 
+				{
+					?>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="alert alert-success"><i class="fa fa-check"></i> Magazzino/Servizio aggiunto <b>correttamente!</b></div>
+						</div>
+					</div>
 					<?php
 				}
 				?>
