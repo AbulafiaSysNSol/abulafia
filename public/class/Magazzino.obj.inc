@@ -280,6 +280,17 @@ require_once('../db-connessione-include.php');
 			return $res;
 		}
 
+		public function eliminaDocumento($id, $tipologia, $magazzino) {
+			global $connessione;
+			$righe = $this->righeDocumento($id);
+			foreach($righe as $val)
+			{
+				$this->eliminaRigaDocumento($val[0], $magazzino, $tipologia);
+			}
+			$query = $connessione->query("DELETE FROM documenti_magazzino WHERE id = '$id'");
+			return $query;
+		}
+
 		public function eliminaRigaDocumento($idriga, $magazzino, $tipodocumento) {
 			global $connessione;
 			try 

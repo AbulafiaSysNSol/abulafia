@@ -16,8 +16,6 @@
 	$m = new Magazzino();
 	$s = new Servizio();
 	$c = new Calendario();
-	$a = new Anagrafica();
-	$admin = $a->isAdmin($_SESSION['loginid']);
 	
 	$doc = $_GET['q'];
 	$mag = $_GET['mag'];
@@ -53,11 +51,8 @@
 					<td align="center" nowrap style="vertical-align: middle">
 						<div class="btn-group btn-group-sm" role="group">
 							<a class="btn btn-info" href=""><i class="fa fa-info fa-fw"></i></a>
-							<a class="btn btn-warning" href="?corpus=magazzino-documenti-carico-scarico-prodotti&id=<?php echo $val['id']; ?>&tipologia=<?php echo $val['tipologia']; ?>"><i class="fa fa-pencil fa-fw"></i></a>
-							<?php if($admin) { ?>	
-								<a class="btn btn-danger" href=""><i class="fa fa-trash fa-fw"></i></a>
-							<?php } ?>
-							<!--<a class="btn btn-primary" href=""><i class="fa fa-envelope-o fa-fw"></i></a>-->
+							<a class="btn btn-warning" href="?corpus=magazzino-documenti-carico-scarico-prodotti&id=<?php echo $val['id']; ?>&tipologia=<?php echo $val['tipologia']; ?>"><i class="fa fa-pencil fa-fw"></i></a>	
+							<a class="btn btn-danger" onClick="return confirm('Vuoi veramente cancellare questo documento?');" href="?corpus=magazzino-documenti-carico-scarico-elimina&id=<?php echo $val['id']; ?>&tipologia=<?php echo $val['tipologia']; ?>&magazzino=<?php echo $val['magazzino']; ?>"><i class="fa fa-trash fa-fw"></i></a>
 							<!--<a class="btn btn-danger" href=""><i class="fa fa-file-pdf-o fa-fw"></i></a>-->
 						</div>
 					</td>		
