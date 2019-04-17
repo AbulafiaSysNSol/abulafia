@@ -291,8 +291,8 @@ tinymce.init({
    								$connessione->beginTransaction();
 								$query = $connessione->prepare('SELECT COUNT(*) 
 												FROM comp_lettera 
-											WHERE (vista = 1 OR vista = 2) 
-											AND firmata = 0');
+												WHERE (vista = 1 OR vista = 2) 
+												AND firmata = 0');
 								$query->execute();
 								$connessione->commit();
 							} 
@@ -310,7 +310,7 @@ tinymce.init({
 												WHERE (vista = 1 OR vista = 2) 
 												AND firmata = 0 
 												AND joinpersoneuffici.ufficio = comp_lettera.ufficio 
-												AND joinpersoneuffici.utente = $user'); 
+												AND joinpersoneuffici.utente = :user'); 
 								$query->bindParam(':user', $user);
 								$query->execute();
 								$connessione->commit();
