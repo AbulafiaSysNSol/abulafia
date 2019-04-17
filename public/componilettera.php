@@ -240,6 +240,7 @@
 		   	echo "Errore: " . $errorePDO->getMessage();
 		   	$connessione->rollBack();
 		 	$insert = false;
+		 	exit();
 		}	
 		$html2pdf->Output('lettere'.$anno.'/'.$protocollo.'/'.$name,'F');
 		header("Location: login0.php?corpus=dettagli-protocollo&id=".$protocollo."&anno=".$anno);

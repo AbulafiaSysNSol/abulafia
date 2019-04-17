@@ -75,13 +75,12 @@
 		$data = date("Y-m-d");
 		$erroreallegati = 0;
 		foreach ($destinatari as $valore) {
-
 			try {
 			   	$connessione->beginTransaction();
 				$query = $connessione->prepare("INSERT INTO mailsend VALUES ('', :userid, :valore, :data, :idlettera, :annoricercaprotocollo) "); 
 				$query->bindParam(':userid', $userid);
 				$query->bindParam(':valore', $valore);
-				$query->bindParam(':date', $data);
+				$query->bindParam(':data', $data);
 				$query->bindParam(':idlettera', $idlettera);
 				$query->bindParam(':annoricercaprotocollo', $annoricercaprotocollo);
 				$query->execute();

@@ -33,7 +33,7 @@
 	//ACQUISISCO I DATI GIA' REGISTRATI DELLA LETTERA
 	$query = $connessione->query("SELECT * FROM comp_lettera WHERE id = $id");
 	$dati = $query->fetch();
-	$oggetto= strip_tags(addslashes($dati['oggetto']));
+	$oggetto = strip_tags(addslashes($dati['oggetto']));
 	$datalettera = $dati['data'];
 	$speditaricevuta = 'spedita';
 	
@@ -51,7 +51,7 @@
 	//SCRIVO I DETTAGLI DELLA LETTERA NEL DB
 	try {
    		$connessione->beginTransaction();
-		$query = $connessione->prepare("INSERT INTO lettere$annoprotocollo VALUES (null, :$oggetto, :datalettera, :dataregistrazione, null, :speditaricevuta, :posizione, :riferimento, :pratica, :note) "); 
+		$query = $connessione->prepare("INSERT INTO lettere$annoprotocollo VALUES ('', :oggetto, :datalettera, :dataregistrazione, '', :speditaricevuta, :posizione, :riferimento, :pratica, :note) "); 
 		$query->bindParam(':oggetto', $oggetto);
 		$query->bindParam(':datalettera', $datalettera);
 		$query->bindParam(':dataregistrazione', $dataregistrazione);
@@ -69,6 +69,7 @@
     	echo "Errore: " . $errorePDO->getMessage();
     	$connessione->rollBack();
     	$inserimento = false;
+    	exit();
 	}
 	
 	//AGGIORNO LA LETTERA
@@ -78,25 +79,29 @@
 		$query->bindParam(':ultimoid', $ultimoid);
 		$query->bindParam(':annoprotocollo', $annoprotocollo);
 		$query->bindParam(':id', $id);
+		$query->execute();
 		$connessione->commit();
 	}	 
 	catch (PDOException $errorePDO) { 
     	echo "Errore: " . $errorePDO->getMessage();
     	$connessione->rollBack();
+    	exit();
 	}
 		
 	//SCRIVO L'UTENTE CHE HA FATTO L'INSERIMENTO
 	try {
    		$connessione->beginTransaction();
-		$query = $connessione->prepare("INSERT INTO joinlettereinserimento$annoprotocollo VALUES(:ultimoid, :loginid, null, :dataregistrazione)"); 
+		$query = $connessione->prepare("INSERT INTO joinlettereinserimento$annoprotocollo VALUES(:ultimoid, :loginid, '', :dataregistrazione)"); 
 		$query->bindParam(':ultimoid', $ultimoid);
 		$query->bindParam(':loginid', $loginid);
 		$query->bindParam(':dataregistrazione', $dataregistrazione);
+		$query->execute();
 		$connessione->commit();
 	}	 
 	catch (PDOException $errorePDO) { 
     	echo "Errore: " . $errorePDO->getMessage();
     	$connessione->rollBack();
+    	exit();
 	}
 		
 	//SCRIVO I MITTENTI/DESTINATARI NEL DB
@@ -167,10 +172,6 @@
 	
 ?>
 
-<SCRIPT LANGUAGE="Javascript">
-	browser= navigator.appName;
-	if (browser == "Netscape")
-		window.location="componilettera.php?id=<?php echo $idnext ?>&from=protocolla-lettera"; 
-	else 
-		window.location="componilettera.php?id=<?php echo $idnext ?>&from=protocolla-lettera"; 
-</SCRIPT>
+<script language = "javascript">
+	window.location="componilettera.php?id=<?php echo $idnext ?>&from=protocolla-lettera"; 
+</script>
