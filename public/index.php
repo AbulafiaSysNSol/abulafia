@@ -79,6 +79,12 @@
                 <?php
             }
 
+             if ( (isset($_GET['google'])) && ($_GET['google'] == "err") ) {
+                ?>
+                <div class="col-sm-12"><center><div class="alert alert-danger"><i class="fa fa-warning"></i> L'account Google con cui hai effettuato l'accesso non ha i privilegi per operare su questa installazione di Abulafia Web.<br>Se pensi che ci sia un errore contatta il supporto all'indirizzo supporto@abulafiaweb.it</div></center></div>
+                <?php
+            }
+
             if ($recovery) {
                 ?>
                 <div class="col-sm-12"><center><div class="alert alert-info"><b><i class="fa fa-check"></i> Ti abbiamo inviato un'email con un link per resettare la password. Ricordati di controllare anche la posta indesiderata.</b></div></center></div>
@@ -140,7 +146,7 @@
                                     <center>
                                     <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-sign-in fa-fw"></i> Login</button>
                                     <br><br>
-                                    <center><div><img src="images/google.png"></div></center>
+                                    <center><div><a href="googlelogin.php"><img src="images/google.png"></a></div></center>
                                     <br>
                                     <a href="password-recovery.php"><i class="fa fa-fw fa-envelope-o"></i> Recupera Password</a>
                                      - <a href="https://abulafiaweb.freshdesk.com/support/tickets/new" target="_blank"><i class="fa fa-fw fa-support"></i> Contatta il Supporto</a>
