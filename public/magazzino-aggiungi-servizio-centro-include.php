@@ -8,18 +8,6 @@
 				</div>
 				
 				<div class="panel-body">
-					
-					<?php
-					 if( isset($_GET['insert']) && $_GET['insert'] == "ok") {
-					?>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="alert alert-success"><i class="fa fa-check"></i> Servizio registrato <b>correttamente!</b></div>
-						</div>
-					</div>
-					<?php
-					}
-					?>
 				
 					<form class="form-horizontal" role="form" name="modulo" method="post" action="magazzino-aggiungi-servizio2.php">
 
@@ -51,7 +39,7 @@
 						</div>
 						
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Città:</label>
+							<label class="col-sm-3 control-label">Citt&agrave;:</label>
 							<div class="row">
 								<div class="col-sm-6">
 									<input type="text" class="form-control input-sm" name="citta">

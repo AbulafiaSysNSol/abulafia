@@ -26,7 +26,8 @@
 				?>
 
 				<?php
-					 if( isset($_GET['edit']) && $_GET['edit'] == "ok") {
+					$edit = false;
+					if( isset($_GET['edit']) && $_GET['edit'] == "ok") {
 						$magazzino = $_GET['magazzino'];
 						$prodotto = $_GET['prodotto'];
 						$edit = true;
@@ -40,19 +41,19 @@
 					}
 				?>
 
-				<script type="text/javascript" src="livesearch-magazzino-ricerca-deposito.js" <?php if($edit) { ?> onLoad="showResult('<?php echo $prodotto; ?>','<?php echo $magazzino; ?>')" <?php } else { ?>onLoad="showResult('','')" <?php } ?> ></script>
+				<script type="text/javascript" src="livesearch-magazzino-ricerca-deposito.js" <?php if($edit) { ?> onLoad = "showResult('<?php echo $prodotto; ?>','<?php echo $magazzino; ?>')" <?php } else { ?>onLoad="showResult('','')" <?php } ?> ></script>
 				<form name="cercato" onSubmit="return false">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="input-group">
 								<div class="input-group-addon">Magazzino/Servizio:</div>
 								<select class="form-control input" name="mag" onchange="showResult(desc.value,this.value)">
-									<option value="">TUTTI I MAGAZZINI/SETTORI</option>
+									<option value="">Tutti i Magazzini/Servizi</option>
 									<?php
 										$res = $s->ricercaServizio('');
 										foreach($res as $val) {
 										?>
-											<option value="<?php echo $val['codice']; ?>"><?php echo strtoupper($val['descrizione']); ?></option>
+											<option value="<?php echo $val['codice']; ?>"><?php echo $val['descrizione']; ?></option>
 											<?php
 										}
 									?>

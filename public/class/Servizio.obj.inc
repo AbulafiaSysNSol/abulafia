@@ -93,10 +93,10 @@
 		public function ricercaServizio($descrizione) {
 			global $connessione;
 			if( ($descrizione == '') OR ($descrizione == NULL) ) {
-				$query = $connessione->query("SELECT * FROM servizi ORDER BY magazzino DESC, descrizione ASC");
+				$query = $connessione->query("SELECT * FROM servizi ORDER BY codice ASC, descrizione ASC");
 			}
 			else {
-				$query = $connessione->query("SELECT * FROM servizi WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') ORDER BY magazzino DESC, descrizione ASC");
+				$query = $connessione->query("SELECT * FROM servizi WHERE (codice LIKE '%$descrizione%') OR (descrizione LIKE '%$descrizione%') ORDER BY codice ASC, descrizione ASC");
 			}
 			
 			$result = array();
