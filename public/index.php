@@ -138,8 +138,10 @@
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
                                     <center>
-                                    <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-sign-in"></i> Login</button>
+                                    <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-sign-in fa-fw"></i> Login</button>
                                     <br><br>
+                                    <center><div><img src="images/google.png"></div></center>
+                                    <br>
                                     <a href="password-recovery.php"><i class="fa fa-fw fa-envelope-o"></i> Recupera Password</a>
                                      - <a href="https://abulafiaweb.freshdesk.com/support/tickets/new" target="_blank"><i class="fa fa-fw fa-support"></i> Contatta il Supporto</a>
                                     </center>
