@@ -178,7 +178,7 @@ class Lettera {
 		Oggetto: 
 		<strong>
 			<?php 
-				echo $this->arraylettera1['oggetto'];
+				echo stripslashes($this->arraylettera1['oggetto']);
 			?>
 		</strong>
 		

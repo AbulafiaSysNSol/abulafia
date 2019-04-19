@@ -35,7 +35,7 @@
 					<i class="fa fa-book"></i> Protocollo N. <b><?php echo $dettagli['idlettera']; ?></b> del <b><?php echo $calendario->dataSlash($dettagli['dataregistrazione']); ?></b>
 				</h2>
 				<h4>
-					"<?php echo $dettagli['oggetto']; ?>"
+					"<?php echo stripslashes($dettagli['oggetto']); ?>"
 				</h4>
 			</center>
 		<hr>

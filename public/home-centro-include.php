@@ -258,7 +258,7 @@ if($a->isProtocollo($_SESSION['loginid'])) { ?>
 						echo "	<tr>
 								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".$icon.$val[0]."</a></td>
 								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".$data->dataSlash($val[1])."</a></td>
-								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".$val[2]."</a></td>
+								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".stripslashes($val[2])."</a></td>
 								</tr>";
 					}
 				}
