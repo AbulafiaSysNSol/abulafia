@@ -19,12 +19,12 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<h5><i class="fa fa-file-text-o"></i> Testo della lettera:</h5>
-						<textarea id="editor" class="form-control" rows="20" name="message"><?php echo $dettagli['testo']; ?></textarea>
+						<textarea id="editor" class="form-control" rows="20" name="message"><?php echo stripslashes($dettagli['testo']); ?></textarea>
 					</div>
 				
 					<div class="col-sm-4">
 						<h5><i class="fa fa-certificate"></i> Oggetto:</h5>
-						<textarea id="editorOgg" class="form-control" rows="2" type="text" name="oggetto"><?php echo $dettagli['oggetto']; ?></textarea>		
+						<textarea id="editorOgg" class="form-control" rows="2" type="text" name="oggetto"><?php echo stripslashes($dettagli['oggetto']); ?></textarea>		
 						<br>
 						<h5><i class="fa fa-calendar"></i> Data della lettera:</h5>
 						<input required type="text" class="form-control input-sm datepickerProt" name="data" value="<?php echo $calendario->dataSlash($dettagli['data']); ?>">
