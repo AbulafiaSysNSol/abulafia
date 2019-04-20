@@ -12,7 +12,10 @@ include 'testa-include.php'; //carica il file con l'header.
 
 $include=include $corpus.'-centro-include.php';//carica la pagina cercata, la cui variabile è stata passata con il metodo get. L'errore standard è soppresso con @ per consentire il messaggio di errore personalizzato
 
-if (!$include) { echo '<center><img src="images/pagenotfound.jpg"></center>';include 'sotto-include.php';exit();} //messaggio di errore qualora la pagina richiesta non esistesse
+if (!$include) //messaggio di errore qualora la pagina richiesta non esistesse
+{ 
+	echo '<center><img src="images/pagenotfound.jpg"></center>';
+} 
 
 
 include 'sotto-include.php'; //carica il file con il footer.
