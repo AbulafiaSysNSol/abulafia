@@ -9,8 +9,22 @@
 				$my_log->publleggilog('0', '50', 'access', $_SESSION['logfile']); //legge dal log degli accessi
 			?>
 			</p>
-			<br><b><a href="download.php?lud=access.log&est=log"><i class="fa fa-download"></i> Scarica il log degli accessi</a></b>
+
+			<form action="download-on-the-fly.php"" method="post">
+
+   			<input type="hidden" name="textonthefly" value="<?php print(base64_encode(serialize($my_log->righefiltrate))); ?>">
+			<input type="hidden" name="logname" value="Access LOG">
+			<input type="hidden" name="filename" value="access-log.txt">
+
+   			<center><input type="submit" 
+							name="submit_parse" 
+							style="margin-bottom: 20px; margin-top: 10px;width:250px; font-face: "Comic Sans MS"; 
+							font-size: larger; " 
+							value="Scarica questo LOG completo"> </center>
+   			</form>
 
 		</div>
 				
 </div>
+
+

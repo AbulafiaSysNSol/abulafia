@@ -9,7 +9,17 @@
 				$my_log->publleggilog('0', '50', ' ', 'mail');//legge dal log delle email inviate
 			?>
 			</p>
-			<br><b><a href="download.php?lud=mail.log&est=log"><i class="fa fa-download"></i> Scarica il log delle mail</a></b>
+			<form action="download-on-the-fly.php"" method="post">
+   			<input type="hidden" name="textonthefly" value="<?php print(base64_encode(serialize($my_log->righefiltrate))); ?>">
+			<input type="hidden" name="logname" value="Mail LOG">
+			<input type="hidden" name="filename" value="mail-log.txt">
+
+   			<center><input type="submit" 
+							name="submit_parse" 
+							style="margin-bottom: 20px; margin-top: 10px;width:250px; font-face: "Comic Sans MS"; 
+							font-size: larger; " 
+							value="Scarica questo LOG completo"> </center>
+   			</form>
 
 		</div>
 				

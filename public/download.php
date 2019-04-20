@@ -56,5 +56,6 @@
 	    
 	/* leggiamo il file inviamo l'output */    
 	@readfile($path) or die('SERVER ERROR!');    
-	exit;    
+	exit;
+	
 ?>   
