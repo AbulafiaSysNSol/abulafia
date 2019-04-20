@@ -1,4 +1,6 @@
 <?php
+/*acquisisce dal form della pagina precedente i valori HIDDEN tramite POST con noe del file, 
+prima riga del file ed array da spampare. Crea un file di testo al volo e lo propone per il download*/
 
 session_start();
 
