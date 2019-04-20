@@ -1,12 +1,14 @@
 <?php
 	$annoprotocollo = $_SESSION['annoprotocollo'];
 	if (!is_numeric($annoprotocollo))
-		{
+	{
 		echo "Errore nella definizione dell'anno"; 
 		exit; 
-		}
+	}
+
 	//controllo dell'autorizzazione necessaria alla gestione degli utenti di abulafia
-	if ($_SESSION['auth'] < 99) { 
+	if ($_SESSION['auth'] < 99) 
+	{ 
 		echo 'Non hai l\'autorizzazione necessaria per utilizzare questa funzione. Se ritieni di averne diritto, contatta l\'amministratore di sistema'; 
 		exit ();
 	}
@@ -20,29 +22,36 @@
 		</div>
 		<div class="panel-body">
 			<?php
-				 if( isset($_GET['update']) && $_GET['update'] == "error") {
+				if( isset($_GET['update']) && $_GET['update'] == "error") 
+				{
 				?>
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="alert alert-danger center"><span class="glyphicon glyphicon-exclamation-sign"></span><b> Attenzione:</b> c'e' stato un errore nella modifica delle impostazioni, riprova in seguito o contatta l'amministratore del server.</div>
+						<div class="alert alert-danger center">
+						<span class="glyphicon glyphicon-exclamation-sign"></span>
+						<b> Attenzione:</b> c'e' stato un errore nella modifica delle impostazioni, 
+						riprova in seguito o contatta l'amministratore del server.
+						</div>
 					</div>
 				</div>
 				<?php
 				}
 
-				 if( isset($_GET['update']) && $_GET['update'] == "success") {
+				if( isset($_GET['update']) && $_GET['update'] == "success") 
+				{
 				?>
 				<div class="row">
 					<div class="col-sm-12">
-						<center><div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span> <b>Impostazioni Salvate!</b></div></center>
+						<center>
+						<div class="alert alert-success">
+						<span class="glyphicon glyphicon-ok"></span> 
+						<b>Impostazioni Salvate!</b>
+						</div>
+						</center>
 					</div>
 				</div>
 				<?php
 				}
-
-			//funzione per determinare se la tabella "lettere" è vuota. In caso positivo è possibile settare il campo "primo numero per il protocollo"
-/*deprecato			$contalettere=mysq>l_query("select count(*) from lettere$annoprotocollo where lettere$annoprotocollo.datalettera!='0000-00-00'");
-			$res_count=mysq>l_fetch_row($contalettere);*/
 							
 			try 
 				{
@@ -71,33 +80,59 @@
 			
 			<form name="modifica" method="post" class="form-group">
 			<div class="row">
-
 				<div class="col-sm-4">
-					<center><h3><i class="fa fa-cog"></i> Generali:</h3><br></center>
+					<center>
+					<h3><i class="fa fa-cog"></i> Generali:</h3><br>
+					</center>
 					<label>Nome dell'applicativo:</label>
-					<input class="form-control" type="text" name="nomeapplicativo"  value="<?php echo $_SESSION['nomeapplicativo'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
+					<input class="form-control" 
+						type="text" 
+						name="nomeapplicativo"  
+						value="<?php echo $_SESSION['nomeapplicativo'];?>" 
+						<?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Descrizione breve:</label>
-					<input class="form-control" type="text" name="headerdescription"  value="<?php echo $_SESSION['headerdescription'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
+					<input class="form-control" 
+							type="text" 
+							name="headerdescription"  
+							value="<?php echo $_SESSION['headerdescription'];?>" 
+							<?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Numero Versione</label>
-					<input class="form-control" type="text" name="version"  value="<?php echo $_SESSION['version'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
+					<input class="form-control" 
+							type="text" 
+							name="version"  
+							value="<?php echo $_SESSION['version'];?>" 
+							<?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>
 					<label>Denominazione</label>
-					<input class="form-control" type="text" name="denominazione"  value="<?php echo stripslashes($_SESSION['denominazione']);?>"/>
+					<input class="form-control" 
+							type="text" 
+							name="denominazione"  
+							value="<?php echo stripslashes($_SESSION['denominazione']);?>"/>
 					<br>
 					<label>Sede (Citt&agrave;)</label>
-					<input class="form-control" type="text" name="sede"  value="<?php echo stripslashes($_SESSION['sede']);?>"/>
+					<input class="form-control" 
+							type="text" 
+							name="sede"  
+							value="<?php echo stripslashes($_SESSION['sede']);?>"/>
 					<br>
 					<label>Vertice (presidente/commissario)</label>
-					<input class="form-control" type="text" name="vertice"  value="<?php echo $_SESSION['vertice'];?>"/>
+					<input class="form-control" 
+							type="text" 
+							name="vertice"  
+							value="<?php echo $_SESSION['vertice'];?>"/>
 				</div>
 				
 				<div class="col-sm-4">
-					<center><h3><i class="fa fa-book"></i> Protocollo:</h3><br></center>
-
+					<center>
+					<h3><i class="fa fa-book"></i> Protocollo:</h3><br>
+					</center>
 					<label>Inizio utilizzo Abulafia (aaaa/mm/gg)</label>
-					<input class="form-control" type="text" name="inizio"  value="<?php echo $_SESSION['inizio'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
+					<input class="form-control" 
+							type="text" 
+							name="inizio"  
+							value="<?php echo $_SESSION['inizio'];?>" <?php if(!$admin) { echo 'readonly'; } ?>/>
 					<br>	
 					<label>Anno Corrente per il Protocollo</label>
 					<input class="form-control" type="text" name="annoprotocollo"  value="<?php echo $_SESSION['annoprotocollo'];?>" disabled />
