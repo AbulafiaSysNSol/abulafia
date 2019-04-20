@@ -2,6 +2,7 @@
 
 class Log 
 {
+
 	
 	public function contaLog($logfile) 
 	{
@@ -55,32 +56,34 @@ class Log
 	public function publleggilog ($partenza, $numerorighe, $filtro, $logfile) //<man>Legge dal file $logfile dalla riga $partenza per un certo $numerorighe numero di righe, filtrando solo quelle dove compare $filtro</man>
 	{
 		if (!is_dir($_SESSION['logdirectory'])) //se la directory non esiste, la crea
+		{ 
+			$creadir=mkdir($_SESSION['logdirectory'], 0777, true);	
+			if (!$creadir) 
 			{ 
-				$creadir=mkdir($_SESSION['logdirectory'], 0777, true);	
-				if (!$creadir) 
-					{ 
-						die ("Impossibile creare la directory: log/");
-					}
+				die ("Impossibile creare la directory: log/");
 			}
+		}
 		
 		if (file_exists($_SESSION['logdirectory'].$logfile)==false) //se il file non esiste, lo crea
-			{ 
-				$filehandle=fopen($_SESSION['logdirectory'].$logfile, 'w');
-				fclose($filehandle);
-			}
+		{ 
+			$filehandle=fopen($_SESSION['logdirectory'].$logfile, 'w');
+			fclose($filehandle);
+		}
 		
 		$accessloglines = (file($_SESSION['logdirectory'].$logfile));
 		$accessloglinesnumber = count($accessloglines);
 		$ciclo = 0;
-		
+		$this->righefiltrate=array('esportazione log');
+
 		while (($ciclo < $numerorighe) and ( $accessloglinesnumber-($ciclo+$partenza) > 0)) 
 		{
 			$ciclo = $ciclo + 1;
 			$riga = $accessloglines[$accessloglinesnumber-($ciclo+$partenza)];
 			if (strpos($riga, $filtro, 0) > 0) 
-				{ 
-					echo '<br>'. $ciclo.') '.$riga.'<br>';
-				}
+			{
+				array_push($this->righefiltrate, $ciclo.' )'.$riga); 
+				echo '<br>'. $ciclo.') '.$riga.'<br>';
+			}
 			else 
 			{ 
 				$numerorighe = $numerorighe +1; 
