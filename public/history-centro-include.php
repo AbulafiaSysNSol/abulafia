@@ -9,7 +9,8 @@
 				$my_log->publleggilog('0', '100', ' ', $_SESSION['logfile']);//legge dal log
 			?>
 			</p>
-			<br><b><a href="download.php?lud=general.log&est=log"><i class="fa fa-download"></i> Scarica il log integrale di tutte le azioni</a></b>
+			<br>
+			<center><a class="btn btn-success btn-sm" href="download.php?lud=general.log&est=log"><i class="fa fa-download"></i> Scarica questo LOG completo</a></b></center>
 
 		</div>
 				

@@ -579,7 +579,7 @@
 				<tr bgcolor=<?php echo $colorelinee; ?> >
 					<td style="vertical-align: middle"><?php echo $icon . ' ' . $value[0]; ?></td>
 					<td style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
-					<td style="vertical-align: middle"><?php echo $value[1] ;?></td>
+					<td style="vertical-align: middle"><?php echo stripslashes($value[1]) ;?></td>
 					<td nowrap style="vertical-align: middle"> 
 					
 					<?php
