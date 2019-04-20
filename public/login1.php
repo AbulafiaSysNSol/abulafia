@@ -11,10 +11,8 @@
 	$_SESSION['my_calendario']= serialize($my_calendario); //serializzazione per passaggio alle variabili di sessione
 	$logdirectory="log/";
 	$_SESSION['logdirectory'] = "log/";
-	//logfile unificato $errorlog='error.log';
 	$logfile='general.log';
 	$maillog='mail.log';
-	//logfile unificato $historylog = 'history.log';
 	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 	$userid = addslashes($_POST['userid']); // nome utente inserito nella form della pagina iniziale
 	$usermd = md5($userid);
@@ -100,8 +98,6 @@
 		exit();
 	}
 	
-	//inizio settaggio delle variabili di sessione
-	/*deprecato	$logindata=mysq<l_query("select * from users where loginname='$userid'"); $logindata2=mysq<l_fetch_array($logindata);*/
 
 	try 
 		{

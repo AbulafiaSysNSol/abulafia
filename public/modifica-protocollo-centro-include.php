@@ -304,7 +304,7 @@
 			<label><span class="glyphicon glyphicon-asterisk"></span> Oggetto della lettera:</label>
 			<div class="row">
 			<div class="col-sm-11">
-			<input required id="ogg" class="form-control" size="40" type="text" name="oggetto" value="<?php echo str_replace('"',"''",$row['oggetto']); ?>" />
+			<input required id="ogg" class="form-control" size="40" type="text" name="oggetto" value="<?php echo str_replace('"',"''",stripslashes($row['oggetto'])); ?>" />
 			</div>
 			</div>
 			
