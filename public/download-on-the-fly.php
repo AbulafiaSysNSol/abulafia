@@ -25,6 +25,8 @@ if (isset($_POST['textonthefly'])) //acquisisce il valore dalla pagina precedent
 	// do your Db stuff here to get the content into $content
 	print $_POST['logname']." ";
 	print_r(unserialize(base64_decode($_POST['textonthefly'])));
+	$my_log=new Log();
+	$my_log->publscrivilog($_SESSION['loginname'], 'download ' .$_POST['filename'], 'ok', $_SESSION['ip'], $_SESSION['logfile'], 'download' );
 	unset($_POST['textonthefly']);
 	exit();
 }
