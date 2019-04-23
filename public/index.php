@@ -54,8 +54,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-social.css" rel="stylesheet">
     <link href="css/mobile.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <!-- Add custom CSS here -->
     <link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
 
@@ -146,8 +147,8 @@
                                     <center>
                                     <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-sign-in fa-fw"></i> Login</button>
                                     <br><br>
-                                    <center><div><a href="googlelogin.php"><img src="images/google.png"></a></div></center>
-                                    <br>
+                                    <a class="btn btn-social btn-google" href="googlelogin.php"><span class="fa fa-google"></span> Sign in with Google</a>
+                                    <br><br>
                                     <a href="password-recovery.php"><i class="fa fa-fw fa-envelope-o"></i> Recupera Password</a>
                                      - <a href="https://abulafiaweb.freshdesk.com/support/tickets/new" target="_blank"><i class="fa fa-fw fa-support"></i> Contatta il Supporto</a>
                                     </center>
