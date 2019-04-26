@@ -261,64 +261,81 @@
 			
 			<br>
 			
-			<table class="table table-bordered">
-				<tr>
-					<td style="vertical-align: middle" align="center"><b>Id</b></td>
-					<td style="vertical-align: middle" align="center"><b>Tipo</b></td>
-					<td style="vertical-align: middle" align="center"><b>Cognome/Rag. Sociale</b></td>
-					<td style="vertical-align: middle" align="center"><b>Nome</b></td>
-					<td style="vertical-align: middle" align="center"><b>Cod. Fiscale/P. Iva</b></td>
-					<td width="150" style="vertical-align: middle" align="center"><b>Opzioni</b></td>
-				</tr>
-				<?php
-				while ($row = $risultati->fetch()) {
-					$row = array_map('stripslashes', $row);
-					if ( $contatorelinee % 2 == 1 ) { 
-						$colorelinee = $_SESSION['primocoloretabellarisultati'] ; 
-					} //primo colore
-					else { 
-						$colorelinee = $_SESSION['secondocoloretabellarisultati'] ; 
-					} //secondo colore
-					$contatorelinee = $contatorelinee + 1 ;
-					?>
-					<tr bgcolor=<?php echo $colorelinee; ?>>
-						<td style="vertical-align: middle" align="left"><?php echo $row['idanagrafica'];?></td>
-						<td style="vertical-align: middle" align="left"><?php echo ucwords($row['tipologia']);?></td>
-						<td style="vertical-align: middle" align="left"><?php echo $row['cognome'];?></td>
-						<td style="vertical-align: middle" align="left"><?php echo $row['nome'] ; ?> </td>
-						<td style="vertical-align: middle" align="left"><?php echo $row['codicefiscale'];?></td>
-						<td nowrap style="vertical-align: middle" align="center">
-							<div class="btn-group btn-group-sm">
-								<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli anagrafica" href="login0.php?corpus=dettagli-anagrafica
-													&from=risultati
-													&tabella=anagrafica
-													&id=<?php echo $row['idanagrafica'];?>">
-													<span class="glyphicon glyphicon-info-sign"></span>
-								</a>
-								<?php 
-								if (!$a->isUser($row['idanagrafica'])) {
-									?>
-									<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica anagrafica" 	href="login0.php?corpus=modifica-anagrafica
+			<div id="no-more-tables">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td style="vertical-align: middle" align="center"><b>Id</b></td>
+							<td style="vertical-align: middle" align="center"><b>Tipo</b></td>
+							<td style="vertical-align: middle" align="center"><b>Cognome/Rag. Sociale</b></td>
+							<td style="vertical-align: middle" align="center"><b>Nome</b></td>
+							<td style="vertical-align: middle" align="center"><b>Cod. Fiscale/P. Iva</b></td>
+							<td width="150" style="vertical-align: middle" align="center"><b>Opzioni</b></td>
+						</tr>
+					</thead>
+
+					<?php
+					while ($row = $risultati->fetch()) {
+						$row = array_map('stripslashes', $row);
+						if ( $contatorelinee % 2 == 1 ) { 
+							$colorelinee = $_SESSION['primocoloretabellarisultati'] ; 
+						} //primo colore
+						else { 
+							$colorelinee = $_SESSION['secondocoloretabellarisultati'] ; 
+						} //secondo colore
+						$contatorelinee = $contatorelinee + 1 ;
+						?>
+						<tr bgcolor=<?php echo $colorelinee; ?>>
+							<?php
+								if($row['tipologia'] == 'persona')
+								{
+									$den = "Cognome";
+									$cod = "Cod. Fiscale";
+								}
+								else
+								{
+									$den = "Denominazione";
+									$cod = "P. Iva";
+								}
+							?>
+							<td data-title="Id" style="vertical-align: middle" align="left"><?php echo $row['idanagrafica'];?></td>
+							<td data-title="Tipo" style="vertical-align: middle" align="left"><?php echo ucwords($row['tipologia']);?></td>
+							<td data-title="<?php echo $den; ?>" style="vertical-align: middle" align="left"><?php echo $row['cognome'];?></td>
+							<td data-title="Nome" style="vertical-align: middle" align="left"><?php echo $row['nome'] ; ?> </td>
+							<td data-title="<?php echo $cod; ?>" style="vertical-align: middle" align="left"><?php echo $row['codicefiscale'];?></td>
+							<td data-title="Opzioni" nowrap style="vertical-align: middle" align="center">
+								<div class="btn-group btn-group-sm">
+									<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli anagrafica" href="login0.php?corpus=dettagli-anagrafica
 														&from=risultati
 														&tabella=anagrafica
 														&id=<?php echo $row['idanagrafica'];?>">
-														<span class="glyphicon glyphicon-pencil"></span>
+														<span class="glyphicon glyphicon-info-sign"></span>
 									</a>
-									<?php
-								}
-								?>
-								<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Visualizza corrispondenza anagrafica" 	href="login0.php?corpus=corrispondenza-anagrafica
-													&currentpage=1&iniziorisultati=0
-													&id=<?php echo $row['idanagrafica'];?>">
-													<i class="fa fa-exchange"></i>
-								</a>
-							</div>
-						</td>
-					</tr>
-					<?php
-				}
-				?>
-			</table>
+									<?php 
+									if (!$a->isUser($row['idanagrafica'])) {
+										?>
+										<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica anagrafica" 	href="login0.php?corpus=modifica-anagrafica
+															&from=risultati
+															&tabella=anagrafica
+															&id=<?php echo $row['idanagrafica'];?>">
+															<span class="glyphicon glyphicon-pencil"></span>
+										</a>
+										<?php
+									}
+									?>
+									<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Visualizza corrispondenza anagrafica" 	href="login0.php?corpus=corrispondenza-anagrafica
+														&currentpage=1&iniziorisultati=0
+														&id=<?php echo $row['idanagrafica'];?>">
+														<i class="fa fa-exchange"></i>
+									</a>
+								</div>
+							</td>
+						</tr>
+						<?php
+					}
+					?>
+				</table>
+			</div>
 			
 			<?php
 			//controllo per pagina avanti-indietro
@@ -547,84 +564,88 @@
 			<div class="alert alert-warning"><b><i class="fa fa-warning"></i> Attenzione:</b> al momento la funzione "qrcode" potrebbe non funzionare su tutti gli allegati.</div>
 			</center>
 			-->
-			<table class="table table-bordered">
-				<tr align = "center">
-					<td style="vertical-align: middle">N.</td>
-					<td style="vertical-align: middle">Data</td>
-					<td style="vertical-align: middle">Oggetto</td>
-					<td style="vertical-align: middle">Allegati</td>
-					<td style="vertical-align: middle">Mitt./Dest.</td>
-					<td style="vertical-align: middle">Opzioni</td>
-				</tr>
-			<?php
-			
-			while ($value = $risultati->fetch()) { //elenco i risultati dell'array
-				$value = array_map('stripslashes', $value);
-				if ( $contatorelinee % 2 == 1 ) { 
-					$colorelinee = $_SESSION['primocoloretabellarisultati'];
-				} //primo colore
-				else {
-					$colorelinee = $_SESSION['secondocoloretabellarisultati']; 
-				} //secondo colore
-				$contatorelinee = $contatorelinee + 1 ;
-
-				if($value[5] == 'spedita') { 
-					$icon = '<i class="fa fa-arrow-up fa-fw"></i> '; 
-				} 
-				else { 
-					$icon = '<i class="fa fa-arrow-down fa-fw"></i> '; 
-				}
-
-				?>
-				<tr bgcolor=<?php echo $colorelinee; ?> >
-					<td style="vertical-align: middle"><?php echo $icon . ' ' . $value[0]; ?></td>
-					<td style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
-					<td style="vertical-align: middle"><?php echo stripslashes($value[1]) ;?></td>
-					<td nowrap style="vertical-align: middle"> 
-					
-					<?php
-					$file = false;
-					$urlfile= $my_lettera->cercaAllegati($value[0], $annoricercaprotocollo);
-					if ($urlfile) {
-						foreach ($urlfile as $valore) {
-							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '5'); //richiamo del metodo "downloadlink" dell'oggetto file
-							$file = true;
-							echo $download;
-						}
-					}
-					else {
-						echo "Nessun file associato";
-					}
-					
-					?>
-					</td>
-
-					<td style="vertical-align: middle">
-					<?php
-					$mittenti = $connessione->query("SELECT DISTINCT * 
-								FROM anagrafica, $joinletteremittenti 
-								WHERE $joinletteremittenti.idlettera = '$value[0]' 
-								AND anagrafica.idanagrafica=$joinletteremittenti.idanagrafica");
-					while ($mittenti2 = $mittenti->fetch()) {
-						$mittenti2 = array_map('stripslashes', $mittenti2);
-						$mittenti3 = $mittenti2['nome'].' '.$mittenti2['cognome'];	
-						?>	
-						<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $mittenti2['idanagrafica'];?>"><?php echo '- ' .$mittenti3; ?><br></a>
-						<?php 
-					}
-					?>
-					</td>
-					<td style="vertical-align: middle; text-align: center;">
-						<div class="btn-group-vertical btn-group-sm">
-							<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli Protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-info-circle fa-fw"></i> Dettagli</a>
-							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-edit fa-fw"></i> Modifica</a>
-						</div>
-					</td>		
-				</tr>
+			<div id="no-more-tables">
+				<table class="table table-bordered">
+					<thead>
+						<tr align = "center">
+							<td style="vertical-align: middle">N.</td>
+							<td style="vertical-align: middle">Data</td>
+							<td style="vertical-align: middle">Oggetto</td>
+							<td style="vertical-align: middle">Allegati</td>
+							<td style="vertical-align: middle">Mitt./Dest.</td>
+							<td style="vertical-align: middle">Opzioni</td>
+						</tr>
+					</thead>
 				<?php
-			}
-			?>
-			</table>
+				
+				while ($value = $risultati->fetch()) { //elenco i risultati dell'array
+					$value = array_map('stripslashes', $value);
+					if ( $contatorelinee % 2 == 1 ) { 
+						$colorelinee = $_SESSION['primocoloretabellarisultati'];
+					} //primo colore
+					else {
+						$colorelinee = $_SESSION['secondocoloretabellarisultati']; 
+					} //secondo colore
+					$contatorelinee = $contatorelinee + 1 ;
+
+					if($value[5] == 'spedita') { 
+						$icon = '<i class="fa fa-arrow-up fa-fw"></i> '; 
+					} 
+					else { 
+						$icon = '<i class="fa fa-arrow-down fa-fw"></i> '; 
+					}
+
+					?>
+					<tr bgcolor=<?php echo $colorelinee; ?> >
+						<td data-title="N." style="vertical-align: middle"><?php echo $icon . ' ' . $value[0]; ?></td>
+						<td data-title="Data" style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
+						<td data-title="Oggetto" style="vertical-align: middle"><?php echo stripslashes($value[1]) ;?></td>
+						<td data-title="Allegati" nowrap style="vertical-align: middle"> 
+						
+						<?php
+						$file = false;
+						$urlfile= $my_lettera->cercaAllegati($value[0], $annoricercaprotocollo);
+						if ($urlfile) {
+							foreach ($urlfile as $valore) {
+								$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '5'); //richiamo del metodo "downloadlink" dell'oggetto file
+								$file = true;
+								echo $download;
+							}
+						}
+						else {
+							echo "Nessun file associato";
+						}
+						
+						?>
+						</td>
+
+						<td data-title="Mitt./Dest." style="vertical-align: middle">
+						<?php
+						$mittenti = $connessione->query("SELECT DISTINCT * 
+									FROM anagrafica, $joinletteremittenti 
+									WHERE $joinletteremittenti.idlettera = '$value[0]' 
+									AND anagrafica.idanagrafica=$joinletteremittenti.idanagrafica");
+						while ($mittenti2 = $mittenti->fetch()) {
+							$mittenti2 = array_map('stripslashes', $mittenti2);
+							$mittenti3 = $mittenti2['nome'].' '.$mittenti2['cognome'];	
+							?>	
+							<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $mittenti2['idanagrafica'];?>"><?php echo '- ' .$mittenti3; ?><br></a>
+							<?php 
+						}
+						?>
+						</td>
+						<td data-title="Opzioni" style="vertical-align: middle; text-align: center;">
+							<div class="btn-group-vertical btn-group-sm">
+								<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli Protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-info-circle fa-fw"></i> Dettagli</a>
+								<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-edit fa-fw"></i> Modifica</a>
+							</div>
+						</td>		
+					</tr>
+					<?php
+				}
+				?>
+				</table>
+			</div>
 
 			<ul class="pagination">
 			<?php

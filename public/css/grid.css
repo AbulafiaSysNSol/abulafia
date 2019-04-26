@@ -28,3 +28,63 @@ body, html {
 	}
 
 }
+
+ @media only screen and (max-width: 767px) { 
+
+    /* Forza la tabella a non comportarsi come una normale tabella */ 
+ 	#no-more-tables table,  
+ 	#no-more-tables thead,  
+ 	#no-more-tables tbody,  
+ 	#no-more-tables th,  
+ 	#no-more-tables td,  
+ 	#no-more-tables tr 
+ 	{  
+ 		display: block;  
+ 	} 
+
+ 	/* Nasconde le intestazioni della tabella */ 
+ 	#no-more-tables thead tr 
+ 	{  
+ 		position: absolute; 
+ 		top:-9999px; 
+ 		left:-9999px; 
+ 	} 
+
+ 	#no-more-tables tr 
+ 	{ 
+ 		border: 1px solid #ccc; 
+ 	} 
+
+ 	#no-more-tables td 
+ 	{  
+ 		/* Inserisce il comportamento come una riga */  
+ 		border: none; 
+ 		border-bottom: 1px solid #eee;  
+ 		position: relative; 
+ 		padding-left: 50%;  
+ 		white-space: normal; 
+ 		text-align:left; 
+ 	} 
+
+ 	#no-more-tables td:before 
+ 	{  
+ 		/* Inserisce il comportamento come un'intestazione di tabella */ 
+ 		position: absolute;
+
+ 		/* I valori top/left agiscono come padding */ 
+ 		left: 6px; 
+ 		width: 45%;  
+ 		padding-right: 10px;  
+ 		white-space: nowrap; 
+ 		text-align:left;
+ 		vertical-align:middle; 
+ 		font-weight: bold; 
+ 	} 
+
+ 	/* Aggiunge l'etichetta ai dati della tabella */ 
+ 	#no-more-tables td:before 
+ 	{ 
+ 		content: attr(data-title);
+ 	} 
+
+ } 
