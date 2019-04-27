@@ -73,6 +73,7 @@
 		</div>
 	</div>
 	</center>
+	<br>
 	<?php
 	
 	if  ($num_righe > 0 ) {
@@ -116,87 +117,89 @@
 		</ul>
 		<br>
 		
-		<table class="table table-bordered">
-			<tr align = "center">
-				<td style="vertical-align: middle">N. Prot.</td>
-				<td style="vertical-align: middle">Data Reg.</td>
-				<td style="vertical-align: middle">Pos.</td>
-				<td style="vertical-align: middle">Oggetto</td>
-				<td style="vertical-align: middle">File</td>
-				<td style="vertical-align: middle">Mitt./Dest.</td>
-				<td style="vertical-align: middle" width="240">Opzioni</td>
-			</tr>
-		<?php
-		
-		while ($value = $risultati->fetch()) { //elenco i risultati dell'array
-			$value = array_map('stripslashes', $value);
-			if ( $contatorelinee % 2 == 1 ) { 
-				$colorelinee = $_SESSION['primocoloretabellarisultati'];
-			} //primo colore
-			else {
-				$colorelinee = $_SESSION['secondocoloretabellarisultati']; 
-			} //secondo colore
-			$contatorelinee = $contatorelinee + 1 ;
-
-			if($value[5] == 'spedita') { 
-				$icon = '<i class="fa fa-arrow-up fa-fw"></i> '; 
-			} 
-			else { 
-				$icon = '<i class="fa fa-arrow-down fa-fw"></i> '; 
-			}
-
-			?>
-			<tr align = "center" bgcolor=<?php echo $colorelinee; ?> >
-				<td style="vertical-align: middle"><?php echo $icon . ' ' . $value[0] ;?></td>
-				<td style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
-				<td style="vertical-align: middle"><?php echo $value[7] ;?></td>
-				<td style="vertical-align: middle"><?php echo $value[1] ;?></td>
-				<td nowrap style="vertical-align: middle"> 
-				
-				<?php
-				$file = false;
-				$urlfile= $my_lettera->cercaAllegati($value[0], $annoricercaprotocollo);
-				if ($urlfile) {
-					foreach ($urlfile as $valore) {
-						$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '14'); //richiamo del metodo "downloadlink" dell'oggetto file
-						$file = true;
-						echo $download;
-					}
-				}
-				else {
-					echo "Nessun file associato";
-				}
-				
-				?>
-				</td>
-					
-				<td style="vertical-align: middle">
-					<?php
-					$mittenti= $connessione->query("SELECT distinct * 
-								from anagrafica, $joinletteremittenti 
-								where $joinletteremittenti.idlettera = '$value[0]' 
-								and anagrafica.idanagrafica=$joinletteremittenti.idanagrafica");
-					while ($mittenti2 = $mittenti->fetch()) {
-						$mittenti2 = array_map('stripslashes', $mittenti2);
-						$mittenti3 = $mittenti2['nome'].' '.$mittenti2['cognome'];	
-						?>	
-						<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $mittenti2['idanagrafica'];?>"><?php echo $mittenti3; ?><br></a>
-						<?php 
-					}
-					?>
-				</td>
-
-				<td nowrap style="vertical-align: middle">
-					<div class="btn-group-vertical btn-group-sm">
-						<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-info-circle fa-fw"></i> Dettagli</span></a>
-						<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-edit fa-fw"></i> Modifica</a>
-					</div>
-				</td>		
-			</tr>
+		<div id="no-more-tables">
+			<table class="table table-bordered">
+				<thead>
+					<tr align = "center">
+						<td style="vertical-align: middle">N. Prot.</td>
+						<td style="vertical-align: middle">Data Reg.</td>
+						<td style="vertical-align: middle">Oggetto</td>
+						<td style="vertical-align: middle">File</td>
+						<td style="vertical-align: middle">Mitt./Dest.</td>
+						<td style="vertical-align: middle" width="240">Opzioni</td>
+					</tr>
+				</thead>
 			<?php
-		}
-		?>
-		</table>
+			
+			while ($value = $risultati->fetch()) { //elenco i risultati dell'array
+				$value = array_map('stripslashes', $value);
+				if ( $contatorelinee % 2 == 1 ) { 
+					$colorelinee = $_SESSION['primocoloretabellarisultati'];
+				} //primo colore
+				else {
+					$colorelinee = $_SESSION['secondocoloretabellarisultati']; 
+				} //secondo colore
+				$contatorelinee = $contatorelinee + 1 ;
+
+				if($value[5] == 'spedita') { 
+					$icon = '<i class="fa fa-arrow-up fa-fw"></i> '; 
+				} 
+				else { 
+					$icon = '<i class="fa fa-arrow-down fa-fw"></i> '; 
+				}
+
+				?>
+				<tr align = "center" bgcolor=<?php echo $colorelinee; ?> >
+					<td data-title="N." style="vertical-align: middle"><?php echo $icon . ' ' . $value[0] ;?></td>
+					<td data-title="Data" style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
+					<td data-title="Oggetto" style="vertical-align: middle"><?php echo $value[1] ;?></td>
+					<td data-title="Allegati" nowrap style="vertical-align: middle"> 
+					
+					<?php
+					$file = false;
+					$urlfile= $my_lettera->cercaAllegati($value[0], $annoricercaprotocollo);
+					if ($urlfile) {
+						foreach ($urlfile as $valore) {
+							$download = $my_file->downloadlink($valore[2], $value[0], $annoricercaprotocollo, '5'); //richiamo del metodo "downloadlink" dell'oggetto file
+							$file = true;
+							echo $download;
+						}
+					}
+					else {
+						echo "Nessun file associato";
+					}
+					
+					?>
+					</td>
+						
+					<td data-title="Mitt./Dest." style="vertical-align: middle">
+						<?php
+						$mittenti= $connessione->query("SELECT distinct * 
+									from anagrafica, $joinletteremittenti 
+									where $joinletteremittenti.idlettera = '$value[0]' 
+									and anagrafica.idanagrafica=$joinletteremittenti.idanagrafica");
+						while ($mittenti2 = $mittenti->fetch()) {
+							$mittenti2 = array_map('stripslashes', $mittenti2);
+							$mittenti3 = $mittenti2['nome'].' '.$mittenti2['cognome'];	
+							?>	
+							<a href="login0.php?corpus=dettagli-anagrafica&from=risultati&tabella=anagrafica&id=<?php echo $mittenti2['idanagrafica'];?>"><?php echo $mittenti3; ?><br></a>
+							<?php 
+						}
+						?>
+					</td>
+
+					<td data-title="Opzioni" nowrap style="vertical-align: middle">
+						<div class="btn-group-vertical btn-group-sm">
+							<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-info-circle fa-fw"></i> Dettagli</span></a>
+							<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-edit fa-fw"></i> Modifica</a>
+						</div>
+					</td>		
+				</tr>
+				<?php
+			}
+			?>
+			</table>
+		</div>
 
 			<ul class="pagination">
 			<?php
