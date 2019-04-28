@@ -7,17 +7,22 @@
     $oidc = new OpenIDConnectClient(
         'https://identity.cain.alfioemanuele.io/openid',
         '600188',
-        '231d0da3685ea27bda92710babb594aa46494fd84d9a37a81dbc0e2a'
+        ''
     );
 
     //$oidc->setCertPath('C:\xampp7\htdocs\openid\cert\cacert.pem');
+
     $oidc->addScope('openid');
-    $oidc->addScope('profile');
+    //$oidc->addScope('profile');
     $oidc->addScope('email');
+    //$oidc->addScope('groups');
+    //$oidc->addScope('roles');
 
     $oidc->authenticate();
     
     $email = $oidc->requestUserInfo('email');
+    //$gruppi = $oidc->requestUserInfo('groups');
+    //$ruoli = $oidc->requestUserInfo('roles');
 
     include 'class/Log.obj.inc';
     include '../db-connessione-include.php'; //connessione al db-server
@@ -37,6 +42,7 @@
     catch (PDOException $errorePDO) 
     { 
         echo "Errore: " . $errorePDO->getMessage();
+        exit();
     }
 
     $risultati = $query->fetch();

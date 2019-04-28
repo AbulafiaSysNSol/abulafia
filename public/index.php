@@ -153,7 +153,7 @@
                                     <center>
                                     <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-sign-in fa-fw"></i> Login</button>
                                     <br><br>
-                                    <a class="btn btn-social btn-openid" href="cainlogin.php"><span class="fa fa-openid"></span> Sign in with Cain-Project</a>
+                                    <a class="btn btn-social btn-openid" href="cainlogin.php"><span class="fa fa-openid"></span> Sign in with Cain Project</a>
                                     <br><br>
                                     <a class="btn btn-social btn-google" href="googlelogin.php"><span class="fa fa-google"></span> Sign in with Google</a>
                                     <br><br>
