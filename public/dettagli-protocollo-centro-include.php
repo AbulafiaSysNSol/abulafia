@@ -205,29 +205,33 @@
 				<div class="col-sm-12">
 
 					<h3><span class="glyphicon glyphicon-time"></span> Storico delle modifiche:</h3><br>
-			
-					<table class="table table-bordered">
-						<tr>
-							<td style="vertical-align: middle" align="center" >Data</td>
-							<td style="vertical-align: middle" align="center" >Utente</td>
-							<td style="vertical-align: middle" align="center" >Modifica</td>
-							<td style="vertical-align: middle" align="center" >Valore precedente</td>
-							<td style="vertical-align: middle" align="center" >Valore attuale</td>
-						</tr>
-						<?php
-							while($mod = $query->fetch()) {
-								?>
-								<tr bgcolor="<?php echo $mod['color']; ?>">
-									<td style="vertical-align: middle" align="center" ><?php echo date('d/m/Y H:i',$mod['time']); ?></td>
-									<td style="vertical-align: middle" align="center" ><?php echo $anagrafica->getName($mod['user']); ?></td>
-									<td style="vertical-align: middle" align="center" ><?php echo $mod['modifica']; ?></td>
-									<td style="vertical-align: middle" align="center" ><?php echo stripslashes($mod['prima']); ?></td>
-									<td style="vertical-align: middle" align="center" ><?php echo stripslashes($mod['dopo']); ?></td>
+					
+					<div id="no-more-tables">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<td style="vertical-align: middle" align="center" >Data</td>
+									<td style="vertical-align: middle" align="center" >Utente</td>
+									<td style="vertical-align: middle" align="center" >Modifica</td>
+									<td style="vertical-align: middle" align="center" >Valore precedente</td>
+									<td style="vertical-align: middle" align="center" >Valore attuale</td>
 								</tr>
-								<?php
-							}
-						?>
-					</table>
+							</thead>
+							<?php
+								while($mod = $query->fetch()) {
+									?>
+									<tr bgcolor="<?php echo $mod['color']; ?>">
+										<td data-title="Data" style="vertical-align: middle" align="center" ><?php echo date('d/m/Y H:i',$mod['time']); ?></td>
+										<td data-title="Utente" style="vertical-align: middle" align="center" ><?php echo $anagrafica->getName($mod['user']); ?></td>
+										<td data-title="Modifica" style="vertical-align: middle" align="center" ><?php echo $mod['modifica']; ?></td>
+										<td data-title="Precedente" style="vertical-align: middle" align="center" ><?php echo stripslashes($mod['prima']); ?></td>
+										<td data-title="Attuale" style="vertical-align: middle" align="center" ><?php echo stripslashes($mod['dopo']); ?></td>
+									</tr>
+									<?php
+								}
+							?>
+						</table>
+					</div>
 				</div>
 			</div>
 			<?php

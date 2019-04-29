@@ -38,7 +38,7 @@
 							?>
 						</select>
 						<br><br>
-						<button class="btn btn-success btn-lg" type="submit"><i class="fa fa-save"></i> Salva e inserisci i destinatari <i class="fa fa-arrow-right"></i></button>
+						<button class="btn btn-success smartphone" type="submit"><i class="fa fa-save"></i> Salva e inserisci i destinatari <i class="fa fa-arrow-right"></i></button>
 					</div>
 				</div>					
 			</form>
