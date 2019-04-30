@@ -98,7 +98,7 @@
 	?>
 	
 <div class="row">
-	
+	<!--
 	<div class="col-sm-3">		
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -119,8 +119,20 @@
 			</div>
 		</div>
 	</div>
-	
+	-->
+	<div class="col-sm-12">
+				<center>
+						<div class="alert alert-warning">
+							<h3><i class="fa fa-info-circle fa-fw"></i> Attualmente questa installazione di Abulafia Web risulta sospesa.</h3>
+							<br><br>
+							Fino a quando non sarà riattivata non è possibile registrare nuovi protocolli, ma solo consultare quelli già registrati.
+							<br><br>
+							Per qualsiasi informazione contattaci all'indirizzo email: supporto@abulafiaweb.it
+						</div>
+				</center>
+	</div>
 
+	<!--
 	<div class="col-sm-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -227,12 +239,11 @@
 		
 		</div>
 
-		<!-- blocco destro -->
+		
 
 	</div>
 </div>
 
-<!-- blocco ultimi protocolli registrati -->
 <?php 
 if($a->isProtocollo($_SESSION['loginid'])) { ?>
 	<div class="panel panel-default">
@@ -287,3 +298,6 @@ if($a->isAdmin($_SESSION['loginid'])) { ?>
 }	
 $my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO HOME' , 'OK' , $_SESSION['ip'], $_SESSION['logfile'], 'page request');
 ?>
+
+-->
+</div>

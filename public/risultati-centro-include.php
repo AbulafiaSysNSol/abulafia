@@ -313,14 +313,6 @@
 									</a>
 									<?php 
 									if (!$a->isUser($row['idanagrafica'])) {
-										?>
-										<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica anagrafica" 	href="login0.php?corpus=modifica-anagrafica
-															&from=risultati
-															&tabella=anagrafica
-															&id=<?php echo $row['idanagrafica'];?>">
-															<span class="glyphicon glyphicon-pencil"></span>
-										</a>
-										<?php
 									}
 									?>
 									<a class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="Visualizza corrispondenza anagrafica" 	href="login0.php?corpus=corrispondenza-anagrafica
@@ -637,7 +629,6 @@
 						<td data-title="Opzioni" style="vertical-align: middle; text-align: center;">
 							<div class="btn-group-vertical btn-group-sm">
 								<a class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Dettagli Protocollo" href="login0.php?corpus=dettagli-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-info-circle fa-fw"></i> Dettagli</a>
-								<a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Protocollo" href="login0.php?corpus=modifica-protocollo&from=risultati&tabella=protocollo&id=<?php echo $value[0];?>"><i class="fa fa-edit fa-fw"></i> Modifica</a>
 							</div>
 						</td>		
 					</tr>

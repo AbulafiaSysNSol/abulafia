@@ -253,7 +253,6 @@ tinymce.init({
 						<li class="dropdown <?php if($_GET['corpus'] == 'anagrafica' OR $_GET['corpus']=='ricerca-anagrafica') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-address-book-o fa-fw"></i> Anagrafica <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="login0.php?corpus=anagrafica"><i class="fa fa-user-plus fa-fw"></i> Inserisci nuova anagrafica</a></li>
 								<li><a href="login0.php?corpus=ricerca-anagrafica"><i class="fa fa-search fa-fw"></i></span> Ricerca in anagrafica</a></li>
 							</ul>
 						</li>
@@ -263,15 +262,12 @@ tinymce.init({
 						<li class="dropdown <?php if($_GET['corpus'] == 'protocollo' OR $_GET['corpus']=='titolario' OR $_GET['corpus']=='titolario-modifica' OR $_GET['corpus']=='stampa-registro' OR $_GET['corpus'] == 'protocollo2') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw"></i> Protocollo <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="login0.php?corpus=protocollo2&from=crea"><i class="fa fa-plus fa-fw"></i></span> Crea nuovo numero progressivo</a></li>
 								<li><a href="login0.php?corpus=ricerca-protocollo"><i class="fa fa-search fa-fw"></i> Ricerca nel protocollo</a></li>
-								<li><a href="login0.php?corpus=titolario"><i class="fa fa-list fa-fw"></i> Gestione titolario</a></li>
-								<li><a href="login0.php?corpus=pratiche"><i class="fa fa-tags fa-fw"></i> Gestione pratiche</a></li>
-								<li><a href="login0.php?corpus=stampa-registro"><i class="fa fa-file-pdf-o fa-fw"></i> Esporta registro in PDF</a></li>
 							</ul>
 						</li>
 					<?php } ?>
 
+					<!--
 					<?php if($_SESSION['mod_documenti'] && $anag->isDocumenti($_SESSION['loginid'])) { ?>
 						<li class="dropdown <?php if($_GET['corpus'] == 'documenti' OR $_GET['corpus']=='documenti-nuovo') { echo ' active'; }?>">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-folder-o fa-fw"></i> Documenti <b class="caret"></b></a>
@@ -386,9 +382,9 @@ tinymce.init({
 								<li><a href="?corpus=magazzino-documenti"><i class="fa fa-file-text-o fa-fw"></i> Documenti</a></li>
 								<li class="divider"></li>
 								<li><a href="?corpus=magazzino-settori"><i class="fa fa-list-ul fa-fw"></i> Settori</a></li>
-								<!--<li><a href="?corpus=magazzino-causali"><i class="fa fa-list-ul fa-fw"></i> Causali</a></li>
+								<li><a href="?corpus=magazzino-causali"><i class="fa fa-list-ul fa-fw"></i> Causali</a></li>
 								<li><a href="#"><i class="fa fa-pencil-square-o"></i> Richieste</a></li>
-								<li><a href="#"><i class="fa fa-truck"></i> Ordini</a></li> -->
+								<li><a href="#"><i class="fa fa-truck"></i> Ordini</a></li>
 							</ul>
 						</li>
 					<?php } ?>
@@ -405,9 +401,10 @@ tinymce.init({
 							</ul>
 						</li>
 					<?php } ?>
-					
+				
+				-->	
 				</ul>
-		   
+		   		
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
