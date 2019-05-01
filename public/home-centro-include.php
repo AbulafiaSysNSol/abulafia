@@ -125,7 +125,7 @@
 						<div class="alert alert-warning">
 							<h3><i class="fa fa-info-circle fa-fw"></i> Attualmente questa installazione di Abulafia Web risulta sospesa.</h3>
 							<br><br>
-							Fino a quando non sarà riattivata non è possibile registrare nuovi protocolli, ma solo consultare quelli già registrati.
+							Fino a quando non verr&agrave; riattivata non sar&agrave; possibile registrare nuovi protocolli, ma solo consultare quelli gi&agrave; registrati.
 							<br><br>
 							Per qualsiasi informazione contattaci all'indirizzo email: supporto@abulafiaweb.it
 						</div>
