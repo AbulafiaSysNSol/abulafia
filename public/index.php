@@ -54,8 +54,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-social.css" rel="stylesheet">
     <link href="css/mobile.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <!-- Add custom CSS here -->
     <link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
 
@@ -76,6 +77,18 @@
             if ($s) {
                 ?>
                 <div class="col-sm-12"><center><div class="alert alert-warning"><b><i class="fa fa-warning"></i> Non hai effettuato l'accesso o la sessione &egrave; scaduta. Effettua nuovamente il login per utilizzare l'applicazione.</b></div></center></div>
+                <?php
+            }
+
+            if ( (isset($_GET['google'])) && ($_GET['google'] == "err") ) {
+                ?>
+                <div class="col-sm-12"><center><div class="alert alert-danger"><i class="fa fa-warning"></i> L'account Google con cui hai effettuato l'accesso non ha i privilegi per operare su questa installazione di Abulafia Web.<br>Se pensi che ci sia un errore contatta il supporto all'indirizzo supporto@abulafiaweb.it</div></center></div>
+                <?php
+            }
+
+            if ( (isset($_GET['cain'])) && ($_GET['cain'] == "err") ) {
+                ?>
+                <div class="col-sm-12"><center><div class="alert alert-danger"><i class="fa fa-warning"></i> L'account Cain-Project con cui hai effettuato l'accesso non ha i privilegi per operare su questa installazione di Abulafia Web.<br>Se pensi che ci sia un errore contatta il supporto all'indirizzo supporto@abulafiaweb.it</div></center></div>
                 <?php
             }
 
@@ -138,7 +151,11 @@
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
                                     <center>
-                                    <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-sign-in"></i> Login</button>
+                                    <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-sign-in fa-fw"></i> Login</button>
+                                    <br><br>
+                                    <a class="btn btn-social btn-openid" href="cainlogin.php"><span class="fa fa-openid"></span> Sign in with Cain Project</a>
+                                    <br><br>
+                                    <a class="btn btn-social btn-google" href="googlelogin.php"><span class="fa fa-google"></span> Sign in with Google</a>
                                     <br><br>
                                     <a href="password-recovery.php"><i class="fa fa-fw fa-envelope-o"></i> Recupera Password</a>
                                      - <a href="https://abulafiaweb.freshdesk.com/support/tickets/new" target="_blank"><i class="fa fa-fw fa-support"></i> Contatta il Supporto</a>
