@@ -30,7 +30,7 @@
 					
 					<div class="form-group">
 						<h4><i class="fa fa-certificate"></i> Oggetto:</h4>
-						<input required id="ogg" value="<?php echo $ogg; ?>" class="form-control" type="text" name="oggetto" placeholder="inserisci un oggetto...">
+						<input required id="ogg" value="<?php echo stripslashes($ogg); ?>" class="form-control" type="text" name="oggetto" placeholder="inserisci un oggetto...">
 					</div>
 					
 					<div class="form-group">
@@ -39,11 +39,11 @@
 					</div>
 					
 					<div class="form-group">
-						<input type="checkbox" name="intestazione" value="intestazione"> Intestazione Standard<br />
+						<input type="checkbox" name="intestazione" value="intestazione"> Includi Intestazione<br />
 					</div>
 					
 					<div class="form-group">
-						<input type="checkbox" name="firma" value="firma"> Firma Standard
+						<input type="checkbox" name="firma" value="firma" checked> Includi Firma
 					</div>
 				</div>
 				
@@ -60,7 +60,7 @@
 					</div>
 				</div>
 			</div>
-			<small>(Per utilizzare una intestazione ed una firma standard, impostarla nelle impostazioni e selezionare le caselle)</small>
+			<small>(E' possibile personalizzare intestazione e firma da <a href="?corpus=server-mail">questa pagina</a>.)</small>
 			<br><br><button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Invio email in corso..." type="submit" class="btn btn-success"><i class="fa fa-share"></i> Invia</button>
 		</form>
 	</div>

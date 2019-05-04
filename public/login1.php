@@ -7,13 +7,13 @@
 	}
 
 	include 'maledetti-apici-centro-include.php'; //ATTIVA O DISATTIVA IL MAGIC QUOTE PER GLI APICI
-	$my_calendario= new Calendario();//crea un nuovo oggetto
-	$_SESSION['my_calendario']= serialize($my_calendario); //serializzazione per passaggio alle variabili di sessione
-	$logdirectory="log/";
+	$my_calendario = new Calendario();//crea un nuovo oggetto
+	$_SESSION['my_calendario'] = serialize($my_calendario); //serializzazione per passaggio alle variabili di sessione
+	$logdirectory = "log/";
 	$_SESSION['logdirectory'] = "log/";
-	$logfile='general.log';
-	$maillog='mail.log';
-	$data=strftime("%d-%m-%Y /") . ' ' . date("g:i a");
+	$logfile = 'general.log';
+	$maillog = 'mail.log';
+	$data = strftime("%d-%m-%Y /") . ' ' . date("g:i a");
 	$userid = addslashes($_POST['userid']); // nome utente inserito nella form della pagina iniziale
 	$usermd = md5($userid);
 	$password = md5($_POST['password']); // password inserita nella form della pagina iniziale
@@ -85,22 +85,21 @@
 		
 	
 
-	if ($risultati[0][0] < 1 ) {
-		$my_log -> publscrivilog($userid, 'login', 'denied', $client , $logfile,'access');
-		$_SESSION['auth']= 0 ;
+	if ($risultati[0][0] < 1 ) 
+	{
+		$my_log -> publscrivilog($userid, 'login', 'denied', $client, $logfile, 'access');
+		$_SESSION['auth'] = 0 ;
 		?>
-		<SCRIPT LANGUAGE="Javascript">
-		browser= navigator.appName;
-		if (browser == "Netscape")
-		window.location="index.php?err=1"; else window.location="index.php?err=1";
-		</SCRIPT>
+		<script language = "javascript">
+			window.location="index.php?err=1";
+		</script>
 		<?php 
 		exit();
 	}
 	
 
 	try 
-		{
+	{
    		$connessione->beginTransaction();
 		$query = $connessione->prepare('SELECT * 
 						from users 
@@ -109,20 +108,20 @@
 		$query->bindParam(':userid', $userid);
 		$query->execute();
 		$connessione->commit();
-		} 
-		
-		//gestione dell'eventuale errore della query
-		catch (PDOException $errorePDO) { 
+	} 
+	//gestione dell'eventuale errore della query
+	catch (PDOException $errorePDO) 
+	{ 
     		echo "Errore: " . $errorePDO->getMessage();
-		}
+	}
 	
-	$logindata= $query->fetchAll();
-	$logindata2=$logindata[0];
-	$idperricerca=$logindata2['idanagrafica']; //setta l'id dell'user che ha effettuato il login
+	$logindata = $query->fetchAll();
+	$logindata2 = $logindata[0];
+	$idperricerca = $logindata2['idanagrafica']; //setta l'id dell'user che ha effettuato il login
 
 
 	try 
-		{
+	{
    		$connessione->beginTransaction();
 		$query = $connessione->prepare('SELECT * 
 						from anagrafica 
@@ -131,12 +130,12 @@
 		$query->bindParam(':idperricerca', $idperricerca);
 		$query->execute();
 		$connessione->commit();
-		} 
-		
-		//gestione dell'eventuale errore della query
-		catch (PDOException $errorePDO) { 
+	} 
+	//gestione dell'eventuale errore della query
+	catch (PDOException $errorePDO) 
+	{ 
     		echo "Errore: " . $errorePDO->getMessage();
-		}
+	}
 
 	$logindata3 = $query->fetchAll();
 	$logindata4=$logindata3[0];

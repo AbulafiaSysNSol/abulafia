@@ -11,7 +11,7 @@
 			?>
 		</p>
 
-		<form action="download-on-the-fly.php"" method="post">
+		<form action="download-on-the-fly.php" method="post">
    			<input type="hidden" name="textonthefly" value="<?php print(base64_encode(serialize($my_log->righefiltrate))); ?>">
 			<input type="hidden" name="logname" value="Access LOG">
 			<input type="hidden" name="filename" value="access-log.txt">

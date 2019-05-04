@@ -34,7 +34,6 @@ Class Mail {
 				$query->bindParam(':porta', $porta);
 				$query->bindParam(':protocollo', $protocollo);
 				$query->bindParam(':replyto', $replyto);
-				$query->bindParam(':diagnosi', $diagnosi);
 				$query->bindParam(':headermail', $headermail);
 				$query->bindParam(':footermail', $footermail);
 				$query->execute();

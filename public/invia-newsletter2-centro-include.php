@@ -65,7 +65,7 @@
 	$result = $mail->send();
 	
 	if(!$result) {
-		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:</b> si è verificato un errore nell\'invio dell\'email.<br>'.$mail->ErrorInfo.'</div>';
+		echo '<div class="alert alert-danger"><b><i class="fa fa-times"></i> Errore:</b> si &egrave; verificato un errore nell\'invio dell\'email.<br>'.$mail->ErrorInfo.'</div>';
 		echo '<a href="?corpus=dettagli-protocollo&id=' . $idlettera . '&anno=' . $annoricercaprotocollo . '"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo</a> - <a href="?corpus=home"><i class="fa fa-home"></i> Torna alla home</a>';
 		$esito= 'FAILED';
 	} 
@@ -121,5 +121,5 @@
 		<?php
 	}
 	
-	$my_log -> publscrivilog($_SESSION['loginname'],'mail' , $esito , 'oggetto '.$oggetto.' - prot '.$idlettera.' - destinatari:'.str_replace(',',', ',$destinatario), $_SESSION['logfile'], 'mail');
+	$my_log->publscrivilog($_SESSION['loginname'], 'mail', $esito, 'Oggetto '. stripslashes($oggetto) .' - Prot '. $idlettera . ' - Destinatari: '. str_replace(',',', ',$destinatario), $_SESSION['maillog'], 'mail');
 ?>
