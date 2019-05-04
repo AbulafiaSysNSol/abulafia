@@ -1,7 +1,7 @@
 <?php
 
 	$id = $_GET['id'];
-	$attributo = $_POST['descrizione'];
+	$attributo = stripslashes($_POST['descrizione']);
 	try {
 	   	$connessione->beginTransaction();
 		$query = $connessione->prepare("UPDATE attributi SET attributo = :attributo WHERE id = :id"); 

@@ -77,7 +77,7 @@
 			</tr>
 			<?php
 			while ($risultati2 = $risultati->fetch())	{
-				$risultati2 = array_map ("stripslashes",$risultati2);
+				$risultati2 = array_map("stripslashes",$risultati2);
 				echo '<tr>';
 				echo '<td>' . $risultati2['id'] . '</td><td>' . $risultati2['attributo'] . '</td>
 					<td>

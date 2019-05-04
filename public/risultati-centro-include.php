@@ -568,7 +568,7 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr align = "center">
-							<td style="vertical-align: middle">N.</td>
+							<td nowrap style="vertical-align: middle">N.</td>
 							<td style="vertical-align: middle">Data</td>
 							<td style="vertical-align: middle">Oggetto</td>
 							<td style="vertical-align: middle">Allegati</td>
@@ -597,7 +597,7 @@
 
 					?>
 					<tr bgcolor=<?php echo $colorelinee; ?> >
-						<td data-title="N." style="vertical-align: middle"><?php echo $icon . ' ' . $value[0]; ?></td>
+						<td nowrap data-title="N." style="vertical-align: middle"><?php echo $icon . ' ' . $value[0]; ?></td>
 						<td data-title="Data" style="vertical-align: middle"> <?php $my_calendario->publdataitaliana($value[3],'/'); echo $my_calendario->dataitaliana ?></td>
 						<td data-title="Oggetto" style="vertical-align: middle"><?php echo stripslashes($value[1]) ;?></td>
 						<td data-title="Allegati" nowrap style="vertical-align: middle"> 

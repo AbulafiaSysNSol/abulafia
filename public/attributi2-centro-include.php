@@ -1,6 +1,6 @@
 <?php 
 
-	$attributo = $_POST['descrizione'];
+	$attributo = stripslashes($_POST['descrizione']);
 	try {
 	   	$connessione->beginTransaction();
 		$query = $connessione->prepare("INSERT INTO attributi VALUES(null, :attributo)"); 

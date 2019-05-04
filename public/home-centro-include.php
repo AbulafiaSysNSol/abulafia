@@ -247,7 +247,7 @@ if($a->isProtocollo($_SESSION['loginid'])) { ?>
 			<table class="table table-striped">
 				<?php
 				if($risultati) {
-					echo "<tr><td><b>N.</b></td><td><b>DATA</b></td><td><b>OGGETTO</b></td></tr>";
+					echo "<tr><td nowrap><b>N.</b></td><td><b>DATA</b></td><td><b>OGGETTO</b></td></tr>";
 					foreach ($risultati as $val) {
 						if($val[3]=='spedita') {
 							$icon = '<i class="fa fa-arrow-up fa-fw"></i> ';
@@ -256,7 +256,7 @@ if($a->isProtocollo($_SESSION['loginid'])) { ?>
 							$icon = '<i class="fa fa-arrow-down fa-fw"></i> ';
 						}
 						echo "	<tr>
-								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".$icon.$val[0]."</a></td>
+								<td nowrap><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".$icon.$val[0]."</a></td>
 								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".$data->dataSlash($val[1])."</a></td>
 								<td><a href=\"?corpus=dettagli-protocollo&id=".$val[0]."&anno=".$anno."\">".stripslashes($val[2])."</a></td>
 								</tr>";

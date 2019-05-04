@@ -57,7 +57,7 @@
 									<?php
 									$attributi = $lett->getAttributi();
 									foreach($attributi as $value) {
-										echo '<option value="' . $value[0] . '">' . $value[0] . '</option>';
+										echo '<option value="' . $value[0] . '">' . stripslashes($value[0]) . '</option>';
 									}
 									?>
 									<option value=""></option>
@@ -142,7 +142,7 @@
 									<?php
 										$attributi = $lett->getAttributi();
 										foreach($attributi as $value) {
-											echo '<option value="' . $value[0] . '">' . $value[0] . '</option>';
+											echo '<option value="' . $value[0] . '">' . stripslashes($value[0]) . '</option>';
 										}
 									?>
 									<option value=""></option>
