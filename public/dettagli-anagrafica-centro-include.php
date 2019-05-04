@@ -126,7 +126,8 @@
 								if ($row2['numero'] != '') 
 								{
 									echo '<i class="fa fa-'.$row2['tipo'].' fa-fw"></i> ';
-									echo strtolower($row2['numero']).'<br>';
+									echo strtolower($row2['numero']);
+									echo '<br>';
 								}
 							}
 							?>
