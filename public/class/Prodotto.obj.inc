@@ -111,6 +111,13 @@
 			return $result;
 		}
 
+		public function getPrezzo($id) {
+			global $connessione;
+			$query = $connessione->query("SELECT prezzo FROM anagrafica_prodotto WHERE codice = '$id'");
+			$result = $query->fetch();
+			return $result[0];
+		}
+
 		public function getProdottoById($id) { //<man>Restituisce la descrizione del prodottoe pasando l'id</man>
 			global $connessione;
 			$query = $connessione->query("SELECT * FROM anagrafica_prodotto WHERE codice = '$id'");
