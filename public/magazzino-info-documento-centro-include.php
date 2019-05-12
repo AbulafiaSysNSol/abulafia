@@ -19,13 +19,14 @@
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 
+			<div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title"><strong><i class="fa fa-info fa-fw"></i> Info Documento</strong></h4>
+		    </div>
+
 			<div class="modal-body">
 				<div class="panel panel-default">
-						
-					<div class="panel-heading">
-						<h3 class="panel-title"><strong><i class="fa fa-info fa-fw"></i> Info Documento</strong></h3>
-					</div>
-								
+													
 					<div class="panel-body">
 
 						<div class="row">
@@ -101,7 +102,7 @@
 						<br>
 						
 						<center>
-								<a class="btn btn-danger" href="#"><i class="fa fa-fw fa-file-pdf-o"></i> Genera PDF</a>
+								<a class="btn btn-danger fancybox" data-fancybox-type="iframe" href="magazzino-documento-pdf.php?id=<?php echo $id; ?>"><i class="fa fa-fw fa-file-pdf-o"></i> Genera PDF</a>
 						</center>
 
 					</div>

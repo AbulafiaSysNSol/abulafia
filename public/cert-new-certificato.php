@@ -1,6 +1,7 @@
 <?php
 
 	session_start();
+	error_reporting(E_ERROR);
 
 	if ($_SESSION['auth'] < 1 ) {
 		header("Location: index.php?s=1");
@@ -164,7 +165,7 @@
 	$pdf = new PDF();
 	$pdf->AliasNbPages();
 	$pdf->SetAutoPageBreak(true,15);
-	$pdf->AddPage('P','A4',90);
+	$pdf->AddPage('P','A4');
 	$pdf->SetFont('Arial','',9);
 	$pdf->SetTitle('Certificato_' . time());
 

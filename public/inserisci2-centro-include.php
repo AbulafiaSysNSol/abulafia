@@ -7,13 +7,13 @@
 		$insertok = '';
 	}
 	if( isset($_POST['cognome']) ) {
-		$cognome = $_POST['cognome'];
+		$cognome = stripslashes($_POST['cognome']);
 	}
 	else {
 		$cognome = '';
 	}
 	if( isset($_POST['nome']) ) {
-		$nome = $_POST['nome'];
+		$nome = stripslashes($_POST['nome']);
 	}
 	else {
 		$nome = '';
@@ -27,7 +27,7 @@
 		$nascita_data = '';
 	}
 	if( isset($_POST['nascitacomune']) ) {
-		$nascita_comune = $_POST['nascitacomune'];
+		$nascita_comune = stripslashes($_POST['nascitacomune']);
 	}
 	else {
 		$nascita_comune = '';
@@ -45,7 +45,7 @@
 		$nascita_stato = '';
 	}
 	if( isset($_POST['residenzavia']) ) {
-		$residenza_via = $_POST['residenzavia'];
+		$residenza_via = stripslashes($_POST['residenzavia']);
 	}
 	else {
 		$residenza_via = '';
@@ -57,7 +57,7 @@
 		$residenza_civico = '';
 	}
 	if( isset($_POST['residenzacomune']) ) {
-		$residenza_comune = $_POST['residenzacomune'];
+		$residenza_comune = stripslashes($_POST['residenzacomune']);
 	}
 	else {
 		$residenza_comune = '';

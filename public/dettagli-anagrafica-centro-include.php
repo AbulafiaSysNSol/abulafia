@@ -36,7 +36,7 @@
 		<?php
 	}
 	$level = $_SESSION['auth'];
-	$id= $_GET['id'];
+	$id = $_GET['id'];
 	$risultati = $connessione->query("SELECT * FROM anagrafica WHERE idanagrafica = '$id'");
 	$risultati2 = $connessione->query("SELECT * FROM jointelefonipersone WHERE idanagrafica = '$id'");
 	$countrecapiti = $connessione->query("SELECT COUNT(*) FROM jointelefonipersone WHERE idanagrafica = '$id'");
@@ -51,11 +51,13 @@
 	
 	<div class="col-sm-9">
        	<div class="panel panel-default">
+
        		<div class="panel-heading">
        			<h3 class="panel-title"><strong><i class="fa fa-address-card-o"></i> Dettagli Anagrafica:</strong></h3>
        		</div>
                        			
       		<div class="panel-body">
+
             	<div class="col-sm-3">
             		<center>
                     <br><img class="img-circle" src="<?php if($row['urlfoto']) {echo 'foto/'.$row['urlfoto'];} else {echo 'foto/sagoma.png';} ?>" width="150">             
@@ -63,7 +65,7 @@
                 </div>
                       
                 <div class="col-sm-9 smartphone">
-                    <div class="container">
+                   
 	                    <h3>
 	                    	<?php echo '<i class="fa fa-user fa-fw"></i> ' . ucwords(strtolower($row['cognome'])) . ' ' . ucwords(strtolower($row['nome'])); ?><?php if($row['codicefiscale'] != '') { echo ' ('.strtoupper($row['codicefiscale']).')'; } ?>		
 	                    </h3>
@@ -84,11 +86,7 @@
 						{ 
 							echo ' - ' . ucwords(strtolower($row['nascitastato']));
 						}
-						?>
-                	</div>
-                    
-                    <div class="container">
-           				<?php 
+
 	                	if ($row['residenzavia'] != '')
 						{
 		                	echo '<hr><i class="fa fa-map-marker fa-fw"></i> ' . ucwords(strtolower($row['residenzavia'])); 
@@ -111,7 +109,6 @@
 							}
 						} 
 						?>
-					</div>
                     
                     <?php
                     $cr = $countrecapiti->fetch();
@@ -119,7 +116,7 @@
 					{
 						?>
 						<hr>
-	                	<div class="container">
+	                	
 	                		<?php
 							while ($row2 = $risultati2->fetch()) 
 							{
@@ -131,7 +128,7 @@
 								}
 							}
 							?>
-	                	</div>
+	                	
 	                    <?php
 	                }
 	                ?>
@@ -161,4 +158,5 @@
 		  
 		</div>
 	</div>
+
 </div>
