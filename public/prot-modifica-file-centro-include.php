@@ -70,6 +70,7 @@
 					$query = $connessione->prepare("INSERT INTO storico_modifiche VALUES(null, :idlettera, :annoprotocollo, 'Aggiunto allegato', :user, $time, '#DEFEB4', ' ', :name)"); 
 					$query->bindParam(':idlettera', $idlettera);
 					$query->bindParam(':annoprotocollo', $annoprotocollo);
+					$query->bindParam(':user', $user);
 					$query->bindParam(':name', $name);
 					$query->execute();
 					$connessione->commit();
