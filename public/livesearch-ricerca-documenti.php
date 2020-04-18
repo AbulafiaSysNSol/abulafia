@@ -21,8 +21,10 @@
 	$mag = $_GET['mag'];
 	$causale = $_GET['causale'];
 	$num = $_GET['num'];
+	$rif = $_GET['rif'];
+	$note = $_GET['note'];
 
-	$res = $m->getDocumentFilter($doc, $mag, $causale, $num);
+	$res = $m->getDocumentFilter($doc, $mag, $causale, $num, $rif, $note);
 	if($res)
 	{
 		?>
@@ -32,6 +34,8 @@
 				<td>Data</td>
 				<td>Magazzino</td>
 				<td>Causale</td>
+				<td>Riferimento</td>
+				<td>Note</td>
 				<td>Opzioni</td>
 			</tr>
 			<?php
@@ -48,6 +52,8 @@
 					<td style="vertical-align: middle"><?php echo $c->dataSlash($val['datadocumento']); ?></td>
 					<td style="vertical-align: middle"><?php echo $val['magazzino'] . ' - ' . $s->getServizioById($val['magazzino']); ?></td>
 					<td style="vertical-align: middle" align="center"><?php echo strtoupper($val['causale']); ?></td>
+					<td style="vertical-align: middle"><?php echo $val['riferimento']; ?></td>
+					<td style="vertical-align: middle"><?php echo $val['note']; ?></td>
 					<td align="center" nowrap style="vertical-align: middle">
 						<div class="btn-group btn-group-sm" role="group">
 							<a class="btn btn-info" href="?corpus=magazzino-info-documento&id=<?php echo $val['id']; ?>"><i class="fa fa-info fa-fw"></i></a>

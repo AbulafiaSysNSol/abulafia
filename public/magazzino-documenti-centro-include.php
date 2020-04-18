@@ -21,19 +21,14 @@
 				
 				<label><i class="fa fa-file-o fa-fw"></i> Documenti Emessi:</label><br>
 				
-				<script type="text/javascript" src="livesearch-ricerca-documenti.js" onLoad="showResult('','','','25')"></script>
+				<script type="text/javascript" src="livesearch-ricerca-documenti.js" onLoad="showResult('','','','25','','')"></script>
 				<form name="documenti" onSubmit="return false">
 					<div class="row">
-						<div class="col-sm-3">
-							<div class="input-group">
-								<div class="input-group-addon"><i class="fa fa-search fa-fw"></i></div><input placeholder="N. Documento" type="text" name="documento" class="form-control" onkeyup="showResult(this.value,magazzino.value,causale.value,risultati.value)">
-							</div>
-						</div>
-
-						<div class="col-sm-4">
+						
+						<div class="col-sm-5">
 							<div class="input-group">
 								<div class="input-group-addon"><i class="fa fa-cube fa-fw"></i> Magazzino:</div>
-								<select class="form-control" name="magazzino" onChange="showResult(documento.value,this.value,causale.value,risultati.value)">
+								<select class="form-control" name="magazzino" onChange="showResult(documento.value,this.value,causale.value,risultati.value,riferimento.value,note.value)">
 									<option value="">Tutti i Magazzini</option>
 									<?php
 										$s = new Servizio();
@@ -49,10 +44,10 @@
 							</div>
 						</div>
 
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 							<div class="input-group">
 								<div class="input-group-addon"><i class="fa fa-bars fa-fw"></i> Causale:</div>
-								<select class="form-control" name="causale" onChange="showResult(documento.value,magazzino.value,this.value,risultati.value)">
+								<select class="form-control" name="causale" onChange="showResult(documento.value,magazzino.value,this.value,risultati.value,riferimento.value,note.value)">
 									<option value="">Tutte la causali</option>
 									<option value="acquisto">Acquisto</option>
 									<option value="rettifica+">Rettifica Inventario +</option>
@@ -69,10 +64,10 @@
 							</div>
 						</div>
 
-						<div class="col-sm-2">
+						<div class="col-sm-3">
 							<div class="input-group">
 								<div class="input-group-addon"><i class="fa fa-list-ol fa-fw"></i> N. Ris.</div>
-								<select class="form-control" name="risultati" onChange="showResult(documento.value,magazzino.value,causale.value,this.value)">
+								<select class="form-control" name="risultati" onChange="showResult(documento.value,magazzino.value,causale.value,this.value,riferimento.value,note.value)">
 									<option value="25">25</option>
 									<option value="50">50</option>
 									<option value="100">100</option>
@@ -81,6 +76,29 @@
 								</select>
 							</div>
 						</div>
+
+					</div>
+					<br>
+					<div class="row">
+
+						<div class="col-sm-2">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-search fa-fw"></i> N. Doc.</div><input placeholder="" type="text" name="documento" class="form-control" onkeyup="showResult(this.value,magazzino.value,causale.value,risultati.value,riferimento.value,note.value)">
+							</div>
+						</div>
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-search fa-fw"></i> Riferimento:</div><input placeholder="" type="text" name="riferimento" class="form-control" onkeyup="showResult(documento.value,magazzino.value,causale.value,risultati.value,this.value,note.value)">
+							</div>
+						</div>
+
+						<div class="col-sm-5">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-search fa-fw"></i>  Note:</div><input placeholder="" type="text" name="note" class="form-control" onkeyup="showResult(documento.value,magazzino.value,causale.value,risultati.value,riferimento.value,this.value)">
+							</div>
+						</div>
+
 					</div>
 				</form>
 				

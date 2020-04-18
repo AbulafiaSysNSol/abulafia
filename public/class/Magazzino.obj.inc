@@ -141,7 +141,7 @@ require_once('../db-connessione-include.php');
 			return $documenti;
 		}
 
-		public function getDocumentFilter($doc, $mag, $causale, $num) {
+		public function getDocumentFilter($doc, $mag, $causale, $num, $rif, $note) {
 			global $connessione;
 			$where = '';
 			$w = 0;
@@ -172,6 +172,30 @@ require_once('../db-connessione-include.php');
 				else 
 				{
 					$where = $where . " AND causale = '" . $causale . "'";
+				}
+			}
+			if ($rif != '')
+			{
+				if($w == 0)
+				{
+					$where = "WHERE riferimento LIKE '%" . $rif . "%'";
+					$w = 1; 
+				}
+				else 
+				{
+					$where = $where . " AND riferimento LIKE '%" . $rif . "%'";
+				}
+			}
+			if ($note != '')
+			{
+				if($w == 0)
+				{
+					$where = "WHERE note LIKE '%" . $note . "%'";
+					$w = 1; 
+				}
+				else 
+				{
+					$where = $where . " AND note LIKE '%" . $note . "%'";
 				}
 			}
 			$query = $connessione->query("SELECT * FROM documenti_magazzino $where ORDER BY id DESC LIMIT $num");
