@@ -36,7 +36,7 @@
 				<td>Causale</td>
 				<td>Riferimento</td>
 				<td>Note</td>
-				<td nowrap>Opzioni</td>
+				<td style="white-space: nowrap;">Opzioni</td>
 			</tr>
 			<?php
 			foreach($res as $val) {
@@ -54,7 +54,7 @@
 					<td style="vertical-align: middle" align="center"><?php echo strtoupper($val['causale']); ?></td>
 					<td style="vertical-align: middle"><?php echo $val['riferimento']; ?></td>
 					<td style="vertical-align: middle"><?php echo $val['note']; ?></td>
-					<td align="center" nowrap style="vertical-align: middle">
+					<td align="center" style="vertical-align: middle; white-space: nowrap;">
 						<div class="btn-group btn-group-xs" role="group">
 							<a class="btn btn-info" href="?corpus=magazzino-info-documento&id=<?php echo $val['id']; ?>"><i class="fa fa-info fa-fw"></i></a>
 							<a class="btn btn-warning" href="?corpus=magazzino-documenti-carico-scarico-prodotti&id=<?php echo $val['id']; ?>&tipologia=<?php echo $val['tipologia']; ?>"><i class="fa fa-pencil fa-fw"></i></a>	
