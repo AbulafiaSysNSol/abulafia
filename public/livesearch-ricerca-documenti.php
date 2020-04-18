@@ -30,13 +30,13 @@
 		?>
 		<table class="table table-bordered" width="100%">
 			<tr style="vertical-align: middle">
-				<td>Num. Doc.</td>
+				<td>Doc.</td>
 				<td>Data</td>
 				<td>Magazzino</td>
 				<td>Causale</td>
 				<td>Riferimento</td>
 				<td>Note</td>
-				<td>Opzioni</td>
+				<td nowrap>Opzioni</td>
 			</tr>
 			<?php
 			foreach($res as $val) {
@@ -55,7 +55,7 @@
 					<td style="vertical-align: middle"><?php echo $val['riferimento']; ?></td>
 					<td style="vertical-align: middle"><?php echo $val['note']; ?></td>
 					<td align="center" nowrap style="vertical-align: middle">
-						<div class="btn-group btn-group-sm" role="group">
+						<div class="btn-group btn-group-xs" role="group">
 							<a class="btn btn-info" href="?corpus=magazzino-info-documento&id=<?php echo $val['id']; ?>"><i class="fa fa-info fa-fw"></i></a>
 							<a class="btn btn-warning" href="?corpus=magazzino-documenti-carico-scarico-prodotti&id=<?php echo $val['id']; ?>&tipologia=<?php echo $val['tipologia']; ?>"><i class="fa fa-pencil fa-fw"></i></a>	
 							<a class="btn btn-danger" onClick="return confirm('Vuoi veramente cancellare questo documento?');" href="?corpus=magazzino-documenti-carico-scarico-elimina&id=<?php echo $val['id']; ?>&tipologia=<?php echo $val['tipologia']; ?>&magazzino=<?php echo $val['magazzino']; ?>"><i class="fa fa-trash fa-fw"></i></a>
