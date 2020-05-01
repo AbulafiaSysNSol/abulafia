@@ -23,8 +23,9 @@
 	$num = $_GET['num'];
 	$rif = $_GET['rif'];
 	$note = $_GET['note'];
+	$ordine = $_GET['ord'];
 
-	$res = $m->getDocumentFilter($doc, $mag, $causale, $num, $rif, $note);
+	$res = $m->getDocumentFilter($doc, $mag, $causale, $num, $rif, $note, $ordine);
 	if($res)
 	{
 		?>

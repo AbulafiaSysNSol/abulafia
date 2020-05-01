@@ -66,27 +66,46 @@
 			}
 			return $q;
 		}
+
+		public function inDeposito($codiceprodotto, $magazzino) {
+			global $connessione;
+			$query = $connessione->query("SELECT COUNT(*) FROM joinprodottimagazzini WHERE idprodotto = '$codiceprodotto' AND codicemagazzino = '$magazzino'"); 
+			$count = $query->fetch();
+			if ($count[0] > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+
+		}
 		
 		public function assegnaProdotto($codiceprodotto, $magazzino, $settore, $scortaminima, $riordino, $giacenzainiziale, $confezionamento) {
-			global $connessione;
-			try {
-   			$connessione->beginTransaction();
-			$query = $connessione->prepare("INSERT INTO joinprodottimagazzini VALUES (null, :codiceprodotto, :magazzino, :settore, :scortaminima, :riordino, :giacenzainiziale, :giacenzainiziale, :confezionamento )"); 
-			$query->bindParam(':codiceprodotto', $codiceprodotto);
-			$query->bindParam(':magazzino', $magazzino);
-			$query->bindParam(':settore', $settore);
-			$query->bindParam(':scortaminima', $scortaminima);
-			$query->bindParam(':riordino', $riordino);
-			$query->bindParam(':giacenzainiziale', $giacenzainiziale);
-			$query->bindParam(':confezionamento', $confezionamento);
-			$query->execute();
-			$connessione->commit();
-			$q = true;
-			}	 
-			catch (PDOException $errorePDO) { 
-	    		echo "Errore: " . $errorePDO->getMessage();
-				$connessione->rollBack();
-				$q = false;
+			$duplicate = $this->inDeposito($codiceprodotto, $magazzino);
+			if ($duplicate) {
+				$q = 'duplicate';
+			}
+			else {
+				global $connessione;
+				try {
+		   			$connessione->beginTransaction();
+					$query = $connessione->prepare("INSERT INTO joinprodottimagazzini VALUES (null, :codiceprodotto, :magazzino, :settore, :scortaminima, :riordino, :giacenzainiziale, :giacenzainiziale, :confezionamento )"); 
+					$query->bindParam(':codiceprodotto', $codiceprodotto);
+					$query->bindParam(':magazzino', $magazzino);
+					$query->bindParam(':settore', $settore);
+					$query->bindParam(':scortaminima', $scortaminima);
+					$query->bindParam(':riordino', $riordino);
+					$query->bindParam(':giacenzainiziale', $giacenzainiziale);
+					$query->bindParam(':confezionamento', $confezionamento);
+					$query->execute();
+					$connessione->commit();
+					$q = true;
+				}	 
+				catch (PDOException $errorePDO) { 
+		    		echo "Errore: " . $errorePDO->getMessage();
+					$connessione->rollBack();
+					$q = false;
+				}
 			}
 			return $q;
 		}

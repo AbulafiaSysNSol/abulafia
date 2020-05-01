@@ -1,6 +1,6 @@
 var xmlhttp;
 
-function showResult(doc, mag, causale, num, rif, note) {
+function showResult(doc, mag, causale, num, rif, note, ordine) {
 	
 	xmlhttp=GetXmlHttpObject()
 
@@ -10,7 +10,7 @@ function showResult(doc, mag, causale, num, rif, note) {
 	}
 
 	var url="livesearch-ricerca-documenti.php";
-	url=url+"?q="+doc+"&mag="+mag+"&causale="+causale+"&num="+num+"&rif="+rif+"&note="+note;
+	url=url+"?q="+doc+"&mag="+mag+"&causale="+causale+"&num="+num+"&rif="+rif+"&note="+note+"&ord="+ordine;
 
 	xmlhttp.onreadystatechange=stateChanged;
 	xmlhttp.open("GET",url,true);

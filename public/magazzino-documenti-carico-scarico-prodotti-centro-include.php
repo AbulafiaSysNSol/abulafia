@@ -37,10 +37,10 @@
 					<form class="form-horizontal" role="form" name="righedocumento" method="post" action="magazzino-documenti-carico-scarico-prodotti2.php?id=<?php echo $id; ?>&tipologia=<?php echo $tipologia; ?>&magazzino=<?php echo $info[2]; ?>">
 						<tr>
 							<td><input id="prodotto1" type="text" class="form-control input-sm" name="prodotto" readonly></td>
-							<td><input id="descrizione1" type="text" placeholder="inserisce il codice o la descrizione del prodotto da aggiungere..." class="form-control input-sm" name="descrizione" onkeyup="showResult(this.value,'<?php echo $info[2];?>')"></td>
+							<td><input id="descrizione1" type="text" placeholder="inserisce il codice o la descrizione del prodotto da aggiungere..." class="form-control input-sm" name="descrizione" onkeyup="showResult(this.value,'<?php echo $info[2];?>')" required></td>
 							<td><input id="quantita1" type="text" class="form-control input-sm" name="quantita" disabled required></td>
 							<td><input id="nota1" type="text" class="form-control input-sm" name="nota" disabled></td>
-							<td align="center"><button class="btn btn-success"><i class="fa fa-plus fa-fw"></i></button></td>
+							<td align="center"><button class="btn btn-success" id="subbutton" disabled><i class="fa fa-plus fa-fw"></i></button></td>
 						</tr>
 							
 					</form>
@@ -93,6 +93,7 @@
   	document.getElementById("quantita1").disabled = false;
   	document.getElementById("quantita1").focus();
   	document.getElementById("nota1").disabled = false;
+  	document.getElementById("subbutton").disabled = false;
   
   }
 

@@ -10,11 +10,21 @@
 			<div class="panel-body">
 
 				<?php
-					 if( isset($_GET['insert']) && $_GET['insert'] == "ok") {
+					if( isset($_GET['insert']) && $_GET['insert'] == "ok") {
 					?>
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="alert alert-success"><i class="fa fa-check"></i> Prodotto assegnato <b>correttamente!</b></div>
+						</div>
+					</div>
+					<?php
+					}
+
+					if( isset($_GET['insert']) && $_GET['insert'] == "duplicate") {
+					?>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="alert alert-danger"><i class="fa fa-warning"></i> <b>Attenzione:</b> Prodotto gi&agrave; in deposito nel Magazzino selezionato. Controlla i dati inseriti.</div>
 						</div>
 					</div>
 					<?php

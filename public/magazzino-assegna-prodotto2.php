@@ -21,8 +21,11 @@
 	
 	$res = $p->assegnaProdotto($codiceprodotto, $magazzino, $settore, $scortaminima, $riordino, $giacenzainiziale, $confezionamento); 
 	
-	if($res) {
+	if($res == 1) {
 		header("Location: login0.php?corpus=magazzino-prodotti&insert=ok");
+	}
+	else if($res == "duplicate") {
+		header("Location: login0.php?corpus=magazzino-prodotti&insert=duplicate");
 	}
 	else {
 		echo 'Errore nella registrazione dei dati';
