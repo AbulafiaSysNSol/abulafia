@@ -50,7 +50,7 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="content-type" content="text/html;" charset="utf-8" />
 <title><?php echo 'Abulafia Web ' . $_SESSION['version'];?></title>
 <meta name="keywords" content="abulafia web, protocollo informatico, gestione documentale, gestione magazzino" />
 <meta name="description" content="Abulafia Web - Protocollo Informatico - Gestione Documentale - Gestione Magazzino" />
