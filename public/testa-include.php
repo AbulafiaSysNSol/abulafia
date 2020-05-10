@@ -263,6 +263,7 @@ tinymce.init({
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book fa-fw"></i> Protocollo <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="login0.php?corpus=ricerca-protocollo"><i class="fa fa-search fa-fw"></i> Ricerca nel protocollo</a></li>
+								<li><a href="login0.php?corpus=stampa-registro"><i class="fa fa-file-pdf-o fa-fw"></i> Esporta registro in PDF</a></li>
 							</ul>
 						</li>
 					<?php } ?>

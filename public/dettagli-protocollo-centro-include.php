@@ -175,6 +175,7 @@
 				<br>
 			</div>
 			
+			<!--
 			<div class="col-sm-3">
 				<h3><i class="fa fa-cog"></i> Opzioni</h3><br>
 				<div class="row">
@@ -193,6 +194,7 @@
 					</div>
 				</div>
 			</div>
+			-->
 		</div>
 		
 		<?php
