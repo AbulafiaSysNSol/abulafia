@@ -51,7 +51,7 @@
 	//SCRIVO I DETTAGLI DELLA LETTERA NEL DB
 	try {
    		$connessione->beginTransaction();
-		$query = $connessione->prepare("INSERT INTO lettere$annoprotocollo VALUES ('', :oggetto, :datalettera, :dataregistrazione, '', :speditaricevuta, :posizione, :riferimento, :pratica, :note) "); 
+		$query = $connessione->prepare("INSERT INTO lettere$annoprotocollo VALUES (null, :oggetto, :datalettera, :dataregistrazione, '', :speditaricevuta, :posizione, :riferimento, :pratica, :note) "); 
 		$query->bindParam(':oggetto', $oggetto);
 		$query->bindParam(':datalettera', $datalettera);
 		$query->bindParam(':dataregistrazione', $dataregistrazione);
@@ -91,7 +91,7 @@
 	//SCRIVO L'UTENTE CHE HA FATTO L'INSERIMENTO
 	try {
    		$connessione->beginTransaction();
-		$query = $connessione->prepare("INSERT INTO joinlettereinserimento$annoprotocollo VALUES(:ultimoid, :loginid, '', :dataregistrazione)"); 
+		$query = $connessione->prepare("INSERT INTO joinlettereinserimento$annoprotocollo VALUES(:ultimoid, :loginid, '0', :dataregistrazione)"); 
 		$query->bindParam(':ultimoid', $ultimoid);
 		$query->bindParam(':loginid', $loginid);
 		$query->bindParam(':dataregistrazione', $dataregistrazione);

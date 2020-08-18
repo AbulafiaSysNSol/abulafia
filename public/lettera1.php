@@ -23,7 +23,7 @@
 	
 	try {
 	   	$connessione->beginTransaction();
-		$query = $connessione->prepare("INSERT INTO comp_lettera VALUES ( '', '', '', :data, :oggetto, :testo, :allegati, :vista, :firmata, :insert, :ufficio)"); 
+		$query = $connessione->prepare("INSERT INTO comp_lettera VALUES ( null, '0', '0', :data, :oggetto, :testo, :allegati, :vista, :firmata, :insert, :ufficio)"); 
 		$query->bindParam(':data', $data);
 		$query->bindParam(':oggetto', $oggetto);
 		$query->bindParam(':testo', $testo);
