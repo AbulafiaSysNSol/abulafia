@@ -18,7 +18,7 @@ if (!$include) //messaggio di errore qualora la pagina richiesta non esistesse
 } 
 
 
-include 'sotto-include.php'; //carica il file con il footer.
+include 'sotto-include.php';  //carica il file con il footer.
 
 ?>
 
