@@ -13,7 +13,12 @@
 	$calendario = new Calendario();
 	
 	$data = $calendario->dataDB($_POST['data']);
-	$allegati = $_POST['allegati'];
+	if($_POST['allegati'] == '') {
+		$allegati = 0;
+	}
+	else {
+		$allegati = $_POST['allegati'];
+	}
 	$oggetto = addslashes($_POST['oggetto']);
 	$testo = addslashes($_POST['message']);
 	$ufficio = addslashes($_POST['ufficio']);

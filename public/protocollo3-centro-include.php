@@ -244,40 +244,40 @@
 		if(!$_SESSION['block']) {
 			if($dettagli['speditaricevuta'] != $speditaricevuta) {
 				$old = $dettagli['speditaricevuta'];
-				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato spedita/ricevuta', '$user', '$time', '#FFFFCC', '$old', '$speditaricevuta')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$annoprotocollo', 'Modificato spedita/ricevuta', '$user', '$time', '#FFFFCC', '$old', '$speditaricevuta')");
 				$change = true;
 			}
 			if($dettagli['oggetto'] != $oggetto) {
 				$old = $dettagli['oggetto'];
-				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato oggetto', '$user', '$time', '#FFFFCC', '$old', '$oggetto')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$annoprotocollo', 'Modificato oggetto', '$user', '$time', '#FFFFCC', '$old', '$oggetto')");
 				$change = true;
 			}
 			if($dettagli['datalettera'] != $datalettera) {
 				$old = $calendario->dataSlash($dettagli['datalettera']);
 				$new = $calendario->dataSlash($datalettera);
-				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata data', '$user', '$time', '#FFFFCC', '$old', '$new')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$annoprotocollo', 'Modificata data', '$user', '$time', '#FFFFCC', '$old', '$new')");
 				$change = true;
 			}
 			if($dettagli['posizione'] != $posizione) {
 				$old = $dettagli['posizione'];
-				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificato mezzo di trasmissione', '$user', '$time', '#FFFFCC', '$old', '$posizione')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$annoprotocollo', 'Modificato mezzo di trasmissione', '$user', '$time', '#FFFFCC', '$old', '$posizione')");
 				$change = true;
 			}
 			if($dettagli['riferimento'] != $riferimento) {
 				$old = addslashes($dettagli['riferimento'] . ' - ' . $lettera->getDescPosizione($dettagli['riferimento']));
 				$now = addslashes($riferimento . ' - ' . $lettera->getDescPosizione($riferimento));
-				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata posizione', '$user', '$time', '#FFFFCC', '$old', '$now')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$annoprotocollo', 'Modificata posizione', '$user', '$time', '#FFFFCC', '$old', '$now')");
 				$change = true;
 			}
 			if($dettagli['pratica'] != $pratica) {
 				$old = addslashes($lettera->getDescPratica($dettagli['pratica']));
 				$now = addslashes($lettera->getDescPratica($pratica));
-				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata pratica', '$user', '$time', '#FFFFCC', '$old', '$now')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$annoprotocollo', 'Modificata pratica', '$user', '$time', '#FFFFCC', '$old', '$now')");
 				$change = true;
 			}
 			if($dettagli['note'] != $note) {
 				$old = $dettagli['note'];
-				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$annoprotocollo', 'Modificata nota', '$user', '$time', '#FFFFCC', '$old', '$note')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$annoprotocollo', 'Modificata nota', '$user', '$time', '#FFFFCC', '$old', '$note')");
 				$change = true;
 			}
 		}

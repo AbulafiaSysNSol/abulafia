@@ -82,7 +82,7 @@
 		$name = $anagrafica->getName($idanagrafica);
 		if(!$_SESSION['block']) 
 		{
-			$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Aggiunto mittente/destinatario', '$user', '$time', '#DEFEB4', ' ', '$name')");
+			$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$anno', 'Aggiunto mittente/destinatario', '$user', '$time', '#DEFEB4', ' ', '$name')");
 		}
 		$risultati = $connessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
@@ -111,7 +111,7 @@
 			$name = $anagrafica->getName($idanagrafica);
 			if(!$_SESSION['block']) 
 			{
-				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso mittente/destinatario', '$user', '$time', '#FC9E9E', '$name', ' ')");
+				$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$anno', 'Rimosso mittente/destinatario', '$user', '$time', '#FC9E9E', '$name', ' ')");
 			}
 			$my_log->publscrivilog( $_SESSION['loginname'], 'MODIFICA PROTOCOLLO '. $idlettera , 'OK' , 'ELIMINATO MITTENTE/DESTINATARIO '. $idanagrafica , $_SESSION['logfile'], 'protocollo');
 		}
@@ -129,7 +129,7 @@
 		$time = time();
 		if(!$_SESSION['block']) 
 		{
-			$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES('', '$idlettera', '$anno', 'Rimosso allegato', '$user', '$time', '#FC9E9E', '$nome', ' ')");
+			$regmodifica = $connessione->query("INSERT INTO storico_modifiche VALUES(null, '$idlettera', '$anno', 'Rimosso allegato', '$user', '$time', '#FC9E9E', '$nome', ' ')");
 		}
 		$risultati = $connessione->query("SELECT * from lettere$annoprotocollo where idlettera='$idlettera'");
 		$risultati2 = $connessione->query("SELECT * from joinletteremittenti$annoprotocollo, anagrafica where joinletteremittenti$annoprotocollo.idlettera='$idlettera' and joinletteremittenti$annoprotocollo.idanagrafica=anagrafica.idanagrafica ");
