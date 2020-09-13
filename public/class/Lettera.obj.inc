@@ -429,7 +429,7 @@ class Lettera {
 		$idins = $_SESSION['loginid'];
 		try {
    			$connessione->beginTransaction();
-			$query = $connessione->prepare("INSERT INTO comp_lettera (protocollo, anno, data, oggetto, testo, allegati, vista, firmata, idins) SELECT 0, 0, data, oggetto, testo, allegati, 0, 0, :idins FROM comp_lettera WHERE id = :id"); 
+			$query = $connessione->prepare("INSERT INTO comp_lettera (protocollo, anno, data, oggetto, testo, allegati, vista, firmata, idins, ufficio) SELECT 0, 0, data, oggetto, testo, allegati, 0, 0, :idins, ufficio FROM comp_lettera WHERE id = :id"); 
 			$query->bindParam(':idins', $idins);
 			$query->bindParam(':id', $id);
 			$query->execute();
