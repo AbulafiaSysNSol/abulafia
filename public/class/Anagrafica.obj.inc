@@ -201,6 +201,36 @@ class Anagrafica {
 			return false;
 	}
 
+	public function isAutoparco($id) {
+		global $connessione;
+		$query = $connessione->query("SELECT autoparco FROM users WHERE idanagrafica = $id");
+		$autoparco = $query->fetch();
+		if ($autoparco[0] == 1)
+			return true;
+		else
+			return false;
+	}
+
+	public function isOpco($id) { //operatore di centrale
+		global $connessione;
+		$query = $connessione->query("SELECT opco FROM users WHERE idanagrafica = $id");
+		$autoparco = $query->fetch();
+		if ($autoparco[0] == 1)
+			return true;
+		else
+			return false;
+	}
+
+	public function isRespco($id) { //responsabile di centrale
+		global $connessione;
+		$query = $connessione->query("SELECT respco FROM users WHERE idanagrafica = $id");
+		$autoparco = $query->fetch();
+		if ($autoparco[0] == 1)
+			return true;
+		else
+			return false;
+	}
+
 	public function isContabilita($id) {
 		global $connessione;
 		$query = $connessione->query("SELECT contabilita FROM users WHERE idanagrafica = $id");
@@ -393,6 +423,76 @@ class Anagrafica {
 		$res = $query->fetch();
 		$nome = $res[0] . ' ' . $res[1];
 		return $nome;
+	}
+
+	public function Autorizza($id) {
+
+		global $connessione;
+		$autorizzato = 1;
+
+		try {
+			$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE anagrafica SET autorizzato = :autorizzato WHERE idanagrafica = :idanagrafica");
+			$query->bindParam(':autorizzato', $autorizzato);
+			$query->bindParam(':idanagrafica', $id);
+			$query->execute();
+			$connessione->commit();
+			$q3 = true;
+		}
+		catch (PDOException $errorePDO) {
+			echo "Errore: " . $errorePDO->getMessage();
+			$connessione->rollBack();
+			$q3 = false;
+		}
+
+		return $q3;
+	}
+
+	public function revocaAutorizzazione($id) {
+
+		global $connessione;
+		$autorizzato = 0;
+
+		try {
+			$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE anagrafica SET autorizzato = :autorizzato WHERE idanagrafica = :idanagrafica");
+			$query->bindParam(':autorizzato', $autorizzato);
+			$query->bindParam(':idanagrafica', $id);
+			$query->execute();
+			$connessione->commit();
+			$q3 = true;
+		}
+		catch (PDOException $errorePDO) {
+			echo "Errore: " . $errorePDO->getMessage();
+			$connessione->rollBack();
+			$q3 = false;
+		}
+
+		return $q3;
+	}
+
+	public function getCellulare($id) {
+		global $connessione;
+		$risultati2 = $connessione->query("SELECT * FROM jointelefonipersone WHERE idanagrafica = '$id'");
+		$countrecapiti = $connessione->query("SELECT COUNT(*) FROM jointelefonipersone WHERE idanagrafica = '$id'");
+		$cr = $countrecapiti->fetch();
+
+		if ($cr[0] > 0) {
+			$row2 = $risultati2->fetch();
+			while ($cell = $row2)
+			{
+				if ($cell['tipo'] = 'mobile')
+				{
+					return $cell['numero'];
+				}
+			}
+
+		}
+		else
+		{
+			return null;
+		}
+
 	}
 
 }
