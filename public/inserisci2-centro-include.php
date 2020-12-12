@@ -24,7 +24,7 @@
 		$nascita_data = $nascitadata[2].'-'.$nascitadata[1].'-'.$nascitadata[0];
 	}
 	else {
-		$nascita_data = '';
+		$nascita_data = '0000-00-00';
 	}
 	if( isset($_POST['nascitacomune']) ) {
 		$nascita_comune = stripslashes($_POST['nascitacomune']);

@@ -152,7 +152,7 @@
 				?>
 				<div class="row">
 					<div class="col-sm-12">
-						<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b> c'è stato un errore nell'associare la nuova anagrafica.</div>
+						<div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b> c'&egrave; stato un errore nell'associare la nuova anagrafica.</div>
 					</div>
 				</div>
 				<?php
