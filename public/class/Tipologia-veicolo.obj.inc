@@ -9,7 +9,7 @@ class Tipologia_veicolo{
         try {
             $connessione->beginTransaction();
             $query = $connessione->prepare("INSERT INTO aut_tipologie VALUES ('0', :descrizione)");
-            $query->bindParam(':descrizione', strtoupper($descrizione));
+            $query->bindParam(':descrizione',$descrizione);
             $query->execute();
             $connessione->commit();
             $q = true;
@@ -46,7 +46,7 @@ class Tipologia_veicolo{
         try {
             $connessione->beginTransaction();
             $query = $connessione->prepare("UPDATE aut_tipologie SET descrizione = :descrizione WHERE id = :id");
-            $query->bindParam(':descrizione', strtoupper($descrizione));
+            $query->bindParam(':descrizione',$descrizione);
             $query->bindParam(':id', $id);
             $query->execute();
             $connessione->commit();

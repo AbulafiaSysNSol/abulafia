@@ -75,6 +75,20 @@
 		$ambulatorio = 0;
 	}
 
+	if(isset($_POST['autoparco'])) {
+		$autoparco = 1;
+	}
+	else {
+		$autoparco = 0;
+	}
+
+	if(isset($_POST['co'])) {
+		$co = 1;
+	}
+	else {
+		$co = 0;
+	}
+
 	if(isset($_POST['contabilita'])) {
 		$contabilita = 1;
 	}

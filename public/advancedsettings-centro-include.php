@@ -195,7 +195,15 @@
 							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
 						</tr>
 						<tr>
-							<td><label>Contabilità </label></td><td><input type="checkbox" name="contabilita" <?php if($_SESSION['mod_contabilita']) echo 'checked'; ?>
+							<td><label>Autoparco </label></td><td><input type="checkbox" name="autoparco" <?php if($_SESSION['mod_autoparco']) echo 'checked'; ?>
+							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
+						</tr>
+						<tr>
+							<td><label>Centrale Operativa </label></td><td><input type="checkbox" name="co" <?php if($_SESSION['mod_co']) echo 'checked'; ?>
+							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
+						</tr>
+						<tr>
+							<td><label>Contabilit&agrave; </label></td><td><input type="checkbox" name="contabilita" <?php if($_SESSION['mod_contabilita']) echo 'checked'; ?>
 							<?php if(!$admin) { echo 'disabled'; } ?> > </td>
 						</tr>
 					</table>				

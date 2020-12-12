@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h3 class="panel-title"><strong><i class="fa fa-user-circle"></i> Volontari autorizzati</strong></h3>
+        <h3 class="panel-title"><strong><i class="fa fa-user-circle"></i> Volontari Autorizzati</strong></h3>
     </div>
 
     <div class="panel-body">
@@ -12,14 +12,14 @@
 
         if (isset($_GET['delete']) &&($_GET['delete'] == 'ok')) {
             ?>
-            <center><div class="alert alert-success"><i class="fa fa-trash"></i> Autorizzazione volontario rimossa <b>correttamente!</b></div></center>
+            <center><div class="alert alert-success"><i class="fa fa-trash"></i> Autorizzazione Volontario Rimossa <b>Correttamente!</b></div></center>
             <?php
         }
 
         if ($a->isRespco($_SESSION['loginid']) || $a->isAdmin($_SESSION['loginid'])){ ?>
 
-            <div align="right">
-                <a href="?corpus=co-volontari-aggiungi"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi autorizzato</button></a><br><br>
+            <div>
+                <a href="?corpus=co-volontari-aggiungi"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi Volontario</button></a><br><br>
             </div>
 
         <?php } ?>

@@ -43,8 +43,8 @@
             <tr bgcolor=<?php echo $colorelinee; ?>>
                 <td style="vertical-align: middle"><?php echo ucwords($risultati2['descrizione']);?></td>
                 <td style="vertical-align: middle" align="center">
-                        <a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Tipologia" href="login0.php?corpus=autoparco-tipologie-edit&id=<?php echo $risultati2['id']; ?>">
-                            <i class="fa fa-edit fa-fw"></i>
+                        <a class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Modifica Tipologia" href="login0.php?corpus=autoparco-tipologie-edit&id=<?php echo $risultati2['id']; ?>">
+                            <i class="fa fa-edit fa-fw"></i> Modifica
                         </a>
                     </div>
                 </td>

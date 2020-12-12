@@ -16,25 +16,25 @@
     <div class="panel-body">
 
         <?php
-            if ($_GET['insert'] == 'ok') {
+            if (isset($_GET['insert']) && $_GET['insert'] == 'ok') {
                 ?>
                 <center><div class="alert alert-success"><i class="fa fa-check"></i> Tipologia veicolo inserita <b>correttamente!</b></div></center>
                 <?php
             }
 
-            if ($_GET['insert'] == 'error') {
+            if (isset($_GET['insert']) && $_GET['insert'] == 'error') {
                 ?>
                 <center><div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Tipologia veicolo non inserita <b>correttamente!</b> Controlla che non sia già presente!</div></center>
                 <?php
             }
 
-            if ($_GET['mod'] == 'ok') {
+            if (isset($_GET['mod']) && $_GET['mod'] == 'ok') {
                 ?>
                 <center><div class="alert alert-success"><i class="fa fa-check"></i> Tipologia veicolo modificata <b>correttamente!</b></div></center>
                 <?php
             }
 
-            if ($_GET['mod'] == 'error') {
+            if (isset($_GET['mod']) && $_GET['mod'] == 'error') {
                 ?>
                 <center><div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> Tipologia veicolo non modificata! Controlla che non sia già presente!</div></center>
                 <?php
@@ -43,7 +43,7 @@
         ?>
 
         <div align="left">
-            <a href="?corpus=autoparco-tipologie-add"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi tipologia veicolo</button></a><br><br>
+            <a href="?corpus=autoparco-tipologie-add"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi Tipologia Veicolo</button></a><br><br>
         </div>
 
         <script type="text/javascript" src="livesearch-autoparco-tipologie.js" onLoad="showResult('','25')"></script>
