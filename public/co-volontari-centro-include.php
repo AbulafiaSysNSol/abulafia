@@ -19,7 +19,9 @@
         if ($a->isRespco($_SESSION['loginid']) || $a->isAdmin($_SESSION['loginid'])){ ?>
 
             <div>
-                <a href="?corpus=co-volontari-aggiungi"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi Volontario</button></a><br><br>
+                <a href="?corpus=co-volontari-aggiungi"><button type="button" class="btn btn-primary"><i class="fa fa-user-plus"></i> Aggiungi Volontario</button></a>
+           
+                <a href="?corpus=co-volontari-aggiungi"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi Operatore</button></a><br><br>
             </div>
 
         <?php } ?>

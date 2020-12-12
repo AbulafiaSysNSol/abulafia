@@ -410,8 +410,8 @@ $anag = new Anagrafica();
                         <li class="dropdown <?php if($_GET['corpus'] == 'cert' OR $_GET['corpus']=='cert-anag') { echo ' active'; }?>">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-car fa-fw"></i> Autoparco <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="?corpus=autoparco-search-veicoli"><i class="fa fa-car fa-fw"></i> Veicoli</a></li>
                                 <li><a href="?corpus=autoparco-add-veicoli"><i class="fa fa-plus fa-fw"></i> Aggiungi veicolo</a></li>
+                                <li><a href="?corpus=autoparco-search-veicoli"><i class="fa fa-car fa-fw"></i> Elenco Veicoli</a></li>
                             </ul>
                         </li>
                     <?php } ?>

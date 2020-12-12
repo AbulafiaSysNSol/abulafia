@@ -33,9 +33,9 @@ class Veicolo {
         try {
             $connessione->beginTransaction();
             $query = $connessione->prepare("UPDATE aut_veicoli SET targa = :targa, tipologia = :tipologia, selettiva = :selettiva WHERE id = :id");
-            $query->bindParam(':targa', strtoupper($targa));
+            $query->bindParam(':targa', $targa);
             $query->bindParam(':tipologia', $tipologia);
-            $query->bindParam(':selettiva', strtoupper($selettiva));
+            $query->bindParam(':selettiva', $selettiva);
             $query->bindParam(':id', $id);
             $query->execute();
             $connessione->commit();
