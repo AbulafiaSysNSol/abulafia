@@ -1,6 +1,6 @@
 
 <!-- Modal -->
-<form action="?corpus=inserimento.rapido.anagrafica&idlettera=<?php echo $idlettera; ?>" method="POST" name="modale">
+<form action="?corpus=anagrafica" method="POST" name="modale">
     <div class="modal fade" id="myModal" tabindex="-1" role="form" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -80,7 +80,7 @@
         } ?>
 
         <div align="right">
-            <a href="?corpus=inserimento.rapido.anagrafica&idlettera=<?php echo $idlettera; ?>"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi volontario</button></a><br><br>
+            <a href="?corpus=anagrafica"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Aggiungi volontario</button></a><br><br>
         </div>
 
         <script type="text/javascript" src="livesearch-co-volontari-aggiungi.js" onLoad="showResult('','25')"></script>
