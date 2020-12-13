@@ -1,14 +1,23 @@
 <?php
-
+    //inserire controllo per evitare che si possa generare più di una check per ogni prenotazione veicolo, la check puo essere fatta solo da autista
+    $data = date('d-m-Y');
+    $ora = date('H:i');
     $id = $_GET['veicolo'];
     $v = new Veicolo();
     $info = $v->infoVeicolo($id);
 
 ?>
 
-    <div class="<?php if($errore) { echo "panel panel-danger";} else { echo "panel panel-default";} ?>">
-
+    <div class="panel panel-default">
         <div class="panel-heading">
+            <div class="col-sm-6">
+                <h4><i class="fa fa-tag"></i>Targa: <?php echo $info['targa']; ?></h4>
+                <h4><i class="fa fa-calendar-o"></i>Data: <?php echo $data; ?></h4>
+                <h4><i class="fa fa-clock-o"></i>Ora: <?php echo $ora; ?></h4>
+            </div>
+            <div class="col-sm-6">
+                <h5>prova2</h5>
+            </div>
             <h3 class="panel-title">
                 <center><h5><i class="fa fa-warning fa-fw"></i> Il numero di protocollo verr&agrave; assegnato dopo aver concluso l'inserimento dei dati.</h5>
                     <h5><i class="fa fa-info-circle fa-fw"></i> Identificativo Provvisorio Protocollo: <strong><?php echo $my_lettera->idtemporaneo;?>.</strong></h5></center>
