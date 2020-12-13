@@ -11,12 +11,12 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="col-sm-6">
-                <h4><i class="fa fa-tag"></i>Targa: <?php echo $info['targa']; ?></h4>
-                <h4><i class="fa fa-calendar-o"></i>Data: <?php echo $data; ?></h4>
-                <h4><i class="fa fa-clock-o"></i>Ora: <?php echo $ora; ?></h4>
+                <h4><i class="fa fa-tag"></i> Targa: <?php echo $info['targa']; ?></h4>
+                <h4><i class="fa fa-calendar-o"></i> Data: <?php echo $data; ?></h4>
+                <h4><i class="fa fa-clock-o"></i> Ora: <?php echo $ora; ?></h4>
             </div>
             <div class="col-sm-6">
-                <h5>prova2</h5>
+                <h4><i class="fa fa-user-o"></i> Autista:</h4>
             </div>
             <h3 class="panel-title">
                 <center><h5><i class="fa fa-warning fa-fw"></i> Il numero di protocollo verr&agrave; assegnato dopo aver concluso l'inserimento dei dati.</h5>
@@ -28,37 +28,6 @@
         </div>
 
         <div class="panel-body">
-
-            <?php
-            if( isset($_GET['insert']) && $_GET['insert'] == "error") {
-                ?>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b> c'&egrave; stato un errore nell'associare la nuova anagrafica.</div>
-                    </div>
-                </div>
-                <?php
-            }
-            ?>
-
-            <?php
-            if( isset($_GET['upfile']) && $_GET['upfile'] == "error") {
-                ?>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="alert alert-danger"><b><i class="fa fa-warning"></i> Attenzione:</b>
-                            c'e' stato un errore nel caricamento
-                            del file sul server: controlla
-                            la dimensione massima, riprova in seguito
-                            o contatta l'amministratore del server.
-                        </div>
-                    </div>
-                </div>
-                <?php
-            }
-
-            ?>
-
             <div class="row">
                 <div class="col-sm-6">
                     <h3><b><i class="fa fa-wrench"></i> Controllo Meccanico </b></h3>
