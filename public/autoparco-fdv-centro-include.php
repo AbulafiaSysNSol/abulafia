@@ -48,31 +48,16 @@
                 <?php
             }
 
-            if($doc) {
-                ?>
-                <div class="alert alert-info"><b><i class="fa fa-warning"></i> ATTENZIONE:</b> hai allegato un file <b>modificabile</b>. E' consigliato allegare file in PDF.</div>
-                <?php
-            }
-
-            if( isset($_GET['upfile']) && $_GET['upfile'] == "success") {
-                ?>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="alert alert-success"><i class="fa fa-check"></i> File allegato <b>correttamente!</b></div>
-                    </div>
-                </div>
-                <?php
-            }
             ?>
 
             <div class="row">
                 <div class="col-sm-6">
-                    <h3><b><small><i class="fa fa-square-o"></i></small> Controllo Meccanico: <small>allegati <i class="fa fa-folder-open-o"></i> e mittenti/destinatari <i class="fa fa-group"></i> </b></small></h3>
+                    <h3><b><i class="fa fa-wrench"></i> Controllo Meccanico </b></h3>
                     <hr>
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">Controlllo</th>
+                            <th scope="col">Controllo</th>
                             <th scope="col">1/4</th>
                             <th scope="col">1/2</th>
                             <th scope="col">3/4</th>
@@ -108,7 +93,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Controlllo</th>
+                                <th scope="col">Controllo</th>
                                 <th scope="col">Min</th>
                                 <th scope="col">Med</th>
                                 <th scope="col">Max</th>
@@ -193,7 +178,7 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">Controlllo</th>
+                            <th scope="col">Controllo</th>
                             <th scope="col">Si</th>
                             <th scope="col">No</th>
                         </tr>
