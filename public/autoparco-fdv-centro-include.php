@@ -10,26 +10,31 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="col-sm-6">
-                <h4><i class="fa fa-tag"></i> Targa: <?php echo $info['targa']; ?></h4>
-                <h4><i class="fa fa-calendar-o"></i> Data: <?php echo $data; ?></h4>
-                <h4><i class="fa fa-clock-o"></i> Ora: <?php echo $ora; ?></h4>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4><i class="fa fa-tag"></i> Targa: <?php echo $info['targa']; ?></h4>
+                    <h4><i class="fa fa-calendar-o"></i> Data: <?php echo $data; ?></h4>
+                    <h4><i class="fa fa-clock-o"></i> Ora: <?php echo $ora; ?></h4>
+                </div>
+                <div class="col-sm-6">
+                    <h4><i class="fa fa-user-o"></i> Autista:</h4>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <h4><i class="fa fa-user-o"></i> Autista:</h4>
-            </div>
-            <h3 class="panel-title">
-                <center><h5><i class="fa fa-warning fa-fw"></i> Il numero di protocollo verr&agrave; assegnato dopo aver concluso l'inserimento dei dati.</h5>
-                    <h5><i class="fa fa-info-circle fa-fw"></i> Identificativo Provvisorio Protocollo: <strong><?php echo $my_lettera->idtemporaneo;?>.</strong></h5></center>
-                <?php if($errore) {
-                    echo "<center><b><i class=\"fa fa-warning\"></i> ATTENZIONE:</b> Bisogna inserire almeno un mittente o un destinatario.</center>";
-                } ?>
-            </h3>
         </div>
 
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label> <span class="glyphicon glyphicon-comment"></span> Km:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
+                            </div>
+                        </div>
+                    </div>
                     <h3><b><i class="fa fa-wrench"></i> Controllo Meccanico </b></h3>
                     <hr>
                     <table class="table">
@@ -380,14 +385,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label> <span class="glyphicon glyphicon-comment"></span> Note:</label>
-                            <div class="row">
-                                <div class="col-sm-11">
-                                    <input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <button id="buttonl" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Registrazione in corso..." type="button" class="btn btn-success btn-lg" onClick="Controllo()"><span class="glyphicon glyphicon-plus-sign"></span> Registra Lettera</button>
                     </form>
