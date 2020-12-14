@@ -133,7 +133,7 @@
 
 		try {
 		   	$connessione->beginTransaction();
-			$query = $connessione->prepare("INSERT INTO anagrafica VALUES (null, :nome, :cognome, :residenza_stato, :residenza_provincia, :residenza_comune, :residenza_via, :residenza_civico, :residenza_cap, :nascita_data, :nascita_stato, :nascita_provincia, :nascita_comune, :url_foto, :gruppo_sanguigno, :codice_fiscale, :anagraficatipologia, '0')"); 
+			$query = $connessione->prepare("INSERT INTO anagrafica VALUES (null, :nome, :cognome, :residenza_stato, :residenza_provincia, :residenza_comune, :residenza_via, :residenza_civico, :residenza_cap, :nascita_data, :nascita_stato, :nascita_provincia, :nascita_comune, :url_foto, :gruppo_sanguigno, :codice_fiscale, :anagraficatipologia, '0', '0', '0')"); 
 			$query->bindParam(':nome', $nome);
 			$query->bindParam(':cognome', $cognome);
 			$query->bindParam(':residenza_stato', $residenza_stato);

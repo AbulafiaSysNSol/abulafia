@@ -449,7 +449,6 @@ class Anagrafica {
 	}
 
 	public function revocaAutorizzazione($id) {
-
 		global $connessione;
 		$autorizzato = 0;
 
@@ -469,6 +468,105 @@ class Anagrafica {
 		}
 
 		return $q3;
+	}
+
+	function random_string($length) {
+   		$string = "";
+ 		for ($i = 0; $i <= ($length/32); $i++)
+        $string .= md5(time()+rand(0,99));
+ 		$max_start_index = (32*$i)-$length;
+   		$random_string = substr($string, rand(0, $max_start_index), $length);
+	    return $random_string;
+	}
+
+	public function nuovoVolontario($nome, $cognome, $codicefiscale, $email) {
+		global $connessione;
+
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO anagrafica VALUES (null, :nome, :cognome, '', '', '', '', '', '', '', '', '', '', '', '', :codicefiscale, 'persona', '0', '1', '0')"); 
+			$query->bindParam(':nome', $nome);
+			$query->bindParam(':cognome', $cognome);
+			$query->bindParam(':codicefiscale', $codicefiscale);
+			$query->execute();
+			$lastid = $connessione->lastInsertId();
+			$connessione->commit();
+			$inserimento = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore1: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$inserimento = false;
+		 	exit();
+		}	
+		
+		$id = $lastid;
+		$nome = str_replace("'","",$nome);
+		$cognome = str_replace("'","",$cognome);	
+		$nomenuovoutente = strtolower($nome.'.'.$cognome);
+		$password = $this->random_string(8);
+		$passwordDB = md5($password);
+
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO users VALUES(:id, 0, :nomenuovoutente, :passwordDB, :email, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)"); 
+			$query->bindParam(':id', $id);
+			$query->bindParam(':nomenuovoutente', $nomenuovoutente);
+			$query->bindParam(':passwordDB', $passwordDB);
+			$query->bindParam(':email', $email);
+			$query->execute();
+			$connessione->commit();
+			$nuovoutente = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore2: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$nuovoutente = false;
+		 	exit();
+		}	
+
+		try {
+		   	$connessione->beginTransaction();
+			$query = $connessione->prepare("INSERT INTO usersettings VALUES(:id, 30, '', '#DEFEB4', '#FFFFCC', '100%', '0', '0')"); 
+			$query->bindParam(':id', $id);
+			$query->execute();
+			$connessione->commit();
+			$setting = true;
+		}	 
+		catch (PDOException $errorePDO) { 
+		   	echo "Errore3: " . $errorePDO->getMessage();
+		   	$connessione->rollBack();
+		 	$setting = false;
+		 	exit();
+		}
+
+		require('lib/phpmailer/PHPMailerAutoload.php');
+		$mail = new PHPMailer();
+		$oggetto = "Creazione Nuovo Utente AbulafiaWeb";
+		$messaggio = 	'Buongiorno '. $nome . ' ' . $cognome . ',<br><br>&egrave; ti confermiamo la 					creazione del tuo account sulla piattaforma Abulafia Web.<br><br>
+						Di seguito i dati per accedere:<br><br>
+						link: ' . $_SESSION['paginaprincipale'] . '<br>
+						username: ' . $nomenuovoutente . '<br>
+						password: ' . $password . '<br><br>
+						Per eventuali chiarimenti puoi rispondere a questa email.
+						<br><br>Il Team di Abulafia';
+
+		$mail->setFrom ("supporto@abulafiaweb.it", "Abulafia Web");
+		$mail->addReplyTo ("supporto@abulafiaweb.it");
+		$mail->addAddress($email);
+		
+		$mail->isHTML(true);   
+		$mail->Subject = $oggetto;
+		$mail->Body = $messaggio;
+		
+		$result = $mail->send();
+
+		if($inserimento && $nuovoutente && $setting && $result) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public function getCellulare($id) {
