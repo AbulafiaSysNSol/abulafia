@@ -1,10 +1,13 @@
 <?php
+
     //inserire controllo per evitare che si possa generare più di una check per ogni prenotazione veicolo, la check puo essere fatta solo da autista
     $data = date('d-m-Y');
     $ora = date('H:i');
     $id = $_GET['veicolo'];
     $v = new Veicolo();
     $info = $v->infoVeicolo($id);
+    $u = new Anagrafica;
+    $utente = $u->getName($_SESSION['loginid']);
 
 ?>
 
@@ -17,7 +20,7 @@
                     <h4><i class="fa fa-clock-o"></i> Ora: <?php echo $ora; ?></h4>
                 </div>
                 <div class="col-sm-6">
-                    <h4><i class="fa fa-user-o"></i> Autista:</h4>
+                    <h4><i class="fa fa-user-o"></i> Autista: <?php echo $utente; ?></h4>
                 </div>
             </div>
         </div>
@@ -28,10 +31,10 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-3">
-                                <label> <span class="glyphicon glyphicon-comment"></span> Km:</label>
+                                <label> <span class="glyphicon glyphicon-road"></span> Km:</label>
                             </div>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="note" <?php if( ($errore || $add) && isset($_SESSION['note'])) { echo "value=\"".$_SESSION['note']."\"";} ?>>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" name="note" id="km">
                             </div>
                         </div>
                     </div>
@@ -51,23 +54,23 @@
                         <tr>
                             <th scope="row">Carburante</th>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="carburante" id="carb1">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="carburante" id="carb2">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="carburante" id="carb3">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="carburante" id="carb4">
                                 </div>
                             </td>
                         </tr>
@@ -86,72 +89,72 @@
                         <tr>
                             <th scope="row">Olio Motore</th>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="olio" id="olio_min">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="olio" id="olio_med">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="olio" id="olio_max">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Liquido dei freni</th>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="liquidofreni" id="liquidofreni_min">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="liquidofreni" id="liquidofreni_med">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="liquidofreni" id="liquidofreni_max">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Liquido Radiatore</th>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="liquidoradiatore" id="liquidoradiatore_min">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="liquidoradiatore" id="liquidoradiatore_med">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="liquidoradiatore" id="liquidoradiatore_max">
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">Pneumatici (stato)</th>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="pneumatici" id="pneumatici_min">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="pneumatici" id="pneumatici_med">
                                 </div>
                             </td>
                             <td>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="pneumatici" id="pneumatici_max">
                                 </div>
                             </td>
                         </tr>
@@ -170,117 +173,135 @@
                             <tr>
                                 <th scope="row">Ruota di Scorta</th>
                                 <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ruotascorta" id="ruotascorta_si">
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="ruotascorta" id="ruotascorta_no">
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-
-                    <div class="form-group">
-                        <!--form caricamento allegati-->
-                        <form id="uploadForm" role="form" enctype="multipart/form-data" action="login0.php?corpus=prot-modifica-file" method="POST">
-                            <div class="row">
-                                <div class="col-sm-11">
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />
-                                    <label for="exampleInputFile"> <i class="fa fa-upload"></i> Carica allegati:</label>
-                                    <small>&egrave; possibile scegliere pi&ugrave; file alla volta;</small>
-                                    <input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true" data-placeholder="nessun file selezionato.">
-                                    <br>
-                                    <button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso...attendere!" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
-                                    <br><br>
-                                    <div class="progress" id="progress" style="display: none;">
-                                        <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <?php
-                    if (count($my_lettera->arrayallegati)> 0) {
-                        ?>
-                        <i class="fa fa-folder-o"></i> <b>File associati:</b>
-                        <table class="table table-condensed">
-                            <?php
-                            foreach ($my_lettera->arrayallegati as $elencochiavi => $elencoallegati ) {
-                                ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $my_file->getIcon($my_file->estensioneFile($elencochiavi)); ?>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        <?php echo $elencochiavi.' '; ?>
-                                    </td>
-                                    <td>
-                                        <a class="fancybox btn btn-info btn-sm" data-fancybox-type="iframe" href="<?php echo 'lettere'.$annoprotocollo.'/temp/'.$elencochiavi;?>"><i class="fa fa-file-o fa-fw"></i></a>
-                                        <a class="btn btn-danger btn-sm" href="login0.php?corpus=protocollo2&from=eliminaallegato&nome=<?php echo $elencochiavi;?>"><i class="fa fa-trash fa-fw"></i></a>
-                                    </td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
-                        </table>
-                        <?php
-                    }
-                    else {
-                        echo "Nessun file associato.";
-                    }
-                    ?>
-
-                    <div class="row">
-                        <div class ="col-sm-12" id="content" style="display: none;">
-                            <br>
-                            <i class="fa fa-spinner fa-spin"></i><b> Caricamento allegato in corso...</b>
-                            <br><img src="images/progress.gif">
-                        </div>
-                    </div>
-
+                    <h3><b><i class="fa fa-lightbulb-o"></i> Controllo Elettrico </b></h3>
                     <hr>
-                    <?php
-
-                    if($errore) { echo "<div class=\"alert alert-danger\">"; }
-                    $my_lettera->publcercamittente($idlettera,''); //richiamo del metodo
-                    if($errore) { echo "</div>"; }
-
-                    if (count($my_lettera->arraymittenti)> 0) {
-                        echo "<br><b><i class=\"fa fa-users\"></i> Mittenti/Destinatari attuali: </b>";
-                        ?>
-                        <table class="table table-condensed">
-                            <?php
-                            foreach ($my_lettera->arraymittenti as $elencochiavi => $elencomittenti ) {
-                                ?>
-                                <tr>
-                                    <td style="vertical-align: middle" width="12%">
-                                        <img src="<?php echo $my_anagrafica->getFoto($elencochiavi); ?>" class="img-circle img-responsive">
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        <?php echo stripslashes($elencomittenti).' '; ?>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        <a href="anagrafica-mini.php?id=<?php echo $elencochiavi ?>" class="fancybox btn btn-info btn-sm" data-fancybox-type="iframe">
-                                            <i class="fa fa-info-circle fa-fw"></i>
-                                        </a>
-                                        <a class="btn btn-danger btn-sm" href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"><i class="fa fa-trash fa-fw"></i></a>
-                                    </td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
-                        </table>
-                        <?php
-                    }
-                    else {
-                        echo 'Nessun mittente/destinatario associato.<br>';
-                    }
-                    echo '<br>';
-                    ?>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Controllo</th>
+                            <th scope="col">Si</th>
+                            <th scope="col">No</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Luci di posizione</th>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="luciposizione" id="luciposizione_si">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="luciposizione" id="luciposizione_no">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Luci anabbaglianti</th>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="lucianabbaglianti" id="lucianabbaglianti_si">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="lucianabbaglianti" id="lucianabbaglianti_no">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Fendinebbia</th>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="lucianabbaglianti" id="lucianabbaglianti_si">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="lucianabbaglianti" id="lucianabbaglianti_no">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Stop</th>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="stop" id="stop_si">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="stop" id="stop_no">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Fari posteriori di carico</th>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="faricarico" id="faricarico_si">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="faricarico" id="faricarico_no">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Lampeggiatori</th>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="lampeggiatori" id="lampeggiatori_si">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="lampeggiatori" id="lampeggiatori_no">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Sirena</th>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sirena" id="sirena_si">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sirena" id="sirena_no">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Frecce</th>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="frecce" id="frecce_si">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="frecce" id="frecce_no">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="col-sm-6">
