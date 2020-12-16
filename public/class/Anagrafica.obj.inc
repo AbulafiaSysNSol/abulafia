@@ -558,7 +558,6 @@ class Anagrafica {
 		$mail->Subject = $oggetto;
 		$mail->Body = $messaggio;
 		$result = $mail->send();
-		echo $result; exit();
 
 		if($inserimento && $nuovoutente && $setting && $result) {
 			return true;
