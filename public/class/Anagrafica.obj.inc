@@ -484,7 +484,7 @@ class Anagrafica {
 
 		try {
 		   	$connessione->beginTransaction();
-			$query = $connessione->prepare("INSERT INTO anagrafica VALUES (null, :nome, :cognome, '', '', '', '', '', '', '', '', '', '', '', '', :codicefiscale, 'persona', '0', '1', '0')"); 
+			$query = $connessione->prepare("INSERT INTO anagrafica VALUES (null, :nome, :cognome, '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', :codicefiscale, 'persona', '0', '1', '0')"); 
 			$query->bindParam(':nome', $nome);
 			$query->bindParam(':cognome', $cognome);
 			$query->bindParam(':codicefiscale', $codicefiscale);
