@@ -540,7 +540,11 @@ class Anagrafica {
 		 	exit();
 		}
 
-		require('lib/phpmailer/PHPMailerAutoload.php');
+		//use PHPMailer\PHPMailer\PHPMailer;
+		//use PHPMailer\PHPMailer\Exception;
+		require 'lib/phpmailer/src/Exception.php';
+		require 'lib/phpmailer/src/PHPMailer.php';
+		require 'lib/phpmailer/src/SMTP.php';
 		$mail = new PHPMailer();
 		$oggetto = "Creazione Nuovo Utente AbulafiaWeb";
 		$messaggio = 	'Buongiorno '. $nome . ' ' . $cognome . ',<br><br>&egrave; ti confermiamo la 					creazione del tuo account sulla piattaforma Abulafia Web.<br><br>
