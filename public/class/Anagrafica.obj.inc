@@ -554,12 +554,11 @@ class Anagrafica {
 		$mail->setFrom ("supporto@abulafiaweb.it", "Abulafia Web");
 		$mail->addReplyTo ("supporto@abulafiaweb.it");
 		$mail->addAddress($email);
-		
 		$mail->isHTML(true);   
 		$mail->Subject = $oggetto;
 		$mail->Body = $messaggio;
-		
 		$result = $mail->send();
+		echo $result; exit();
 
 		if($inserimento && $nuovoutente && $setting && $result) {
 			return true;
