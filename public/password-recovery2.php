@@ -6,10 +6,10 @@
         header("Location: login0.php?corpus=home");
     }
 
-	require 'lib/phpmailer/src/Exception.php';
-	require 'lib/phpmailer/src/PHPMailer.php';
-	require 'lib/phpmailer/src/SMTP.php';
-	$mail = new PHPMailer();
+	require_once 'lib/phpmailer/src/Exception.php';
+	require_once 'lib/phpmailer/src/PHPMailer.php';
+	require_once 'lib/phpmailer/src/SMTP.php';
+	$mail = new PHPMailer\PHPMailer\PHPMailer;
 
 	function random_string($length) {
    		$string = "";

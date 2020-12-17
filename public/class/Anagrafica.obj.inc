@@ -540,12 +540,12 @@ class Anagrafica {
 		 	exit();
 		}
 
-		//use PHPMailer\PHPMailer\PHPMailer;
-		//use PHPMailer\PHPMailer\Exception;
-		require 'lib/phpmailer/src/Exception.php';
-		require 'lib/phpmailer/src/PHPMailer.php';
-		require 'lib/phpmailer/src/SMTP.php';
-		$mail = new PHPMailer();
+		require_once 'lib/phpmailer/src/Exception.php';
+		require_once 'lib/phpmailer/src/PHPMailer.php';
+		require_once 'lib/phpmailer/src/SMTP.php';
+
+		$mail = new PHPMailer\PHPMailer\PHPMailer;
+
 		$oggetto = "Creazione Nuovo Utente AbulafiaWeb";
 		$messaggio = 	'Buongiorno '. $nome . ' ' . $cognome . ',<br><br>&egrave; ti confermiamo la 					creazione del tuo account sulla piattaforma Abulafia Web.<br><br>
 						Di seguito i dati per accedere:<br><br>
@@ -561,12 +561,15 @@ class Anagrafica {
 		$mail->isHTML(true);   
 		$mail->Subject = $oggetto;
 		$mail->Body = $messaggio;
-		$result = $mail->send();
 
+		$result = $mail->send();
+	
 		if($inserimento && $nuovoutente && $setting && $result) {
 			return true;
 		}
 		else {
+			echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+			exit();
 			return false;
 		}
 	}
