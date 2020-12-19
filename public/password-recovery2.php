@@ -9,7 +9,9 @@
 	require_once 'lib/phpmailer/src/Exception.php';
 	require_once 'lib/phpmailer/src/PHPMailer.php';
 	require_once 'lib/phpmailer/src/SMTP.php';
+	
 	$mail = new PHPMailer\PHPMailer\PHPMailer;
+	include '../../generalmailconf.php';
 
 	function random_string($length) {
    		$string = "";

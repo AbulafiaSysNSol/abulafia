@@ -19,7 +19,7 @@ $c = new Calendario();
 $ogg = $_GET['q'];
 $num = $_GET['num'];
 
-$query = $connessione->query("SELECT * FROM anagrafica WHERE autorizzato is true  AND (nome LIKE '%$ogg%' OR cognome LIKE '%$ogg%' OR codicefiscale LIKE '%$ogg%' ) ORDER BY cognome DESC LIMIT $num");
+$query = $connessione->query("SELECT * FROM anagrafica WHERE volontario = '1' AND (nome LIKE '%$ogg%' OR cognome LIKE '%$ogg%' OR codicefiscale LIKE '%$ogg%' ) ORDER BY cognome DESC LIMIT $num");
 ?>
 
 <table class="table table-bordered">
@@ -28,7 +28,7 @@ $query = $connessione->query("SELECT * FROM anagrafica WHERE autorizzato is true
         <td><b>Cognome</b></td>
         <td><b>Codice Fiscale</b></td>
         <td><b>Cellulare</b></td>
-        <?php if($a->isRespco($_SESSION['loginid'])){ ?> <td align="center"><b>Opzioni</b></td> <?php } ?>
+        <?php if($a->isRespco($_SESSION['loginid']) || $a->isAdmin($_SESSION['loginid'])){ ?> <td align="center"><b>Opzioni</b></td> <?php } ?>
     </tr>
 
     <?php
@@ -53,8 +53,8 @@ $query = $connessione->query("SELECT * FROM anagrafica WHERE autorizzato is true
             <?php if($a->isRespco($_SESSION['loginid']) || $a->isAdmin($_SESSION['loginid']) ){ ?>
                 <td style="vertical-align: middle" align="center">
                     <div class="btn-group btn-group-sm">
-                        <a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Revoca autorizzazione" onclick="return confirm('Sicuro di voler revocare autorizzazione al volontario?')" href="co-volontari-revoca.php?id=<?php echo $risultati2['idanagrafica']; ?>">
-                            <i class="fa fa-trash-o fa-fw"></i>
+                        <a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Rendi Operatore" onclick="return confirm('Sicuro di voler rendere operatore il volontario?')" href="co-volontari-rendi-op.php?id=<?php echo $risultati2['idanagrafica']; ?>">
+                            <i class="fa fa-id-badge fa-fw"></i> Rendi Operatore
                         </a>
                     </div>
                 </td>

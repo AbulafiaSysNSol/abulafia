@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h3 class="panel-title"><strong><i class="fa fa-user-circle"></i> Volontari Autorizzati</strong></h3>
+        <h3 class="panel-title"><strong><i class="fa fa-users"></i> Elenco Volontari </strong></h3>
     </div>
 
     <div class="panel-body">
@@ -9,12 +9,6 @@
         <?php
 
         $a = new Anagrafica();
-
-        if (isset($_GET['delete']) &&($_GET['delete'] == 'ok')) {
-            ?>
-            <center><div class="alert alert-success"><i class="fa fa-trash"></i> Autorizzazione Volontario Rimossa <b>Correttamente!</b></div></center>
-            <?php
-        }
 
         if (isset($_GET['insert']) &&($_GET['insert'] == 'ok')) {
             ?>
@@ -25,9 +19,7 @@
         if ($a->isRespco($_SESSION['loginid']) || $a->isAdmin($_SESSION['loginid'])){ ?>
 
             <div>
-                <a href="?corpus=modale-volontario"><button type="button" class="btn btn-primary"><i class="fa fa-user-plus fa-fw"></i> Aggiungi Volontario</button></a>
-           
-                <a href="?corpus=co-volontari-aggiungi"><button type="button" class="btn btn-success"><i class="fa fa-id-badge fa-fw"></i> Aggiungi Operatore</button></a><br><br>
+                <a href="?corpus=modale-volontario"><button type="button" class="btn btn-primary"><i class="fa fa-user-plus fa-fw"></i> Aggiungi Volontario</button></a><br><br>
             </div>
 
         <?php } ?>
