@@ -191,7 +191,7 @@
 					echo '<center><div class="alert alert-success"><b><h4><i class="fa fa-check"></i> Ben Fatto!</b></h4>Nessuna azione richiede la tua attenzione.</center>';
 				}
 
-				if (!$e->isSetMail()) {
+				if (!$e->isSetMail() && $_SESSION['auth'] >= 90) {
 					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-envelope"></i> Invio Email</b></h4>per poter inviare email bisogna configurare le impostazioni in <a href="?corpus=server-mail">questa pagina</a>.</div></center>';
 				}
 
@@ -199,34 +199,39 @@
 			</div>
 		</div>
 
-		<div class="panel panel-default">
-		
-			<div class="panel-heading">
-				<h3 class="panel-title"><strong><i class="fa fa-hdd-o"></i> Spazio Archiviazione:</strong></h3>
-			</div>
+		<?php
+		if ($_SESSION['auth'] >= 90) {
+           	?>
+			<div class="panel panel-default">
 			
-			<div class="panel-body">
-				<?php
-				$file = new File();
-				$dim =  round($file->sizeDirectory("../public/") / (1024*1024), 2) ;
-				$max = $_SESSION['quota'];
-				$percentuale = ( $dim / $max ) * 100;
-				if($percentuale <=50)
-					$class = "progress-bar-success";
-				else if($percentuale <=80)
-					$class = "progress-bar-warning";
-				else
-					$class = "progress-bar-danger";
-				?>
-				<div class="progress">
-					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
-					</div>
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong><i class="fa fa-hdd-o"></i> Spazio Archiviazione:</strong></h3>
 				</div>
-				<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,2).'%)'; ?></center>
+				
+				<div class="panel-body">
+					<?php
+					$file = new File();
+					$dim =  round($file->sizeDirectory("../public/") / (1024*1024), 2) ;
+					$max = $_SESSION['quota'];
+					$percentuale = ( $dim / $max ) * 100;
+					if($percentuale <=50)
+						$class = "progress-bar-success";
+					else if($percentuale <=80)
+						$class = "progress-bar-warning";
+					else
+						$class = "progress-bar-danger";
+					?>
+					<div class="progress">
+						<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
+						</div>
+					</div>
+					<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,2).'%)'; ?></center>
+				</div>
 			</div>
+			<?php
+		}
+		?>
 		
-		</div>
-
 		<!-- blocco destro -->
 
 	</div>

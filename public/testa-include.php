@@ -437,7 +437,13 @@ $anag = new Anagrafica();
                         <ul class="dropdown-menu">
                             <li role="presentation" class="dropdown-header">OPZIONI</li>
                             <li><a href="login0.php?corpus=settings"><i class="fa fa-cog fa-fw"></i> Impostazioni Utente</a></li>
-                            <li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o fa-fw"></i> Impostazioni Email</a></li>
+                            <?php
+                            if ($_SESSION['auth'] >= 90) {
+                                ?>
+                                <li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o fa-fw"></i> Impostazioni Email</a></li>
+                                <?php
+                            }
+                            ?>
                             <li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart fa-fw"></i> Statistiche</a></li>
                             <li><a href="https://www.abulafiaweb.it/#contact-section" target="_blank"><i class="fa fa-comment-o fa-fw"></i> Contattaci</a></li>
                             <li><a href="https://abulafiaweb.freshdesk.com" target="_blank"><i class="fa fa-support fa-fw"></i> Portale Helpdesk</a></li>

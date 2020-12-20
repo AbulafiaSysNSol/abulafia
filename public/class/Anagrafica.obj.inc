@@ -509,7 +509,7 @@ class Anagrafica {
 
 		try {
 		   	$connessione->beginTransaction();
-			$query = $connessione->prepare("INSERT INTO users VALUES(:id, 0, :nomenuovoutente, :passwordDB, :email, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)"); 
+			$query = $connessione->prepare("INSERT INTO users VALUES(:id, 10, :nomenuovoutente, :passwordDB, :email, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)"); 
 			$query->bindParam(':id', $id);
 			$query->bindParam(':nomenuovoutente', $nomenuovoutente);
 			$query->bindParam(':passwordDB', $passwordDB);
@@ -548,9 +548,9 @@ class Anagrafica {
 		include '../../generalmailconf.php';
 
 		$oggetto = "Creazione Nuovo Utente AbulafiaWeb";
-		$messaggio = 	'Buongiorno '. $nome . ' ' . $cognome . ',<br><br>&egrave; ti confermiamo la 					creazione del tuo account sulla piattaforma Abulafia Web.<br><br>
+		$messaggio = 	'Buongiorno '. $nome . ' ' . $cognome . ',<br><br>ti confermiamo la 					creazione del tuo account sulla piattaforma Abulafia Web.<br><br>
 						Di seguito i dati per accedere:<br><br>
-						link: ' . $_SESSION['paginaprincipale'] . '<br>
+						link: <a href="' . $_SESSION['paginaprincipale'] . '"> ' . $_SESSION['paginaprincipale'] . ' <br>
 						username: ' . $nomenuovoutente . '<br>
 						password: ' . $password . '<br><br>
 						Per eventuali chiarimenti puoi rispondere a questa email.
