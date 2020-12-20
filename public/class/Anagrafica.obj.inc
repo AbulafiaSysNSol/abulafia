@@ -470,6 +470,46 @@ class Anagrafica {
 		return $q3;
 	}
 
+	public function autorizzaOP($id) {
+		global $connessione;
+
+		try {
+			$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE users SET opco = 1 WHERE idanagrafica = :id");
+			$query->bindParam(':id', $id);
+			$query->execute();
+			$connessione->commit();
+			$q3 = true;
+		}
+		catch (PDOException $errorePDO) {
+			echo "Errore: " . $errorePDO->getMessage();
+			$connessione->rollBack();
+			$q3 = false;
+		}
+
+		return $q3;
+	}
+
+	public function revocaOP($id) {
+		global $connessione;
+
+		try {
+			$connessione->beginTransaction();
+			$query = $connessione->prepare("UPDATE users SET opco = 0 WHERE idanagrafica = :id");
+			$query->bindParam(':id', $id);
+			$query->execute();
+			$connessione->commit();
+			$q3 = true;
+		}
+		catch (PDOException $errorePDO) {
+			echo "Errore: " . $errorePDO->getMessage();
+			$connessione->rollBack();
+			$q3 = false;
+		}
+
+		return $q3;
+	}
+
 	function random_string($length) {
    		$string = "";
  		for ($i = 0; $i <= ($length/32); $i++)
@@ -502,7 +542,8 @@ class Anagrafica {
 		
 		$id = $lastid;
 		$nome = str_replace("'","",$nome);
-		$cognome = str_replace("'","",$cognome);	
+		$cognome = str_replace("'","",$cognome);
+		$cognome = str_replace(" ","",$cognome);	
 		$nomenuovoutente = strtolower($nome.'.'.$cognome);
 		$password = $this->random_string(8);
 		$passwordDB = md5($password);
@@ -548,9 +589,9 @@ class Anagrafica {
 		include '../../generalmailconf.php';
 
 		$oggetto = "Creazione Nuovo Utente AbulafiaWeb";
-		$messaggio = 	'Buongiorno '. $nome . ' ' . $cognome . ',<br><br>ti confermiamo la 					creazione del tuo account sulla piattaforma Abulafia Web.<br><br>
+		$messaggio = 	'Buongiorno '. ucwords($nome) . ' ' . ucwords($cognome) . ',<br><br>ti confermiamo la 					creazione del tuo account sulla piattaforma Abulafia Web.<br><br>
 						Di seguito i dati per accedere:<br><br>
-						link: <a href="' . $_SESSION['paginaprincipale'] . '"> ' . $_SESSION['paginaprincipale'] . ' <br>
+						link: <a href="' . $_SESSION['paginaprincipale'] . '"> ' . $_SESSION['paginaprincipale'] . '</a> <br>
 						username: ' . $nomenuovoutente . '<br>
 						password: ' . $password . '<br><br>
 						Per eventuali chiarimenti puoi rispondere a questa email.

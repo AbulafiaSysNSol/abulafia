@@ -46,16 +46,35 @@ $query = $connessione->query("SELECT * FROM anagrafica WHERE volontario = '1' AN
         <tr bgcolor=<?php echo $colorelinee; ?>>
             <td style="vertical-align: middle"><?php echo ucwords($risultati2['nome']);?></td>
             <td style="vertical-align: middle"><?php echo ucwords($risultati2['cognome']);?></td>
-            <td style="vertical-align: middle"><?php echo ucwords($risultati2['codicefiscale']);?></td>
+            <td style="vertical-align: middle"><?php echo strtoupper($risultati2['codicefiscale']);?></td>
             <td style="vertical-align: middle">
                 <?php $anag = new Anagrafica(); $cell = $anag->getCellulare($risultati2['idanagrafica']); echo $cell; //implementare il multinumero ?>
             </td>
             <?php if($a->isRespco($_SESSION['loginid']) || $a->isAdmin($_SESSION['loginid']) ){ ?>
                 <td style="vertical-align: middle" align="center">
-                    <div class="btn-group btn-group-sm">
-                        <a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Rendi Operatore" onclick="return confirm('Sicuro di voler rendere operatore il volontario?')" href="co-volontari-rendi-op.php?id=<?php echo $risultati2['idanagrafica']; ?>">
-                            <i class="fa fa-id-badge fa-fw"></i> Rendi Operatore
+                    <div class="btn-group btn-group-xs">
+                        
+                        <?php
+                        if ($a->isOpco($risultati2['idanagrafica'])) {
+                            ?>
+                            <a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Revoca Operatore" onclick="return confirm('Sicuro di voler revocare il volontario?')" href="co-revoca-op.php?id=<?php echo $risultati2['idanagrafica']; ?>">
+                                <i class="fa fa-times fa-fw"></i> Revoca Operatore
+                            </a>
+                            <?php
+                        }
+                        else {
+                            ?>
+                            <a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Rendi Operatore" onclick="return confirm('Sicuro di voler rendere operatore il volontario?')" href="co-rendi-op.php?id=<?php echo $risultati2['idanagrafica']; ?>">
+                                <i class="fa fa-id-badge fa-fw"></i> Rendi Operatore
+                            </a>
+                            <?php
+                        }
+                        ?>
+
+                        <a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Assegna Mezzo" href="<?php echo $risultati2['idanagrafica']; ?>">
+                            <i class="fa fa-arrow-right fa-fw"></i> Assegna Mezzo
                         </a>
+
                     </div>
                 </td>
             <?php } ?>

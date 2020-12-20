@@ -12,7 +12,19 @@
 
         if (isset($_GET['insert']) &&($_GET['insert'] == 'ok')) {
             ?>
-            <center><div class="alert alert-success"><i class="fa fa-trash"></i> Volontario Aggiunto <b>Correttamente!</b></div></center>
+            <center><div class="alert alert-success"><i class="fa fa-check"></i> Volontario Aggiunto <b>Correttamente!</b> Un'email con username e password &egrave; stata mandata all'indirizzo email inserito.</div></center>
+            <?php
+        }
+
+        if (isset($_GET['addop']) &&($_GET['addop'] == 'ok')) {
+            ?>
+            <center><div class="alert alert-success"><i class="fa fa-check"></i> Volontario Nominato Operatore con <b>Successo!</b></div></center>
+            <?php
+        }
+
+        if (isset($_GET['revop']) &&($_GET['revop'] == 'ok')) {
+            ?>
+            <center><div class="alert alert-danger"><i class="fa fa-check"></i> Operatore Revocato con <b>Successo!</b></div></center>
             <?php
         }
 
