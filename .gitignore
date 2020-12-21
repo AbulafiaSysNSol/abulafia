@@ -29,3 +29,5 @@ public/images/barcode/*
 public/certificati/*
 !public/certificati/.gitkeep
 /public/images/intestazione_certificato.png
+public/cartecircolazione/*
+!public/cartecircolazione/.gitkeep

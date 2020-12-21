@@ -4,16 +4,17 @@ require_once('../db-connessione-include.php');
 
 class Veicolo {
 
-    public function insertVeicolo($targa, $tipologia, $selettiva) {
+    public function insertVeicolo($targa, $tipologia, $selettiva, $libretto) {
 
         global $connessione;
 
         try {
                 $connessione->beginTransaction();
-                $query = $connessione->prepare("INSERT INTO aut_veicoli VALUES ('0',:targa, :tipologia, :selettiva)");
-                $query->bindParam(':targa', strtoupper($targa));
+                $query = $connessione->prepare("INSERT INTO aut_veicoli VALUES ('0',:targa, :tipologia, :selettiva, :libretto)");
+                $query->bindParam(':targa', $targa);
                 $query->bindParam(':tipologia', $tipologia);
-                $query->bindParam(':selettiva', strtoupper($selettiva));
+                $query->bindParam(':selettiva', $selettiva);
+                $query->bindParam(':libretto', $libretto);
                 $query->execute();
                 $connessione->commit();
                 $q3 = true;

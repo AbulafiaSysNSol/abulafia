@@ -34,7 +34,7 @@ if( isset($_GET['insert']) && $_GET['insert'] == "error") {
 
     <div class="panel-body">
 
-        <form class="form-horizontal" action="autoparco-add-veicoli2.php" role="form" name="modulo" method="post" >
+        <form class="form-horizontal" action="autoparco-add-veicoli2.php" role="form" name="modulo" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
                 <div class="row">
@@ -50,7 +50,7 @@ if( isset($_GET['insert']) && $_GET['insert'] == "error") {
                             <?php
                                 foreach ( $tipologie as $rows ) {
                                     $a = $rows['descrizione'];
-                                        echo "<option value=$a>$a</option>";
+                                        echo "<option value = $a> $a </option>";
                                 }
                             ?>
                         </select>
@@ -62,27 +62,21 @@ if( isset($_GET['insert']) && $_GET['insert'] == "error") {
 
             <div class="form-group">
                 <div class="row">
-                    <label class="col-sm-2 control-label">Selettiva radio:</label>
+                    <label class="col-sm-2 control-label">Selettiva Radio:</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control input-sm" minlength="7" maxlength="8" name="selettiva">
                     </div>
 
-                    <label class="col-sm-2 control-label"> Carica libretto:</label>
+                    <label class="col-sm-2 control-label"> Carica Libretto:</label>
                     <div class="col-sm-5">
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_SESSION['protocollomaxfilesize'];?>" />
-                        <input required id="uploadedfile" name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true" data-placeholder="nessun file selezionato.">
-                        <br>
-                        <button id="buttonload" onclick="showbar();" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Caricamento in corso...attendere!" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-paperclip"></span> Allega File </button>
-                        <br><br>
-                        <div class="progress" id="progress" style="display: none;">
-                            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            </div>
-                        </div>
+                        <input name="uploadedfile[]" type="file" multiple="multiple" class="filestyle" data-buttonBefore="true" data-placeholder="nessun file selezionato.">
                     </div>
                 </div>
             </div>
 
             <br>
+
             <div class="row">
                 <center>
                     <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-check"></i> Aggiungi Veicolo</button>
@@ -94,45 +88,3 @@ if( isset($_GET['insert']) && $_GET['insert'] == "error") {
 
     </div>
 </div>
-
-<script>
-    $("#buttonl").click(function() {
-        var $btn = $(this);
-        var oggetto = document.modulo.oggetto.value;
-        if ((oggetto == "") || (oggetto == "undefined")) {
-            return false;
-        }
-        else {
-            $btn.button('loading');
-        }
-    });
-
-    $("#buttonload").click(function() {
-        var $btn = $(this);
-        if(document.getElementById("uploadedfile").value != '') {
-            $btn.button('loading');
-        }
-    });
-</script>
-
-<script language="javascript">
-
-    <!--
-    function showbar() {
-        if(document.getElementById("uploadedfile").value != '') {
-            document.getElementById("progress").style.display="block";
-        }
-    }
-
-
-    function loading()
-
-    {
-        if(document.getElementById("exampleInputFile").value != '') {
-            document.getElementById("content").style.display="table";
-        }
-    }
-
-
-    //-->
-</script>

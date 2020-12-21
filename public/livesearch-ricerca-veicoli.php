@@ -15,6 +15,7 @@ function __autoload ($class_name) { //funzione predefinita che si occupa di cari
 
 $a = new Anagrafica();
 $c = new Calendario();
+$f = new File();
 
 $ogg = $_GET['q'];
 $num = $_GET['num'];
@@ -41,6 +42,13 @@ $query = $connessione->query("SELECT * FROM aut_veicoli WHERE targa LIKE '%$ogg%
             $colorelinee = $_SESSION['secondocoloretabellarisultati'] ;
         } //secondo colore
         $contatorelinee = $contatorelinee + 1 ;
+        $estensione = $f->estensioneFile($risultati2['libretto']);
+        if ($estensione == 'jpg' || $estensione == 'jpeg' || $estensione == 'JPG' || $estensione == 'JPEG' || $estensione == 'png' || $estensione == 'PNG') {
+            $type = 'image';
+        }
+        else {
+            $type = 'iframe';
+        }
         ?>
         <tr bgcolor=<?php echo $colorelinee; ?>>
             <td style="vertical-align: middle"><?php echo ucwords($risultati2['targa']);?></td>
@@ -48,19 +56,16 @@ $query = $connessione->query("SELECT * FROM aut_veicoli WHERE targa LIKE '%$ogg%
             <td style="vertical-align: middle"><?php echo ucwords($risultati2['selettiva']);?></td>
             <td style="vertical-align: middle" align="center">
                 <div class="btn-group btn-group-sm">
-                    <a class="btn btn-info btn" data-toggle="tooltip" data-placement="left" title="Visualizza Libretto" href="login0.php?corpus=autoparco-show-libretto&id=<?php echo $risultati2['id']; //convertire in visualizzazione+download ?> " data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-info-circle fa-fw"></i>
+                    <a class="fancybox btn btn-info btn" data-fancybox-type="<?php echo $type; ?>" data-toggle="tooltip" data-placement="left" title="Visualizza Libretto" href="cartecircolazione/<?php echo $risultati2['libretto']; //convertire in visualizzazione+download ?> " data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-file-text-o fa-fw"></i> Libretto
                     </a>
                     <a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Veicolo" href="login0.php?corpus=autoparco-edit-veicoli&id=<?php echo $risultati2['id']; ?>">
-                        <i class="fa fa-edit fa-fw"></i>
+                        <i class="fa fa-edit fa-fw"></i> Modifica
                     </a>
-                    <?php /*<a class="btn btn-success" data-toggle="tooltip" data-placement="left" title="Aggiungi Visita" href="login0.php?corpus=cert-modale-add-access&id=<?php echo $risultati2['id']; ?>" data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-medkit fa-fw"></i>
-                    </a> */ ?>
                     <?php if($a->isAdmin($_SESSION['loginid'])) {
                         ?>
                         <a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Elimina Veicolo" onclick="return confirm('Sicuro di voler cancellare il veicolo?')" href="autoparco-delete-veicolo.php?id=<?php echo $risultati2['id']; ?>">
-                            <i class="fa fa-trash-o fa-fw"></i>
+                            <i class="fa fa-trash-o fa-fw"></i> Elimina
                         </a>
                         <?php
                     }
