@@ -21,34 +21,40 @@
     $c = new Calendario();
     $f = new File;
 
-    foreach ($_FILES['uploadedfile']['name'] as $filename) {
+    if ($_FILES['uploadedfile']['name'][0] != '') {
+        foreach ($_FILES['uploadedfile']['name'] as $filename) {
 
-        $time = time();
-        $name = $time.".".$f->estensioneFile(basename($filename));  
-        $target_path = "cartecircolazione/" . $name;
-        $count = 0;
-        
-        //se lo spostamento del file va a buon fine
-        if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'][$count], $target_path)) { 
+            $time = time();
+            $name = $time.".".$f->estensioneFile(basename($filename));  
+            $target_path = "cartecircolazione/" . $name;
+            $count = 0;
             
-            /*try {
-                $connessione->beginTransaction();
-                $query = $connessione->prepare("INSERT INTO joinlettereallegati VALUES(:idlettera, :annoprotocollo, :name)"); 
-                $query->bindParam(':idlettera', $idlettera);
-                $query->bindParam(':annoprotocollo', $annoprotocollo);
-                $query->bindParam(':name', $name);
-                $query->execute();
-                $connessione->commit();
-                $inserisci = true;
-            }    
-            catch (PDOException $errorePDO) { 
-                echo "Errore: " . $errorePDO->getMessage();
-                $connessione->rollBack();
-                $inserisci = false;
-            }*/
-            $allegato = true;
-            $count++;
+            //se lo spostamento del file va a buon fine
+            if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'][$count], $target_path)) { 
+                
+                /*try {
+                    $connessione->beginTransaction();
+                    $query = $connessione->prepare("INSERT INTO joinlettereallegati VALUES(:idlettera, :annoprotocollo, :name)"); 
+                    $query->bindParam(':idlettera', $idlettera);
+                    $query->bindParam(':annoprotocollo', $annoprotocollo);
+                    $query->bindParam(':name', $name);
+                    $query->execute();
+                    $connessione->commit();
+                    $inserisci = true;
+                }    
+                catch (PDOException $errorePDO) { 
+                    echo "Errore: " . $errorePDO->getMessage();
+                    $connessione->rollBack();
+                    $inserisci = false;
+                }*/
+                $allegato = true;
+                $count++;
+            }
         }
+    }
+    else {
+        $allegato = true;
+        $name = '';
     }
 
     $targa = $_POST['targa'];

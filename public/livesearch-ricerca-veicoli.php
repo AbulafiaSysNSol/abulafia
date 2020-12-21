@@ -56,9 +56,15 @@ $query = $connessione->query("SELECT * FROM aut_veicoli WHERE targa LIKE '%$ogg%
             <td style="vertical-align: middle"><?php echo ucwords($risultati2['selettiva']);?></td>
             <td style="vertical-align: middle" align="center">
                 <div class="btn-group btn-group-sm">
-                    <a class="fancybox btn btn-info btn" data-fancybox-type="<?php echo $type; ?>" data-toggle="tooltip" data-placement="left" title="Visualizza Libretto" href="cartecircolazione/<?php echo $risultati2['libretto']; //convertire in visualizzazione+download ?> " data-toggle="modal" data-target="#myModal">
-                        <i class="fa fa-file-text-o fa-fw"></i> Libretto
-                    </a>
+                    <?php 
+                    if ($risultati2['libretto'] != '') {
+                        ?>
+                        <a class="fancybox btn btn-info btn" data-fancybox-type="<?php echo $type; ?>" data-toggle="tooltip" data-placement="left" title="Visualizza Libretto" href="cartecircolazione/<?php echo $risultati2['libretto']; //convertire in visualizzazione+download ?> " data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-file-text-o fa-fw"></i> Libretto
+                        </a>
+                        <?php
+                    }
+                    ?>
                     <a class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Modifica Veicolo" href="login0.php?corpus=autoparco-edit-veicoli&id=<?php echo $risultati2['id']; ?>">
                         <i class="fa fa-edit fa-fw"></i> Modifica
                     </a>
