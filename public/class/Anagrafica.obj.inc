@@ -241,6 +241,16 @@ class Anagrafica {
 			return false;
 	}
 
+	public function isVolontario($id) {
+		global $connessione;
+		$query = $connessione->query("SELECT volontario FROM anagrafica WHERE idanagrafica = $id");
+		$contabilita = $query->fetch();
+		if ($contabilita[0] == 1) 
+			return true;
+		else
+			return false;
+	}
+
 	public function isUser($id) {
 		global $connessione;
 		$query = $connessione->query("SELECT COUNT(*) FROM users WHERE idanagrafica = $id");

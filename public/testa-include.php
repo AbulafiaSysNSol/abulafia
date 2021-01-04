@@ -406,12 +406,25 @@ $anag = new Anagrafica();
                         </li>
                     <?php } ?>
 
-                    <?php if($_SESSION['mod_autoparco'] && $anag->isAutoparco($_SESSION['loginid'])) { ?>
+                    <?php if($_SESSION['mod_autoparco'] && ($anag->isAutoparco($_SESSION['loginid'])) || $anag->isVolontario($_SESSION['loginid'])) { ?>
                         <li class="dropdown <?php if($_GET['corpus'] == 'cert' OR $_GET['corpus']=='cert-anag') { echo ' active'; }?>">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-car fa-fw"></i> Autoparco <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="?corpus=autoparco-add-veicoli"><i class="fa fa-plus fa-fw"></i> Aggiungi veicolo</a></li>
-                                <li><a href="?corpus=autoparco-search-veicoli"><i class="fa fa-car fa-fw"></i> Elenco Veicoli</a></li>
+                                <?php
+                                if ($anag->isAutoparco($_SESSION['loginid'])) {
+                                    ?>
+                                    <li><a href="?corpus=autoparco-add-veicoli"><i class="fa fa-plus fa-fw"></i> Aggiungi veicolo</a></li>
+                                    <li><a href="?corpus=autoparco-search-veicoli"><i class="fa fa-car fa-fw"></i> Elenco Veicoli</a></li>
+                                    <li><a href="?corpus=autoparco-add-veicoli"><i class="fa fa-address-card fa-fw"></i> Richieste Mezzi</a></li>
+                                    <li><a href="?corpus=co-elenco-veicoli-assegnati"><i class="fa fa-list-ul fa-fw"></i> Veicoli Assegnati</a></li>
+                                    <?php
+                                }
+                                if ($anag->isVolontario($_SESSION['loginid'])) {
+                                    ?>
+                                    <li><a href="?corpus=autoparco-richiedi-veicolo"><i class="fa fa-plus-circle fa-fw"></i> Richiedi Veicolo</a></li>
+                                    <?php
+                                }
+                                ?>
                             </ul>
                         </li>
                     <?php } ?>
@@ -421,8 +434,6 @@ $anag = new Anagrafica();
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-laptop fa-fw"></i> CO <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="?corpus=co-volontari"><i class="fa fa-users fa-fw"></i> Volontari Abilitati</a></li>
-                                <li><a href="?corpus=co-elenco-veicoli-assegnati"><i class="fa fa-list-ul fa-fw"></i> Veicoli Assegnati</a></li>
-                                <li><a href="?corpus=autoparco-add-veicoli"><i class="fa fa-address-card fa-fw"></i> Richieste Mezzi</a></li>
                             </ul>
                         </li>
                     <?php } ?>
@@ -442,10 +453,10 @@ $anag = new Anagrafica();
                             if ($_SESSION['auth'] >= 90) {
                                 ?>
                                 <li><a href="login0.php?corpus=server-mail"><i class="fa fa-envelope-o fa-fw"></i> Impostazioni Email</a></li>
+                                <li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart fa-fw"></i> Statistiche</a></li>
                                 <?php
                             }
                             ?>
-                            <li><a href="login0.php?corpus=statistiche"><i class="fa fa-bar-chart fa-fw"></i> Statistiche</a></li>
                             <li><a href="https://www.abulafiaweb.it/#contact-section" target="_blank"><i class="fa fa-comment-o fa-fw"></i> Contattaci</a></li>
                             <li><a href="https://abulafiaweb.freshdesk.com" target="_blank"><i class="fa fa-support fa-fw"></i> Portale Helpdesk</a></li>
                             <?php

@@ -108,9 +108,9 @@
 			<div class="panel-body">
 				<?php
 				echo '<br><a href="?corpus=modifica-anagrafica&from=home&id=' . $_SESSION['loginid'] . '"><center><img class="img-circle" width="65%" src="' . $a->getFoto($_SESSION['loginid']) .'"></center></a>';
-				echo '<br><br><div style="line-height: 2;">Nome: <b>' . $a->getNome($_SESSION['loginid']) . '</b></div>';
-				echo '<div style="line-height: 2;">Cognome: <b>' . $a->getCognome($_SESSION['loginid']) . '</b></div>';
-				echo '<div style="line-height: 2;">C.F.: <b>' . $a->getCodiceFiscale($_SESSION['loginid']) . '</b></div>';
+				echo '<br><br><div style="line-height: 2;">Nome: <b>' . ucwords($a->getNome($_SESSION['loginid'])) . '</b></div>';
+				echo '<div style="line-height: 2;">Cognome: <b>' . ucwords($a->getCognome($_SESSION['loginid'])) . '</b></div>';
+				echo '<div style="line-height: 2;">C.F.: <b>' . strtoupper($a->getCodiceFiscale($_SESSION['loginid'])) . '</b></div>';
 				?>
 				<hr>
 				<div style="line-height: 1.8;"><a href="?corpus=modifica-anagrafica&from=home&id=<?php echo $_SESSION['loginid']?>"><i class="fa fa-edit fa-fw"></i> Modifica Profilo</a></div>
