@@ -36,6 +36,12 @@
 		<?php
 	}
 
+	if (isset($_GET['updateprofile']) &&($_GET['updateprofile'] == 'true')) {
+		?>
+		<center><h4><div class="alert alert-success"><i class="fa fa-check"></i> Profilo utente aggiornato <b>correttamente!</b></div></h4></center>
+		<?php
+	}
+
 	if (isset($_GET['profile']) &&($_GET['profile'] == 'ok')) {
 		?>
 		<center><h4><div class="alert alert-success"><i class="fa fa-check"></i> Profilo aggiornato <b>correttamente!</b> E adesso possibile riprendere l'uso del software.</div></h4></center>
