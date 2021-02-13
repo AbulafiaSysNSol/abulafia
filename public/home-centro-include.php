@@ -120,7 +120,7 @@
 				?>
 				<hr>
 				<div style="line-height: 1.8;"><a href="?corpus=modifica-anagrafica&from=home&id=<?php echo $_SESSION['loginid']?>"><i class="fa fa-edit fa-fw"></i> Modifica Profilo</a></div>
-				<div style="line-height: 1.8;"><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><i class="fa fa-key fa-fw"></i> Gestione Credenziali</a></div>
+				<div style="line-height: 1.8;"><a href="login0.php?corpus=cambio-password"><i class="fa fa-key fa-fw"></i> Gestione Credenziali</a></div>
 				<div style="line-height: 1.8;"><a href="login0.php?corpus=settings"><i class="fa fa-cog fa-fw"></i> Impostazioni Utente</a></div>
 			</div>
 		</div>
