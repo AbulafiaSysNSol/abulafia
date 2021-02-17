@@ -5,7 +5,10 @@
 	$my_lettera = new Lettera();
 	$my_file = new File();
 	
+	require_once 'lib/phpmailer/src/Exception.php';
+	require_once 'lib/phpmailer/src/PHPMailer.php';
 	require_once 'lib/phpmailer/src/SMTP.php';
+
 	$mail = new PHPMailer\PHPMailer\PHPMailer;
 
 	$idlettera = $_GET['id'];
