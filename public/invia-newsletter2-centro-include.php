@@ -5,8 +5,8 @@
 	$my_lettera = new Lettera();
 	$my_file = new File();
 	
-	require('lib/phpmailer/PHPMailerAutoload.php');
-	$mail = new PHPMailer();
+	require_once 'lib/phpmailer/src/SMTP.php';
+	$mail = new PHPMailer\PHPMailer\PHPMailer;
 
 	$idlettera = $_GET['id'];
 	$annoricercaprotocollo = $_GET['anno'];
@@ -104,7 +104,7 @@
 			if($erroreallegati == 0) {
 				?>
 				<div class="col-sm-6">
-					<div class="alert alert-danger"><i class="fa fa-times"></i> <b>Attenzione:</b> si è verificato un problema con l'invio degli allegati. Riprovare.</div>
+					<div class="alert alert-danger"><i class="fa fa-times"></i> <b>Attenzione:</b> si Ã¨ verificato un problema con l'invio degli allegati. Riprovare.</div>
 				</div>
 				<?php
 			}
