@@ -141,6 +141,19 @@
 
 	<div class="col-sm-3">
 
+		<?php
+		if($a->isVolontario($_SESSION['loginid'])) {
+			?>
+			<div class="alert alert-warning">
+				<center>
+					<i class="fa fa-plus-circle fa-5x fa-fw"></i> <i class="fa fa-car fa-5x fa-fw"></i> 
+					<br><br><a href="login0.php?corpus=autoparco-richiedi-veicolo"><b>Richiedi Veicolo</b></a>
+				</center>
+			</div>
+			<?php
+		}
+		?>
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title"><strong><i class="fa fa-calendar-check-o"></i> Avvisi/Reminder:</strong></h3>

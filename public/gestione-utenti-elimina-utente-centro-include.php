@@ -26,7 +26,20 @@
 	   	echo "Errore: " . $errorePDO->getMessage();
 	   	$connessione->rollBack();
 	 	exit();
-	}	
+	}
+
+	try {
+	   	$connessione->beginTransaction();
+		$query = $connessione->prepare("UPDATE anagrafica SET volontario = '0' WHERE idanagrafica = :id LIMIT 1"); 
+		$query->bindParam(':id', $id);
+		$query->execute();
+		$connessione->commit();
+	}	 
+	catch (PDOException $errorePDO) { 
+	   	echo "Errore: " . $errorePDO->getMessage();
+	   	$connessione->rollBack();
+	 	exit();
+	}
 
 ?>
 
