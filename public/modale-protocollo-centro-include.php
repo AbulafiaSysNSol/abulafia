@@ -67,7 +67,7 @@
 							$risultati = $connessione->query("SELECT distinct * from pratiche");
 							?>
 							<select class="form-control" size=1 cols=4 NAME="pratica">
-							<option value="">nessuna pratica
+							<option value="0">nessuna pratica
 							<?php
 							while ($risultati2 = $risultati->fetch())
 							{

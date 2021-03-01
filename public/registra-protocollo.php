@@ -21,7 +21,10 @@
 	$my_log = new Log();
 	
 	//LIBRERIA PER L'INVIO DI EMAIL
-	include('lib/phpmailer/PHPMailerAutoload.php');
+	require_once 'lib/phpmailer/src/Exception.php';
+	require_once 'lib/phpmailer/src/PHPMailer.php';
+	require_once 'lib/phpmailer/src/SMTP.php';
+
 	$date=strftime("%d/%m/%Y");
 	$ora = date("g:i a");
 	$datamail = $date . ' alle ' . $ora;
@@ -138,7 +141,7 @@
 		$indirizzi = $anagrafica->getNotificationsIns();
 		if ($indirizzi) {
 			//invio notifica
-			$mail = new PHPMailer();
+			$mail = new PHPMailer\PHPMailer\PHPMailer;
 			$mail->From = 'no-reply@abulafiaweb.it';
 			$mail->FromName = 'Abulafia Web Notification';
 			$mail->isHTML(true);
