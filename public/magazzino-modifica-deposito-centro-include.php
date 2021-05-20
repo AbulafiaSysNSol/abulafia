@@ -9,6 +9,7 @@
 	$s = new Servizio();
 	$m = new Magazzino();
 	$p = new Prodotto();
+	$c = new Calendario();
 	$info = $m->getDepositoById($id);
 ?>
 
@@ -71,6 +72,21 @@
 								<div class="col-sm-4">
 									<label>Confezionamento:</label>
 									<input type="text" value="<?php echo $info['confezionamento']; ?>" class="form-control input-sm" name="confezionamento">
+								</div>
+							
+							</div>
+							<br>
+							
+							<div class="row">
+							
+								<div class="col-sm-7">
+									<label>Lotto:</label>
+									<input type="text" value="<?php echo $info['lotto']; ?>" class="form-control input-sm" name="lotto">
+								</div>
+							
+								<div class="col-sm-5">
+									<label>Scadenza:</label>
+									<input type="text" value="<?php echo $c->dataSlash($info['scadenza']); ?>" class="form-control input-sm" name="scadenza">
 								</div>
 							
 							</div>

@@ -74,6 +74,21 @@
 									<input type="text" value="0" class="form-control input-sm" name="confezionamento" required>
 								</div>
 							</div>
+
+							<br>
+
+							<div class="row">
+								<div class="col-sm-7">
+									<label id="lbllotto">Lotto:</label>
+									<input type="text" placeholder="-" class="form-control input-sm" name="lotto">
+								</div>
+							
+								<div class="col-sm-5">
+									<label id="lblscadenza">Scadenza:</label>
+									<input type="text" placeholder="gg/mm/aaaa" class="form-control input-sm" name="scadenza">
+								</div>
+							</div>
+
 						</div>
 					</div>
 			
