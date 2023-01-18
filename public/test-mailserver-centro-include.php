@@ -14,7 +14,8 @@
 		?>
 		<div class="alert alert-danger"><b><i class="fa fa-warning"></i> ERRORE:</b> Impossibile collegarsi al server mail.<br><br>
 		<?php
-			echo 'Mailer Error: ' . $mail->ErrorInfo;
+			echo 'Error: ' . $mail->ErrorInfo;
+			echo '<br><br>' . $res;
 		?>	
 		<br><br>Controllare i parametri nelle <a href="?corpus=server-mail">impostazioni email</a>. </div>
 		<?php
