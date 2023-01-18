@@ -92,6 +92,9 @@
 			</script>
 			<?php
 		}
+		else {
+			echo 'Error: ' . $mail->ErrorInfo;
+		}
 	}
 
 ?>
