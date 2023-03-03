@@ -80,7 +80,7 @@
 
 		}
 		
-		public function assegnaProdotto($codiceprodotto, $magazzino, $settore, $scortaminima, $riordino, $giacenzainiziale, $confezionamento) {
+		public function assegnaProdotto($codiceprodotto, $magazzino, $settore, $scortaminima, $riordino, $giacenzainiziale, $lotto, $scadenza, $confezionamento) {
 			$duplicate = $this->inDeposito($codiceprodotto, $magazzino);
 			if ($duplicate) {
 				$q = 'duplicate';
@@ -89,13 +89,15 @@
 				global $connessione;
 				try {
 		   			$connessione->beginTransaction();
-					$query = $connessione->prepare("INSERT INTO joinprodottimagazzini VALUES (null, :codiceprodotto, :magazzino, :settore, :scortaminima, :riordino, :giacenzainiziale, :giacenzainiziale, :confezionamento )"); 
+					$query = $connessione->prepare("INSERT INTO joinprodottimagazzini VALUES (null, :codiceprodotto, :magazzino, :settore, :scortaminima, :riordino, :giacenzainiziale, :giacenzainiziale, :lotto, :scadenza, :confezionamento )"); 
 					$query->bindParam(':codiceprodotto', $codiceprodotto);
 					$query->bindParam(':magazzino', $magazzino);
 					$query->bindParam(':settore', $settore);
 					$query->bindParam(':scortaminima', $scortaminima);
 					$query->bindParam(':riordino', $riordino);
 					$query->bindParam(':giacenzainiziale', $giacenzainiziale);
+					$query->bindParam(':lotto', $lotto);
+					$query->bindParam(':scadenza', $scadenza);
 					$query->bindParam(':confezionamento', $confezionamento);
 					$query->execute();
 					$connessione->commit();

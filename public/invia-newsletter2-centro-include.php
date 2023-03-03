@@ -77,7 +77,7 @@
 		foreach ($destinatari as $valore) {
 			try {
 			   	$connessione->beginTransaction();
-				$query = $connessione->prepare("INSERT INTO mailsend VALUES ('', :userid, :valore, :data, :idlettera, :annoricercaprotocollo) "); 
+				$query = $connessione->prepare("INSERT INTO mailsend VALUES (null, :userid, :valore, :data, :idlettera, :annoricercaprotocollo) "); 
 				$query->bindParam(':userid', $userid);
 				$query->bindParam(':valore', $valore);
 				$query->bindParam(':data', $data);

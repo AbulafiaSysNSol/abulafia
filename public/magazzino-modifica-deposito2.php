@@ -10,7 +10,9 @@
 	include 'class/Log.obj.inc';
 	include '../db-connessione-include.php';
 	include 'class/Magazzino.obj.inc';
+	include 'class/Calendario.obj.inc';
 	$m = new Magazzino();
+	$c = new Calendario();
 	$id = $_GET['id'];
 	$prodotto = $_GET['prodotto'];
 	$magazzino = $_GET['magazzino'];
@@ -18,8 +20,10 @@
 	$scortaminima = $_POST['scortaminima'];
 	$riordino = $_POST['riordino'];
 	$confezionamento = $_POST['confezionamento'];
+	$lotto = $_POST['lotto'];
+	$scadenza = $c->dataDB($_POST['scadenza']);
 	
-	$res = $m->modificaDeposito($id, $settore, $scortaminima, $riordino, $confezionamento); 
+	$res = $m->modificaDeposito($id, $settore, $scortaminima, $riordino, $confezionamento, $lotto, $scadenza); 
 	
 	
 	if($res) {

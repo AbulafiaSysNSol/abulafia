@@ -12,7 +12,12 @@
 	include 'class/Prodotto.obj.inc';
 	$p = new Prodotto();
 	$descrizione = $_POST['descrizione'];
-	$prezzo = str_replace(',','.',$_POST['prezzo']);
+	if($_POST['prezzo'] == '') {
+		$prezzo = 0;
+	}
+	else {
+		$prezzo = str_replace(',','.',$_POST['prezzo']);
+	}
 	$note = $_POST['note'];
 	$unita = $_POST['unitadimisura'];
 	$barcode = $_POST['codicebarre'];

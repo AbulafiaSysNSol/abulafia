@@ -8,7 +8,7 @@
 
 	try {
 	   	$connessione->beginTransaction();
-		$query = $connessione->prepare("INSERT INTO users VALUES(:id, 0, :nomenuovoutente, :passwordnuovoutente, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)"); 
+		$query = $connessione->prepare("INSERT INTO users VALUES(:id, 0, :nomenuovoutente, :passwordnuovoutente, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)"); 
 		$query->bindParam(':id', $id);
 		$query->bindParam(':nomenuovoutente', $nomenuovoutente);
 		$query->bindParam(':passwordnuovoutente', $passwordnuovoutente);
@@ -25,7 +25,7 @@
 
 	try {
 	   	$connessione->beginTransaction();
-		$query = $connessione->prepare("INSERT INTO usersettings VALUES(:id, 30, '', '#DEFEB4', '#FFFFCC', '100%', '', '')"); 
+		$query = $connessione->prepare("INSERT INTO usersettings VALUES(:id, 30, '', '#DEFEB4', '#FFFFCC', '100%', '0', '0')"); 
 		$query->bindParam(':id', $id);
 		$query->execute();
 		$connessione->commit();
