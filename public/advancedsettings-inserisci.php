@@ -75,13 +75,6 @@
 		$ambulatorio = 0;
 	}
 
-	if(isset($_POST['contabilita'])) {
-		$contabilita = 1;
-	}
-	else {
-		$contabilita = 0;
-	}
-
 	//eventuale settaggio del primo numero del nuovo protocollo
 	if( isset($_POST['primoprotocollo']) and is_numeric($_POST['primoprotocollo']))  {
 		$primoprotocollo= $_POST['primoprotocollo'];
@@ -140,8 +133,7 @@
 				defaultsettings.documenti = :documenti, 
 				defaultsettings.lettere = :lettere, 
 				defaultsettings.magazzino = :magazzino, 
-				defaultsettings.ambulatorio = :ambulatorio, 
-				defaultsettings.contabilita = :contabilita");
+				defaultsettings.ambulatorio = :ambulatorio");
 
 		$query->bindParam(':version', $version);
 		$query->bindParam(':email', $email);
@@ -162,7 +154,6 @@
 		$query->bindParam(':lettere', $lettere);
 		$query->bindParam(':magazzino', $magazzino);
 		$query->bindParam(':ambulatorio', $ambulatorio);
-		$query->bindParam(':contabilita', $contabilita);
 		$query->execute();
 		$connessione->commit();
 	} 
@@ -191,7 +182,6 @@
 	$_SESSION['mod_lettere'] = $lettere;
 	$_SESSION['mod_magazzino'] = $magazzino;
 	$_SESSION['mod_ambulatorio'] = $ambulatorio;
-	$_SESSION['mod_contabilita'] = $contabilita;
 
 ?>
 

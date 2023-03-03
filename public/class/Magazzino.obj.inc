@@ -37,15 +37,17 @@ require_once('../db-connessione-include.php');
 			return $res;
 		}
 
-		public function modificaDeposito($id, $settore, $scortaminima, $riordino, $confezionamento) {
+		public function modificaDeposito($id, $settore, $scortaminima, $riordino, $confezionamento, $lotto, $scadenza) {
 			global $connessione;
 			try {
 	   			$connessione->beginTransaction();
-				$query = $connessione->prepare("UPDATE joinprodottimagazzini SET settore = :settore, scortaminima = :scortaminima, puntoriordino = :riordino, confezionamento = :confezionamento WHERE id = :id"); 
+				$query = $connessione->prepare("UPDATE joinprodottimagazzini SET settore = :settore, scortaminima = :scortaminima, puntoriordino = :riordino, confezionamento = :confezionamento, lotto = :lotto, scadenza = :scadenza WHERE id = :id"); 
 				$query->bindParam(':settore', $settore);
 				$query->bindParam(':scortaminima', $scortaminima);
 				$query->bindParam(':riordino', $riordino);
 				$query->bindParam(':confezionamento', $confezionamento);
+				$query->bindParam(':lotto', $lotto);
+				$query->bindParam(':scadenza', $scadenza);
 				$query->bindParam(':id', $id);
 				$query->execute();
 				$connessione->commit();

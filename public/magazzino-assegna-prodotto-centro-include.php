@@ -56,24 +56,39 @@
 							<div class="row">
 								<div class="col-sm-3">
 									<label id="lblcognome">Scorta Minima:</label>
-									<input type="text" class="form-control input-sm" name="scortaminima">
+									<input type="text" value="0" class="form-control input-sm" name="scortaminima" required>
 								</div>
 							
 								<div class="col-sm-2">
 									<label id="lblnome">Riordino:</label>
-									<input type="text" class="form-control input-sm" name="riordino">
+									<input type="text" value="0" class="form-control input-sm" name="riordino" required>
 								</div>
 							
 								<div class="col-sm-4">
 									<label id="lblcognome">Giacenza Iniziale:</label>
-									<input type="text" class="form-control input-sm" name="giacenzainiziale">
+									<input type="text" value="0" class="form-control input-sm" name="giacenzainiziale" required>
 								</div>
 							
 								<div class="col-sm-2">
 									<label id="lblcognome">Confezionamento:</label>
-									<input type="text" class="form-control input-sm" name="confezionamento">
+									<input type="text" value="0" class="form-control input-sm" name="confezionamento" required>
 								</div>
 							</div>
+
+							<br>
+
+							<div class="row">
+								<div class="col-sm-7">
+									<label id="lbllotto">Lotto:</label>
+									<input type="text" placeholder="-" class="form-control input-sm" name="lotto">
+								</div>
+							
+								<div class="col-sm-5">
+									<label id="lblscadenza">Scadenza:</label>
+									<input type="text" placeholder="gg/mm/aaaa" class="form-control input-sm" name="scadenza">
+								</div>
+							</div>
+
 						</div>
 					</div>
 			

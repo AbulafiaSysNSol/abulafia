@@ -1,5 +1,7 @@
 <?php
 
+	$a = new Anagrafica();
+
 	//inizio passaggio dati da pagina inserimento
 	if(isset($_POST['cognome'])) {
 		$cognome = $_POST['cognome'];
@@ -107,7 +109,13 @@
 		$nascita_data='0000-00-00';
 	}
 	
-	$id =$_GET['id'];
+	if (!$a->isAnagrafica($_SESSION['loginid'])) {
+		$id = $_SESSION['loginid'];
+	}
+	else {
+		$id = $_GET['id'];
+	}
+	
 	$anagraficatipologia= $_POST['anagraficatipologia'];
 
 	try {
@@ -165,8 +173,20 @@
 	else { 
 		$inserimento='true';
 	}
-?>
 
-<script LANGUAGE="Javascript">
-	window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>&from=modifica"; 
-</script>
+	if ($a->isAnagrafica($_SESSION['loginid'])) {
+		?>
+		<script language = "javascript">
+			window.location="login0.php?corpus=dettagli-anagrafica&inserimento=<?php echo $inserimento;?>&id=<?php echo $id;?>&from=modifica"; 
+		</script>
+		<?php
+	}
+	else {
+		?>
+		<script language = "javascript">
+			window.location="login0.php?corpus=home&updateprofile=<?php echo $inserimento;?>"; 
+		</script>
+		<?php		
+	}
+
+?>

@@ -1,7 +1,14 @@
 <?php
 
+	$a = new Anagrafica();
 	$level = $_SESSION['auth'];
-	$id = $_GET['id'];
+
+	if (!$a->isAnagrafica($_SESSION['loginid'])) {
+		$id = $_SESSION['loginid'];
+	}
+	else {
+		$id = $_GET['id'];
+	}
 
 	//inizio del passaggio dei dati dalla pagina precedente
 	$from = $_GET['from'];
@@ -141,61 +148,73 @@
 
 		<form class="form-horizontal" role="form" name="modulo" method="post">
 		
-			<label>Tipologia:</label>
-			<div class="row">
-				<div class="col-sm-3">
-					<SELECT class="form-control input-sm" NAME="anagraficatipologia" onChange="Change()">
-					<?php 
-					if( $row['tipologia'] == 'persona') { 
-						?>
-						<OPTION value="persona" selected >Persona Fisica </OPTION>
-						<?php 
-					} 
-					else { 
-						?>
-						<OPTION value="persona">Persona Fisica</OPTION>
-						<?php 
-					} 
-					 
-					if( $row['tipologia'] == 'carica') { 
-						?>
-						<OPTION value="carica" selected >Carica Elettiva o Incarico</OPTION>
-						<?php 
-					} 
-					else { 
-						?>
-						<OPTION value="carica">Carica Elettiva o Incarico</OPTION>
-						<?php 
-					} 
-					
-					if( $row['tipologia'] == 'ente') { 
-						?>
-						<OPTION Value="ente" selected >Ente</OPTION>
-						<?php 
-					} 
-					else { 
-						?>
-						<OPTION value="ente">Ente</OPTION>
-						<?php 
-					}
+			<?php
+			if ($a->isAnagrafica($_SESSION['loginid'])) {
+				?>
+				<label>Tipologia:</label>
+				<div class="row">
+					<div class="col-sm-3">
+						<SELECT class="form-control input-sm" NAME="anagraficatipologia" onChange="Change()">
+						<?php
+						if( $row['tipologia'] == 'persona') { 
+							?>
+							<OPTION value="persona" selected >Persona Fisica </OPTION>
+							<?php 
+						} 
+						else { 
+							?>
+							<OPTION value="persona">Persona Fisica</OPTION>
+							<?php
+						} 
+						 
+						if( $row['tipologia'] == 'carica') { 
+							?>
+							<OPTION value="carica" selected >Carica Elettiva o Incarico</OPTION>
+							<?php
+						} 
+						else { 
+							?>
+							<OPTION value="carica">Carica Elettiva o Incarico</OPTION>
+							<?php
+						} 
+						
+						if( $row['tipologia'] == 'ente') { 
+							?>
+							<OPTION Value="ente" selected >Ente</OPTION>
+							<?php
+						} 
+						else { 
+							?>
+							<OPTION value="ente">Ente</OPTION>
+							<?php
+						}
 
-					if( $row['tipologia'] == 'fornitore') { 
+						if( $row['tipologia'] == 'fornitore') { 
+							?>
+							<OPTION Value="fornitore" selected >Fornitore</OPTION>
+							<?php
+						}
+						else {
+							?>
+							<OPTION value="fornitore">Fornitore</OPTION>
+							<?php
+						}
 						?>
-						<OPTION Value="fornitore" selected >Fornitore</OPTION>
-						<?php 
-					} 
-					else { 
-						?>
-						<OPTION value="fornitore">Fornitore</OPTION>
-						<?php 
-					}
-					?>
-					</select>
+						</select>
+					</div>
 				</div>
-			</div>
-			
-			<br>
 
+				<br>
+
+				<?php
+			}
+			else {
+				?>
+				<input type="hidden" name="anagraficatipologia" value="persona">
+				<?php
+			}
+			?>
+			
 			<div class="row" style="padding: 7px;">
 				<label id="lblcog" class="col-sm-2 control-label">Cognome:</label> 
 				<label id="lblden" style="display: none;" class="col-sm-2 control-label">Denominazione:</label>
@@ -309,16 +328,22 @@
 			<div class="row" style="padding: 7px;">
 				<label class="col-sm-2 control-label">Codice Fiscale:</label>
 				<div class="col-sm-4">
-					<input class="form-control input-sm" type="text" name="codicefiscale" value="<?php echo $row['codicefiscale'];?>" />
+					<input class="form-control input-sm" type="text" name="codicefiscale" value="<?php echo strtoupper($row['codicefiscale']);?>" />
 				</div>
 			</div>
 
-			<div class="row" style="padding: 7px;">
-				<label class="col-sm-2 control-label">Fuori Uso:</label>
-				<div class="col-sm-2" style="padding-top: 7px;">
-					<input type="checkbox" name="fuoriuso" <?php if($row['fuoriuso'] == 1) echo 'checked'; ?> />
+			<?php
+			if ($a->isAnagrafica($_SESSION['loginid'])) {
+				?>
+				<div class="row" style="padding: 7px;">
+					<label class="col-sm-2 control-label">Fuori Uso:</label>
+					<div class="col-sm-2" style="padding-top: 7px;">
+						<input type="checkbox" name="fuoriuso" <?php if($row['fuoriuso'] == 1) echo 'checked'; ?> />
+					</div>
 				</div>
-			</div>
+				<?php
+			}
+			?>
 			
 			</body>
 
@@ -447,5 +472,3 @@
 }
  //-->
 </script> 
-
-

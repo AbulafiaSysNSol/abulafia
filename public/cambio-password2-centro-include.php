@@ -1,10 +1,10 @@
 <?php
 
-	$loginid=$_SESSION['loginid'];
-	$vecchiapassword=$_POST['vecchiapassword'];
-	$nuovapassword1=$_POST['nuovapassword1'];
-	$nuovapassword2=$_POST['nuovapassword2'];
-	$errorecambiopassword= 0;
+	$loginid = $_SESSION['loginid'];
+	$vecchiapassword = $_POST['vecchiapassword'];
+	$nuovapassword1 = $_POST['nuovapassword1'];
+	$nuovapassword2 = $_POST['nuovapassword2'];
+	$errorecambiopassword = 0;
 	$controllodb = $connessione->query("SELECT DISTINCT * FROM users WHERE idanagrafica = '$loginid'");
 	$controllodb2 = $controllodb->fetch();
 	$nuovapassword3 = MD5($nuovapassword1);
@@ -18,7 +18,7 @@
 		$errorecambiopassword= 1;
 	}	
 
-	if (($nuovapassword1 =='') or ($nuovapassword2 =='') or ($vecchiapassword =='')) { 
+	if (($nuovapassword1 == '') or ($nuovapassword2 == '') or ($vecchiapassword == '')) { 
 		?>
 		<script language = "javascript">
 			window.location="login0.php?corpus=cambio-password&pass=empty";

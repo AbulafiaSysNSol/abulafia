@@ -36,6 +36,12 @@
 		<?php
 	}
 
+	if (isset($_GET['updateprofile']) &&($_GET['updateprofile'] == 'true')) {
+		?>
+		<center><h4><div class="alert alert-success"><i class="fa fa-check"></i> Profilo utente aggiornato <b>correttamente!</b></div></h4></center>
+		<?php
+	}
+
 	if (isset($_GET['profile']) &&($_GET['profile'] == 'ok')) {
 		?>
 		<center><h4><div class="alert alert-success"><i class="fa fa-check"></i> Profilo aggiornato <b>correttamente!</b> E adesso possibile riprendere l'uso del software.</div></h4></center>
@@ -108,13 +114,13 @@
 			<div class="panel-body">
 				<?php
 				echo '<br><a href="?corpus=modifica-anagrafica&from=home&id=' . $_SESSION['loginid'] . '"><center><img class="img-circle" width="65%" src="' . $a->getFoto($_SESSION['loginid']) .'"></center></a>';
-				echo '<br><br><div style="line-height: 2;">Nome: <b>' . $a->getNome($_SESSION['loginid']) . '</b></div>';
-				echo '<div style="line-height: 2;">Cognome: <b>' . $a->getCognome($_SESSION['loginid']) . '</b></div>';
-				echo '<div style="line-height: 2;">C.F.: <b>' . $a->getCodiceFiscale($_SESSION['loginid']) . '</b></div>';
+				echo '<br><br><div style="line-height: 2;">Nome: <b>' . ucwords($a->getNome($_SESSION['loginid'])) . '</b></div>';
+				echo '<div style="line-height: 2;">Cognome: <b>' . ucwords($a->getCognome($_SESSION['loginid'])) . '</b></div>';
+				echo '<div style="line-height: 2;">C.F.: <b>' . strtoupper($a->getCodiceFiscale($_SESSION['loginid'])) . '</b></div>';
 				?>
 				<hr>
 				<div style="line-height: 1.8;"><a href="?corpus=modifica-anagrafica&from=home&id=<?php echo $_SESSION['loginid']?>"><i class="fa fa-edit fa-fw"></i> Modifica Profilo</a></div>
-				<div style="line-height: 1.8;"><a href="login0.php?corpus=cambio-password&loginid=<?php echo $_SESSION['loginid']?>"><i class="fa fa-key fa-fw"></i> Gestione Credenziali</a></div>
+				<div style="line-height: 1.8;"><a href="login0.php?corpus=cambio-password"><i class="fa fa-key fa-fw"></i> Gestione Credenziali</a></div>
 				<div style="line-height: 1.8;"><a href="login0.php?corpus=settings"><i class="fa fa-cog fa-fw"></i> Impostazioni Utente</a></div>
 			</div>
 		</div>
@@ -191,7 +197,7 @@
 					echo '<center><div class="alert alert-success"><b><h4><i class="fa fa-check"></i> Ben Fatto!</b></h4>Nessuna azione richiede la tua attenzione.</center>';
 				}
 
-				if (!$e->isSetMail()) {
+				if (!$e->isSetMail() && $_SESSION['auth'] >= 90) {
 					echo '<center><div class="alert alert-info"><b><h4><i class="fa fa-envelope"></i> Invio Email</b></h4>per poter inviare email bisogna configurare le impostazioni in <a href="?corpus=server-mail">questa pagina</a>.</div></center>';
 				}
 
@@ -199,34 +205,39 @@
 			</div>
 		</div>
 
-		<div class="panel panel-default">
-		
-			<div class="panel-heading">
-				<h3 class="panel-title"><strong><i class="fa fa-hdd-o"></i> Spazio Archiviazione:</strong></h3>
-			</div>
+		<?php
+		if ($_SESSION['auth'] >= 90) {
+           	?>
+			<div class="panel panel-default">
 			
-			<div class="panel-body">
-				<?php
-				$file = new File();
-				$dim =  round($file->sizeDirectory("../public/") / (1024*1024), 2) ;
-				$max = $_SESSION['quota'];
-				$percentuale = ( $dim / $max ) * 100;
-				if($percentuale <=50)
-					$class = "progress-bar-success";
-				else if($percentuale <=80)
-					$class = "progress-bar-warning";
-				else
-					$class = "progress-bar-danger";
-				?>
-				<div class="progress">
-					<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
-					</div>
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong><i class="fa fa-hdd-o"></i> Spazio Archiviazione:</strong></h3>
 				</div>
-				<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,2).'%)'; ?></center>
+				
+				<div class="panel-body">
+					<?php
+					$file = new File();
+					$dim =  round($file->sizeDirectory("../public/") / (1024*1024), 2) ;
+					$max = $_SESSION['quota'];
+					$percentuale = ( $dim / $max ) * 100;
+					if($percentuale <=50)
+						$class = "progress-bar-success";
+					else if($percentuale <=80)
+						$class = "progress-bar-warning";
+					else
+						$class = "progress-bar-danger";
+					?>
+					<div class="progress">
+						<div class="progress-bar <?php echo $class; ?>" role="progressbar" aria-valuenow="<?php echo $dim; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max; ?>" style="width: <?php echo $percentuale; ?>%;">
+						</div>
+					</div>
+					<center><?php echo $file->unitaMisura($dim).' su ' . $file->unitaMisura($max) . ' (' . round($percentuale,2).'%)'; ?></center>
+				</div>
 			</div>
+			<?php
+		}
+		?>
 		
-		</div>
-
 		<!-- blocco destro -->
 
 	</div>
