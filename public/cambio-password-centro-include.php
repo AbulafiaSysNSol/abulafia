@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-    	<h3 class="panel-title" bgcolor="red"><b>Cambia Password</b></h3>
+    	<h3 class="panel-title" bgcolor="red"><i class="fa fa-key"></i> <b>Cambia Password</b></h3>
   	</div>
 
   	<div class="panel-body">
@@ -19,7 +19,7 @@
 			?>
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="alert alert-danger" align="center"><b><i class="fa fa-exclamation-triangle"></i> La password attuale non è corretta!</b></div>
+					<div class="alert alert-danger" align="center"><b><i class="fa fa-exclamation-triangle"></i> La password attuale non &egrave; corretta!</b></div>
 				</div>
 			</div>
 			<?php
