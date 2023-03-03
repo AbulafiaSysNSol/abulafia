@@ -4,6 +4,7 @@
 	$level = $_SESSION['auth'];
 	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO RICERCA' , 'OK' , $_SESSION['ip'], $_SESSION['logfile'], 'protocollo');
 	$lett = new Lettera();
+	$anagrafica = new Anagrafica();
 ?>
 
 <div class="panel panel-default">
@@ -33,7 +34,7 @@
 						<h4><i class="fa fa-filter"></i> Filtri aggiuntivi:</h4><br>
 					</div>
 							
-					<div class="col-sm-4">	
+					<div class="col-sm-3">	
 						<div id="prot" class="col-sm-12">
 							<label><i class="fa fa-book"></i> Anno Protocollo:</label>
 							<SELECT class="form-control input-sm" name="annoricercaprotocollo" >
@@ -68,7 +69,7 @@
 						<br>
 					</div>
 						
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<div id="prot1" class="col-sm-12">
 							<label><i class="fa fa-exchange"></i> Spedita/Ricevuta:</label>
 							<SELECT class="form-control input-sm" NAME="speditaricevuta">
@@ -92,7 +93,7 @@
 						<br>
 					</div>
 						
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<div id="prot2" class="col-sm-12">
 							<label><i class="fa fa-calendar"></i> Registrati dal - al:</label>
 							<div class="row">
@@ -115,6 +116,25 @@
 									}
 								?>
 							</SELECT>
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div id="prot2" class="col-sm-12">
+							<label><i class="fa fa-user"></i> Registrato da:</label>
+							<SELECT class="form-control input-sm" NAME="registratore">
+								<OPTION value="" onclick="document.search.cercato.focus()">qualsiasi utente</OPTION>
+								<?php
+									$utenti = $anagrafica->getUserId();
+									foreach($utenti as $user) {
+										echo '<option value=' . $user[0] . '>' . $anagrafica->getNome($user[0]) .' ' . $anagrafica->getCognome($user[0]) . '</option>';
+									}
+								?>
+							</SELECT>
+							<br>
+								
+							<label><i class="fa fa-commenting-o"></i> Note:</label>
+							<input class="form-control input-sm" type="text" name="note">
 						</div>
 					</div>
 

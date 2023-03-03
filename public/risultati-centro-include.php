@@ -67,6 +67,15 @@
 			$prat = " AND pratica = '$pratica' ";
 		}
 	}
+	if(isset($_POST['note'])) {
+		$notice = $_POST['note'];
+		if($notice == "") {
+			$note = '';
+		}
+		else {
+			$note = " AND note LIKE '%$notice%' ";
+		}
+	}
 	if( (isset($_POST['data1'])) && ($_POST['data1'] != "") && ($_POST['data2'] != "") ) {
 		$data1 = $_POST['data1'];
 		$data2 = $_POST['data2'];
@@ -420,6 +429,18 @@
 	if ($tabella == 'lettere') {
 		$tabella = $tabella.$annoricercaprotocollo;
 		$joinletteremittenti = 'joinletteremittenti'.$annoricercaprotocollo;
+		$joinlettereinserimento = 'joinlettereinserimento'.$annoricercaprotocollo;
+		$jointabelle = $tabella . '.idlettera = ' . $joinlettereinserimento . '.idlettera';
+
+		if(isset($_POST['registratore'])) {
+			$registratore = $_POST['registratore'];
+			if($registratore == "") {
+				$reg = '';
+			}
+			else {
+				$reg = " AND $joinlettereinserimento.idinser = '$registratore' ";
+			}
+		}
 		
 		//ricerca parole non continue
 		$cercato2 = '';
@@ -457,31 +478,29 @@
 		if ($ordinerisultati == 'cron-inverso') { 
 			$_SESSION['ordinerisultati'] = 'order by '.$tabella.'.idlettera desc';
 		}
-		$count = $connessione->query(	
-						"SELECT 
-							COUNT(*) 
-						FROM 
-							$tabella
-						WHERE 
-							($tabella.idlettera like '%$cercato%' 
-							OR 
-								($tabella.oggetto like '%$cercato%'
-								$cercato2)
-							OR 
-								($tabella.note like '%$cercato%' 
-								$cercato3)
-							OR
-							$tabella.datalettera like '$data')
-							AND
+		$count = $connessione->query("
+						SELECT COUNT(*) 
+						FROM $tabella, $joinlettereinserimento
+						WHERE 	($tabella.idlettera like '%$cercato%' 
+								OR 
+								($tabella.oggetto like '%$cercato%' $cercato2)
+								OR 
+								($tabella.note like '%$cercato%' $cercato3)
+								OR
+								$tabella.datalettera like '$data')
+								AND
 								($tabella.speditaricevuta!=''
 								AND
 								$tabella.oggetto!='')
-							$sped
-							$pos
-							$prat
-							$dataricercadb
-							"
-						);
+								AND 
+								$jointabelle
+								$sped
+								$pos
+								$prat
+								$note
+								$reg
+								$dataricercadb
+						");
 						
 		//conteggio per divisione in pagine dei risultati
 		$res_count = $count->fetch();//conteggio per divisione in pagine dei risultati
@@ -491,31 +510,29 @@
 		$contatorelinee = 1 ;// per divisione in due colori diversi in tabella
 		$ordinerisultati = $_SESSION['ordinerisultati'];
 		$risultati = $connessione->query("	
-							SELECT  DISTINCT 
-								* 
-							FROM 
-								$tabella
-							WHERE
-								($tabella.idlettera like '%$cercato%' 
-								OR 
-									($tabella.oggetto like '%$cercato%'
-									$cercato2)
-								OR 
-									($tabella.note like '%$cercato%' 
-									$cercato3)
-								OR
-								$tabella.datalettera like '$data')
-								AND
+							SELECT  DISTINCT * 
+							FROM $tabella, $joinlettereinserimento
+							WHERE 	($tabella.idlettera like '%$cercato%' 
+									OR 
+									($tabella.oggetto like '%$cercato%' $cercato2)
+									OR 
+									($tabella.note like '%$cercato%' $cercato3)
+									OR
+									$tabella.datalettera like '$data')
+									AND
 									($tabella.speditaricevuta!=''
 									AND
 									$tabella.oggetto!='')
-							$sped
-							$pos
-							$prat
-							$dataricercadb
-							$ordinerisultati 
-							LIMIT
-								$iniziorisultati , $risultatiperpagina
+									AND 
+									$jointabelle
+									$sped
+									$pos
+									$prat
+									$note
+									$reg
+									$dataricercadb
+									$ordinerisultati 
+							LIMIT $iniziorisultati , $risultatiperpagina
 						");
 		$num_righe = $risultati->rowCount();
 		$my_log -> publscrivilog( $_SESSION['loginname'], 'EFFETTUATA RICERCA IN PROTOCOLLO' , 'OK' , 'VALORE CERCATO '.$cercato, $_SESSION['logfile'], 'anagrafica');

@@ -3,20 +3,22 @@
 	session_start();
 
 	if ($_SESSION['auth'] < 1 ) {
-			header("Location: index.php?s=1");
-			exit(); 
-		}
-
-	function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
-		require_once "class/" . $class_name.".obj.inc";
+		header("Location: index.php?s=1");
+		exit(); 
 	}
+
+	include 'class/Log.obj.inc';
+	include 'class/Lettera.obj.inc';
+	include 'class/Calendario.obj.inc';
+	include '../db-connessione-include.php';
+	include 'maledetti-apici-centro-include.php';
+
 	$my_log = new Log();
 	$lettera = new Lettera();
 	$calendario = new Calendario();
 	$id = $_GET['id'];
 	$anno = $_GET['anno'];
-	include '../db-connessione-include.php';
-	include 'maledetti-apici-centro-include.php';
+
 	require('lib/fpdf/fpdf.php');
 		
 	class PDF extends FPDF
@@ -42,7 +44,6 @@
 
 	$now = date("d".'/'."m".'/'."Y");
 	$iniziale = 'Con la presente, si attesta l\'avvenuta ricezione all\'ufficio del documento in oggetto.';
-	//$finale = 'Documento generato digitalmente da Abulafia ' . $_SESSION['version'];
 	$dettagli = $lettera->getDettagli($id,$anno);
 	$mittente = $lettera->getMittenti($id,$anno);
 	$pdf = new PDF('P','mm', 'A4');
@@ -67,8 +68,5 @@
 	$pdf->Write('',$_SESSION['sede'] . ', ' . $now);
 	$pdf->SetXY(140,190);
 	$pdf->Write('','L\'ADDETTO');
-	//$pdf->SetFont('Times','',11);
-	//$pdf->SetY(240);
-	//$pdf->Write('',$finale);
 	$pdf->Output('ricevutaprotocollo.pdf','I');
 ?>

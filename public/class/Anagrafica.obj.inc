@@ -221,6 +221,16 @@ class Anagrafica {
 			return false;
 	}
 
+	public function getUserId() {
+		global $connessione;
+		$query = $connessione->query("SELECT idanagrafica FROM users WHERE protocollo = 1 AND admin = 0");
+		$utenti = array();
+		while ($ut = $query->fetch()) {
+			array_push($utenti, $ut);
+		}
+		return $utenti;
+	}
+
 	public function canSign($idutente, $idufficio) {
 		global $connessione;
 		$query = $connessione->query("SELECT COUNT(*) FROM joinpersoneuffici WHERE utente = $idutente AND ufficio = $idufficio");
