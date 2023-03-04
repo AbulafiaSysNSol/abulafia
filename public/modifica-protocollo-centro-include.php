@@ -44,8 +44,12 @@
 	$row3 = $risultati3->fetch();
 	if (($_SESSION['auth'] <= $row3['auth']) and ($row3['idinser'] !=  $_SESSION['loginid'])) 
 	{
-		echo 'Non hai un livello di autorizzazione sufficiente a modificare questo protocollo.';?> 
-		<a href="login0.php?corpus=dettagli-protocollo&from=risultati&id=<?php echo $idlettera;?>"><br><br>Vai alla pagina dei Dettagli del Protocollo N.<?php echo $idlettera;?><br><br></a><?php
+		?>
+		<div align="center" class="alert alert-danger">
+			<h4><i class="fa fa-exclamation-triangle"></i> Non hai un livello di autorizzazione sufficiente a modificare questo protocollo.</h4> 
+			<a href="login0.php?corpus=dettagli-protocollo&from=risultati&id=<?php echo $idlettera;?>"><i class="fa fa-reply"></i> Torna ai dettagli del protocollo n. <?php echo $idlettera;?><br></a>
+		</div>
+		<?php
 		include 'sotto-include.php'; //carica il file con il footer.
 		exit();
 	}
