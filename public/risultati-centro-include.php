@@ -464,7 +464,7 @@
 		// FILTRO RICERCA PROTOCOLLO UTENTE CHE HA REGISTRATO LA LETTERA
 		if(isset($_POST['registratore'])) {
 			$registratore = $_POST['registratore'];
-			$_SESSIONE['ricreg'] = $_POST['registratore'];
+			$_SESSION['ricreg'] = $_POST['registratore'];
 			
 		}
 		else {
