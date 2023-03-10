@@ -5,6 +5,11 @@
 	$my_log -> publscrivilog( $_SESSION['loginname'], 'GO TO RICERCA' , 'OK' , $_SESSION['ip'], $_SESSION['logfile'], 'protocollo');
 	$lett = new Lettera();
 	$anagrafica = new Anagrafica();
+	$_SESSION['ricspedric'] = null;
+	$_SESSION['ricnote'] = null;
+	$_SESSION['ricreg'] = null;
+	$_SESSION['ricdal'] = null;
+	$_SESSION['ricdal'] = null;
 ?>
 
 <div class="panel panel-default">
@@ -37,7 +42,7 @@
 					<div class="col-sm-3">	
 						<div id="prot" class="col-sm-12">
 							<label><i class="fa fa-book"></i> Anno Protocollo:</label>
-							<SELECT class="form-control input-sm" name="annoricercaprotocollo" >
+							<SELECT class="form-control input-sm" name="annoricercaprotocollo" onchange="document.search.cercato.focus();">
 								<?php
 									$esistenzatabella1 = $connessione->query("SHOW TABLES LIKE 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
 									$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
@@ -60,7 +65,7 @@
 							
 						<div class="col-sm-12">
 							<br><label><i class="fa fa-sort-alpha-asc"></i> Elenca in ordine:</label>
-							<SELECT class="form-control input-sm" NAME="group1">
+							<SELECT class="form-control input-sm" NAME="group1" onchange="document.search.cercato.focus();">
 								<OPTION value="alfabetico" onclick="document.search.cercato.focus()"> Alfabetico</OPTION>
 								<OPTION value="cronologico" onclick="document.search.cercato.focus()"> Cronologico</OPTION>
 								<OPTION value="cron-inverso" onclick="document.search.cercato.focus()" selected> Cronologico Inverso</OPTION>
@@ -72,7 +77,7 @@
 					<div class="col-sm-3">
 						<div id="prot1" class="col-sm-12">
 							<label><i class="fa fa-exchange"></i> Spedita/Ricevuta:</label>
-							<SELECT class="form-control input-sm" NAME="speditaricevuta">
+							<SELECT class="form-control input-sm" NAME="speditaricevuta" onchange="document.search.cercato.focus();">
 								<OPTION value="" onclick="document.search.cercato.focus()">tutte</OPTION>
 								<OPTION value="sped" onclick="document.search.cercato.focus()">spedite</OPTION>
 								<OPTION value="ric" onclick="document.search.cercato.focus()">ricevute</OPTION>
@@ -80,7 +85,7 @@
 							
 							<br>
 							<label><i class="fa fa-archive"></i> Posizioni:</label>
-							<SELECT class="form-control input-sm" NAME="posizione">
+							<SELECT class="form-control input-sm" NAME="posizione" onchange="document.search.cercato.focus();">
 								<OPTION value="" onclick="document.search.cercato.focus()">tutte</OPTION>
 								<?php
 									$posizioni = $lett->getPosizioni();
@@ -98,16 +103,16 @@
 							<label><i class="fa fa-calendar"></i> Registrati dal - al:</label>
 							<div class="row">
 								<div class="col-sm-6">
-									<input type="text" class="form-control input-sm datepickerProt" name="data1" placeholder="dal...">
+									<input type="text" class="form-control input-sm datepickerProt" name="data1" placeholder="dal..." onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;" onblur="document.search.cercato.focus();">
 								</div>
 								<div class="col-sm-6">
-									<input type="text" class="form-control input-sm datepickerProt" name="data2" placeholder="al...">							
+									<input type="text" class="form-control input-sm datepickerProt" name="data2" placeholder="al..." onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;" onblur="document.search.cercato.focus();">							
 								</div>
 							</div>
 							<br>
 								
 							<label><i class="fa fa-tags"></i> Pratiche:</label>
-							<SELECT class="form-control input-sm" NAME="pratica">
+							<SELECT class="form-control input-sm" NAME="pratica" onchange="document.search.cercato.focus();">
 								<OPTION value="" onclick="document.search.cercato.focus()">tutte</OPTION>
 								<?php
 									$pratiche = $lett->getPratiche();
@@ -122,19 +127,19 @@
 					<div class="col-sm-3">
 						<div id="prot2" class="col-sm-12">
 							<label><i class="fa fa-user"></i> Registrato da:</label>
-							<SELECT class="form-control input-sm" NAME="registratore">
+							<SELECT class="form-control input-sm" NAME="registratore" onchange="document.search.cercato.focus();">
 								<OPTION value="" onclick="document.search.cercato.focus()">qualsiasi utente</OPTION>
 								<?php
 									$utenti = $anagrafica->getUserId();
 									foreach($utenti as $user) {
-										echo '<option value=' . $user[0] . '>' . $anagrafica->getNome($user[0]) .' ' . $anagrafica->getCognome($user[0]) . '</option>';
+										echo '<option value=' . $user[0] . '>' . stripslashes($anagrafica->getNome($user[0])) .' ' . stripslashes($anagrafica->getCognome($user[0])) . '</option>';
 									}
 								?>
 							</SELECT>
 							<br>
 								
 							<label><i class="fa fa-commenting-o"></i> Note:</label>
-							<input class="form-control input-sm" type="text" name="note">
+							<input class="form-control input-sm" type="text" name="note" onkeydown="if(event.keyCode==13) autorized(<?php echo $level ?>)" onfocus="formInUse = true;">
 						</div>
 					</div>
 

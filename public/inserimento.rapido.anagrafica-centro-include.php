@@ -14,7 +14,7 @@
 							INSERT INTO 
 								anagrafica 
 							VALUES 
-								(null,:nome,:cognome,'','','','','','','0000-00-00','','','','','','',:anagraficatipologia, '0', '0', '0') 
+								(null,:nome,:cognome,'','','','','','','0000-00-00','','','','','','',:anagraficatipologia, '0') 
 						"); 
 		$query->bindParam(':nome', $nome);
 		$query->bindParam(':cognome', $cognome);

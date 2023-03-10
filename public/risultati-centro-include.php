@@ -37,18 +37,26 @@
 	$pos = '';
 	$prat = '';
 	$dataricercadb = "";
+
+	// FILTRO RICERCA PROTOCOLLO SPEDITO O RICEVUTO
 	if(isset($_POST['speditaricevuta'])) {
 		$speditaricevuta = $_POST['speditaricevuta'];
-		if($speditaricevuta == "") {
-			$sped = '';
-		}
-		if($speditaricevuta == "sped") {
-			$sped = " AND speditaricevuta = 'spedita' ";
-		}
-		if($speditaricevuta == "ric") {
-			$sped = " AND speditaricevuta = 'ricevuta' ";
-		}
+		$_SESSION['ricspedric'] = $_POST['speditaricevuta'];
 	}
+	else {
+		$speditaricevuta = $_SESSION['ricspedric'];
+	}
+	if($speditaricevuta == "") {
+		$sped = '';
+	}
+	if($speditaricevuta == "sped") {
+		$sped = " AND speditaricevuta = 'spedita' ";
+	}
+	if($speditaricevuta == "ric") {
+		$sped = " AND speditaricevuta = 'ricevuta' ";
+	}
+
+	// FILTRO RICERCA PROTOCOLLO POSIZIONE
 	if(isset($_POST['posizione'])) {
 		$posizione = $_POST['posizione'];
 		if($posizione == "") {
@@ -58,6 +66,8 @@
 			$pos = " AND riferimento = '$posizione' ";
 		}
 	}
+
+	// FILTRO RICERCA PROTOCOLLO PRATICA
 	if(isset($_POST['pratica'])) {
 		$pratica = $_POST['pratica'];
 		if($pratica == "") {
@@ -67,18 +77,35 @@
 			$prat = " AND pratica = '$pratica' ";
 		}
 	}
+
+	// FILTRO RICERCA PROTOCOLLO NOTE
 	if(isset($_POST['note'])) {
 		$notice = $_POST['note'];
-		if($notice == "") {
-			$note = '';
-		}
-		else {
-			$note = " AND note LIKE '%$notice%' ";
-		}
+		$_SESSION['ricnote'] = $_POST['note'];
 	}
+	else {
+		$notice = $_SESSION['ricnote'];
+	}
+	if($notice == "") {
+		$note = '';
+	}
+	else {
+		$note = " AND note LIKE '%$notice%' ";
+	}
+
+	// FILTRO RICERCA PROTOCOLLO INTERVALLO DI DATE
 	if( (isset($_POST['data1'])) && ($_POST['data1'] != "") && ($_POST['data2'] != "") ) {
 		$data1 = $_POST['data1'];
+		$_SESSION['ricdal'] = $_POST['data1'];
 		$data2 = $_POST['data2'];
+		$_SESSION['rical'] = $_POST['data2'];
+		$datainizio = $my_calendario->dataDB($data1);
+		$datafine = $my_calendario->dataDB($data2);
+		$dataricercadb = " AND dataregistrazione BETWEEN '$datainizio' AND '$datafine' ";
+	}
+	else if(isset($_SESSION['ricdal'])) {
+		$data1 = $_SESSION['ricdal'];
+		$data2 = $_SESSION['rical'];
 		$datainizio = $my_calendario->dataDB($data1);
 		$datafine = $my_calendario->dataDB($data2);
 		$dataricercadb = " AND dataregistrazione BETWEEN '$datainizio' AND '$datafine' ";
@@ -412,9 +439,11 @@
 		}
 
 	}
-	//fine scelta tabella = anagrafica
 	
-	//scelta tabella = lettere
+	/*
+	--- SCELTA TABELLA LETTERE ---
+	*/
+
 	$my_file = new File(); //crea un nuovo oggetto 'file'
 	$my_lettera = new Lettera();
 
@@ -432,17 +461,23 @@
 		$joinlettereinserimento = 'joinlettereinserimento'.$annoricercaprotocollo;
 		$jointabelle = $tabella . '.idlettera = ' . $joinlettereinserimento . '.idlettera';
 
+		// FILTRO RICERCA PROTOCOLLO UTENTE CHE HA REGISTRATO LA LETTERA
 		if(isset($_POST['registratore'])) {
 			$registratore = $_POST['registratore'];
-			if($registratore == "") {
-				$reg = '';
-			}
-			else {
-				$reg = " AND $joinlettereinserimento.idinser = '$registratore' ";
-			}
+			$_SESSIONE['ricreg'] = $_POST['registratore'];
+			
+		}
+		else {
+			$registratore = $_SESSION['ricreg'];
+		}
+		if($registratore == "") {
+			$reg = '';
+		}
+		else {
+			$reg = " AND $joinlettereinserimento.idinser = '$registratore' ";
 		}
 		
-		//ricerca parole non continue
+		// RICERCA PAROLE NON CONTINUE
 		$cercato2 = '';
 		$cercato3 = '';
 		if ($cercato != '') {
