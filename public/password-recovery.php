@@ -57,7 +57,7 @@
 
                     <div class="panel-heading">
                         <div class="panel-title">
-                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?>Recupera Password<br><?php if($_GET['err'] == 1) {echo 'Utente non trovato, controlla i dati inseriti!';} ?></center>
+                            <center><?php if($_GET['err'] == 1) {echo '<i class="fa fa-warning"></i>';} ?> Recupera Password<br><?php if($_GET['err'] == 1) {echo '<i class="fa fa-times"></i> Errore: utente non trovato controlla i dati inseriti!';} ?></center>
                         </div>
                     </div>     
 

@@ -75,6 +75,7 @@
 						<br><br>Il link sar&agrave; attivo per 24 ore.
 						<br><br>Il Team di Abulafia';
 
+		include '../../generalmailconf.php';
 		$mail->setFrom ("supporto@abulafiaweb.it", "Abulafia Web");
 		$mail->addReplyTo ("supporto@abulafiaweb.it");
 		$mail->addAddress($email);
