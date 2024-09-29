@@ -44,19 +44,26 @@
 							<label><i class="fa fa-book"></i> Anno Protocollo:</label>
 							<SELECT class="form-control input-sm" name="annoricercaprotocollo" onchange="document.search.cercato.focus();">
 								<?php
-									$esistenzatabella1 = $connessione->query("SHOW TABLES LIKE 'lettere%'"); //ricerca delle tabelle "lettere" esistenti
-									$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
-									$my_calendario-> publadesso(); //acquisizione dell'anno attuale per indicare l'anno selezionato di default
+
+									//ricerca delle tabelle "lettere" esistenti
+									$esistenzatabella1 = $connessione->query("SHOW TABLES LIKE 'lettere%'"); 
+									//deserializzazione dell'oggetto
+									$my_calendario = unserialize ($_SESSION['my_calendario']);
+									
+									//acquisizione dell'anno attuale per indicare l'anno selezionato di default
+									$my_calendario->publadesso();
+
 									while ($esistenzatabella11 = $esistenzatabella1->fetch()) {
-										if ('lettere'.$my_calendario->anno== $esistenzatabella11[0]) { 
-											$selected='selected'; 
+										if ('lettere' . $my_calendario->anno == $esistenzatabella11[0]) { 
+											$selected = 'selected'; 
 										}
 										else { 
-											$selected ='';
+											$selected = '';
 										}
-										$annoprotocollo= explode("lettere", $esistenzatabella11[0]);
+										$annoprotocollo = explode("lettere", $esistenzatabella11[0]);
 										?>
-										<OPTION value="<?php echo $annoprotocollo[1] ;?>" onclick="document.search.cercato.focus()" <?php echo $selected ;?>> <?php echo $annoprotocollo[1].' ' ;?></OPTION>
+										<OPTION value="<?php echo $annoprotocollo[1] ;?>" onclick="document.search.cercato focus()" <?php echo $selected ;?>> <?php echo $annoprotocollo[1].' ' ;?>
+										</OPTION>
 										<?php
 									}
 								?>

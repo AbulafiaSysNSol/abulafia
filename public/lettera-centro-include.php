@@ -15,7 +15,7 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<h5><i class="fa fa-newspaper-o"></i> Testo della lettera:</h5>
-						<textarea id="editor" class="form-control" rows="20" name="message"></textarea>
+						<textarea id="editor" class="form-control" rows="26" name="message"></textarea>
 					</div>
 				
 					<div class="col-sm-4">
