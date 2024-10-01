@@ -26,6 +26,7 @@
 	$p = new Prodotto();
 	$m = new Magazzino();
 	$s = new Servizio();
+	$c = new Calendario();
 	
 	$res = $p->ricercaDeposito($q, $z);
 	$count = $p->contaDeposito($q, $z);
@@ -58,7 +59,7 @@
 			?>
 			<table class="table table-bordered" width="100%">
 				<tr>
-					<td colspan="8" style="vertical-align: middle">
+					<td colspan="10" style="vertical-align: middle">
 						Risultati: <b><?php echo $count; ?></b>
 					</td>
 				</tr>
@@ -66,9 +67,12 @@
 					<td style="vertical-align: middle"><b>Magazzino</b></td>
 					<td style="vertical-align: middle"><b>Prodotto</b></td>
 					<td style="vertical-align: middle"><b>Descrizione</b></td>
-					<td style="vertical-align: middle"><b>Giacenza</b></td>
 					<td style="vertical-align: middle"><b>U.M.</b></td>
 					<td style="vertical-align: middle"><b>Scorta Min.</b></td>
+					<td style="vertical-align: middle"><b>Giacenza</b></td>
+					<td style="vertical-align: middle"><b>Lotto</b></td>
+					<td style="vertical-align: middle"><b>Scadenza</b></td>
+					
 					<td></td>
 				</tr>
 				<?php
@@ -78,12 +82,15 @@
 						<td style="vertical-align: middle" align="left"><?php echo $s->getServizioById($val[0]); ?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $val['codice']; ?></td>
 						<td style="vertical-align: middle"><?php echo strtoupper($val['descrizione']); ?></td>
-						<td style="vertical-align: middle" align="center"><b><?php echo $val['giacenza']; ?></b></td>
 						<td style="vertical-align: middle" align="center"><?php echo $val['unita_misura']; ?></td>
 						<td style="vertical-align: middle" align="center"><?php echo $val['scortaminima']; ?></td>
+						<td style="vertical-align: middle" align="center"><b><?php echo $val['giacenza']; ?></b></td>
+						<td style="vertical-align: middle" align="center"><b><?php if( (isset($val['lotto'])) && ($val['lotto'] != "") ) { echo $val['lotto']; } else { echo "-"; } ?></b></td>
+						<td style="vertical-align: middle" align="center"><b><?php if( (isset($val['scadenza'])) && ($val['scadenza'] != "0000-00-00") ) { echo $c->dataSlash($val['scadenza']); } else { echo "-"; } ?></b></td>
+						
 						<td align="center"><a class="btn btn-warning btn-sm" href="?corpus=magazzino-modifica-deposito&id=<?php echo $val[14] ?>"><i class="fa fa-edit fa-fw"></i></a></td>
 					</tr>
-					<?php
+				<?php
 				}
 				?>
 				
