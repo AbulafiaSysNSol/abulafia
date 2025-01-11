@@ -88,7 +88,7 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-5 control-label">Accettazione<br><a class="fancybox" data-fancybox-type="iframe" href="terminiecondizioni.php">Termini e Condizioni d'uso</a>:</label>
+							<label class="col-sm-5 control-label">Accettazione<br><a data-fancybox data-type="iframe" data-preload="false" href="terminiecondizioni.php">Termini e Condizioni d'uso</a>:</label>
 							<div class="row">
 								<div class="col-sm-3">
 									<input type="checkbox" class=" input-sm" name="terminiecondizioni" required>

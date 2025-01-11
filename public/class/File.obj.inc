@@ -33,7 +33,7 @@ Class File {
             }
               			
 			$this->link = "<div style='padding: 3px;'>" . $this->testodownloadlink." <a class='btn btn-xs btn-primary' title='Download File' href=".$this->href.$this->opzionidownloadlink."> <i class='fa fa-download fa-fw'></i></a>
-			<a class='btn btn-xs btn-success fancybox' title='Visualizza File' data-fancybox-type='iframe' href='lettere".$annoricercaprotocollo."/".$idlettera."/".$nomefile."'><i class='fa fa-file-text-o fa-fw'></i></a><br></div>";
+			<a class='btn btn-xs btn-success' title='Visualizza File' data-fancybox data-type='iframe' data-preload='false' href='lettere".$annoricercaprotocollo."/".$idlettera."/".$nomefile."'><i class='fa fa-file-text-o fa-fw'></i></a><br></div>";
 		}
 		return $this->link;
 	}

@@ -232,7 +232,7 @@
 									<?php echo $elencochiavi.' '; ?>
 								</td>
 								<td>
-									<a class="fancybox btn btn-info btn-sm" data-fancybox-type="iframe" href="<?php echo 'lettere'.$annoprotocollo.'/temp/'.$elencochiavi;?>"><i class="fa fa-file-o fa-fw"></i></a>
+									<a class="btn btn-info btn-sm" data-fancybox data-type="iframe" data-preload="false" href="<?php echo 'lettere'.$annoprotocollo.'/temp/'.$elencochiavi;?>"><i class="fa fa-file-o fa-fw"></i></a>
 									<a class="btn btn-danger btn-sm" href="login0.php?corpus=protocollo2&from=eliminaallegato&nome=<?php echo $elencochiavi;?>"><i class="fa fa-trash fa-fw"></i></a>
 								</td>
 							</tr>	
@@ -277,7 +277,7 @@
 										<?php echo stripslashes($elencomittenti).' '; ?>
 									</td>
 									<td style="vertical-align: middle">
-										<a href="anagrafica-mini.php?id=<?php echo $elencochiavi ?>" class="fancybox btn btn-info btn-sm" data-fancybox-type="iframe">
+										<a href="anagrafica-mini.php?id=<?php echo $elencochiavi ?>" class="btn btn-info btn-sm" data-fancybox data-type="iframe" data-preload="false">
 											<i class="fa fa-info-circle fa-fw"></i>
 										</a>
 										<a class="btn btn-danger btn-sm" href="login0.php?corpus=protocollo2&from=elimina-mittente&idanagrafica=<?php echo $elencochiavi;?>"><i class="fa fa-trash fa-fw"></i></a>

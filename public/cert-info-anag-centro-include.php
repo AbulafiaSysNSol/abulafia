@@ -176,7 +176,7 @@
 											echo '<td>' . $val['tipo'] . '</td>';
 											echo '<td>' . $a->getNome($val['medico']) . ' ' . $a->getCognome($val['medico']) . '</td>';
 											?> <td align="center">
-													<a class="btn btn-primary btn-xs btn-danger fancybox" data-fancybox-type="iframe" href="certificati/<?php echo $val['file']; ?>">Visualizza</a>
+													<a class="btn btn-primary btn-xs btn-danger" data-fancybox data-type="iframe" data-preload="false" href="certificati/<?php echo $val['file']; ?>">Visualizza</a>
 												</td> <?php
 											echo '</tr>'; 
 										}

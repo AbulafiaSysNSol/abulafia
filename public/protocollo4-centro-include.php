@@ -87,9 +87,7 @@
 				</a>
 			</p>	
 			<p>
-				<a 	class="iframe" 
-					data-fancybox-type="iframe" 
-					href="stampa-barcode.php?id=<?php echo $ultimoid;?>&anno=<?php echo $annoprotocollo;?>"> 
+				<a class="iframe" data-fancybox data-type="iframe" data-preload="false" href="stampa-barcode.php?id=<?php echo $ultimoid;?>&anno=<?php echo $annoprotocollo;?>"> 
 					<span class="glyphicon glyphicon-barcode"></span> Stampa etichetta barcode
 				</a>
 			</p>

@@ -54,7 +54,7 @@
 							</a>
 						</td>
 						<td style="vertical-align: middle" nowrap>
-							<a href="anagrafica-mini.php?id=<?php echo $row['idanagrafica']; ?>" class="fancybox btn btn-info btn-sm" data-fancybox-type="iframe">
+							<a href="anagrafica-mini.php?id=<?php echo $row['idanagrafica']; ?>" class="btn btn-info btn-sm" data-fancybox data-type="iframe" data-preload="false">
 								<i class="fa fa-info fa-fw"></i>
 							</a>
 							<a class="btn btn-success btn-sm" href="login0.php?corpus=protocollo2&idanagrafica=<?php echo $row['idanagrafica'];?>&idlettera=<?php echo $idlettera;?>&from=aggiungi">

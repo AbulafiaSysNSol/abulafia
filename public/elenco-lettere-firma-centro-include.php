@@ -75,7 +75,7 @@ else {
 					<td style="vertical-align: middle" align="center"><?php if($risultati2['firmata'] == 1) { echo '<i class="fa fa-check"></i>'; } else { echo '<i class="fa fa-times"></i>'; }?></td>
 					<td style="vertical-align: middle" align="center">
 						<div class="btn-group btn-group-sm">
-							<a class="btn btn-info fancybox" data-fancybox-type="iframe" data-toggle="tooltip" data-placement="left" title="Anteprima lettera" href="componilettera.php?id=<?php echo $risultati2['idlettera'] ?>">
+							<a class="btn btn-info" data-fancybox data-type="iframe" data-preload="false" data-toggle="tooltip" data-placement="left" title="Anteprima lettera" href="componilettera.php?id=<?php echo $risultati2['idlettera'] ?>">
 									<span class="glyphicon glyphicon-info-sign"></span>
 							</a>
 							<?php if($risultati2['firmata'] == 0) { ?>

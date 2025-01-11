@@ -5,25 +5,25 @@
 		exit(); 
 	}
 	
-	include '../db-connessione-include.php'; //connessione al db-server
+	//connessione al db-server
+	include '../db-connessione-include.php'; 
 	include 'maledetti-apici-centro-include.php';
 
-	function __autoload ($class_name) { //funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
+	//funzione predefinita che si occupa di caricare dinamicamente tutti gli oggetti esterni quando vengono richiamati
+	function __autoload ($class_name) { 
 		require_once "class/" . $class_name.".obj.inc";
 	}
 	
-	$my_calendario = unserialize ($_SESSION['my_calendario']); //deserializzazione dell'oggetto
-	$my_anagrafica = unserialize($_SESSION['my_anagrafica']);//deserializzazione 
-	$my_log = unserialize($_SESSION['my_log']);//deserializzazione 
-	$my_registroprotocollo = unserialize($_SESSION['my_registroprotocollo']);//deserializzazione 
-	$my_ricerca = unserialize($_SESSION['my_ricerca']);//deserializzazione 
-	$my_manuale = unserialize($_SESSION['my_manuale']);//deserializzazione 
-	$my_tabellahtml = unserialize($_SESSION['my_tabellahtml']);//deserializzazione 
-	$my_database = unserialize($_SESSION['my_database']);//deserializzazione
-	$my_lettera = unserialize($_SESSION['my_lettera']);//deserializzazione 
-/*deprecato	$setting=mysq<l_query("select * from defaultsettings");
-	$setting2=mysq<l_fetch_array($setting);
-*/
+	//deserializzazione dell'oggetto
+	$my_calendario = unserialize ($_SESSION['my_calendario']); 
+	$my_anagrafica = unserialize($_SESSION['my_anagrafica']); 
+	$my_log = unserialize($_SESSION['my_log']); 
+	$my_registroprotocollo = unserialize($_SESSION['my_registroprotocollo']); 
+	$my_ricerca = unserialize($_SESSION['my_ricerca']); 
+	$my_manuale = unserialize($_SESSION['my_manuale']); 
+	$my_tabellahtml = unserialize($_SESSION['my_tabellahtml']); 
+	$my_database = unserialize($_SESSION['my_database']);
+	$my_lettera = unserialize($_SESSION['my_lettera']); 
 
 	try {
    		$connessione->beginTransaction();
@@ -47,163 +47,128 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//IT" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html>
-<head>
+	
+	<head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title><?php echo 'Abulafia Web ' . $_SESSION['version'];?></title>
-<meta name="keywords" content="abulafia web, protocollo informatico, gestione documentale, gestione magazzino" />
-<meta name="description" content="Abulafia Web - Protocollo Informatico - Gestione Documentale - Gestione Magazzino" />
-<meta name="author" content="Biagio Saitta & Alfio Musmarra" />
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-<link rel="stylesheet" type="text/css" href="style.php"/>
+		<title><?php echo 'Abulafia Web ' . $_SESSION['version'];?></title>
 
-  <!-- META -->
-  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-  <!-- META -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="abulafia web, protocollo informatico, gestione documentale, gestione magazzino" />
+		<meta name="description" content="Abulafia Web - Protocollo Informatico - Gestione Documentale - Gestione Magazzino" />
+		<meta name="author" content="Biagio Saitta & Alfio Musmarra" />
+		
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="stylesheet" type="text/css" href="style.php"/>
+ 		<link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
+  	<link href="css/font-awesome.min.css" rel="stylesheet">
+  	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  	<link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.10.4.custom.css"></link>
+  	<link href="css/grid.css" rel="stylesheet">
   
-  <!-- CSS -->
-  <link href='https://fonts.googleapis.com/css?family=Telex' rel='stylesheet' type='text/css'>
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <link rel="stylesheet" type="text/css" href="css/redmond/jquery-ui-1.10.4.custom.css"></link>
-  <link href="css/grid.css" rel="stylesheet">
-  <!-- CSS -->  
+  	<script type="text/javascript" src="js/jquery.js"></script>
+  	<script type="text/javascript" src="js/jquery-1.10.4.custom.js"></script>
+  	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+  	<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+  	<script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
+  	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+  	<script type="text/javascript" src="js/bootstrap-filestyle.min.js"> </script>
   
-  <!-- JS -->
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/jquery-1.10.4.custom.js"></script>
-  <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
-  <script type="text/javascript" src="js/jquery-ui-i18n.js"></script>
-  <script type="text/javascript" src="lib/tinymce/tinymce.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap-filestyle.min.js"> </script>
-  <!-- JS -->
+	  <!-- FULLCALENDAR -->
+	  <link rel='stylesheet' href='lib/fullcalendar/fullcalendar.css' />
+	  <script src='lib/fullcalendar/lib/moment.min.js'></script>
+	  <script src='lib/fullcalendar/fullcalendar.js'></script>
+	  <script src='lib/fullcalendar/locale/it.js'></script>
 
-  <!-- FULLCALENDAR -->
-  <link rel='stylesheet' href='lib/fullcalendar/fullcalendar.css' />
-  <script src='lib/fullcalendar/lib/moment.min.js'></script>
-  <script src='lib/fullcalendar/fullcalendar.js'></script>
-  <script src='lib/fullcalendar/locale/it.js'></script>
-  <!-- FULLCALENDAR -->
-
-  <script type="text/javascript">
-  	$(function() {
-	  	$('#calendar').fullCalendar({
- 	 })
-	});
-  </script>
-
-<script type="text/javascript">
-tinymce.init({
-    selector: "textarea#editor",
-    language: 'it',
-    statusbar : false,
-    menubar: true,
-    promotion: false,
-    forced_root_block: false,
-    nonbreaking_force_tab: true,
-    paste_as_text: true,
-    paste_auto_cleanup_on_paste : true,
-    fontsize_formats: "6pt 8pt 9pt 10pt 11pt 12pt 13pt 14pt 15pt 16pt 18pt 20pt 22pt 24pt 26pt 36pt 54pt 72pt",
-    plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak ysearchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table contextmenu directionality emoticons template paste textcolor colorpicker textpattern imagetools',
-    toolbar1: "bold underline italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify bullist numlist outdent indent fontsizeselect",
-    toolbar2: "table subscript superscript charmap link image preview visualblocks visualchars code"
- });
-</script>
-
-<script type="text/javascript">
-tinymce.init({
-    selector: "textarea#editorMail",
-    language: 'it',
-    height: 350,
-    statusbar : false,
-    menubar: false,
-    forced_root_block: false,
-    paste_as_text: true,
-    paste_auto_cleanup_on_paste : true,
-    plugins: 'paste',
-    toolbar: "bold underline italic strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent"
- });
-</script>
-
-<script type="text/javascript">
-tinymce.init({
-    selector: "textarea#editorOgg",
-    language: 'it',
-		height: 200,
-    statusbar : false,
-    menubar: false,
-    forced_root_block: false,
-    paste_as_text: true,
-    paste_auto_cleanup_on_paste : true,
-     plugins: 'paste',
-    toolbar: "bold underline italic strikethrough"
- });
-</script>
-  
-  <script type="text/javascript">
-	$(function(){
-	     $.datepicker.setDefaults( $.datepicker.regional[ "it" ] );
-	     $('.datepicker').datepicker( { changeMonth: true, changeYear: true });
-	     $('.datepickerAnag').datepicker( { changeMonth: true, changeYear: true, yearRange: "-100:+0" }); 
-	     $('.datepickerProt').datepicker( { changeMonth: true, changeYear: true, maxDate: "today" });
-	});
-</script>
-  
-  <!-- Fancybox -->
-	<script type="text/javascript" src="js/fancy/lib/jquery.mousewheel-3.0.6.pack.js"></script>
-	<script type="text/javascript" src="js/fancy/source/jquery.fancybox.js?v=2.1.5"></script>
-	<link rel="stylesheet" type="text/css" href="js/fancy/source/jquery.fancybox.css?v=2.1.5" media="screen" />
-	<link rel="stylesheet" type="text/css" href="js/fancy/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
-	<link rel="stylesheet" type="text/css" href="js/fancy/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
-	<script type="text/javascript" src="js/fancy/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
-	<script type="text/javascript" src="js/fancy/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-	<script type="text/javascript" src="js/fancy/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
-<!-- End Fancybox -->
-
-<script type="text/javascript">
-		$(function() {
-			$('.fancybox').fancybox();
-			
-			$(".iframe").fancybox({
-				type: 'iframe',
-				'padding' : 10,  
-				'autoDimensions' : false,
-				'width' : 500,
-				'height' : 'auto'
-			});
-
-			// Change title type, overlay closing speed
-			$(".fancybox-effects-a").fancybox({
-				helpers: {
-					title : {
-						type : 'outside'
-					},
-					overlay : {
-						speedOut : 0
-					}
-				}
-			});
-
+	  <script type="text/javascript">
+	  	$(function() {
+		  	$('#calendar').fullCalendar({
+	 	 })
 		});
-  </script>
-  
-  <style type="text/css">
-	.fancybox-custom .fancybox-skin {
-		box-shadow: 0 0 50px #222;
-	}
-</style>
+	  </script>
+	  <!-- FULLCALENDAR -->
+
+	  <!-- TINYMCE -->
+	  <script type="text/javascript" src="lib/tinymce/tinymce.min.js"></script>
+
+		<script type="text/javascript">
+		tinymce.init({
+		    selector: "textarea#editor",
+		    language: 'it',
+		    statusbar : false,
+		    menubar: true,
+		    promotion: false,
+		    forced_root_block: false,
+		    nonbreaking_force_tab: true,
+		    paste_as_text: true,
+		    paste_auto_cleanup_on_paste : true,
+		    fontsize_formats: "6pt 8pt 9pt 10pt 11pt 12pt 13pt 14pt 15pt 16pt 18pt 20pt 22pt 24pt 26pt 36pt 54pt 72pt",
+		    plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak ysearchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table contextmenu directionality emoticons template paste textcolor colorpicker textpattern imagetools',
+		    toolbar1: "bold underline italic strikethrough forecolor backcolor alignleft aligncenter alignright alignjustify bullist numlist outdent indent fontsizeselect",
+		    toolbar2: "table subscript superscript charmap link image preview visualblocks visualchars code"
+		 });
+		</script>
+
+		<script type="text/javascript">
+		tinymce.init({
+		    selector: "textarea#editorMail",
+		    language: 'it',
+		    height: 350,
+		    statusbar : false,
+		    menubar: false,
+		    forced_root_block: false,
+		    paste_as_text: true,
+		    paste_auto_cleanup_on_paste : true,
+		    plugins: 'paste',
+		    toolbar: "bold underline italic strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent"
+		 });
+		</script>
+
+		<script type="text/javascript">
+		tinymce.init({
+		    selector: "textarea#editorOgg",
+		    language: 'it',
+				height: 200,
+		    statusbar : false,
+		    menubar: false,
+		    forced_root_block: false,
+		    paste_as_text: true,
+		    paste_auto_cleanup_on_paste : true,
+		     plugins: 'paste',
+		    toolbar: "bold underline italic strikethrough"
+		 });
+		</script>
+		<!-- TINYMCE -->
+  	
+  	<!-- DATEPICKER -->
+  	<script type="text/javascript">
+			$(function(){
+	     	$.datepicker.setDefaults( $.datepicker.regional[ "it" ] );
+	     	$('.datepicker').datepicker( { changeMonth: true, changeYear: true });
+	     	$('.datepickerAnag').datepicker( { changeMonth: true, changeYear: true, yearRange: "-100:+0" }); 
+	     	$('.datepickerProt').datepicker( { changeMonth: true, changeYear: true, maxDate: "today" });
+			});
+		</script>
+		<!-- DATEPICKER -->
+
+		<!-- FANCYBOX -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    <!-- FANCYBOX -->
   
 </head>
-
 
 <body>
   
 	<?php
 		$anag = new Anagrafica();
 	?>
+
+	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+	<script>
+     Fancybox.bind("[data-fancybox]", {
+       //
+     }) 
+  </script>
 
   <div class="container">
 	 

@@ -102,7 +102,7 @@
 						<br>
 						
 						<center>
-								<a class="btn btn-danger fancybox" data-fancybox-type="iframe" href="magazzino-documento-pdf.php?id=<?php echo $id; ?>"><i class="fa fa-fw fa-file-pdf-o"></i> Genera PDF</a>
+								<a class="btn btn-danger" data-fancybox data-type="iframe" data-preload="false" href="magazzino-documento-pdf.php?id=<?php echo $id; ?>"><i class="fa fa-fw fa-file-pdf-o"></i> Genera PDF</a>
 						</center>
 
 					</div>

@@ -49,7 +49,7 @@
 				<td style="vertical-align: middle" align="center">
 					<div class="btn-group btn-group-sm">
 						<?php if($risultati2['protocollo'] == 0) { ?>
-						<a class="btn btn-info fancybox" data-fancybox-type="iframe" data-toggle="tooltip" data-placement="left" title="Anteprima lettera" href="componilettera.php?id=<?php echo $risultati2['id'] ?>">
+						<a class="btn btn-info" data-fancybox data-type="iframe" data-preload="false" data-toggle="tooltip" data-placement="left" title="Anteprima lettera" href="componilettera.php?id=<?php echo $risultati2['id'] ?>">
 								<span class="glyphicon glyphicon-info-sign"></span>
 						</a>
 						<?php }
