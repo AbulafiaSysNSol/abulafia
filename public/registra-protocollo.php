@@ -21,10 +21,12 @@
 	$my_log = new Log();
 	
 	//LIBRERIA PER L'INVIO DI EMAIL
-	require('lib/phpmailer/PHPMailerAutoload.php');
-	//require_once 'lib/phpmailer/src/Exception.php';
-	//require_once 'lib/phpmailer/src/PHPMailer.php';
-	//require_once 'lib/phpmailer/src/SMTP.php';
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+
+	require 'lib/phpmailer/src/Exception.php';
+	require 'lib/phpmailer/src/PHPMailer.php';
+	require 'lib/phpmailer/src/SMTP.php';
 
 	$date=strftime("%d/%m/%Y");
 	$ora = date("g:i a");

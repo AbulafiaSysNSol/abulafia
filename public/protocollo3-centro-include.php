@@ -62,7 +62,12 @@
 	$calendario = new Calendario();
 	
 	//LIBRERIA PER L'INVIO DI EMAIL
-	include('lib/phpmailer/PHPMailerAutoload.php');
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+
+	require 'lib/phpmailer/src/Exception.php';
+	require 'lib/phpmailer/src/PHPMailer.php';
+	require 'lib/phpmailer/src/SMTP.php';
 	$date = strftime("%d/%m/%Y");
 	$ora = date("g:i a");
 	$datamail = $date . ' alle ' . $ora;

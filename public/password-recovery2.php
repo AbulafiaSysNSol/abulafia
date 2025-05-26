@@ -6,7 +6,13 @@
         header("Location: login0.php?corpus=home");
     }
 
-	require('lib/phpmailer/PHPMailerAutoload.php');
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+
+	require 'lib/phpmailer/src/Exception.php';
+	require 'lib/phpmailer/src/PHPMailer.php';
+	require 'lib/phpmailer/src/SMTP.php';
+	
 	$mail = new PHPMailer();
 
 	function random_string($length) {
